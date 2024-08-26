@@ -12,6 +12,7 @@ import { createEventVideoById } from './firebase';
 import { deleteYoutubeLiveStream } from './youtube';
 import Organization from '@models/organization.model';
 import { refreshAccessToken } from './oauth';
+import { fetchAndParseVTT, parseVTT } from './util';
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -327,7 +328,10 @@ export const generateThumbnail = async (data: {
       ) ?? [];
 
     if (lpThumbnails.length > 0) {
-      return lpThumbnails[0].url.replace('thumbnails.vtt', 'keyframes_0.jpg');
+      return lpThumbnails[0].url.replace(
+        'thumbnails.vtt',
+        `${await fetchAndParseVTT(lpThumbnails[0].url)}`,
+      );
     }
   } catch (e) {
     throw new HttpException(400, 'Error generating thumbnail');
@@ -370,15 +374,25 @@ export const createClip = async (data: {
     });
     const parsedClip = JSON.parse(clip.rawResponse.data.toString());
     let session = await SessionModel.findById(data.sessionId);
-    await SessionModel.findByIdAndUpdate(data.sessionId, {
-      assetId: parsedClip.asset.id,
-      playbackId: parsedClip.asset.playbackId,
-      start: new Date().getTime(),
-      end: new Date().getTime(),
-      startClipTime: data.start,
-      endClipTime: data.end,
-      type: SessionType.clip,
-    });
+    await SessionModel.findOneAndUpdate(
+      { _id: data.sessionId },
+      {
+        $set: {
+          assetId: parsedClip.asset.id,
+          playbackId: parsedClip.asset.playbackId,
+          start: new Date().getTime(),
+          end: new Date().getTime(),
+          startClipTime: data.start,
+          endClipTime: data.end,
+          type: SessionType.clip,
+          createdAt: new Date(),
+        },
+      },
+      {
+        new: true,
+        timestamps: false, // Disable automatic timestamp handling
+      },
+    );
     if (session.firebaseId) {
       const speakerNames = session.speakers
         .map((speaker) => speaker.name)

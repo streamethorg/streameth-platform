@@ -7,8 +7,10 @@ node_modules
 
 .yarn/*
 .yarn
+
 # testing
 /coverage
+/playwright
 
 # next.js
 /.next/

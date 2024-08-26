@@ -14,9 +14,10 @@ import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrg
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
-import { ConnectWalletButton } from '../misc/ConnectWalletButton';
 import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
+import { IconLeft } from 'react-day-picker';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 
 const HomePageNavbar = ({
   logo,
@@ -75,6 +76,17 @@ const MobileNavBar = ({
   const [searchVisible, setSearchVisible] = useState(false);
   const toggleSearch = () => setSearchVisible(!searchVisible);
   const toggleMenu = () => setMenuVisible(!menuVisible);
+  const pathname = usePathname();
+  const { searchParams, handleTermChange } = useSearchParams();
+
+  // Check if the URL contains the "clips" parameter and "selectedRecording"
+  const showGoBack =
+    pathname.includes('clips') && searchParams.has('selectedRecording');
+
+  // Handle the "Go back" functionality
+  const handleGoBack = () => {
+    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+  };
 
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
@@ -85,13 +97,13 @@ const MobileNavBar = ({
   }, [menuVisible, searchVisible]);
 
   return (
-    <NavigationMenu className="sticky top-0 z-50 flex flex-row items-center bg-white lg:hidden">
+    <NavigationMenu className="flex sticky top-0 z-50 flex-row items-center bg-white lg:hidden">
       {(searchVisible || menuVisible) && (
-        <div className="absolute left-0 top-0 h-[100vh] w-[100vw] bg-black bg-opacity-50" />
+        <div className="absolute top-0 left-0 bg-black bg-opacity-50 h-[100vh] w-[100vw]" />
       )}
 
       {searchVisible && showSearchBar && (
-        <div className="absolute bottom-[-56px] w-full bg-secondary">
+        <div className="absolute w-full bottom-[-56px] bg-secondary">
           <SearchBar organizationSlug={currentOrganization} isMobile={true} />
         </div>
       )}
@@ -110,29 +122,38 @@ const MobileNavBar = ({
             />
           </div>
         )}
-        {showSearchBar && (
+        {showGoBack ? (
+          <Button
+            className="mr-2"
+            variant="outline"
+            size="sm"
+            onClick={handleGoBack}
+          >
+            <IconLeft className="mr-1" /> Go back
+          </Button>
+        ) : (
           <Link href={`/${currentOrganization}`}>
             <Image
               src={logo ?? '/logo.png'}
               alt="Logo"
               height={36}
               width={36}
-              className="aspect-square h-full"
+              className="h-full aspect-square"
             />
           </Link>
         )}
 
-        <div className="ml-auto flex items-center">
+        <div className="flex items-center ml-auto">
           {showSearchBar && (
             <button onClick={toggleSearch} className="p-2">
               {searchVisible ? (
-                <X className="h-6 w-6 text-primary" />
+                <X className="w-6 h-6 text-primary" />
               ) : (
-                <Search className="h-6 w-6 text-primary" />
+                <Search className="w-6 h-6 text-primary" />
               )}
             </button>
           )}
-          {pages.length > 0 && (
+          {pages.length > 1 && (
             <button onClick={toggleMenu} className="z-50">
               {!menuVisible ? (
                 <Menu size={30} strokeWidth={2} className="" />
@@ -142,9 +163,10 @@ const MobileNavBar = ({
             </button>
           )}
         </div>
-        {menuVisible && (
-          <Navbar organization={currentOrganization} pages={pages} />
-        )}
+        {menuVisible ||
+          (pages.length < 2 && (
+            <Navbar organization={currentOrganization} pages={pages} />
+          ))}
       </div>
     </NavigationMenu>
   );
@@ -167,10 +189,21 @@ const PCNavBar = ({
 }) => {
   const { isConnected } = useAccount();
   const pathname = usePathname();
+  const { searchParams, handleTermChange } = useSearchParams();
   const isStudio = pathname.includes('studio');
+
+  // Check if the URL contains the "clips" parameter and "selectedRecording"
+  const showGoBack =
+    pathname.includes('clips') && searchParams.has('selectedRecording');
+
+  // Handle the "Go back" functionality
+  const handleGoBack = () => {
+    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+  };
+
   return (
-    <NavigationMenu className="sticky top-0 z-[30] hidden w-full flex-row items-center justify-between bg-white p-2 px-4 shadow-sm md:hidden lg:flex">
-      <div className="flex flex-1 items-center justify-start">
+    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white md:hidden lg:flex z-[30]">
+      <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
             <Image
@@ -183,14 +216,27 @@ const PCNavBar = ({
           </Link>
         )}
         {organizations && (
-          <Link href={`/${currentOrganization}`}>
-            <Button className="hidden lg:block" variant={'primary'}>
-              View channel page
-            </Button>
-          </Link>
+          <div className="flex flex-row space-x-1">
+            {showGoBack && (
+              <Button
+                className="hidden lg:block"
+                variant={'outline'}
+                onClick={handleGoBack}
+              >
+                <div className="flex items-center">
+                  <IconLeft className="mr-1" /> Go back
+                </div>
+              </Button>
+            )}
+            <Link href={`/${currentOrganization}`}>
+              <Button className="hidden lg:block" variant={'primary'}>
+                View channel page
+              </Button>
+            </Link>
+          </div>
         )}
       </div>
-      <div className="mx-auto flex w-2/5 flex-grow-0 items-center justify-center">
+      <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
         {showSearchBar && (
           <SearchBar
             searchVisible={showSearchBar}
@@ -198,7 +244,7 @@ const PCNavBar = ({
           />
         )}
       </div>
-      <div className="flex flex-1 items-center justify-end">
+      <div className="flex flex-1 justify-end items-center">
         {organizations && (
           <SwitchOrganization
             organization={currentOrganization}
@@ -206,11 +252,11 @@ const PCNavBar = ({
           />
         )}
         <Navbar organization={currentOrganization} pages={pages} />
-        {isConnected && (
+        {/* {isConnected && (
           <div className="mr-2">
             <ConnectWalletButton />
           </div>
-        )}
+        )} */}
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>

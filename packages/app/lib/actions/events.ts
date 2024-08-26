@@ -12,6 +12,7 @@ import { IEvent } from 'streameth-new-server/src/interfaces/event.interface';
 import { revalidatePath } from 'next/cache';
 import GoogleSheetService from '@/lib/services/googleSheetService';
 import GoogleDriveService from '@/lib/services/googleDriveService';
+
 export const createEventAction = async ({ event }: { event: IEvent }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {

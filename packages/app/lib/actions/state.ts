@@ -9,7 +9,7 @@ export const createStateAction = async ({ state }: { state: IState }) => {
   if (!authToken) {
     throw new Error('No user session found');
   }
-  console.log('Creating state:', state);
+
   const response = await createState({
     state,
     authToken,

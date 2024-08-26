@@ -39,3 +39,36 @@ export const isEthereumAddress = (address: string): boolean => {
 export const PUBLIC_PATH = '../../../public';
 export const IMAGE_BASE_PATH = path.join(process.cwd(), 'public');
 export const BASE_PATH = path.join(process.cwd(), '../../data');
+
+export async function fetchAndParseVTT(url: string) {
+  try {
+    // Fetch the VTT file
+    const response = await fetch(url);
+    const vttData = await response.text();
+
+    // Parse the VTT data
+    const keyframe = parseVTT(vttData);
+
+    if (keyframe) {
+      return keyframe;
+    }
+  } catch (error) {
+    console.error('Error fetching or parsing VTT file:', error);
+  }
+}
+
+export function parseVTT(vttData: string) {
+  const lines = vttData.split('\n');
+  let keyframe = null;
+
+  // Extract the keyframe for the first time range
+  lines.forEach((line) => {
+    if (/^\d{2}:\d{2}:\d{2}/.test(line)) {
+      // get the first keyframe
+      keyframe = lines[lines.indexOf(line) + 1].trim();
+      return;
+    }
+  });
+
+  return keyframe;
+}

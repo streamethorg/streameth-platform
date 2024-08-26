@@ -82,7 +82,6 @@ export default async function ArchivePage({
           <ArchiveVideos
             organizationSlug={params.organization}
             searchQuery={searchParams.searchQuery || ''}
-            page={Number(searchParams.page || 1)}
             event={searchParams.event}
           />
         </Suspense>

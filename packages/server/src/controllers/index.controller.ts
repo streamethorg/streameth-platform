@@ -1,4 +1,3 @@
-
 import { HttpException } from '@exceptions/HttpException';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import { StateStatus } from '@interfaces/state.interface';
@@ -96,18 +95,12 @@ export class IndexController extends Controller {
 
   private async assetReady(id: string) {
     const asset = await getAsset(id);
-    const session = await this.sessionService.findOne({
-      assetId: asset.id,
-    });
-
-    if (!session) {
-      return SendApiResponse('No session found', null, '400');
-    }
-    // const ipfs = await uploadToIpfs(id);
+    const session = await this.sessionService.findOne({ assetId: asset.id });
+    if (!session) throw new HttpException(404, 'No session found');
     await this.sessionService.update(session._id.toString(), {
-      // ipfsURI: ipfs,
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
+      clippingStatus: ClippingStatus.completed,
     } as any);
 
     if (session.firebaseId && asset.playbackUrl) {
@@ -116,15 +109,12 @@ export class IndexController extends Controller {
         mp4Url: await getDownloadUrl(asset.id),
       });
     }
-
-    const state = await this.stateService.getAll({
-      sessionId: session._id.toString(),
+    const state = await this.stateService.findOne({
+      _id: session._id.toString(),
+      type: StateType.video,
     });
-
-    if (!state || state.length === 0) {
-      return SendApiResponse('No state found', null, '400');
-    }
-    await this.stateService.update(state[0]._id.toString(), {
+    if (!state) throw new HttpException(404, 'No state found');
+    await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
     });
 
@@ -140,20 +130,20 @@ export class IndexController extends Controller {
       assetId: asset.id,
     });
 
-    if (!session) {
-      throw 'No session found';
-    }
+    if (!session) throw new HttpException(404, 'No session found');
 
-    const state = await this.stateService.getAll({
+    const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
+      type: StateType.video,
     });
+    if (!state) throw new HttpException(404, 'No state found');
 
-    if (!state || state.length === 0) {
-      throw 'No state found';
-    }
+    await this.sessionService.update(session._id.toString(), {
+      clippingStatus: ClippingStatus.failed,
+    } as any);
 
-    await this.stateService.update(state[0]._id.toString(), {
-      status: StateStatus.error,
+    await this.stateService.update(state._id.toString(), {
+      status: StateStatus.failed,
     });
   }
 }

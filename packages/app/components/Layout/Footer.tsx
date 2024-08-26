@@ -29,13 +29,13 @@ const Footer = ({ active }: { active?: string }) => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="z-[99999999] mb-3 mt-5 flex flex-col items-center justify-center space-y-2 md:mb-5">
+    <footer className="flex flex-col justify-center items-center px-4 mt-5 mb-3 space-y-2 md:px-0 md:mb-5 z-[99999999]">
       <a className="mb-2 cursor-pointer" href="/">
         <StreamethLogoGray height={25} className="" />
       </a>
       <div className="flex items-center">
         {/* Visible only on small screens */}
-        <div className="flex w-full justify-center text-sm text-gray-500 md:hidden">
+        <div className="flex justify-center w-full text-sm text-gray-500 md:hidden">
           © {year} StreamETH International B.V.
         </div>
         {/* Visible on larger screens */}

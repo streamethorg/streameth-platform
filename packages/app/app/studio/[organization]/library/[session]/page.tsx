@@ -32,13 +32,13 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  if (!session || (!session.playbackId && !session.assetId)) return notFound();
+  // Check if session exists and has a playbackId. If not, return a 'not found' response.
+  if (!session?.playbackId) return notFound();
 
-  const videoUrl = await getVideoUrlAction(session.assetId as string);
+  const videoUrl = await getVideoUrlAction(session);
 
-  if (!videoUrl) {
-    return notFound();
-  }
+  // If we couldn't get a video URL, return a 'not found' response.
+  if (!videoUrl) return notFound();
 
   return (
     <div className="h-full overflow-auto p-4">
