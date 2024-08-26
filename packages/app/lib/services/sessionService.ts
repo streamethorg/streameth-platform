@@ -148,6 +148,7 @@ export const createSession = async ({
     throw e;
   }
 };
+
 export const fetchSession = async ({
   session,
 }: {
