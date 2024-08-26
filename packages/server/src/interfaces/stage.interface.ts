@@ -48,6 +48,7 @@ export class IStage {
   mintable?: boolean;
   createdAt?: string;
   nftCollections?: Types.ObjectId | string[];
+  recordingIndex?: number;
 }
 
 export interface IStageModel extends Omit<IStage, '_id'>, Document {}

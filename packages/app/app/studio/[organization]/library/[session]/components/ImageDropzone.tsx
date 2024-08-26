@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { useCallback, useState, forwardRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { resizeImage } from '@/lib/utils/resizeImage';
+import { imageUploadAction } from '@/lib/actions/imageUpload';
 
 interface ImageDropzoneProps {
   id?: string;
@@ -32,35 +33,28 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
     );
     const [isUploading, setIsUploading] = useState(false);
 
-    const onSubmit = async (file: File) => {
-      if (!file) return;
-      setIsUploading(true);
-      try {
-        const data = new FormData();
-        data.set(
-          'file',
-          new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
-            type: file.type,
-          })
-        );
-        data.set('path', path);
-
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: data,
-        });
-        if (!res.ok) {
-          throw new Error(await res.text());
+    const onSubmit = useCallback(
+      async (file: File) => {
+        if (!file) return;
+        setIsUploading(true);
+        try {
+          const data = new FormData();
+          data.set('file', file);
+          data.set('directory', path);
+          const imageUrl = await imageUploadAction({ data });
+          if (!imageUrl) {
+            throw new Error('Error uploading image');
+          }
+          onChange(imageUrl);
+          toast.success('Image uploaded successfully');
+        } catch (e) {
+          console.error(e);
+          toast.error('Error uploading image');
         }
-        onChange(getImageUrl('/' + path + '/' + file.name));
-
-        toast.success('Image uploaded successfully');
-      } catch (e) {
-        console.error(e);
-        toast.error('Error uploading image');
-      }
-      setIsUploading(false);
-    };
+        setIsUploading(false);
+      },
+      [onChange, path]
+    );
 
     const onDrop = useCallback(
       async (acceptedFiles: File[]) => {
@@ -72,7 +66,7 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
           onSubmit(processedFile);
         }
       },
-      [onChange]
+      [onSubmit]
     );
 
     const { getRootProps, getInputProps } = useDropzone({

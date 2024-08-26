@@ -20,6 +20,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { resizeImage } from '@/lib/utils/resizeImage';
+import { imageUploadAction } from '@/lib/actions/imageUpload';
 
 function getImageData(file: File) {
   const dataTransfer = new DataTransfer();
@@ -75,10 +76,10 @@ interface ImageUploadProps {
   options: {
     maxSize?: number;
     placeholder?: string;
-    aspectRatio: number;
+    aspectRatio?: number;
     requireExactSize?: { width: number; height: number };
     isProfileImage?: boolean;
-    resize: boolean;
+    resize?: boolean;
   };
   onChange: (value: string) => void;
   value: string | undefined;
@@ -151,32 +152,32 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
     const onSubmit = async (file: File): Promise<string> => {
       if (!file) return '';
 
-      const isValidSize = await validateImage(file);
-      if (!isValidSize) {
-        throw new Error(error || 'Invalid image size');
-      }
+      try {
+        const isValidSize = await validateImage(file);
+        if (!isValidSize) {
+          throw new Error('Invalid image size');
+        }
 
-      const data = new FormData();
-      data.set(
-        'file',
-        new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
-          type: file.type,
-        })
-      );
-      data.set('path', path);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      });
-      if (!res.ok) {
-        throw new Error(await res.text());
-      }
-      const uploadedPath = getImageUrl(
-        '/' + path + '/' + file.name.replace(/[^a-zA-Z0-9.]/g, '_')
-      );
-      setPreview(uploadedPath);
+        const data = new FormData();
+        data.set(
+          'file',
+          new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
+            type: file.type,
+          })
+        );
+        data.set('directory', path);
+        const imageUrl = await imageUploadAction({ data });
+        if (!imageUrl) throw new Error('Error uploading image');
 
-      return uploadedPath;
+        setPreview(imageUrl);
+        return imageUrl;
+      } catch (e) {
+        console.error(e);
+        setPreview('');
+        throw e;
+      } finally {
+        setIsUploading(false);
+      }
     };
 
     const onDropRejected = useCallback(

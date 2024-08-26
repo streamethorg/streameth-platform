@@ -16,7 +16,7 @@ const LivestreamActions = ({
     <div className="space-y-2">
       <EditLivestream organizationSlug={organizationSlug} stage={stream} />
 
-      <ShareLivestream organization={organizationSlug} streamId={stream._id} />
+      <ShareLivestream organization={organizationSlug} streamId={stream._id!} />
       <DeleteLivestream stream={stream} />
     </div>
   );

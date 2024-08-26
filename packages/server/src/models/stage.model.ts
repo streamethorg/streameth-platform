@@ -38,6 +38,7 @@ export const StageSchema = new Schema<IStageModel>(
     streamEndDate: { type: Date, default: Date.now() },
     mintable: { type: Boolean, default: false },
     nftCollections: [{ type: String, ref: 'Nft-Collection' }],
+    recordingIndex: { type: Number, default: 0 },
   },
   {
     timestamps: true,

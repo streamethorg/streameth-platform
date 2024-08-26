@@ -134,12 +134,11 @@ const LibraryPage = async ({
 }) => {
   if (
     !searchParams.layout ||
-    !searchParams.sort ||
     (searchParams.layout !== eLayout.grid &&
       searchParams.layout !== eLayout.list)
   ) {
     redirect(
-      `/studio/${params.organization}/library?layout=${eLayout.list}&sort=${eSort.desc_date}&page=1&limit=20`
+      `/studio/${params.organization}/library?layout=${eLayout.list}&page=1&limit=20`
     );
   }
 

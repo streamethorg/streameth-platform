@@ -266,25 +266,20 @@ export const sortArray = (
   sortBy: string
 ) => {
   return stages.sort((a, b) => {
-    if (sortBy) {
-      switch (sortBy) {
-        case eSort.asc_alpha:
-          return a.name.localeCompare(b.name);
-        case eSort.desc_alpha:
-          return b.name.localeCompare(a.name);
-        case eSort.asc_date:
-          return (
-            new Date(a.updatedAt!).getTime() - new Date(b.updatedAt!).getTime()
-          );
-        case eSort.desc_date:
-          return (
-            new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime()
-          );
-        default:
-          return 0;
-      }
-    } else {
-      return 0;
+    switch (sortBy) {
+      case eSort.asc_alpha:
+        return a.name.localeCompare(b.name);
+      case eSort.desc_alpha:
+        return b.name.localeCompare(a.name);
+      case eSort.asc_date:
+        return (
+          new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime()
+        );
+      case eSort.desc_date:
+      default:
+        return (
+          new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+        );
     }
   });
 };
