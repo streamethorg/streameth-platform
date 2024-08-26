@@ -17,26 +17,6 @@ interface DropzoneProps {
   abortControllerRef: MutableRefObject<AbortController>;
 }
 
-const checkVideoDimensions = (
-  file: File
-): Promise<{ width: number; height: number }> => {
-  return new Promise((resolve, reject) => {
-    const video = document.createElement('video');
-    video.preload = 'metadata';
-
-    video.onloadedmetadata = () => {
-      window.URL.revokeObjectURL(video.src);
-      resolve({ width: video.videoWidth, height: video.videoHeight });
-    };
-
-    video.onerror = () => {
-      reject(new Error('Invalid video file'));
-    };
-
-    video.src = URL.createObjectURL(file);
-  });
-};
-
 const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
   const { onChange, abortControllerRef } = props;
   const [progress, setProgress] = useState<number>(0);
@@ -64,16 +44,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     async (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
         const file = acceptedFiles[0];
-        const { width, height } = await checkVideoDimensions(file);
-        const aspectRatio = width / height;
-
-        if (Math.abs(aspectRatio - 16 / 9) > 0.01) {
-          setError('Video must have a 16:9 aspect ratio');
-          setTimeout(() => {
-            setError('');
-          }, 8000);
-          return;
-        }
 
         startUpload(file);
       }
