@@ -209,7 +209,7 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
-    await this.create({
+    const session = await this.create({
       name: payload.name,
       description: payload.name,
       start: payload.createdAt,
@@ -219,6 +219,10 @@ export default class SessionService {
       organizationId: stage.organizationId,
       assetId: payload.assetId,
       type: SessionType.livestream,
+    });
+    await this.sessionTranscriptions({
+      organizationId: session.organizationId,
+      sessionId: session._id.toString(),
     });
   }
 

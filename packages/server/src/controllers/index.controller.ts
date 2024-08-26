@@ -1,27 +1,27 @@
-import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import {
-  Controller,
-  Get,
-  Route,
-  Tags,
-  Body,
-  Post,
-  Header,
-  UploadedFile,
-  FormField,
-  Security,
-} from 'tsoa';
-import startAITools from '@aitools/main';
-import { validateWebhook } from '@utils/validateWebhook';
-import StageService from '@services/stage.service';
-import { LivepeerEvent } from '@interfaces/livepeer.interface';
-import SessionService from '@services/session.service';
-import { getAsset, getDownloadUrl } from '@utils/livepeer';
-import StateService from '@services/state.service';
-import { StateStatus } from '@interfaces/state.interface';
-import StorageService from '@utils/s3';
+
 import { HttpException } from '@exceptions/HttpException';
+import { LivepeerEvent } from '@interfaces/livepeer.interface';
+import { StateStatus } from '@interfaces/state.interface';
+import SessionService from '@services/session.service';
+import StageService from '@services/stage.service';
+import StateService from '@services/state.service';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { updateEventVideoById } from '@utils/firebase';
+import { getAsset, getDownloadUrl } from '@utils/livepeer';
+import StorageService from '@utils/s3';
+import { validateWebhook } from '@utils/validateWebhook';
+import {
+  Body,
+  Controller,
+  FormField,
+  Get,
+  Header,
+  Post,
+  Route,
+  Security,
+  Tags,
+  UploadedFile,
+} from 'tsoa';
 
 @Tags('Index')
 @Route('')
@@ -128,7 +128,10 @@ export class IndexController extends Controller {
       status: StateStatus.completed,
     });
 
-    // await startAITools(payload.payload.id);
+    await this.sessionService.sessionTranscriptions({
+      organizationId: session.organizationId.toString(),
+      sessionId: session._id.toString(),
+    });
   }
 
   private async assetFailed(id: string) {
