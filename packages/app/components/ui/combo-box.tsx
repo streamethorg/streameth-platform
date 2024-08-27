@@ -63,8 +63,7 @@ export default function Combobox({
           className="w-full justify-between"
         >
           {logo && renderLogo(orgLogo)}
-          {value ? value : placeholder}
-
+          <p className="truncate ...">{value ? value : placeholder}</p>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
