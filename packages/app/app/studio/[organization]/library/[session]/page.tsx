@@ -79,7 +79,6 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
               className="space-y-2"
               type="multiple"
               defaultValue={['publishVideo', 'menu']}
-
             >
               <AccordionItem defaultChecked value="menu">
                 <AccordionContent>

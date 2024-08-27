@@ -245,8 +245,8 @@ const CreateClipButton = ({
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="bg-white">
-        <div className="flex h-[300px] flex-col bg-white p-4">
+      <DialogContent className="bg-white w-full sm:w-[500px]">
+        <div className="flex h-[300px] w-full sm:w-[460px]  flex-col bg-white p-4">
           <Tabs defaultValue={'sessions'}>
             <TabsList className="w-full !justify-start gap-5 border-y border-grey">
               {sessions.sessions.length > 0 && (
