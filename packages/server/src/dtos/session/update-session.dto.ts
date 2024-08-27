@@ -127,4 +127,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsArray()
   socials?: { name: string; date: number }[];
+
+  @IsOptional()
+  @IsString()
+  createdAt?: string;
 }

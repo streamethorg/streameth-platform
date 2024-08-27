@@ -148,6 +148,7 @@ export const createSession = async ({
     throw e;
   }
 };
+
 export const fetchSession = async ({
   session,
 }: {
@@ -511,6 +512,38 @@ export const saveSessionImport = async ({
       },
       body: JSON.stringify({
         scheduleId,
+      }),
+    });
+    if (!response.ok) {
+      throw 'Error importing session';
+    }
+    revalidatePath('/studio');
+    return (await response.json()).message;
+  } catch (e) {
+    console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const generateTranscriptions = async ({
+  authToken,
+  sessionId,
+  organizationId,
+}: {
+  authToken: string;
+  sessionId: string;
+  organizationId: string;
+}): Promise<string> => {
+  try {
+    const response = await fetch(`${apiUrl()}/sessions/transcriptions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        sessionId,
+        organizationId,
       }),
     });
     if (!response.ok) {

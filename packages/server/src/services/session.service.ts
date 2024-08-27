@@ -1,17 +1,17 @@
+import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { ISession, SessionType } from '@interfaces/session.interface';
+import { IUploadSession } from '@interfaces/upload.session.interface';
+import Event from '@models/event.model';
 import Organization from '@models/organization.model';
 import Session from '@models/session.model';
-import Event from '@models/event.model';
-import { config } from '@config';
-import { Types } from 'mongoose';
 import Stage from '@models/stage.model';
 import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
-import Fuse from 'fuse.js';
-import { IUploadSession } from '@interfaces/upload.session.interface';
 import { refreshAccessToken } from '@utils/oauth';
 import connection from '@utils/rabbitmq';
+import Fuse from 'fuse.js';
+import { Types } from 'mongoose';
 
 export default class SessionService {
   private path: string;
@@ -209,7 +209,7 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
-    await this.create({
+    const session = await this.create({
       name: payload.name,
       description: payload.name,
       start: payload.createdAt,
@@ -219,6 +219,32 @@ export default class SessionService {
       organizationId: stage.organizationId,
       assetId: payload.assetId,
       type: SessionType.livestream,
+    });
+    await this.sessionTranscriptions({
+      organizationId: session.organizationId,
+      sessionId: session._id.toString(),
+    });
+  }
+
+  async sessionTranscriptions(
+    data: Pick<IUploadSession, 'organizationId' | 'sessionId'>,
+  ) {
+    const session = await this.get(data.sessionId.toString());
+    const queue = 'audio';
+    const channel = await (await connection).createChannel();
+    channel.assertQueue(queue, {
+      durable: true,
+    });
+    const payload = {
+      ...data,
+      session: {
+        videoUrl: session.videoUrl,
+        slug: session.slug,
+        name: session.name,
+      },
+    };
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
+      persistent: true,
     });
   }
 

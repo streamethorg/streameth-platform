@@ -11,8 +11,6 @@ import SessionOptions from './components/SessionOptions';
 import { Label } from '@/components/ui/label';
 import GetHashButton from '../components/GetHashButton';
 import TextPlaceholder from '@/components/ui/text-placeholder';
-import { Button } from '@/components/ui/button';
-import { SiTwitter } from 'react-icons/si';
 import {
   Accordion,
   AccordionContent,
@@ -23,6 +21,7 @@ import UploadToYoutubeButton from './components/UploadToYoutubeButton';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import UploadTwitterButton from './components/UploadTwitterButton';
+import SessionTranscriptions from './components/SessionTranscriptions';
 
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
@@ -32,12 +31,9 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  // Check if session exists and has a playbackId. If not, return a 'not found' response.
   if (!session?.playbackId) return notFound();
 
   const videoUrl = await getVideoUrlAction(session);
-
-  // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
   return (
@@ -78,12 +74,12 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
               ]}
             />
           </div>
-
           <div className="flex-grow overflow-auto">
             <Accordion
               className="space-y-2"
               type="multiple"
               defaultValue={['publishVideo', 'menu']}
+
             >
               <AccordionItem defaultChecked value="menu">
                 <AccordionContent>

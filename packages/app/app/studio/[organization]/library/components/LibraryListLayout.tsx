@@ -28,7 +28,7 @@ const LibraryListLayout = async ({
           </TableHead>
           <TableHead>Visibility</TableHead>
           <TableHead className="cursor-pointer">
-            <TableSort title="Updated at" sortBy="date" />
+            <TableSort title="Created at" sortBy="date" />
           </TableHead>
           <TableHead>Views</TableHead>
           <TableHead>

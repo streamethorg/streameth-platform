@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import {
+  ChunkDataTypes,
   IExtendedEvent,
   IExtendedNftCollections,
   IExtendedOrganization,
@@ -266,25 +267,20 @@ export const sortArray = (
   sortBy: string
 ) => {
   return stages.sort((a, b) => {
-    if (sortBy) {
-      switch (sortBy) {
-        case eSort.asc_alpha:
-          return a.name.localeCompare(b.name);
-        case eSort.desc_alpha:
-          return b.name.localeCompare(a.name);
-        case eSort.asc_date:
-          return (
-            new Date(a.updatedAt!).getTime() - new Date(b.updatedAt!).getTime()
-          );
-        case eSort.desc_date:
-          return (
-            new Date(b.updatedAt!).getTime() - new Date(a.updatedAt!).getTime()
-          );
-        default:
-          return 0;
-      }
-    } else {
-      return 0;
+    switch (sortBy) {
+      case eSort.asc_alpha:
+        return a.name.localeCompare(b.name);
+      case eSort.desc_alpha:
+        return b.name.localeCompare(a.name);
+      case eSort.asc_date:
+        return (
+          new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime()
+        );
+      case eSort.desc_date:
+      default:
+        return (
+          new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+        );
     }
   });
 };
@@ -352,4 +348,24 @@ export const constructYoutubeLiveRedirect = (userEmail: string): string => {
   });
 
   return `${baseUrl}?${params.toString()}`;
+};
+
+export const jsonToVtt = (ChunkData: ChunkDataTypes) => {
+  let vtt = 'WEBVTT\n\n';
+
+  ChunkData.chunks.forEach((chunk) => {
+    const startTime = convertToVttTimestamp(chunk.timestamp[0]);
+    const endTime = convertToVttTimestamp(chunk.timestamp[1]);
+    vtt += `${startTime} --> ${endTime}\n`;
+    vtt += `${chunk.text.trim()}\n\n`;
+  });
+
+  return vtt.trim();
+};
+
+const convertToVttTimestamp = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = (seconds % 60).toFixed(3);
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(6, '0')}`;
 };

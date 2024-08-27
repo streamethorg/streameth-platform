@@ -1,9 +1,9 @@
-import { logger } from './logger';
 import crypto from 'crypto';
-import OAuth from 'oauth-1.0a';
+import { config } from 'dotenv';
 import fs from 'fs';
 import fetch from 'node-fetch';
-import { config } from 'dotenv';
+import OAuth from 'oauth-1.0a';
+import { logger } from './logger';
 config();
 
 function delay(ms: number): Promise<void> {
