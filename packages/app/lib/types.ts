@@ -238,6 +238,15 @@ export interface INFTSessions extends IExtendedSession {
   videoType: string;
 }
 
+interface ChunkTypes {
+  text: string;
+  timestamp: [number, number];
+}
+
+export interface ChunkDataTypes {
+  chunks: ChunkTypes[];
+  text: string;
+}
 export interface IExtendedScheduleImporter extends IScheduleImporter {
   _id: string;
 }

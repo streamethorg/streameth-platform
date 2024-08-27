@@ -132,10 +132,13 @@ const SessionAccordion = ({
               <FormLabel>Thumbnail</FormLabel>
               <FormControl>
                 <ImageUpload
+                  options={{
+                    resize: true,
+                    aspectRatio: 16 / 9,
+                  }}
                   path={`sessions`}
                   {...field}
                   onChange={field.onChange}
-                  aspectRatio={16 / 9}
                 />
               </FormControl>
             </FormItem>
@@ -204,7 +207,7 @@ const SessionAccordion = ({
           <Button className="w-full" type="submit">
             {isUpdatingSession ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please
                 Updating session
               </>
             ) : (

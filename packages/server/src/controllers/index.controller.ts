@@ -5,7 +5,7 @@ import { StateStatus, StateType } from '@interfaces/state.interface';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
-import { type IStandardResponse, SendApiResponse } from '@utils/api.response';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { updateEventVideoById } from '@utils/firebase';
 import { getAsset, getDownloadUrl } from '@utils/livepeer';
 import StorageService from '@utils/s3';
@@ -117,6 +117,11 @@ export class IndexController extends Controller {
     if (!state) throw new HttpException(404, 'No state found');
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
+    });
+
+    await this.sessionService.sessionTranscriptions({
+      organizationId: session.organizationId.toString(),
+      sessionId: session._id.toString(),
     });
   }
 
