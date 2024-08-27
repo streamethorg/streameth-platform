@@ -62,7 +62,6 @@ export function PlayerWithControls(props: {
       });
     }
   }, [videoRef]);
-
   if (!props.src || !props.src?.[0].src) {
     return (
       <PlayerLoading
@@ -76,6 +75,7 @@ export function PlayerWithControls(props: {
     <Player.Root src={props.src}>
       <Player.Container className="h-full w-full overflow-hidden bg-gradient-to-b from-[#FF9976] to-[#6426EF] outline-none transition md:rounded-xl">
         <Player.Video
+          crossOrigin="anonymous"
           ref={videoRef}
           id={`player-${props.src[0].src}`}
           title={props.name ?? 'video'}
@@ -85,7 +85,7 @@ export function PlayerWithControls(props: {
             label="English"
             kind="subtitles"
             srcLang="en"
-            src={props.caption ?? '/sample.vtt'}
+            src={props.caption}
             default
           />
         </Player.Video>
@@ -233,14 +233,15 @@ export function PlayerWithControls(props: {
                   />
                 </div>
               </Link>
-
-              <div onClick={toggleSubtitles} className="cursor-pointer">
-                {showSubtitles ? (
-                  <MdOutlineClosedCaptionDisabled color="#fff" size={26} />
-                ) : (
-                  <MdOutlineClosedCaption color="#fff" size={26} />
-                )}
-              </div>
+              {props.caption && (
+                <div onClick={toggleSubtitles} className="cursor-pointer">
+                  {showSubtitles ? (
+                    <MdOutlineClosedCaptionDisabled color="#fff" size={26} />
+                  ) : (
+                    <MdOutlineClosedCaption color="#fff" size={26} />
+                  )}
+                </div>
+              )}
 
               <Player.FullscreenIndicator matcher={false} asChild>
                 <Settings className="h-6 w-6 flex-shrink-0 text-white transition" />
