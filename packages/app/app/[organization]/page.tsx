@@ -95,7 +95,7 @@ const OrganizationHome = async ({
             <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 w-full space-y-2 p-4 text-white">
               <div className="flex w-full flex-row justify-between">
-                <div>
+                <div className="overflow-hidden">
                   <h2 className="text-2xl font-bold">{organization.name}</h2>
                   <ChannelDescription description={organization.description} />
                 </div>

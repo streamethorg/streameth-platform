@@ -143,7 +143,7 @@ const ClipButton = ({
   );
 
   return (
-    <div className="flex flex-grow flex-col space-y-2">
+    <div className="flex flex-grow flex-col space-y-2 overflow-hidden">
       <div className="my-4 flex flex-grow flex-col space-y-2">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
