@@ -11,8 +11,6 @@ import SessionOptions from './components/SessionOptions';
 import { Label } from '@/components/ui/label';
 import GetHashButton from '../components/GetHashButton';
 import TextPlaceholder from '@/components/ui/text-placeholder';
-import { Button } from '@/components/ui/button';
-import { SiTwitter } from 'react-icons/si';
 import {
   Accordion,
   AccordionContent,
@@ -33,24 +31,21 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  // Check if session exists and has a playbackId. If not, return a 'not found' response.
   if (!session?.playbackId) return notFound();
 
   const videoUrl = await getVideoUrlAction(session);
-
-  // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
   return (
-    <div className="h-full overflow-auto p-4">
+    <div className="overflow-auto p-4 h-full">
       <Link href={`/studio/${params.organization}/library`}>
-        <div className="mb-4 flex items-center justify-start space-x-4">
+        <div className="flex justify-start items-center mb-4 space-x-4">
           <ArrowLeft />
           <p>Back to library</p>
         </div>
       </Link>
-      <div className="flex flex-col gap-4 overflow-auto md:flex-row">
-        <div className="space-y-4 rounded-xl border bg-white p-4 md:w-2/3">
+      <div className="flex overflow-auto flex-col gap-4 md:flex-row">
+        <div className="p-4 space-y-4 bg-white rounded-xl border md:w-2/3">
           <h1 className="text-lg font-bold">Video Details</h1>
           <EditSessionForm
             session={session}
@@ -89,7 +84,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
             </AccordionItem>
 
             <AccordionItem
-              className="rounded-xl border bg-white px-4"
+              className="px-4 bg-white rounded-xl border"
               value="publishVideo"
               defaultChecked
             >
@@ -118,7 +113,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
             </AccordionItem>
 
             <AccordionItem
-              className="rounded-xl border bg-white px-4"
+              className="px-4 bg-white rounded-xl border"
               value="videoData"
             >
               <AccordionTrigger>
