@@ -13,6 +13,7 @@ import {
   sessionImport,
   stageSessionImport,
   saveSessionImport,
+  generateTranscriptions,
 } from '../services/sessionService';
 import {
   ISession,
@@ -274,6 +275,33 @@ export const saveSessionImportAction = async ({
   try {
     const res = await saveSessionImport({
       scheduleId,
+      authToken,
+    });
+    revalidatePath('/studio');
+
+    return res;
+  } catch (e) {
+    console.error('Error importing session acton');
+    return null;
+  }
+};
+
+export const generateTranscriptionActions = async ({
+  sessionId,
+  organizationId,
+}: {
+  sessionId: string;
+  organizationId: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  try {
+    const res = await generateTranscriptions({
+      sessionId,
+      organizationId,
       authToken,
     });
     revalidatePath('/studio');

@@ -134,9 +134,9 @@ const CreateLivestreamModal = ({
       <DialogTrigger asChild>
         <Button
           variant={'outline'}
-          className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
+          className="flex flex-row justify-start items-center p-2 pr-4 space-x-4 h-auto bg-white rounded-xl border w-fit"
         >
-          <div className="rounded-xl border bg-primary p-4 text-white">
+          <div className="p-4 text-white rounded-xl border bg-primary">
             <LuRadio size={25} />
           </div>
           <span className="text-sm">Create Livestream</span>
@@ -178,13 +178,17 @@ const CreateLivestreamModal = ({
                 control={form.control}
                 name="thumbnail"
                 render={({ field }) => (
-                  <FormItem className="mt-4 flex aspect-video p-1">
+                  <FormItem className="flex p-1 mt-4 aspect-video">
                     <FormLabel>Thumbnail</FormLabel>
                     <FormControl>
                       <ImageUpload
-                        placeholder="Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. "
-                        className="m-auto h-full w-full bg-neutrals-300 text-black"
-                        aspectRatio={1}
+                        options={{
+                          placeholder:
+                            'Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9. ',
+                          aspectRatio: 1,
+                          resize: true,
+                        }}
+                        className="m-auto w-full h-full text-black bg-neutrals-300"
                         path={`livestreams/${organization?.slug}`}
                         {...field}
                       />
@@ -202,15 +206,15 @@ const CreateLivestreamModal = ({
                     >
                       Streaming multiple days?
                     </p>
-                    <div className="mt-1 flex items-center gap-5">
-                      <div className="flex items-center gap-1">
+                    <div className="flex gap-5 items-center mt-1">
+                      <div className="flex gap-1 items-center">
                         <Checkbox
                           checked={isMultiDate}
                           onCheckedChange={() => setIsMultiDate(true)}
                         />
                         <Label>Yes</Label>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex gap-1 items-center">
                         <Checkbox
                           defaultChecked
                           onCheckedChange={() => setIsMultiDate(!isMultiDate)}
@@ -220,7 +224,7 @@ const CreateLivestreamModal = ({
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4 flex space-x-3">
+                  <div className="flex mt-4 space-x-3">
                     <FormField
                       control={form.control}
                       name="streamDate"
@@ -266,7 +270,7 @@ const CreateLivestreamModal = ({
                   )}
                   {isMultiDate && (
                     <>
-                      <div className="mt-4 flex space-x-3">
+                      <div className="flex mt-4 space-x-3">
                         <FormField
                           control={form.control}
                           name="streamEndDate"
