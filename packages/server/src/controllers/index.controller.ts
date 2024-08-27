@@ -1,6 +1,7 @@
 import { HttpException } from '@exceptions/HttpException';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
-import { StateStatus } from '@interfaces/state.interface';
+import { ClippingStatus } from '@interfaces/session.interface';
+import { StateStatus, StateType } from '@interfaces/state.interface';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
