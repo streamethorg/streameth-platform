@@ -1,12 +1,12 @@
-const shouldAnalyzeBundles = process.env.ANALYZE === true
+const shouldAnalyzeBundles = process.env.ANALYZE === true;
 /** @type {import('next').NextConfig} */
 
 let nextConfig = {
   redirects: async () => [
     {
-      source: "/",
-      destination: "https://info.streameth.org",
-      permanent: true
+      source: '/',
+      destination: 'https://info.streameth.org',
+      permanent: true,
     },
     {
       source: '/',
@@ -113,23 +113,20 @@ let nextConfig = {
           {
             key: 'Access-Control-Allow-Headers',
             value:
-              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+              'X-CSRF-Token, X-Requested-With, Accept, Depth, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
           },
         ],
       },
-    ]
+    ];
   },
-  webpack: (
-    config,
-    { buildId, dev, isServer, defaultLoaders, webpack }
-  ) => {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(
       new webpack.DefinePlugin({
         'process.env.FLUENTFFMPEG_COV': false,
       })
-    )
+    );
 
-    return config
+    return config;
   },
   images: {
     unoptimized: false,
@@ -149,14 +146,14 @@ let nextConfig = {
     ],
   },
   staticPageGenerationTimeout: 1000,
-}
+};
 
 if (shouldAnalyzeBundles) {
-  console.log('Analyzing bundles..')
+  console.log('Analyzing bundles..');
   const withNextBundleAnalyzer = require('next-bundle-analyzer')({
     enabled: true,
-  })
-  nextConfig = withNextBundleAnalyzer(nextConfig)
+  });
+  nextConfig = withNextBundleAnalyzer(nextConfig);
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -209,8 +209,8 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
-    await this.create({
-      name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
+    const session = await this.create({
+      name: payload.name,
       description: payload.name,
       start: payload.createdAt,
       end: payload.lastSeen,
@@ -220,7 +220,32 @@ export default class SessionService {
       assetId: payload.assetId,
       type: SessionType.livestream,
     });
-    await stage.updateOne({ $inc: { recordingIndex: 1 } });
+    await this.sessionTranscriptions({
+      organizationId: session.organizationId,
+      sessionId: session._id.toString(),
+    });
+  }
+
+  async sessionTranscriptions(
+    data: Pick<IUploadSession, 'organizationId' | 'sessionId'>,
+  ) {
+    const session = await this.get(data.sessionId.toString());
+    const queue = 'audio';
+    const channel = await (await connection).createChannel();
+    channel.assertQueue(queue, {
+      durable: true,
+    });
+    const payload = {
+      ...data,
+      session: {
+        videoUrl: session.videoUrl,
+        slug: session.slug,
+        name: session.name,
+      },
+    };
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
+      persistent: true,
+    });
   }
 
   async uploadSessionToSocials(data: IUploadSession) {
