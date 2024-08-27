@@ -1,20 +1,21 @@
-import 'reflect-metadata';
+import { jobs } from '@utils/pulse.cron';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
+import createError from 'http-errors';
+import { connect, disconnect, set } from 'mongoose';
 import morgan from 'morgan';
-import { connect, set, disconnect } from 'mongoose';
+import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 import { config } from './config';
-import errorMiddleware from './middlewares/error.middleware';
-import { logger } from './utils/logger';
 import { dbConnection } from './databases';
-import createError from 'http-errors';
-import * as swaggerDocument from './swagger/swagger.json';
+import errorMiddleware from './middlewares/error.middleware';
 import { RegisterRoutes } from './routes/routes';
+import * as swaggerDocument from './swagger/swagger.json';
+import { logger } from './utils/logger';
 
 class App {
   public app: express.Application;
@@ -30,6 +31,7 @@ class App {
     this.initializeMiddlewares();
     this.initializeSwagger();
     this.initializeErrorHandling();
+    this.initializeJobs();
   }
 
   listen() {
@@ -78,6 +80,10 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
     RegisterRoutes(this.app);
+  }
+
+  private initializeJobs() {
+    return jobs();
   }
 
   private initializeSwagger() {
