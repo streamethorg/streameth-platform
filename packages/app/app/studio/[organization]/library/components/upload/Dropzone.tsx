@@ -48,7 +48,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
         startUpload(file);
       }
     },
-    [onChange]
+    [startUpload]
   );
 
   const onDropRejected = useCallback((fileRejections: FileRejection[]) => {
@@ -68,7 +68,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     if (assetId) {
       onChange(assetId);
     }
-  }, [isUploading, assetId]);
+  }, [isUploading, assetId, onChange]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
