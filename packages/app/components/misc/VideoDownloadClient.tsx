@@ -46,9 +46,6 @@ const VideoDownloadClient = ({
     setLoading(true);
     try {
       const object = await fetchDownloadUrl(assetId);
-
-      console.log(object.downloadUrl);
-
       const link = document.createElement('a');
       link.href = object.downloadUrl;
       link.setAttribute('download', videoName);
