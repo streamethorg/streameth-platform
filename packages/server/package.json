@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@privy-io/server-auth": "^1.7.3",
+    "@pulsecron/pulse": "^1.6.3",
     "@thirdweb-dev/storage": "^2.0.10",
     "amqplib": "^0.10.4",
     "bcrypt": "^5.1.1",
