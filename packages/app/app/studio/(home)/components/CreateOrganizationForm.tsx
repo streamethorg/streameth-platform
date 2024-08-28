@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -25,7 +25,6 @@ import { Loader2 } from 'lucide-react';
 import ImageUpload from '@/components/misc/form/imageUpload';
 import { useRouter } from 'next/navigation';
 import { IExtendedOrganization } from '@/lib/types';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 
 interface CreateOrganizationFormProps {
   organization?: IExtendedOrganization;
@@ -37,7 +36,6 @@ export default function CreateOrganizationForm({
   disableName = false,
 }: CreateOrganizationFormProps) {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof organizationSchema>>({
@@ -62,7 +60,6 @@ export default function CreateOrganizationForm({
         },
       })
         .then(() => {
-          setIsOpen(false);
           toast.success('Organization updated');
         })
         .catch(() => {
@@ -78,7 +75,6 @@ export default function CreateOrganizationForm({
       organization: values,
     })
       .then((response) => {
-        setIsOpen(false);
         toast.success('Organization created');
         router.push(`/studio/${response.slug}`);
       })
