@@ -8,16 +8,16 @@ import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Path,
   Post,
   Put,
   Query,
   Route,
+  Security,
   SuccessResponse,
   Tags,
-  Security,
-  Delete,
 } from 'tsoa';
 
 @Tags('Session')
@@ -108,6 +108,7 @@ export class SessionController extends Controller {
   /**
    * @summary Transcribe session
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('transcriptions')
   async sessionTranscriptions(
@@ -120,6 +121,7 @@ export class SessionController extends Controller {
   /**
    * @summary Publish session to socials
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('upload')
   async uploadSessionToSocials(
