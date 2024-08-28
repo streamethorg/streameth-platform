@@ -4,63 +4,74 @@ import {
   createOrganization,
   fetchOrganizations,
 } from '@/lib/services/organizationService';
-import { setFile } from './utils/setFile';
 import path from 'path';
 import { existsSync } from 'fs';
-import { createOrganizationAction } from '@/lib/actions/organizations';
+import { deleteStage, fetchStages } from '@/lib/services/stageService';
+import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
+import { removeStage } from './utils/removeStages';
+
+const API_URL = process.env['NEXT_PUBLIC_API_URL'] || '';
 
 const generateShortId = () => {
   return crypto.randomBytes(3).toString('hex');
 };
 
-const test = base.extend({
-  orgId: async ({ browserName }, use, testInfo) => {
+const test = base.extend<{ organization: IOrganization }>({
+  organization: async ({ browserName, context }, use, testInfo) => {
+    // Get environment variables and generate unique ID
     const baseEnv = process.env['ORG_NAME'] || 'TestOrg';
     const uniqueId = generateShortId();
-    const orgId = `${baseEnv}_${browserName.toLowerCase()}_${uniqueId}`;
-    console.log(`Running test "${testInfo.title}" with ORG_ID: ${orgId}`);
-    await use(orgId);
-  },
-});
-const API_URL = process.env['NEXT_PUBLIC_API_URL'] || '';
+    const orgName = `${baseEnv}_${browserName.toLowerCase()}_${uniqueId}`;
 
-test.beforeEach(async ({ request, context, orgId }) => {
-  // step 1: get the authentication token
-  const cookies = await context.cookies();
-  const authtoken = cookies.find(
-    (cookie) => cookie.name === 'user-session'
-  )?.value;
-  const walletAddress = cookies.find(
-    (cookie) => cookie.name === 'user-address'
-  )?.value;
+    console.log(
+      `Creating organization for test "${testInfo.title}" with name: ${orgName}`
+    );
 
-  if (!authtoken) {
-    console.error('authentication token not found');
-    return;
-  }
+    // Get authentication token from cookies
+    const cookies = await context.cookies();
+    const authToken = cookies.find(
+      (cookie) => cookie.name === 'user-session'
+    )?.value;
+    const walletAddress = cookies.find(
+      (cookie) => cookie.name === 'user-address'
+    )?.value;
 
-  const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
-  if (!existsSync(logoPath)) {
-    throw new Error(`Logo file not found at ${logoPath}`);
-  }
+    if (!authToken) {
+      throw new Error('Authentication token not found');
+    }
 
-  createOrganizationAction;
-  const organization = createOrganization({
-    organization: {
-      name: orgId,
+    if (!walletAddress) {
+      throw new Error('Wallet address not found');
+    }
+
+    // Prepare logo path
+    const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
+    if (!existsSync(logoPath)) {
+      throw new Error(`Logo file not found at ${logoPath}`);
+    }
+
+    // Create organization
+    const organizationData = {
+      name: orgName,
       email: 'test@example.com',
       logo: logoPath,
       walletAddress: walletAddress,
-    },
-    authToken: authtoken,
-  });
-  if (!organization) {
-    console.error('Organization does not exist');
-    return;
-  }
+    };
+
+    const createdOrg = await createOrganization({
+      organization: organizationData,
+      authToken: authToken,
+    });
+
+    if (!createdOrg) {
+      throw new Error('Failed to create organization');
+    }
+
+    await use(createdOrg);
+  },
 });
 
-test.afterEach(async ({ request, context, orgId }) => {
+test.afterEach(async ({ request, context, organization }) => {
   try {
     // step 1: get the authentication token
     const cookies = await context.cookies();
@@ -74,7 +85,7 @@ test.afterEach(async ({ request, context, orgId }) => {
     }
 
     const organizations = await fetchOrganizations();
-    const testOrg = organizations.find((org) => org.name === orgId);
+    const testOrg = organizations.find((org) => org.name === organization.name);
 
     if (!testOrg) {
       console.log(
@@ -106,35 +117,35 @@ test.afterEach(async ({ request, context, orgId }) => {
   }
 });
 
-test('Organization page exists', async ({ page, orgId }) => {
-  await page.goto(`/studio/${orgId}`);
-  expect(page.url()).toContain(`/studio/${orgId}`);
+test('Organization page exists', async ({ page, organization }) => {
+  await page.goto(`/studio/${organization.slug}`);
+  expect(page.url()).toContain(`/studio/${organization.slug}`);
 
   expect(page.getByRole('button', { name: 'View channel page' })).toBeVisible();
 });
 
-test('navigate to channel page', async ({ page, orgId }) => {
-  await page.goto(`/studio/${orgId}`);
+test('navigate to channel page', async ({ page, organization }) => {
+  await page.goto(`/studio/${organization.slug}`);
 
   const channelButton = page.getByRole('button', { name: 'View channel page' });
   expect(channelButton).toBeVisible();
   await channelButton.click();
 
-  expect(page.url()).toContain(`/${orgId}`);
+  expect(page.url()).toContain(`/${organization.slug}`);
 });
 
-test('able to select your organization', async ({ page, orgId }) => {
+test('able to select your organization', async ({ page, organization }) => {
   await page.goto(`/studio`);
 
   expect(
     page.getByRole('heading', { name: 'Your organizations' })
   ).toBeVisible();
   await page
-    .getByRole('link', { name: `logo ${orgId}` })
+    .getByRole('link', { name: `logo ${organization.slug}` })
     .getByRole('button')
     .click();
 
-  await expect(page).toHaveURL(`/studio/${orgId}`);
+  await expect(page).toHaveURL(`/studio/${organization.slug}`);
 });
 
 test('able to create a second organization', async ({ page }) => {
@@ -144,4 +155,73 @@ test('able to create a second organization', async ({ page }) => {
   expect(
     page.getByRole('heading', { name: 'Create an organization' })
   ).toBeVisible();
+});
+
+test('create a livestream "right now"', async ({
+  page,
+  context,
+  organization,
+}) => {
+  const thumbnailPath = path.join(__dirname, 'assets', 'thumbnail.png');
+
+  if (!existsSync(thumbnailPath)) {
+    throw new Error(`Logo file not found at ${thumbnailPath}`);
+  }
+
+  await page.goto(`/studio/${organization.slug}`);
+
+  await page.getByRole('button', { name: 'Create Livestream' }).click();
+  await page
+    .locator('div')
+    .filter({ hasText: 'Right nowStream to your' })
+    .nth(2)
+    .click();
+  await page
+    .getByPlaceholder('e.g. My first livestream')
+    .fill('my_test_stream');
+
+  const fileInput = page.locator('div input[type="file"]');
+  await fileInput.setInputFiles(thumbnailPath);
+
+  await page.getByRole('button', { name: 'Create livestream' }).click();
+  await page.waitForURL(
+    new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
+  );
+
+  removeStage(context, organization);
+});
+
+test('create a scheduled livestream', async ({
+  page,
+  context,
+  organization,
+}) => {
+  const thumbnailPath = path.join(__dirname, 'assets', 'thumbnail.png');
+
+  if (!existsSync(thumbnailPath)) {
+    throw new Error(`Logo file not found at ${thumbnailPath}`);
+  }
+
+  await page.goto(`/studio/${organization.slug}`);
+
+  await page.getByRole('button', { name: 'Create Livestream' }).click();
+  await page.getByRole('heading', { name: 'Schedule a stream' }).click();
+  await page
+    .getByPlaceholder('e.g. My first livestream')
+    .fill('my_test_stream');
+
+  const fileInput = page.locator('div input[type="file"]');
+  await fileInput.setInputFiles(thumbnailPath);
+
+  await page.getByRole('button', { name: 'August 28th,' }).click();
+  await page.getByRole('gridcell', { name: '30' }).nth(1).click();
+  await page.getByRole('combobox').click();
+  await page.getByLabel('04:30').click();
+  await page.getByRole('button', { name: 'Schedule livestream' }).click();
+
+  await page.waitForURL(
+    new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
+  );
+
+  removeStage(context, organization);
 });
