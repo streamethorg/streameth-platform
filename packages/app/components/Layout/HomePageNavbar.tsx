@@ -46,6 +46,7 @@ const HomePageNavbar = ({
         showSearchBar={showSearchBar}
         organizations={organizations}
         currentOrganization={currentOrganization || ''}
+        showLogo={showLogo}
       />
       <PCNavBar
         showLogo={showLogo}
@@ -65,12 +66,14 @@ const MobileNavBar = ({
   showSearchBar,
   organizations,
   currentOrganization,
+  showLogo = true,
 }: {
   logo?: string;
   pages: Page[];
   showSearchBar: boolean;
   organizations?: IExtendedOrganization[];
   currentOrganization: string;
+  showLogo?: boolean;
 }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
@@ -79,11 +82,9 @@ const MobileNavBar = ({
   const pathname = usePathname();
   const { searchParams, handleTermChange } = useSearchParams();
 
-  // Check if the URL contains the "clips" parameter and "selectedRecording"
   const showGoBack =
     pathname.includes('clips') && searchParams.has('selectedRecording');
 
-  // Handle the "Go back" functionality
   const handleGoBack = () => {
     handleTermChange([{ key: 'selectedRecording', value: undefined }]);
   };
@@ -132,15 +133,17 @@ const MobileNavBar = ({
             <IconLeft className="mr-1" /> Go back
           </Button>
         ) : (
-          <Link href={`/${currentOrganization}`}>
-            <Image
-              src={logo ?? '/logo.png'}
-              alt="Logo"
-              height={36}
-              width={36}
-              className="h-full aspect-square"
-            />
-          </Link>
+          showLogo && (
+            <Link href={`/${currentOrganization}`}>
+              <Image
+                src={logo ?? '/logo.png'}
+                alt="Logo"
+                height={36}
+                width={36}
+                className="h-full aspect-square"
+              />
+            </Link>
+          )
         )}
 
         <div className="flex items-center ml-auto">
@@ -192,11 +195,9 @@ const PCNavBar = ({
   const { searchParams, handleTermChange } = useSearchParams();
   const isStudio = pathname.includes('studio');
 
-  // Check if the URL contains the "clips" parameter and "selectedRecording"
   const showGoBack =
     pathname.includes('clips') && searchParams.has('selectedRecording');
 
-  // Handle the "Go back" functionality
   const handleGoBack = () => {
     handleTermChange([{ key: 'selectedRecording', value: undefined }]);
   };
@@ -252,11 +253,6 @@ const PCNavBar = ({
           />
         )}
         <Navbar organization={currentOrganization} pages={pages} />
-        {/* {isConnected && (
-          <div className="mr-2">
-            <ConnectWalletButton />
-          </div>
-        )} */}
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
