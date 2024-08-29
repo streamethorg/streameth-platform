@@ -166,10 +166,22 @@ const MobileNavBar = ({
             </button>
           )}
         </div>
-        {menuVisible ||
-          (pages.length < 2 && (
-            <Navbar organization={currentOrganization} pages={pages} />
-          ))}
+        {menuVisible && (
+          <div className="absolute top-full left-0 w-full bg-background p-4 shadow-md">
+            <nav className="flex flex-col space-y-2">
+              {pages.map((page) => (
+                <Link key={page.href} href={page.href}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left"
+                  >
+                    {page.name}
+                  </Button>
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </NavigationMenu>
   );
