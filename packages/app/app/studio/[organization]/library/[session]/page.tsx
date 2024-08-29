@@ -135,12 +135,11 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                       <TextPlaceholder text={session.assetId} />
                     </div>
                   )}
-                  {session.videoTranscription && (
-                    <div>
-                      <Label>Transcript</Label>
-                      <TextPlaceholder text={session.videoTranscription} />
-                    </div>
-                  )}
+                  <SessionTranscriptions
+                    videoTranscription={session.videoTranscription}
+                    organizationId={params.organization}
+                    sessionId={session._id}
+                  />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
