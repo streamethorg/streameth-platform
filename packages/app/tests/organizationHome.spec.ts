@@ -73,6 +73,8 @@ const test = base.extend<{ organization: IOrganization }>({
 
 test.afterEach(async ({ request, context, organization }) => {
   try {
+    removeStage(context, organization);
+
     // step 1: get the authentication token
     const cookies = await context.cookies();
     const authToken = cookies.find(
@@ -187,8 +189,6 @@ test('create a livestream "right now"', async ({
   await page.waitForURL(
     new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
   );
-
-  removeStage(context, organization);
 });
 
 test('create a scheduled livestream', async ({
@@ -213,8 +213,15 @@ test('create a scheduled livestream', async ({
   const fileInput = page.locator('div input[type="file"]');
   await fileInput.setInputFiles(thumbnailPath);
 
-  await page.getByRole('button', { name: 'August 28th,' }).click();
-  await page.getByRole('gridcell', { name: '30' }).nth(1).click();
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const todayFormatted = today.toLocaleDateString('en-US', { month: 'long' });
+  const tomorrowDay = tomorrow.getDate().toString();
+  await page.getByRole('button', { name: todayFormatted }).click();
+  await page.getByRole('gridcell', { name: tomorrowDay }).nth(1).click();
+
   await page.getByRole('combobox').click();
   await page.getByLabel('04:30').click();
   await page.getByRole('button', { name: 'Schedule livestream' }).click();
@@ -222,6 +229,87 @@ test('create a scheduled livestream', async ({
   await page.waitForURL(
     new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
   );
+});
 
-  removeStage(context, organization);
+test('create a livestream "right now" & make stream public', async ({
+  page,
+  context,
+  organization,
+}) => {
+  const thumbnailPath = path.join(__dirname, 'assets', 'thumbnail.png');
+
+  if (!existsSync(thumbnailPath)) {
+    throw new Error(`Logo file not found at ${thumbnailPath}`);
+  }
+
+  await page.goto(`/studio/${organization.slug}`);
+
+  await page.getByRole('button', { name: 'Create Livestream' }).click();
+  await page
+    .locator('div')
+    .filter({ hasText: 'Right nowStream to your' })
+    .nth(2)
+    .click();
+  await page
+    .getByPlaceholder('e.g. My first livestream')
+    .fill('my_test_stream');
+
+  const fileInput = page.locator('div input[type="file"]');
+  await fileInput.setInputFiles(thumbnailPath);
+
+  await page.getByRole('button', { name: 'Create livestream' }).click();
+  await page.waitForURL(
+    new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
+  );
+
+  await page.getByRole('button', { name: 'Back to homepage' }).click();
+  await page.getByRole('cell', { name: 'Private' }).getByRole('button').click();
+  await page.getByRole('menuitem', { name: 'Make Public' }).click();
+  expect(page.getByRole('cell', { name: 'Public' })).toBeVisible();
+});
+
+test('create a livestream "right now" & delete it', async ({
+  page,
+  context,
+  organization,
+}) => {
+  const thumbnailPath = path.join(__dirname, 'assets', 'thumbnail.png');
+
+  if (!existsSync(thumbnailPath)) {
+    throw new Error(`Logo file not found at ${thumbnailPath}`);
+  }
+
+  await page.goto(`/studio/${organization.slug}`);
+
+  await page.getByRole('button', { name: 'Create Livestream' }).click();
+  await page
+    .locator('div')
+    .filter({ hasText: 'Right nowStream to your' })
+    .nth(2)
+    .click();
+  await page
+    .getByPlaceholder('e.g. My first livestream')
+    .fill('my_test_stream');
+
+  const fileInput = page.locator('div input[type="file"]');
+  await fileInput.setInputFiles(thumbnailPath);
+
+  await page.getByRole('button', { name: 'Create livestream' }).click();
+  await page.waitForURL(
+    new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
+  );
+
+  await page.getByRole('button', { name: 'Back to homepage' }).click();
+  await page
+    .getByRole('cell', { name: 'Manage Clip' })
+    .getByRole('button')
+    .nth(2)
+    .click();
+  await page.getByRole('button', { name: 'Delete' }).click();
+  await page.getByRole('button', { name: 'Delete' }).click();
+
+  expect(page.getByText('Livestream deleted')).toBeVisible();
+  expect(
+    page.getByRole('heading', { name: 'No livestreams found' })
+  ).toBeVisible();
 });
