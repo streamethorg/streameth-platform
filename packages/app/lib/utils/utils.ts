@@ -369,3 +369,9 @@ const convertToVttTimestamp = (seconds: number): string => {
   const secs = (seconds % 60).toFixed(3);
   return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(6, '0')}`;
 };
+
+export function formatTimestamp(seconds: number) {
+  const date = new Date(0);
+  date.setSeconds(seconds);
+  return date.toISOString().substr(11, 8);
+}

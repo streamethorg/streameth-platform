@@ -14,10 +14,8 @@ import { formatDate } from '@/lib/utils/time';
 import ViewCounts from '@/app/[organization]/components/ViewCounts';
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder';
 import { IExtendedSpeaker } from '@/lib/types';
-import VideoDownload from '@/app/[organization]/components/VideoDownload';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { EllipsisVertical } from 'lucide-react';
 import VideoDownloadClient from '../misc/VideoDownloadClient';
+import TranscriptionModal from './TranscriptionModal';
 
 const DesktopButtons = ({
   name,
@@ -56,6 +54,9 @@ const DesktopButtons = ({
           start={date}
           end={date}
         />
+      )}
+      {video?.transcripts?.chunks && (
+        <TranscriptionModal video={video as IExtendedSession} />
       )}
     </>
   );
@@ -101,6 +102,9 @@ const MobileButtons = ({
           start={date}
           end={date}
         />
+      )}
+      {video?.transcripts?.chunks && (
+        <TranscriptionModal video={video as IExtendedSession} />
       )}
     </div>
   );

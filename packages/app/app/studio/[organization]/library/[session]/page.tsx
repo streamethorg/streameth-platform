@@ -22,6 +22,7 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import UploadTwitterButton from './components/UploadTwitterButton';
 import SessionTranscriptions from './components/SessionTranscriptions';
+import { Button } from '@/components/ui/button';
 
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
@@ -40,10 +41,10 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     <div className="flex flex-col h-full overflow-hidden p-4">
       <div className="mb-4">
         <Link href={`/studio/${params.organization}/library`}>
-          <div className="flex items-center space-x-4">
-            <ArrowLeft />
-            <p>Back to library</p>
-          </div>
+          <Button variant="ghost" className="mb-2 px-2">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to homepage
+          </Button>
         </Link>
       </div>
 
@@ -63,6 +64,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
         <div className="w-1/3 flex flex-col overflow-hidden">
           <div className="flex-shrink-0 mb-4">
             <PlayerWithControls
+              caption={session?.transcripts?.subtitleUrl}
               src={[
                 {
                   src: videoUrl as `${string}m3u8`,
@@ -134,12 +136,11 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                       <TextPlaceholder text={session.assetId} />
                     </div>
                   )}
-                  {session.videoTranscription && (
-                    <div>
-                      <Label>Transcript</Label>
-                      <TextPlaceholder text={session.videoTranscription} />
-                    </div>
-                  )}
+                  <SessionTranscriptions
+                    videoTranscription={session?.transcripts?.subtitleUrl}
+                    organizationId={params.organization}
+                    sessionId={session._id}
+                  />
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
