@@ -12,7 +12,7 @@ export default function ClientSidePlayer({
   name: string;
   thumbnail: string;
   src: Src[];
-  caption: string;
+  caption?: string;
 }) {
   return (
     <PlayerWithControls

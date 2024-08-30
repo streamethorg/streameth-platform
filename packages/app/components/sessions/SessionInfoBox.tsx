@@ -55,6 +55,9 @@ const DesktopButtons = ({
           end={date}
         />
       )}
+      {video?.transcripts?.chunks && (
+        <TranscriptionModal video={video as IExtendedSession} />
+      )}
     </>
   );
 };
@@ -100,6 +103,9 @@ const MobileButtons = ({
           end={date}
         />
       )}
+      {video?.transcripts?.chunks && (
+        <TranscriptionModal video={video as IExtendedSession} />
+      )}
     </div>
   );
 };
@@ -125,7 +131,7 @@ const SessionInfoBox = async ({
   vod?: boolean;
   organizationSlug?: string;
   viewCount?: boolean;
-  video?: IExtendedStage | IExtendedSession;
+  video?: IExtendedStage;
 }) => {
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
@@ -184,9 +190,6 @@ const SessionInfoBox = async ({
           />
         </div>
       </>
-      {video?.transcripts?.chunks && (
-        <TranscriptionModal video={video as IExtendedSession} />
-      )}
     </div>
   );
 };

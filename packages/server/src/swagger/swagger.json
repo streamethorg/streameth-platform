@@ -1582,6 +1582,44 @@
 					},
 					"clippingStatus": {
 						"$ref": "#/components/schemas/ClippingStatus"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"text": {
+											"type": "string"
+										},
+										"timestamp": {
+											"items": {
+												"type": "number",
+												"format": "double"
+											},
+											"type": "array"
+										}
+									},
+									"required": [
+										"text",
+										"timestamp"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -1779,6 +1817,44 @@
 					},
 					"clippingStatus": {
 						"$ref": "#/components/schemas/ClippingStatus"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"text": {
+											"type": "string"
+										},
+										"timestamp": {
+											"items": {
+												"type": "number",
+												"format": "double"
+											},
+											"type": "array"
+										}
+									},
+									"required": [
+										"text",
+										"timestamp"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -1936,6 +2012,44 @@
 					},
 					"clippingStatus": {
 						"$ref": "#/components/schemas/ClippingStatus"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"text": {
+											"type": "string"
+										},
+										"timestamp": {
+											"items": {
+												"type": "number",
+												"format": "double"
+											},
+											"type": "array"
+										}
+									},
+									"required": [
+										"text",
+										"timestamp"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl"
+						],
+						"type": "object"
 					},
 					"autolabels": {
 						"items": {
@@ -4922,7 +5036,13 @@
 				"tags": [
 					"Session"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -4955,7 +5075,13 @@
 				"tags": [
 					"Session"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
