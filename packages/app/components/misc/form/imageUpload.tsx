@@ -31,13 +31,11 @@ function getImageData(file: File) {
 }
 
 interface ConfirmImageDeletionProps {
-  onChange: (files: string | null) => void;
-  setPreview: React.Dispatch<React.SetStateAction<string>>;
+  onDelete: () => void;
 }
 
 const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
-  onChange,
-  setPreview,
+  onDelete,
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -58,8 +56,7 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
           </Button>
           <Button
             onClick={() => {
-              onChange('');
-              setPreview('');
+              onDelete();
               setOpen(false);
             }}
             variant="destructive"
@@ -72,7 +69,8 @@ const ConfirmImageDeletion: React.FC<ConfirmImageDeletionProps> = ({
   );
 };
 
-interface ImageUploadProps {
+interface ImageUploadProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  path: string;
   options: {
     maxSize?: number;
     placeholder?: string;
@@ -81,21 +79,11 @@ interface ImageUploadProps {
     isProfileImage?: boolean;
     resize?: boolean;
   };
-  onChange: (value: string) => void;
-  value: string | undefined;
-  path: string;
-  className?: string;
 }
 
-export interface ImageUploadRef {
-  reset: () => void;
-}
-
-const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
+const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
   (
     {
-      onChange,
-      value,
       path,
       className,
       options: {
@@ -106,6 +94,9 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
         isProfileImage = false,
         resize = false,
       },
+      onChange,
+      value,
+      ...props
     },
     ref
   ) => {
@@ -114,14 +105,6 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
     );
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-
-    useImperativeHandle(ref, () => ({
-      reset: () => {
-        setPreview('');
-        onChange('');
-        setError(null);
-      },
-    }));
 
     const validateImage = useCallback(
       (file: File): Promise<boolean> => {
@@ -209,7 +192,9 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
           setPreview(displayUrl);
           toast.promise(
             onSubmit(file).then((uploadedPath) => {
-              onChange(uploadedPath);
+              onChange?.({
+                target: { name: props.name, value: uploadedPath },
+              } as React.ChangeEvent<HTMLInputElement>);
               setIsUploading(true);
               return 'Image uploaded successfully';
             }),
@@ -220,7 +205,9 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
                 return message;
               },
               error: (error: Error) => {
-                onChange('');
+                onChange?.({
+                  target: { name: props.name, value: '' },
+                } as React.ChangeEvent<HTMLInputElement>);
                 setPreview('');
                 setIsUploading(false);
                 return error.message || 'Unknown error';
@@ -229,10 +216,10 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
           );
         }
       },
-      [onSubmit, resize, onChange]
+      [onSubmit, resize, props.name]
     );
 
-    const { getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps, inputRef } = useDropzone({
       accept: {
         'image/*': ['.png', '.jpg', '.gif'],
       },
@@ -241,6 +228,15 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
       onDrop,
       onDropRejected,
     });
+
+    useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+
+    const handleDelete = useCallback(() => {
+      onChange?.({
+        target: { name: props.name, value: '' },
+      } as React.ChangeEvent<HTMLInputElement>);
+      setPreview('');
+    }, [onChange, props.name]);
 
     const containerClasses = isProfileImage
       ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'
@@ -262,13 +258,7 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
           </div>
         ) : preview ? (
           <div className="relative w-full h-full">
-            <ConfirmImageDeletion
-              onChange={() => {
-                onChange('');
-                setPreview('');
-              }}
-              setPreview={setPreview}
-            />
+            <ConfirmImageDeletion onDelete={handleDelete} />
             <Image src={preview} alt="preview" fill className={imageClasses} />
           </div>
         ) : (
@@ -281,7 +271,7 @@ const ImageUpload = forwardRef<ImageUploadRef, ImageUploadProps>(
                 {placeholder}
               </p>
             )}
-            <input {...getInputProps()} />
+            <input {...getInputProps(props)} />
             {error && (
               <p className="absolute right-0 left-0 mt-2 text-sm text-center text-red-500 bottom-[-2rem]">
                 {error}

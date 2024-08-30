@@ -4,6 +4,7 @@ import { IExtendedStage } from '@/lib/types';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const StreamHeader = ({
   stream,
@@ -26,10 +27,10 @@ const StreamHeader = ({
     <div>
       {isLiveStreamPage && (
         <Link href={`/studio/${organizationSlug}`}>
-          <div className="mb-4 flex items-center justify-start space-x-4">
-            <ArrowLeft />
-            <p>Back to homepage</p>
-          </div>
+          <Button variant="ghost" className="mb-2 px-2">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to homepage
+          </Button>
         </Link>
       )}
     </div>
