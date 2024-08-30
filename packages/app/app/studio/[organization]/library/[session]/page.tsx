@@ -63,6 +63,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
         <div className="w-1/3 flex flex-col overflow-hidden">
           <div className="flex-shrink-0 mb-4">
             <PlayerWithControls
+              caption={session?.transcripts?.subtitleUrl}
               src={[
                 {
                   src: videoUrl as `${string}m3u8`,
@@ -135,7 +136,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                     </div>
                   )}
                   <SessionTranscriptions
-                    videoTranscription={session.videoTranscription}
+                    videoTranscription={session?.transcripts?.subtitleUrl}
                     organizationId={params.organization}
                     sessionId={session._id}
                   />
