@@ -1,5 +1,5 @@
-import { bool, cleanEnv, port, str } from 'envalid';
 import { config } from 'dotenv';
+import { bool, cleanEnv, port, str } from 'envalid';
 // config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
 config();
 
@@ -49,6 +49,9 @@ const validateEnv = () => {
     FIREBASE_PROVIDER_CERT: str(),
     FIREBASE_CLIENT_CERT: str(),
     FIREBASE_DOMAIN: str(),
+    GOOGLE_API_KEY: str(),
+    SERVICE_ACCOUNT_PRIVATE_KEY: str(),
+    SERVICE_ACCOUNT_EMAIL: str(),
   });
 };
 

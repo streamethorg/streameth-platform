@@ -6,21 +6,29 @@ import {
 import { SessionType } from '@interfaces/session.interface';
 import ScheduleImport from '@models/schedule.model';
 import Stage from '@models/stage.model';
+import GoogleSheetService from '@utils/google-sheet';
 import { generateId } from '@utils/util';
 import { Types } from 'mongoose';
 import fetch from 'node-fetch';
 import SessionService from './session.service';
 import StageService from './stage.service';
+
 export default class ScheduleImporterService {
   private stageService = new StageService();
   private sessionService = new SessionService();
+  private googleSheetService = new GoogleSheetService();
 
   async importSessionsAndStage(data: {
     url: string;
     type: string;
     organizationId: string;
   }): Promise<any> {
-    return this.pretalx(data.url, data.organizationId);
+    if (data.type === 'pretalx') {
+      return this.pretalx(data.url, data.organizationId);
+    }
+    if (data.type === 'gsheet') {
+      return this.gsheet(data.url, data.organizationId);
+    }
   }
 
   async importByStage(data: {
@@ -31,7 +39,7 @@ export default class ScheduleImporterService {
   }): Promise<void> {
     const stage = await Stage.findById(data.stageId);
     if (!stage) throw new HttpException(404, 'Stage not found');
-    return this.pretalxStage({
+    return this.pretalxByStage({
       url: data.url,
       roomId: stage.slug,
       organizationId: data.organizationId,
@@ -50,6 +58,7 @@ export default class ScheduleImporterService {
           organizationId: schedule.organizationId,
           slug: stage.slug,
           streamDate: stage.streamDate,
+          ...stage,
         });
       }
     }
@@ -66,6 +75,7 @@ export default class ScheduleImporterService {
           type: session.type,
           stageId: session.stageId,
           speakers: session.speakers,
+          ...session,
         });
       }
     }
@@ -75,7 +85,7 @@ export default class ScheduleImporterService {
     );
   }
 
-  private async pretalxStage(d: {
+  private async pretalxByStage(d: {
     url: string;
     roomId: string;
     organizationId: string;
@@ -181,6 +191,34 @@ export default class ScheduleImporterService {
       metadata: {
         stages: rooms,
         sessions: sessionsData,
+      },
+    });
+  }
+
+  private async gsheet(
+    url: string,
+    organizationId: string,
+  ): Promise<IScheduleImporter> {
+    const sheetId = url.split('/')[5];
+    const speakers = await this.googleSheetService.generateSpeakers(sheetId);
+    const stages = await this.googleSheetService.generateStages(
+      sheetId,
+      organizationId,
+    );
+    const sessions = await this.googleSheetService.generateSessions(
+      sheetId,
+      organizationId,
+      stages,
+      speakers,
+    );
+    return ScheduleImport.create({
+      url,
+      type: 'gsheet',
+      status: 'pending',
+      organizationId,
+      metadata: {
+        stages,
+        sessions,
       },
     });
   }
