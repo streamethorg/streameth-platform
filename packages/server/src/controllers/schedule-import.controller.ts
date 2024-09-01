@@ -41,7 +41,7 @@ export class ScheduleImporterController extends Controller {
     return SendApiResponse('schedule generated', importer);
   }
 
-  @Security('jwt', ['org'])
+  // @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('import/save')
   async save(

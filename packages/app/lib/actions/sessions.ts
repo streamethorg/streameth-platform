@@ -264,8 +264,10 @@ export const stageSessionImportAction = async ({
 
 export const saveSessionImportAction = async ({
   scheduleId,
+  organizationId,
 }: {
   scheduleId: string;
+  organizationId: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {

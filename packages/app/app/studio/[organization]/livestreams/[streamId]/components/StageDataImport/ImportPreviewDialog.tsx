@@ -17,12 +17,14 @@ const ImportPreviewDialog = ({
   setOpen,
   hasRooms = false,
   scheduleId,
+  organizationId,
 }: {
   previewData?: IScheduleImportMetadata;
   open: boolean;
   setOpen: (open: boolean) => void;
   hasRooms?: boolean;
   scheduleId: string;
+  organizationId: string;
 }) => {
   const [isSavingSessions, setIsSavingSessions] = useState(false);
 
@@ -30,6 +32,7 @@ const ImportPreviewDialog = ({
     setIsSavingSessions(true);
     await saveSessionImportAction({
       scheduleId,
+      organizationId,
     })
       .then((response) => {
         if (response) {

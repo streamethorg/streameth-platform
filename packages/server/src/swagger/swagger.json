@@ -2373,6 +2373,100 @@
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
+			"ImportStatus": {
+				"enum": [
+					"pending",
+					"completed",
+					"failed"
+				],
+				"type": "string"
+			},
+			"IScheduleImportMetadata": {
+				"properties": {
+					"sessions": {
+						"items": {
+							"$ref": "#/components/schemas/ISession"
+						},
+						"type": "array"
+					},
+					"stages": {
+						"items": {
+							"$ref": "#/components/schemas/IStage"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"sessions",
+					"stages"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IScheduleImporter": {
+				"properties": {
+					"url": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/ImportType"
+					},
+					"status": {
+						"$ref": "#/components/schemas/ImportStatus"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"metadata": {
+						"$ref": "#/components/schemas/IScheduleImportMetadata"
+					}
+				},
+				"required": [
+					"url",
+					"type",
+					"status",
+					"organizationId",
+					"metadata"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IScheduleImporter_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IScheduleImporter"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"Pick_IScheduleImporterDto.url-or-type-or-organizationId-or-stageId_": {
 				"properties": {
 					"organizationId": {
@@ -5113,7 +5207,13 @@
 				"tags": [
 					"Schedule"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -5136,7 +5236,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_void_"
+									"$ref": "#/components/schemas/IStandardResponse_IScheduleImporter_"
 								}
 							}
 						}
@@ -5145,7 +5245,13 @@
 				"tags": [
 					"Schedule"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,

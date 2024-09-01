@@ -20,7 +20,7 @@ import {
 import { sessionImportAction } from '@/lib/actions/sessions';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import ImportPreviewDialog from '../[streamId]/components/StreamPlatforms/StageDataImport/ImportPreviewDialog';
+import ImportPreviewDialog from '../[streamId]/components/StageDataImport/ImportPreviewDialog';
 import { FaFileImport } from 'react-icons/fa';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
@@ -89,6 +89,7 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="pretalx">Pretalx</SelectItem>
+              <SelectItem value="gsheet">Google Sheet</SelectItem>
             </SelectContent>
           </Select>
 
@@ -123,6 +124,7 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
         setOpen={setIsPreviewOpen}
         hasRooms
         scheduleId={scheduleId}
+        organizationId={organizationId}
       />
     </>
   );

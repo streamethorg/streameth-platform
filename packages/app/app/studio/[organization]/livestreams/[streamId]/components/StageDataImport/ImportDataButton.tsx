@@ -121,6 +121,7 @@ const ImportDataButton = ({
         previewData={previewData}
         setOpen={setIsPreviewOpen}
         scheduleId={scheduleId}
+        organizationId={organizationId}
       />
     </>
   );
