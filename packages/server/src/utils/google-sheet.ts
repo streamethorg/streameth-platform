@@ -78,7 +78,7 @@ export default class GoogleSheetService {
       SPEAKER_DATA_RANGE,
     );
     const speakers = [];
-    for (const [index, row] of data.entries()) {
+    for (const row of data) {
       const [name, description, twitterHandle, avatar] = row;
       const speaker = {
         name,
@@ -111,7 +111,7 @@ export default class GoogleSheetService {
       STAGE_DATA_RANGE,
     );
     const stages = [];
-    for (const [index, row] of data.entries()) {
+    for (const row of data) {
       const [name, streamId] = row;
       const stage = {
         _id: new Types.ObjectId().toString(),
@@ -146,7 +146,7 @@ export default class GoogleSheetService {
       SESSION_DATA_RANGE,
     );
     const sessions = [];
-    for (const [index, row] of data.entries()) {
+    for (const row of data) {
       const [
         Name,
         Description,
@@ -185,8 +185,68 @@ export default class GoogleSheetService {
         type: SessionType.video,
         stageId: stage._id,
         speakers: speakersData,
-        track: row[13],
-        coverImage: row[17],
+        track: row[13] || 'No track',
+        coverImage: row[17] || 'No cover image',
+      };
+      sessions.push(session);
+    }
+    return sessions;
+  }
+
+  async generateSessionsByStage(d: {
+    sheetId: string;
+    stageId: string;
+    stageSlug: string;
+    organizationId: string;
+  }) {
+    const data = await this.getDataForRange(
+      d.sheetId,
+      SESSION_SHEET,
+      SESSION_DATA_RANGE,
+    );
+    const sessions = [];
+    for (const row of data) {
+      const [
+        Name,
+        Description,
+        stage,
+        Day,
+        Start,
+        End,
+        sessionType,
+        ...speakerIdsRaw
+      ] = row.slice(0, 11);
+      if (generateId(stage) !== d.stageSlug) continue;
+      const newDate = () => {
+        const date = Day.split('/');
+        return `${date[2]}-${date[1]}-${date[0]}`;
+      };
+      const speakers = await this.generateSpeakers(d.sheetId);
+      const speakersData = speakerIdsRaw
+        .filter(Boolean)
+        .map((id) => {
+          const speakerSlug = generateId(id);
+          const speaker = speakers.find((s) => s.slug === speakerSlug);
+          return speaker;
+        })
+        .filter(Boolean);
+      const session = {
+        _id: new Types.ObjectId().toString(),
+        name: Name,
+        description: Description,
+        start: moment
+          .tz(`${newDate()} ${Start}:00`, 'YYYY-MM-DD HH:mm:ss', 'UTC')
+          .valueOf(),
+        end: moment
+          .tz(`${newDate()} ${End}:00`, 'YYYY-MM-DD HH:mm:ss', 'UTC')
+          .valueOf(),
+        slug: generateId(Name),
+        organizationId: d.organizationId,
+        type: SessionType.video,
+        stageId: d.stageId,
+        speakers: speakersData,
+        track: row[13] || 'No track',
+        coverImage: row[17] || 'No cover image',
       };
       sessions.push(session);
     }

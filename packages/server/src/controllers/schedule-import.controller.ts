@@ -1,4 +1,5 @@
 import { IScheduleImporterDto } from '@dtos/schedule-importer/create-import.dto';
+import { IScheduleImporter } from '@interfaces/schedule-importer.interface';
 import ScheduleImporterService from '@services/schedule-import.service';
 import { type IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
@@ -35,7 +36,7 @@ export class ScheduleImporterController extends Controller {
       IScheduleImporterDto,
       'url' | 'type' | 'organizationId' | 'stageId'
     >,
-  ): Promise<IStandardResponse<void>> {
+  ): Promise<IStandardResponse<IScheduleImporter>> {
     const importer = await this.importerService.importByStage(body);
     return SendApiResponse('schedule generated', importer);
   }

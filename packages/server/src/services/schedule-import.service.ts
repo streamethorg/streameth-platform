@@ -36,15 +36,25 @@ export default class ScheduleImporterService {
     url: string;
     type: string;
     organizationId: string;
-  }): Promise<void> {
+  }): Promise<IScheduleImporter> {
     const stage = await Stage.findById(data.stageId);
     if (!stage) throw new HttpException(404, 'Stage not found');
-    return this.pretalxByStage({
-      url: data.url,
-      roomId: stage.slug,
-      organizationId: data.organizationId,
-      stageId: data.stageId,
-    });
+    if (data.type === 'pretalx') {
+      return this.pretalxByStage({
+        url: data.url,
+        roomId: stage.slug,
+        organizationId: data.organizationId,
+        stageId: data.stageId,
+      });
+    }
+    if (data.type === 'gsheet') {
+      return this.gsheetByStage({
+        url: data.url,
+        organizationId: data.organizationId,
+        stageId: data.stageId,
+        stageSlug: stage.slug,
+      });
+    }
   }
 
   async save(scheduleId: string): Promise<void> {
@@ -90,7 +100,7 @@ export default class ScheduleImporterService {
     roomId: string;
     organizationId: string;
     stageId: string;
-  }): Promise<any> {
+  }): Promise<IScheduleImporter> {
     const response = await fetch(d.url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -218,6 +228,31 @@ export default class ScheduleImporterService {
       organizationId,
       metadata: {
         stages,
+        sessions,
+      },
+    });
+  }
+
+  private async gsheetByStage(d: {
+    url: string;
+    organizationId: string;
+    stageId: string;
+    stageSlug: string;
+  }): Promise<IScheduleImporter> {
+    const sheetId = d.url.split('/')[5];
+    const sessions = await this.googleSheetService.generateSessionsByStage({
+      sheetId,
+      stageId: d.stageId,
+      stageSlug: d.stageSlug,
+      organizationId: d.organizationId,
+    });
+    return ScheduleImport.create({
+      url: d.url,
+      type: 'gsheet',
+      status: 'pending',
+      organizationId: d.organizationId,
+      metadata: {
+        stages: [],
         sessions,
       },
     });
