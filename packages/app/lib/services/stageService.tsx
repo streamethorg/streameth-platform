@@ -140,7 +140,7 @@ export const updateStage = async ({
   stage: IExtendedStage;
   authToken: string;
 }): Promise<IExtendedStage> => {
-  const { _id, createdAt, updatedAt, __v, ...rest } = stage;
+  const { _id, createdAt, recordingIndex, updatedAt, __v, ...rest } = stage;
   try {
     const response = await fetch(`${apiUrl()}/stages/${_id}`, {
       method: 'PUT',
