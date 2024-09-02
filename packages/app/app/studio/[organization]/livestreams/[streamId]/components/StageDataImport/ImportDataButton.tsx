@@ -149,7 +149,11 @@ const ImportDataButton = ({
               />
 
               <DialogFooter>
-                <Button onClick={() => setOpen(false)} variant={'outline'}>
+                <Button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  variant={'outline'}
+                >
                   Cancel
                 </Button>
                 <Button type="submit" variant={'primary'} loading={isImporting}>
