@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -23,22 +22,43 @@ import { toast } from 'sonner';
 import ImportPreviewDialog from '../[streamId]/components/StageDataImport/ImportPreviewDialog';
 import { FaFileImport } from 'react-icons/fa';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
+import { ScheduleImportSchema } from '@/lib/schema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
 const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
   const [isImporting, setIsImporting] = useState(false);
   const [open, setOpen] = useState(false);
-  const [source, setSource] = useState('');
-  const [url, setUrl] = useState('');
   const [previewData, setPreviewData] = useState<IScheduleImportMetadata>();
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [scheduleId, setScheduleId] = useState('');
 
-  const handleImportSession = async () => {
+  const form = useForm<z.infer<typeof ScheduleImportSchema>>({
+    resolver: zodResolver(ScheduleImportSchema),
+    defaultValues: {
+      type: '',
+      url: '',
+      organizationId: organizationId,
+    },
+  });
+  const { watch } = form;
+  const type = watch('type');
+
+  const handleImportSession = async (
+    values: z.infer<typeof ScheduleImportSchema>
+  ) => {
     setIsImporting(true);
     await sessionImportAction({
-      url,
-      type: source,
-      organizationId,
+      ...values,
     })
       .then((response) => {
         if (response) {
@@ -79,42 +99,69 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
             Import all rooms and their corresponding talks quickly and easily,
             ensuring your setup is organized and up-to-date.
           </DialogDescription>
-          <Label>Select Data Source</Label>
-          <Select
-            defaultValue={source}
-            onValueChange={(value: string) => setSource(value)}
-          >
-            <SelectTrigger className="rounded-lg border bg-white">
-              <SelectValue placeholder="Select Source" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pretalx">Pretalx</SelectItem>
-              <SelectItem value="gsheet">Google Sheet</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Label>Input {source} API url</Label>
-          <Input
-            className="rounded-lg border bg-white"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://myscheduleurl.com/schedule/export/schedule.json"
-          />
-          <DialogFooter>
-            <Button onClick={() => setOpen(false)} variant={'outline'}>
-              Cancel
-            </Button>
-            <Button
-              onClick={() => {
-                handleImportSession();
-              }}
-              variant={'primary'}
-              disabled={!url}
-              loading={isImporting}
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(handleImportSession)}
+              className="space-y-4"
             >
-              Import
-            </Button>
-          </DialogFooter>
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="">Select Data Source</FormLabel>
+                    <FormControl>
+                      <Select
+                        value={field.value} // Ensure the select value is controlled by the form state
+                        onValueChange={(value: string) => {
+                          field.onChange(value); // Update form value
+                        }}
+                      >
+                        <SelectTrigger className="rounded-lg border bg-white">
+                          <SelectValue placeholder="Select Source" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pretalx">Pretalx</SelectItem>
+                          <SelectItem value="gsheet">Google Sheet</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="url"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="">Input {type} url</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-white"
+                        placeholder="https://myscheduleurl.com/schedule/export/schedule.json"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <DialogFooter>
+                <Button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  variant={'outline'}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" variant={'primary'} loading={isImporting}>
+                  Import
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
         </DialogContent>
       </Dialog>
 

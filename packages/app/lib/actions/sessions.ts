@@ -238,10 +238,10 @@ export const stageSessionImportAction = async ({
   url: string;
   organizationId: string;
   type: string;
-  stageId: string;
+  stageId?: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
+  if (!authToken || !stageId) {
     throw new Error('No user session found');
   }
 
