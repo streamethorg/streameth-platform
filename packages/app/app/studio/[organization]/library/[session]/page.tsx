@@ -32,7 +32,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  if (!session?.playbackId) return notFound();
+  if (!session?.playbackId || !organization) return notFound();
 
   const videoUrl = await getVideoUrlAction(session);
   if (!videoUrl) return notFound();
@@ -138,7 +138,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                   )}
                   <SessionTranscriptions
                     videoTranscription={session?.transcripts?.subtitleUrl}
-                    organizationId={params.organization}
+                    organizationId={organization._id}
                     sessionId={session._id}
                   />
                 </AccordionContent>
