@@ -1,6 +1,7 @@
 import { createReadStream, createWriteStream, unlinkSync } from 'fs';
 import { google, youtube_v3 } from 'googleapis';
 import https from 'https';
+import { logger } from './logger';
 
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -130,7 +131,10 @@ export async function uploadToYouTube(
     }
     return;
   } catch (error) {
-    console.error('An error occurred:', error);
+    logger.error('An error occurred:', error);
+    if (error.message == 'Invalid Credentials') {
+      throw new Error('Unauthorized');
+    }
     return;
   }
 }
