@@ -1,9 +1,9 @@
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IState, StateStatus, StateType } from '@interfaces/state.interface';
+import Event from '@models/event.model';
 import Session from '@models/session.model';
 import State from '@models/state.model';
-import Event from '@models/event.model';
 
 export default class StateService {
   private path: string;
@@ -14,7 +14,7 @@ export default class StateService {
   }
 
   async create(data: IState): Promise<IState> {
-    return await this.controller.store.create(' ', data);
+    return await this.controller.store.create('', data);
   }
 
   async update(stateId: string, data: IState): Promise<IState> {

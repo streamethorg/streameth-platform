@@ -1,6 +1,7 @@
 import {
   IStateModel,
   SheetType,
+  SocialType,
   StateStatus,
   StateType,
 } from '@interfaces/state.interface';
@@ -14,6 +15,7 @@ const StateSchema = new Schema<IStateModel>(
     eventSlug: { type: String, default: '' },
     sessionSlug: { type: String, default: '' },
     sheetType: { type: String, enum: Object.keys(SheetType) },
+    socialType: { type: String, enum: Object.keys(SocialType) },
     status: {
       type: String,
       default: StateStatus.pending,
