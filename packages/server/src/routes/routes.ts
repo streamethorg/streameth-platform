@@ -769,6 +769,43 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"type":{"ref":"ImportType","required":true},"url":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ImportStatus": {
+        "dataType": "refEnum",
+        "enums": ["pending","completed","failed"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IScheduleImportMetadata": {
+        "dataType": "refObject",
+        "properties": {
+            "sessions": {"dataType":"array","array":{"dataType":"refObject","ref":"ISession"},"required":true},
+            "stages": {"dataType":"array","array":{"dataType":"refObject","ref":"IStage"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IScheduleImporter": {
+        "dataType": "refObject",
+        "properties": {
+            "url": {"dataType":"string","required":true},
+            "type": {"ref":"ImportType","required":true},
+            "status": {"ref":"ImportStatus","required":true},
+            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
+            "metadata": {"ref":"IScheduleImportMetadata","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_IScheduleImporter_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"ref":"IScheduleImporter"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IScheduleImporterDto.url-or-type-or-organizationId-or-stageId_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"stageId":{"dataType":"string","required":true},"type":{"ref":"ImportType","required":true},"url":{"dataType":"string","required":true}},"validators":{}},
@@ -2405,6 +2442,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/schedule/import',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(ScheduleImporterController)),
             ...(fetchMiddlewares<RequestHandler>(ScheduleImporterController.prototype.importSchdeule)),
 
@@ -2435,6 +2473,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/schedule/import/stage',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(ScheduleImporterController)),
             ...(fetchMiddlewares<RequestHandler>(ScheduleImporterController.prototype.importSchdeuleByStage)),
 
@@ -2465,12 +2504,13 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/schedule/import/save',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(ScheduleImporterController)),
             ...(fetchMiddlewares<RequestHandler>(ScheduleImporterController.prototype.save)),
 
             async function ScheduleImporterController_save(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"scheduleId":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"scheduleId":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

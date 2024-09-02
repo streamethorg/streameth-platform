@@ -74,4 +74,9 @@ export const config = {
     clientCert: validatedEnv.FIREBASE_CLIENT_CERT,
     domain: validatedEnv.FIREBASE_DOMAIN,
   },
+  google: {
+    apiKey: validatedEnv.GOOGLE_API_KEY,
+    privateKey: validatedEnv.SERVICE_ACCOUNT_PRIVATE_KEY,
+    accountEmail: validatedEnv.SERVICE_ACCOUNT_EMAIL,
+  },
 };
