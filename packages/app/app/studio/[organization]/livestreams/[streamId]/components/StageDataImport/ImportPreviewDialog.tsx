@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { saveSessionImportAction } from '@/lib/actions/sessions';
+import { IExtendedStage } from '@/lib/types';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
@@ -18,6 +19,7 @@ const ImportPreviewDialog = ({
   hasRooms = false,
   scheduleId,
   organizationId,
+  stage,
 }: {
   previewData?: IScheduleImportMetadata;
   open: boolean;
@@ -25,6 +27,7 @@ const ImportPreviewDialog = ({
   hasRooms?: boolean;
   scheduleId: string;
   organizationId: string;
+  stage?: IExtendedStage;
 }) => {
   const [isSavingSessions, setIsSavingSessions] = useState(false);
 
@@ -102,7 +105,20 @@ const ImportPreviewDialog = ({
                 </div>
               </div>
             ) : (
-              <p>no Session found</p>
+              <div>
+                <p className="text-xl mb-3">No Session found</p>
+                <p className="">
+                  {hasRooms ? (
+                    'Please verify the link and try again'
+                  ) : (
+                    <p>
+                      Please verify the link and ensure that the stage/room name
+                      on the schedule matches{' '}
+                      <span className="font-bold">{stage?.name}</span>
+                    </p>
+                  )}
+                </p>
+              </div>
             )}
           </div>
 
@@ -110,16 +126,18 @@ const ImportPreviewDialog = ({
             <Button onClick={() => setOpen(false)} variant={'outline'}>
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                handleSaveSessions();
-              }}
-              variant={'primary'}
-              disabled={!previewData || !scheduleId}
-              loading={isSavingSessions}
-            >
-              Save
-            </Button>
+            {previewData?.sessions && previewData?.sessions?.length > 0 && (
+              <Button
+                onClick={() => {
+                  handleSaveSessions();
+                }}
+                variant={'primary'}
+                disabled={!previewData || !scheduleId}
+                loading={isSavingSessions}
+              >
+                Save
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -5283,7 +5283,13 @@
 				"tags": [
 					"Schedule"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -5291,11 +5297,15 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"organizationId": {
+										"type": "string"
+									},
 									"scheduleId": {
 										"type": "string"
 									}
 								},
 								"required": [
+									"organizationId",
 									"scheduleId"
 								],
 								"type": "object"

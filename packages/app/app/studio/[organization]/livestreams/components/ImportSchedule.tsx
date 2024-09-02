@@ -27,7 +27,7 @@ import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/sch
 const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
   const [isImporting, setIsImporting] = useState(false);
   const [open, setOpen] = useState(false);
-  const [source, setSource] = useState('pretalx');
+  const [source, setSource] = useState('');
   const [url, setUrl] = useState('');
   const [previewData, setPreviewData] = useState<IScheduleImportMetadata>();
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);

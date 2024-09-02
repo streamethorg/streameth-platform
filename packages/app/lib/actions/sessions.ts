@@ -278,6 +278,7 @@ export const saveSessionImportAction = async ({
     const res = await saveSessionImport({
       scheduleId,
       authToken,
+      organizationId,
     });
     revalidatePath('/studio');
 
