@@ -162,6 +162,7 @@ export default class GoogleSheetService {
         return `${date[2]}-${date[1]}-${date[0]}`;
       };
       const stage = stages.find((s) => s.slug === generateId(stageId));
+      if (!stage) continue;
       const speakersData = speakerIdsRaw
         .filter(Boolean)
         .map((id) => {
