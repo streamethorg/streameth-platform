@@ -86,14 +86,13 @@ jobs:
           PRIVY_OTP: ${{ secrets.PRIVY_OTP }}
           ORG_NAME: test_org
 
-      - name: Upload test results
-        if: always()
+      - name: Save .next directory
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-chrome
-          path: packages/app/playwright-report
+          name: next-artifact
           include-hidden-files: true
-          retention-days: 30
+          if-no-files-found: error
+          path: ${{ github.workspace }}/packages/app/.next
 
   firefox-tests:
     needs: install
