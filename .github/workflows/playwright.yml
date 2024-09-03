@@ -39,9 +39,9 @@ jobs:
 
       - name: Save .next directory
         uses: actions/upload-artifact@v4
-        include-hidden-files: true
         with:
           name: next-artifact
+          include-hidden-files: true
           if-no-files-found: error
           path: ${{ github.workspace }}/packages/app/.next
 
