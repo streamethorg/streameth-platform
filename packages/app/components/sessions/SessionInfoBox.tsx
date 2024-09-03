@@ -55,7 +55,7 @@ const DesktopButtons = ({
           end={date}
         />
       )}
-      {video?.transcripts?.chunks && (
+      {video?.transcripts?.chunks[0]?.text && (
         <TranscriptionModal video={video as IExtendedSession} />
       )}
     </>

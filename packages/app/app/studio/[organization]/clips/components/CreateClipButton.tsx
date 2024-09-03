@@ -96,7 +96,7 @@ const ClipButton = ({
     }
 
     setIsLoading(true);
-    createClipAction({
+    await createClipAction({
       playbackId,
       recordingId: selectedRecording,
       start: startTime.unix,
