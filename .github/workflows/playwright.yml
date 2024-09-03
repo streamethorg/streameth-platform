@@ -37,6 +37,11 @@ jobs:
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
 
+      - name: List all files
+        run: |
+          echo "Listing all files in the current directory and subdirectories:"
+          find . -type f | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+
       - name: Save .next directory
         uses: actions/upload-artifact@v4
         with:
