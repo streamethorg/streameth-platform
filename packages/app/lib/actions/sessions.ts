@@ -238,10 +238,10 @@ export const stageSessionImportAction = async ({
   url: string;
   organizationId: string;
   type: string;
-  stageId: string;
+  stageId?: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
+  if (!authToken || !stageId) {
     throw new Error('No user session found');
   }
 
@@ -264,8 +264,10 @@ export const stageSessionImportAction = async ({
 
 export const saveSessionImportAction = async ({
   scheduleId,
+  organizationId,
 }: {
   scheduleId: string;
+  organizationId: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {
@@ -276,6 +278,7 @@ export const saveSessionImportAction = async ({
     const res = await saveSessionImport({
       scheduleId,
       authToken,
+      organizationId,
     });
     revalidatePath('/studio');
 

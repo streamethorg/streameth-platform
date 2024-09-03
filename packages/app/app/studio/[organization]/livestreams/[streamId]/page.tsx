@@ -15,8 +15,8 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import ImportDataButton from './components/StreamPlatforms/StageDataImport/ImportDataButton';
-import ViewSessionsDialog from './components/StreamPlatforms/StageDataImport/ViewSessionsDialog';
+import ImportDataButton from './components/StageDataImport/ImportDataButton';
+import ViewSessionsDialog from './components/StageDataImport/ViewSessionsDialog';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
@@ -86,6 +86,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             <ImportDataButton
               organizationId={organization._id}
               stageId={params.streamId}
+              stage={stream}
             />
           </div>
         </div>

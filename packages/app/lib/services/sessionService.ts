@@ -499,9 +499,11 @@ export const stageSessionImport = async ({
 export const saveSessionImport = async ({
   authToken,
   scheduleId,
+  organizationId,
 }: {
   authToken: string;
   scheduleId: string;
+  organizationId: string;
 }): Promise<string> => {
   try {
     const response = await fetch(`${apiUrl()}/schedule/import/save`, {
@@ -512,6 +514,7 @@ export const saveSessionImport = async ({
       },
       body: JSON.stringify({
         scheduleId,
+        organizationId,
       }),
     });
     if (!response.ok) {

@@ -5,6 +5,11 @@ export enum SheetType {
   pretalx = 'pretalx',
 }
 
+export enum SocialType {
+  twitter = 'twitter',
+  youtube = 'youtube',
+}
+
 export enum StateStatus {
   pending = 'pending',
   completed = 'completed',
@@ -17,6 +22,8 @@ export enum StateType {
   nft = 'nft',
   event = 'event',
   video = 'video',
+  transcrpition = 'transcrpition',
+  social = 'social',
 }
 
 export interface IState {
@@ -27,6 +34,7 @@ export interface IState {
   eventSlug?: string;
   sessionSlug?: string;
   sheetType?: SheetType;
+  socialType?: SocialType;
   status?: StateStatus;
   type?: StateType;
 }
