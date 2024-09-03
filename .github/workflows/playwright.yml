@@ -37,6 +37,9 @@ jobs:
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
 
+      - name: Enable debug logging
+        run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
       - name: Check for .next directory
         run: |
           if [ -d "packages/app/.next" ]; then
@@ -48,12 +51,20 @@ jobs:
             find packages/app -type d
           fi
 
+      - name: Set permissions
+        run: |
+          sudo chown -R $USER:$USER packages/app/.next
+          sudo chmod -R 755 packages/app/.next
+
+      - name: Wait for file system
+        run: sleep 10
+
       - name: Save .next directory
         uses: actions/upload-artifact@v4
         with:
           name: next-artifact
           if-no-files-found: error
-          path: packages/app/.next
+          path: ${{ github.workspace }}/packages/app/.next
 
   chrome-tests:
     needs: install
