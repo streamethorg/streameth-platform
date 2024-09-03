@@ -37,15 +37,16 @@ jobs:
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
 
-      - name: List all directories
+      - name: Check for .next directory
         run: |
-          echo "Listing all directories in the current directory and subdirectories:"
-          find . -type d | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
-
-      - name: List all files
-        run: |
-          echo "Listing all files in the current directory and subdirectories:"
-          find . -type f | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+          if [ -d "packages/app/.next" ]; then
+            echo ".next directory exists"
+            ls -la packages/app/.next
+          else
+            echo ".next directory does not exist"
+            echo "Current directory structure:"
+            find packages/app -type d
+          fi
 
       - name: Save .next directory
         uses: actions/upload-artifact@v4
