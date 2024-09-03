@@ -59,39 +59,32 @@ export class IndexController extends Controller {
     @Header('livepeer-signature') livepeerSignature: string,
     @Body() payload: any,
   ): Promise<IStandardResponse<string>> {
-    try {
-      const webhookAuth = validateWebhook(livepeerSignature, payload);
-      if (!webhookAuth) {
-        console.log('Invalid signature or timestamp');
-        return SendApiResponse('Invalid signature or timestamp', null, '401');
-      }
-
-      console.log('Livepeer Payload:', payload);
-
-      switch (payload.event) {
-        case LivepeerEvent.assetReady:
-          await this.assetReady(payload.payload.id);
-          break;
-        case LivepeerEvent.assetFailed:
-          await this.assetFailed(payload.payload.id);
-          break;
-        case LivepeerEvent.streamStarted:
-        case LivepeerEvent.streamIdle:
-          await this.stageService.findStreamAndUpdate(payload.stream.id);
-          break;
-        case LivepeerEvent.recordingReady:
-          await this.sessionService.createStreamRecordings(
-            payload.payload.session,
-          );
-          break;
-        default:
-          return SendApiResponse('Event not recognizable', null, '400');
-      }
-      return SendApiResponse('OK');
-    } catch (err) {
-      console.log(err);
-      return SendApiResponse(err.toString(), null, '500');
+    const webhookAuth = validateWebhook(livepeerSignature, payload);
+    if (!webhookAuth) {
+      console.log('Invalid signature or timestamp');
+      return SendApiResponse('Invalid signature or timestamp', null, '401');
     }
+    console.log('Livepeer Payload:', payload);
+    switch (payload.event) {
+      case LivepeerEvent.assetReady:
+        await this.assetReady(payload.payload.id);
+        break;
+      case LivepeerEvent.assetFailed:
+        await this.assetFailed(payload.payload.id);
+        break;
+      case LivepeerEvent.streamStarted:
+      case LivepeerEvent.streamIdle:
+        await this.stageService.findStreamAndUpdate(payload.stream.id);
+        break;
+      case LivepeerEvent.recordingReady:
+        await this.sessionService.createStreamRecordings(
+          payload.payload.session,
+        );
+        break;
+      default:
+        return SendApiResponse('Event not recognizable', null, '400');
+    }
+    return SendApiResponse('OK');
   }
 
   private async assetReady(id: string) {
