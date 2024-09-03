@@ -37,6 +37,11 @@ jobs:
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           SPACE_STORAGE_PATH: ${{ secrets.SPACE_STORAGE_PATH }}
 
+      - name: List all directories
+        run: |
+          echo "Listing all directories in the current directory and subdirectories:"
+          find . -type d | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+
       - name: List all files
         run: |
           echo "Listing all files in the current directory and subdirectories:"
