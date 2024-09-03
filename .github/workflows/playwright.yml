@@ -41,8 +41,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: next-artifact
+          include-hidden-files: true
           if-no-files-found: error
-          path: packages/app/.next
+          path: ${{ github.workspace }}/packages/app/.next
 
   chrome-tests:
     needs: install
