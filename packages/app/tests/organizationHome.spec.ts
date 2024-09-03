@@ -72,9 +72,8 @@ const test = base.extend<{ organization: IOrganization }>({
 });
 
 test.afterEach(async ({ request, context, organization }) => {
+  removeStage(context, organization);
   try {
-    removeStage(context, organization);
-
     // step 1: get the authentication token
     const cookies = await context.cookies();
     const authToken = cookies.find(
@@ -265,7 +264,7 @@ test('create a livestream "right now" & make stream public', async ({
   await page.getByRole('button', { name: 'Back to homepage' }).click();
   await page.getByRole('cell', { name: 'Private' }).getByRole('button').click();
   await page.getByRole('menuitem', { name: 'Make Public' }).click();
-  expect(page.getByRole('cell', { name: 'Public' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Public' })).toBeVisible();
 });
 
 test('create a livestream "right now" & delete it', async ({
@@ -296,7 +295,8 @@ test('create a livestream "right now" & delete it', async ({
 
   await page.getByRole('button', { name: 'Create livestream' }).click();
   await page.waitForURL(
-    new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`)
+    new RegExp(`/studio/${organization.slug}/livestreams/\\w+$`),
+    { waitUntil: 'commit' }
   );
 
   await page.getByRole('button', { name: 'Back to homepage' }).click();
@@ -306,9 +306,18 @@ test('create a livestream "right now" & delete it', async ({
     .nth(2)
     .click();
   await page.getByRole('button', { name: 'Delete' }).click();
+
+  const deleteDialog = page.locator(
+    'div[role="dialog"][data-state="open"]:has-text("Are you sure you want to delete this livestream?")'
+  );
+  await expect(deleteDialog).toBeVisible();
+
   await page.getByRole('button', { name: 'Delete' }).click();
 
+  await expect(deleteDialog).not.toBeVisible();
+
   expect(page.getByText('Livestream deleted')).toBeVisible();
+
   expect(
     page.getByRole('heading', { name: 'No livestreams found' })
   ).toBeVisible();
