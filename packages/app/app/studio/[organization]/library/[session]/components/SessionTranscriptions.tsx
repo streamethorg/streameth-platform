@@ -3,17 +3,21 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 import { generateTranscriptionActions } from '@/lib/actions/sessions';
+import { IExtendedState } from '@/lib/types';
 import React, { useState } from 'react';
+import { LuLoader2 } from 'react-icons/lu';
 import { toast } from 'sonner';
 
 const SessionTranscriptions = ({
   videoTranscription,
   organizationId,
   sessionId,
+  transcriptionState,
 }: {
   videoTranscription?: string;
   sessionId: string;
   organizationId: string;
+  transcriptionState: IExtendedState[];
 }) => {
   const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
   const handleGenerateTranscription = async () => {
@@ -43,9 +47,26 @@ const SessionTranscriptions = ({
         <div>
           <TextPlaceholder text={videoTranscription} />
         </div>
+      ) : transcriptionState[0]?.status === 'pending' ? (
+        <Button disabled variant="primary">
+          <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
+          transcription...
+        </Button>
+      ) : transcriptionState[0]?.status === 'failed' ? (
+        <div>
+          <p>Transcription failed. Please try again.</p>
+          <Button
+            variant="primary"
+            className="mt-2"
+            onClick={handleGenerateTranscription}
+            loading={isGeneratingTranscript}
+          >
+            Try Again
+          </Button>
+        </div>
       ) : (
         <Button
-          variant={'primary'}
+          variant="primary"
           className="mt-2"
           onClick={handleGenerateTranscription}
           loading={isGeneratingTranscript}

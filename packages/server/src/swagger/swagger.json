@@ -479,6 +479,13 @@
 				],
 				"type": "string"
 			},
+			"SocialType": {
+				"enum": [
+					"twitter",
+					"youtube"
+				],
+				"type": "string"
+			},
 			"StateStatus": {
 				"enum": [
 					"pending",
@@ -493,7 +500,9 @@
 				"enum": [
 					"nft",
 					"event",
-					"video"
+					"video",
+					"transcrpition",
+					"social"
 				],
 				"type": "string"
 			},
@@ -547,6 +556,9 @@
 					},
 					"sheetType": {
 						"$ref": "#/components/schemas/SheetType"
+					},
+					"socialType": {
+						"$ref": "#/components/schemas/SocialType"
 					},
 					"status": {
 						"$ref": "#/components/schemas/StateStatus"
@@ -627,6 +639,9 @@
 					},
 					"sheetType": {
 						"$ref": "#/components/schemas/SheetType"
+					},
+					"socialType": {
+						"$ref": "#/components/schemas/SocialType"
 					},
 					"status": {
 						"$ref": "#/components/schemas/StateStatus"

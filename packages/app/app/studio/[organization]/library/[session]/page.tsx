@@ -1,6 +1,6 @@
 'use server';
 
-import { studioPageParams } from '@/lib/types';
+import { IExtendedState, studioPageParams } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
 import { PlayerWithControls } from '@/components/ui/Player';
 import { notFound } from 'next/navigation';
@@ -23,6 +23,8 @@ import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import UploadTwitterButton from './components/UploadTwitterButton';
 import SessionTranscriptions from './components/SessionTranscriptions';
 import { Button } from '@/components/ui/button';
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
+import { fetchAllStates } from '@/lib/services/stateService';
 
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
@@ -33,6 +35,10 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
   });
 
   if (!session?.playbackId || !organization) return notFound();
+  const transcriptionState = await fetchAllStates({
+    sessionId: session._id,
+    type: StateType.transcrpition,
+  });
 
   const videoUrl = await getVideoUrlAction(session);
   if (!videoUrl) return notFound();
@@ -140,6 +146,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                     videoTranscription={session?.transcripts?.subtitleUrl}
                     organizationId={organization._id}
                     sessionId={session._id}
+                    transcriptionState={transcriptionState}
                   />
                 </AccordionContent>
               </AccordionItem>

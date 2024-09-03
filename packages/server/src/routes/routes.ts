@@ -254,6 +254,11 @@ const models: TsoaRoute.Models = {
         "enums": ["gsheet","pretalx"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SocialType": {
+        "dataType": "refEnum",
+        "enums": ["twitter","youtube"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "StateStatus": {
         "dataType": "refEnum",
         "enums": ["pending","completed","canceled","sync","failed"],
@@ -261,7 +266,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "StateType": {
         "dataType": "refEnum",
-        "enums": ["nft","event","video"],
+        "enums": ["nft","event","video","transcrpition","social"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IState": {
@@ -274,6 +279,7 @@ const models: TsoaRoute.Models = {
             "eventSlug": {"dataType":"string"},
             "sessionSlug": {"dataType":"string"},
             "sheetType": {"ref":"SheetType"},
+            "socialType": {"ref":"SocialType"},
             "status": {"ref":"StateStatus"},
             "type": {"ref":"StateType"},
         },
@@ -300,6 +306,7 @@ const models: TsoaRoute.Models = {
             "eventSlug": {"dataType":"string"},
             "sessionSlug": {"dataType":"string"},
             "sheetType": {"ref":"SheetType"},
+            "socialType": {"ref":"SocialType"},
             "status": {"ref":"StateStatus"},
             "type": {"ref":"StateType"},
         },
