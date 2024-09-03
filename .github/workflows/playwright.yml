@@ -92,6 +92,7 @@ jobs:
         with:
           name: playwright-report-chrome
           path: packages/app/playwright-report
+          include-hidden-files: true
           retention-days: 30
 
   firefox-tests:
