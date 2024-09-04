@@ -104,7 +104,7 @@ export class IndexController extends Controller {
       });
     }
     const state = await this.stateService.findOne({
-      _id: session._id.toString(),
+      sessionId: session._id.toString(),
       type: StateType.video,
     });
     if (!state) throw new HttpException(404, 'No state found');
