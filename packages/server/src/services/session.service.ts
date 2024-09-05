@@ -212,7 +212,7 @@ export default class SessionService {
       'streamSettings.streamId': payload.parentId,
     });
     const session = await this.create({
-      name: payload.name,
+      name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
       description: payload.name,
       start: payload.createdAt,
       end: payload.lastSeen,
@@ -222,6 +222,7 @@ export default class SessionService {
       assetId: payload.assetId,
       type: SessionType.livestream,
     });
+    await stage.updateOne({ $inc: { recordingIndex: 1 } });
     await this.sessionTranscriptions({
       organizationId: session.organizationId,
       sessionId: session._id.toString(),
