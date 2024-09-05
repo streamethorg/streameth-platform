@@ -13,11 +13,11 @@ import {
   Path,
   Post,
   Put,
+  Query,
   Route,
+  Security,
   SuccessResponse,
   Tags,
-  Security,
-  Query,
 } from 'tsoa';
 
 @Tags('Stage')
@@ -26,7 +26,7 @@ export class StageController extends Controller {
   private stageService = new StageService();
 
   /**
-   * @summary Create Session
+   * @summary Create Stage
    */
   @Security('jwt', ['org'])
   @SuccessResponse('201')

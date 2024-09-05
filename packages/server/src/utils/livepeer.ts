@@ -1,10 +1,12 @@
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
-import { SessionType } from '@interfaces/session.interface';
+import { ClippingStatus, SessionType } from '@interfaces/session.interface';
+import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IMultiStream } from '@interfaces/stream.interface';
 import Organization from '@models/organization.model';
 import SessionModel from '@models/session.model';
 import Stage from '@models/stage.model';
+import State from '@models/state.model';
 import { Livepeer } from 'livepeer';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
@@ -386,6 +388,7 @@ export const createClip = async (data: {
           endClipTime: data.end,
           type: SessionType.clip,
           createdAt: new Date(),
+          clippingStatus: ClippingStatus.pending,
         },
       },
       {
@@ -413,7 +416,23 @@ export const createClip = async (data: {
       // Update Firebase
       await createEventVideoById(session.firebaseId, newData);
     }
-
+    const state = await State.findOne({
+      sessionId: session._id.toString(),
+      type: StateType.video,
+    })
+    if(state) {
+      await state.updateOne({
+        status: StateStatus.pending,
+      });
+    }else{
+      await State.create({
+        sessionId: session._id.toString(),
+        sessionSlug: session.slug,
+        organizationId: session.organizationId.toString(),
+        type: StateType.video,
+        status: StateStatus.pending,
+      });
+    }
     return parsedClip;
   } catch (e) {
     console.log('error', e);

@@ -174,7 +174,7 @@ export default class GoogleSheetService {
       const session = {
         _id: new Types.ObjectId().toString(),
         name: Name,
-        description: Description,
+        description: Description || 'No description',
         start: moment
           .tz(`${newDate()} ${Start}:00`, 'YYYY-MM-DD HH:mm:ss', 'UTC')
           .valueOf(),
@@ -234,7 +234,7 @@ export default class GoogleSheetService {
       const session = {
         _id: new Types.ObjectId().toString(),
         name: Name,
-        description: Description,
+        description: Description || 'No description',
         start: moment
           .tz(`${newDate()} ${Start}:00`, 'YYYY-MM-DD HH:mm:ss', 'UTC')
           .valueOf(),

@@ -121,7 +121,7 @@ export default class ScheduleImporterService {
           });
           const sessionData = {
             name: session.title,
-            description: session.description || '',
+            description: session.description || 'No description',
             start: new Date(session.date).getTime(),
             end: new Date().getTime(),
             slug: generateId(session.title),
@@ -180,7 +180,7 @@ export default class ScheduleImporterService {
           });
           const sessionData = {
             name: session.title,
-            description: session.description || '',
+            description: session.description || 'No description',
             start: new Date(session.date).getTime(),
             end: new Date().getTime(),
             slug: generateId(session.title),
