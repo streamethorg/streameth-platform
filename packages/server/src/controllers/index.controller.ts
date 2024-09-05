@@ -67,7 +67,7 @@ export class IndexController extends Controller {
     console.log('Livepeer Payload:', payload);
     switch (payload.event) {
       case LivepeerEvent.assetReady:
-        await this.assetReady(payload.payload.id);
+        await this.assetReady(payload.payload.id ?? payload.payload.asset.id);
         break;
       case LivepeerEvent.assetFailed:
         await this.assetFailed(payload.payload.id);
