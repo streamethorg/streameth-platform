@@ -68,6 +68,7 @@ export default async function Watch({
           <PlayerWithControls
             name={session.name}
             thumbnail={session.coverImage ?? thumbnail}
+            caption={session?.transcripts?.subtitleUrl}
             src={[
               {
                 src: videoUrl as `${string}m3u8`,

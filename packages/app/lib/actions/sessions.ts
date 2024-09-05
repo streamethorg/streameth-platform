@@ -13,6 +13,7 @@ import {
   sessionImport,
   stageSessionImport,
   saveSessionImport,
+  generateTranscriptions,
 } from '../services/sessionService';
 import {
   ISession,
@@ -237,10 +238,10 @@ export const stageSessionImportAction = async ({
   url: string;
   organizationId: string;
   type: string;
-  stageId: string;
+  stageId?: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
+  if (!authToken || !stageId) {
     throw new Error('No user session found');
   }
 
@@ -263,8 +264,10 @@ export const stageSessionImportAction = async ({
 
 export const saveSessionImportAction = async ({
   scheduleId,
+  organizationId,
 }: {
   scheduleId: string;
+  organizationId: string;
 }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {
@@ -274,6 +277,34 @@ export const saveSessionImportAction = async ({
   try {
     const res = await saveSessionImport({
       scheduleId,
+      authToken,
+      organizationId,
+    });
+    revalidatePath('/studio');
+
+    return res;
+  } catch (e) {
+    console.error('Error importing session acton');
+    return null;
+  }
+};
+
+export const generateTranscriptionActions = async ({
+  sessionId,
+  organizationId,
+}: {
+  sessionId: string;
+  organizationId: string;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  try {
+    const res = await generateTranscriptions({
+      sessionId,
+      organizationId,
       authToken,
     });
     revalidatePath('/studio');

@@ -1,40 +1,34 @@
 'use client';
-import React from 'react';
-import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
 import { Button } from '@/components/ui/button';
-import { useClipContext } from './ClipContext';
-import { Loader2 } from 'lucide-react';
-import { toast } from 'sonner';
-import useSearchParams from '@/lib/hooks/useSearchParams';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  ISession,
-  SessionType,
-} from 'streameth-new-server/src/interfaces/session.interface';
+import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 import {
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
 } from '@/lib/types';
+import { Loader2 } from 'lucide-react';
+import React from 'react';
+import { toast } from 'sonner';
+import {
+  ISession,
+  SessionType,
+} from 'streameth-new-server/src/interfaces/session.interface';
+import { useClipContext } from './ClipContext';
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import Combobox from '@/components/ui/combo-box';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
-import { createStateAction } from '@/lib/actions/state';
-import {
-  StateStatus,
-  StateType,
-} from 'streameth-new-server/src/interfaces/state.interface';
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 const ClipButton = ({
   playbackId,
   selectedRecording,
@@ -96,7 +90,7 @@ const ClipButton = ({
     }
 
     setIsLoading(true);
-    createClipAction({
+    await createClipAction({
       playbackId,
       recordingId: selectedRecording,
       start: startTime.unix,
@@ -107,15 +101,6 @@ const ClipButton = ({
         setIsLoading(false);
         setSessionId('');
         setDialogOpen(false);
-
-        await createStateAction({
-          state: {
-            sessionId: session._id,
-            type: StateType.video,
-            sessionSlug: session.slug,
-            organizationId: session.organizationId,
-          },
-        });
 
         toast.success('Clip created');
       })
@@ -143,7 +128,7 @@ const ClipButton = ({
   );
 
   return (
-    <div className="flex flex-grow flex-col space-y-2">
+    <div className="flex flex-grow flex-col space-y-2 overflow-hidden">
       <div className="my-4 flex flex-grow flex-col space-y-2">
         <Label>{custom ? 'Session name' : 'Select Session'}</Label>
         {custom ? (
@@ -245,8 +230,8 @@ const CreateClipButton = ({
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="bg-white">
-        <div className="flex h-[300px] flex-col bg-white p-4">
+      <DialogContent className="bg-white w-full sm:w-[500px]">
+        <div className="flex h-[300px] w-full sm:w-[460px]  flex-col bg-white p-4">
           <Tabs defaultValue={'sessions'}>
             <TabsList className="w-full !justify-start gap-5 border-y border-grey">
               {sessions.sessions.length > 0 && (

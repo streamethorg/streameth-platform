@@ -14,7 +14,7 @@ import {
 import * as Player from '@livepeer/react/player';
 import * as Popover from '@radix-ui/react-popover';
 import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRef, useEffect } from 'react';
 // @ts-ignore
 import mux from 'mux-embed';
@@ -22,13 +22,30 @@ import Image from 'next/image';
 import { Src } from '@livepeer/react';
 import LogoDark from '@/public/logo_dark.png';
 import Link from 'next/link';
+import {
+  MdOutlineClosedCaption,
+  MdOutlineClosedCaptionDisabled,
+} from 'react-icons/md';
 
 export function PlayerWithControls(props: {
   src: Src[] | null;
   name?: string;
   thumbnail?: string;
+  caption?: string;
 }) {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [showSubtitles, setShowSubtitles] = useState<boolean>(false);
+
+  const toggleSubtitles = () => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      const tracks = videoElement.textTracks;
+      for (let i = 0; i < tracks.length; i++) {
+        tracks[i].mode = showSubtitles ? 'hidden' : 'showing';
+      }
+      setShowSubtitles(!showSubtitles);
+    }
+  };
 
   useEffect(() => {
     if (videoRef.current) {
@@ -45,7 +62,6 @@ export function PlayerWithControls(props: {
       });
     }
   }, [videoRef]);
-
   if (!props.src || !props.src?.[0].src) {
     return (
       <PlayerLoading
@@ -59,11 +75,21 @@ export function PlayerWithControls(props: {
     <Player.Root src={props.src}>
       <Player.Container className="h-full w-full overflow-hidden bg-gradient-to-b from-[#FF9976] to-[#6426EF] outline-none transition md:rounded-xl">
         <Player.Video
+          crossOrigin="anonymous"
           ref={videoRef}
           id={`player-${props.src[0].src}`}
           title={props.name ?? 'video'}
           className={cn('h-full w-full transition')}
-        />
+        >
+          <track
+            label="English"
+            kind="subtitles"
+            srcLang="en"
+            src={props.caption}
+            default
+          />
+        </Player.Video>
+
         {/* <Player.PlayingIndicator asChild matcher={false}>
           <div className="shadow border flex flex-col items-center justify-center bg-white rounded-xl h-[60px] absolute top-0 bottom-0 py-0 p-2 m-2">
             <span className="text-xs">Powered by</span>
@@ -207,6 +233,16 @@ export function PlayerWithControls(props: {
                   />
                 </div>
               </Link>
+              {props.caption && (
+                <div onClick={toggleSubtitles} className="cursor-pointer">
+                  {showSubtitles ? (
+                    <MdOutlineClosedCaptionDisabled color="#fff" size={26} />
+                  ) : (
+                    <MdOutlineClosedCaption color="#fff" size={26} />
+                  )}
+                </div>
+              )}
+
               <Player.FullscreenIndicator matcher={false} asChild>
                 <Settings className="h-6 w-6 flex-shrink-0 text-white transition" />
               </Player.FullscreenIndicator>

@@ -2,11 +2,13 @@ import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { ISession, SessionType } from '@interfaces/session.interface';
+import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IUploadSession } from '@interfaces/upload.session.interface';
 import Event from '@models/event.model';
 import Organization from '@models/organization.model';
 import Session from '@models/session.model';
 import Stage from '@models/stage.model';
+import State from '@models/state.model';
 import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import connection from '@utils/rabbitmq';
@@ -209,7 +211,7 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
-    await this.create({
+    const session = await this.create({
       name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
       description: payload.name,
       start: payload.createdAt,
@@ -221,6 +223,46 @@ export default class SessionService {
       type: SessionType.livestream,
     });
     await stage.updateOne({ $inc: { recordingIndex: 1 } });
+    await this.sessionTranscriptions({
+      organizationId: session.organizationId,
+      sessionId: session._id.toString(),
+    });
+  }
+
+  async sessionTranscriptions(
+    data: Pick<IUploadSession, 'organizationId' | 'sessionId'>,
+  ) {
+    const session = await this.get(data.sessionId.toString());
+    const queue = 'audio';
+    const channel = await (await connection).createChannel();
+    channel.assertQueue(queue, {
+      durable: true,
+    });
+    const payload = {
+      ...data,
+      session: {
+        videoUrl: session.videoUrl,
+        slug: session.slug,
+        name: session.name,
+      },
+    };
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
+      persistent: true,
+    });
+    const state = await State.findOne({
+      sessionId: data.sessionId,
+      type: StateType.transcrpition,
+    });
+    if (state) {
+      await state.updateOne({ status: StateStatus.pending });
+    } else {
+      await State.create({
+        organizationId: data.organizationId,
+        sessionId: data.sessionId,
+        status: StateStatus.pending,
+        type: StateType.transcrpition,
+      });
+    }
   }
 
   async uploadSessionToSocials(data: IUploadSession) {
@@ -228,9 +270,6 @@ export default class SessionService {
     if (!session.assetId || !session.videoUrl) {
       throw new HttpException(400, 'Asset Id or video Url does not exist');
     }
-    // if (!session.coverImage) {
-    //   throw new HttpException(400, 'No cover image');
-    // }
     let token;
     if (data.socialId) {
       const org = await Organization.findOne({
@@ -270,6 +309,22 @@ export default class SessionService {
     channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
       persistent: true,
     });
+    const state = await State.findOne({
+      sessionId: data.sessionId,
+      type: StateType.social,
+      socialType: data.type,
+    });
+    if (state) {
+      await state.updateOne({ status: StateStatus.pending });
+    } else {
+      await State.create({
+        organizationId: data.organizationId,
+        sessionId: data.sessionId,
+        status: StateStatus.pending,
+        type: StateType.social,
+        socialType: data.type,
+      });
+    }
   }
 
   private async createMultipleStreamRecordings(streamId: string) {

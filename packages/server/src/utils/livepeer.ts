@@ -1,18 +1,20 @@
-import fetch from 'node-fetch';
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
-const { host, secretKey } = config.livepeer;
-import { Livepeer } from 'livepeer';
+import { ClippingStatus, SessionType } from '@interfaces/session.interface';
+import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IMultiStream } from '@interfaces/stream.interface';
-import Stage from '@models/stage.model';
-import { Session, Stream } from 'livepeer/dist/models/components';
-import SessionModel from '@models/session.model';
-import { SessionType } from '@interfaces/session.interface';
-import { createEventVideoById } from './firebase';
-import { deleteYoutubeLiveStream } from './youtube';
 import Organization from '@models/organization.model';
+import SessionModel from '@models/session.model';
+import Stage from '@models/stage.model';
+import State from '@models/state.model';
+import { Livepeer } from 'livepeer';
+import { Session, Stream } from 'livepeer/dist/models/components';
+import fetch from 'node-fetch';
+import { createEventVideoById } from './firebase';
 import { refreshAccessToken } from './oauth';
 import { fetchAndParseVTT, parseVTT } from './util';
+import { deleteYoutubeLiveStream } from './youtube';
+const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
@@ -386,6 +388,7 @@ export const createClip = async (data: {
           endClipTime: data.end,
           type: SessionType.clip,
           createdAt: new Date(),
+          clippingStatus: ClippingStatus.pending,
         },
       },
       {
@@ -413,11 +416,51 @@ export const createClip = async (data: {
       // Update Firebase
       await createEventVideoById(session.firebaseId, newData);
     }
-
+    const state = await State.findOne({
+      sessionId: session._id.toString(),
+      type: StateType.video,
+    })
+    if(state) {
+      await state.updateOne({
+        status: StateStatus.pending,
+      });
+    }else{
+      await State.create({
+        sessionId: session._id.toString(),
+        sessionSlug: session.slug,
+        organizationId: session.organizationId.toString(),
+        type: StateType.video,
+        status: StateStatus.pending,
+      });
+    }
     return parsedClip;
   } catch (e) {
     console.log('error', e);
     throw new HttpException(400, 'Error creating clip');
+  }
+};
+
+export const refetchAssets = async () => {
+  try {
+    const sessions = await SessionModel.find({
+      $and: [{ playbackId: { $eq: '' } }, { assetId: { $ne: '' } }],
+    });
+    if (sessions.length === 0) return;
+    const sessionPromise = sessions.map(async (session) => {
+      try {
+        let asset = await getAsset(session.assetId);
+        if (!asset) {
+          return;
+        }
+        await session.updateOne({ playbackId: asset.playbackId });
+      } catch (e) {
+        throw new HttpException(400, 'Error refetching asset');
+      }
+    });
+    await Promise.all(sessionPromise);
+  } catch (e) {
+    console.log('error', e);
+    throw new HttpException(400, 'Error refetching asset');
   }
 };
 

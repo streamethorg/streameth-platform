@@ -61,6 +61,14 @@ export interface ISession {
   firebaseId?: string;
   talkType?: string;
   clippingStatus?: ClippingStatus;
+  transcripts?: {
+    subtitleUrl: string;
+    chunks: {
+      timestamp: number[];
+      text: string;
+    }[];
+    text: string;
+  };
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

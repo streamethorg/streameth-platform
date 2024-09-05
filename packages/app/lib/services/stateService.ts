@@ -14,7 +14,6 @@ export const createState = async ({
   state: IState;
   authToken: string;
 }): Promise<IState> => {
-  console.log('fe state', state);
   try {
     const response = await fetch(`${apiUrl()}/states`, {
       method: 'POST',

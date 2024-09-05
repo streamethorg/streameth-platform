@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import {
+  ChunkDataTypes,
   IExtendedEvent,
   IExtendedNftCollections,
   IExtendedOrganization,
@@ -348,3 +349,29 @@ export const constructYoutubeLiveRedirect = (userEmail: string): string => {
 
   return `${baseUrl}?${params.toString()}`;
 };
+
+export const jsonToVtt = (ChunkData: ChunkDataTypes) => {
+  let vtt = 'WEBVTT\n\n';
+
+  ChunkData.chunks.forEach((chunk) => {
+    const startTime = convertToVttTimestamp(chunk.timestamp[0]);
+    const endTime = convertToVttTimestamp(chunk.timestamp[1]);
+    vtt += `${startTime} --> ${endTime}\n`;
+    vtt += `${chunk.text.trim()}\n\n`;
+  });
+
+  return vtt.trim();
+};
+
+const convertToVttTimestamp = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = (seconds % 60).toFixed(3);
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(6, '0')}`;
+};
+
+export function formatTimestamp(seconds: number) {
+  const date = new Date(0);
+  date.setSeconds(seconds);
+  return date.toISOString().substr(11, 8);
+}

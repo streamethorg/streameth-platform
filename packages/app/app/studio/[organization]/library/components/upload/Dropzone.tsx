@@ -7,7 +7,7 @@ import React, {
   forwardRef,
   MutableRefObject,
 } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, FileRejection } from 'react-dropzone';
 import { FileUp } from 'lucide-react';
 import uploadVideo from '@/lib/uploadVideo';
 import { getUrlAction } from '@/lib/actions/livepeer';
@@ -22,6 +22,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
   const [progress, setProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState(false);
   const [assetId, setAssetId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const startUpload = async (file: File) => {
     setIsUploading(true);
@@ -40,34 +41,50 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
   };
 
   const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
+    async (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
-        startUpload(acceptedFiles[0]);
+        const file = acceptedFiles[0];
+
+        startUpload(file);
       }
     },
-    [onChange]
+    [startUpload]
   );
+
+  const onDropRejected = useCallback((fileRejections: FileRejection[]) => {
+    const { code, message } = fileRejections[0].errors[0];
+    if (code === 'file-too-large') {
+      setError(`File is too large. Max size is 5GB.`);
+    } else {
+      setError(message);
+    }
+
+    setTimeout(() => {
+      setError('');
+    }, 8000);
+  }, []);
 
   useEffect(() => {
     if (assetId) {
       onChange(assetId);
     }
-  }, [isUploading, assetId]);
+  }, [isUploading, assetId, onChange]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'video/*': ['.mp4', '.mov'],
     },
-    maxSize: 5 * 1024 * 1024 * 1024, // 5 GB in bytes
+    maxSize: 8 * 1024 * 1024 * 1024, // 8 GB in bytes
     maxFiles: 1,
     onDrop,
+    onDropRejected,
   });
 
   if (isUploading && progress >= 100) {
     return (
       <div
         ref={ref}
-        className="flex aspect-video h-40 w-full cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-300 bg-gray-100 text-sm transition-colors hover:bg-gray-200"
+        className="flex flex-col justify-center items-center w-full h-40 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video"
       >
         <p className="m-2">
           Uploading finished! Processing now... Please proceed...
@@ -80,15 +97,15 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     return (
       <div
         ref={ref}
-        className="flex aspect-video h-40 w-full cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-300 bg-gray-100 p-2 transition-colors hover:bg-gray-200"
+        className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video"
       >
-        <div className="relative flex h-full w-full items-center justify-center">
-          <div className="absolute left-0 top-0 h-full w-full rounded-md bg-gray-300 opacity-50"></div>
+        <div className="flex relative justify-center items-center w-full h-full">
+          <div className="absolute top-0 left-0 w-full h-full bg-gray-300 rounded-md opacity-50"></div>
           <div
-            className="absolute left-0 top-0 h-full rounded-md bg-purple-400"
+            className="absolute top-0 left-0 h-full bg-purple-400 rounded-md"
             style={{ width: `${progress}%` }}
           ></div>
-          <div className="z-10 flex flex-col items-center justify-center">
+          <div className="flex z-10 flex-col justify-center items-center">
             <p>{progress}%</p>
             <p>Uploading. Please wait...</p>
           </div>
@@ -101,17 +118,24 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     <div
       ref={ref}
       {...getRootProps()}
-      className="flex h-40 w-full cursor-pointer flex-col items-center justify-center space-y-2 rounded-md border-2 border-dashed border-gray-300 bg-white text-sm transition-colors hover:bg-gray-200"
+      className="flex flex-col justify-center items-center space-y-2 w-full h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200"
     >
       <FileUp size={35} />
       <input {...getInputProps()} />
-      <div className="mx-4">
-        <p>Drag and drop videos to upload... Or just click here!</p>
-        <p>
-          Maximum video file size is 5GB. Best resolution of 1920 x 1080. Aspect
-          ratio of 16:9
-        </p>
-      </div>
+
+      {error ? (
+        <div className="mx-4">
+          <p className="text-destructive">{error}</p>
+        </div>
+      ) : (
+        <div className="mx-4">
+          <p>Drag and drop videos to upload... Or just click here!</p>
+          <p>
+            Maximum video file size is 5GB. Best resolution of 1920 x 1080.
+            Aspect ratio of 16:9
+          </p>
+        </div>
+      )}
     </div>
   );
 });

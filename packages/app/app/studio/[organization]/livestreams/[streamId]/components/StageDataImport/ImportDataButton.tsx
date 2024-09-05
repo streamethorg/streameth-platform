@@ -16,12 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { sessionImportAction } from '@/lib/actions/sessions';
+import { stageSessionImportAction } from '@/lib/actions/sessions';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
-import ImportPreviewDialog from '../[streamId]/components/StageDataImport/ImportPreviewDialog';
-import { FaFileImport } from 'react-icons/fa';
+import ImportPreviewDialog from './ImportPreviewDialog';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
+import { IExtendedStage } from '@/lib/types';
 import { ScheduleImportSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -35,19 +35,27 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
+const ImportDataButton = ({
+  organizationId,
+  stageId,
+  stage,
+}: {
+  organizationId: string;
+  stageId: string;
+  stage?: IExtendedStage;
+}) => {
   const [isImporting, setIsImporting] = useState(false);
   const [open, setOpen] = useState(false);
   const [previewData, setPreviewData] = useState<IScheduleImportMetadata>();
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [scheduleId, setScheduleId] = useState('');
-
   const form = useForm<z.infer<typeof ScheduleImportSchema>>({
     resolver: zodResolver(ScheduleImportSchema),
     defaultValues: {
       type: '',
       url: '',
       organizationId: organizationId,
+      stageId: stageId,
     },
   });
   const { watch } = form;
@@ -57,7 +65,7 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
     values: z.infer<typeof ScheduleImportSchema>
   ) => {
     setIsImporting(true);
-    await sessionImportAction({
+    await stageSessionImportAction({
       ...values,
     })
       .then((response) => {
@@ -83,21 +91,13 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button
-            variant={'outline'}
-            className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
-          >
-            <div className="rounded-xl border bg-primary p-4 text-white">
-              <FaFileImport size={25} />
-            </div>
-            <span className="text-sm">Import Schedule</span>
-          </Button>
+          <Button variant="primary">Import Data</Button>
         </DialogTrigger>
         <DialogContent>
-          <DialogTitle>Import Schedule and Stage</DialogTitle>
+          <DialogTitle>Import Stage Data</DialogTitle>
           <DialogDescription>
-            Import all rooms and their corresponding talks quickly and easily,
-            ensuring your setup is organized and up-to-date.
+            Import a single room. Please ensure the stage name matches the room
+            name exactly.
           </DialogDescription>
           <Form {...form}>
             <form
@@ -169,12 +169,12 @@ const ImportSchedule = ({ organizationId }: { organizationId: string }) => {
         open={isPreviewOpen}
         previewData={previewData}
         setOpen={setIsPreviewOpen}
-        hasRooms
         scheduleId={scheduleId}
         organizationId={organizationId}
+        stage={stage}
       />
     </>
   );
 };
 
-export default ImportSchedule;
+export default ImportDataButton;

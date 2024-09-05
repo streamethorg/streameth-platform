@@ -1,2 +1,2 @@
-src/routes/*.ts
-src/swagger/*.ts
+src/routes/*
+src/swagger/*

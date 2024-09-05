@@ -1,72 +1,84 @@
-import amqp from 'amqplib';
-import { downloadM3U8ToMP4 } from './utils/ffmpeg';
-import { uploadToYouTube } from './utils/youtube';
-import fs from 'fs';
-import { logger } from './utils/logger';
 import { config } from 'dotenv';
+import fs from 'fs';
 import { MongoClient, ObjectId } from 'mongodb';
-import { uploadToTwitter } from './utils/twitter';
+import { errorMessageToStatusCode } from './utils/errors';
+import { downloadM3U8ToMP4 } from './utils/ffmpeg';
+import { logger } from './utils/logger';
+import connection from './utils/mq';
+import { uploadToYouTube } from './utils/youtube';
+
 config();
 
 const client = new MongoClient(process.env.DB_HOST);
 const db = client.db(process.env.DB_NAME);
 const sessions = db.collection('sessions');
+const states = db.collection('states');
 
+const updateVideoState = async (
+  sessionId: string,
+  socialType: string,
+  status: string
+) => {
+  const state = await states.findOne({
+    sessionId: ObjectId.createFromHexString(sessionId),
+    type: 'social',
+    socialType: socialType,
+  });
+  await states.findOneAndUpdate(
+    {
+      _id: ObjectId.createFromHexString(state._id.toString()),
+    },
+    {
+      $set: {
+        status: status,
+      },
+    }
+  );
+};
 async function videoUploader() {
   try {
     const queue = 'videos';
-    const conn = await amqp.connect({
-      protocol: 'amqp',
-      hostname: process.env.MQ_HOST,
-      port: Number(process.env.MQ_PORT),
-      username: process.env.MQ_USERNAME,
-      password: process.env.MQ_SECRET,
-      vhost: '/',
-    });
-    const channel = await conn.createChannel();
-    conn.on('error', (e) => {
-      logger.error('RabbitMQ connection error:', e);
-    });
+    const channel = await (await connection).createChannel();
+    let data;
     channel.assertQueue(queue, {
       durable: true,
     });
     channel.consume(
       queue,
       async (msg) => {
-        const payload = Buffer.from(msg.content).toString();
-        const data = JSON.parse(payload);
-        await downloadM3U8ToMP4(
-          data.session.videoUrl,
-          data.session.slug,
-          './tmp'
-        );
-        switch (data.type) {
-          case 'youtube':
-            await uploadToYouTube(
-              data.session,
-              `./tmp/${data.session.slug}.mp4`,
-              data.token.secret
-            );
-            break;
-          case 'twitter':
-            await uploadToTwitter(
-              data.session,
-              `./tmp/${data.session.slug}.mp4`,
-              data.token
-            );
-            break;
-          default:
-            break;
-        }
-        fs.unlinkSync(`./tmp/${data.session.slug}.mp4`);
-        await sessions.findOneAndUpdate(
-          { _id: ObjectId.createFromHexString(data.sessionId) },
-          {
-            $addToSet: {
-              socials: { name: data.type, date: new Date().getTime() },
-            },
+        try {
+          const payload = Buffer.from(msg.content).toString();
+          data = JSON.parse(payload);
+          await downloadM3U8ToMP4(
+            data.session.videoUrl,
+            data.session.slug,
+            './tmp'
+          );
+          await uploadToYouTube(
+            data.session,
+            `./tmp/${data.session.slug}.mp4`,
+            data.token
+          );
+          await sessions.findOneAndUpdate(
+            { _id: ObjectId.createFromHexString(data.sessionId) },
+            {
+              $addToSet: {
+                socials: { name: data.type, date: new Date().getTime() },
+              },
+            }
+          );
+          await updateVideoState(data.sessionId, data.type, 'completed');
+          fs.unlinkSync(`./tmp/${data.session.slug}.mp4`);
+          logger.info('Video upload completed');
+        } catch (e) {
+          logger.error('Error', e);
+          const errorCode = errorMessageToStatusCode(e.message);
+          if (errorCode === 401) {
+            await updateVideoState(data.sessionId, data.type, 'failed');
+          } else {
+            await updateVideoState(data.sessionId, data.type, 'failed');
           }
-        );
+        }
       },
       {
         noAck: true,

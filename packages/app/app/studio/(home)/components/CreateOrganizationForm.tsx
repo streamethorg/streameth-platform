@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -36,7 +36,6 @@ export default function CreateOrganizationForm({
   disableName = false,
 }: CreateOrganizationFormProps) {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof organizationSchema>>({
@@ -61,7 +60,6 @@ export default function CreateOrganizationForm({
         },
       })
         .then(() => {
-          setIsOpen(false);
           toast.success('Organization updated');
         })
         .catch(() => {
@@ -77,7 +75,6 @@ export default function CreateOrganizationForm({
       organization: values,
     })
       .then((response) => {
-        setIsOpen(false);
         toast.success('Organization created');
         router.push(`/studio/${response.slug}`);
       })
@@ -100,11 +97,15 @@ export default function CreateOrganizationForm({
               <FormItem className="">
                 <FormControl>
                   <ImageUpload
-                    className="h-40 w-full rounded-xl bg-neutrals-300"
-                    placeholder="Click to upload image here. Image must be exactly 1500x500 pixels. Maximum file size is 5MB."
-                    aspectRatio={3 / 1}
-                    path={`organizations`}
-                    requireExactSize={{ width: 1500, height: 500 }}
+                    className="w-full h-40 rounded-xl bg-neutrals-300"
+                    options={{
+                      requireExactSize: { width: 1500, height: 500 },
+                      resize: false,
+                      placeholder:
+                        'Click to upload image here. Image must be exactly 1500x500 pixels. Maximum file size is 2MB.',
+                      aspectRatio: 3 / 1,
+                    }}
+                    path="organizations"
                     {...field}
                   />
                 </FormControl>
@@ -119,10 +120,13 @@ export default function CreateOrganizationForm({
               <FormItem>
                 <FormControl>
                   <ImageUpload
-                    placeholder="Upload logo"
-                    aspectRatio={1}
+                    options={{
+                      placeholder: 'Upload logo',
+                      resize: false,
+                      isProfileImage: true,
+                      aspectRatio: 1,
+                    }}
                     path={`organizations`}
-                    isProfileImage={true}
                     {...field}
                   />
                 </FormControl>
@@ -193,7 +197,7 @@ export default function CreateOrganizationForm({
           <Button type="submit" className="ml-auto" variant={'primary'}>
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
               </>
             ) : organization ? (
               'Update'

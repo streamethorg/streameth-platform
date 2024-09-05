@@ -5,7 +5,7 @@ import { StateStatus, StateType } from '@interfaces/state.interface';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
-import { type IStandardResponse, SendApiResponse } from '@utils/api.response';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { updateEventVideoById } from '@utils/firebase';
 import { getAsset, getDownloadUrl } from '@utils/livepeer';
 import StorageService from '@utils/s3';
@@ -59,39 +59,32 @@ export class IndexController extends Controller {
     @Header('livepeer-signature') livepeerSignature: string,
     @Body() payload: any,
   ): Promise<IStandardResponse<string>> {
-    try {
-      const webhookAuth = validateWebhook(livepeerSignature, payload);
-      if (!webhookAuth) {
-        console.log('Invalid signature or timestamp');
-        return SendApiResponse('Invalid signature or timestamp', null, '401');
-      }
-
-      console.log('Livepeer Payload:', payload);
-
-      switch (payload.event) {
-        case LivepeerEvent.assetReady:
-          await this.assetReady(payload.payload.id);
-          break;
-        case LivepeerEvent.assetFailed:
-          await this.assetFailed(payload.payload.id);
-          break;
-        case LivepeerEvent.streamStarted:
-        case LivepeerEvent.streamIdle:
-          await this.stageService.findStreamAndUpdate(payload.stream.id);
-          break;
-        case LivepeerEvent.recordingReady:
-          await this.sessionService.createStreamRecordings(
-            payload.payload.session,
-          );
-          break;
-        default:
-          return SendApiResponse('Event not recognizable', null, '400');
-      }
-      return SendApiResponse('OK');
-    } catch (err) {
-      console.log(err);
-      return SendApiResponse(err.toString(), null, '500');
+    const webhookAuth = validateWebhook(livepeerSignature, payload);
+    if (!webhookAuth) {
+      console.log('Invalid signature or timestamp');
+      return SendApiResponse('Invalid signature or timestamp', null, '401');
     }
+    console.log('Livepeer Payload:', payload);
+    switch (payload.event) {
+      case LivepeerEvent.assetReady:
+        await this.assetReady(payload.payload.id ?? payload.payload.asset.id);
+        break;
+      case LivepeerEvent.assetFailed:
+        await this.assetFailed(payload.payload.id);
+        break;
+      case LivepeerEvent.streamStarted:
+      case LivepeerEvent.streamIdle:
+        await this.stageService.findStreamAndUpdate(payload.stream.id);
+        break;
+      case LivepeerEvent.recordingReady:
+        await this.sessionService.createStreamRecordings(
+          payload.payload.session,
+        );
+        break;
+      default:
+        return SendApiResponse('Event not recognizable', null, '400');
+    }
+    return SendApiResponse('OK');
   }
 
   private async assetReady(id: string) {
@@ -111,12 +104,17 @@ export class IndexController extends Controller {
       });
     }
     const state = await this.stateService.findOne({
-      _id: session._id.toString(),
+      sessionId: session._id.toString(),
       type: StateType.video,
     });
     if (!state) throw new HttpException(404, 'No state found');
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
+    });
+
+    await this.sessionService.sessionTranscriptions({
+      organizationId: session.organizationId.toString(),
+      sessionId: session._id.toString(),
     });
   }
 
