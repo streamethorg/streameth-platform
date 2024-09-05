@@ -74,7 +74,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     accept: {
       'video/*': ['.mp4', '.mov'],
     },
-    maxSize: 5 * 1024 * 1024 * 1024, // 5 GB in bytes
+    maxSize: 8 * 1024 * 1024 * 1024, // 8 GB in bytes
     maxFiles: 1,
     onDrop,
     onDropRejected,
