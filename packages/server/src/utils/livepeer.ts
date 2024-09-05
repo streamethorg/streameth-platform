@@ -416,12 +416,23 @@ export const createClip = async (data: {
       // Update Firebase
       await createEventVideoById(session.firebaseId, newData);
     }
-    await State.create({
+    const state = await State.findOne({
       sessionId: session._id.toString(),
-      organizationId: session.organizationId.toString(),
       type: StateType.video,
-      status: StateStatus.pending,
-    });
+    })
+    if(state) {
+      await state.updateOne({
+        status: StateStatus.pending,
+      });
+    }else{
+      await State.create({
+        sessionId: session._id.toString(),
+        sessionSlug: session.slug,
+        organizationId: session.organizationId.toString(),
+        type: StateType.video,
+        status: StateStatus.pending,
+      });
+    }
     return parsedClip;
   } catch (e) {
     console.log('error', e);
