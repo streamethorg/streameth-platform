@@ -419,12 +419,12 @@ export const createClip = async (data: {
     const state = await State.findOne({
       sessionId: session._id.toString(),
       type: StateType.video,
-    })
-    if(state) {
+    });
+    if (state) {
       await state.updateOne({
         status: StateStatus.pending,
       });
-    }else{
+    } else {
       await State.create({
         sessionId: session._id.toString(),
         sessionSlug: session.slug,
