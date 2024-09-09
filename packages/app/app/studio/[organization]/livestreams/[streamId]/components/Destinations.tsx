@@ -7,11 +7,9 @@ import EditLivestream from '../../components/EditLivestream';
 
 const Destinations = ({
   organization,
-  organizationSlug,
   stream,
 }: {
   organization: IExtendedOrganization;
-  organizationSlug: string;
   stream: IExtendedStage;
 }) => {
   if (!stream.streamSettings?.streamId || !stream._id) {
