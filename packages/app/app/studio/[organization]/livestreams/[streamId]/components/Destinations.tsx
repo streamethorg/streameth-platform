@@ -16,17 +16,11 @@ const Destinations = ({
     return NotFound();
   }
 
+  const streamTargets = stream?.streamSettings?.targets || [];
+
   return (
     <Card className="flex flex-col flex-grow justify-start p-4 space-y-4 h-full shadow-none">
       <div className="flex justify-start space-x-2">
-        <CreateMultistreamTarget
-          btnName="Add Destination"
-          organizationId={stream.organizationId as string}
-          streamId={stream?.streamSettings?.streamId}
-          organization={organization}
-          stageId={stream._id}
-          streamTargets={stream?.streamSettings?.targets || []}
-        />
         <EditLivestream
           stage={stream}
           organizationSlug={organization.slug!}
@@ -39,7 +33,16 @@ const Destinations = ({
         stream={stream}
         organizationId={stream.organizationId as string}
       />
-      {/* <PublishLivestream stream={stream} /> */}
+      {streamTargets.length !== 0 && (
+        <CreateMultistreamTarget
+          btnName="Add Destination"
+          organizationId={stream.organizationId as string}
+          streamId={stream?.streamSettings?.streamId}
+          organization={organization}
+          stageId={stream._id}
+          streamTargets={stream?.streamSettings?.targets || []}
+        />
+      )}
     </Card>
   );
 };

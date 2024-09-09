@@ -26,11 +26,11 @@ const Sidebar = ({
         <TabsTrigger value="destinations">Destinations</TabsTrigger>
       </TabsList>
       <TabsContent className="h-full" value="clips">
-        <Card className="h-[calc(100%-20px)] w-full overflow-y-scroll">
+        <Card className="shadow-none h-[calc(100%-20px)] w-full overflow-y-scroll">
           <ClipsList sessions={sessions} />
         </Card>
       </TabsContent>
-      <TabsContent className="h-[calc(100%-100px)]" value="destinations">
+      <TabsContent className="h-[calc(100%-20px)]" value="destinations">
         <Destinations stream={stage} organization={organization} />
       </TabsContent>
     </Tabs>
