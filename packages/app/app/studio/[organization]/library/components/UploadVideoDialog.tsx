@@ -21,24 +21,6 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
   const [open, setOpen] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const router = useRouter();
-  const abortControllerRef = useRef(new AbortController());
-
-  const handleCancel = () => {
-    abortControllerRef.current.abort();
-  };
-
-  const onFinish = () => {
-    setIsUploaded(true);
-
-    setTimeout(() => {
-      setIsUploaded(false);
-    }, 10000);
-  };
-
-  const handleUploadComplete = (assetId: string) => {
-    console.log('Upload completed with asset ID:', assetId);
-    // Do something with the asset ID
-  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -80,11 +62,7 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
               </DialogDescription>
             </DialogHeader>
             <Separator />
-            <Dropzone
-              organizationId={organizationId}
-              onUploadComplete={handleUploadComplete}
-              abortControllerRef={abortControllerRef}
-            />
+            <Dropzone organizationId={organizationId} />
           </>
         )}
       </DialogContent>

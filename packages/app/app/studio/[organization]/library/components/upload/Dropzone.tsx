@@ -26,11 +26,10 @@ type Uploads = {
 
 interface DropzoneProps {
   organizationId: string;
-  onUploadComplete: (assetId: string) => void;
 }
 
 const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
-  const { organizationId, onUploadComplete } = props;
+  const { organizationId } = props;
   const [error, setError] = useState<string | null>(null);
   const [uploads, setUploads] = useState<Uploads>({});
   const abortControllersRef = useRef<{ [uploadId: string]: AbortController }>(
@@ -143,7 +142,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                 assetId: assetId,
                 published: false,
               });
-              onUploadComplete(assetId);
               resolve(assetId);
             }
           );
@@ -169,7 +167,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
         delete abortControllersRef.current[uploadId];
       }
     },
-    [cancelUpload, finishUpload, onUploadComplete]
+    [cancelUpload, finishUpload]
   );
 
   const onDrop = useCallback(
