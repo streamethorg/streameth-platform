@@ -16,13 +16,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { sessionSchema } from '@/lib/schema';
 import { toast } from 'sonner';
-import {
-  createSessionAction,
-  updateSessionAction,
-} from '@/lib/actions/sessions';
+import { createSessionAction } from '@/lib/actions/sessions';
 import { Loader2, Earth, Lock, ChevronDown } from 'lucide-react';
 import Dropzone from './Dropzone';
-import { getFormSubmitStatus, getImageUrl } from '@/lib/utils/utils';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { DialogClose } from '@/components/ui/dialog';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { createStateAction } from '@/lib/actions/state';

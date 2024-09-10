@@ -11,15 +11,21 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import UploadVideoForm from './upload/UploadVideoForm';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import UploadComplete from '@/lib/svg/UploadComplete';
 import { useRouter } from 'next/navigation';
 import { LuFileUp } from 'react-icons/lu';
+import Dropzone from './upload/Dropzone';
 
 const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
   const [open, setOpen] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const router = useRouter();
+  const abortControllerRef = useRef(new AbortController());
+
+  const handleCancel = () => {
+    abortControllerRef.current.abort();
+  };
 
   const onFinish = () => {
     setIsUploaded(true);
@@ -29,10 +35,15 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     }, 10000);
   };
 
+  const handleUploadComplete = (assetId: string) => {
+    console.log('Upload completed with asset ID:', assetId);
+    // Do something with the asset ID
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="flex w-fit flex-row items-center space-x-4 rounded-xl border bg-white p-2 pr-4 hover:bg-secondary">
-        <div className="rounded-xl border bg-primary p-4 text-white">
+      <DialogTrigger className="flex flex-row items-center p-2 pr-4 space-x-4 bg-white rounded-xl border w-fit hover:bg-secondary">
+        <div className="p-4 text-white rounded-xl border bg-primary">
           <LuFileUp size={25} />
         </div>
         <span className="text-sm">Upload Video</span>
@@ -40,8 +51,8 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
       <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
         {isUploaded ? (
           <>
-            <DialogHeader className="space-y-4 p-10">
-              <div className="mx-auto p-4">
+            <DialogHeader className="p-10 space-y-4">
+              <div className="p-4 mx-auto">
                 <UploadComplete />
               </div>
               <div className="flex flex-col items-center space-y-2">
@@ -69,9 +80,10 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
               </DialogDescription>
             </DialogHeader>
             <Separator />
-            <UploadVideoForm
+            <Dropzone
               organizationId={organizationId}
-              onFinish={onFinish}
+              onUploadComplete={handleUploadComplete}
+              abortControllerRef={abortControllerRef}
             />
           </>
         )}
