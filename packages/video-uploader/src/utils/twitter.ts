@@ -172,6 +172,7 @@ async function tweetWithMediaV2(
       }),
     });
     const data = await response.json();
+    logger.info('Tweet posted successfully');
   } catch (e) {
     logger.error(e.message);
   }
