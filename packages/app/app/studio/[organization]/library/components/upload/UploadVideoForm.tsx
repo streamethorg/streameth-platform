@@ -18,7 +18,6 @@ import { sessionSchema } from '@/lib/schema';
 import { toast } from 'sonner';
 import { createSessionAction } from '@/lib/actions/sessions';
 import { Loader2, Earth, Lock, ChevronDown } from 'lucide-react';
-import Dropzone from './Dropzone';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { DialogClose } from '@/components/ui/dialog';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
@@ -32,18 +31,13 @@ import {
 } from '@/components/ui/popover';
 
 const UploadVideoForm = ({
-  stageId,
-  eventId,
   organizationId,
   onFinish,
 }: {
-  stageId?: string;
-  eventId?: string;
   organizationId: string;
-  onFinish: () => void;
+  onFinish: (values: z.infer<typeof sessionSchema>) => void;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const abortControllerRef = useRef(new AbortController());
 
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
@@ -55,44 +49,8 @@ const UploadVideoForm = ({
     },
   });
 
-  const handleCancel = () => {
-    abortControllerRef.current.abort();
-  };
-
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    setIsLoading(true);
-
-    createSessionAction({
-      session: {
-        ...values,
-        coverImage: '',
-        organizationId,
-        speakers: [],
-        start: 0,
-        end: 0,
-        type: SessionType.video,
-        eventId: eventId || '',
-        stageId: stageId || '',
-      },
-    })
-      .then(async (session) => {
-        await createStateAction({
-          state: {
-            sessionId: session._id,
-            type: StateType.video,
-            sessionSlug: session.slug,
-            organizationId: session.organizationId,
-          },
-        });
-        onFinish();
-      })
-      .catch((e) => {
-        console.log(e);
-        toast.error('Error creating Session');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    onFinish(values);
   }
 
   return (
@@ -182,25 +140,9 @@ const UploadVideoForm = ({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <ImageDropzone
-                  path={`sessions/${eventId}
-                    )}`}
-                  {...field}
-                />
+                <ImageDropzone path={`sessions`} {...field} />
               </FormControl>
               <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          disabled={!form.getValues('name')}
-          control={form.control}
-          name="assetId"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Dropzone {...field} abortControllerRef={abortControllerRef} />
-              </FormControl>
             </FormItem>
           )}
         />
@@ -208,7 +150,6 @@ const UploadVideoForm = ({
           <DialogClose>
             <span
               className={` ${buttonVariants({ variant: 'secondary' })} 'text-black border-2`}
-              onClick={() => handleCancel()}
             >
               Cancel
             </span>
