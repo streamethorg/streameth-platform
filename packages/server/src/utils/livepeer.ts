@@ -460,7 +460,36 @@ export const refetchAssets = async () => {
     await Promise.all(sessionPromise);
   } catch (e) {
     console.log('error', e);
-    throw new HttpException(400, 'Error refetching asset');
+    throw new HttpException(400, 'Error processing asset');
+  }
+};
+
+export const getAssetByPlaybackId = async () => {
+  try {
+    const sessions = await SessionModel.find({
+      $and: [{ playbackId: { $ne: '' } }, { assetId: { $eq: '' } }],
+    });
+    if (sessions.length === 0) return;
+    const sessionPromise = sessions.map(async (session) => {
+      try {
+        const url = `${host}/api/asset?filters=[{"id":"playbackId","value":"${session.playbackId}"}]`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${secretKey}`,
+          },
+        });
+        const data = await response.json();
+        if (data.length === 0) return;
+        await session.updateOne({ assetId: data[0].id });
+      } catch (e) {
+        throw new HttpException(400, 'Error fetching asset');
+      }
+    });
+    await Promise.all(sessionPromise);
+  } catch (e) {
+    throw new HttpException(500, 'Error processing asset');
   }
 };
 
