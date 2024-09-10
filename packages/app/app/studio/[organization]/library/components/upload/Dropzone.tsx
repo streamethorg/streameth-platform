@@ -2,13 +2,7 @@
 
 import { createSessionAction } from '@/lib/actions/sessions';
 import * as z from 'zod';
-import {
-  useEffect,
-  useState,
-  useCallback,
-  forwardRef,
-  MutableRefObject,
-} from 'react';
+import { useState, useCallback, forwardRef, useRef } from 'react';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { FileUp } from 'lucide-react';
 import uploadVideo from '@/lib/uploadVideo';
@@ -18,11 +12,12 @@ import { sessionSchema } from '@/lib/schema';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { createStateAction } from '@/lib/actions/state';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
-import { values } from 'lodash';
+import { Button } from '@/components/ui/button';
 
 type UploadStatus = {
   progress: number;
   filename: string;
+  assetId: string | null;
 };
 
 type Uploads = {
@@ -32,111 +27,154 @@ type Uploads = {
 interface DropzoneProps {
   organizationId: string;
   onUploadComplete: (assetId: string) => void;
-  abortControllerRef: MutableRefObject<AbortController>;
 }
 
 const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
-  const { organizationId, onUploadComplete, abortControllerRef } = props;
+  const { organizationId, onUploadComplete } = props;
   const [error, setError] = useState<string | null>(null);
   const [uploads, setUploads] = useState<Uploads>({});
+  const abortControllersRef = useRef<{ [uploadId: string]: AbortController }>(
+    {}
+  );
 
-  const finishUpload = (values: z.infer<typeof sessionSchema>) => {
-    createSessionAction({
-      session: {
-        ...values,
-        coverImage: '',
-        organizationId,
-        speakers: [],
-        start: 0,
-        end: 0,
-        type: SessionType.video,
-        eventId: '',
-        stageId: '',
-      },
-    })
-      .then(async (session) => {
-        await createStateAction({
-          state: {
-            sessionId: session._id,
-            type: StateType.video,
-            sessionSlug: session.slug,
-            organizationId: session.organizationId,
-          },
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-        toast.error('Error creating Session');
-      });
-  };
-
-  const startUpload = async (file: File) => {
-    const uploadId = Date.now().toString();
-    console.log(uploads);
-
-    setUploads((prev) => ({
-      ...prev,
-      [uploadId]: { progress: 0, filename: file.name, assetId: null },
-    }));
-
-    console.log(uploads);
-    const toastId = toast.loading(`Preparing to upload ${file.name}...`);
-
-    try {
-      const uploadUrl = await getUrlAction(file.name);
-      if (!uploadUrl) {
-        throw new Error('Failed to get upload URL');
+  const cancelUpload = useCallback(
+    (uploadId: string, toastId: string | number) => {
+      if (!abortControllersRef.current[uploadId]) {
+        console.log('AbortController not found for uploadId:', uploadId);
+        return;
       }
+      abortControllersRef.current[uploadId].abort();
 
-      await new Promise<string>((resolve, reject) => {
-        uploadVideo(
-          file,
-          uploadUrl.tusEndpoint as string,
-          abortControllerRef,
-          (percentage) => {
-            setUploads((prev) => ({
-              ...prev,
-              [uploadId]: { ...prev[uploadId], progress: percentage },
-            }));
-            toast.loading(
-              `Uploading ${file.name} - ${Math.round(percentage)}%`,
-              { id: toastId }
-            );
-          },
-          async () => {
-            const assetId = uploadUrl.assetId as string;
-            setUploads((prev) => ({
-              ...prev,
-              [uploadId]: { ...prev[uploadId], assetId },
-            }));
-            finishUpload({
-              name: file.name,
-              description: 'No description',
-              assetId: assetId,
-              published: false,
-            });
-            onUploadComplete(assetId);
-            resolve(assetId);
-          }
-        );
-      });
+      const filename = uploads[uploadId]?.filename || 'Unknown file';
+      toast.error(`Upload cancelled for ${filename}`, { id: toastId });
 
-      toast.success(`${file.name} uploaded successfully`, { id: toastId });
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Upload failed', {
-        id: toastId,
-      });
-    } finally {
       setUploads((prev) => {
         const { [uploadId]: _, ...rest } = prev;
         return rest;
       });
-    }
-  };
+
+      delete abortControllersRef.current[uploadId];
+      toast.dismiss(toastId);
+    },
+    [uploads]
+  );
+
+  const finishUpload = useCallback(
+    (values: z.infer<typeof sessionSchema>) => {
+      createSessionAction({
+        session: {
+          ...values,
+          coverImage: '',
+          organizationId,
+          speakers: [],
+          start: 0,
+          end: 0,
+          type: SessionType.video,
+          eventId: '',
+          stageId: '',
+        },
+      })
+        .then(async (session) => {
+          await createStateAction({
+            state: {
+              sessionId: session._id,
+              type: StateType.video,
+              sessionSlug: session.slug,
+              organizationId: session.organizationId,
+            },
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error('Error creating Session');
+        });
+    },
+    [organizationId]
+  );
+
+  const startUpload = useCallback(
+    async (file: File) => {
+      const uploadId = Date.now().toString();
+      abortControllersRef.current[uploadId] = new AbortController();
+
+      setUploads((prev) => ({
+        ...prev,
+        [uploadId]: { progress: 0, filename: file.name, assetId: null },
+      }));
+
+      const toastId = toast.loading(`Preparing to upload ${file.name}...`);
+
+      try {
+        const uploadUrl = await getUrlAction(file.name);
+        if (!uploadUrl) {
+          throw new Error('Failed to get upload URL');
+        }
+
+        await new Promise<string>((resolve, reject) => {
+          uploadVideo(
+            file,
+            uploadUrl.tusEndpoint as string,
+            abortControllersRef.current[uploadId],
+            (percentage) => {
+              setUploads((prev) => ({
+                ...prev,
+                [uploadId]: { ...prev[uploadId], progress: percentage },
+              }));
+              toast.loading(
+                `Uploading ${file.name} - ${Math.round(percentage)}%`,
+                {
+                  cancel: {
+                    label: 'Cancel',
+                    onClick: () => cancelUpload(uploadId, toastId),
+                  },
+                  id: toastId,
+                }
+              );
+            },
+            async () => {
+              const assetId = uploadUrl.assetId as string;
+              setUploads((prev) => ({
+                ...prev,
+                [uploadId]: { ...prev[uploadId], assetId },
+              }));
+              finishUpload({
+                name: file.name,
+                description: 'No description',
+                assetId: assetId,
+                published: false,
+              });
+              onUploadComplete(assetId);
+              resolve(assetId);
+            }
+          );
+        });
+
+        toast.success(`${file.name} uploaded successfully`, { id: toastId });
+      } catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.log('Upload was cancelled');
+        } else {
+          toast.error(
+            error instanceof Error ? error.message : 'Upload failed',
+            {
+              id: toastId,
+            }
+          );
+        }
+      } finally {
+        setUploads((prev) => {
+          const { [uploadId]: _, ...rest } = prev;
+          return rest;
+        });
+        delete abortControllersRef.current[uploadId];
+      }
+    },
+    [cancelUpload, finishUpload, onUploadComplete]
+  );
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      acceptedFiles.map((file) => startUpload(file));
+      acceptedFiles.forEach((file) => startUpload(file));
     },
     [startUpload]
   );
@@ -150,7 +188,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     }
 
     setTimeout(() => {
-      setError('');
+      setError(null);
     }, 8000);
   }, []);
 
@@ -163,39 +201,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     onDrop,
     onDropRejected,
   });
-
-  //if (isUploading && progress >= 100) {
-  //  return (
-  //    <div
-  //      ref={ref}
-  //      className="flex flex-col justify-center items-center w-full h-40 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video"
-  //    >
-  //      <p className="m-2">
-  //        Uploading finished! Processing now... Please proceed...
-  //      </p>
-  //    </div>
-  //  );
-  //}
-
-  //if (progress < 100) {
-  //  return (
-  //    <div
-  //      ref={ref}
-  //      className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video"
-  //    >
-  //      <div className="flex relative justify-center items-center w-full h-full">
-  //        <div className="absolute top-0 left-0 w-full h-full bg-gray-300 rounded-md opacity-50"></div>
-  //        <div
-  //          className="absolute top-0 left-0 h-full bg-purple-400 rounded-md"
-  //          style={{ width: `${progress}%` }}
-  //        ></div>
-  //        <div className="flex z-10 flex-col justify-center items-center">
-  //          <p>Uploading. Please wait...</p>
-  //        </div>
-  //      </div>
-  //    </div>
-  //  );
-  //}
 
   return (
     <div
