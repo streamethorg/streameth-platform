@@ -32,7 +32,6 @@ const SessionSchema = new Schema<ISessionModel>(
       end: { type: Number, default: 0 },
     },
     playback: {
-      livepeerId: { type: String, default: '' },
       videoUrl: { type: String, default: '' },
       ipfsHash: { type: String, default: '' },
       format: { type: String, default: '' },
