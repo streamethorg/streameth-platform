@@ -216,3 +216,24 @@ export const ScheduleImportSchema = z.object({
   organizationId: z.string(),
   stageId: z.string().optional(),
 });
+
+export const injectUrlSchema = z.object({
+  name: z.string().min(3, 'name is required'),
+  url: z.union([
+    z
+      .string()
+      .url()
+      .refine(
+        (url) => url.includes('youtube.com') || url.includes('youtu.be'),
+        {
+          message: 'Invalid YouTube URL',
+        }
+      ),
+    z
+      .string()
+      .url()
+      .refine((url) => url.endsWith('.m3u8') || url.includes('.m3u8?'), {
+        message: 'Invalid HLS URL',
+      }),
+  ]),
+});

@@ -16,7 +16,7 @@ import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface
 import { UseFormProps, UseFormReturn } from 'react-hook-form';
 import { getDateInUTC } from './time';
 import { toast } from 'sonner';
-
+import youtubedl from 'youtube-dl-exec';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -374,4 +374,34 @@ export function formatTimestamp(seconds: number) {
   const date = new Date(0);
   date.setSeconds(seconds);
   return date.toISOString().substr(11, 8);
+}
+
+export async function getHLSUrl(videoUrl: string): Promise<string | null> {
+  try {
+    const output = await youtubedl(videoUrl, {
+      dumpSingleJson: true,
+      noWarnings: true,
+      callHome: false,
+      format: 'best',
+    });
+    console.log('output', output);
+
+    // Check if formats exist and get the best available format
+    if (output.formats && output.formats.length > 0) {
+      const bestFormat = output.formats.reduce((prev, current) => {
+        return (prev.height || 0) > (current.height || 0) ? prev : current;
+      });
+
+      if (bestFormat && bestFormat.url) {
+        console.log('Best quality URL:', bestFormat.url);
+        return bestFormat.url;
+      }
+    }
+
+    console.log('No suitable format found.');
+    return null;
+  } catch (err) {
+    console.error('Error:', err);
+    return null;
+  }
 }

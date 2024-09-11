@@ -17,6 +17,8 @@ import { fetchAsset, fetchSession } from '@/lib/services/sessionService';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import ClipSlider from './components/ClipSlider';
+import SessionRecordingSelect from './components/SessionRecordingSelect';
+import InjectUrlInput from './components/InjectUrlInput';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -47,121 +49,61 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
     return notFound();
   }
 
-  const stages = await fetchStages({
-    organizationId: organization._id,
-  });
+  // stages
+  const stages = (
+    await fetchStages({
+      organizationId: organization._id,
+    })
+  ).filter((stage) => stage.streamSettings?.isActive);
 
-  if (stages.length === 0) {
-    return (
-      <ClipContainer>
-        <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4">
-          <div className="mx-auto mb-auto flex h-full w-full max-w-[500px] flex-col items-center justify-center space-y-4 rounded-lg border bg-background bg-white p-4 text-center">
-            <Film className="rounded-lg p-4" size={84} />
-            <p className="text-lg font-bold">Clip a livestream!</p>
-            <p className="text-foreground-muted text-sm">
-              You dont have any stages to clip from, first create a livestream
-              to get started
-            </p>
-            <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button variant={'primary'}>Create a livestream</Button>
-            </Link>
-          </div>
-        </div>
-      </ClipContainer>
-    );
-  }
-
-  const currentStage = stages.find((s) => {
-    return s._id === stage;
-  });
-
-  if (!currentStage) {
-    return (
-      <ClipContainer>
-        <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4">
-          <SelectSession stages={stages} currentStageId={stage} />
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
-            <Film className="rounded-lg p-4" size={84} />
-            <p className="text-lg font-bold">Clip a livestream!</p>
-            <p className="text-foreground-muted text-sm">
-              Please select a livestream that has a recordings from the dropdown
-              above
-            </p>
-            <p className="font-bold">or</p>
-            <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button variant={'primary'}>Create a livestream</Button>
-            </Link>
-          </div>
-        </div>
-      </ClipContainer>
-    );
-  }
-
-  const stageRecordings = await fetchStageRecordings({
-    streamId: currentStage?.streamSettings?.streamId ?? '',
-  });
-
-  const currentRecording = (function () {
-    if (selectedRecording) {
-      const recording = stageRecordings?.recordings.find(
-        (recording) => recording?.id === selectedRecording
-      );
-      if (recording) {
-        return recording?.id ?? null;
-      }
-      return null;
+  // Fetch recordings for each active stage
+  const stageRecordingsPromises = stages.map(async (stage) => {
+    const streamId = stage?.streamSettings?.streamId ?? '';
+    if (streamId) {
+      return await fetchStageRecordings({ streamId });
     }
     return null;
-  })();
+  });
 
-  if (
-    stageRecordings?.recordings?.length === 0 ||
-    !stageRecordings?.parentStream?.id
-  ) {
+  // Wait for all recordings to be fetched
+  const stageRecordings = await Promise.all(stageRecordingsPromises);
+  // Create a new array with parentStream name and the first(live) recording
+  const liveStageRecordings = stageRecordings.map((recording, index) => {
+    const firstRecording = recording?.recordings[0] || null; // Get the first recording, or null if there are no recordings
+    return {
+      parentStreamName: recording?.parentStream?.name || 'Unknown', // Use stage's name or 'Unknown' if not present
+      firstRecording,
+    };
+  });
+
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const sessionRecordings = (
+    await fetchAllSessions({ organizationSlug: params.organization })
+  )?.sessions?.filter(
+    (session) =>
+      session?.type === 'livestream' &&
+      new Date(session?.createdAt as string) > sevenDaysAgo
+  );
+
+  if (!selectedRecording) {
     return (
       <ClipContainer>
-        <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
-          <SelectSession stages={stages} currentStageId={stage} />
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-8 text-center">
-            <Film className="rounded-lg p-4" size={84} />
-            <p className="text-lg font-bold">No recordings</p>
-            <p className="text-foreground-muted text-sm">
-              This stream does not have any recordings, go live and come back to
-              clip to clip your livestream
-            </p>
-            <Link href={`/studio/${params.organization}/livestreams`}>
-              <Button variant={'primary'}>Go Live</Button>
-            </Link>
+        <div className="mx-auto mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4  mt-4">
+          <div className="flex flex-col space-y-4 bg-white">
+            {liveStageRecordings.length > 0 && (
+              <SelectSession
+                stages={liveStageRecordings}
+                currentStageId={stage}
+              />
+            )}
           </div>
+          <SessionRecordingSelect sessions={sessionRecordings} />
+          <InjectUrlInput organizationId={organization._id} />
         </div>
       </ClipContainer>
     );
   }
 
-  if (!currentRecording) {
-    return (
-      <ClipContainer>
-        <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
-          <SelectSession stages={stages} currentStageId={stage} />
-          <RecordingSelect streamRecordings={stageRecordings.recordings} />
-          <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-4 text-center">
-            <Film className="rounded-lg p-4" size={84} />
-            <p className="text-lg font-bold">Clip a livestream!</p>
-            <p className="text-foreground-muted text-sm">
-              Please select a livestream recording from the dropdown above
-            </p>
-          </div>
-        </div>
-      </ClipContainer>
-    );
-  }
-
-  const event = await fetchEvent({
-    eventId: currentStage.eventId as string,
-  });
-  const sessions = await fetchAllSessions({
-    stageId: currentStage._id,
-  });
   const previewAsset = await (async function () {
     if (previewId) {
       const session = await fetchSession({
@@ -190,29 +132,26 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
       <div className="flex w-full flex-col">
         <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
           <ClipProvider>
-            <ReactHlsPlayer
-              playbackId={stageRecordings.parentStream?.playbackId ?? ''}
-              selectedStreamSession={currentRecording}
-            />
+            <ReactHlsPlayer src={selectedRecording} />
             <ClipSlider />
-            <CreateClipButton
+            {/* <CreateClipButton
               currentRecording={currentRecording}
               playbackId={stageRecordings.parentStream?.playbackId ?? ''}
               organization={organization}
               currentStage={currentStage}
               sessions={sessions}
-            />
+            /> */}
           </ClipProvider>
         </div>
       </div>
-      <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
+      {/* <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
         <SessionSidebar
           event={event ?? undefined}
           sessions={sessions.sessions.filter((session) => session.assetId)}
           currentRecording={currentRecording}
           recordings={stageRecordings}
         />
-      </Suspense>
+      </Suspense> */}
     </ClipContainer>
   );
 };
@@ -274,14 +213,8 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
   );
   return (
     <Suspense
-      key={searchParams.stage + searchParams.selectedRecording}
-      fallback={
-        searchParams.stage && searchParams.selectedRecording ? (
-          <Skeleton2 />
-        ) : (
-          <Skeleton />
-        )
-      }
+      key={searchParams.selectedRecording}
+      fallback={searchParams.selectedRecording ? <Skeleton2 /> : <Skeleton />}
     >
       <EventClips params={params} searchParams={searchParams} />
     </Suspense>

@@ -4,13 +4,15 @@ import Hls from 'hls.js';
 import { useClipContext } from './ClipContext';
 
 export interface HlsPlayerProps {
-  playbackId: string;
-  selectedStreamSession: string;
+  playbackId?: string;
+  selectedStreamSession?: string;
+  src: string;
 }
 
 const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   playbackId,
   selectedStreamSession,
+  src,
 }) => {
   const {
     setPlaybackStatus,
@@ -32,7 +34,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
 
   const [error, setError] = useState<string | null>(null);
 
-  const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`;
+  // const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`;
 
   useEffect(() => {
     if (Hls.isSupported() && videoRef.current) {
