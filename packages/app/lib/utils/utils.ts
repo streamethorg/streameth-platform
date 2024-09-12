@@ -16,7 +16,8 @@ import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface
 import { UseFormProps, UseFormReturn } from 'react-hook-form';
 import { getDateInUTC } from './time';
 import { toast } from 'sonner';
-import youtubedl from 'youtube-dl-exec';
+import youtubeDl from 'youtube-dl-exec';
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -376,29 +377,47 @@ export function formatTimestamp(seconds: number) {
   return date.toISOString().substr(11, 8);
 }
 
+interface YoutubeDlInfo {
+  formats?: Array<{
+    protocol?: string;
+    ext?: string;
+    url?: string;
+  }>;
+  manifest_url?: string;
+}
+
 export async function getHLSUrl(videoUrl: string): Promise<string | null> {
   try {
-    const output = await youtubedl(videoUrl, {
+    const info: YoutubeDlInfo = await youtubeDl(videoUrl, {
       dumpSingleJson: true,
+      noCheckCertificates: true,
       noWarnings: true,
-      callHome: false,
-      format: 'best',
+      preferFreeFormats: true,
+      addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
     });
-    console.log('output', output);
 
-    // Check if formats exist and get the best available format
-    if (output.formats && output.formats.length > 0) {
-      const bestFormat = output.formats.reduce((prev, current) => {
-        return (prev.height || 0) > (current.height || 0) ? prev : current;
-      });
+    console.log('Full info:', JSON.stringify(info, null, 2));
 
-      if (bestFormat && bestFormat.url) {
-        console.log('Best quality URL:', bestFormat.url);
-        return bestFormat.url;
-      }
+    // Check for HLS stream in formats
+    const hlsStream = info.formats?.find(
+      (format) =>
+        format.protocol === 'hls' ||
+        format.protocol === 'm3u8_native' ||
+        format.ext === 'm3u8'
+    );
+
+    if (hlsStream?.url) {
+      console.log('HLS URL found:', hlsStream.url);
+      return hlsStream.url;
     }
 
-    console.log('No suitable format found.');
+    // Check for HLS manifest URL
+    if (info.manifest_url?.endsWith('.m3u8')) {
+      console.log('HLS manifest URL found:', info.manifest_url);
+      return info.manifest_url;
+    }
+
+    console.log('No HLS stream found. Available formats:', info.formats);
     return null;
   } catch (err) {
     console.error('Error:', err);

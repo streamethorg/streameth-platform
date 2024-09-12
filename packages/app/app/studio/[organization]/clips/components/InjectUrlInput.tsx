@@ -19,7 +19,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { createSessionAction } from '@/lib/actions/sessions';
-import { start } from 'repl';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 
 const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
@@ -50,10 +49,11 @@ const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
           name: values.name,
           videoUrl: finalUrl,
           type: SessionType.livestream,
-          description: '',
+          description: 'no description',
           organizationId: organizationId,
           start: new Date().getTime(),
           end: new Date().getTime(),
+          speakers: [],
         };
         await createSessionAction({ session });
         handleTermChange([{ key: 'selectedRecording', value: finalUrl }]);
