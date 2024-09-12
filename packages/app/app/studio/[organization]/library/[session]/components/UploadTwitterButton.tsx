@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { SiX } from 'react-icons/si';
 import { IExtendedOrganization } from '@/lib/types';
-import { uploadSessionToSocials } from '@/lib/actions/sessions';
+import { uploadSessionToSocialsAction } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
 import { CiCirclePlus } from 'react-icons/ci';
 
@@ -41,7 +41,7 @@ const UploadTwitterButton = ({
   const handleTwitterPublish = async () => {
     setIsLoading(true);
     try {
-      const response = await uploadSessionToSocials({
+      const response = await uploadSessionToSocialsAction({
         type: 'twitter',
         sessionId,
         organizationId: organization?._id as string,
