@@ -14,7 +14,7 @@ const states = db.collection('states');
 const updateVideoState = async (
   sessionId: string,
   socialType: string,
-  status: string,
+  status: string
 ) => {
   const state = await states.findOne({
     sessionId: ObjectId.createFromHexString(sessionId),
@@ -29,7 +29,7 @@ const updateVideoState = async (
       $set: {
         status: status,
       },
-    },
+    }
   );
 };
 async function videoUploader() {
@@ -50,20 +50,20 @@ async function videoUploader() {
           await downloadM3U8ToMP4(
             data.session.videoUrl,
             data.session.slug,
-            './tmp',
+            './tmp'
           );
           if (data.type === 'youtube') {
             await uploadToYouTube(
               data.session,
               `./tmp/${data.session.slug}.mp4`,
-              data.token,
+              data.token
             );
           }
           if (data.type === 'twitter') {
             await uploadToTwitter(
               data.session,
               `./tmp/${data.session.slug}.mp4`,
-              data.token,
+              data.token
             );
           }
           await sessions.findOneAndUpdate(
@@ -72,7 +72,7 @@ async function videoUploader() {
               $addToSet: {
                 socials: { name: data.type, date: new Date().getTime() },
               },
-            },
+            }
           );
           await updateVideoState(data.sessionId, data.type, 'completed');
           fs.unlinkSync(`./tmp/${data.session.slug}.mp4`);
@@ -89,7 +89,7 @@ async function videoUploader() {
       },
       {
         noAck: true,
-      },
+      }
     );
   } catch (e) {
     logger.error('error', e);
