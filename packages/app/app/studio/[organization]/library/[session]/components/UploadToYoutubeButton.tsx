@@ -1,13 +1,13 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { uploadSessionToYouTubeAction } from '@/lib/actions/sessions';
+import { uploadSessionToSocialsAction } from '@/lib/actions/sessions';
 import { IExtendedOrganization } from '@/lib/types';
+import Link from 'next/link';
 import React, { useState } from 'react';
+import { CiCirclePlus } from 'react-icons/ci';
 import { SiYoutube } from 'react-icons/si';
 import { toast } from 'sonner';
-import { CiCirclePlus } from 'react-icons/ci';
-import Link from 'next/link';
 
 const UploadToYoutubeButton = ({
   organization,
@@ -50,7 +50,7 @@ const UploadToYoutubeButton = ({
   const handleYoutubePublish = async () => {
     setIsLoading(true);
     try {
-      const response = await uploadSessionToYouTubeAction({
+      const response = await uploadSessionToSocialsAction({
         type: 'youtube',
         sessionId,
         organizationId: organization?._id as string,
