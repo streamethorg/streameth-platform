@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { SiX } from 'react-icons/si';
 import { IExtendedOrganization } from '@/lib/types';
-import { uploadSessionToYouTubeAction } from '@/lib/actions/sessions';
+import { uploadSessionToSocials } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
 import { CiCirclePlus } from 'react-icons/ci';
 
@@ -41,7 +41,7 @@ const UploadTwitterButton = ({
   const handleTwitterPublish = async () => {
     setIsLoading(true);
     try {
-      const response = await uploadSessionToYouTubeAction({
+      const response = await uploadSessionToSocials({
         type: 'twitter',
         sessionId,
         organizationId: organization?._id as string,
@@ -65,7 +65,7 @@ const UploadTwitterButton = ({
     <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger>
         <Button className="min-w-[200px] bg-[#121212]">
-          <SiX className="mr-2" /> Publish to X(Twitter) (Coming Soon)
+          <SiX className="mr-2" /> Publish to X
         </Button>
       </DialogTrigger>
       <DialogContent className="px-8 z-[99999999999999999]">
