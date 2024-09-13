@@ -72,3 +72,14 @@ export function parseVTT(vttData: string) {
 
   return keyframe;
 }
+
+export const getSourceType = (url: string): string => {
+  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+  const twitterRegex = /^(https?:\/\/)?(www\.)?twitter\.com\/.+$/;
+  if (youtubeRegex.test(url)) {
+    return 'youtube';
+  }
+  if (twitterRegex.test(url)) {
+    return 'twitter';
+  }
+};

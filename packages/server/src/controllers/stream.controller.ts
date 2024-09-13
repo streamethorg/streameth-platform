@@ -4,29 +4,30 @@ import { DeleteMultiStreamDto } from '@dtos/stream/delete-multistream.dto';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
   createAsset,
-  getStreamInfo,
+  createClip,
   createMultiStream,
   deleteMultiStream,
-  getDownloadUrl,
-  createClip,
-  getSessionMetrics,
-  getStreamRecordings,
-  uploadToIpfs,
-  getAsset,
   generateThumbnail,
+  getAsset,
+  getDownloadUrl,
+  getHlsUrl,
+  getSessionMetrics,
+  getStreamInfo,
+  getStreamRecordings,
   getVideoPhaseAction,
+  uploadToIpfs,
 } from '@utils/livepeer';
 import {
-  Tags,
-  Route,
-  Controller,
   Body,
-  Post,
-  SuccessResponse,
+  Controller,
+  Delete,
   Get,
   Path,
-  Delete,
+  Post,
+  Route,
   Security,
+  SuccessResponse,
+  Tags,
 } from 'tsoa';
 
 @Tags('Stream')
@@ -176,5 +177,17 @@ export class StreamController extends Controller {
       playbackId: body.playbackId,
     });
     return SendApiResponse('thumbnail generated', thumbnail);
+  }
+
+  /**
+   * @summary  Get HLS url
+   */
+  @SuccessResponse('201')
+  @Post('hls')
+  async getHls(
+    @Body() body: { url: string },
+  ): Promise<IStandardResponse<string>> {
+    const hlsUrl = await getHlsUrl(body.url);
+    return SendApiResponse('HLS url generated', hlsUrl);
   }
 }

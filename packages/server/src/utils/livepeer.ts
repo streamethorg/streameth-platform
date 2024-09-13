@@ -10,9 +10,10 @@ import State from '@models/state.model';
 import { Livepeer } from 'livepeer';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
+import youtubedl from 'youtube-dl-exec';
 import { createEventVideoById } from './firebase';
 import { refreshAccessToken } from './oauth';
-import { fetchAndParseVTT, parseVTT } from './util';
+import { fetchAndParseVTT, getSourceType, parseVTT } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
@@ -357,6 +358,29 @@ export const getSessionMetrics = async (
     };
   } catch (e) {
     throw new HttpException(400, 'Error getting metrics');
+  }
+};
+
+export const getHlsUrl = async (url: string): Promise<string> => {
+  try {
+    const type = getSourceType(url);
+    if (type === 'youtube') {
+      const output = await youtubedl(url, {
+        dumpSingleJson: true,
+        noWarnings: true,
+        preferFreeFormats: true,
+        addHeader: ['referer:youtube.com'],
+      });
+      const hlsFormat = output.formats.find(
+        (format) =>
+          format.protocol === 'm3u8_native' &&
+          format.ext === 'mp4' &&
+          format.resolution == '1280x720',
+      );
+      return hlsFormat.manifest_url;
+    }
+  } catch (e) {
+    throw new HttpException(400, 'Error getting HLS URL');
   }
 };
 
