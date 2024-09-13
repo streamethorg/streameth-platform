@@ -13,7 +13,7 @@ import fetch from 'node-fetch';
 import youtubedl from 'youtube-dl-exec';
 import { createEventVideoById } from './firebase';
 import { refreshAccessToken } from './oauth';
-import { fetchAndParseVTT, getSourceType, parseVTT } from './util';
+import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
@@ -323,7 +323,7 @@ export const generateThumbnail = async (data: {
       const asset = await getAsset(data.assetId);
       playbackId = asset.playbackId;
     }
-    const asset = await livepeer.playback.get(playbackId as string);
+    const asset = await livepeer.playback.get(playbackId);
 
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
@@ -361,28 +361,33 @@ export const getSessionMetrics = async (
   }
 };
 
-export const getHlsUrl = async (url: string): Promise<string> => {
+export const getHlsUrl = async (
+  url: string,
+): Promise<{ type: string; url: string }> => {
   try {
-    const type = getSourceType(url);
     let hlsUrl = '';
-    if (type === 'youtube') {
-      const output = await youtubedl(url, {
+    const source = getSourceType(url);
+    if (source.type === 'youtube' || source.type === 'twitter') {
+      let output = await youtubedl(url, {
         dumpSingleJson: true,
         noWarnings: true,
         preferFreeFormats: true,
-        addHeader: ['referer:youtube.com'],
+        addHeader: source.header,
       });
       const hlsFormat = output.formats.find(
         (format) =>
           format.protocol === 'm3u8_native' &&
           format.ext === 'mp4' &&
-          format.resolution == '1280x720',
+          source.resolutions?.includes(format.resolution),
       );
-      hlsUrl = `${config.cors.host}/raw?url=${encodeURIComponent(hlsFormat.manifest_url)}`;
+      hlsUrl = hlsFormat.manifest_url;
     } else {
       hlsUrl = url;
     }
-    return hlsUrl;
+    return {
+      type: source.type,
+      url: hlsUrl,
+    };
   } catch (e) {
     throw new HttpException(400, 'Error getting HLS URL');
   }

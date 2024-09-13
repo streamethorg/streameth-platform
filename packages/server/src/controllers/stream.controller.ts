@@ -186,7 +186,7 @@ export class StreamController extends Controller {
   @Post('hls')
   async getHls(
     @Body() body: { url: string },
-  ): Promise<IStandardResponse<string>> {
+  ): Promise<IStandardResponse<{ type: string; url: string }>> {
     const hlsUrl = await getHlsUrl(body.url);
     return SendApiResponse('HLS url generated', hlsUrl);
   }

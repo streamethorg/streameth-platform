@@ -73,15 +73,26 @@ export function parseVTT(vttData: string) {
   return keyframe;
 }
 
-export const getSourceType = (url: string): string => {
+export const getSourceType = (
+  url: string,
+): { header: Array<string>; type: string; resolutions?: Array<string> } => {
+  const resolutions = ['1280x720', '1920x960', '1920x1080', '2560x1280'];
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
-  const twitterRegex = /^(https?:\/\/)?(www\.)?twitter\.com\/.+$/;
+  const twitterRegex = /^https?:\/\/(www\.)?(twitter\.com|x\.com)\/.+$/i;
   if (youtubeRegex.test(url)) {
-    return 'youtube';
+    return {
+      type: 'youtube',
+      header: ['referer:youtube.com'],
+      resolutions,
+    };
   }
   if (twitterRegex.test(url)) {
-    return 'twitter';
+    return {
+      type: 'twitter',
+      header: [],
+      resolutions,
+    };
   } else {
-    return 'custom';
+    return { type: 'custom', header: [] };
   }
 };
