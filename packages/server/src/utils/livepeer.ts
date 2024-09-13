@@ -364,6 +364,7 @@ export const getSessionMetrics = async (
 export const getHlsUrl = async (url: string): Promise<string> => {
   try {
     const type = getSourceType(url);
+    let hlsUrl = '';
     if (type === 'youtube') {
       const output = await youtubedl(url, {
         dumpSingleJson: true,
@@ -377,8 +378,11 @@ export const getHlsUrl = async (url: string): Promise<string> => {
           format.ext === 'mp4' &&
           format.resolution == '1280x720',
       );
-      return hlsFormat.manifest_url;
+      hlsUrl = `${config.cors.host}/raw?url=${encodeURIComponent(hlsFormat.manifest_url)}`;
+    } else {
+      hlsUrl = url;
     }
+    return hlsUrl;
   } catch (e) {
     throw new HttpException(400, 'Error getting HLS URL');
   }

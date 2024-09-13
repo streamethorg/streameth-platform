@@ -81,5 +81,7 @@ export const getSourceType = (url: string): string => {
   }
   if (twitterRegex.test(url)) {
     return 'twitter';
+  } else {
+    return 'custom';
   }
 };
