@@ -20,7 +20,7 @@ const InfoHoverCard = ({
   iconClassName,
 }: {
   title: string;
-  description: string;
+  description?: string;
   size?: number;
   stroke?: number;
   Icon?: IconType;
@@ -41,7 +41,7 @@ const InfoHoverCard = ({
         <div className="flex justify-between space-x-4">
           <div className="space-y-1">
             <h4 className="text-sm font-semibold">{title}</h4>
-            <p className="text-sm">{description}</p>
+            {description && <p className="text-sm">{description}</p>}
           </div>
         </div>
       </HoverCardContent>

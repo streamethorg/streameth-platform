@@ -3,6 +3,7 @@
 import DatePicker from '@/components/misc/form/datePicker';
 import ImageUpload from '@/components/misc/form/imageUpload';
 import TimePicker from '@/components/misc/form/timePicker';
+import InfoHoverCard from '@/components/misc/interact/InfoHoverCard';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -211,7 +212,13 @@ const EditLivestream = ({
                 name="streamTime"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel required>Stream Time</FormLabel>
+                    <div className="flex justify-between items-center">
+                      <FormLabel required>Stream Time</FormLabel>
+                      <InfoHoverCard
+                        title="Enter time in your local timezone"
+                        size={16}
+                      />
+                    </div>
                     <FormControl>
                       <TimePicker
                         value={field.value}
