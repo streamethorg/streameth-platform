@@ -1,15 +1,5 @@
 'use client';
 
-import { Separator } from '@/components/ui/separator';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { LuFileUp } from 'react-icons/lu';
 import { createSessionAction } from '@/lib/actions/sessions';
 import * as z from 'zod';
 import {
@@ -19,7 +9,6 @@ import {
   useRef,
   Dispatch,
   SetStateAction,
-  useEffect,
 } from 'react';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { FileUp } from 'lucide-react';
@@ -30,60 +19,27 @@ import { sessionSchema } from '@/lib/schema';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { createStateAction } from '@/lib/actions/state';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
-import { Button } from '@/components/ui/button';
-import UploadVideoForm from './UploadVideoForm';
-import { on } from 'events';
-
-type UploadStatus = {
-  progress: number;
-  filename: string;
-  assetId: string | null;
-};
-
-type Uploads = {
-  [uploadId: string]: UploadStatus;
-};
+import { Uploads } from '../UploadVideoDialog';
 
 interface DropzoneProps {
   organizationId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setOnEdit: Dispatch<SetStateAction<string | null>>;
+  uploads: Uploads;
+  setUploads: Dispatch<SetStateAction<Uploads>>;
 }
 
 const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
-  const { organizationId, setOpen } = props;
+  const { organizationId, setOpen, uploads, setUploads, setOnEdit } = props;
   const [error, setError] = useState<string | null>(null);
-  const [uploads, setUploads] = useState<Uploads>({});
   const abortControllersRef = useRef<{ [uploadId: string]: AbortController }>(
     {}
   );
-  const [onEdit, setOnEdit] = useState('');
-  const onEditRef = useRef(onEdit);
 
-  console.log('rerender');
-
-  useEffect(() => {
-    console.log('useEffect triggered. onEdit:', onEdit);
-    onEditRef.current = onEdit;
-  }, [onEdit]);
-
-  const handleEditClick = useCallback(
-    (uploadId: string) => {
-      console.log('handleEditClick called with uploadId:', uploadId);
-      setOnEdit(uploadId);
-      setOpen(true);
-
-      // Log the current state immediately after setting
-      console.log('Immediate onEdit state:', onEdit);
-      console.log('Immediate onEditRef state:', onEditRef.current);
-
-      // Log the state after a short delay
-      setTimeout(() => {
-        console.log('Delayed onEdit state:', onEdit);
-        console.log('Delayed onEditRef state:', onEditRef.current);
-      }, 0);
-    },
-    [setOpen]
-  );
+  const handleEditClick = (uploadId: string) => {
+    setOnEdit(uploadId);
+    setOpen(true);
+  };
 
   const cancelUpload = useCallback(
     (uploadId: string, toastId: string | number) => {
@@ -93,7 +49,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
       }
       abortControllersRef.current[uploadId].abort();
 
-      const filename = uploads[uploadId]?.filename || 'Unknown file';
+      const filename = uploads[uploadId]?.session.name || 'Unknown file';
       toast.error(`Upload cancelled for ${filename}`, { id: toastId });
 
       setUploads((prev) => {
@@ -146,10 +102,18 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
       abortControllersRef.current[uploadId] = new AbortController();
 
       setOpen(false);
-
       setUploads((prev) => ({
         ...prev,
-        [uploadId]: { progress: 0, filename: file.name, assetId: null },
+        [uploadId]: {
+          progress: 0,
+          session: {
+            name: file.name,
+            assetId: '',
+            published: false,
+            description: 'No description',
+            coverImage: '',
+          },
+        },
       }));
 
       const toastId = toast.loading(`Preparing to upload ${file.name}...`);
@@ -160,7 +124,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
           throw new Error('Failed to get upload URL');
         }
 
-        await new Promise<string>((resolve) => {
+        await new Promise<string>((resolve, reject) => {
           uploadVideo(
             file,
             uploadUrl.tusEndpoint as string,
@@ -170,6 +134,8 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                 ...prev,
                 [uploadId]: { ...prev[uploadId], progress: percentage },
               }));
+              //const upload = uploads[uploadId]
+
               toast.loading(
                 `Uploading ${file.name} - ${Math.round(percentage)}%`,
                 {
@@ -193,10 +159,22 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
               const assetId = uploadUrl.assetId as string;
               setUploads((prev) => ({
                 ...prev,
-                [uploadId]: { ...prev[uploadId], assetId },
+                [uploadId]: {
+                  ...prev[uploadId],
+                  session: {
+                    ...prev[uploadId].session,
+                    assetId: assetId,
+                  },
+                },
               }));
+              const upload = uploads[uploadId];
+              if (!upload) {
+                reject(new Error('Upload does not exist'));
+                return;
+              }
+
               finishUpload({
-                name: file.name,
+                name: upload.session.name,
                 description: 'No description',
                 assetId: assetId,
                 published: false,
@@ -258,25 +236,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     onDrop,
     onDropRejected,
   });
-
-  const onFinish = (values: any) => {
-    console.log(values);
-  };
-
-  if (onEdit) {
-    return (
-      <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
-        <DialogHeader>
-          <DialogTitle>Edit Asset</DialogTitle>
-          <DialogDescription>Change details of the asset</DialogDescription>
-        </DialogHeader>
-        <Separator />
-        <UploadVideoForm organizationId={organizationId} onFinish={onFinish} />
-      </DialogContent>
-    );
-  }
-
-  console.log(onEdit);
 
   return (
     <div

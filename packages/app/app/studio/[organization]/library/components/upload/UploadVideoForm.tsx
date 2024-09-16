@@ -15,14 +15,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { sessionSchema } from '@/lib/schema';
-import { toast } from 'sonner';
-import { createSessionAction } from '@/lib/actions/sessions';
 import { Loader2, Earth, Lock, ChevronDown } from 'lucide-react';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { DialogClose } from '@/components/ui/dialog';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { createStateAction } from '@/lib/actions/state';
-import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 import ImageDropzone from '../../[session]/components/ImageDropzone';
 import {
   Popover,
@@ -31,26 +26,35 @@ import {
 } from '@/components/ui/popover';
 
 const UploadVideoForm = ({
-  organizationId,
-  onFinish,
+  session,
+  onSessionUpdate,
 }: {
-  organizationId: string;
-  onFinish: (values: z.infer<typeof sessionSchema>) => void;
+  session: z.infer<typeof sessionSchema>;
+  onSessionUpdate: (updatedSession: z.infer<typeof sessionSchema>) => void;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof sessionSchema>>({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
-      name: '',
+      name: session.name,
+      assetId: undefined,
       coverImage: '',
-      description: '',
-      assetId: '',
+      description: 'No Description',
     },
   });
 
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    onFinish(values);
+    console.log('submit');
+    setIsLoading(true);
+    try {
+      onSessionUpdate(values);
+      console.log(values);
+    } catch (error) {
+      console.error('Failed to update session:', error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -151,15 +155,11 @@ const UploadVideoForm = ({
             <span
               className={` ${buttonVariants({ variant: 'secondary' })} 'text-black border-2`}
             >
-              Cancel
+              Close
             </span>
           </DialogClose>
           <Button
-            disabled={
-              getFormSubmitStatus(form) ||
-              !form.getValues('assetId') ||
-              isLoading
-            }
+            disabled={getFormSubmitStatus(form) || isLoading}
             variant={'primary'}
             type="submit"
           >
@@ -169,7 +169,7 @@ const UploadVideoForm = ({
                 Please wait...
               </>
             ) : (
-              <p className="text-white">Create asset</p>
+              <p className="text-white">Edit asset</p>
             )}
           </Button>
         </div>
