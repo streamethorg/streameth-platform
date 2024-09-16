@@ -31,6 +31,7 @@ const RecordingSelect = ({
           session &&
             handleTermChange([
               { key: 'selectedRecording', value: session.recordingUrl ?? '' },
+              { key: 'type', value: 'custom' },
             ]);
         }}
       >

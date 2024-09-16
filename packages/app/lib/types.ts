@@ -129,6 +129,7 @@ export interface ClipsPageParams {
     selectedRecording: string;
     replaceAsset: string;
     previewId: string;
+    type: string;
   };
 }
 

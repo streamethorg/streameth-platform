@@ -6,6 +6,7 @@ import {
   createStage,
   deleteMultistream,
   deleteStage,
+  getHlsUrl,
   updateStage,
 } from '../services/stageService';
 import { cookies } from 'next/headers';
@@ -174,4 +175,21 @@ export const createSocialLivestreamStageAction = async ({
       error: error,
     };
   }
+};
+
+export const getHlsUrlAction = async ({ url }: { url: string }) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+
+  const response = await getHlsUrl({
+    url,
+    authToken,
+  });
+  if (!response) {
+    throw new Error('Error getting HLS URL');
+  }
+  revalidatePath('/studio');
+  return response;
 };

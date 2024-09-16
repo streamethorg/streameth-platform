@@ -16,7 +16,6 @@ import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface
 import { UseFormProps, UseFormReturn } from 'react-hook-form';
 import { getDateInUTC } from './time';
 import { toast } from 'sonner';
-import youtubeDl from 'youtube-dl-exec';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -375,52 +374,4 @@ export function formatTimestamp(seconds: number) {
   const date = new Date(0);
   date.setSeconds(seconds);
   return date.toISOString().substr(11, 8);
-}
-
-interface YoutubeDlInfo {
-  formats?: Array<{
-    protocol?: string;
-    ext?: string;
-    url?: string;
-  }>;
-  manifest_url?: string;
-}
-
-export async function getHLSUrl(videoUrl: string): Promise<string | null> {
-  try {
-    const info: YoutubeDlInfo = await youtubeDl(videoUrl, {
-      dumpSingleJson: true,
-      noCheckCertificates: true,
-      noWarnings: true,
-      preferFreeFormats: true,
-      addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
-    });
-
-    console.log('Full info:', JSON.stringify(info, null, 2));
-
-    // Check for HLS stream in formats
-    const hlsStream = info.formats?.find(
-      (format) =>
-        format.protocol === 'hls' ||
-        format.protocol === 'm3u8_native' ||
-        format.ext === 'm3u8'
-    );
-
-    if (hlsStream?.url) {
-      console.log('HLS URL found:', hlsStream.url);
-      return hlsStream.url;
-    }
-
-    // Check for HLS manifest URL
-    if (info.manifest_url?.endsWith('.m3u8')) {
-      console.log('HLS manifest URL found:', info.manifest_url);
-      return info.manifest_url;
-    }
-
-    console.log('No HLS stream found. Available formats:', info.formats);
-    return null;
-  } catch (err) {
-    console.error('Error:', err);
-    return null;
-  }
 }

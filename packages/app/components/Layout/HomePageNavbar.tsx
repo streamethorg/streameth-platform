@@ -211,7 +211,10 @@ const PCNavBar = ({
     pathname.includes('clips') && searchParams.has('selectedRecording');
 
   const handleGoBack = () => {
-    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+    handleTermChange([
+      { key: 'selectedRecording', value: undefined },
+      { key: 'type', value: undefined },
+    ]);
   };
 
   return (

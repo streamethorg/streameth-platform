@@ -293,3 +293,36 @@ export async function createSocialLivestreamStage({
     throw errorObject;
   }
 }
+
+export async function getHlsUrl({
+  url,
+  authToken,
+}: {
+  url: string;
+  authToken: string;
+}): Promise<{ type: string; url: string }> {
+  try {
+    const response = await fetch(`${apiUrl()}/streams/hls`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ url }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      const errorMessage = `Error ${response.status}: ${error.message || 'Error getting HLS URL'}`;
+      throw new Error(errorMessage);
+    }
+    return (await response.json()).data;
+  } catch (error) {
+    const errorObject = {
+      message: 'Error getting HLS URL',
+      details: error instanceof Error ? error.message : 'Unknown error',
+    };
+
+    throw errorObject;
+  }
+}

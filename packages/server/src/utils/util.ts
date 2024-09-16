@@ -77,6 +77,9 @@ export const getSourceType = (
   url: string,
 ): { header: Array<string>; type: string; resolutions?: Array<string> } => {
   const resolutions = [
+    '364x640',
+    '528x960',
+    '576x1024',
     '720x1280',
     '1280x720',
     '1920x960',

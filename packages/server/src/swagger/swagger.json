@@ -472,6 +472,37 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse__type-string--url-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"url": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"url",
+							"type"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"SheetType": {
 				"enum": [
 					"gsheet",
@@ -4199,6 +4230,47 @@
 					"content": {
 						"application/json": {
 							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/streams/hls": {
+			"post": {
+				"operationId": "GetHls",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__type-string--url-string__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get HLS url",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"url": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"url"
+								],
+								"type": "object"
+							}
 						}
 					}
 				}

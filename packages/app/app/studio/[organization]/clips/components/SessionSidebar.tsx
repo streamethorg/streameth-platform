@@ -14,6 +14,7 @@ import {
 import { CardTitle } from '@/components/ui/card';
 import { IExtendedEvent } from '@/lib/types';
 import { Session, Stream } from 'livepeer/dist/models/components';
+import Markers from './Markers';
 
 const SessionSidebar = ({
   event,
@@ -22,10 +23,10 @@ const SessionSidebar = ({
   event?: IExtendedEvent;
   sessions: IExtendedSession[];
   currentRecording?: string;
-  recordings: {
-    parentStream: Stream | undefined;
-    recordings: Session[];
-  };
+  // recordings: {
+  //   parentStream: Stream | undefined;
+  //   recordings: Session[];
+  // };
 }) => {
   const [sessionId, setSessionId] = React.useState('');
   const uniqueDates = sessions.filter(
@@ -38,9 +39,9 @@ const SessionSidebar = ({
   const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
 
   return (
-    <div className="h-full w-[400px] border-l bg-background bg-white">
+    <div className="h-full w-[500px] border-l bg-background bg-white">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
-        <div className="flex flex-col space-y-2">
+        {/* <div className="flex flex-col space-y-2">
           {uniqueDates.length > 1 && (
             <Select onValueChange={(value) => setDayFilter(value)}>
               <SelectTrigger className="bg-white">
@@ -87,9 +88,11 @@ const SessionSidebar = ({
                 .reverse(),
             ]}
           />
-        </div>
+        </div>*/}
+
+        <Markers />
       </CardTitle>
-      <div className="h-[calc(100%-100px)] w-full overflow-y-scroll">
+      {/* <div className="h-[calc(100%-100px)] w-full overflow-y-scroll">
         <ClipsSessionList
           event={event}
           sessions={sessions
@@ -102,7 +105,7 @@ const SessionSidebar = ({
             .filter((session) => (sessionId ? session._id === sessionId : true))
             .reverse()}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

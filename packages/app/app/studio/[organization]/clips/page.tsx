@@ -19,6 +19,7 @@ import { notFound } from 'next/navigation';
 import ClipSlider from './components/ClipSlider';
 import SessionRecordingSelect from './components/SessionRecordingSelect';
 import InjectUrlInput from './components/InjectUrlInput';
+import Markers from './components/Markers';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -39,7 +40,7 @@ const SkeletonSidebar = () => (
 );
 
 const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
-  const { stage, selectedRecording, previewId } = searchParams;
+  const { stage, selectedRecording, type, previewId } = searchParams;
 
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -129,10 +130,10 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex w-full flex-col">
-        <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
-          <ClipProvider>
-            <ReactHlsPlayer src={selectedRecording} />
+      <ClipProvider>
+        <div className="flex w-full flex-col">
+          <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
+            <ReactHlsPlayer src={selectedRecording} type={type} />
             <ClipSlider />
             {/* <CreateClipButton
               currentRecording={currentRecording}
@@ -141,17 +142,18 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
               currentStage={currentStage}
               sessions={sessions}
             /> */}
-          </ClipProvider>
+          </div>
         </div>
-      </div>
-      {/* <Suspense key={currentStage._id} fallback={<SkeletonSidebar />}>
-        <SessionSidebar
-          event={event ?? undefined}
-          sessions={sessions.sessions.filter((session) => session.assetId)}
-          currentRecording={currentRecording}
-          recordings={stageRecordings}
-        />
-      </Suspense> */}
+
+        <Suspense fallback={<SkeletonSidebar />}>
+          <SessionSidebar
+            // event={event ?? undefined}
+            sessions={sessionRecordings.filter((session) => session.assetId)}
+            currentRecording={selectedRecording}
+            // recordings={stageRecordings}
+          />
+        </Suspense>
+      </ClipProvider>
     </ClipContainer>
   );
 };
