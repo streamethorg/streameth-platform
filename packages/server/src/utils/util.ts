@@ -76,7 +76,13 @@ export function parseVTT(vttData: string) {
 export const getSourceType = (
   url: string,
 ): { header: Array<string>; type: string; resolutions?: Array<string> } => {
-  const resolutions = ['1280x720', '1920x960', '1920x1080', '2560x1280'];
+  const resolutions = [
+    '720x1280',
+    '1280x720',
+    '1920x960',
+    '1920x1080',
+    '2560x1280',
+  ];
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
   const twitterRegex = /^https?:\/\/(www\.)?(twitter\.com|x\.com)\/.+$/i;
   if (youtubeRegex.test(url)) {
