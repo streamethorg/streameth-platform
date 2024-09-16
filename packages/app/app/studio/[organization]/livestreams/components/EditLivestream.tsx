@@ -35,6 +35,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import moment from 'moment-timezone';
 
 const EditLivestream = ({
   stage,
@@ -50,6 +51,11 @@ const EditLivestream = ({
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMultiDate, setIsMultiDate] = useState(stage?.isMultipleDate);
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const userOffset = moment.tz(userTimezone).utcOffset() / 60;
+  const userOffsetStr =
+    userOffset >= 0 ? `+${userOffset}` : `-${Math.abs(userOffset)}`;
+
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
     defaultValues: {
@@ -215,7 +221,8 @@ const EditLivestream = ({
                     <div className="flex justify-between items-center">
                       <FormLabel required>Stream Time</FormLabel>
                       <InfoHoverCard
-                        title="Enter time in your local timezone"
+                        title={`Enter time in your local timezone (UTC${userOffsetStr})`}
+                        description={`For example, if your livestream is at 16:00 in your timezone, enter 16:00. We'll convert it for the your viewers correctly.`}
                         size={16}
                       />
                     </div>
