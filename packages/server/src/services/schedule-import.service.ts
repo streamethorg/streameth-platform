@@ -167,7 +167,6 @@ export default class ScheduleImporterService {
     let sessionsData = [];
     for (const day of data.schedule.conference.days) {
       for (const [roomName, sessions] of Object.entries(day.rooms)) {
-        console.log('sessions', sessions);
         const room = rooms.find((r) => r.slug === generateId(roomName));
         if (!room) continue;
         for (const session of sessions as any[]) {
