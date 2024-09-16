@@ -9,7 +9,7 @@ const TwitterConnectButton = ({ state }: { state?: string }) => {
   return (
     <Link href={`/api/twitter/request?state=${state}`}>
       <Button className="min-w-[200px] bg-[#121212]">
-        <SiX className="mr-2" />X account
+        <SiX className="mr-2" />X (Twitter)
       </Button>
     </Link>
   );
