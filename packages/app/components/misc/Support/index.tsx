@@ -80,15 +80,21 @@ const Support = () => {
             >
               Telegram support
             </a>{' '}
-            channel to stay informed about ticket updates, or alternatively, you
-            can raise an issue on{' '}
+            channel to stay informed about ticket updates, raise an issue on{' '}
             <a
               className="font-semibold text-primary"
               href="https://github.com/streamethorg/streameth-platform/issues"
               target="_blank"
               rel="noopener noopener"
             >
-              GitHub.
+              GitHub{' '}
+            </a>
+            or even send an email to{' '}
+            <a
+              href="mailto:support@streameth.com"
+              className="font-semibold text-primary"
+            >
+              support@streameth.com
             </a>
           </p>
 
