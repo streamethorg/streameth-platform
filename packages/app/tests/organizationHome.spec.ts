@@ -1,12 +1,12 @@
-import { test as base, expect } from '@playwright/test';
-import crypto from 'crypto';
 import {
   createOrganization,
   fetchOrganizations,
 } from '@/lib/services/organizationService';
-import path from 'path';
-import { existsSync } from 'fs';
 import { deleteStage, fetchStages } from '@/lib/services/stageService';
+import { test as base, expect } from '@playwright/test';
+import crypto from 'crypto';
+import { existsSync } from 'fs';
+import path from 'path';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
 import { removeStage } from './utils/removeStages';
 
@@ -219,7 +219,7 @@ test('create a scheduled livestream', async ({
   const todayFormatted = today.toLocaleDateString('en-US', { month: 'long' });
   const tomorrowDay = tomorrow.getDate().toString();
   await page.getByRole('button', { name: todayFormatted }).click();
-  await page.getByRole('gridcell', { name: tomorrowDay }).click();
+  await page.getByRole('gridcell', { name: tomorrowDay }).nth(1).click();
 
   await page.getByRole('combobox').click();
   await page.getByLabel('04:30').click();
@@ -299,8 +299,7 @@ test('create a livestream "right now" & delete it', async ({
     { waitUntil: 'commit' }
   );
 
-  await page.goto(`/studio/${organization.slug}`);
-  //await page.getByRole('button', { name: 'Back to homepage' }).click();
+  await page.getByRole('button', { name: 'Back to homepage' }).click();
   await page
     .getByRole('cell', { name: 'Manage Clip' })
     .getByRole('button')
