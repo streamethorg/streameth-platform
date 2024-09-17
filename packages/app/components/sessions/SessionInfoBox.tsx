@@ -11,7 +11,7 @@ import {
   IExtendedStage,
 } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
-import Timezone from '@/lib/utils/timezone';
+import { default as Timezone, default as Timezone } from '@/lib/utils/timezone';
 import ShareButton from '../misc/interact/ShareButton';
 import VideoDownloadClient from '../misc/VideoDownloadClient';
 import CollectVideButton from './CollectVideButton';
