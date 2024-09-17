@@ -134,7 +134,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                 ...prev,
                 [uploadId]: { ...prev[uploadId], progress: percentage },
               }));
-              //const upload = uploads[uploadId]
 
               toast.loading(
                 `Uploading ${file.name} - ${Math.round(percentage)}%`,
@@ -157,29 +156,30 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
             },
             async () => {
               const assetId = uploadUrl.assetId as string;
-              const upload = uploads[uploadId];
-              if (!upload) {
-                reject(new Error('Upload does not exist'));
-                return;
-              }
+              console.log('assetId', assetId);
 
-              setUploads((prev) => ({
-                ...prev,
-                [uploadId]: {
+              setUploads((prev) => {
+                const updatedUpload = {
                   ...prev[uploadId],
                   session: {
                     ...prev[uploadId].session,
                     assetId: assetId,
                   },
-                },
-              }));
+                };
 
-              finishUpload({
-                name: upload.session.name,
-                description: upload.session.description,
-                assetId: assetId,
-                published: upload.session.published,
+                finishUpload({
+                  name: updatedUpload.session.name,
+                  description: updatedUpload.session.description,
+                  assetId: assetId,
+                  published: updatedUpload.session.published,
+                });
+
+                return {
+                  ...prev,
+                  [uploadId]: updatedUpload,
+                };
               });
+
               resolve(assetId);
             }
           );

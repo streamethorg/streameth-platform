@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -38,18 +38,27 @@ const UploadVideoForm = ({
     resolver: zodResolver(sessionSchema),
     defaultValues: {
       name: session.name,
-      assetId: undefined,
-      coverImage: '',
-      description: 'No Description',
+      assetId: session.assetId,
+      coverImage: session.coverImage || '',
+      description: session.description || 'No Description',
+      published: session.published || false,
     },
   });
 
+  useEffect(() => {
+    form.reset({
+      name: session.name,
+      assetId: session.assetId,
+      coverImage: session.coverImage || '',
+      description: session.description || 'No Description',
+      published: session.published || false,
+    });
+  }, [session, form]);
+
   function onSubmit(values: z.infer<typeof sessionSchema>) {
-    console.log('submit');
     setIsLoading(true);
     try {
       onSessionUpdate(values);
-      console.log(values);
     } catch (error) {
       console.error('Failed to update session:', error);
     } finally {
