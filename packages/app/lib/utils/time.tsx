@@ -18,12 +18,6 @@ export function generateTimezones() {
 
 export const getTime = (date: Date): number => moment(date).valueOf();
 
-export const formatTime = (seconds: number) => {
-  const date = new Date(0);
-  date.setSeconds(seconds);
-  return date.toISOString().substr(11, 8);
-};
-
 export const formatDate = (
   date: Date,
   format = 'YYYY-MM-DD',
