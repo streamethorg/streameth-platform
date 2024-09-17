@@ -157,6 +157,12 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
             },
             async () => {
               const assetId = uploadUrl.assetId as string;
+              const upload = uploads[uploadId];
+              if (!upload) {
+                reject(new Error('Upload does not exist'));
+                return;
+              }
+
               setUploads((prev) => ({
                 ...prev,
                 [uploadId]: {
@@ -167,17 +173,12 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                   },
                 },
               }));
-              const upload = uploads[uploadId];
-              if (!upload) {
-                reject(new Error('Upload does not exist'));
-                return;
-              }
 
               finishUpload({
                 name: upload.session.name,
-                description: 'No description',
+                description: upload.session.description,
                 assetId: assetId,
-                published: false,
+                published: upload.session.published,
               });
               resolve(assetId);
             }
