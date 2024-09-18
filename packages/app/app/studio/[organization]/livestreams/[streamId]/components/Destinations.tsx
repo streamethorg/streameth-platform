@@ -1,9 +1,7 @@
-import { Card } from '@/components/ui/card';
 import Multistream from './Multistream';
 import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
 import NotFound from '@/app/not-found';
-import EditLivestream from '../../components/EditLivestream';
 
 const Destinations = ({
   organization,
@@ -20,14 +18,7 @@ const Destinations = ({
 
   return (
     <div className="flex flex-col flex-grow justify-start p-4 space-y-4 h-full">
-      <div className="flex justify-start space-x-2">
-        <EditLivestream
-          stage={stream}
-          organizationSlug={organization.slug!}
-          variant="outline"
-          btnText="Edit Livestream"
-        />
-      </div>
+      <div className="flex justify-start space-x-2"></div>
       <Multistream
         organization={organization}
         stream={stream}

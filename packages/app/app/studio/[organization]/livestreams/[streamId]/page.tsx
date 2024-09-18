@@ -9,12 +9,7 @@ import StreamHeader from './components/StreamHeader';
 import NotFound from '@/app/not-found';
 import StreamHealth from './components/StreamHealth';
 import { Button } from '@/components/ui/button';
-import {
-  ArrowRight,
-  MoveIcon,
-  Scissors,
-  ScissorsLineDashed,
-} from 'lucide-react';
+import { ArrowRight, ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
@@ -27,6 +22,7 @@ import {
 import Sidebar from './components/Sidebar';
 import Preview from '../../Preview';
 import { fetchStageRecordings } from '@/lib/services/stageService';
+import EditLivestream from '../components/EditLivestream';
 
 const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -119,14 +115,17 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
                 </div>
               </Button>
             </Link>
+            <EditLivestream
+              stage={stream}
+              organizationSlug={organization.slug!}
+              variant="outline"
+              btnText="Edit Livestream"
+            />
             {stream.streamSettings?.isActive && latestRecordingId && (
               <Link
                 href={`/studio/${params.organization}/clips?stage=${stream._id}&selectedRecording=${latestRecordingId}`}
               >
-                <Button
-                  variant="primary"
-                  className="flex w-full items-center gap-1"
-                >
+                <Button variant="primary" className="flex items-center gap-1">
                   Clip Live
                   <ScissorsLineDashed className="ml-1 h-5 w-5" />
                 </Button>

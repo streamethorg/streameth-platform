@@ -110,10 +110,10 @@ const EditLivestream = ({
   }
   return (
     <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-      <DialogTrigger className="w-full" asChild>
-        <Button className="flex space-x-2 w-full" variant={variant}>
-          <FilePenLine size={15} />
+      <DialogTrigger asChild>
+        <Button className="flex space-x-2" variant={variant}>
           <span>{btnText}</span>
+          <FilePenLine className="ml-2 w-5 h-5" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
