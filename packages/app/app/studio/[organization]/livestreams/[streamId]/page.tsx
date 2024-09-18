@@ -9,7 +9,7 @@ import StreamHeader from './components/StreamHeader';
 import NotFound from '@/app/not-found';
 import StreamHealth from './components/StreamHealth';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MoveIcon, Scissors } from 'lucide-react';
 import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
@@ -101,12 +101,18 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
               target="_blank"
             >
               <Button variant="outline">
-                View Livestream
+                Watch Livestream
                 <div>
-                  <ArrowRight className="pl-1 w-4 h-4" />
+                  <ArrowRight className="ml-1 w-5 h-5" />
                 </div>
               </Button>
             </Link>
+            {/* TODO: Add clip live button redirect */}
+            {stream.streamSettings?.isActive && (
+              <Button variant={'primary'}>
+                Clip Live <Scissors className="ml-2 w-4 h-4" />
+              </Button>
+            )}
 
             <ImportDataButton
               organizationId={organization._id}
