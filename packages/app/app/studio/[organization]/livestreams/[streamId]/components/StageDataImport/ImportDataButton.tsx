@@ -34,6 +34,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { FileDown } from 'lucide-react';
 
 const ImportDataButton = ({
   organizationId,
@@ -91,7 +92,9 @@ const ImportDataButton = ({
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="primary">Import Data</Button>
+          <Button variant="primary">
+            Import Data <FileDown className="ml-2 w-5 h-5" />
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogTitle>Import Stage Data</DialogTitle>
