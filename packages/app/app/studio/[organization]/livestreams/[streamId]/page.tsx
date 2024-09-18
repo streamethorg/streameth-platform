@@ -9,7 +9,12 @@ import StreamHeader from './components/StreamHeader';
 import NotFound from '@/app/not-found';
 import StreamHealth from './components/StreamHealth';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, MoveIcon, Scissors } from 'lucide-react';
+import {
+  ArrowRight,
+  MoveIcon,
+  Scissors,
+  ScissorsLineDashed,
+} from 'lucide-react';
 import Link from 'next/link';
 import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
@@ -21,6 +26,7 @@ import {
 } from '@/lib/services/sessionService';
 import Sidebar from './components/Sidebar';
 import Preview from '../../Preview';
+import { fetchStageRecordings } from '@/lib/services/stageService';
 
 const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -51,6 +57,12 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
     }
     return undefined;
   })();
+
+  const stageRecordings = await fetchStageRecordings({
+    streamId: stream.streamSettings?.streamId ?? '',
+  });
+
+  const latestRecordingId = stageRecordings?.recordings[0]?.id;
 
   return (
     <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-[1000px]">
@@ -108,10 +120,18 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
               </Button>
             </Link>
             {/* TODO: Add clip live button redirect */}
-            {stream.streamSettings?.isActive && (
-              <Button variant={'primary'}>
-                Clip Live <Scissors className="ml-2 w-4 h-4" />
-              </Button>
+            {stream.streamSettings?.isActive && latestRecordingId && (
+              <Link
+                href={`/studio/${params.organization}/clips?stage=${stream._id}&selectedRecording=${latestRecordingId}`}
+              >
+                <Button
+                  variant="primary"
+                  className="flex w-full items-center gap-1"
+                >
+                  Clip Live
+                  <ScissorsLineDashed className="ml-1 h-5 w-5" />
+                </Button>
+              </Link>
             )}
 
             <ImportDataButton
