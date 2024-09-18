@@ -20,20 +20,24 @@ const Sidebar = ({
   organization: IExtendedOrganization;
 }) => {
   return (
-    <Tabs defaultValue="clips" className="w-[400px]">
-      <TabsList className="grid grid-cols-2 w-full">
-        <TabsTrigger value="clips">Clips</TabsTrigger>
-        <TabsTrigger value="destinations">Destinations</TabsTrigger>
-      </TabsList>
-      <TabsContent className="h-full" value="clips">
-        <Card className="shadow-none h-[calc(100%-20px)] w-full overflow-y-scroll">
-          <ClipsList sessions={sessions} />
-        </Card>
-      </TabsContent>
-      <TabsContent className="h-[calc(100%-20px)]" value="destinations">
-        <Destinations stream={stage} organization={organization} />
-      </TabsContent>
-    </Tabs>
+    <Card className="w-[400px] flex flex-col h-[calc(100vh-12rem)] mb-4 overflow-hidden">
+      <Tabs defaultValue="clips" className="flex flex-col h-full">
+        <TabsList className="grid grid-cols-2 w-full">
+          <TabsTrigger value="clips">Clips</TabsTrigger>
+          <TabsTrigger value="destinations">Destinations</TabsTrigger>
+        </TabsList>
+        <TabsContent className="flex-grow overflow-hidden" value="clips">
+          <div className="h-full overflow-y-auto">
+            <ClipsList sessions={sessions} />
+          </div>
+        </TabsContent>
+        <TabsContent className="flex-grow overflow-hidden" value="destinations">
+          <div className="h-full overflow-y-auto">
+            <Destinations stream={stage} organization={organization} />
+          </div>
+        </TabsContent>
+      </Tabs>
+    </Card>
   );
 };
 

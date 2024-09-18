@@ -19,7 +19,7 @@ const Destinations = ({
   const streamTargets = stream?.streamSettings?.targets || [];
 
   return (
-    <Card className="flex flex-col flex-grow justify-start p-4 space-y-4 h-full shadow-none">
+    <div className="flex flex-col flex-grow justify-start p-4 space-y-4 h-full">
       <div className="flex justify-start space-x-2">
         <EditLivestream
           stage={stream}
@@ -43,7 +43,7 @@ const Destinations = ({
           streamTargets={stream?.streamSettings?.targets || []}
         />
       )}
-    </Card>
+    </div>
   );
 };
 
