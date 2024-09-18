@@ -119,7 +119,6 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
                 </div>
               </Button>
             </Link>
-            {/* TODO: Add clip live button redirect */}
             {stream.streamSettings?.isActive && latestRecordingId && (
               <Link
                 href={`/studio/${params.organization}/clips?stage=${stream._id}&selectedRecording=${latestRecordingId}`}
