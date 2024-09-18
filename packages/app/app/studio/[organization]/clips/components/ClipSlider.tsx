@@ -245,12 +245,19 @@ const ClipSlider = () => {
     return date.toISOString().substr(11, 8);
   };
 
-  const updateMarker = (id: string, updates: Partial<IMarker>) => {
-    setMarkers((prevMarkers) =>
-      prevMarkers.map((marker) =>
-        marker.id === id ? { ...marker, ...updates } : marker
-      )
-    );
+  const updateMarker = (
+    id: string,
+    updates: Partial<IMarker['metadata'][0]>
+  ) => {
+    setMarkers((prevMarkers) => {
+      if (!prevMarkers) return null;
+      return {
+        ...prevMarkers,
+        metadata: prevMarkers.metadata.map((marker) =>
+          marker.id === id ? { ...marker, ...updates } : marker
+        ),
+      };
+    });
   };
 
   const handleMarkerDrag = useCallback(
@@ -261,8 +268,9 @@ const ClipSlider = () => {
     ) => {
       e.preventDefault();
       const startX = e.clientX;
-      const marker = markers.find((m) => m.id === markerId);
-      if (!marker || !videoRef.current) return;
+      if (!markers || !videoRef.current) return;
+      const marker = markers.metadata.find((m) => m.id === markerId);
+      if (!marker) return;
 
       const initialPosition = isStart ? marker.start : marker.end;
       const timelineWidth = videoRef.current.getBoundingClientRect().width;
@@ -276,18 +284,22 @@ const ClipSlider = () => {
           Math.min(videoDuration, initialPosition + deltaTime)
         );
 
-        setMarkers((prevMarkers) =>
-          prevMarkers.map((m) => {
-            if (m.id === markerId) {
-              if (isStart) {
-                return { ...m, start: Math.min(newPosition, m.end - 0.1) };
-              } else {
-                return { ...m, end: Math.max(newPosition, m.start + 0.1) };
+        setMarkers((prevMarkers) => {
+          if (!prevMarkers) return null;
+          return {
+            ...prevMarkers,
+            metadata: prevMarkers.metadata.map((m) => {
+              if (m.id === markerId) {
+                if (isStart) {
+                  return { ...m, start: Math.min(newPosition, m.end - 0.1) };
+                } else {
+                  return { ...m, end: Math.max(newPosition, m.start + 0.1) };
+                }
               }
-            }
-            return m;
-          })
-        );
+              return m;
+            }),
+          };
+        });
       };
 
       const handleMouseUp = () => {
@@ -365,31 +377,32 @@ const ClipSlider = () => {
                 </div>
               );
             })}
-          {markers.map((marker) => (
-            <div
-              key={marker.id}
-              className="absolute flex flex-col"
-              style={{
-                left: `${(marker.start / (videoRef.current?.duration || 1)) * 100}%`,
-                width: `${((marker.end - marker.start) / (videoRef.current?.duration || 1)) * 100}%`,
-              }}
-            >
+          {markers &&
+            markers.metadata.map((marker) => (
               <div
-                className="h-4 cursor-pointer"
-                style={{ backgroundColor: marker.color }}
-                title={marker.title}
+                key={marker.id}
+                className="absolute flex flex-col"
+                style={{
+                  left: `${(marker.start / (videoRef.current?.duration || 1)) * 100}%`,
+                  width: `${((marker.end - marker.start) / (videoRef.current?.duration || 1)) * 100}%`,
+                }}
               >
                 <div
-                  className="absolute left-0 h-full w-2 cursor-ew-resize"
-                  onMouseDown={(e) => handleMarkerDrag(marker.id, true, e)}
-                />
-                <div
-                  className="absolute right-0 h-full w-2 cursor-ew-resize"
-                  onMouseDown={(e) => handleMarkerDrag(marker.id, false, e)}
-                />
+                  className="h-4 cursor-pointer"
+                  style={{ backgroundColor: marker.color }}
+                  title={marker.title}
+                >
+                  <div
+                    className="absolute left-0 h-full w-2 cursor-ew-resize"
+                    onMouseDown={(e) => handleMarkerDrag(marker.id, true, e)}
+                  />
+                  <div
+                    className="absolute right-0 h-full w-2 cursor-ew-resize"
+                    onMouseDown={(e) => handleMarkerDrag(marker.id, false, e)}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className="relative flex h-10 rounded-full">
           <div className="my-auto h-2 w-full rounded-xl bg-gray-400" />

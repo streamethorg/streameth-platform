@@ -8,11 +8,12 @@ const MarkerSchema = new Schema<IMarker>(
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     metadata: [
       {
+        id: { type: String, default: 0, required: true },
         start: { type: Number, default: 0, required: true },
         end: { type: Number, default: 0, required: true },
         color: { type: String, default: '#FFA500', required: true },
         title: { type: String, default: '', required: true },
-        description: { type: String, default: '', required: true },
+        description: { type: String, default: '', required: false },
         speakers: [
           {
             name: { type: String, default: '' },

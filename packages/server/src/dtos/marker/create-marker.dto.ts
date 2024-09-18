@@ -12,10 +12,11 @@ export class CreateMarkerDto implements IMarker {
 
   @IsArray()
   metadata: Array<{
+    id: string;
     start: number;
     end: number;
     color: string;
     title: string;
-    description: string;
+    description?: string;
   }>;
 }

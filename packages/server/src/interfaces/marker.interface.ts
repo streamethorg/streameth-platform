@@ -4,11 +4,12 @@ export interface IMarker {
   name: string;
   organizationId: Types.ObjectId | string;
   metadata: Array<{
+    id: string;
     start: number;
     end: number;
     color: string;
     title: string;
-    description: string;
+    description?: string;
   }>;
   slug?: string;
 }

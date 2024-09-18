@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import ClipsSessionList from './ClipSessionList';
-import { IExtendedSession } from '@/lib/types';
+import { IExtendedMarkers, IExtendedSession } from '@/lib/types';
 import Combobox from '@/components/ui/combo-box';
 import {
   Select,
@@ -14,19 +14,17 @@ import {
 import { CardTitle } from '@/components/ui/card';
 import { IExtendedEvent } from '@/lib/types';
 import { Session, Stream } from 'livepeer/dist/models/components';
-import Markers from './Markers';
+import Markers from './markers/Markers';
 
 const SessionSidebar = ({
-  event,
+  markers,
   sessions,
+  organizationId,
 }: {
-  event?: IExtendedEvent;
+  markers?: IExtendedMarkers[];
   sessions: IExtendedSession[];
   currentRecording?: string;
-  // recordings: {
-  //   parentStream: Stream | undefined;
-  //   recordings: Session[];
-  // };
+  organizationId: string;
 }) => {
   const [sessionId, setSessionId] = React.useState('');
   const uniqueDates = sessions.filter(
@@ -39,7 +37,7 @@ const SessionSidebar = ({
   const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
 
   return (
-    <div className="h-full w-[500px] border-l bg-background bg-white">
+    <div className="h-full w-[600px] border-l bg-background bg-white">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
         {/* <div className="flex flex-col space-y-2">
           {uniqueDates.length > 1 && (
@@ -90,7 +88,10 @@ const SessionSidebar = ({
           />
         </div>*/}
 
-        <Markers />
+        <Markers
+          organizationId={organizationId}
+          organizationMarkers={markers}
+        />
       </CardTitle>
       {/* <div className="h-[calc(100%-100px)] w-full overflow-y-scroll">
         <ClipsSessionList

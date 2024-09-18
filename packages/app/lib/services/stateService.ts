@@ -62,7 +62,6 @@ export const fetchAllStates = async ({
       cache: 'no-store',
     });
     if (!response.ok) {
-      console.log(response.status);
       return [];
     }
     const data: IExtendedState[] = (await response.json()).data;

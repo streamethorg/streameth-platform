@@ -3049,6 +3049,228 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IMarker": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"metadata": {
+						"items": {
+							"properties": {
+								"description": {
+									"type": "string"
+								},
+								"title": {
+									"type": "string"
+								},
+								"color": {
+									"type": "string"
+								},
+								"end": {
+									"type": "number",
+									"format": "double"
+								},
+								"start": {
+									"type": "number",
+									"format": "double"
+								},
+								"id": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"title",
+								"color",
+								"end",
+								"start",
+								"id"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"metadata"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IMarker_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IMarker"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateMarkerDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"metadata": {
+						"items": {
+							"properties": {
+								"description": {
+									"type": "string"
+								},
+								"title": {
+									"type": "string"
+								},
+								"color": {
+									"type": "string"
+								},
+								"end": {
+									"type": "number",
+									"format": "double"
+								},
+								"start": {
+									"type": "number",
+									"format": "double"
+								},
+								"id": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"title",
+								"color",
+								"end",
+								"start",
+								"id"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"slug": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"metadata"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse__stages-Array_any_--markers-IMarker-at-metadata__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"markers": {
+								"items": {
+									"properties": {
+										"description": {
+											"type": "string"
+										},
+										"title": {
+											"type": "string"
+										},
+										"color": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										},
+										"id": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"title",
+										"color",
+										"end",
+										"start",
+										"id"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"stages": {
+								"items": {},
+								"type": "array"
+							}
+						},
+						"required": [
+							"markers",
+							"stages"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IMarker__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"GSheetConfig": {
 				"properties": {
 					"sheetId": {
@@ -6013,6 +6235,218 @@
 						}
 					}
 				]
+			}
+		},
+		"/markers": {
+			"post": {
+				"operationId": "CreateMarker",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IMarker_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMarkerDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllMarkers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IMarker__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/markers/{markerId}": {
+			"put": {
+				"operationId": "UpdateMarker",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IMarker_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Update marker",
+				"tags": [
+					"Marker"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "markerId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMarkerDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteMarker",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete marker",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "markerId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"subMarkerId": {
+										"type": "string"
+									},
+									"organizationId": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"subMarkerId",
+									"organizationId"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/markers/import": {
+			"post": {
+				"operationId": "ImportMarkers",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__stages-Array_any_--markers-IMarker-at-metadata__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Import markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"organizationId": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									},
+									"url": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"organizationId",
+									"type",
+									"url"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/": {

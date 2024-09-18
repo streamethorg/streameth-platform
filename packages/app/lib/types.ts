@@ -9,6 +9,7 @@ import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IState } from 'streameth-new-server/src/interfaces/state.interface';
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface';
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
+import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
@@ -249,5 +250,9 @@ export interface ChunkDataTypes {
   text: string;
 }
 export interface IExtendedScheduleImporter extends IScheduleImporter {
+  _id: string;
+}
+
+export interface IExtendedMarkers extends IMarker {
   _id: string;
 }

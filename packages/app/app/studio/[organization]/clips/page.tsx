@@ -19,7 +19,8 @@ import { notFound } from 'next/navigation';
 import ClipSlider from './components/ClipSlider';
 import SessionRecordingSelect from './components/SessionRecordingSelect';
 import InjectUrlInput from './components/InjectUrlInput';
-import Markers from './components/Markers';
+import Markers from './components/markers/Markers';
+import { fetchMarkers } from '@/lib/services/clipSevice';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -105,6 +106,10 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
     );
   }
 
+  const markers = await fetchMarkers({
+    organizationId: organization._id,
+  });
+
   const previewAsset = await (async function () {
     if (previewId) {
       const session = await fetchSession({
@@ -118,7 +123,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
     }
     return undefined;
   })();
-
+  console.log('markers', markers);
   return (
     <ClipContainer>
       {previewAsset && (
@@ -147,10 +152,10 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
 
         <Suspense fallback={<SkeletonSidebar />}>
           <SessionSidebar
-            // event={event ?? undefined}
+            markers={markers}
+            organizationId={organization._id}
             sessions={sessionRecordings.filter((session) => session.assetId)}
             currentRecording={selectedRecording}
-            // recordings={stageRecordings}
           />
         </Suspense>
       </ClipProvider>
