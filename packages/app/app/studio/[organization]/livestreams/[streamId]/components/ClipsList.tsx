@@ -6,6 +6,7 @@ import useSearchParams from '@/lib/hooks/useSearchParams';
 import { IExtendedSession } from '@/lib/types';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
+import { Clapperboard } from 'lucide-react';
 
 const ClipsList = ({ sessions }: { sessions: IExtendedSession[] }) => {
   const { handleTermChange } = useSearchParams();
@@ -60,9 +61,11 @@ const ClipItem = ({
           {session.description || 'No description provided'}
         </p>
       </div>
-      <Link href={`/edit-clip/${session._id}`} passHref>
-        <Button variant="outline" className="w-20 h-8 ml-2">
+      {/* TODO: add edit endpoint right now it does nothing*/}
+      <Link href={'#'} passHref>
+        <Button variant="primary" className="w-20 h-8 ml-2">
           Edit
+          <Clapperboard className="ml-2 w-4 h-4" />
         </Button>
       </Link>
     </div>
