@@ -1,7 +1,11 @@
 'use client';
 import React from 'react';
 import ClipsSessionList from './ClipSessionList';
-import { IExtendedMarkers, IExtendedSession } from '@/lib/types';
+import {
+  IExtendedMarkers,
+  IExtendedSession,
+  IExtendedStage,
+} from '@/lib/types';
 import Combobox from '@/components/ui/combo-box';
 import {
   Select,
@@ -20,7 +24,9 @@ const SessionSidebar = ({
   markers,
   sessions,
   organizationId,
+  stages,
 }: {
+  stages: IExtendedStage[];
   markers?: IExtendedMarkers[];
   sessions: IExtendedSession[];
   currentRecording?: string;
@@ -37,7 +43,7 @@ const SessionSidebar = ({
   const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
 
   return (
-    <div className="h-full w-[600px] border-l bg-background bg-white">
+    <div className="h-full w-[600px] border-l bg-background bg-white overflow-auto">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
         {/* <div className="flex flex-col space-y-2">
           {uniqueDates.length > 1 && (
@@ -89,6 +95,7 @@ const SessionSidebar = ({
         </div>*/}
 
         <Markers
+          stages={stages}
           organizationId={organizationId}
           organizationMarkers={markers}
         />

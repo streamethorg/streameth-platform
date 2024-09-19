@@ -52,14 +52,14 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
   }
 
   // stages
-  const stages = (
-    await fetchStages({
-      organizationId: organization._id,
-    })
-  ).filter((stage) => stage.streamSettings?.isActive);
+  const stages = await fetchStages({
+    organizationId: organization._id,
+  });
+
+  const activeStages = stages.filter((stage) => stage.streamSettings?.isActive);
 
   // Fetch recordings for each active stage
-  const stageRecordingsPromises = stages.map(async (stage) => {
+  const stageRecordingsPromises = activeStages.map(async (stage) => {
     const streamId = stage?.streamSettings?.streamId ?? '';
     if (streamId) {
       return await fetchStageRecordings({ streamId });
@@ -123,7 +123,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
     }
     return undefined;
   })();
-  console.log('markers', markers);
+
   return (
     <ClipContainer>
       {previewAsset && (
@@ -152,6 +152,7 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
 
         <Suspense fallback={<SkeletonSidebar />}>
           <SessionSidebar
+            stages={stages}
             markers={markers}
             organizationId={organization._id}
             sessions={sessionRecordings.filter((session) => session.assetId)}

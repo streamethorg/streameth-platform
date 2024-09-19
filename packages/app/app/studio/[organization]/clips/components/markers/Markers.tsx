@@ -10,15 +10,17 @@ import {
   updateMarkersAction,
 } from '@/lib/actions/clips';
 import { toast } from 'sonner';
-import { IExtendedMarkers } from '@/lib/types';
+import { IExtendedMarkers, IExtendedStage } from '@/lib/types';
 import ImportMarkers from './ImportMarkers';
 
 const Markers = ({
   organizationId,
   organizationMarkers,
+  stages,
 }: {
   organizationMarkers?: IExtendedMarkers[];
   organizationId: string;
+  stages: IExtendedStage[];
 }) => {
   const { videoRef, markers, setMarkers } = useClipContext();
   const [newMarker, setNewMarker] = useState<Partial<
@@ -29,8 +31,6 @@ const Markers = ({
   const [isCustomMarker, setIsCustomMarker] = useState(false);
 
   const formatTime = (seconds: number) => {
-    if (!seconds) return '00:00:00';
-
     const date = new Date(0);
     date.setSeconds(seconds);
     return date.toISOString().substr(11, 8);
@@ -149,27 +149,28 @@ const Markers = ({
   };
 
   const handleSaveMarkers = async () => {
-    if (!markersName) {
+    console.log('markers', markers, markers?.name);
+    if (!markersName && !markers?.name) {
       toast.error('Please enter a name for the markers');
       return;
     }
     const markerData = {
-      name: markersName,
+      name: markersName || markers?.name!,
       organizationId,
-      metadata: [],
+      metadata: markers?.metadata || [],
     };
     await createMarkersAction({ markers: markerData })
       .then((response) => {
-        console.log('responseData', response);
         if ('error' in response) {
           toast.error('Error saving new markers');
         } else {
+          console.log('response', response);
           toast.success('New markers saved successfully');
           setMarkers({
             _id: response._id,
-            name: markersName,
+            name: response.name,
             organizationId,
-            metadata: [],
+            metadata: markers?.metadata || [],
           });
         }
       })
@@ -179,9 +180,8 @@ const Markers = ({
   };
 
   const handleUpdateMarkers = async () => {
-    if (!markers || !markers._id) {
-      toast.error('Cannot update markers without an ID');
-      return;
+    if (!markers?._id) {
+      return handleSaveMarkers();
     }
     await updateMarkersAction({
       markers: {
@@ -209,7 +209,6 @@ const Markers = ({
     markerId: string;
     subMarkerId: string;
   }) => {
-    // setIsDeleting(true);
     await deleteMarkerAction({
       markerId: markerId,
       subMarkerId: subMarkerId,
@@ -224,16 +223,17 @@ const Markers = ({
       })
       .catch(() => {
         toast.error('Error deleting marker');
-      })
-      .finally(() => {
-        // setIsDeleting(false);
       });
   };
 
   return (
     <div>
       <h3 className="text-lg font-semibold mb-2">Markers</h3>
-      <ImportMarkers organizationMarkers={organizationMarkers} />
+      <ImportMarkers
+        stages={stages}
+        organizationMarkers={organizationMarkers}
+        organizationId={organizationId}
+      />
 
       {!markers && (
         <div className="flex items-center gap-2 mt-4 pb-4 my-3">
@@ -257,77 +257,89 @@ const Markers = ({
       {markers && (
         <>
           <div className="mt-4 pb-4 my-3">
-            <h4 className="font-semibold mb-2">{markers.name}</h4>
-            {markers.metadata.map((marker) => (
-              <div key={marker.id} className="flex flex-col space-x-2 mb-2">
-                {editingMarker === marker.id ? (
-                  <div className="flex flex-col space-y-2">
-                    <Input
-                      type="number"
-                      value={marker.start}
-                      onChange={(e) =>
-                        updateMarker(marker.id, {
-                          start: parseFloat(e.target.value),
-                        })
-                      }
-                    />
-                    <Input
-                      type="number"
-                      value={marker.end}
-                      onChange={(e) =>
-                        updateMarker(marker.id, {
-                          end: parseFloat(e.target.value),
-                        })
-                      }
-                    />
-                    <Input
-                      type="text"
-                      value={marker.title}
-                      onChange={(e) =>
-                        updateMarker(marker.id, { title: e.target.value })
-                      }
-                    />
-                    <Button onClick={() => setEditingMarker(null)}>Save</Button>
-                  </div>
-                ) : (
-                  <div className="border-b border-gray-200">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="color"
-                          value={marker.color}
-                          onChange={(e) =>
-                            updateMarker(marker.id, { color: e.target.value })
-                          }
-                          className="w-6 h-6"
-                        />
-                        <p>{marker.title}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Button
-                          size={'sm'}
-                          variant={'outline'}
-                          onClick={() => setEditingMarker(marker.id)}
-                        >
-                          <Edit2 size={16} />
-                        </Button>
-                        <Button
-                          size={'sm'}
-                          variant={'outline'}
-                          onClick={() => removeMarker(marker.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
+            <h4 className="font-semibold mb-2 border-b border-gray-200">
+              {markers.name}
+            </h4>
+            <div className="max-h-[400px] overflow-auto">
+              {markers.metadata.map((marker) => (
+                <div key={marker.id} className="flex flex-col space-x-2 mb-2">
+                  {editingMarker === marker.id ? (
+                    <div className="flex flex-col space-y-2">
+                      <Input
+                        type="number"
+                        value={marker.start}
+                        onChange={(e) =>
+                          updateMarker(marker.id, {
+                            start: parseFloat(e.target.value),
+                          })
+                        }
+                      />
+                      <Input
+                        type="number"
+                        value={marker.end}
+                        onChange={(e) =>
+                          updateMarker(marker.id, {
+                            end: parseFloat(e.target.value),
+                          })
+                        }
+                      />
+                      <Input
+                        type="text"
+                        value={marker.title}
+                        onChange={(e) =>
+                          updateMarker(marker.id, { title: e.target.value })
+                        }
+                      />
+                      <Button onClick={() => setEditingMarker(null)}>
+                        Save
+                      </Button>
                     </div>
-                    <span className="text-sm text-gray-500">
-                      IN {formatTime(marker.start)} - OUT{' '}
-                      {formatTime(marker.end)}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
+                  ) : (
+                    <div className="border-b border-gray-200">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div>
+                            <input
+                              type="color"
+                              value={marker.color}
+                              onChange={(e) =>
+                                updateMarker(marker.id, {
+                                  color: e.target.value,
+                                })
+                              }
+                              className="w-4 h-7"
+                            />
+                          </div>
+                          <p className="text-base line-clamp-2">
+                            {marker.title}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size={'sm'}
+                            variant={'outline'}
+                            onClick={() => setEditingMarker(marker.id)}
+                          >
+                            <Edit2 size={16} />
+                          </Button>
+                          <Button
+                            size={'sm'}
+                            variant={'outline'}
+                            onClick={() => removeMarker(marker.id)}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <span className="text-sm text-gray-500">
+                        IN {formatTime(marker.start)} - OUT{' '}
+                        {formatTime(marker.end)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
             {newMarker ? (
               <div className="flex flex-col space-y-2 mt-4">
                 <input
@@ -392,6 +404,7 @@ const Markers = ({
                 variant={'primary'}
                 size={'sm'}
                 onClick={() => setNewMarker({})}
+                className="mt-3"
               >
                 <Plus className="mr-2" /> Add Marker
               </Button>

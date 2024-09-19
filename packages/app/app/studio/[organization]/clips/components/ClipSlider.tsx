@@ -383,8 +383,8 @@ const ClipSlider = () => {
                 key={marker.id}
                 className="absolute flex flex-col"
                 style={{
-                  left: `${(marker.start / (videoRef.current?.duration || 1)) * 100}%`,
-                  width: `${((marker.end - marker.start) / (videoRef.current?.duration || 1)) * 100}%`,
+                  left: `${getMarkerPosition(marker.start)}%`,
+                  width: `${getMarkerPosition(marker.end) - getMarkerPosition(marker.start)}%`,
                 }}
               >
                 <div
