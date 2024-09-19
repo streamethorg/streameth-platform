@@ -1,8 +1,11 @@
 'use client';
 
-import VideoCard from '@/components/misc/VideoCard';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { IExtendedSession } from '@/lib/types';
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const ClipsList = ({ sessions }: { sessions: IExtendedSession[] }) => {
   const { handleTermChange } = useSearchParams();
@@ -20,18 +23,49 @@ const ClipsList = ({ sessions }: { sessions: IExtendedSession[] }) => {
   return (
     <>
       {sortedSessions.map((session) => (
-        <div key={session._id} className="py-2 px-4 w-full">
-          <div
-            className="cursor-pointer"
-            onClick={() =>
-              handleTermChange([{ key: 'previewId', value: session._id }])
-            }
-          >
-            <VideoCard session={session} />
-          </div>
-        </div>
+        <ClipItem
+          key={session._id}
+          session={session}
+          handleTermChange={handleTermChange}
+        />
       ))}
     </>
+  );
+};
+
+const ClipItem = ({
+  session,
+  handleTermChange,
+}: {
+  session: IExtendedSession;
+  handleTermChange: (params: { key: string; value: string }[]) => void;
+}) => {
+  const imageUrl = useGenerateThumbnail({ session });
+
+  return (
+    <div className="flex items-start py-2 px-4 w-full">
+      <div
+        className="cursor-pointer flex-shrink-0 mr-3"
+        onClick={() =>
+          handleTermChange([{ key: 'previewId', value: session._id }])
+        }
+      >
+        <div className="w-[80px] h-[45px]">
+          <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
+        </div>
+      </div>
+      <div className="flex-grow">
+        <h3 className="text-sm font-medium truncate">{session.name}</h3>
+        <p className="text-xs text-gray-400 truncate">
+          {session.description || 'No description provided'}
+        </p>
+      </div>
+      <Link href={`/edit-clip/${session._id}`} passHref>
+        <Button variant="outline" className="w-20 h-8 ml-2">
+          Edit
+        </Button>
+      </Link>
+    </div>
   );
 };
 
