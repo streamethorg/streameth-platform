@@ -1,7 +1,6 @@
 'use server';
 
 import React from 'react';
-import LivestreamEmbedCode from './components/LivestreamEmbedCode';
 import { fetchStage } from '@/lib/services/stageService';
 import { LivestreamPageParams } from '@/lib/types';
 import StreamConfigWithPlayer from './components/StreamConfigWithPlayer';
@@ -11,7 +10,6 @@ import StreamHealth from './components/StreamHealth';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
-import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import ImportDataButton from './components/StageDataImport/ImportDataButton';
 import {
@@ -23,6 +21,7 @@ import Sidebar from './components/Sidebar';
 import Preview from '../../Preview';
 import { fetchStageRecordings } from '@/lib/services/stageService';
 import EditLivestream from '../components/EditLivestream';
+import ShareAndEmbed from './components/ShareAndEmbed';
 
 const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -60,6 +59,8 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
 
   const latestRecordingId = stageRecordings?.recordings[0]?.id;
 
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${params.organization}/livestream?stage=${stream._id}`;
+
   return (
     <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-[1000px]">
       {previewAsset && (
@@ -94,14 +95,10 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
               />
             </div>
 
-            <LivestreamEmbedCode
-              streamId={stream._id}
+            <ShareAndEmbed
+              url={shareUrl}
+              streamId={stream._id as string}
               playerName={stream?.name}
-            />
-            <ShareLivestream
-              streamId={params.streamId}
-              variant={'outline'}
-              organization={params.organization}
             />
 
             <Link
@@ -115,6 +112,7 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
                 </div>
               </Button>
             </Link>
+
             <EditLivestream
               stage={stream}
               organizationSlug={organization.slug!}
@@ -131,12 +129,6 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
                 </Button>
               </Link>
             )}
-
-            <ImportDataButton
-              organizationId={organization._id}
-              stageId={params.streamId}
-              stage={stream}
-            />
           </div>
         </div>
         <Sidebar
