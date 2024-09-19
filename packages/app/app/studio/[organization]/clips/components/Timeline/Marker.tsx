@@ -31,7 +31,7 @@ const Marker = ({
   };
   return (
     <div
-      className={`absolute h-[calc(100%-40px)] w-[15px] top-5`}
+      className={`absolute h-[calc(100%-20px)] w-[15px] top-4`}
       style={{
         left: `${getMarkerPosition(
           marker === 'start' ? startTime.displayTime : endTime.displayTime
@@ -41,17 +41,20 @@ const Marker = ({
         !blocked && handleMouseDown(marker, e);
       }}
     >
-      <div className="relative h-full w-full">
+      <div className="relative h-full w-full z-50">
         <div
           id={marker}
-          className={` h-full cursor-pointer bg-primary bg-opacity-10 ${
+          className={` h-full cursor-pointer ${
             marker !== 'start'
               ? 'translate-x-[-100%] rounded-r-xl'
               : 'rounded-l-xl'
           } `}
+          style={{
+            background: 'rgba(200, 75, 80, 1)',
+          }}
         />
         {selectedTooltip === marker && (
-          <div className="absolute left-[-55px] top-[-50px] flex flex-col items-center justify-center rounded-xl bg-primary p-1 text-xs text-white">
+          <div className="absolute left-[-55px] top-[-50px] flex flex-col items-center justify-center rounded-xl bg-primary p-1 text-xs text-white z-[9999]">
             <p className="flex w-[120px] flex-row items-center justify-center space-x-1">
               <span>Use</span> <ArrowLeftSquare width={15} height={15} />
               <ArrowRightSquare width={15} height={15} /> <span>to trim</span>
@@ -78,10 +81,10 @@ export const MarkerOverlay = () => {
   };
   return (
     <div
-      className="absolute flex rounded-xl h-[calc(100%-40px)] top-5 "
+      className="absolute flex rounded-xl h-[calc(100%-20px)] top-4 "
       style={{
-        background: 'rgba(76, 175, 80, 0.3)',
-        left: `${getMarkerPosition(startTime.displayTime)}%`,
+        background: 'rgba(200, 75, 80, 0.4)',
+        left: `${+getMarkerPosition(startTime.displayTime)}%`,
         right: `${100 - getMarkerPosition(endTime.displayTime)}%`,
       }}
     ></div>

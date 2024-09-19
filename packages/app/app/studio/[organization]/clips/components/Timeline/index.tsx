@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { debounce } from 'lodash';
 import Marker, { MarkerOverlay } from './Marker';
+import Playhead from './PlayHead';
 const debouncedUpdate = debounce((callback: (data: any) => void, data: any) => {
   callback(data);
 }, 100);
@@ -70,7 +71,6 @@ const Timeline = () => {
       ) {
         return;
       }
-
       if (selectedTooltip) {
         const tooltipElement = document.getElementById(selectedTooltip);
         if (tooltipElement && !tooltipElement.contains(e.target as Node)) {
@@ -78,9 +78,7 @@ const Timeline = () => {
         }
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -179,6 +177,10 @@ const Timeline = () => {
   }, []);
 
   useEffect(() => {
+    const preventDefault = (e: Event) => e.preventDefault();
+
+    window.addEventListener('dragstart', preventDefault);
+    window.addEventListener('dragover', preventDefault);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('keydown', (e) => {
@@ -203,6 +205,8 @@ const Timeline = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('dragstart', preventDefault);
+      window.removeEventListener('dragover', preventDefault);
     };
   }, [
     handle1SecondIncrementDecrement,
@@ -212,15 +216,7 @@ const Timeline = () => {
     videoRef,
   ]);
 
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (videoRef.current) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      videoRef.current.currentTime = pos * videoRef.current.duration;
-    }
-  };
-
-  const maxLength = 3600 || 0;
+  const maxLength = videoRef.current?.duration || 0;
   const pixelsPerSecond = 4;
   const timelineWidth = maxLength * pixelsPerSecond;
 
@@ -230,6 +226,7 @@ const Timeline = () => {
         className="h-[100px] relative"
         style={{ width: `${timelineWidth}px` }}
       >
+        <Playhead maxLength={maxLength} timelineWidth={timelineWidth} />
         <TimelineMarkers
           maxLength={maxLength}
           timelineWidth={timelineWidth}

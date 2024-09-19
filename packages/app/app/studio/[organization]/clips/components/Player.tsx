@@ -94,18 +94,14 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       endTime.unix === 0
     ) {
       setEndTime({
-        displayTime: videoRef.current.duration,
-        unix: Date.now() - playbackStatus.offset,
+        displayTime: 30, // Set end time to 30 seconds
+        unix: Date.now() - playbackStatus.offset + 30000, // Adjust unix time to 30 seconds from now
       });
     }
   }, [setEndTime, videoRef, playbackStatus]);
 
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
-      {/* <div className='bg-black p-4 text-white flex flex-row space-x-2 absolute top-0 z-[99999]'>
-        <p>{new Date(startTime.unix).toISOString()}</p>
-        <p>{new Date(endTime.unix).toISOString()}</p>
-      </div> */}
       <video
         ref={videoRef}
         autoPlay={false}
