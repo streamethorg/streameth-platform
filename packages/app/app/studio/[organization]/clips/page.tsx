@@ -16,7 +16,8 @@ import SessionSidebar from './components/SessionSidebar';
 import { fetchAsset, fetchSession } from '@/lib/services/sessionService';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
-import ClipSlider from './components/ClipSlider';
+import Timeline from './components/Timeline';
+import Controls from './components/Controls';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -187,21 +188,23 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
           organizationSlug={params.organization}
         />
       )}
-      <div className="flex w-full flex-col">
-        <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
+      <div className="flex w-[calc(100%-400px)] flex-col">
+        <div className="flex h-full w-full  flex-col">
           <ClipProvider>
+            <div className="h-[80px] w-full bg-gray-100"></div>
             <ReactHlsPlayer
               playbackId={stageRecordings.parentStream?.playbackId ?? ''}
               selectedStreamSession={currentRecording}
             />
-            <ClipSlider />
-            <CreateClipButton
+            <Controls />
+            <Timeline />
+            {/* <CreateClipButton
               currentRecording={currentRecording}
               playbackId={stageRecordings.parentStream?.playbackId ?? ''}
               organization={organization}
               currentStage={currentStage}
               sessions={sessions}
-            />
+            /> */}
           </ClipProvider>
         </div>
       </div>

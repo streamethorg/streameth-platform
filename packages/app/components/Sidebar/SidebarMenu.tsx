@@ -52,7 +52,7 @@ const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
   ];
 
   return (
-    <div className="relative w-[1/4]">
+    <div className="relative w-[54px]">
       <SidebarUI>
         {navigationItems.map((item, index) => (
           <SidebarItem

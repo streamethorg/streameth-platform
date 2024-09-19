@@ -101,7 +101,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
   }, [setEndTime, videoRef, playbackStatus]);
 
   return (
-    <div className="relative mb-4 flex h-2/3 flex-grow">
+    <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
       {/* <div className='bg-black p-4 text-white flex flex-row space-x-2 absolute top-0 z-[99999]'>
         <p>{new Date(startTime.unix).toISOString()}</p>
         <p>{new Date(endTime.unix).toISOString()}</p>
