@@ -9,11 +9,11 @@ import {
   createClip,
   createAsset,
   generateThumbnail,
-  uploadSessionToYouTube,
   sessionImport,
   stageSessionImport,
   saveSessionImport,
   generateTranscriptions,
+  uploadSessionToSocialsRequest,
 } from '../services/sessionService';
 import {
   ISession,
@@ -166,7 +166,7 @@ export const generateThumbnailAction = async (session: IExtendedSession) => {
     return null;
   }
 };
-export const uploadSessionToYouTubeAction = async ({
+export const uploadSessionToSocialsAction = async ({
   sessionId,
   organizationId,
   socialId,
@@ -183,7 +183,7 @@ export const uploadSessionToYouTubeAction = async ({
   }
 
   try {
-    const res = await uploadSessionToYouTube({
+    const res = await uploadSessionToSocialsRequest({
       sessionId,
       organizationId,
       socialId,

@@ -1,26 +1,21 @@
 import React, { Suspense } from 'react';
 import { ClipsPageParams } from '@/lib/types';
 import SelectSession from './components/SelectSession';
-import RecordingSelect from './components/RecordingSelect';
-import CreateClipButton from './components/CreateClipButton';
 import { ClipProvider } from './components/ClipContext';
 import ReactHlsPlayer from './components/Player';
 import { fetchStageRecordings, fetchStages } from '@/lib/services/stageService';
 import { fetchAllSessions } from '@/lib/data';
-import { fetchEvent } from '@/lib/services/eventService';
-import { Film } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import Preview from '../Preview';
 import SessionSidebar from './components/SessionSidebar';
 import { fetchAsset, fetchSession } from '@/lib/services/sessionService';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
-import ClipSlider from './components/ClipSlider';
 import SessionRecordingSelect from './components/SessionRecordingSelect';
 import InjectUrlInput from './components/InjectUrlInput';
 import Markers from './components/markers/Markers';
 import { fetchMarkers } from '@/lib/services/clipSevice';
+import Timeline from './components/Timeline';
+import Controls from './components/Controls';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -136,10 +131,12 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
         />
       )}
       <ClipProvider>
-        <div className="flex w-full flex-col">
-          <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
+        <div className="flex flex-row w-full h-full">
+          <div className="flex h-full w-[calc(100%-400px)]  flex-col">
+            <div className="h-[80px] w-full bg-gray-100"></div>
             <ReactHlsPlayer src={selectedRecording} type={type} />
-            <ClipSlider />
+            <Controls />
+            <Timeline />
             {/* <CreateClipButton
               currentRecording={currentRecording}
               playbackId={stageRecordings.parentStream?.playbackId ?? ''}
@@ -148,17 +145,16 @@ const EventClips = async ({ params, searchParams }: ClipsPageParams) => {
               sessions={sessions}
             /> */}
           </div>
+          <Suspense fallback={<SkeletonSidebar />}>
+            <SessionSidebar
+              stages={stages}
+              markers={markers}
+              organizationId={organization._id}
+              sessions={sessionRecordings.filter((session) => session.assetId)}
+              currentRecording={selectedRecording}
+            />
+          </Suspense>
         </div>
-
-        <Suspense fallback={<SkeletonSidebar />}>
-          <SessionSidebar
-            stages={stages}
-            markers={markers}
-            organizationId={organization._id}
-            sessions={sessionRecordings.filter((session) => session.assetId)}
-            currentRecording={selectedRecording}
-          />
-        </Suspense>
       </ClipProvider>
     </ClipContainer>
   );

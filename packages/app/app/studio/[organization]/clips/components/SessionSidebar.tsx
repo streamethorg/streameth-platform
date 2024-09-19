@@ -43,7 +43,7 @@ const SessionSidebar = ({
   const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
 
   return (
-    <div className="h-full w-[600px] border-l bg-background bg-white overflow-auto">
+    <div className="h-full w-[400px] border-l bg-background bg-white overflow-auto">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
         {/* <div className="flex flex-col space-y-2">
           {uniqueDates.length > 1 && (

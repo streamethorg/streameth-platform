@@ -101,7 +101,7 @@
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.0.1",
-    "@playwright/test": "^1.37.0",
+    "@playwright/test": "^1.46.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/fuzzy-search": "^2.1.5",
     "@types/lodash": "^4.17.7",
