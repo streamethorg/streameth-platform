@@ -268,6 +268,13 @@ const PCNavBar = ({
           />
         )}
         <Navbar organization={currentOrganization} pages={pages} />
+        {organizations && organizations.length === 1 && (
+          <Link href="/studio/create">
+            <Button className="mr-2" variant="outlinePrimary">
+              Create Organization
+            </Button>
+          </Link>
+        )}
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
