@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/select';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { Clapperboard, Eye, GraduationCap } from 'lucide-react';
 
 const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   const { searchParams, handleTermChange } = useSearchParams();
@@ -75,7 +76,11 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="stage" className="text-sm font-medium">
+            <label
+              htmlFor="stage"
+              className="text-sm font-medium flex items-center gap-2"
+            >
+              <GraduationCap className="w-5 h-5" />
               Stage
             </label>
             <Select value={selectedStage} onValueChange={setSelectedStage}>
@@ -95,7 +100,11 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="type" className="text-sm font-medium">
+            <label
+              htmlFor="type"
+              className="text-sm font-medium flex items-center gap-2"
+            >
+              <Clapperboard className="w-5 h-5" />
               Video Type
             </label>
             <Select value={selectedType} onValueChange={setSelectedType}>
@@ -106,7 +115,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
                 <SelectGroup>
                   {sessionTypes.map((type) => (
                     <SelectItem key={type.value} value={type.value}>
-                      {type.label}
+                      {type.label.charAt(0).toUpperCase() + type.label.slice(1)}
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -115,7 +124,11 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="visibility" className="text-sm font-medium">
+            <label
+              htmlFor="visibility"
+              className="text-sm font-medium flex items-center gap-2"
+            >
+              <Eye className="w-5 h-5" />
               Visibility
             </label>
             <Select
