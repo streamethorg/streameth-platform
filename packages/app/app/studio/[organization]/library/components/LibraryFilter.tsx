@@ -70,7 +70,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
         <div className="flex items-center justify-between">
           <h4 className="font-bold">Filters</h4>
           <Button onClick={handleClearFilter} size="sm" variant="outline">
-            Clear
+            Clear Filters
           </Button>
         </div>
 
