@@ -18,7 +18,8 @@ import {
 } from '@/components/ui/select';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { Clapperboard, Eye, GraduationCap } from 'lucide-react';
+import { Check, Clapperboard, Eye, GraduationCap } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   const { searchParams, handleTermChange } = useSearchParams();
@@ -82,6 +83,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             >
               <GraduationCap className="w-5 h-5" />
               Stage
+              {selectedStage && <Check className="w-4 h-4 text-green-500" />}
             </label>
             <Select value={selectedStage} onValueChange={setSelectedStage}>
               <SelectTrigger id="stage">
@@ -106,6 +108,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             >
               <Clapperboard className="w-5 h-5" />
               Video Type
+              {selectedType && <Check className="w-4 h-4 text-green-500" />}
             </label>
             <Select value={selectedType} onValueChange={setSelectedType}>
               <SelectTrigger id="type">
@@ -130,6 +133,9 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             >
               <Eye className="w-5 h-5" />
               Visibility
+              {selectedVisibility && (
+                <Check className="w-4 h-4 text-green-500" />
+              )}
             </label>
             <Select
               value={selectedVisibility}
