@@ -2,11 +2,10 @@ import { TableCell } from '@/components/ui/table';
 import { IExtendedSession, eLayout } from '@/lib/types';
 import {
   EllipsisVertical,
-  Clock,
   Users,
   Video,
   Scissors,
-  Pencil,
+  Radio,
   FilePenLine,
 } from 'lucide-react';
 import Link from 'next/link';
@@ -47,6 +46,30 @@ const TableCells = async ({
     ? formatDuration(item.playback.duration * 1000) // Convert seconds to milliseconds
     : 'N/A';
 
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case 'clip':
+        return <Scissors className="w-4 h-4 text-green-500" />;
+      case 'livestream':
+        return <Radio className="w-4 h-4 text-red-500" />;
+      case 'video':
+      default:
+        return <Video className="w-4 h-4 text-sky-500" />;
+    }
+  };
+
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case 'clip':
+        return 'Clip';
+      case 'livestream':
+        return 'Livestream';
+      case 'video':
+      default:
+        return 'Video';
+    }
+  };
+
   return (
     <>
       <TableCell className="relative max-w-[300px] font-medium">
@@ -63,12 +86,8 @@ const TableCells = async ({
       </TableCell>
       <TableCell>
         <div className="flex items-center space-x-1">
-          {item.type === 'clip' ? (
-            <Scissors className="w-4 h-4 text-green-500" />
-          ) : (
-            <Video className="w-4 h-4 text-red-500" />
-          )}
-          <span>{item.type === 'clip' ? 'Clip' : 'Video'}</span>
+          {getTypeIcon(item.type)}
+          <span>{getTypeLabel(item.type)}</span>
         </div>
       </TableCell>
       <TableCell>
