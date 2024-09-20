@@ -104,3 +104,18 @@ export const getDateWithTime = (date: Date, time: string) => {
   const dateInput = formatDate(new Date(date), 'YYYY-MM-DD');
   return new Date(`${dateInput}T${time}`);
 };
+
+export function formatDuration(milliseconds: number): string {
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+
+  const paddedMinutes = String(minutes % 60).padStart(2, '0');
+  const paddedSeconds = String(seconds % 60).padStart(2, '0');
+
+  if (hours > 0) {
+    return `${hours}:${paddedMinutes}:${paddedSeconds}`;
+  } else {
+    return `${paddedMinutes}:${paddedSeconds}`;
+  }
+}
