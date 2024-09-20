@@ -43,14 +43,6 @@ export const PopoverActions = ({
     <div className="grid gap-4">
       <div className="grid gap-2">
         <Link
-          href={`/studio/${organizationSlug}/library/${session._id as string}`}
-        >
-          <Button variant={'ghost'} className="w-full !justify-start space-x-2">
-            <FilePenLine className="w-5 h-5" />
-            <p className="">Edit</p>
-          </Button>
-        </Link>
-        <Link
           href={`/${organizationSlug}/watch?session=${session._id as string}`}
         >
           <Button variant={'ghost'} className="w-full !justify-start space-x-2">
