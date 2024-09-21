@@ -1,4 +1,4 @@
-import { IStageModel } from '@interfaces/stage.interface';
+import { IStageModel, StageType } from '@interfaces/stage.interface';
 import { Schema, model } from 'mongoose';
 
 export const StageSchema = new Schema<IStageModel>(
@@ -39,6 +39,16 @@ export const StageSchema = new Schema<IStageModel>(
     mintable: { type: Boolean, default: false },
     nftCollections: [{ type: String, ref: 'Nft-Collection' }],
     recordingIndex: { type: Number, default: 0 },
+    source: {
+      url: { type: String, default: '' },
+      m3u8Url: { type: String, default: '' },
+      type: { type: String, default: '' },
+    },
+    type: {
+      type: String,
+      enum: Object.keys(StageType),
+      default: StageType.livepeer,
+    },
   },
   {
     timestamps: true,

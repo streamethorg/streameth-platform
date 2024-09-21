@@ -325,3 +325,25 @@ export async function getHlsUrl({
     throw errorObject;
   }
 }
+
+export async function createHlsStage({
+  hlsStage,
+  authToken,
+}: {
+  hlsStage: IStage;
+  authToken: string;
+}): Promise<IStage> {
+  const response = await fetch(`${apiUrl()}/stages/hls`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify(hlsStage),
+  });
+
+  if (!response.ok) {
+    throw 'Error creating stage';
+  }
+  return (await response.json()).data;
+}

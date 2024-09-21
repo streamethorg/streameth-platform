@@ -30,6 +30,10 @@ export interface ILiveStream {
   organizationId: string;
 }
 
+export enum StageType {
+  custom = 'custom',
+  livepeer = 'livepeer',
+}
 export class IStage {
   _id?: Types.ObjectId | string;
   name: string;
@@ -49,6 +53,8 @@ export class IStage {
   createdAt?: string;
   nftCollections?: Types.ObjectId | string[];
   recordingIndex?: number;
+  type?: StageType;
+  source?: { url: string; m3u8Url: string; type: string };
 }
 
 export interface IStageModel extends Omit<IStage, '_id'>, Document {}

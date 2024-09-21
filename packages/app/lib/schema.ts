@@ -218,6 +218,6 @@ export const ScheduleImportSchema = z.object({
 });
 
 export const injectUrlSchema = z.object({
-  name: z.string().optional(),
+  name: z.string().min(1, 'Name is required'),
   url: z.string().url({ message: 'Invalid URL' }),
 });

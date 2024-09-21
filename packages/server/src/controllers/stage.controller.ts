@@ -1,4 +1,5 @@
 import { OrgIdDto } from '@dtos/organization/orgid.dto';
+import { CreateHlsStageDto } from '@dtos/stage/create-hls.dto';
 import { CreateStageDto } from '@dtos/stage/create-stage.dto';
 import { CreateLiveStreamDto } from '@dtos/stage/livestream.dto';
 import { UpdateStageDto } from '@dtos/stage/update-stage.dto';
@@ -36,6 +37,19 @@ export class StageController extends Controller {
   ): Promise<IStandardResponse<IStage>> {
     const stage = await this.stageService.create(body);
     return SendApiResponse('stage created', stage);
+  }
+
+  /**
+   * @summary Create HLS Stage
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('201')
+  @Post('hls')
+  async createHlsStage(
+    @Body() body: CreateHlsStageDto,
+  ): Promise<IStandardResponse<IStage>> {
+    const stage = await this.stageService.createHlsStage(body);
+    return SendApiResponse('HLS stage created', stage);
   }
 
   /**
