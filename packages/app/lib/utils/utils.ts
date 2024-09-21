@@ -375,3 +375,14 @@ export function formatTimestamp(seconds: number) {
   date.setSeconds(seconds);
   return date.toISOString().substr(11, 8);
 }
+
+// returns the m3u8 link for the live stage
+export const getLiveStageSrcValue = ({
+  playbackId,
+  recordingId,
+}: {
+  playbackId?: string;
+  recordingId?: string;
+}) => {
+  return `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${recordingId}/output.m3u8`;
+};

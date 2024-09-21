@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { useClipContext } from './ClipContext';
+import React, { useEffect, useState, useCallback } from 'react';
+import { IMarker, useClipContext } from './ClipContext';
 import {
   ArrowLeftSquare,
   ArrowRightSquare,
@@ -8,7 +8,6 @@ import {
   PauseIcon,
 } from 'lucide-react';
 import { debounce } from 'lodash';
-import { start } from 'repl';
 
 const debouncedUpdate = debounce((callback: (data: any) => void, data: any) => {
   callback(data);
@@ -28,6 +27,8 @@ const ClipSlider = () => {
     selectedTooltip,
     isLoading,
     fragmentLoading,
+    markers,
+    setMarkers,
   } = useClipContext();
 
   const [initialMousePos, setInitialMousePos] = useState<number>(0);
@@ -244,6 +245,62 @@ const ClipSlider = () => {
     return date.toISOString().substr(11, 8);
   };
 
+  const updateMarker = (id: string, updates: Partial<IMarker>) => {
+    setMarkers((prevMarkers) =>
+      prevMarkers.map((marker) =>
+        marker.id === id ? { ...marker, ...updates } : marker
+      )
+    );
+  };
+
+  const handleMarkerDrag = useCallback(
+    (
+      markerId: string,
+      isStart: boolean,
+      e: React.MouseEvent<HTMLDivElement>
+    ) => {
+      e.preventDefault();
+      const startX = e.clientX;
+      const marker = markers.find((m) => m.id === markerId);
+      if (!marker || !videoRef.current) return;
+
+      const initialPosition = isStart ? marker.start : marker.end;
+      const timelineWidth = videoRef.current.getBoundingClientRect().width;
+      const videoDuration = videoRef.current.duration;
+
+      const handleMouseMove = (moveEvent: MouseEvent) => {
+        const deltaX = moveEvent.clientX - startX;
+        const deltaTime = (deltaX / timelineWidth) * videoDuration;
+        const newPosition = Math.max(
+          0,
+          Math.min(videoDuration, initialPosition + deltaTime)
+        );
+
+        setMarkers((prevMarkers) =>
+          prevMarkers.map((m) => {
+            if (m.id === markerId) {
+              if (isStart) {
+                return { ...m, start: Math.min(newPosition, m.end - 0.1) };
+              } else {
+                return { ...m, end: Math.max(newPosition, m.start + 0.1) };
+              }
+            }
+            return m;
+          })
+        );
+      };
+
+      const handleMouseUp = () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseup', handleMouseUp);
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    },
+    [markers, setMarkers, videoRef]
+  );
+
   return (
     <div className="flex h-[200px] flex-col">
       <div className="flex w-full flex-row items-center justify-center space-x-6 border-b border-t p-2">
@@ -308,6 +365,31 @@ const ClipSlider = () => {
                 </div>
               );
             })}
+          {markers.map((marker) => (
+            <div
+              key={marker.id}
+              className="absolute flex flex-col"
+              style={{
+                left: `${(marker.start / (videoRef.current?.duration || 1)) * 100}%`,
+                width: `${((marker.end - marker.start) / (videoRef.current?.duration || 1)) * 100}%`,
+              }}
+            >
+              <div
+                className="h-4 cursor-pointer"
+                style={{ backgroundColor: marker.color }}
+                title={marker.title}
+              >
+                <div
+                  className="absolute left-0 h-full w-2 cursor-ew-resize"
+                  onMouseDown={(e) => handleMarkerDrag(marker.id, true, e)}
+                />
+                <div
+                  className="absolute right-0 h-full w-2 cursor-ew-resize"
+                  onMouseDown={(e) => handleMarkerDrag(marker.id, false, e)}
+                />
+              </div>
+            </div>
+          ))}
         </div>
         <div className="relative flex h-10 rounded-full">
           <div className="my-auto h-2 w-full rounded-xl bg-gray-400" />
@@ -349,9 +431,6 @@ const ClipSlider = () => {
             }}
           />
         </div>
-        {/* <div>
-          clip length: {formatUnixTime((endTime.unix - startTime.unix))}{ endTime.unix} { startTime.unix}
-        </div> */}
       </div>
     </div>
   );

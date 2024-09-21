@@ -1,19 +1,21 @@
+import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { ILiveStream, IStage } from '@interfaces/stage.interface';
-import Stage from '@models/stage.model';
+import { ILiveStream, IStage, StageType } from '@interfaces/stage.interface';
 import Events from '@models/event.model';
-import { Types } from 'mongoose';
+import Organization from '@models/organization.model';
+import Stage from '@models/stage.model';
 import {
   createMultiStream,
   createStream,
   deleteStream,
   getStreamInfo,
 } from '@utils/livepeer';
-import { config } from '@config';
-import Organization from '@models/organization.model';
 import { refreshAccessToken } from '@utils/oauth';
+import { getSourceType } from '@utils/util';
 import { createYoutubeLiveStream } from '@utils/youtube';
+import { Types } from 'mongoose';
+import youtubedl from 'youtube-dl-exec';
 
 export default class StageService {
   private path: string;
@@ -102,6 +104,42 @@ export default class StageService {
       },
       { upsert: true },
     );
+  }
+
+  async createHlsStage(d: {
+    name: string;
+    url: string;
+    organizationId: string;
+  }): Promise<IStage> {
+    try {
+      let hlsUrl = '';
+      const source = getSourceType(d.url);
+      if (source.type === 'youtube' || source.type === 'twitter') {
+        let output = await youtubedl(d.url, {
+          dumpSingleJson: true,
+          noWarnings: true,
+          preferFreeFormats: true,
+          addHeader: source.header,
+        });
+        const hlsFormat = output.formats.find(
+          (format) =>
+            format.protocol === 'm3u8_native' &&
+            format.ext === 'mp4' &&
+            source.resolutions?.includes(format.resolution),
+        );
+        hlsUrl = hlsFormat.manifest_url;
+      } else {
+        hlsUrl = d.url;
+      }
+      return await this.controller.store.create(d.name, {
+        name: d.name,
+        source: { url: d.url, type: source.type, m3u8Url: hlsUrl },
+        organizationId: d.organizationId,
+        type: StageType.custom,
+      });
+    } catch (e) {
+      throw new HttpException(400, 'Error getting HLS URL');
+    }
   }
 
   async createMetadata(stageId: string) {

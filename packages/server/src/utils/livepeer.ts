@@ -12,7 +12,7 @@ import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
 import { createEventVideoById } from './firebase';
 import { refreshAccessToken } from './oauth';
-import { fetchAndParseVTT, parseVTT } from './util';
+import { fetchAndParseVTT } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
@@ -322,7 +322,7 @@ export const generateThumbnail = async (data: {
       const asset = await getAsset(data.assetId);
       playbackId = asset.playbackId;
     }
-    const asset = await livepeer.playback.get(playbackId as string);
+    const asset = await livepeer.playback.get(playbackId);
 
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
