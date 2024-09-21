@@ -86,7 +86,11 @@ const MobileNavBar = ({
     pathname.includes('clips') && searchParams.has('selectedRecording');
 
   const handleGoBack = () => {
-    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+    handleTermChange([
+      { key: 'videoType', value: undefined },
+      { key: 'stageId', value: undefined },
+      { key: 'sessionId', value: undefined },
+    ]);
   };
 
   useLayoutEffect(() => {
@@ -208,12 +212,13 @@ const PCNavBar = ({
   const isStudio = pathname.includes('studio');
 
   const showGoBack =
-    pathname.includes('clips') && searchParams.has('selectedRecording');
+    pathname.includes('clips') && searchParams.has('videoType');
 
   const handleGoBack = () => {
     handleTermChange([
-      { key: 'selectedRecording', value: undefined },
-      { key: 'type', value: undefined },
+      { key: 'videoType', value: undefined },
+      { key: 'stageId', value: undefined },
+      { key: 'sessionId', value: undefined },
     ]);
   };
 

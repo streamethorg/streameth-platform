@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import useSearchParams from '@/lib/hooks/useSearchParams';
-import { injectUrlSchema, ScheduleImportSchema } from '@/lib/schema';
+import { injectUrlSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,9 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { createSessionAction } from '@/lib/actions/sessions';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { getHlsUrlAction } from '@/lib/actions/stages';
+import { createHlsStageAction } from '@/lib/actions/stages';
 
 const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
   const { handleTermChange } = useSearchParams();
@@ -35,11 +33,16 @@ const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
   const handleSubmit = async (values: z.infer<typeof injectUrlSchema>) => {
     setLoading(true);
     try {
-      let response = await getHlsUrlAction({ url: values.url });
-      if (response?.url) {
+      const hlsStage = {
+        name: values.name,
+        url: values.url,
+        organizationId,
+      };
+      const response = await createHlsStageAction({ hlsStage });
+      if (response && response._id) {
         handleTermChange([
-          { key: 'selectedRecording', value: response.url },
-          { key: 'type', value: response.type },
+          { key: 'stageId', value: response._id.toString() },
+          { key: 'videoType', value: 'customUrl' },
         ]);
       } else {
         toast.error('Error getting HLS URL');
@@ -57,16 +60,18 @@ const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
 
   return (
     <div className="w-full space-y-2">
-      <p className="text-sm font-bold">Input url?</p>
+      <p className="font-bold">Custom URL details</p>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-          {/* <FormField
+          <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="">Input name</FormLabel>
+                <FormLabel required className="">
+                  Name
+                </FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -77,29 +82,30 @@ const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
-          <div className="flex gap-2">
-            <FormField
-              control={form.control}
-              name="url"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  {/* <FormLabel className="">input url</FormLabel> */}
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Input url"
-                      className="bg-white"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button variant="primary" type="submit" loading={loading}>
-              Go
-            </Button>
-          </div>
+          />
+
+          <FormField
+            control={form.control}
+            name="url"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel required className="">
+                  Url
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Input url"
+                    className="bg-white"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button variant="primary" type="submit" loading={loading}>
+            Go
+          </Button>
         </form>
       </Form>
     </div>

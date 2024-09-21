@@ -1,7 +1,6 @@
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedStage } from '../types';
-import { fetchEvents } from './eventService';
 import { Session, Stream } from 'livepeer/dist/models/components';
 
 export async function fetchStage({
@@ -325,4 +324,26 @@ export async function getHlsUrl({
 
     throw errorObject;
   }
+}
+
+export async function createHlsStage({
+  hlsStage,
+  authToken,
+}: {
+  hlsStage: IStage;
+  authToken: string;
+}): Promise<IStage> {
+  const response = await fetch(`${apiUrl()}/stages/hls`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify(hlsStage),
+  });
+
+  if (!response.ok) {
+    throw 'Error creating stage';
+  }
+  return (await response.json()).data;
 }

@@ -249,16 +249,6 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse__type-string--url-string__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"url":{"dataType":"string","required":true},"type":{"dataType":"string","required":true}}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SheetType": {
         "dataType": "refEnum",
         "enums": ["gsheet","pretalx"],
@@ -384,6 +374,11 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "StageType": {
+        "dataType": "refEnum",
+        "enums": ["custom","livepeer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStage": {
         "dataType": "refObject",
         "properties": {
@@ -405,6 +400,8 @@ const models: TsoaRoute.Models = {
             "createdAt": {"dataType":"string"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "recordingIndex": {"dataType":"double"},
+            "type": {"ref":"StageType"},
+            "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
         },
         "additionalProperties": false,
     },
@@ -440,6 +437,36 @@ const models: TsoaRoute.Models = {
             "createdAt": {"dataType":"string"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "recordingIndex": {"dataType":"double"},
+            "type": {"ref":"StageType"},
+            "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateHlsStageDto": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
+            "streamSettings": {"ref":"IStreamSettings"},
+            "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
+            "order": {"dataType":"double"},
+            "slug": {"dataType":"string"},
+            "published": {"dataType":"boolean"},
+            "isMultipleDate": {"dataType":"boolean"},
+            "organizationId": {"dataType":"string","required":true},
+            "thumbnail": {"dataType":"string"},
+            "streamDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
+            "streamEndDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
+            "mintable": {"dataType":"boolean"},
+            "createdAt": {"dataType":"string"},
+            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
+            "recordingIndex": {"dataType":"double"},
+            "type": {"ref":"StageType"},
+            "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
+            "url": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -1706,36 +1733,6 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/streams/hls',
-            ...(fetchMiddlewares<RequestHandler>(StreamController)),
-            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getHls)),
-
-            async function StreamController_getHls(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"url":{"dataType":"string","required":true}}},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new StreamController();
-
-              await templateService.apiHandler({
-                methodName: 'getHls',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/states',
             authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(StateController)),
@@ -1853,6 +1850,37 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'createStage',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/stages/hls',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(StageController)),
+            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.createHlsStage)),
+
+            async function StageController_createHlsStage(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateHlsStageDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StageController();
+
+              await templateService.apiHandler({
+                methodName: 'createHlsStage',
                 controller,
                 response,
                 next,

@@ -1,6 +1,7 @@
 'use server';
 import { Livepeer } from 'livepeer';
 import {
+  createHlsStage,
   createMultistream,
   createSocialLivestreamStage,
   createStage,
@@ -12,6 +13,7 @@ import {
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { IExtendedStage } from '../types';
+import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 
 export const createStageAction = async ({
   stage,
@@ -189,6 +191,26 @@ export const getHlsUrlAction = async ({ url }: { url: string }) => {
   });
   if (!response) {
     throw new Error('Error getting HLS URL');
+  }
+  revalidatePath('/studio');
+  return response;
+};
+
+export const createHlsStageAction = async ({
+  hlsStage,
+}: {
+  hlsStage: IStage;
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+  const response = await createHlsStage({
+    hlsStage,
+    authToken,
+  });
+  if (!response) {
+    throw new Error('Error creating HLS stage');
   }
   revalidatePath('/studio');
   return response;
