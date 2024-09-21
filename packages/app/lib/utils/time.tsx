@@ -18,8 +18,13 @@ export function generateTimezones() {
 
 export const getTime = (date: Date): number => moment(date).valueOf();
 
-export const formatDate = (date: Date, format = 'YYYY-MM-DD'): string =>
-  moment(date).format(format);
+export const formatDate = (
+  date: Date,
+  format = 'YYYY-MM-DD',
+  timezone: string = 'UTC'
+): string => {
+  return moment(date).tz(timezone).format(format);
+};
 
 export const getEventDays = (start: Date, end: Date): number[] => {
   const startDate = moment(start);

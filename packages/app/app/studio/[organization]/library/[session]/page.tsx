@@ -118,6 +118,11 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                       organizationSlug={params.organization}
                       sessionId={session._id}
                     />
+                    <UploadTwitterButton
+                      organization={organization}
+                      organizationSlug={params.organization}
+                      sessionId={session._id}
+                    />
                   </div>
                 </AccordionContent>
               </AccordionItem>

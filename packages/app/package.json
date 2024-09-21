@@ -71,7 +71,7 @@
     "lucide-react": "^0.427.0",
     "moment-timezone": "^0.5.43",
     "mux-embed": "^5.2.1",
-    "next": "^14.2.0",
+    "next": "^14.2.12",
     "next-themes": "^0.2.1",
     "pino-pretty": "^10.3.1",
     "postcss": "8.4.31",
@@ -101,7 +101,7 @@
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.0.1",
-    "@playwright/test": "^1.37.0",
+    "@playwright/test": "^1.46.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/fuzzy-search": "^2.1.5",
     "@types/lodash": "^4.17.7",

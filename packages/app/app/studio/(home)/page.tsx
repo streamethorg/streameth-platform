@@ -11,9 +11,14 @@ import Image from 'next/image';
 import { fetchUserAction } from '@/lib/actions/users';
 import { IExtendedUser } from '@/lib/types';
 import { Button } from '@/components/ui/button';
+import { redirect } from 'next/navigation';
 
 const Studio = async () => {
   const userData: IExtendedUser = await fetchUserAction({});
+
+  if (userData?.organizations?.length === 1) {
+    redirect(`/studio/${userData.organizations[0].slug}`);
+  }
 
   return (
     <div className="flex h-full flex-col">

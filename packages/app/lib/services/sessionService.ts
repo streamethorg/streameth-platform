@@ -384,7 +384,7 @@ export const generateThumbnail = async ({
     throw e;
   }
 };
-export const uploadSessionToYouTube = async ({
+export const uploadSessionToSocialsRequest = async ({
   sessionId,
   type,
   organizationId,

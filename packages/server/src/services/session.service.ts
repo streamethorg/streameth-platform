@@ -9,7 +9,7 @@ import Organization from '@models/organization.model';
 import Session from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
-import { getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
+import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import connection from '@utils/rabbitmq';
 import Fuse from 'fuse.js';
@@ -211,6 +211,7 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
+    const asset = await getAsset(payload.assetId);
     const session = await this.create({
       name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
       description: payload.name,
@@ -221,6 +222,11 @@ export default class SessionService {
       organizationId: stage.organizationId,
       assetId: payload.assetId,
       type: SessionType.livestream,
+      playback: {
+        videoUrl: payload.recordingUrl,
+        format: asset.videoSpec?.format ?? '',
+        duration: asset.videoSpec?.duration ?? 0,
+      },
     });
     await stage.updateOne({ $inc: { recordingIndex: 1 } });
     await this.sessionTranscriptions({
@@ -288,6 +294,12 @@ export default class SessionService {
       };
     }
     if (data.type == 'twitter') {
+      if (session.playback.duration > 140) {
+        throw new HttpException(
+          400,
+          'Twitter only supports videos less than 2 minutes',
+        );
+      }
       data.token = { key: token.accessToken, secret: token.refreshToken };
     }
     const queue = 'videos';
