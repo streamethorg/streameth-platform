@@ -10,10 +10,12 @@ const ClipStartOptions = ({
   organizationId,
   pastRecordings,
   liveStages,
+  customUrlStages,
 }: {
   organizationId: string;
   pastRecordings: IExtendedSession[];
   liveStages: IExtendedStage[];
+  customUrlStages: IExtendedStage[];
 }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
@@ -64,7 +66,10 @@ const ClipStartOptions = ({
       )}
 
       {selectedOption === 'past' && (
-        <PastRecordingSelect pastRecordings={pastRecordings} />
+        <PastRecordingSelect
+          customUrlStages={customUrlStages}
+          pastRecordings={pastRecordings}
+        />
       )}
 
       {selectedOption === 'custom' && (

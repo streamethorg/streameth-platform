@@ -28,7 +28,7 @@ const CreateNFTModal = async ({
   return (
     <CreateNFTForm
       videos={videos as INFTSessions[]}
-      stages={stages as INFTSessions[]}
+      stages={stages as unknown as INFTSessions[]}
       organizationId={organizationId}
       organizationSlug={organization}
       type={type as NftCollectionType}

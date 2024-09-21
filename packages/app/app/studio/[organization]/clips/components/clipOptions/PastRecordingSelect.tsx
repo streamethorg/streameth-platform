@@ -1,5 +1,5 @@
 import useSearchParams from '@/lib/hooks/useSearchParams';
-import { IExtendedSession } from '@/lib/types';
+import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import React from 'react';
 import {
   Select,
@@ -12,39 +12,53 @@ import {
 
 const PastRecordingSelect = ({
   pastRecordings,
+  customUrlStages,
 }: {
+  customUrlStages: IExtendedStage[];
   pastRecordings?: IExtendedSession[];
 }) => {
-  const { handleTermChange, searchParams } = useSearchParams();
+  const { handleTermChange } = useSearchParams();
 
-  if (!pastRecordings) return <div>No stream sessions found</div>;
+  const mergedItems = [
+    ...(pastRecordings || []),
+    ...customUrlStages.map((stage) => ({ ...stage, isStage: true })),
+  ];
+
+  if (mergedItems.length === 0) return <div>No recordings or stages found</div>;
 
   return (
     <div className="w-full space-y-2">
-      <p className="font-bold">Choose Recording</p>
+      <p className="font-bold">Choose Recording or Custom URL Stage</p>
       <Select
         onValueChange={(value) => {
-          const session = pastRecordings.find((s) => s._id === value);
-          session &&
-            handleTermChange([
-              { key: 'sessionId', value: session._id ?? '' },
-              { key: 'videoType', value: 'recording' },
-            ]);
+          const item = mergedItems.find((i) => i._id === value);
+          if (item) {
+            if ('isStage' in item) {
+              handleTermChange([
+                { key: 'stageId', value: item._id ?? '' },
+                { key: 'videoType', value: 'customUrl' },
+              ]);
+            } else {
+              handleTermChange([
+                { key: 'sessionId', value: item._id ?? '' },
+                { key: 'videoType', value: 'recording' },
+              ]);
+            }
+          }
         }}
       >
         <SelectTrigger className="bg-white">
           <SelectValue
-            placeholder={'Select a recording to create clips from'}
+            placeholder={'Select a recording or stage to create clips from'}
           />
         </SelectTrigger>
         <SelectContent className="bg-white">
           <SelectGroup>
-            {pastRecordings.map((pastRecording) => (
-              <SelectItem
-                key={pastRecording._id}
-                value={pastRecording._id ?? ''}
-              >
-                {pastRecording.name}
+            {mergedItems.map((item) => (
+              <SelectItem key={item._id} value={item._id ?? ''}>
+                {'isStage' in item
+                  ? `Stage: ${item.name}`
+                  : `Recording: ${item.name}`}
               </SelectItem>
             ))}
           </SelectGroup>

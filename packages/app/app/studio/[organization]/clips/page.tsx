@@ -13,6 +13,7 @@ import {
   fetchStages,
 } from '@/lib/services/stageService';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
+import { StageType } from 'streameth-new-server/src/interfaces/stage.interface';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -41,6 +42,9 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const stages = await fetchStages({
     organizationId: organization._id,
   });
+  const customUrlStages = stages.filter(
+    (stage) => stage?.type === StageType.custom
+  );
   const liveStages = stages.filter((stage) => stage.streamSettings?.isActive);
 
   // if no videoType, render the ClipStartOptions component
@@ -52,6 +56,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             pastRecordings={sessionRecordings}
             liveStages={liveStages}
             organizationId={organization._id}
+            customUrlStages={customUrlStages}
           />
         </Card>
       </ClipContainer>
@@ -99,10 +104,12 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     if (!stage || !stage?.source?.m3u8Url) return <div>No stage found</div>;
 
     return (
-      <ClippingInterface
-        src={stage?.source?.m3u8Url}
-        type={stage?.source?.type}
-      />
+      <ClipContainer>
+        <ClippingInterface
+          src={stage?.source?.m3u8Url}
+          type={stage?.source?.type}
+        />
+      </ClipContainer>
     );
   }
 

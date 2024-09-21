@@ -120,18 +120,13 @@ export interface nftPageParams {
 export interface ClipsPageParams {
   params: {
     organization: string;
-    // session: string;
-    // eventId: string;
   };
   searchParams: {
     videoType: 'livestream' | 'recording' | 'customUrl';
     sessionId: string;
     stageId: string;
-    // stage: string;
-    // selectedSession: string;
-    // selectedLiveRecording: string;
     // replaceAsset: string;
-    // previewId: string;
+    previewId: string;
   };
 }
 
