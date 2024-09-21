@@ -152,7 +152,7 @@ const SessionInfoBox = async ({
         </CardTitle>
         <InfoBoxDescription speakers={speakers} description={description} />
         <div className="flex items-center space-x-2 text-sm">
-          <Timezone date={date} video={video} />
+          <Timezone date={date} video={video as IExtendedStage} />
           {playbackId && (
             <>
               <span className="font-bold">|</span>
