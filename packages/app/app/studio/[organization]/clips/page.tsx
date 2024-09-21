@@ -14,6 +14,7 @@ import {
 } from '@/lib/services/stageService';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
 import { StageType } from 'streameth-new-server/src/interfaces/stage.interface';
+import { fetchMarkers } from '@/lib/services/clipSevice';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -62,6 +63,10 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       </ClipContainer>
     );
 
+  const markers = await fetchMarkers({
+    organizationId: organization._id,
+  });
+
   if (videoType === 'livestream' && stageId) {
     // Fetch live recording for the selected stage
     const liveStage = liveStages.find((stage) => stage._id === stageId);
@@ -70,10 +75,13 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
 
     const stageRecordings = await fetchStageRecordings({ streamId });
     const liveRecording = stageRecordings?.recordings[0] ?? null;
-    console.log(liveRecording);
+
     return (
       <ClipContainer>
         <ClippingInterface
+          markers={markers}
+          stages={stages}
+          organizationId={organization._id}
           src={getLiveStageSrcValue({
             playbackId: liveRecording?.playbackId,
             recordingId: liveRecording?.id,
@@ -92,7 +100,13 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     if (!session || !session.videoUrl) return <div>No session found</div>;
     return (
       <ClipContainer>
-        <ClippingInterface src={session?.videoUrl} type={'livepeer'} />;
+        <ClippingInterface
+          markers={markers}
+          stages={stages}
+          organizationId={organization._id}
+          src={session?.videoUrl}
+          type={'livepeer'}
+        />
       </ClipContainer>
     );
   }
@@ -106,6 +120,9 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     return (
       <ClipContainer>
         <ClippingInterface
+          markers={markers}
+          stages={stages}
+          organizationId={organization._id}
           src={stage?.source?.m3u8Url}
           type={stage?.source?.type}
         />

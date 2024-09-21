@@ -1,21 +1,40 @@
 import React from 'react';
 import ReactHlsPlayer from './Player';
-import ClipSlider from '../ClipSlider';
+
 import { ClipProvider } from '../ClipContext';
 import ClipSidebar from './ClipSidebar';
+import Controls from '../Controls';
+import Timeline from '../Timeline';
+import { IExtendedMarkers, IExtendedStage } from '@/lib/types';
 
-const ClippingInterface = ({ src, type }: { src: string; type: string }) => {
-  console.log(src);
+const ClippingInterface = ({
+  markers,
+  stages,
+  organizationId,
+  src,
+  type,
+}: {
+  src: string;
+  type: string;
+  organizationId: string;
+  markers: IExtendedMarkers[];
+  stages: IExtendedStage[];
+}) => {
   return (
     <ClipProvider>
       <div className="flex w-full flex-col">
         <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
           <ReactHlsPlayer src={src} type={type} />
-          <ClipSlider />
+          <Controls />
+          <Timeline />
         </div>
       </div>
 
-      <ClipSidebar />
+      <ClipSidebar
+        markers={markers}
+        stages={stages}
+        organizationId={organizationId}
+      />
     </ClipProvider>
   );
 };
