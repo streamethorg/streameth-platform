@@ -248,6 +248,7 @@ export default class GoogleSheetService {
         speakers: speakersData,
         track: row[13] || 'No track',
         coverImage: row[17] || 'No cover image',
+        day: Day,
       };
       sessions.push(session);
     }
