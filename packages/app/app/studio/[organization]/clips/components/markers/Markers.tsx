@@ -36,13 +36,6 @@ const Markers = ({
     return date.toISOString().substr(11, 8);
   };
 
-  const getMarkerPosition = (time: number) => {
-    if (videoRef.current && videoRef.current.duration) {
-      return (time / videoRef.current.duration) * 100;
-    }
-    return 0;
-  };
-
   const addMarker = () => {
     if (
       newMarker &&
@@ -98,54 +91,6 @@ const Markers = ({
         metadata: prevMarkers.metadata.filter((marker) => marker.id !== id),
       };
     });
-  };
-
-  const handleMarkerDrag = (
-    markerId: string,
-    isStart: boolean,
-    e: React.MouseEvent<HTMLDivElement>
-  ) => {
-    e.preventDefault();
-    const startX = e.clientX;
-    const marker = markers?.metadata.find((m) => m.id === markerId);
-    if (!marker || !videoRef.current) return;
-
-    const initialPosition = isStart ? marker.start : marker.end;
-
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      const rect = videoRef.current!.getBoundingClientRect();
-      const deltaX = moveEvent.clientX - startX;
-      const deltaTime = (deltaX / rect.width) * videoRef.current!.duration;
-      const newPosition = Math.max(
-        0,
-        Math.min(videoRef.current!.duration, initialPosition + deltaTime)
-      );
-
-      setMarkers((prevMarkers) => {
-        if (!prevMarkers) return null;
-        return {
-          ...prevMarkers,
-          metadata: prevMarkers.metadata.map((m) => {
-            if (m.id === markerId) {
-              if (isStart) {
-                return { ...m, start: Math.min(newPosition, m.end - 0.1) };
-              } else {
-                return { ...m, end: Math.max(newPosition, m.start + 0.1) };
-              }
-            }
-            return m;
-          }),
-        };
-      });
-    };
-
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
   };
 
   const handleSaveMarkers = async () => {

@@ -1,15 +1,10 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { useClipContext } from '../ClipContext';
-import {
-  ArrowLeftSquare,
-  ArrowRightSquare,
-  PlayIcon,
-  PauseIcon,
-} from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { IMarker, useClipContext } from '../ClipContext';
 import { debounce } from 'lodash';
-import Marker, { MarkerOverlay } from './Marker';
+import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
+
 const debouncedUpdate = debounce((callback: (data: any) => void, data: any) => {
   callback(data);
 }, 100);
@@ -28,6 +23,7 @@ const Timeline = () => {
     selectedTooltip,
     isLoading,
     fragmentLoading,
+    markers,
   } = useClipContext();
 
   const [initialMousePos, setInitialMousePos] = useState<number>(0);
@@ -176,6 +172,23 @@ const Timeline = () => {
     setDragging(null);
   }, []);
 
+  const handleMarkerClick = (marker: IMarker['metadata'][0]) => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = marker.start;
+      setStartTime({
+        displayTime: marker.start,
+        unix: Date.now() - playbackStatus!.offset,
+      });
+
+      setEndTime({
+        displayTime: marker.end,
+        unix: Date.now() - playbackStatus!.offset,
+      });
+
+      videoRef.current.play();
+    }
+  };
+
   useEffect(() => {
     const preventDefault = (e: Event) => e.preventDefault();
 
@@ -219,20 +232,36 @@ const Timeline = () => {
   const maxLength = videoRef.current?.duration || 0;
   const pixelsPerSecond = 4;
   const timelineWidth = maxLength * pixelsPerSecond;
-
   return (
     <div className="relative flex flex-col w-full bg-white p-2 h-[200px] overflow-scroll">
       <div
         className="h-[100px] relative"
         style={{ width: `${timelineWidth}px` }}
       >
+        {markers &&
+          markers.metadata.map((marker) => {
+            if (marker.start > maxLength) return null;
+            return (
+              <div
+                key={marker.id}
+                className={`absolute h-[20px] border bg-opacity-20 rounded`}
+                onClick={() => handleMarkerClick(marker)}
+                style={{
+                  backgroundColor: marker.color,
+                  border: `3px solid ${marker.color}`,
+                  left: `${(marker.start / maxLength) * timelineWidth}px`,
+                  width: `${((marker.end - marker.start) / maxLength) * timelineWidth}px`,
+                }}
+              />
+            );
+          })}
         <Playhead maxLength={maxLength} timelineWidth={timelineWidth} />
-        <TimelineMarkers
+        <TimelineDrawing
           maxLength={maxLength}
           timelineWidth={timelineWidth}
           scale={pixelsPerSecond}
         />
-        <Marker
+        <TrimmControls
           {...{
             handleMouseDown,
             marker: 'start',
@@ -240,8 +269,8 @@ const Timeline = () => {
             blocked: isLoading && dragging !== 'start',
           }}
         />
-        <MarkerOverlay />
-        <Marker
+        <TrimmOverlay />
+        <TrimmControls
           {...{
             handleMouseDown,
             marker: 'end',
@@ -263,7 +292,7 @@ const formatTime = (seconds: number) => {
   return date.toISOString().substr(11, 8);
 };
 
-const TimelineMarkers = ({
+const TimelineDrawing = ({
   maxLength,
   timelineWidth,
   scale,
@@ -283,7 +312,7 @@ const TimelineMarkers = ({
       markers.push(
         <div
           key={i}
-          className="absolute h-full top-4"
+          className="absolute h-full top-6"
           style={{ left: `${position}px` }}
         >
           <div className="absolute bottom-0 left-0 transform -translate-x-1/2 text-xs text-gray-400 ">
@@ -299,7 +328,7 @@ const TimelineMarkers = ({
           className="absolute h-full"
           style={{ left: `${position}px` }}
         >
-          <div className="absolute top-4 h-1/2 border-l border-gray-600"></div>
+          <div className="absolute top-6 h-1/2 border-l border-gray-600"></div>
         </div>
       );
     }

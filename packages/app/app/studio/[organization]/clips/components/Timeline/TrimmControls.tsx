@@ -1,19 +1,14 @@
-import {
-  ArrowLeftSquare,
-  ArrowRightSquare,
-  PlayIcon,
-  PauseIcon,
-} from 'lucide-react';
+import { ArrowLeftSquare, ArrowRightSquare } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
+
 const formatTime = (seconds: number) => {
   if (!seconds) return '00:00:00';
-
   const date = new Date(0);
   date.setSeconds(seconds);
   return date.toISOString().substr(11, 8);
 };
 
-const Marker = ({
+const TrimmControls = ({
   handleMouseDown,
   marker,
   blocked,
@@ -31,7 +26,7 @@ const Marker = ({
   };
   return (
     <div
-      className={`absolute h-[calc(100%-20px)] w-[15px] top-4`}
+      className={`absolute h-[calc(100%-20px)] w-[15px] top-6`}
       style={{
         left: `${getMarkerPosition(
           marker === 'start' ? startTime.displayTime : endTime.displayTime
@@ -69,9 +64,9 @@ const Marker = ({
   );
 };
 
-export default Marker;
+export default TrimmControls;
 
-export const MarkerOverlay = () => {
+export const TrimmOverlay = () => {
   const { startTime, endTime, videoRef, selectedTooltip } = useClipContext();
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
@@ -81,7 +76,7 @@ export const MarkerOverlay = () => {
   };
   return (
     <div
-      className="absolute flex rounded-xl h-[calc(100%-20px)] top-4 "
+      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6 "
       style={{
         background: 'rgba(200, 75, 80, 0.4)',
         left: `${+getMarkerPosition(startTime.displayTime)}%`,
