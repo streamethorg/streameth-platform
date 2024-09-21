@@ -29,7 +29,7 @@ const ClipStartOptions = ({
         <h1 className="text-2xl font-bold">Create a Clip</h1>
         {selectedOption && (
           <Button variant="outline" onClick={() => setSelectedOption(null)}>
-            Reset
+            Back
           </Button>
         )}
       </div>
