@@ -25,7 +25,7 @@ export class MarkerController extends Controller {
   /**
    * @summary Create markers
    */
-  //@Security('jwt', ['org'])
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post()
   async createMarker(
@@ -38,6 +38,7 @@ export class MarkerController extends Controller {
   /**
    * @summary Update marker
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{markerId}')
   async updateMarker(
@@ -51,13 +52,18 @@ export class MarkerController extends Controller {
   /**
    * @summary Import markers
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('import')
   async importMarkers(
-    @Body() body: { url: string; type: string; organizationId: string },
-  ): Promise<
-    IStandardResponse<{ stages: Array<any>; markers: IMarker['metadata'] }>
-  > {
+    @Body()
+    body: {
+      url: string;
+      type: string;
+      organizationId: string;
+      stageId: string;
+    },
+  ): Promise<IStandardResponse<Array<IMarker>>> {
     const markers = await this.markerService.importMarkers(body);
     return SendApiResponse('markers imported', markers);
   }
@@ -65,12 +71,20 @@ export class MarkerController extends Controller {
   /**
    * @summary Get all markers
    */
+  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Get()
   async getAllMarkers(
-    @Query() organizationId: string,
+    @Query() organization: string,
+    @Query() stageId: string,
+    @Query() date?: string,
   ): Promise<IStandardResponse<Array<IMarker>>> {
-    const markers = await this.markerService.getAll(organizationId);
+    const queryParams = {
+      organization,
+      stageId,
+      date,
+    };
+    const markers = await this.markerService.getAll(queryParams);
     return SendApiResponse('markers fetched', markers);
   }
 

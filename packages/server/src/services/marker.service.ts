@@ -1,9 +1,11 @@
 import BaseController from '@databases/storage';
+import { HttpException } from '@exceptions/HttpException';
 import { IMarker } from '@interfaces/marker.interface';
 import Markers from '@models/markers.model';
+import Stage from '@models/stage.model';
 import GoogleSheetService from '@utils/google-sheet';
-import { generateId } from '@utils/util';
-import { Types } from 'mongoose';
+import { formatDate, generateId, getStartAndEndTime } from '@utils/util';
+import fs from 'fs';
 
 export default class MarkerService {
   private path: string;
@@ -26,17 +28,44 @@ export default class MarkerService {
     url: string;
     type: string;
     organizationId: string;
-  }): Promise<{ stages: Array<any>; markers: IMarker['metadata'] }> {
-    if (d.type === 'gsheet') {
-      return await this.gsheet(d.url, d.organizationId);
-    }
+    stageId: string;
+  }): Promise<Array<IMarker>> {
+    const stage = await Stage.findById(d.stageId);
+    if (!stage) throw new HttpException(404, 'Stage not found');
     if (d.type === 'pretalx') {
-      return await this.pretalx(d.url, d.organizationId);
+      return this.pretalx({
+        url: d.url,
+        roomId: stage.slug,
+        organizationId: d.organizationId,
+        stageId: d.stageId,
+      });
+    }
+    if (d.type === 'gsheet') {
+      return this.gsheet({
+        url: d.url,
+        organizationId: d.organizationId,
+        stageId: d.stageId,
+        stageSlug: stage.slug,
+      });
     }
   }
 
-  async getAll(organizationId: string): Promise<Array<IMarker>> {
-    return await this.controller.store.findAll({ organizationId });
+  async getAll(d: {
+    organization: string;
+    stageId: string;
+    date: string;
+  }): Promise<Array<IMarker>> {
+    let filter = {};
+    if (d.date !== undefined) {
+      filter = { ...filter, date: d.date };
+    }
+    return await this.controller.store.findAll(
+      { organizationId: d.organization, stageId: d.stageId, ...filter },
+      {},
+      this.path,
+      0,
+      0,
+    );
   }
 
   async deleteOne(markerId: string, subMarkerId: string): Promise<void> {
@@ -46,60 +75,50 @@ export default class MarkerService {
     );
   }
 
-  private async gsheet(
-    url: string,
-    organizationId: string,
-  ): Promise<{ stages: Array<any>; markers: IMarker['metadata'] }> {
-    const sheetId = url.split('/')[5];
-    const speakers = await this.googleSheetService.generateSpeakers(sheetId);
-    const stages = await this.googleSheetService.generateStages(
+  private async gsheet(d: {
+    url: string;
+    organizationId: string;
+    stageId: string;
+    stageSlug: string;
+  }): Promise<Array<IMarker>> {
+    const sheetId = d.url.split('/')[5];
+    const sessions = await this.googleSheetService.generateSessionsByStage({
       sheetId,
-      organizationId,
-    );
-    const sessions = await this.googleSheetService.generateSessions(
-      sheetId,
-      organizationId,
-      stages,
-      speakers,
-    );
+      stageId: d.stageId,
+      stageSlug: d.stageSlug,
+      organizationId: d.organizationId,
+    });
     const markers = sessions.map((session) => {
       return {
+        name: session.name,
+        description: session.description,
+        organizationId: d.organizationId,
         start: session.start,
         end: session.end,
-        color: '#FFA500',
-        title: session.title,
-        description: session.description,
+        date: session.day,
         speakers: session.speakers,
+        slug: session.slug,
+        stageId: d.stageId,
       };
     });
-    return {
-      stages,
-      markers,
-    };
+    return await Markers.create(markers);
   }
 
-  private async pretalx(
-    url: string,
-    organizationId: string,
-  ): Promise<{ stages: Array<any>; markers: IMarker['metadata'] }> {
-    const response = await fetch(url);
+  private async pretalx(d: {
+    url: string;
+    roomId: string;
+    organizationId: string;
+    stageId: string;
+  }): Promise<Array<IMarker>> {
+    const response = await fetch(d.url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    const rooms = data.schedule.conference.rooms.map((room: any) => {
-      return {
-        _id: new Types.ObjectId().toString(),
-        name: room.name,
-        slug: generateId(room.name),
-        organizationId,
-        streamDate: new Date(data.schedule.conference.start),
-      };
-    });
-    let sessionsData = [];
+    let markersData = [];
     for (const day of data.schedule.conference.days) {
       for (const [roomName, sessions] of Object.entries(day.rooms)) {
-        const room = rooms.find((r) => r.slug === generateId(roomName));
+        const room = generateId(roomName) === d.roomId;
         if (!room) continue;
         for (const session of sessions as any[]) {
           const speakers = session.persons.map((person: any) => {
@@ -109,33 +128,26 @@ export default class MarkerService {
               photo: person.avatar,
             };
           });
-          const sessionData = {
+          const sessionTime = getStartAndEndTime(
+            session.date,
+            session.start,
+            session.duration,
+          );
+          const markerData = {
             name: session.title,
-            description: session.description || 'No description',
-            start: new Date(session.date).getTime(),
-            end: new Date().getTime(),
-            slug: generateId(session.title),
-            organizationId: organizationId,
+            description: session.description,
+            organizationId: d.organizationId,
+            start: sessionTime.start,
+            end: sessionTime.end,
+            date: formatDate(session.date),
             speakers: speakers,
+            slug: generateId(session.title),
+            stageId: d.stageId,
           };
-          sessionsData.push(sessionData);
+          markersData.push(markerData);
         }
       }
     }
-
-    const markers = sessionsData.map((session) => {
-      return {
-        start: session.start,
-        end: session.end,
-        color: '#FFA500',
-        title: session.title,
-        description: session.description,
-        speakers: session.speakers,
-      };
-    });
-    return {
-      stages: rooms,
-      markers,
-    };
+    return await Markers.create(markersData);
   }
 }

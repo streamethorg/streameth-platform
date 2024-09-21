@@ -4,26 +4,22 @@ import { model, Schema } from 'mongoose';
 const MarkerSchema = new Schema<IMarker>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
-    slug: { type: String, default: '', index: true },
+    description: { type: String, default: '' },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
-    metadata: [
+    stageId: { type: Schema.Types.ObjectId, index: true, ref: 'Stage' },
+    start: { type: Number, default: 0, required: true },
+    end: { type: Number, default: 0, required: true },
+    date: { type: String, default: '', required: true },
+    color: { type: String, default: '#FFA500', required: true },
+    speakers: [
       {
-        id: { type: String, default: 0, required: true },
-        start: { type: Number, default: 0, required: true },
-        end: { type: Number, default: 0, required: true },
-        color: { type: String, default: '#FFA500', required: true },
-        title: { type: String, default: '', required: true },
-        description: { type: String, default: '', required: false },
-        speakers: [
-          {
-            name: { type: String, default: '' },
-            photo: { type: String, default: '' },
-            bio: { type: String, default: '' },
-            twitter: { type: String, default: '' },
-          },
-        ],
+        name: { type: String, default: '' },
+        photo: { type: String, default: '' },
+        bio: { type: String, default: '' },
+        twitter: { type: String, default: '' },
       },
     ],
+    slug: { type: String, default: '', index: true },
   },
   {
     timestamps: true,
