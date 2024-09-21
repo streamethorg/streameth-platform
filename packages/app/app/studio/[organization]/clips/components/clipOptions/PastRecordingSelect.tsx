@@ -28,7 +28,7 @@ const PastRecordingSelect = ({
 
   return (
     <div className="w-full space-y-2">
-      <p className="font-bold">Choose Recording or Custom URL Stage</p>
+      <p className="font-bold">Choose Recording</p>
       <Select
         onValueChange={(value) => {
           const item = mergedItems.find((i) => i._id === value);
@@ -49,7 +49,7 @@ const PastRecordingSelect = ({
       >
         <SelectTrigger className="bg-white">
           <SelectValue
-            placeholder={'Select a recording or stage to create clips from'}
+            placeholder={'Select a recording to create clips from'}
           />
         </SelectTrigger>
         <SelectContent className="bg-white">

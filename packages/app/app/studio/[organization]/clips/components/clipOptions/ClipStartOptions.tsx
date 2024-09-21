@@ -5,6 +5,7 @@ import PastRecordingSelect from './PastRecordingSelect';
 import InjectUrlInput from './InjectUrlInput';
 import { Button } from '@/components/ui/button';
 import { IExtendedSession, IExtendedStage } from '@/lib/types';
+import { LuArrowLeft } from 'react-icons/lu';
 
 const ClipStartOptions = ({
   organizationId,
@@ -28,8 +29,12 @@ const ClipStartOptions = ({
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Create a Clip</h1>
         {selectedOption && (
-          <Button variant="outline" onClick={() => setSelectedOption(null)}>
-            Back
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setSelectedOption(null)}
+          >
+            <LuArrowLeft className="mr-1" /> Back
           </Button>
         )}
       </div>
