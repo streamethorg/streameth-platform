@@ -1,5 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, useRef } from 'react';
+import { IMarker } from './sidebar/markers';
 
 type PlaybackStatus = {
   progress: number;
@@ -30,6 +31,8 @@ type ClipContextType = {
   fragmentLoading: boolean;
   setFragmentLoading: React.Dispatch<React.SetStateAction<boolean>>;
   updateClipBounds: (start: number, end: number) => void;
+  markers: IMarker[];
+  setMarkers: React.Dispatch<React.SetStateAction<IMarker[]>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -53,6 +56,7 @@ export const ClipProvider = ({ children }: { children: React.ReactNode }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [dragging, setDragging] = useState<string | null>(null);
   const [selectedTooltip, setSelectedTooltip] = useState<string | null>(null);
+  const [markers, setMarkers] = useState<IMarker[]>([]);
 
   const updateClipBounds = (start: number, end: number) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
