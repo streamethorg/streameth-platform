@@ -22,6 +22,20 @@ const Preview = ({
   sessionId: string;
   organizationSlug: string;
 }) => {
+  const previewAsset = await(async function () {
+    if (previewId) {
+      const session = await fetchSession({
+        session: previewId,
+      });
+      if (session) {
+        return await fetchAsset({
+          assetId: session.assetId as string,
+        });
+      }
+    }
+    return undefined;
+  })();
+
   const [isOpen, setIsOpen] = useState(false);
   const { handleTermChange } = useSearchParams();
   const { status, playbackUrl, playbackId } = asset;

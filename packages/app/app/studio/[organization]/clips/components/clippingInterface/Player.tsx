@@ -36,7 +36,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
   useEffect(() => {
     if (Hls.isSupported() && videoRef.current) {
       const hls = new Hls({
-        debug: true, // Enable debug logs
+        debug: false, // Enable debug logs
         xhrSetup: function (xhr, url) {
           //  if (url.endsWith(".ts")){
           //     url = url.replace(corsProxyUrl, "https://prod-ec-us-east-1.video.pscp.tv/Transcoding/v1/hls/aisgdiMou1VmMGXXA31KjMbfAgOwTNmOcnCTEm1h7TxuQGEmKencuaceIKTuC_8oBTmp3HXozs_9mxKF6QJ5cg/transcode/us-east-1/periscope-replay-direct-prod-us-east-1-public/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsInZlcnNpb24iOiIyIn0.eyJFbmNvZGVyU2V0dGluZyI6ImVuY29kZXJfc2V0dGluZ183MjBwMzBfMTAiLCJIZWlnaHQiOjcyMCwiS2JwcyI6Mjc1MCwiV2lkdGgiOjEyODB9.ldktM4fCFRfkP4ZEBfZPKtlAUNAcTPkoz994YJAzWpE")
@@ -62,7 +62,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
               : Date.now());
           playbackRef.current = { progress, offset };
           setPlaybackStatus(playbackRef.current);
-          console.log(data.frag.rawProgramDateTime);
           setFragmentLoading(false);
         }
       });

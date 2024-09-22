@@ -179,17 +179,6 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
           </div>
         </div>
       </div>
-
-      {/*Skeleton Sidebar */}
-      <div className="flex h-full w-1/3 flex-col border-l bg-background bg-white">
-        <div className="h-[calc(100%-50px)] space-y-4 overflow-y-clip">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="animate-pulse p-4">
-              <div className="aspect-video w-full rounded bg-gray-200 p-4"></div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
   return (
