@@ -16,7 +16,7 @@ import {
   ISession,
   SessionType,
 } from 'streameth-new-server/src/interfaces/session.interface';
-import { useClipContext } from './ClipContext';
+import { useClipContext } from '../ClipContext';
 
 import Combobox from '@/components/ui/combo-box';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';

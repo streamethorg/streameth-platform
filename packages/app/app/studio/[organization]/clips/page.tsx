@@ -2,18 +2,11 @@ import React, { Suspense } from 'react';
 import { ClipsPageParams } from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
-import { Card } from '@/components/ui/card';
-import ClipStartOptions from './components/clipOptions/ClipStartOptions';
+import { Card, CardTitle } from '@/components/ui/card';
 import { fetchAllSessions } from '@/lib/data';
-import ClippingInterface from './components/clippingInterface/ClippingInterface';
-import { fetchSession } from '@/lib/services/sessionService';
-import {
-  fetchStage,
-  fetchStageRecordings,
-  fetchStages,
-} from '@/lib/services/stageService';
-import { getLiveStageSrcValue } from '@/lib/utils/utils';
+import { fetchStages } from '@/lib/services/stageService';
 import { StageType } from 'streameth-new-server/src/interfaces/stage.interface';
+import Link from 'next/link';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -22,7 +15,6 @@ const ClipContainer = ({ children }: { children: React.ReactNode }) => (
 );
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
-  const { videoType, sessionId, stageId } = searchParams;
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   });
@@ -42,88 +34,63 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const stages = await fetchStages({
     organizationId: organization._id,
   });
+
   const customUrlStages = stages.filter(
     (stage) => stage?.type === StageType.custom
   );
   const liveStages = stages.filter((stage) => stage.streamSettings?.isActive);
 
-  // if no videoType, render the ClipStartOptions component
-  if (!videoType)
-    return (
-      <ClipContainer>
-        <Card className="mx-auto bg-white shadow-none mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4  mt-4">
-          <ClipStartOptions
-            pastRecordings={sessionRecordings}
-            liveStages={liveStages}
-            organizationId={organization._id}
-            customUrlStages={customUrlStages}
-          />
-        </Card>
-      </ClipContainer>
-    );
+  return (
+    <ClipContainer>
+      <Card className="mx-auto bg-white shadow-none mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4  mt-4">
+        <CardTitle className="text-2xl font-bold">Past recordings</CardTitle>
+        {sessionRecordings?.map((session) => (
+          <Link
+            key={session._id}
+            href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=recording`}
+          >
+            {session.name}
+          </Link>
+        ))}
 
-  if (videoType === 'livestream' && stageId) {
-    // Fetch live recording for the selected stage
-    const liveStage = liveStages.find((stage) => stage._id === stageId);
-    const streamId = liveStage?.streamSettings?.streamId;
-    if (!streamId) return <div>live stage not found</div>;
+        {sessionRecordings?.length === 0 && (
+          <div className="text-gray-500 text-sm">
+            No past recordings from the last 7 days
+          </div>
+        )}
+      </Card>
 
-    const stageRecordings = await fetchStageRecordings({ streamId });
-    const liveRecording = stageRecordings?.recordings[0] ?? null;
+      <Card className="mx-auto bg-white shadow-none mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4  mt-4">
+        <CardTitle className="text-2xl font-bold">Custom</CardTitle>
+        {customUrlStages?.map((stage) => (
+          <Link
+            key={stage._id}
+            href={`/studio/${organization.slug}/clips/${stage._id}?videoType=customUrl`}
+          >
+            {stage.name}
+          </Link>
+        ))}
 
-    return (
-      <ClipContainer>
-        <ClippingInterface
-          stageId={stageId}
-          organizationId={organization._id}
-          src={getLiveStageSrcValue({
-            playbackId: liveRecording?.playbackId,
-            recordingId: liveRecording?.id,
-          })}
-          type={'livepeer'}
-        />
-      </ClipContainer>
-    );
-  }
+        {sessionRecordings?.length === 0 && (
+          <div className="text-gray-500 text-sm">
+            No past recordings from the last 7 days
+          </div>
+        )}
+      </Card>
 
-  // if videoType === 'recording' and sessionId is provided, render the ClippingInterface component
-  if (videoType === 'recording' && sessionId) {
-    const session = await fetchSession({
-      session: sessionId,
-    });
-    if (!session || !session.videoUrl) return <div>No session found</div>;
-
-    return (
-      <ClipContainer>
-        <ClippingInterface
-          stageId={session?.stageId as string}
-          organizationId={organization._id}
-          src={session?.videoUrl}
-          type={'livepeer'}
-        />
-      </ClipContainer>
-    );
-  }
-
-  if (videoType === 'customUrl' && stageId) {
-    const stage = await fetchStage({
-      stage: stageId,
-    });
-    if (!stage || !stage?.source?.m3u8Url) return <div>No stage found</div>;
-
-    return (
-      <ClipContainer>
-        <ClippingInterface
-          stageId={stageId}
-          organizationId={organization._id}
-          src={stage?.source?.m3u8Url}
-          type={stage?.source?.type}
-        />
-      </ClipContainer>
-    );
-  }
-
-  return <div>No or wrong videoType provided</div>;
+      <Card className="mx-auto bg-white shadow-none mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4  mt-4">
+        <CardTitle className="text-2xl font-bold">Active livestreams</CardTitle>
+        {liveStages?.map((stage) => (
+          <Link
+            key={stage._id}
+            href={`/studio/${organization.slug}/clips/${stage._id}?videoType=livestream`}
+          >
+            {stage.name}
+          </Link>
+        ))}
+      </Card>
+    </ClipContainer>
+  );
 };
 
 // Renders the ClipsConfig component with a fallback skeleton

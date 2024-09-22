@@ -20,7 +20,7 @@ export interface IMarker {
   name: string;
   description: string;
   organizationId: string;
-  stageId: string;
+  stageIdId: string;
   start: number;
   end: number;
   date: string;
@@ -30,7 +30,7 @@ export interface IMarker {
 }
 
 const Markers = ({ organizationId }: { organizationId: string }) => {
-  const { searchParams } = useSearchParams();
+  const { stageId } = useClipContext();
   const [isLoading, setIsLoading] = React.useState(false);
   const { markers, setMarkers } = useClipContext();
 
@@ -42,16 +42,15 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
       )
   );
   const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
-  const stage = searchParams.get('stage');
 
   useEffect(() => {
-    if (stage) {
+    if (stageId) {
       setIsLoading(true);
       fetchAllSessions({
         organizationSlug: organizationId,
         limit: 20,
         page: 1,
-        //stageId: stage,
+        // stageId: stageId,
         onlyVideos: true,
         type: 'video',
       }).then((res) => {
@@ -59,7 +58,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
         setIsLoading(false);
       });
     }
-  }, [stage]);
+  }, [stageId]);
 
   const updateMarker = (marker: IMarker) => {
     // call api to update marker

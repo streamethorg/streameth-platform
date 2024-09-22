@@ -33,13 +33,20 @@ type ClipContextType = {
   updateClipBounds: (start: number, end: number) => void;
   markers: IMarker[];
   setMarkers: React.Dispatch<React.SetStateAction<IMarker[]>>;
+  stageId: string;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
 
 export const useClipContext = () => useContext(ClipContext)!;
 
-export const ClipProvider = ({ children }: { children: React.ReactNode }) => {
+export const ClipProvider = ({
+  children,
+  stageId,
+}: {
+  children: React.ReactNode;
+  stageId: string;
+}) => {
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );
@@ -81,6 +88,9 @@ export const ClipProvider = ({ children }: { children: React.ReactNode }) => {
         fragmentLoading,
         setFragmentLoading,
         updateClipBounds,
+        markers,
+        setMarkers,
+        stageId,
       }}
     >
       {children}

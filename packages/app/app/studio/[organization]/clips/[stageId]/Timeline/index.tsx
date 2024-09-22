@@ -4,13 +4,14 @@ import { useClipContext } from '../ClipContext';
 import { debounce } from 'lodash';
 import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
-import { IExtendedMarkers } from '@/lib/types';
+import { IMarker } from '../../[stageId]/sidebar/markers';
+import { formatTime } from '@/lib/utils/time';
 
 const debouncedUpdate = debounce((callback: (data: any) => void, data: any) => {
   callback(data);
 }, 100);
 
-const Timeline = ({ markers }: { markers: IExtendedMarkers[] }) => {
+const Timeline = () => {
   const {
     playbackStatus,
     setStartTime,
@@ -24,6 +25,7 @@ const Timeline = ({ markers }: { markers: IExtendedMarkers[] }) => {
     selectedTooltip,
     isLoading,
     fragmentLoading,
+    markers,
   } = useClipContext();
 
   const [initialMousePos, setInitialMousePos] = useState<number>(0);
@@ -172,7 +174,7 @@ const Timeline = ({ markers }: { markers: IExtendedMarkers[] }) => {
     setDragging(null);
   }, []);
 
-  const handleMarkerClick = (marker: IExtendedMarkers) => {
+  const handleMarkerClick = (marker: IMarker) => {
     if (videoRef.current) {
       videoRef.current.currentTime = marker.start;
       setStartTime({
@@ -283,14 +285,6 @@ const Timeline = ({ markers }: { markers: IExtendedMarkers[] }) => {
 };
 
 export default Timeline;
-
-const formatTime = (seconds: number) => {
-  if (!seconds) return '00:00:00';
-
-  const date = new Date(0);
-  date.setSeconds(seconds);
-  return date.toISOString().substr(11, 8);
-};
 
 const TimelineDrawing = ({
   maxLength,

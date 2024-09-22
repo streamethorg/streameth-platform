@@ -1,14 +1,7 @@
 'use client';
 import { PlayIcon, PauseIcon } from 'lucide-react';
-import { useClipContext } from './ClipContext';
-
-const formatTime = (seconds: number) => {
-  if (!seconds) return '00:00:00';
-
-  const date = new Date(0);
-  date.setSeconds(seconds);
-  return date.toISOString().substr(11, 8);
-};
+import { useClipContext } from '../[stageId]/ClipContext';
+import { formatTime } from '@/lib/utils/time';
 
 const Controls = () => {
   const { videoRef } = useClipContext();

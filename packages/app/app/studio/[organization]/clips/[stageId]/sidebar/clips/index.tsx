@@ -14,8 +14,10 @@ import useSearchParams from '@/lib/hooks/useSearchParams';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 import { Input } from '@/components/ui/input';
 import Clip from './Clip';
+import { useClipContext } from '../../ClipContext';
 
 const SessionSidebar = ({ organizationId }: { organizationId: string }) => {
+  const { stageId } = useClipContext();
   const [isLoading, setIsLoading] = React.useState(false);
   const [sessions, setSessions] = React.useState<IExtendedSession[]>([]);
   const [filteredSessions, setFilteredSessions] = React.useState<
@@ -30,18 +32,14 @@ const SessionSidebar = ({ organizationId }: { organizationId: string }) => {
   );
   const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
 
-  const { searchParams } = useSearchParams();
-
-  const stage = searchParams.get('stage');
-
   useEffect(() => {
-    if (stage) {
+    if (stageId) {
       setIsLoading(true);
       fetchAllSessions({
         organizationSlug: organizationId,
         limit: 20,
         page: 1,
-        //stageId: stage,
+        // stageId: stageId,
         onlyVideos: true,
         type: 'video',
       }).then((res) => {
@@ -50,7 +48,7 @@ const SessionSidebar = ({ organizationId }: { organizationId: string }) => {
         setIsLoading(false);
       });
     }
-  }, [stage]);
+  }, [stageId]);
 
   if (isLoading) {
     return (

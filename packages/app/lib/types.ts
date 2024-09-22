@@ -121,6 +121,7 @@ export interface nftPageParams {
 export interface ClipsPageParams {
   params: {
     organization: string;
+    stageId: string;
   };
   searchParams: {
     videoType: 'livestream' | 'recording' | 'customUrl';

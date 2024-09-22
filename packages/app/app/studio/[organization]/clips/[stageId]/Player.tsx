@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { useClipContext } from '../ClipContext';
+import { useClipContext } from './ClipContext';
 
 export interface HlsPlayerProps {
   src: string;
