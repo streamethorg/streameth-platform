@@ -2,7 +2,7 @@ import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedMarkers } from '../types';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 
-// create marker collection for an organization
+// create marker for a stage
 export async function createMarkers({
   markers,
   authToken,
@@ -26,7 +26,7 @@ export async function createMarkers({
   return (await response.json()).data;
 }
 
-// update markers for an organization
+// update marker
 export const updateMarkers = async ({
   markers,
   authToken,
@@ -35,7 +35,7 @@ export const updateMarkers = async ({
   authToken: string;
 }): Promise<IExtendedMarkers> => {
   const { _id, ...rest } = markers;
-  console.log('rest', rest.metadata);
+
   try {
     const response = await fetch(`${apiUrl()}/markers/${markers._id}`, {
       method: 'PUT',
@@ -57,15 +57,19 @@ export const updateMarkers = async ({
   }
 };
 
-// fetch all markers for an organization
+// fetch all markers for a stage
 export async function fetchMarkers({
   organizationId,
+  stageId,
+  date,
 }: {
   organizationId: string;
+  stageId?: string;
+  date?: string;
 }): Promise<IExtendedMarkers[]> {
   try {
     const response = await fetch(
-      `${apiUrl()}/markers?organizationId=${organizationId}`,
+      `${apiUrl()}/markers?organization=${organizationId}&stageId=${stageId}`,
       {
         cache: 'no-cache',
       }
@@ -80,15 +84,13 @@ export async function fetchMarkers({
     throw 'Error fetching markers';
   }
 }
-// delete individual marker
+
 export async function deleteMarker({
   markerId,
-  subMarkerId,
   organizationId,
   authToken,
 }: {
   markerId: string;
-  subMarkerId: string;
   organizationId: string;
   authToken: string;
 }): Promise<IExtendedMarkers> {
@@ -99,7 +101,7 @@ export async function deleteMarker({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify({ subMarkerId, organizationId }),
+      body: JSON.stringify({ organizationId }),
     });
     if (!response.ok) {
       throw 'Error deleting marker';
@@ -110,3 +112,30 @@ export async function deleteMarker({
     throw e;
   }
 }
+
+export const importMarkers = async ({
+  stageId,
+  organizationId,
+  type,
+  url,
+  authToken,
+}: {
+  stageId: string;
+  organizationId: string;
+  type: string;
+  url: string;
+  authToken: string;
+}): Promise<IExtendedMarkers> => {
+  const response = await fetch(`${apiUrl()}/markers/import`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify({ stageId, organizationId, type, url }),
+  });
+  if (!response.ok) {
+    throw 'Error importing markers';
+  }
+  return await response.json();
+};

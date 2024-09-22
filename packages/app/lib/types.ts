@@ -251,6 +251,6 @@ export interface IExtendedScheduleImporter extends IScheduleImporter {
   _id: string;
 }
 
-export interface IExtendedMarkers extends IMarker {
+export interface IExtendedMarkers extends Omit<IMarker, '_id'> {
   _id: string;
 }

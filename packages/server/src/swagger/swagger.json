@@ -3237,7 +3237,13 @@
 			},
 			"IMarker": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
+						"type": "string"
+					},
+					"description": {
 						"type": "string"
 					},
 					"organizationId": {
@@ -3250,38 +3256,33 @@
 							}
 						]
 					},
-					"metadata": {
-						"items": {
-							"properties": {
-								"description": {
-									"type": "string"
-								},
-								"title": {
-									"type": "string"
-								},
-								"color": {
-									"type": "string"
-								},
-								"end": {
-									"type": "number",
-									"format": "double"
-								},
-								"start": {
-									"type": "number",
-									"format": "double"
-								},
-								"id": {
-									"type": "string"
-								}
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
 							},
-							"required": [
-								"title",
-								"color",
-								"end",
-								"start",
-								"id"
-							],
-							"type": "object"
+							{
+								"type": "string"
+							}
+						]
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/Omit_ISpeaker.organizationId_"
 						},
 						"type": "array"
 					},
@@ -3292,7 +3293,11 @@
 				"required": [
 					"name",
 					"organizationId",
-					"metadata"
+					"stageId",
+					"start",
+					"end",
+					"date",
+					"color"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -3318,44 +3323,38 @@
 			},
 			"CreateMarkerDto": {
 				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
 					"name": {
+						"type": "string"
+					},
+					"description": {
 						"type": "string"
 					},
 					"organizationId": {
 						"type": "string"
 					},
-					"metadata": {
+					"stageId": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"speakers": {
 						"items": {
-							"properties": {
-								"description": {
-									"type": "string"
-								},
-								"title": {
-									"type": "string"
-								},
-								"color": {
-									"type": "string"
-								},
-								"end": {
-									"type": "number",
-									"format": "double"
-								},
-								"start": {
-									"type": "number",
-									"format": "double"
-								},
-								"id": {
-									"type": "string"
-								}
-							},
-							"required": [
-								"title",
-								"color",
-								"end",
-								"start",
-								"id"
-							],
-							"type": "object"
+							"$ref": "#/components/schemas/ISpeaker"
 						},
 						"type": "array"
 					},
@@ -3366,71 +3365,11 @@
 				"required": [
 					"name",
 					"organizationId",
-					"metadata"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse__stages-Array_any_--markers-IMarker-at-metadata__": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"properties": {
-							"markers": {
-								"items": {
-									"properties": {
-										"description": {
-											"type": "string"
-										},
-										"title": {
-											"type": "string"
-										},
-										"color": {
-											"type": "string"
-										},
-										"end": {
-											"type": "number",
-											"format": "double"
-										},
-										"start": {
-											"type": "number",
-											"format": "double"
-										},
-										"id": {
-											"type": "string"
-										}
-									},
-									"required": [
-										"title",
-										"color",
-										"end",
-										"start",
-										"id"
-									],
-									"type": "object"
-								},
-								"type": "array"
-							},
-							"stages": {
-								"items": {},
-								"type": "array"
-							}
-						},
-						"required": [
-							"markers",
-							"stages"
-						],
-						"type": "object"
-					}
-				},
-				"required": [
-					"status",
-					"message"
+					"stageId",
+					"start",
+					"end",
+					"date",
+					"color"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -6481,7 +6420,13 @@
 				"tags": [
 					"Marker"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -6516,8 +6461,24 @@
 				"parameters": [
 					{
 						"in": "query",
-						"name": "organizationId",
+						"name": "organization",
 						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "stageId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "date",
+						"required": false,
 						"schema": {
 							"type": "string"
 						}
@@ -6544,7 +6505,13 @@
 				"tags": [
 					"Marker"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [
 					{
 						"in": "path",
@@ -6600,29 +6567,7 @@
 							"type": "string"
 						}
 					}
-				],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"properties": {
-									"subMarkerId": {
-										"type": "string"
-									},
-									"organizationId": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"subMarkerId",
-									"organizationId"
-								],
-								"type": "object"
-							}
-						}
-					}
-				}
+				]
 			}
 		},
 		"/markers/import": {
@@ -6634,7 +6579,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse__stages-Array_any_--markers-IMarker-at-metadata__"
+									"$ref": "#/components/schemas/IStandardResponse_Array_IMarker__"
 								}
 							}
 						}
@@ -6644,7 +6589,13 @@
 				"tags": [
 					"Marker"
 				],
-				"security": [],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -6652,6 +6603,9 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"stageId": {
+										"type": "string"
+									},
 									"organizationId": {
 										"type": "string"
 									},
@@ -6663,6 +6617,7 @@
 									}
 								},
 								"required": [
+									"stageId",
 									"organizationId",
 									"type",
 									"url"

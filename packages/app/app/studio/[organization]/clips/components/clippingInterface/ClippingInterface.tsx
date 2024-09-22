@@ -1,40 +1,41 @@
 import React from 'react';
 import ReactHlsPlayer from './Player';
-
 import { ClipProvider } from '../ClipContext';
 import ClipSidebar from './ClipSidebar';
 import Controls from '../Controls';
 import Timeline from '../Timeline';
-import { IExtendedMarkers, IExtendedStage } from '@/lib/types';
+import { fetchMarkers } from '@/lib/services/markerSevice';
 
-const ClippingInterface = ({
-  markers,
-  stages,
+const ClippingInterface = async ({
   organizationId,
   src,
   type,
+  stageId,
 }: {
   src: string;
   type: string;
   organizationId: string;
-  markers: IExtendedMarkers[];
-  stages: IExtendedStage[];
+  stageId: string;
 }) => {
+  const markers = await fetchMarkers({
+    organizationId,
+    stageId,
+  });
+
   return (
     <ClipProvider>
-      <div className="flex w-full flex-col">
-        <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
-          <ReactHlsPlayer src={src} type={type} />
-          <Controls />
-          <Timeline />
-        </div>
+      <div className="flex h-full w-full flex-col space-y-4 overflow-auto bg-white p-4">
+        <ReactHlsPlayer src={src} type={type} />
+        <Controls />
+        <Timeline markers={markers} />
       </div>
-
-      <ClipSidebar
-        markers={markers}
-        stages={stages}
-        organizationId={organizationId}
-      />
+      <div className="h-full w-[500px] px-2 border-l bg-background bg-white">
+        <ClipSidebar
+          markers={markers}
+          organizationId={organizationId}
+          stageId={stageId}
+        />
+      </div>
     </ClipProvider>
   );
 };

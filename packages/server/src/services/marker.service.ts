@@ -68,11 +68,8 @@ export default class MarkerService {
     );
   }
 
-  async deleteOne(markerId: string, subMarkerId: string): Promise<void> {
-    await Markers.findOneAndUpdate(
-      { _id: markerId },
-      { $pull: { metadata: { _id: subMarkerId } } },
-    );
+  async deleteOne(markerId: string): Promise<void> {
+    await Markers.findByIdAndDelete(markerId);
   }
 
   private async gsheet(d: {

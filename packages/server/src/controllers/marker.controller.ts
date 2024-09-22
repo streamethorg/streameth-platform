@@ -71,7 +71,7 @@ export class MarkerController extends Controller {
   /**
    * @summary Get all markers
    */
-  @Security('jwt', ['org'])
+  // @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Get()
   async getAllMarkers(
@@ -96,9 +96,8 @@ export class MarkerController extends Controller {
   @Delete('{markerId}')
   async deleteMarker(
     @Path() markerId: string,
-    @Body() body: { organizationId: string; subMarkerId: string },
   ): Promise<IStandardResponse<void>> {
-    await this.markerService.deleteOne(markerId, body.subMarkerId);
+    await this.markerService.deleteOne(markerId);
     return SendApiResponse('marker deleted');
   }
 }

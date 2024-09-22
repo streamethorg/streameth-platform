@@ -1,15 +1,16 @@
 'use client';
 import React, { useEffect, useState, useCallback } from 'react';
-import { IMarker, useClipContext } from '../ClipContext';
+import { useClipContext } from '../ClipContext';
 import { debounce } from 'lodash';
 import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
+import { IExtendedMarkers } from '@/lib/types';
 
 const debouncedUpdate = debounce((callback: (data: any) => void, data: any) => {
   callback(data);
 }, 100);
 
-const Timeline = () => {
+const Timeline = ({ markers }: { markers: IExtendedMarkers[] }) => {
   const {
     playbackStatus,
     setStartTime,
@@ -23,7 +24,6 @@ const Timeline = () => {
     selectedTooltip,
     isLoading,
     fragmentLoading,
-    markers,
   } = useClipContext();
 
   const [initialMousePos, setInitialMousePos] = useState<number>(0);
@@ -172,7 +172,7 @@ const Timeline = () => {
     setDragging(null);
   }, []);
 
-  const handleMarkerClick = (marker: IMarker['metadata'][0]) => {
+  const handleMarkerClick = (marker: IExtendedMarkers) => {
     if (videoRef.current) {
       videoRef.current.currentTime = marker.start;
       setStartTime({
@@ -239,11 +239,11 @@ const Timeline = () => {
         style={{ width: `${timelineWidth}px` }}
       >
         {markers &&
-          markers.metadata.map((marker) => {
+          markers.map((marker) => {
             if (marker.start > maxLength) return null;
             return (
               <div
-                key={marker.id}
+                key={marker._id}
                 className={`absolute h-[20px] border bg-opacity-20 rounded`}
                 onClick={() => handleMarkerClick(marker)}
                 style={{

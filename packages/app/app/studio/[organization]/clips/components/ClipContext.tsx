@@ -1,20 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, useRef } from 'react';
 
-export interface IMarker {
-  _id?: string;
-  name: string;
-  organizationId: string;
-  metadata: Array<{
-    id: string;
-    start: number;
-    end: number;
-    color: string;
-    title: string;
-    description?: string;
-  }>;
-}
-
 type PlaybackStatus = {
   progress: number;
   offset: number;
@@ -44,8 +30,6 @@ type ClipContextType = {
   fragmentLoading: boolean;
   setFragmentLoading: React.Dispatch<React.SetStateAction<boolean>>;
   updateClipBounds: (start: number, end: number) => void;
-  markers: IMarker | null;
-  setMarkers: React.Dispatch<React.SetStateAction<IMarker | null>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -69,7 +53,6 @@ export const ClipProvider = ({ children }: { children: React.ReactNode }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [dragging, setDragging] = useState<string | null>(null);
   const [selectedTooltip, setSelectedTooltip] = useState<string | null>(null);
-  const [markers, setMarkers] = useState<IMarker | null>(null);
 
   const updateClipBounds = (start: number, end: number) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
@@ -95,8 +78,6 @@ export const ClipProvider = ({ children }: { children: React.ReactNode }) => {
         fragmentLoading,
         setFragmentLoading,
         updateClipBounds,
-        markers,
-        setMarkers,
       }}
     >
       {children}

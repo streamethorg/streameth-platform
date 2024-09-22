@@ -221,3 +221,27 @@ export const injectUrlSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   url: z.string().url({ message: 'Invalid URL' }),
 });
+
+export const markerSchema = z
+  .object({
+    name: z.string().min(1, 'Name is required'),
+    start: z.number().min(0, 'Start is required'),
+    end: z.number().min(0, 'End is required'),
+    organizationId: z.string().min(1, 'Organization ID is required'),
+    stageId: z.string().min(1, 'Stage ID is required'),
+    date: z.string(),
+    color: z.string().min(1, 'Color is required'),
+    speakers: z.array(speakerSchema).optional(),
+    description: z.string().optional(),
+  })
+  .refine((data) => data.end > data.start, {
+    message: 'End time must be greater than start time',
+    path: ['end'], // This will make the error appear on the "end" field
+  });
+
+export const markersImportSchema = z.object({
+  type: z.string().min(1, 'Source is required'),
+  url: z.string().url(),
+  organizationId: z.string(),
+  stageId: z.string(),
+});

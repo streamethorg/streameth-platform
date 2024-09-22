@@ -14,7 +14,6 @@ import {
 } from '@/lib/services/stageService';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
 import { StageType } from 'streameth-new-server/src/interfaces/stage.interface';
-import { fetchMarkers } from '@/lib/services/clipSevice';
 
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
@@ -63,10 +62,6 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       </ClipContainer>
     );
 
-  const markers = await fetchMarkers({
-    organizationId: organization._id,
-  });
-
   if (videoType === 'livestream' && stageId) {
     // Fetch live recording for the selected stage
     const liveStage = liveStages.find((stage) => stage._id === stageId);
@@ -79,8 +74,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     return (
       <ClipContainer>
         <ClippingInterface
-          markers={markers}
-          stages={stages}
+          stageId={stageId}
           organizationId={organization._id}
           src={getLiveStageSrcValue({
             playbackId: liveRecording?.playbackId,
@@ -98,11 +92,11 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       session: sessionId,
     });
     if (!session || !session.videoUrl) return <div>No session found</div>;
+
     return (
       <ClipContainer>
         <ClippingInterface
-          markers={markers}
-          stages={stages}
+          stageId={session?.stageId as string}
           organizationId={organization._id}
           src={session?.videoUrl}
           type={'livepeer'}
@@ -120,8 +114,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     return (
       <ClipContainer>
         <ClippingInterface
-          markers={markers}
-          stages={stages}
+          stageId={stageId}
           organizationId={organization._id}
           src={stage?.source?.m3u8Url}
           type={stage?.source?.type}

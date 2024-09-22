@@ -1032,9 +1032,16 @@ const models: TsoaRoute.Models = {
     "IMarker": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
             "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "metadata": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string"},"title":{"dataType":"string","required":true},"color":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true},"id":{"dataType":"string","required":true}}},"required":true},
+            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "start": {"dataType":"double","required":true},
+            "end": {"dataType":"double","required":true},
+            "date": {"dataType":"string","required":true},
+            "color": {"dataType":"string","required":true},
+            "speakers": {"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},
             "slug": {"dataType":"string"},
         },
         "additionalProperties": false,
@@ -1053,20 +1060,17 @@ const models: TsoaRoute.Models = {
     "CreateMarkerDto": {
         "dataType": "refObject",
         "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
             "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
             "organizationId": {"dataType":"string","required":true},
-            "metadata": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string"},"title":{"dataType":"string","required":true},"color":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true},"id":{"dataType":"string","required":true}}},"required":true},
+            "stageId": {"dataType":"string","required":true},
+            "start": {"dataType":"double","required":true},
+            "end": {"dataType":"double","required":true},
+            "date": {"dataType":"string","required":true},
+            "color": {"dataType":"string","required":true},
+            "speakers": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"}},
             "slug": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse__stages-Array_any_--markers-IMarker-at-metadata__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"markers":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string"},"title":{"dataType":"string","required":true},"color":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true},"id":{"dataType":"string","required":true}}},"required":true},"stages":{"dataType":"array","array":{"dataType":"any"},"required":true}}},
         },
         "additionalProperties": false,
     },
@@ -3199,6 +3203,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/markers',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(MarkerController)),
             ...(fetchMiddlewares<RequestHandler>(MarkerController.prototype.createMarker)),
 
@@ -3229,6 +3234,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.put('/markers/:markerId',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(MarkerController)),
             ...(fetchMiddlewares<RequestHandler>(MarkerController.prototype.updateMarker)),
 
@@ -3260,12 +3266,13 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/markers/import',
+            authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(MarkerController)),
             ...(fetchMiddlewares<RequestHandler>(MarkerController.prototype.importMarkers)),
 
             async function MarkerController_importMarkers(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"type":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"stageId":{"dataType":"string","required":true},"organizationId":{"dataType":"string","required":true},"type":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -3295,7 +3302,9 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
             async function MarkerController_getAllMarkers(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    organizationId: {"in":"query","name":"organizationId","required":true,"dataType":"string"},
+                    organization: {"in":"query","name":"organization","required":true,"dataType":"string"},
+                    stageId: {"in":"query","name":"stageId","required":true,"dataType":"string"},
+                    date: {"in":"query","name":"date","dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -3327,7 +3336,6 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             async function MarkerController_deleteMarker(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     markerId: {"in":"path","name":"markerId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"subMarkerId":{"dataType":"string","required":true},"organizationId":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
