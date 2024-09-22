@@ -5,7 +5,15 @@ import { Button } from '@/components/ui/button';
 import { IMarker } from './index';
 import { formatTime } from '@/lib/utils/time';
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+
+/* Whats missing:
+    - Add update marker logic: update marker should be a form that covers the marker sidebar
+    - Update should write to the db and on callback refetch all markers
+    - Delete marker logic
+    - Would be good to link marker on on sidebar to marker on timeline -> when the marker is clicked highlight the marker on the timeline
+          
+  */
+
 const Marker = ({
   marker,
   setEditingMarker,
@@ -17,23 +25,6 @@ const Marker = ({
   updateMarker: (id: string, data: Partial<IMarker>) => void;
   removeMarker: (id: string) => void;
 }) => {
-  //   <Card className="w-full max-w-2xl overflow-hidden p-2 shadow-none">
-  //   <div className="flex justify-center items-center">
-  //     <div className="flex-shrink-0 w-1/3">
-  //       <Thumbnail imageUrl={coverImage} />
-  //     </div>
-  //     <CardContent className="lg:p-2 p-2 flex-grow">
-  //       <h2 className="text-lg font-semibold line-clamp-1">{name}</h2>
-  //       <p className="text-sm text-gray-500 mt-1">
-  //         {formatDate(
-  //           new Date(session.createdAt as string),
-  //           'ddd. MMM. D, YYYY'
-  //         )}
-  //       </p>
-  //     </CardContent>
-  //   </div>
-  // </Card>
-
   return (
     <Card className="w-full max-w-2xl overflow-hidden p-0 shadow-none h-[100px]">
       <div className="flex flex-grow flex-row items-center h-full">

@@ -29,6 +29,15 @@ export interface IMarker {
   slug: string;
 }
 
+/* Whats missing:
+    - Properly extract all posible dates for markers
+    - We are missing an empty state
+    - Right now i am fetching all sessions, this was done as a mock. 
+    - We just work with the marker collection.
+    - I created a mock type, lets use the right marker type.
+          
+  */
+
 const Markers = ({ organizationId }: { organizationId: string }) => {
   const { stageId } = useClipContext();
   const [isLoading, setIsLoading] = React.useState(false);

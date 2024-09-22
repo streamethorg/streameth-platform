@@ -1,6 +1,6 @@
 'use client';
 import { PlayIcon, PauseIcon } from 'lucide-react';
-import { useClipContext } from '../[stageId]/ClipContext';
+import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 
 const Controls = () => {

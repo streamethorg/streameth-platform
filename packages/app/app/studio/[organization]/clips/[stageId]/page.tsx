@@ -9,6 +9,7 @@ import { fetchStage } from '@/lib/services/stageService';
 import { fetchStageRecordings } from '@/lib/services/stageService';
 import { fetchSession } from '@/lib/services/sessionService';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
+import TopBar from './topBar';
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { organization, stageId } = params;
@@ -56,22 +57,14 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
 
   if (!videoSrc || !type) return <div>Video source not found</div>;
 
-  console.log(stageId, videoSrc, type);
   return (
     <ClipProvider stageId={stageId}>
       <div className="flex flex-row w-full h-full">
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
-          <div className="h-[80px] w-full bg-gray-100"></div>
+          <TopBar />
           <ReactHlsPlayer src={videoSrc} type={type} />
           <Controls />
           <Timeline />
-          {/* <CreateClipButton
-                currentRecording={currentRecording}
-                playbackId={stageRecordings.parentStream?.playbackId ?? ''}
-                organization={organization}
-                currentStage={currentStage}
-                sessions={sessions}
-              /> */}
         </div>
         <div className="flex w-[400px] h-full">
           <Sidebar organizationId={organization} />

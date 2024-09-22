@@ -8,6 +8,14 @@ import { fetchStages } from '@/lib/services/stageService';
 import { StageType } from 'streameth-new-server/src/interfaces/stage.interface';
 import Link from 'next/link';
 
+/*
+
+    whats missing: 
+
+    - create tables in the style of the library and the stream page for better ui.
+    
+
+*/
 const ClipContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="h-full w-full">
     <div className="mx-auto flex h-full w-full flex-row">{children}</div>
