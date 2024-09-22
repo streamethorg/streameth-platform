@@ -58,7 +58,6 @@ export const ClipProvider = ({ children }: { children: React.ReactNode }) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
     setEndTime((prevState) => ({ ...prevState, displayTime: end }));
   };
-
   return (
     <ClipContext.Provider
       value={{
