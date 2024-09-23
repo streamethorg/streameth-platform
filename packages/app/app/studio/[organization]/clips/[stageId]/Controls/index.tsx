@@ -1,4 +1,5 @@
 'use client';
+import React, { useEffect } from 'react';
 import { PlayIcon, PauseIcon } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
@@ -6,6 +7,26 @@ import { Button } from '@/components/ui/button';
 
 const Controls = () => {
   const { videoRef } = useClipContext();
+
+  const spaceBarHandler = (e: KeyboardEvent) => {
+    if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
+      if (videoRef.current) {
+        if (videoRef.current.paused) {
+          videoRef.current.play();
+        } else {
+          videoRef.current.pause();
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', spaceBarHandler);
+
+    return () => {
+      window.removeEventListener('keydown', spaceBarHandler);
+    };
+  }, [videoRef]);
 
   return (
     <div className="bg-white flex w-full flex-row border-b items-center border-t p-2">

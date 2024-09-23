@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    -moz-user-select: none; /* firefox */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE */
+    user-select: none; /* Standard syntax */
+  }
   :root {
     color: #334155;
     --background: 210, 40%, 98%;

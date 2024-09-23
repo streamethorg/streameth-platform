@@ -1,23 +1,97 @@
+'use client';
+import React, { useCallback, useEffect } from 'react';
 import { ArrowLeftSquare, ArrowRightSquare } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
+import { formatTime } from '@/lib/utils/time';
+import { debounce } from 'lodash';
 
-const formatTime = (seconds: number) => {
-  if (!seconds) return '00:00:00';
-  const date = new Date(0);
-  date.setSeconds(seconds);
-  return date.toISOString().substr(11, 8);
-};
+const debouncedUpdate = debounce((callback: (data: any) => void, data: any) => {
+  callback(data);
+}, 100);
 
 const TrimmControls = ({
-  handleMouseDown,
   marker,
   blocked,
 }: {
-  handleMouseDown: (marker: string, event: React.MouseEvent) => void;
   marker: string;
   blocked: boolean;
 }) => {
-  const { startTime, endTime, videoRef, selectedTooltip } = useClipContext();
+  const {
+    startTime,
+    endTime,
+    videoRef,
+    selectedTooltip,
+    playbackStatus,
+    setStartTime,
+    setEndTime,
+    handleMouseDown,
+  } = useClipContext();
+
+  const handle1SecondIncrementDecrement = useCallback(
+    (increment: boolean, marker: string) => {
+      if (videoRef.current && playbackStatus) {
+        const time =
+          marker === 'start' ? startTime.displayTime : endTime.displayTime;
+        const newTime = increment ? time + 1 : time - 1;
+        if (marker === 'start') {
+          if (newTime >= 0 && newTime < endTime.displayTime) {
+            debouncedUpdate(setStartTime, {
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: newTime,
+            });
+          }
+        } else if (marker === 'end') {
+          if (
+            newTime > startTime.displayTime &&
+            newTime <= videoRef.current.duration
+          ) {
+            debouncedUpdate(setEndTime, {
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: newTime,
+            });
+          }
+        }
+        videoRef.current.currentTime = newTime;
+      }
+    },
+    [
+      videoRef,
+      playbackStatus,
+      startTime.displayTime,
+      endTime.displayTime,
+      setStartTime,
+      setEndTime,
+    ]
+  );
+
+  useEffect(() => {
+    const preventDefault = (e: Event) => e.preventDefault();
+
+    window.addEventListener('keydown', (e) => {
+      if (selectedTooltip) {
+        if (e.key === 'ArrowRight') {
+          handle1SecondIncrementDecrement(true, selectedTooltip);
+        } else if (e.key === 'ArrowLeft') {
+          handle1SecondIncrementDecrement(false, selectedTooltip);
+        }
+      }
+
+      if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
+        if (videoRef.current) {
+          if (videoRef.current.paused) {
+            videoRef.current.play();
+          } else {
+            videoRef.current.pause();
+          }
+        }
+      }
+    });
+    return () => {
+      window.removeEventListener('dragstart', preventDefault);
+      window.removeEventListener('dragover', preventDefault);
+    };
+  }, [handle1SecondIncrementDecrement, selectedTooltip, videoRef]);
+
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
       return (time / videoRef.current.duration) * 100;
@@ -67,7 +141,7 @@ const TrimmControls = ({
 export default TrimmControls;
 
 export const TrimmOverlay = () => {
-  const { startTime, endTime, videoRef, selectedTooltip } = useClipContext();
+  const { startTime, endTime, videoRef } = useClipContext();
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
       return (time / videoRef.current.duration) * 100;

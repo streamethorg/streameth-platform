@@ -52,6 +52,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
       hls.loadSource(type === 'youtube' ? proxiedSrc : src);
       hls.attachMedia(videoRef.current);
 
+      console.log(hls.playingDate?.getTime());
+
       hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
         if (videoRef.current) {
           const progress = videoRef.current.currentTime;
