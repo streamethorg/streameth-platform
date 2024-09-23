@@ -56,10 +56,10 @@ const StreamPlatformGrid = ({
   }
 
   const StreamTarget: StreamTargetItem[] = [
-    {
-      title: 'X (WIP)',
-      icon: <SiX size={35} />,
-    },
+    // {
+    //   title: 'X (WIP)',
+    //   icon: <SiX size={35} />,
+    // },
     {
       title: 'YouTube',
       icon: <SiYoutube size={45} color="#ff0000" />,
@@ -96,7 +96,7 @@ const StreamPlatformGrid = ({
       {SelectedComponent ? (
         SelectedComponent
       ) : (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {StreamTarget.map((item, index) => (
             <Block
               key={index}
