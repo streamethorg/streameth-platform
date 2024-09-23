@@ -2,10 +2,10 @@
 import { Plus, Trash2, Edit2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { IMarker } from './index';
+import { IExtendedMarker } from '@/lib/types';
 import { formatTime } from '@/lib/utils/time';
 import { Card } from '@/components/ui/card';
-
+import DeleteMarkerButton from './DeleteMarkerButton';
 /* Whats missing:
     - Add update marker logic: update marker should be a form that covers the marker sidebar
     - Update should write to the db and on callback refetch all markers
@@ -16,14 +16,10 @@ import { Card } from '@/components/ui/card';
 
 const Marker = ({
   marker,
-  setEditingMarker,
-  updateMarker,
-  removeMarker,
+  organizationId,
 }: {
-  marker: IMarker;
-  setEditingMarker: (id: string) => void;
-  updateMarker: (id: string, data: Partial<IMarker>) => void;
-  removeMarker: (id: string) => void;
+  marker: IExtendedMarker;
+  organizationId: string;
 }) => {
   return (
     <Card className="w-full max-w-2xl overflow-hidden p-0 shadow-none h-[100px]">
@@ -33,11 +29,6 @@ const Marker = ({
             <input
               type="color"
               value={marker.color}
-              onChange={(e) =>
-                updateMarker(marker._id, {
-                  color: e.target.value,
-                })
-              }
               className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
             />
             <div
@@ -56,17 +47,14 @@ const Marker = ({
               <Button
                 size={'sm'}
                 variant={'outline'}
-                onClick={() => setEditingMarker(marker._id)}
+                // onClick={() => setEditingMarker(marker._id)}
               >
                 <Edit2 size={16} />
               </Button>
-              <Button
-                size={'sm'}
-                variant={'outline'}
-                onClick={() => removeMarker(marker._id)}
-              >
-                <Trash2 className="w-4 h-4" />
-              </Button>
+              <DeleteMarkerButton
+                markerId={marker._id}
+                organizationId={organizationId}
+              />
             </div>
           </div>
           <span className="text-sm text-gray-500">
@@ -79,36 +67,3 @@ const Marker = ({
 };
 
 export default Marker;
-
-// // {editingMarker === marker._id ? (
-//   <div className="flex flex-col space-y-2">
-//     <Input
-//       type="number"
-//       value={marker.start}
-//       onChange={(e) =>
-//         updateMarker(marker._id, {
-//           start: parseFloat(e.target.value),
-//         })
-//       }
-//     />
-//     <Input
-//       type="number"
-//       value={marker.end}
-//       onChange={(e) =>
-//         updateMarker(marker._id, {
-//           end: parseFloat(e.target.value),
-//         })
-//       }
-//     />
-//     <Input
-//       type="text"
-//       value={marker.title}
-//       onChange={(e) =>
-//         updateMarker(marker._id, { title: e.target.value })
-//       }
-//     />
-//     <Button onClick={() => setEditingMarker(null)}>
-//       Save
-//     </Button>
-//   </div>
-// ) : (

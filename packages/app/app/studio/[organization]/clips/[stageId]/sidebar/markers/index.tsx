@@ -9,25 +9,11 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { CardTitle } from '@/components/ui/card';
-import useSearchParams from '@/lib/hooks/useSearchParams';
-import { fetchAllSessions } from '@/lib/services/sessionService';
 import Marker from './Marker';
 import { useClipContext } from '../../ClipContext';
-
+import { IExtendedMarker } from '@/lib/types';
+import { fetchMarkers } from '@/lib/services/markerSevice';
 // temp
-export interface IMarker {
-  _id: string;
-  name: string;
-  description: string;
-  organizationId: string;
-  stageIdId: string;
-  start: number;
-  end: number;
-  date: string;
-  color: string;
-  speakers?: any[];
-  slug: string;
-}
 
 /* Whats missing:
     - Properly extract all posible dates for markers
@@ -55,39 +41,17 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
   useEffect(() => {
     if (stageId) {
       setIsLoading(true);
-      fetchAllSessions({
-        organizationSlug: organizationId,
-        limit: 20,
-        page: 1,
-        // stageId: stageId,
-        onlyVideos: true,
-        type: 'video',
-      }).then((res) => {
-        setMarkers(res.sessions);
+      fetchMarkers({
+        organizationId: organizationId,
+        stageId: stageId,
+      }).then((markers) => {
+        setMarkers(markers);
         setIsLoading(false);
       });
     }
   }, [stageId]);
 
-  const updateMarker = (marker: IMarker) => {
-    // call api to update marker
-
-    const updatedMarkers = markers.map((m) => {
-      if (m._id === marker._id) {
-        return marker;
-      }
-      return m;
-    });
-    setMarkers(updatedMarkers);
-  };
-
-  const deleteMarker = (markerId: string) => {
-    // call api to delete marker
-    const updatedMarkers = markers.filter((m) => m._id !== markerId);
-    setMarkers(updatedMarkers);
-  };
-
-  const addMarker = (marker: IMarker) => {
+  const addMarker = (marker: IExtendedMarker) => {
     // call api to add marker
     setMarkers([...markers, marker]);
   };
@@ -133,26 +97,12 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          {/* <Input
-            placeholder="Search"
-            onChange={(e) => {
-              setFilteredSessions(
-                sessions.filter((session) =>
-                  session.name.includes(e.target.value)
-                )
-              );
-            }}
-          /> */}
         </div>
       </CardTitle>
       <div className="h-[calc(100%-130px)] w-full overflow-y-scroll">
-        {markers.map((session) => (
-          <div key={session._id} className="w-full px-4 py-2">
-            <Marker
-              marker={session as IMarker}
-              updateMarker={updateMarker}
-              deleteMarker={deleteMarker}
-            />
+        {markers.map((marker) => (
+          <div key={marker._id} className="w-full px-4 py-2">
+            <Marker marker={marker} organizationId={organizationId} />
           </div>
         ))}
       </div>

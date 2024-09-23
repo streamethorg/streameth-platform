@@ -27,7 +27,7 @@ const Layout = async ({
   return (
     <div className="flex h-screen w-screen flex-row">
       <SidebarMenu organizationSlug={params.organization} />
-      <div className="flex w-[calc(100%-54px)] flex-col">
+      <div className="flex w-[calc(100%-73px)] flex-col">
         <HomePageNavbar
           pages={[]}
           showLogo={false}

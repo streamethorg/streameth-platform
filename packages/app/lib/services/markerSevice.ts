@@ -1,5 +1,5 @@
 import { apiUrl } from '@/lib/utils/utils';
-import { IExtendedMarkers } from '../types';
+import { IExtendedMarker } from '../types';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 
 // create marker for a stage
@@ -9,7 +9,7 @@ export async function createMarkers({
 }: {
   markers: IMarker;
   authToken: string;
-}): Promise<IExtendedMarkers> {
+}): Promise<IExtendedMarker> {
   console.log('markers', JSON.stringify(markers));
   const response = await fetch(`${apiUrl()}/markers`, {
     method: 'POST',
@@ -31,9 +31,9 @@ export const updateMarkers = async ({
   markers,
   authToken,
 }: {
-  markers: IExtendedMarkers;
+  markers: IExtendedMarker;
   authToken: string;
-}): Promise<IExtendedMarkers> => {
+}): Promise<IExtendedMarker> => {
   const { _id, ...rest } = markers;
 
   try {
@@ -66,7 +66,7 @@ export async function fetchMarkers({
   organizationId: string;
   stageId?: string;
   date?: string;
-}): Promise<IExtendedMarkers[]> {
+}): Promise<IExtendedMarker[]> {
   try {
     const response = await fetch(
       `${apiUrl()}/markers?organization=${organizationId}&stageId=${stageId}`,
@@ -93,7 +93,7 @@ export async function deleteMarker({
   markerId: string;
   organizationId: string;
   authToken: string;
-}): Promise<IExtendedMarkers> {
+}): Promise<IExtendedMarker> {
   try {
     const response = await fetch(`${apiUrl()}/markers/${markerId}`, {
       method: 'DELETE',
@@ -125,7 +125,7 @@ export const importMarkers = async ({
   type: string;
   url: string;
   authToken: string;
-}): Promise<IExtendedMarkers> => {
+}): Promise<IExtendedMarker> => {
   const response = await fetch(`${apiUrl()}/markers/import`, {
     method: 'POST',
     headers: {

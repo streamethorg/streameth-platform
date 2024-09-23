@@ -245,3 +245,12 @@ export const markersImportSchema = z.object({
   organizationId: z.string(),
   stageId: z.string(),
 });
+
+export const clipSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  start: z.number().min(0, 'Start is required'),
+  end: z.number().min(0, 'End is required'),
+  organizationId: z.string().min(1, 'Organization ID is required'),
+  stageId: z.string().min(1, 'Stage ID is required'),
+  description: z.string().optional(),
+});

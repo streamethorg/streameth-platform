@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, useRef } from 'react';
-import { IMarker } from './sidebar/markers';
+import { IExtendedMarker } from '@/lib/types';
 
 type PlaybackStatus = {
   progress: number;
@@ -31,9 +31,11 @@ type ClipContextType = {
   fragmentLoading: boolean;
   setFragmentLoading: React.Dispatch<React.SetStateAction<boolean>>;
   updateClipBounds: (start: number, end: number) => void;
-  markers: IMarker[];
-  setMarkers: React.Dispatch<React.SetStateAction<IMarker[]>>;
+  markers: IExtendedMarker[];
+  setMarkers: React.Dispatch<React.SetStateAction<IExtendedMarker[]>>;
   stageId: string;
+  isCreatingClip: boolean;
+  setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -63,7 +65,8 @@ export const ClipProvider = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [dragging, setDragging] = useState<string | null>(null);
   const [selectedTooltip, setSelectedTooltip] = useState<string | null>(null);
-  const [markers, setMarkers] = useState<IMarker[]>([]);
+  const [markers, setMarkers] = useState<IExtendedMarker[]>([]);
+  const [isCreatingClip, setIsCreatingClip] = useState<boolean>(false);
 
   const updateClipBounds = (start: number, end: number) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
@@ -91,6 +94,8 @@ export const ClipProvider = ({
         markers,
         setMarkers,
         stageId,
+        isCreatingClip,
+        setIsCreatingClip,
       }}
     >
       {children}

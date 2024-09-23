@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { IExtendedMarkers } from '@/lib/types';
+import { IExtendedMarker } from '@/lib/types';
 import { createMarkersAction, updateMarkersAction } from '@/lib/actions/marker';
 
 const AddOrEditMarkerForm = ({
@@ -29,7 +29,7 @@ const AddOrEditMarkerForm = ({
 }: {
   stageId: string;
   organizationId: string;
-  markerToEdit?: IExtendedMarkers; // Add this prop
+  markerToEdit?: IExtendedMarker; // Add this prop
   onCancel?: () => void; // Add this prop
 }) => {
   const [showForm, setShowForm] = useState(!!markerToEdit);
