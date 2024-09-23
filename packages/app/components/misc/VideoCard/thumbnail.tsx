@@ -24,14 +24,14 @@ export default function Thumbnail({ imageUrl, fallBack }: ThumbnailProps) {
   }
 
   return (
-    <div className="relative aspect-video w-full">
+    <div className="relative aspect-video w-full z-1">
       <Image
         placeholder="blur"
         blurDataURL={srcUrl}
         loading="lazy"
         decoding="async"
         data-nimg="fill"
-        className="rounded-xl"
+        className="rounded-xl z-1"
         alt="Session image"
         quality={100}
         src={srcUrl}

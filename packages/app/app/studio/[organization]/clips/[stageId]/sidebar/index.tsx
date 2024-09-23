@@ -11,16 +11,14 @@ export default function Sidebar({
 }) {
   const { isCreatingClip } = useClipContext();
 
-  if (isCreatingClip) {
-    return (
-      <div className="h-full w-full border-l bg-background">
-        <CreateClipButton organizationId={organizationId} />
-      </div>
-    );
-  }
-
+  // overalay is better ( absolute position) so that when closing we can continue seeing markers / clips as before
   return (
-    <div className="h-full w-full border-l bg-background bg-white">
+    <div className="h-full w-full border-l bg-white relative">
+      {isCreatingClip && (
+        <div className="h-full w-full border-l bg-white absolute z-50">
+          <CreateClipButton organizationId={organizationId} />
+        </div>
+      )}
       <Tabs defaultValue="clips" className=" h-full ">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="markers">Markers</TabsTrigger>
