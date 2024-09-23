@@ -204,7 +204,12 @@ export interface LivestreamPageParams {
     organization: string;
     streamId: string;
   };
-  searchParams: { layout: eLayout; sort: eSort; show: boolean };
+  searchParams: {
+    layout: eLayout;
+    sort: eSort;
+    show: boolean;
+    previewId: string;
+  };
 }
 
 export interface IGenerateEmbed {
