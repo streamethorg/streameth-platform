@@ -17,53 +17,48 @@ import { ScissorsLineDashed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 import { formatTime } from '@/lib/utils/time';
+import TableSort from '@/components/misc/TableSort';
 
 interface ClipsConfigProps {
   organization: any;
-  sessionsWithStageDetails: any[];
+  recording: any[];
   customUrlStages: any[];
   liveStages: any[];
 }
 
 const ClipsConfig = ({
   organization,
-  sessionsWithStageDetails,
+  recording,
   customUrlStages,
   liveStages,
 }: ClipsConfigProps) => {
   return (
     <div className="flex flex-col items-start w-full min-h-screen px-4 md:px-8 py-6 space-y-8 overflow-auto">
-      {sessionsWithStageDetails?.length > 0 && (
+      {recording?.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Past Recordings</h2>
-          <div className="w-full border border-gray-300 rounded-md overflow-hidden">
+          <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
             <div className="max-h-[400px] overflow-auto">
-              <Table className="w-full">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Title
+              <Table className="rounded-xl bg-white p-1">
+                <TableHeader className="sticky top-0 z-50 border-b bg-white">
+                  <TableRow className="rounded-t-xl hover:bg-white">
+                    <TableHead>Title</TableHead>
+                    <TableHead>
+                      <TableSort title="Created At" sortBy="createdAt" />
                     </TableHead>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Created At
+                    <TableHead>Stage Name</TableHead>
+                    <TableHead>
+                      <TableSort title="Duration" sortBy="duration" />
                     </TableHead>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Stage Name
-                    </TableHead>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Duration
-                    </TableHead>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Actions
-                    </TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
-                  {sessionsWithStageDetails.map(
+                <TableBody className="overflow-auto">
+                  {recording.map(
                     (session) =>
                       session.playback.duration > 0 && (
                         <TableRow key={session._id}>
-                          <TableCell>
+                          <TableCell className="max-w-[500px] font-medium">
                             <Link
                               href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=livestream`}
                               className="hover:underline"
@@ -80,15 +75,15 @@ const ClipsConfig = ({
                           <TableCell>
                             {formatTime(session.playback.duration)}
                           </TableCell>
-                          <TableCell>
+                          <TableCell className="my-2 flex items-center space-x-2">
                             <Link
                               href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=recording`}
                             >
                               <Button
-                                variant={'secondary'}
-                                className="flex items-center space-x-2"
+                                variant="primary"
+                                className="flex w-full items-center gap-1"
                               >
-                                <ScissorsLineDashed className="w-4 h-4 mr-2" />
+                                <ScissorsLineDashed className="h-4 w-4" />
                                 Clip
                               </Button>
                             </Link>
@@ -106,32 +101,30 @@ const ClipsConfig = ({
       {customUrlStages.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Custom URL Stages</h2>
-          <div className="w-full border border-gray-300 rounded-md overflow-hidden">
+          <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
             <div className="max-h-[400px] overflow-auto">
-              <Table className="w-full">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Stage Name
-                    </TableHead>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Actions
-                    </TableHead>
+              <Table className="rounded-xl bg-white p-1">
+                <TableHeader className="sticky top-0 z-50 border-b bg-white">
+                  <TableRow className="rounded-t-xl hover:bg-white">
+                    <TableHead>Stage Name</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody className="overflow-auto">
                   {customUrlStages.map((stage) => (
                     <TableRow key={stage._id}>
-                      <TableCell>{stage.name}</TableCell>
-                      <TableCell>
+                      <TableCell className="max-w-[500px] font-medium">
+                        {stage.name}
+                      </TableCell>
+                      <TableCell className="my-2 flex items-center space-x-2">
                         <Link
                           href={`/studio/${organization.slug}/clips/${stage._id}?videoType=customUrl`}
                         >
                           <Button
-                            variant={'secondary'}
-                            className="flex items-center space-x-2"
+                            variant="primary"
+                            className="flex w-full items-center gap-1"
                           >
-                            <ScissorsLineDashed className="w-4 h-4 mr-2" />
+                            <ScissorsLineDashed className="h-4 w-4" />
                             Clip
                           </Button>
                         </Link>
@@ -148,32 +141,30 @@ const ClipsConfig = ({
       {liveStages.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Active Livestreams</h2>
-          <div className="w-full border border-gray-300 rounded-md overflow-hidden">
+          <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
             <div className="max-h-[400px] overflow-auto">
-              <Table className="w-full">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Stage Name
-                    </TableHead>
-                    <TableHead className="bg-white sticky top-0 z-10">
-                      Actions
-                    </TableHead>
+              <Table className="rounded-xl bg-white p-1">
+                <TableHeader className="sticky top-0 z-50 border-b bg-white">
+                  <TableRow className="rounded-t-xl hover:bg-white">
+                    <TableHead>Stage Name</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody className="overflow-auto">
                   {liveStages.map((stage) => (
                     <TableRow key={stage._id}>
-                      <TableCell>{stage.name}</TableCell>
-                      <TableCell>
+                      <TableCell className="max-w-[500px] font-medium">
+                        {stage.name}
+                      </TableCell>
+                      <TableCell className="my-2 flex items-center space-x-2">
                         <Link
                           href={`/studio/${organization.slug}/clips/${stage._id}?videoType=livestream`}
                         >
                           <Button
-                            variant={'secondary'}
-                            className="flex items-center space-x-2"
+                            variant="primary"
+                            className="flex w-full items-center gap-1"
                           >
-                            <ScissorsLineDashed className="w-4 h-4 mr-2" />
+                            <ScissorsLineDashed className="h-4 w-4" />
                             Clip
                           </Button>
                         </Link>
@@ -239,7 +230,7 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
   console.log('liveStages:', liveStages);
 
   // Fetch stage details for each session
-  const sessionsWithStageDetails = await Promise.all(
+  const recording = await Promise.all(
     sessionRecordings.map(async (session) => {
       if (!session.stageId) return session; // Skip if stageId is undefined
       const stage = await fetchStage({ stage: session.stageId.toString() });
@@ -248,7 +239,7 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
     })
   );
 
-  console.log('sessionsWithStageDetails:', sessionsWithStageDetails);
+  console.log('recording:', recording);
 
   return (
     <Suspense
@@ -257,7 +248,7 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
     >
       <ClipsConfig
         organization={organization}
-        sessionsWithStageDetails={sessionsWithStageDetails}
+        recording={recording}
         customUrlStages={customUrlStages}
         liveStages={liveStages}
       />
