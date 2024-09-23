@@ -216,3 +216,8 @@ export const ScheduleImportSchema = z.object({
   organizationId: z.string(),
   stageId: z.string().optional(),
 });
+
+export const injectUrlSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  url: z.string().url({ message: 'Invalid URL' }),
+});

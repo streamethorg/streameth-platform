@@ -28,11 +28,12 @@ const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
       url: `/studio/${organizationSlug}/destinations`,
       icon: <LuShare2 size={25} />,
     },
-    {
-      text: 'NFTs',
-      url: `/studio/${organizationSlug}/nfts`,
-      icon: <LuLock size={25} />,
-    },
+    // WARNING: This is the NFT page only access, commenting this will make user unable to access it
+    // {
+    //   text: 'NFTs',
+    //   url: `/studio/${organizationSlug}/nfts`,
+    //   icon: <LuLock size={25} />,
+    // },
     {
       text: 'Team',
       url: `/studio/${organizationSlug}/team`,

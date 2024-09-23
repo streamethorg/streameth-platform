@@ -30,7 +30,7 @@ const CreateNFT = async ({
     <div className="mx-auto h-full max-w-5xl overflow-auto">
       <CreateNFTForm
         videos={videos as INFTSessions[]}
-        stages={stages as INFTSessions[]}
+        stages={stages as unknown as INFTSessions[]}
         organizationId={organizationId}
         organizationSlug={params.organization}
         type={type as NftCollectionType}

@@ -12,7 +12,7 @@ import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
 import { createEventVideoById } from './firebase';
 import { refreshAccessToken } from './oauth';
-import { fetchAndParseVTT, parseVTT } from './util';
+import { fetchAndParseVTT } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
@@ -322,7 +322,7 @@ export const generateThumbnail = async (data: {
       const asset = await getAsset(data.assetId);
       playbackId = asset.playbackId;
     }
-    const asset = await livepeer.playback.get(playbackId as string);
+    const asset = await livepeer.playback.get(playbackId);
 
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
@@ -460,7 +460,36 @@ export const refetchAssets = async () => {
     await Promise.all(sessionPromise);
   } catch (e) {
     console.log('error', e);
-    throw new HttpException(400, 'Error refetching asset');
+    throw new HttpException(400, 'Error processing asset');
+  }
+};
+
+export const getAssetByPlaybackId = async () => {
+  try {
+    const sessions = await SessionModel.find({
+      $and: [{ playbackId: { $ne: '' } }, { assetId: { $eq: '' } }],
+    });
+    if (sessions.length === 0) return;
+    const sessionPromise = sessions.map(async (session) => {
+      try {
+        const url = `${host}/api/asset?filters=[{"id":"playbackId","value":"${session.playbackId}"}]`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${secretKey}`,
+          },
+        });
+        const data = await response.json();
+        if (data.length === 0) return;
+        await session.updateOne({ assetId: data[0].id });
+      } catch (e) {
+        throw new HttpException(400, 'Error fetching asset');
+      }
+    });
+    await Promise.all(sessionPromise);
+  } catch (e) {
+    throw new HttpException(500, 'Error processing asset');
   }
 };
 

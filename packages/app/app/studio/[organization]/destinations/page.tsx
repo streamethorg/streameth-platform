@@ -1,4 +1,5 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import {
   Card,
   CardTitle,
@@ -18,9 +19,14 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import Image from 'next/image';
 import { SiX, SiYoutube } from 'react-icons/si';
 import { LuRadio } from 'react-icons/lu';
-import DeleteDestination from './components/DeleteDestination';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+
+const AddDestination = dynamic(() => import('./components/AddDestination'), {
+  ssr: false,
+});
+const DeleteDestination = dynamic(
+  () => import('./components/DeleteDestination'),
+  { ssr: false }
+);
 
 const Destinations = async ({
   params,
@@ -46,19 +52,20 @@ const Destinations = async ({
   };
 
   return (
-    <div className="mx-auto mt-12 flex h-[90%] w-full max-w-4xl">
-      <Card className="w-full rounded-r-xl border bg-white shadow-none">
+    <div className="mx-auto mt-12 flex flex-col h-[90%] w-full max-w-4xl">
+      <AddDestination
+        organization={{ ...organization, slug: organization.slug || '' }}
+      />
+
+      <Card className="w-full rounded-xl border bg-white shadow-none">
         <CardHeader>
-          <CardTitle>Destinations</CardTitle>
+          <CardTitle>Connected Destinations</CardTitle>
           <CardDescription className="mt-2">
-            Manage and add social destinations
+            Manage your connected social destinations
           </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <Link href="destinations/connect">
-            <Button variant="primary">Add a destination</Button>
-          </Link>
           <Table className="mt-4">
             <TableHeader className="sticky top-0 z-50 border-separate bg-gray-100">
               <TableRow className="hover:bg-whiterounded-t-xl border-b">
@@ -75,14 +82,16 @@ const Destinations = async ({
                         <div className="bg-black w-[50px] h-[50px] rounded-full">
                           <SiX color="#fff" className="w-full h-full p-3" />
                         </div>
-                      ) : (
+                      ) : thumbnail ? (
                         <Image
                           className="rounded-full"
-                          src={thumbnail!}
+                          src={thumbnail}
                           width={50}
                           height={50}
                           alt={type}
                         />
+                      ) : (
+                        <div className="w-[50px] h-[50px] rounded-full bg-gray-200" />
                       )}
                       {renderSocialTypeIcon(type)}
                     </div>

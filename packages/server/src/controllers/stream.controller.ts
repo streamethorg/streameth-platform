@@ -4,29 +4,29 @@ import { DeleteMultiStreamDto } from '@dtos/stream/delete-multistream.dto';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
   createAsset,
-  getStreamInfo,
+  createClip,
   createMultiStream,
   deleteMultiStream,
-  getDownloadUrl,
-  createClip,
-  getSessionMetrics,
-  getStreamRecordings,
-  uploadToIpfs,
-  getAsset,
   generateThumbnail,
+  getAsset,
+  getDownloadUrl,
+  getSessionMetrics,
+  getStreamInfo,
+  getStreamRecordings,
   getVideoPhaseAction,
+  uploadToIpfs,
 } from '@utils/livepeer';
 import {
-  Tags,
-  Route,
-  Controller,
   Body,
-  Post,
-  SuccessResponse,
+  Controller,
+  Delete,
   Get,
   Path,
-  Delete,
+  Post,
+  Route,
   Security,
+  SuccessResponse,
+  Tags,
 } from 'tsoa';
 
 @Tags('Stream')

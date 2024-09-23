@@ -5,6 +5,7 @@ import { errorMessageToStatusCode } from './utils/errors';
 import { downloadM3U8ToMP4 } from './utils/ffmpeg';
 import { logger } from './utils/logger';
 import connection from './utils/mq';
+import { uploadToTwitter } from './utils/twitter';
 import { uploadToYouTube } from './utils/youtube';
 
 config();
@@ -54,11 +55,20 @@ async function videoUploader() {
             data.session.slug,
             './tmp'
           );
-          await uploadToYouTube(
-            data.session,
-            `./tmp/${data.session.slug}.mp4`,
-            data.token
-          );
+          if(data.type === 'youtube') {
+            await uploadToYouTube(
+              data.session,
+              `./tmp/${data.session.slug}.mp4`,
+              data.token
+            );
+          }
+          if(data.type === 'twitter') {
+            await uploadToTwitter(
+              data.session,
+              `./tmp/${data.session.slug}.mp4`,
+              data.token
+            );
+          }
           await sessions.findOneAndUpdate(
             { _id: ObjectId.createFromHexString(data.sessionId) },
             {

@@ -1,17 +1,14 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { useClipContext } from './ClipContext';
+import { useClipContext } from '../ClipContext';
 
 export interface HlsPlayerProps {
-  playbackId: string;
-  selectedStreamSession: string;
+  src: string;
+  type: string;
 }
 
-const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
-  playbackId,
-  selectedStreamSession,
-}) => {
+const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
   const {
     setPlaybackStatus,
     setIsLoading,
@@ -32,12 +29,27 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
 
   const [error, setError] = useState<string | null>(null);
 
-  const src = `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${selectedStreamSession}/output.m3u8`;
+  const corsProxyUrl = process.env.NEXT_PUBLIC_CORS_PROXY_URL || '';
+  const proxyBaseUrl = `${corsProxyUrl}/raw?url=`;
+  const proxiedSrc = `${proxyBaseUrl}${encodeURIComponent(src)}`;
 
   useEffect(() => {
     if (Hls.isSupported() && videoRef.current) {
-      const hls = new Hls();
-      hls.loadSource(src);
+      const hls = new Hls({
+        debug: true, // Enable debug logs
+        xhrSetup: function (xhr, url) {
+          //  if (url.endsWith(".ts")){
+          //     url = url.replace(corsProxyUrl, "https://prod-ec-us-east-1.video.pscp.tv/Transcoding/v1/hls/aisgdiMou1VmMGXXA31KjMbfAgOwTNmOcnCTEm1h7TxuQGEmKencuaceIKTuC_8oBTmp3HXozs_9mxKF6QJ5cg/transcode/us-east-1/periscope-replay-direct-prod-us-east-1-public/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsInZlcnNpb24iOiIyIn0.eyJFbmNvZGVyU2V0dGluZyI6ImVuY29kZXJfc2V0dGluZ183MjBwMzBfMTAiLCJIZWlnaHQiOjcyMCwiS2JwcyI6Mjc1MCwiV2lkdGgiOjEyODB9.ldktM4fCFRfkP4ZEBfZPKtlAUNAcTPkoz994YJAzWpE")
+          //     console.log(url)
+          //   }
+          if (type === 'youtube') {
+            const proxiedUrl = `${proxyBaseUrl}${encodeURIComponent(url)}`;
+            xhr.open('GET', proxiedUrl, true);
+          }
+        },
+      });
+
+      hls.loadSource(type === 'youtube' ? proxiedSrc : src);
       hls.attachMedia(videoRef.current);
 
       hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
@@ -55,7 +67,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         }
       });
 
-      // if seeking loading spinner
       videoRef.current.onseeking = () => {
         setIsLoading(true);
         setFragmentLoading(true);
@@ -65,7 +76,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
         setIsLoading(false);
       };
 
-      // Set error handling
       hls.on(Hls.Events.ERROR, (event, data) => {
         setError(data.details);
       });
@@ -73,18 +83,16 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
       const intervalId = setInterval(() => {
         if (videoRef.current) {
           const progress = videoRef.current.currentTime;
-          // Update progress without overwriting offset
           playbackRef.current.progress = progress;
           setPlaybackStatus({ ...playbackRef.current });
         }
       }, 1000);
-
       return () => {
         hls.destroy();
         clearInterval(intervalId);
       };
     }
-  }, [src, setPlaybackStatus, videoRef, setIsLoading]);
+  }, [proxiedSrc, setPlaybackStatus, videoRef, setIsLoading, src]);
 
   useEffect(() => {
     if (
@@ -102,10 +110,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({
 
   return (
     <div className="relative mb-4 flex h-2/3 flex-grow">
-      {/* <div className='bg-black p-4 text-white flex flex-row space-x-2 absolute top-0 z-[99999]'>
-        <p>{new Date(startTime.unix).toISOString()}</p>
-        <p>{new Date(endTime.unix).toISOString()}</p>
-      </div> */}
       <video
         ref={videoRef}
         autoPlay={false}

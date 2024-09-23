@@ -798,6 +798,13 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"StageType": {
+				"enum": [
+					"custom",
+					"livepeer"
+				],
+				"type": "string"
+			},
 			"IStage": {
 				"properties": {
 					"_id": {
@@ -905,6 +912,28 @@
 					"recordingIndex": {
 						"type": "number",
 						"format": "double"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StageType"
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -1012,11 +1041,168 @@
 					"recordingIndex": {
 						"type": "number",
 						"format": "double"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StageType"
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
 					"name",
 					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateHlsStageDto": {
+				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"streamSettings": {
+						"$ref": "#/components/schemas/IStreamSettings"
+					},
+					"plugins": {
+						"items": {
+							"$ref": "#/components/schemas/IPlugin"
+						},
+						"type": "array"
+					},
+					"order": {
+						"type": "number",
+						"format": "double"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"isMultipleDate": {
+						"type": "boolean"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"streamDate": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"streamEndDate": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
+					},
+					"recordingIndex": {
+						"type": "number",
+						"format": "double"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StageType"
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"url"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -4365,7 +4551,7 @@
 						}
 					}
 				},
-				"summary": "Create Session",
+				"summary": "Create Stage",
 				"tags": [
 					"Stage"
 				],
@@ -4417,6 +4603,45 @@
 						}
 					}
 				]
+			}
+		},
+		"/stages/hls": {
+			"post": {
+				"operationId": "CreateHlsStage",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IStage_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create HLS Stage",
+				"tags": [
+					"Stage"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateHlsStageDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/stages/{stageId}": {

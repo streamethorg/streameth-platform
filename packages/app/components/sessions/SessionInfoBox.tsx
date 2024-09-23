@@ -16,6 +16,7 @@ import CalendarReminder from '@/app/[organization]/livestream/components/Calenda
 import { IExtendedSpeaker } from '@/lib/types';
 import VideoDownloadClient from '../misc/VideoDownloadClient';
 import TranscriptionModal from './TranscriptionModal';
+import Timezone from '@/lib/utils/timezone';
 
 const DesktopButtons = ({
   name,
@@ -80,7 +81,7 @@ const MobileButtons = ({
   const hasCalendarReminder = !vod;
 
   return (
-    <div className="flex w-full flex-wrap items-center gap-2">
+    <div className="flex flex-wrap gap-2 items-center w-full">
       {video?.nftCollections?.[0] && (
         <CollectVideButton video={video} nftCollection={nftCollection} />
       )}
@@ -131,7 +132,9 @@ const SessionInfoBox = async ({
   vod?: boolean;
   organizationSlug?: string;
   viewCount?: boolean;
-  video?: IExtendedStage;
+  video?:
+    | (IExtendedSession & { isMultipleDate?: boolean; streamEndDate?: string })
+    | IExtendedStage;
 }) => {
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
@@ -143,23 +146,13 @@ const SessionInfoBox = async ({
         inverted ? 'rounded-lg text-card-foreground text-white' : ''
       }`}
     >
-      <div className="flex w-full flex-col justify-start">
-        <CardTitle className="flex flex-row items-start justify-between text-xl lg:text-2xl">
+      <div className="flex flex-col justify-start w-full">
+        <CardTitle className="flex flex-row justify-between items-start text-xl lg:text-2xl">
           <span>{name}</span>
         </CardTitle>
         <InfoBoxDescription speakers={speakers} description={description} />
         <div className="flex items-center space-x-2 text-sm">
-          <span>
-            {video?.isMultipleDate && video?.streamEndDate
-              ? `${formatDate(
-                  new Date(date),
-                  'ddd. MMM. D, YYY, h:mm a'
-                )} - ${formatDate(
-                  new Date(video?.streamEndDate),
-                  'ddd. MMM. D, YYYY, h:mm a'
-                )}`
-              : formatDate(new Date(date), 'ddd. MMM. D, YYYY, h:mm a')}
-          </span>
+          <Timezone date={date} video={video as IExtendedStage} />
           {playbackId && (
             <>
               <span className="font-bold">|</span>
@@ -169,22 +162,22 @@ const SessionInfoBox = async ({
         </div>
       </div>
       <>
-        <div className="mb-auto mt-0 hidden items-center justify-end space-x-2 md:flex">
+        <div className="hidden justify-end items-center mt-0 mb-auto space-x-2 md:flex">
           <DesktopButtons
             name={name}
             description={description}
             date={date}
-            video={video as IExtendedSession}
+            video={video as IExtendedSession | undefined}
             nftCollection={nftCollection}
             vod={vod}
           />
         </div>
-        <div className="mb-auto mt-2 flex items-center justify-between space-x-2 md:hidden">
+        <div className="flex justify-between items-center mt-2 mb-auto space-x-2 md:hidden">
           <MobileButtons
             name={name}
             description={description}
             date={date}
-            video={video as IExtendedSession}
+            video={video as IExtendedSession | undefined}
             nftCollection={nftCollection}
             vod={vod}
           />

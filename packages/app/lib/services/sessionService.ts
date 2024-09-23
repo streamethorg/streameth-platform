@@ -155,9 +155,9 @@ export const fetchSession = async ({
   session: string;
 }): Promise<IExtendedSession | null> => {
   try {
-    const LivepeerClient = new Livepeer({
-      apiKey: process.env.LIVEPEER_API_KEY,
-    });
+    // const LivepeerClient = new Livepeer({
+    //   apiKey: process.env.LIVEPEER_API_KEY,
+    // });
     const response = await fetch(`${apiUrl()}/sessions/${session}`, {
       cache: 'no-store',
     });
@@ -165,10 +165,10 @@ export const fetchSession = async ({
       return null;
     }
     const data: IExtendedSession = (await response.json()).data;
-    if (data.assetId) {
-      const livepeerData = await LivepeerClient.asset.get(data.assetId);
-      data.videoUrl = livepeerData.asset?.playbackUrl;
-    }
+    // if (data.assetId) {
+    //   const livepeerData = await LivepeerClient.asset.get(data.assetId);
+    //   data.videoUrl = livepeerData.asset?.playbackUrl;
+    // }
     return data;
   } catch (e) {
     console.log(e);
@@ -384,7 +384,7 @@ export const generateThumbnail = async ({
     throw e;
   }
 };
-export const uploadSessionToYouTube = async ({
+export const uploadSessionToSocialsRequest = async ({
   sessionId,
   type,
   organizationId,

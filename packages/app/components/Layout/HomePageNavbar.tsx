@@ -86,7 +86,11 @@ const MobileNavBar = ({
     pathname.includes('clips') && searchParams.has('selectedRecording');
 
   const handleGoBack = () => {
-    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+    handleTermChange([
+      { key: 'videoType', value: undefined },
+      { key: 'stageId', value: undefined },
+      { key: 'sessionId', value: undefined },
+    ]);
   };
 
   useLayoutEffect(() => {
@@ -208,10 +212,14 @@ const PCNavBar = ({
   const isStudio = pathname.includes('studio');
 
   const showGoBack =
-    pathname.includes('clips') && searchParams.has('selectedRecording');
+    pathname.includes('clips') && searchParams.has('videoType');
 
   const handleGoBack = () => {
-    handleTermChange([{ key: 'selectedRecording', value: undefined }]);
+    handleTermChange([
+      { key: 'videoType', value: undefined },
+      { key: 'stageId', value: undefined },
+      { key: 'sessionId', value: undefined },
+    ]);
   };
 
   return (
@@ -265,6 +273,13 @@ const PCNavBar = ({
           />
         )}
         <Navbar organization={currentOrganization} pages={pages} />
+        {organizations && organizations.length === 1 && (
+          <Link href="/studio/create">
+            <Button className="mr-2" variant="outlinePrimary">
+              Create Organization
+            </Button>
+          </Link>
+        )}
         {isStudio && <SignInUserButton />}
       </div>
     </NavigationMenu>
