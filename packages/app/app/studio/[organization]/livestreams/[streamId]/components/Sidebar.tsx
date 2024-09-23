@@ -28,7 +28,10 @@ const Sidebar = ({
         </TabsList>
         <TabsContent className="flex-grow overflow-hidden" value="clips">
           <div className="h-full overflow-y-auto">
-            <ClipsList sessions={sessions} />
+            <ClipsList
+              organizationSlug={organization.slug!}
+              sessions={sessions}
+            />
           </div>
         </TabsContent>
         <TabsContent className="flex-grow overflow-hidden" value="destinations">

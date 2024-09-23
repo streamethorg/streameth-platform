@@ -8,7 +8,13 @@ import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { Clapperboard } from 'lucide-react';
 
-const ClipsList = ({ sessions }: { sessions: IExtendedSession[] }) => {
+const ClipsList = ({
+  sessions,
+  organizationSlug,
+}: {
+  sessions: IExtendedSession[];
+  organizationSlug: string;
+}) => {
   const { handleTermChange } = useSearchParams();
   const sortedSessions = sessions.sort((a, b) => {
     return (
@@ -25,6 +31,7 @@ const ClipsList = ({ sessions }: { sessions: IExtendedSession[] }) => {
     <>
       {sortedSessions.map((session) => (
         <ClipItem
+          organizationSlug={organizationSlug}
           key={session._id}
           session={session}
           handleTermChange={handleTermChange}
@@ -37,9 +44,11 @@ const ClipsList = ({ sessions }: { sessions: IExtendedSession[] }) => {
 const ClipItem = ({
   session,
   handleTermChange,
+  organizationSlug,
 }: {
   session: IExtendedSession;
   handleTermChange: (params: { key: string; value: string }[]) => void;
+  organizationSlug: string;
 }) => {
   const imageUrl = useGenerateThumbnail({ session });
 
@@ -61,8 +70,11 @@ const ClipItem = ({
           {session.description || 'No description provided'}
         </p>
       </div>
-      {/* TODO: add edit endpoint right now it does nothing*/}
-      <Link href={'#'} passHref>
+
+      <Link
+        href={`/studio/${organizationSlug}/library/${session._id}`}
+        passHref
+      >
         <Button variant="primary" className="w-20 h-8 ml-2">
           Edit
           <Clapperboard className="ml-2 w-4 h-4" />
