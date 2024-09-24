@@ -1,4 +1,9 @@
-import { ClipsPageParams } from '@/lib/types';
+import {
+  ClipsPageParams,
+  IExtendedOrganization,
+  IExtendedSession,
+  IExtendedStage,
+} from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import { fetchAllSessions } from '@/lib/data';
@@ -15,7 +20,7 @@ import {
 } from '@/components/ui/table';
 import { ScissorsLineDashed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import { formatTime } from '@/lib/utils/time';
 import TableSort from '@/components/misc/TableSort';
 
@@ -23,10 +28,10 @@ import InjectUrlInput from './components/clipOptions/InjectUrlInput';
 import StageName from './components/StageNames';
 
 interface ClipsConfigProps {
-  organization: any;
-  recording: any[];
-  customUrlStages: any[];
-  liveStages: any[];
+  organization: IExtendedOrganization;
+  recording: IExtendedSession[];
+  customUrlStages: IExtendedStage[];
+  liveStages: IExtendedStage[];
 }
 
 const ClipsConfig = ({
@@ -59,6 +64,7 @@ const ClipsConfig = ({
                 <TableBody className="overflow-auto">
                   {recording.map(
                     (session) =>
+                      session.playback?.duration &&
                       session.playback.duration > 0 && (
                         <TableRow key={session._id}>
                           <TableCell className="max-w-[500px] font-medium">
@@ -75,7 +81,7 @@ const ClipsConfig = ({
                             ).toLocaleDateString()}
                           </TableCell>
                           <TableCell>
-                            <StageName stageId={session.stageId} />
+                            <StageName stageId={session.stageId as string} />
                           </TableCell>
                           <TableCell>
                             {formatTime(session.playback.duration)}
@@ -103,7 +109,7 @@ const ClipsConfig = ({
         </section>
       )}
 
-      <InjectUrlInput organizationId={organization._id} />
+      <InjectUrlInput organizationId={organization._id as string} />
 
       {customUrlStages.length > 0 && (
         <section className="w-full">
