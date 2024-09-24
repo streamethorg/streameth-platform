@@ -114,7 +114,7 @@ const ClipsConfig = ({
       {customUrlStages.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Custom URL Stages</h2>
-          <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
+          <div className="mb-10 w-full rounded-xl border bg-white p-1">
             <div className="max-h-[400px] overflow-auto">
               <Table className="rounded-xl bg-white p-1">
                 <TableHeader className="sticky top-0 z-50 border-b bg-white">
@@ -154,7 +154,7 @@ const ClipsConfig = ({
       {liveStages.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Active Livestreams</h2>
-          <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
+          <div className="mb-10 w-full rounded-xl border bg-white p-1">
             <div className="max-h-[400px] overflow-auto">
               <Table className="rounded-xl bg-white p-1">
                 <TableHeader className="sticky top-0 z-50 border-b bg-white">
