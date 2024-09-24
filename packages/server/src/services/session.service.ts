@@ -1,6 +1,7 @@
 import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
+import { RecordingSessionPayload } from '@interfaces/livepeer.webhook.interface';
 import { ISession, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IUploadSession } from '@interfaces/upload.session.interface';
@@ -207,10 +208,11 @@ export default class SessionService {
     return result;
   }
 
-  async createStreamRecordings(payload: any) {
+  async createStreamRecordings(payload: RecordingSessionPayload) {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
+    if (!stage) throw new HttpException(404, 'Stage not found');
     const asset = await getAsset(payload.assetId);
     const session = await this.create({
       name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
@@ -221,6 +223,7 @@ export default class SessionService {
       videoUrl: payload.recordingUrl,
       organizationId: stage.organizationId,
       assetId: payload.assetId,
+      stageId: stage._id.toString(),
       type: SessionType.livestream,
       playback: {
         videoUrl: payload.recordingUrl,
