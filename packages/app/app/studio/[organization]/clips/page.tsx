@@ -15,9 +15,12 @@ import {
 } from '@/components/ui/table';
 import { ScissorsLineDashed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { formatTime } from '@/lib/utils/time';
 import TableSort from '@/components/misc/TableSort';
+
+import InjectUrlInput from './components/clipOptions/InjectUrlInput';
+import StageName from './components/StageNames';
 
 interface ClipsConfigProps {
   organization: any;
@@ -37,7 +40,7 @@ const ClipsConfig = ({
       {recording?.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Past Recordings</h2>
-          <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
+          <div className="mb-10 w-full rounded-xl border bg-white p-1">
             <div className="max-h-[400px] overflow-auto">
               <Table className="rounded-xl bg-white p-1">
                 <TableHeader className="sticky top-0 z-50 border-b bg-white">
@@ -71,7 +74,9 @@ const ClipsConfig = ({
                               session.createdAt as string
                             ).toLocaleDateString()}
                           </TableCell>
-                          <TableCell>{session.stageName || 'N/A'}</TableCell>
+                          <TableCell>
+                            <StageName stageId={session.stageId} />
+                          </TableCell>
                           <TableCell>
                             {formatTime(session.playback.duration)}
                           </TableCell>
@@ -97,6 +102,8 @@ const ClipsConfig = ({
           </div>
         </section>
       )}
+
+      <InjectUrlInput organizationId={organization._id} />
 
       {customUrlStages.length > 0 && (
         <section className="w-full">
