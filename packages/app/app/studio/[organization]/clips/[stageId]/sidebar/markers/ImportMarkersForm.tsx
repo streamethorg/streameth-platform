@@ -3,18 +3,9 @@ import { markersImportSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
@@ -32,23 +23,27 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { importMarkersAction } from '@/lib/actions/marker';
+import { useClipContext } from '../../ClipContext';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
 
-const ImportMarkers = ({
-  organizationId,
-  stageId,
-}: {
-  organizationId: string;
-  stageId: string;
-}) => {
+const ImportMarkersForm = ({ organizationId }: { organizationId: string }) => {
+  const { stageId, setIsImportingMarkers } = useClipContext();
   const [isImporting, setIsImporting] = useState(false);
-  const [open, setOpen] = useState(false);
+
   const form = useForm<z.infer<typeof markersImportSchema>>({
     resolver: zodResolver(markersImportSchema),
     defaultValues: {
       type: '',
       url: '',
-      organizationId: organizationId,
-      stageId: stageId,
+      organizationId,
+      stageId,
     },
   });
 
@@ -67,7 +62,6 @@ const ImportMarkers = ({
         toast.error(response.error);
       } else {
         toast.success('Markers imported successfully');
-        setOpen(false);
       }
     } catch (error) {
       toast.error('Error importing data');
@@ -76,20 +70,21 @@ const ImportMarkers = ({
     }
   };
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Import Markers</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogTitle>Import Markers</DialogTitle>
-        <DialogDescription>
-          Import markers from google sheet or pretalx
-        </DialogDescription>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleImportMarkers)}
-            className="space-y-4"
-          >
+    <Card className="border-none rounded-none shadow-none">
+      <CardHeader>
+        <CardTitle className="text-lg">Import Markers</CardTitle>
+      </CardHeader>
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleImportMarkers)}
+          className="space-y-2"
+        >
+          <CardContent className="border space-y-4 pt-2">
+            <CardDescription>
+              Import markers from Google Sheets or Pretalx. Ensure that the
+              source stage name matches the stage you are importing to.
+            </CardDescription>
             <FormField
               control={form.control}
               name="type"
@@ -133,24 +128,31 @@ const ImportMarkers = ({
                 </FormItem>
               )}
             />
-
-            <DialogFooter>
+          </CardContent>
+          <CardFooter>
+            <div className="flex gap-2 w-full">
               <Button
                 type="button"
-                onClick={() => setOpen(false)}
+                className="w-1/4"
+                onClick={() => setIsImportingMarkers(false)}
                 variant={'outline'}
               >
                 Cancel
               </Button>
-              <Button type="submit" variant={'primary'} loading={isImporting}>
-                Import
+              <Button
+                type="submit"
+                className="w-3/4"
+                variant={'primary'}
+                loading={isImporting}
+              >
+                {isImporting ? 'Importing...' : 'Import'}
               </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+            </div>
+          </CardFooter>
+        </form>
+      </Form>
+    </Card>
   );
 };
 
-export default ImportMarkers;
+export default ImportMarkersForm;

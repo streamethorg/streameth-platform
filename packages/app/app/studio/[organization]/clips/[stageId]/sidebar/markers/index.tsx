@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Select,
   SelectTrigger,
@@ -12,48 +12,31 @@ import { CardTitle } from '@/components/ui/card';
 import Marker from './Marker';
 import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
-import { fetchMarkers } from '@/lib/services/markerSevice';
-// temp
-
-/* Whats missing:
-    - Properly extract all posible dates for markers
-    - We are missing an empty state
-    - Right now i am fetching all sessions, this was done as a mock. 
-    - We just work with the marker collection.
-    - I created a mock type, lets use the right marker type.
-          
-  */
 
 const Markers = ({ organizationId }: { organizationId: string }) => {
-  const { stageId } = useClipContext();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const { markers, setMarkers } = useClipContext();
+  const { isLoading, markers, setFilteredMarkers, filteredMarkers } =
+    useClipContext();
 
-  const uniqueDates = markers.filter(
-    (session, index, self) =>
-      index ===
-      self.findIndex(
-        (t) => new Date(t.start).getDate() === new Date(session.start).getDate()
-      )
-  );
-  const [dayFilter, setDayFilter] = React.useState(uniqueDates[0]?.start || '');
+  // Find unique dates among markers
+  const uniqueDates = useMemo(() => {
+    const dates = Array.from(
+      new Set(markers.map((marker) => new Date(marker.date).toDateString()))
+    ).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+    return ['All dates', ...dates];
+  }, [markers]);
 
-  useEffect(() => {
-    if (stageId) {
-      setIsLoading(true);
-      fetchMarkers({
-        organizationId: organizationId,
-        stageId: stageId,
-      }).then((markers) => {
-        setMarkers(markers);
-        setIsLoading(false);
-      });
-    }
-  }, [stageId]);
+  const [selectedDate, setSelectedDate] = useState(uniqueDates[0]);
 
-  const addMarker = (marker: IExtendedMarker) => {
-    // call api to add marker
-    setMarkers([...markers, marker]);
+  // Update filtered markers when date is changed
+  const handleDateChange = (value: string) => {
+    setSelectedDate(value);
+    setFilteredMarkers(
+      value === 'All dates'
+        ? markers
+        : markers.filter(
+            (marker) => new Date(marker.date).toDateString() === value
+          )
+    );
   };
 
   if (isLoading) {
@@ -69,29 +52,31 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
       </div>
     );
   }
+  // Empty markers state
+  if (markers.length === 0) {
+    return (
+      <div className="flex h-full w-full items-center justify-center border-l bg-white text-gray-500">
+        No markers available
+      </div>
+    );
+  }
 
   return (
     <div className="h-full w-full border-l">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
         <div className="flex flex-col space-y-2">
-          <Select onValueChange={(value) => setDayFilter(value)}>
+          <Select defaultValue={selectedDate} onValueChange={handleDateChange}>
             <SelectTrigger className="bg-white">
               <SelectValue
-                defaultValue={uniqueDates[0]?.start || ''}
-                placeholder={
-                  new Date(uniqueDates[0]?.start).toDateString() ||
-                  'select a day'
-                }
+                defaultValue={selectedDate}
+                placeholder="Select date"
               />
             </SelectTrigger>
             <SelectContent className="bg-white">
               <SelectGroup>
-                {uniqueDates.map((session) => (
-                  <SelectItem
-                    key={session._id}
-                    value={session.start.toString()}
-                  >
-                    {new Date(session.start).toDateString()}
+                {uniqueDates.map((date) => (
+                  <SelectItem key={date} value={date}>
+                    {date}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -99,12 +84,18 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
           </Select>
         </div>
       </CardTitle>
-      <div className="h-[calc(100%-130px)] w-full overflow-y-scroll">
-        {markers.map((marker) => (
-          <div key={marker._id} className="w-full px-4 py-2">
-            <Marker marker={marker} organizationId={organizationId} />
+      <div className="h-[calc(100%-130px)] w-full overflow-y-auto">
+        {filteredMarkers.length > 0 ? (
+          filteredMarkers.map((marker: IExtendedMarker) => (
+            <div key={marker._id} className="w-full px-4 py-2">
+              <Marker marker={marker} organizationId={organizationId} />
+            </div>
+          ))
+        ) : (
+          <div className="flex h-full mt-10 justify-center text-gray-500">
+            No marker found
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

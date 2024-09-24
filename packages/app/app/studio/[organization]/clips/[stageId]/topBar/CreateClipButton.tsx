@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
+import { createClipAction } from '@/lib/actions/sessions';
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useClipContext } from '../ClipContext';
 
 import { clipSchema } from '@/lib/schema';
@@ -25,97 +25,76 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Textarea } from '@/components/ui/textarea';
-
-// const handleCreateClip = async () => {
-//   if (!endTime || !startTime || endTime.unix < startTime.unix) {
-//     toast.error('Start time must be earlier than end time.');
-//     return;
-//   }
-
-//   if (!selectedRecording) {
-//     toast.error('No recording selected.');
-//     return;
-//   }
-
-//   let customSession: ISession = {
-//     name,
-//     description: 'Clip',
-//     start: new Date().getTime(),
-//     end: new Date().getTime(),
-//     stageId,
-//     organizationId,
-//     speakers: [],
-//     type: SessionType['clip'],
-//   };
-//   if (custom) {
-//     customSession = await createSessionAction({
-//       session: { ...customSession },
-//     });
-//   }
-
-//   const session = custom
-//     ? customSession
-//     : sessions.find((s) => s._id === sessionId);
-
-//   if (!session) {
-//     toast.error('Session information is missing.');
-//     return;
-//   }
-
-//   setIsLoading(true);
-//   await createClipAction({
-//     playbackId,
-//     recordingId: selectedRecording,
-//     start: startTime.unix,
-//     end: endTime.unix,
-//     sessionId: session._id as string,
-//   })
-//     .then(async () => {
-//       setIsLoading(false);
-//       setSessionId('');
-//       setDialogOpen(false);
-
-//       toast.success('Clip created');
-//     })
-//     .catch(() => {
-//       setIsLoading(false);
-//       toast.error('Error creating clip');
-//     })
-//     .finally(() => {
-//       setIsLoading(false);
-//       handleTermChange([
-//         {
-//           key: 'previewId',
-//           value: session._id as string,
-//         },
-//       ]);
-//     });
-// };
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { toast } from 'sonner';
 
 // todo
 /*
- - add marker select input to load marker details into clip form
- we can just access markers from contet array
+ 
 
  - correctly implement handleCreateClip: make sure we pass unix time to createClipAction, the form is showing displaytime
+ - create clip action should create a new session on the backend
  */
 const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
   const { isLoading, markers, stageId, setIsCreatingClip, startTime, endTime } =
     useClipContext();
+  const [selectedMarkerId, setSelectedMarkerId] = useState('');
+  const [isCreateClip, setIsCreateClip] = useState(false);
 
+  const selectedMarker = markers.find(
+    (marker) => marker._id === selectedMarkerId
+  );
   const form = useForm<z.infer<typeof clipSchema>>({
     resolver: zodResolver(clipSchema),
     defaultValues: {
       name: '',
-      description: 'Clip',
+      description: '',
       start: startTime.displayTime,
       end: endTime.displayTime,
       organizationId: organizationId,
       stageId: stageId,
+      speakers: [],
     },
   });
 
+  useEffect(() => {
+    if (selectedMarker) {
+      form.reset({
+        name: selectedMarker.name ?? '',
+        description: selectedMarker.description ?? '',
+        start: startTime.displayTime,
+        end: endTime.displayTime,
+        organizationId: organizationId,
+        stageId: stageId,
+        speakers:
+          selectedMarker.speakers?.map((speaker) => ({
+            ...speaker,
+            eventId: speaker.eventId?.toString(),
+          })) ?? [],
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedMarker]);
+
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
+    // await createClipAction({
+    //   session: values,
+    //   start: startTime.unix,
+    //   end: endTime.unix,
+    // })
+    //   .then(async () => {
+    //     toast.success('Clip created');
+    //   })
+    //   .catch(() => {
+    //     toast.error('Error creating clip');
+    //   })
+    //   .finally(() => {});
     return;
   };
 
@@ -124,12 +103,31 @@ const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
       <CardHeader>
         <CardTitle className="text-lg">Create Clip</CardTitle>
       </CardHeader>
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleCreateClip)}
           className="space-y-2"
         >
-          <CardContent className="border space-y-4">
+          <CardContent className="border space-y-4 pt-2">
+            {markers && markers.length > 0 && (
+              <>
+                <FormLabel>Select Marker for Clip</FormLabel>
+                <Select onValueChange={(value) => setSelectedMarkerId(value)}>
+                  <SelectTrigger className="rounded-lg border bg-white">
+                    <SelectValue placeholder="select marker"></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
+                    {markers.map((marker) => (
+                      <SelectItem key={marker._id} value={marker._id}>
+                        {marker.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </>
+            )}
+
             <FormField
               control={form.control}
               name="name"
@@ -229,9 +227,9 @@ const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
                 className="w-3/4"
                 variant="primary"
                 type="submit"
-                loading={isLoading}
+                loading={isLoading || isCreateClip}
               >
-                {'Add'}
+                {isCreateClip ? 'Creating...' : 'Create'}
               </Button>
             </div>
           </CardFooter>

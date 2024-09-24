@@ -2,26 +2,22 @@
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import {
-  createMarkers,
+  createMarker,
   deleteMarker,
   importMarkers,
   updateMarkers,
 } from '../services/markerSevice';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
-import { IExtendedMarkers } from '../types';
+import { IExtendedMarker } from '../types';
 
-export const createMarkersAction = async ({
-  markers,
-}: {
-  markers: IMarker;
-}) => {
+export const createMarkerAction = async ({ marker }: { marker: IMarker }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {
     return { error: 'No user session found' };
   }
   try {
-    const response = await createMarkers({
-      markers,
+    const response = await createMarker({
+      marker,
       authToken,
     });
 
@@ -40,7 +36,7 @@ export const createMarkersAction = async ({
 export const updateMarkersAction = async ({
   markers,
 }: {
-  markers: IExtendedMarkers;
+  markers: IExtendedMarker;
 }) => {
   const authToken = cookies().get('user-session')?.value;
   if (!authToken) {

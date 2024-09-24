@@ -10,10 +10,11 @@ const Timeline = () => {
     videoRef,
     dragging,
     isLoading,
-    markers,
+    filteredMarkers,
     handleMouseDown,
     handleMarkerClick,
     goToClickTime,
+    selectedMarkerId,
   } = useClipContext();
 
   const maxLength = videoRef.current?.duration || 0;
@@ -37,8 +38,8 @@ const Timeline = () => {
         className="h-[100px] relative"
         style={{ width: `${timelineWidth}px` }}
       >
-        {markers &&
-          markers.map((marker) => {
+        {filteredMarkers &&
+          filteredMarkers.map((marker) => {
             if (marker.start > maxLength) return null;
             return (
               <div
@@ -47,7 +48,9 @@ const Timeline = () => {
                 onClick={() => handleMarkerClick(marker)}
                 style={{
                   backgroundColor: marker.color,
-                  border: `3px solid ${marker.color}`,
+                  border: `2px solid ${
+                    selectedMarkerId === marker._id ? '#066FF9' : marker.color
+                  }`,
                   left: `${(marker.start / maxLength) * timelineWidth}px`,
                   width: `${((marker.end - marker.start) / maxLength) * timelineWidth}px`,
                 }}

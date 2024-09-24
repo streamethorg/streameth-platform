@@ -3,25 +3,25 @@ import { IExtendedMarker } from '../types';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 
 // create marker for a stage
-export async function createMarkers({
-  markers,
+export async function createMarker({
+  marker,
   authToken,
 }: {
-  markers: IMarker;
+  marker: IMarker;
   authToken: string;
 }): Promise<IExtendedMarker> {
-  console.log('markers', JSON.stringify(markers));
+  console.log('markers', JSON.stringify(marker));
   const response = await fetch(`${apiUrl()}/markers`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     },
-    body: JSON.stringify(markers),
+    body: JSON.stringify(marker),
   });
 
   if (!response.ok) {
-    throw 'Error creating markers';
+    throw 'Error creating marker';
   }
   return (await response.json()).data;
 }

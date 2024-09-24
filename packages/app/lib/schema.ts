@@ -253,4 +253,5 @@ export const clipSchema = z.object({
   organizationId: z.string().min(1, 'Organization ID is required'),
   stageId: z.string().min(1, 'Stage ID is required'),
   description: z.string().optional(),
+  speakers: z.array(speakerSchema).optional(),
 });

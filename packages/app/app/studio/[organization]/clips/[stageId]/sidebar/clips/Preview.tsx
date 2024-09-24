@@ -8,6 +8,7 @@ import useSearchParams from '@/lib/hooks/useSearchParams';
 import { deleteSessionAction } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
 import { Asset } from 'livepeer/models/components';
+import { Button } from '@/components/ui/button';
 
 const Preview = ({
   initialIsOpen,
@@ -17,28 +18,15 @@ const Preview = ({
   organizationSlug,
 }: {
   initialIsOpen: boolean;
-  asset: Asset;
+  asset?: Asset | null;
   organizationId: string;
   sessionId: string;
   organizationSlug: string;
 }) => {
-  const previewAsset = await(async function () {
-    if (previewId) {
-      const session = await fetchSession({
-        session: previewId,
-      });
-      if (session) {
-        return await fetchAsset({
-          assetId: session.assetId as string,
-        });
-      }
-    }
-    return undefined;
-  })();
-
-  const [isOpen, setIsOpen] = useState(false);
   const { handleTermChange } = useSearchParams();
-  const { status, playbackUrl, playbackId } = asset;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { status, playbackUrl, playbackId } = asset as Asset;
   useEffect(() => {
     setIsOpen(initialIsOpen);
   }, [initialIsOpen, playbackId]);
@@ -54,11 +42,23 @@ const Preview = ({
     }
   }, [status?.phase, handleTermChange]);
 
-  const handleClose = () => {
-    if (isOpen) {
-      handleTermChange([{ key: 'previewId', value: '' }]);
-      setIsOpen(false);
+  const [shareUrl, setShareUrl] = useState('');
+
+  useEffect(() => {
+    if (!asset?.playbackUrl || (asset && 'errors' in asset && asset.errors)) {
+      toast.error('Error processing video');
     }
+  }, [asset]);
+
+  useEffect(() => {
+    setShareUrl(
+      `${window.location.origin}/${organizationSlug}/watch?session=${sessionId}`
+    );
+  }, [organizationSlug, sessionId]);
+
+  const handleClose = () => {
+    handleTermChange([{ key: 'previewId', value: undefined }]);
+    setIsOpen(false);
   };
 
   const handleDelete = () => {
@@ -100,17 +100,18 @@ const Preview = ({
             />
           )}
           <DialogFooter className="flex flex-row text-black">
-            {/* <Button
+            <Button
               className="mr-auto"
               variant={'destructive'}
-              onClick={handleDelete}>
+              onClick={handleDelete}
+            >
               Delete
-            </Button> */}
+            </Button>
 
-            <ShareButton
-              url={`${location.origin}/${organizationSlug}/watch?session=${sessionId}`}
-              shareFor="video"
-            />
+            <ShareButton url={shareUrl} shareFor="video" />
+            <Button variant={'outline'} onClick={handleClose}>
+              Close
+            </Button>
           </DialogFooter>
         </div>
       </DialogContent>

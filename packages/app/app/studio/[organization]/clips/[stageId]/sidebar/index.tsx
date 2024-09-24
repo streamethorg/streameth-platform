@@ -4,20 +4,38 @@ import Markers from './markers/index';
 import SessionSidebar from './clips';
 import { useClipContext } from '../ClipContext';
 import CreateClipButton from '../topBar/CreateClipButton';
+import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
+import { IExtendedSession } from '@/lib/types';
+import ImportMarkersForm from './markers/ImportMarkersForm';
+
 export default function Sidebar({
   organizationId,
+  stageSessions,
 }: {
   organizationId: string;
+  stageSessions: IExtendedSession[];
 }) {
-  const { isCreatingClip } = useClipContext();
+  const { isCreatingClip, isAddingOrEditingMarker, isImportingMarkers } =
+    useClipContext();
 
-  // overalay is better ( absolute position) so that when closing we can continue seeing markers / clips as before
+  const overlayComponents = [
+    { condition: isCreatingClip, Component: CreateClipButton },
+    { condition: isAddingOrEditingMarker, Component: AddOrEditMarkerForm },
+    { condition: isImportingMarkers, Component: ImportMarkersForm },
+  ];
+
   return (
     <div className="h-full w-full border-l bg-white relative">
-      {isCreatingClip && (
-        <div className="h-full w-full border-l bg-white absolute z-50">
-          <CreateClipButton organizationId={organizationId} />
-        </div>
+      {overlayComponents.map(
+        ({ condition, Component }) =>
+          condition && (
+            <div
+              key={Component.name}
+              className="h-full w-full border-l bg-white absolute z-50"
+            >
+              <Component organizationId={organizationId} />
+            </div>
+          )
       )}
       <Tabs defaultValue="clips" className=" h-full ">
         <TabsList className="grid w-full grid-cols-2">
@@ -28,7 +46,7 @@ export default function Sidebar({
           {<Markers organizationId={organizationId} />}
         </TabsContent>
         <TabsContent value="clips" className="h-full">
-          <SessionSidebar organizationId={organizationId} />
+          <SessionSidebar sessions={stageSessions} />
         </TabsContent>
       </Tabs>
     </div>

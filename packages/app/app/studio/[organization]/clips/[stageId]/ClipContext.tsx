@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { IExtendedMarker } from '@/lib/types';
+import { fetchMarkers } from '@/lib/services/markerSevice';
 
 type PlaybackStatus = {
   progress: number;
@@ -49,6 +50,15 @@ type ClipContextType = {
   handleMouseUp: () => void;
   handleMarkerClick: (marker: IExtendedMarker) => void;
   goToClickTime: (event: React.MouseEvent) => void;
+  isAddingOrEditingMarker: boolean;
+  setIsAddingOrEditingMarker: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchAndSetMarkers: () => void;
+  filteredMarkers: IExtendedMarker[];
+  setFilteredMarkers: React.Dispatch<React.SetStateAction<IExtendedMarker[]>>;
+  selectedMarkerId: string;
+  setSelectedMarkerId: React.Dispatch<React.SetStateAction<string>>;
+  isImportingMarkers: boolean;
+  setIsImportingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -58,9 +68,11 @@ export const useClipContext = () => useContext(ClipContext)!;
 export const ClipProvider = ({
   children,
   stageId,
+  organizationId,
 }: {
   children: React.ReactNode;
   stageId: string;
+  organizationId: string;
 }) => {
   const { handleTermChange, searchParams } = useSearchParams();
 
@@ -84,14 +96,37 @@ export const ClipProvider = ({
   const [dragging, setDragging] = useState<string | null>(null);
   const [selectedTooltip, setSelectedTooltip] = useState<string | null>(null);
   const [markers, setMarkers] = useState<IExtendedMarker[]>([]);
+  const [filteredMarkers, setFilteredMarkers] = useState<IExtendedMarker[]>([]);
   const [isCreatingClip, setIsCreatingClip] = useState<boolean>(false);
   const [initialMousePos, setInitialMousePos] = useState<number>(0);
   const [initialMarkerPos, setInitialMarkerPos] = useState<number>(0);
   const [updateTimeStart, setUpdateTimeStart] = useState<boolean>(false);
   const [updateTimeEnd, setUpdateTimeEnd] = useState<boolean>(false);
+  const [isAddingOrEditingMarker, setIsAddingOrEditingMarker] =
+    useState<boolean>(false);
+  const [selectedMarkerId, setSelectedMarkerId] = useState<string>('');
+  const [isImportingMarkers, setIsImportingMarkers] = useState<boolean>(false);
   const maxLength = videoRef.current?.duration || 0;
   const pixelsPerSecond = 4;
   const timelineWidth = maxLength * pixelsPerSecond;
+
+  const fetchAndSetMarkers = async () => {
+    if (stageId) {
+      setIsLoading(true);
+      const markers = await fetchMarkers({
+        organizationId,
+        stageId,
+      });
+      setMarkers(markers);
+      setFilteredMarkers(markers);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAndSetMarkers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stageId]);
 
   useEffect(() => {
     if (handleTermChange) {
@@ -299,6 +334,15 @@ export const ClipProvider = ({
         handleMouseUp,
         handleMarkerClick,
         goToClickTime,
+        isAddingOrEditingMarker,
+        setIsAddingOrEditingMarker,
+        fetchAndSetMarkers,
+        filteredMarkers,
+        setFilteredMarkers,
+        selectedMarkerId,
+        setSelectedMarkerId,
+        isImportingMarkers,
+        setIsImportingMarkers,
       }}
     >
       {children}

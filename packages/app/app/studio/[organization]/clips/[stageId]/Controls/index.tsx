@@ -6,7 +6,14 @@ import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
 
 const Controls = () => {
-  const { videoRef } = useClipContext();
+  const {
+    videoRef,
+    isAddingOrEditingMarker,
+    setIsAddingOrEditingMarker,
+    isImportingMarkers,
+    setSelectedMarkerId,
+    isCreatingClip,
+  } = useClipContext();
 
   const spaceBarHandler = (e: KeyboardEvent) => {
     if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
@@ -43,6 +50,7 @@ const Controls = () => {
         <label>
           Speed:
           <select
+            defaultValue={1}
             onChange={(e) => {
               if (videoRef.current) {
                 videoRef.current.playbackRate = parseFloat(e.target.value);
@@ -50,24 +58,32 @@ const Controls = () => {
             }}
           >
             <option value="0.5">0.5x</option>
-            <option value="1" selected>
-              1x
-            </option>
+            <option value="1">1x</option>
             <option value="1.5">1.5x</option>
             <option value="2">2x</option>
           </select>
         </label>
         <span>
-          {videoRef.current
+          {videoRef?.current?.currentTime
             ? formatTime(videoRef.current.currentTime)
             : '00:00:00'}
           /{' '}
-          {videoRef.current
+          {videoRef?.current?.duration
             ? formatTime(videoRef.current.duration)
             : '00:00:00'}
         </span>
       </div>
-      <Button variant="outline" className="ml-auto">
+      <Button
+        disabled={
+          isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+        }
+        onClick={() => {
+          setIsAddingOrEditingMarker(true);
+          setSelectedMarkerId('');
+        }}
+        variant="outline"
+        className="ml-auto"
+      >
         Add marker
       </Button>
     </div>

@@ -1,18 +1,12 @@
 'use client';
-import { Plus, Trash2, Edit2 } from 'lucide-react';
-import React, { useState } from 'react';
+import { Edit2 } from 'lucide-react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { IExtendedMarker } from '@/lib/types';
 import { formatTime } from '@/lib/utils/time';
 import { Card } from '@/components/ui/card';
 import DeleteMarkerButton from './DeleteMarkerButton';
-/* Whats missing:
-    - Add update marker logic: update marker should be a form that covers the marker sidebar
-    - Update should write to the db and on callback refetch all markers
-    - Delete marker logic
-    - Would be good to link marker on on sidebar to marker on timeline -> when the marker is clicked highlight the marker on the timeline
-          
-  */
+import { useClipContext } from '../../ClipContext';
 
 const Marker = ({
   marker,
@@ -21,16 +15,31 @@ const Marker = ({
   marker: IExtendedMarker;
   organizationId: string;
 }) => {
+  const {
+    setIsAddingOrEditingMarker,
+    isAddingOrEditingMarker,
+    setSelectedMarkerId,
+    selectedMarkerId,
+  } = useClipContext();
+
   return (
-    <Card className="w-full max-w-2xl overflow-hidden p-0 shadow-none h-[100px]">
+    <Card
+      onClick={() => setSelectedMarkerId(marker._id)}
+      className={`w-full max-w-2xl overflow-hidden p-0 shadow-none h-[100px] ${
+        selectedMarkerId === marker._id
+          ? 'border-2 border-blue border-opacity-50'
+          : ''
+      }`}
+    >
       <div className="flex flex-grow flex-row items-center h-full">
         <div className="h-full flex items-center">
           <div className="relative w-4 h-full">
-            <input
-              type="color"
-              value={marker.color}
+            <p
+              style={{
+                backgroundColor: marker.color,
+              }}
               className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-            />
+            ></p>
             <div
               className="w-full h-full rounded"
               style={{
@@ -47,7 +56,11 @@ const Marker = ({
               <Button
                 size={'sm'}
                 variant={'outline'}
-                // onClick={() => setEditingMarker(marker._id)}
+                disabled={isAddingOrEditingMarker}
+                onClick={() => {
+                  setIsAddingOrEditingMarker(true);
+                  setSelectedMarkerId(marker._id);
+                }}
               >
                 <Edit2 size={16} />
               </Button>

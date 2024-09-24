@@ -85,14 +85,6 @@ const MobileNavBar = ({
   const showGoBack =
     pathname.includes('clips') && searchParams.has('selectedRecording');
 
-  const handleGoBack = () => {
-    handleTermChange([
-      { key: 'videoType', value: undefined },
-      { key: 'stageId', value: undefined },
-      { key: 'sessionId', value: undefined },
-    ]);
-  };
-
   useLayoutEffect(() => {
     if (menuVisible || searchVisible) {
       document.body.style.overflow = 'hidden';
@@ -128,14 +120,11 @@ const MobileNavBar = ({
           </div>
         )}
         {showGoBack ? (
-          <Button
-            className="mr-2"
-            variant="outline"
-            size="sm"
-            onClick={handleGoBack}
-          >
-            <IconLeft className="mr-1" /> Go back
-          </Button>
+          <Link href={`/studio/${currentOrganization}/clips`}>
+            <Button className="mr-2" variant="outline" size="sm">
+              <IconLeft className="mr-1" /> Go back
+            </Button>
+          </Link>
         ) : (
           showLogo && (
             <Link href={`/${currentOrganization}`}>
@@ -214,14 +203,6 @@ const PCNavBar = ({
   const showGoBack =
     pathname.includes('clips') && searchParams.has('videoType');
 
-  const handleGoBack = () => {
-    handleTermChange([
-      { key: 'videoType', value: undefined },
-      { key: 'stageId', value: undefined },
-      { key: 'sessionId', value: undefined },
-    ]);
-  };
-
   return (
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white md:hidden lg:flex z-[30]">
       <div className="flex flex-1 justify-start items-center">
@@ -239,15 +220,13 @@ const PCNavBar = ({
         {organizations && (
           <div className="flex flex-row space-x-1">
             {showGoBack && (
-              <Button
-                className="hidden lg:block"
-                variant={'outline'}
-                onClick={handleGoBack}
-              >
-                <div className="flex items-center">
-                  <IconLeft className="mr-1" /> Go back
-                </div>
-              </Button>
+              <Link href={`/studio/${currentOrganization}/clips`}>
+                <Button className="hidden lg:block" variant={'outline'}>
+                  <div className="flex items-center">
+                    <IconLeft className="mr-1" /> Go back
+                  </div>
+                </Button>
+              </Link>
             )}
             <Link href={`/${currentOrganization}`}>
               <Button className="hidden lg:block" variant={'primary'}>

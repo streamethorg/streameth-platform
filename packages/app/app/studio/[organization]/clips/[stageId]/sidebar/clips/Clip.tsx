@@ -3,10 +3,15 @@ import { IExtendedSession } from '@/lib/types';
 import Image from 'next/image';
 import { formatDate } from '@/lib/utils/time';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import useSearchParams from '@/lib/hooks/useSearchParams';
 export default function Clip({ session }: { session: IExtendedSession }) {
-  const { name, coverImage } = session;
+  const { handleTermChange } = useSearchParams();
+  const { name, coverImage, _id } = session;
   return (
-    <Card className="w-full max-w-2xl overflow-hidden p-2 shadow-none">
+    <Card
+      onClick={() => handleTermChange([{ key: 'previewId', value: _id }])}
+      className="w-full max-w-2xl overflow-hidden p-2 shadow-none cursor-pointer hover:bg-gray-100"
+    >
       <div className="flex justify-center items-center">
         <div className="flex-shrink-0 w-1/3">
           <Thumbnail imageUrl={coverImage} />
