@@ -50,10 +50,8 @@ const Layout = async ({
             </div>
           ) : (
             <div className="flex h-full w-full flex-row">
-              <div className="h-full w-full">
-                {children}
-                <Support />
-              </div>
+              {children}
+              <Support />
             </div>
           )}
         </div>

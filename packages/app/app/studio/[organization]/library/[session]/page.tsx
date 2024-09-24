@@ -44,7 +44,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
   if (!videoUrl) return notFound();
 
   return (
-    <div className="flex flex-col h-full overflow-hidden p-4">
+    <div className="flex flex-col h-full w-full overflow-hidden p-4">
       <div className="mb-4">
         <Link href={`/studio/${params.organization}/library`}>
           <Button variant="ghost" className="mb-2 px-2">
