@@ -27,53 +27,53 @@ const TrimmControls = ({
     handleMouseDown,
   } = useClipContext();
 
-  const handle1SecondIncrementDecrement = useCallback(
-    (increment: boolean, marker: string) => {
-      if (videoRef.current && playbackStatus) {
-        const time =
-          marker === 'start' ? startTime.displayTime : endTime.displayTime;
-        const newTime = increment ? time + 1 : time - 1;
-        if (marker === 'start') {
-          if (newTime >= 0 && newTime < endTime.displayTime) {
-            debouncedUpdate(setStartTime, {
-              unix: Date.now() - playbackStatus.offset,
-              displayTime: newTime,
-            });
-          }
-        } else if (marker === 'end') {
-          if (
-            newTime > startTime.displayTime &&
-            newTime <= videoRef.current.duration
-          ) {
-            debouncedUpdate(setEndTime, {
-              unix: Date.now() - playbackStatus.offset,
-              displayTime: newTime,
-            });
-          }
-        }
-        videoRef.current.currentTime = newTime;
-      }
-    },
-    [
-      videoRef,
-      playbackStatus,
-      startTime.displayTime,
-      endTime.displayTime,
-      setStartTime,
-      setEndTime,
-    ]
-  );
+  // const handle1SecondIncrementDecrement = useCallback(
+  //   (increment: boolean, marker: string) => {
+  //     if (videoRef.current && playbackStatus) {
+  //       const time =
+  //         marker === 'start' ? startTime.displayTime : endTime.displayTime;
+  //       const newTime = increment ? time + 1 : time - 1;
+  //       if (marker === 'start') {
+  //         if (newTime >= 0 && newTime < endTime.displayTime) {
+  //           debouncedUpdate(setStartTime, {
+  //             unix: Date.now() - playbackStatus.offset,
+  //             displayTime: newTime,
+  //           });
+  //         }
+  //       } else if (marker === 'end') {
+  //         if (
+  //           newTime > startTime.displayTime &&
+  //           newTime <= videoRef.current.duration
+  //         ) {
+  //           debouncedUpdate(setEndTime, {
+  //             unix: Date.now() - playbackStatus.offset,
+  //             displayTime: newTime,
+  //           });
+  //         }
+  //       }
+  //       videoRef.current.currentTime = newTime;
+  //     }
+  //   },
+  //   [
+  //     videoRef,
+  //     playbackStatus,
+  //     startTime.displayTime,
+  //     endTime.displayTime,
+  //     setStartTime,
+  //     setEndTime,
+  //   ]
+  // );
 
   useEffect(() => {
     const preventDefault = (e: Event) => e.preventDefault();
 
     window.addEventListener('keydown', (e) => {
       if (selectedTooltip) {
-        if (e.key === 'ArrowRight') {
-          handle1SecondIncrementDecrement(true, selectedTooltip);
-        } else if (e.key === 'ArrowLeft') {
-          handle1SecondIncrementDecrement(false, selectedTooltip);
-        }
+        // if (e.key === 'ArrowRight') {
+        //   handle1SecondIncrementDecrement(true, selectedTooltip);
+        // } else if (e.key === 'ArrowLeft') {
+        //   handle1SecondIncrementDecrement(false, selectedTooltip);
+        // }
       }
 
       if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
@@ -90,7 +90,7 @@ const TrimmControls = ({
       window.removeEventListener('dragstart', preventDefault);
       window.removeEventListener('dragover', preventDefault);
     };
-  }, [handle1SecondIncrementDecrement, selectedTooltip, videoRef]);
+  }, [selectedTooltip, videoRef]);
 
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
@@ -122,7 +122,7 @@ const TrimmControls = ({
             background: 'rgba(200, 75, 80, 1)',
           }}
         />
-        {selectedTooltip === marker && (
+        {/* {selectedTooltip === marker && (
           <div className="absolute left-[-55px] top-[-50px] flex flex-col items-center justify-center rounded-xl bg-primary p-1 text-xs text-white z-[9999]">
             <p className="flex w-[120px] flex-row items-center justify-center space-x-1">
               <span>Use</span> <ArrowLeftSquare width={15} height={15} />
@@ -132,7 +132,7 @@ const TrimmControls = ({
               marker === 'start' ? startTime.displayTime : endTime.displayTime
             )}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

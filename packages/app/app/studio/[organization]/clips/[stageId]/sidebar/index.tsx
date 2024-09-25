@@ -57,7 +57,7 @@ export default function Sidebar({
           <TabsTrigger value="markers">Markers</TabsTrigger>
           <TabsTrigger value="clips">Clips</TabsTrigger>
         </TabsList>
-        <TabsContent value="markers">
+        <TabsContent value="markers" className="h-full">
           {<Markers organizationId={organizationId} />}
         </TabsContent>
         <TabsContent value="clips" className="h-full">

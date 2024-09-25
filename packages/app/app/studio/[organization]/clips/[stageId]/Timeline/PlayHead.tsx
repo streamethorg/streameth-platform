@@ -24,7 +24,7 @@ const Playhead: React.FC<TimelinePlayheadProps> = ({
     if (!draggingPlayhead) {
       setCurrentTime(playerTime);
     }
-  }, [draggingPlayhead, playerTime]);
+  }, [playerTime]);
 
   const getMarkerPosition = (time: number) =>
     (time / maxLength) * timelineWidth;

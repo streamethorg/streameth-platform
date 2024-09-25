@@ -18,8 +18,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     setEndTime,
     endTime,
     startTime,
-    fragmentLoading,
-    setFragmentLoading,
+    setHls,
+    setTimeReference,
   } = useClipContext();
 
   const playbackRef = useRef<{ progress: number; offset: number }>({
@@ -48,6 +48,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
           }
         },
       });
+      setHls(hls);
 
       hls.loadSource(type === 'youtube' ? proxiedSrc : src);
       hls.attachMedia(videoRef.current);
@@ -62,13 +63,16 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
               : Date.now());
           playbackRef.current = { progress, offset };
           setPlaybackStatus(playbackRef.current);
-          setFragmentLoading(false);
+
+          setTimeReference({
+            unixTime: new Date(data.frag.rawProgramDateTime).getTime(),
+            currentTime: progress,
+          });
         }
       });
 
       videoRef.current.onseeking = () => {
         setIsLoading(true);
-        setFragmentLoading(true);
       };
 
       videoRef.current.onseeked = () => {
@@ -79,16 +83,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
         setError(data.details);
       });
 
-      const intervalId = setInterval(() => {
-        if (videoRef.current) {
-          const progress = videoRef.current.currentTime;
-          playbackRef.current.progress = progress;
-          setPlaybackStatus({ ...playbackRef.current });
-        }
-      }, 1000);
       return () => {
         hls.destroy();
-        clearInterval(intervalId);
       };
     }
   }, [proxiedSrc, setPlaybackStatus, videoRef, setIsLoading, src]);
@@ -109,11 +105,16 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
 
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
+      <div className="absolute top-0 bg-white z-[99999] p-4 border ">
+        <p>{'start: ' + startTime.unix.toFixed(0)}</p>
+        <p>{'end: ' + endTime.unix.toFixed(0)}</p>
+        <p>{'diff ' + (endTime.unix - startTime.unix).toFixed(0)}</p>
+      </div>
       <video
         ref={videoRef}
         autoPlay={false}
         controls={false}
-        className="sticky top-0 w-full rounded-lg"
+        className="sticky top-0 w-full rounded-lg z-30"
       ></video>
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
         {isLoading && (
