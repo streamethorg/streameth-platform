@@ -127,7 +127,7 @@ export const createSession = async ({
 }: {
   session: ISession;
   authToken: string;
-}): Promise<ISession> => {
+}): Promise<IExtendedSession> => {
   try {
     const response = await fetch(`${apiUrl()}/sessions`, {
       method: 'POST',
@@ -137,14 +137,15 @@ export const createSession = async ({
       },
       body: JSON.stringify(session),
     });
+    const responseData = await response.json();
+    console.log('responseData', responseData);
     if (!response.ok) {
-      console.log('error in createSession', await response.json());
-      throw 'Error updating session';
+      throw 'Error creating session';
     }
     revalidatePath('/studio');
-    return (await response.json()).data;
+    return responseData.data;
   } catch (e) {
-    console.log('error in updateSession', e);
+    console.log('error in createSession', e);
     throw e;
   }
 };
@@ -273,14 +274,15 @@ export const createClip = async ({
         recordingId,
       }),
     });
-
+    const responseData = await response.json();
+    console.log('Clipping responseData', responseData);
     if (!response.ok) {
-      throw 'Error updating session';
+      throw 'Error creating clip';
     }
     revalidatePath('/studio');
-    return (await response.json()).data;
+    return responseData.data;
   } catch (e) {
-    console.log('error in updateSession', e);
+    console.log('error in createClip', e);
     throw e;
   }
 };

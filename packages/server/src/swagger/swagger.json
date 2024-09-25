@@ -1856,7 +1856,6 @@
 				},
 				"required": [
 					"name",
-					"description",
 					"start",
 					"end",
 					"organizationId",
@@ -2092,7 +2091,6 @@
 				"required": [
 					"organizationId",
 					"name",
-					"description",
 					"start",
 					"end",
 					"type"
@@ -2293,10 +2291,10 @@
 				"required": [
 					"organizationId",
 					"name",
-					"description",
 					"start",
 					"end",
 					"type",
+					"description",
 					"speakers"
 				],
 				"type": "object",
@@ -3282,7 +3280,7 @@
 					},
 					"speakers": {
 						"items": {
-							"$ref": "#/components/schemas/Omit_ISpeaker.organizationId_"
+							"$ref": "#/components/schemas/ISpeaker"
 						},
 						"type": "array"
 					},

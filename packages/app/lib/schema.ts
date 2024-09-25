@@ -99,9 +99,9 @@ export const StageSchema = z.object({
 
 // Define a schema for the speaker
 const speakerSchema = z.object({
-  name: z.string().optional(),
-  bio: z.string().optional(),
-  eventId: z.string(),
+  name: z.string(),
+  bio: z.string(),
+  eventId: z.string().optional(),
   twitter: z.string().optional(),
   github: z.string().optional(),
   website: z.string().optional(),

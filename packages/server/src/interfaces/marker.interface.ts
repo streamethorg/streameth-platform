@@ -11,6 +11,6 @@ export interface IMarker {
   end: number;
   date: string;
   color: string;
-  speakers?: Omit<ISpeaker, 'organizationId'>[];
+  speakers?: ISpeaker[];
   slug?: string;
 }

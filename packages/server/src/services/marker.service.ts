@@ -5,6 +5,7 @@ import Markers from '@models/markers.model';
 import Stage from '@models/stage.model';
 import GoogleSheetService from '@utils/google-sheet';
 import { formatDate, generateId, getStartAndEndTime } from '@utils/util';
+import e from 'express';
 import fs from 'fs';
 
 export default class MarkerService {
@@ -79,12 +80,27 @@ export default class MarkerService {
     stageSlug: string;
   }): Promise<Array<IMarker>> {
     const sheetId = d.url.split('/')[5];
-    const sessions = await this.googleSheetService.generateSessionsByStage({
+    const stages = await this.googleSheetService.generateStages(
       sheetId,
-      stageId: d.stageId,
-      stageSlug: d.stageSlug,
-      organizationId: d.organizationId,
-    });
+      d.organizationId,
+    );
+
+    let sessions = [];
+    if (stages.length > 1) {
+      sessions = await this.googleSheetService.generateSessionsByStage({
+        sheetId,
+        stageId: d.stageId,
+        stageSlug: d.stageSlug,
+        organizationId: d.organizationId,
+      });
+    } else if (stages.length === 1) {
+      sessions = await this.googleSheetService.generateSessionsByStage({
+        sheetId,
+        stageId: d.stageId,
+        stageSlug: stages[0].slug,
+        organizationId: d.organizationId,
+      });
+    }
     const markers = sessions.map((session) => {
       return {
         name: session.name,
@@ -113,16 +129,22 @@ export default class MarkerService {
     }
     const data = await response.json();
     let markersData = [];
+    let roomCount = 0;
+
     for (const day of data.schedule.conference.days) {
+      roomCount += Object.keys(day.rooms).length;
       for (const [roomName, sessions] of Object.entries(day.rooms)) {
-        const room = generateId(roomName) === d.roomId;
-        if (!room) continue;
+        const shouldImportRoom =
+          roomCount === 1 || generateId(roomName) === d.roomId;
+        if (!shouldImportRoom) continue;
+
         for (const session of sessions as any[]) {
           const speakers = session.persons.map((person: any) => {
             return {
               name: person.public_name,
               bio: person.biography,
               photo: person.avatar,
+              organizationId: d.organizationId,
             };
           });
           const sessionTime = getStartAndEndTime(
@@ -145,6 +167,7 @@ export default class MarkerService {
         }
       }
     }
+
     return await Markers.create(markersData);
   }
 }

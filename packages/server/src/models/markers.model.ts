@@ -17,6 +17,7 @@ const MarkerSchema = new Schema<IMarker>(
         photo: { type: String, default: '' },
         bio: { type: String, default: '' },
         twitter: { type: String, default: '' },
+        organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
       },
     ],
     slug: { type: String, default: '', index: true },

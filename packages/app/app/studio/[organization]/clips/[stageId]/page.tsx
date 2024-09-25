@@ -30,6 +30,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
 
   let videoSrc = null;
   let type = null;
+  let liveRecording = null;
 
   if (videoType === 'livestream' && stageId) {
     // Fetch live recording for the selected stage
@@ -41,7 +42,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     if (!streamId) return <div>live stage not found</div>;
 
     const stageRecordings = await fetchStageRecordings({ streamId });
-    const liveRecording = stageRecordings?.recordings[0] ?? null;
+    liveRecording = stageRecordings?.recordings[0] ?? null;
 
     if (!stageRecordings) return <div>stage recordings not found</div>;
     videoSrc = getLiveStageSrcValue({
@@ -106,6 +107,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
         </div>
         <div className="flex w-[400px] h-full">
           <Sidebar
+            liveRecordingId={liveRecording?.id}
             stageSessions={stageSessions}
             organizationId={organizationId}
           />

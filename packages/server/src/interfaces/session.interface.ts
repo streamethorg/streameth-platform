@@ -30,7 +30,7 @@ export enum ClippingStatus {
 export interface ISession {
   _id?: Types.ObjectId;
   name: string;
-  description: string;
+  description?: string;
   start: number;
   end: number;
   startClipTime?: number;

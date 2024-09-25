@@ -16,11 +16,6 @@ const Pagination = ({
   // trigger when reaching bottom of the page
   useEffect(() => {
     const handleScroll = () => {
-      console.log(
-        isLoading,
-        window.innerHeight + document.documentElement.scrollTop + 1 <
-          document.documentElement.offsetHeight
-      );
       if (isLoading) return;
       if (
         window.innerHeight + document.documentElement.scrollTop + 1 <
@@ -28,8 +23,6 @@ const Pagination = ({
       ) {
         return;
       }
-      console.log('fetching next page');
-      console.log(pagination);
       if (
         !pagination ||
         pagination.currentPage === pagination.totalPages ||

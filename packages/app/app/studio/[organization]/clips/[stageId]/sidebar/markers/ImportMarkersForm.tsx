@@ -34,7 +34,8 @@ import {
 } from '@/components/ui/card';
 
 const ImportMarkersForm = ({ organizationId }: { organizationId: string }) => {
-  const { stageId, setIsImportingMarkers } = useClipContext();
+  const { stageId, setIsImportingMarkers, fetchAndSetMarkers } =
+    useClipContext();
   const [isImporting, setIsImporting] = useState(false);
 
   const form = useForm<z.infer<typeof markersImportSchema>>({
@@ -62,11 +63,13 @@ const ImportMarkersForm = ({ organizationId }: { organizationId: string }) => {
         toast.error(response.error);
       } else {
         toast.success('Markers imported successfully');
+        fetchAndSetMarkers();
       }
     } catch (error) {
       toast.error('Error importing data');
     } finally {
       setIsImporting(false);
+      setIsImportingMarkers(false);
     }
   };
   return (

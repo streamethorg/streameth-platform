@@ -11,29 +11,44 @@ import ImportMarkersForm from './markers/ImportMarkersForm';
 export default function Sidebar({
   organizationId,
   stageSessions,
+  liveRecordingId,
 }: {
   organizationId: string;
   stageSessions: IExtendedSession[];
+  liveRecordingId?: string;
 }) {
   const { isCreatingClip, isAddingOrEditingMarker, isImportingMarkers } =
     useClipContext();
 
   const overlayComponents = [
-    { condition: isCreatingClip, Component: CreateClipButton },
-    { condition: isAddingOrEditingMarker, Component: AddOrEditMarkerForm },
-    { condition: isImportingMarkers, Component: ImportMarkersForm },
+    {
+      condition: isCreatingClip,
+      Component: CreateClipButton,
+      usesLiveRecordingId: true,
+    },
+    {
+      condition: isAddingOrEditingMarker,
+      Component: AddOrEditMarkerForm,
+    },
+    {
+      condition: isImportingMarkers,
+      Component: ImportMarkersForm,
+    },
   ];
 
   return (
     <div className="h-full w-full border-l bg-white relative">
       {overlayComponents.map(
-        ({ condition, Component }) =>
+        ({ condition, Component, usesLiveRecordingId }) =>
           condition && (
             <div
               key={Component.name}
               className="h-full w-full border-l bg-white absolute z-50"
             >
-              <Component organizationId={organizationId} />
+              <Component
+                organizationId={organizationId}
+                {...(usesLiveRecordingId ? { liveRecordingId } : {})}
+              />
             </div>
           )
       )}

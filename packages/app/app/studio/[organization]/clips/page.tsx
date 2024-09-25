@@ -25,11 +25,14 @@ import { formatTime } from '@/lib/utils/time';
 import TableSort from '@/components/misc/TableSort';
 
 import InjectUrlInput from './components/clipOptions/InjectUrlInput';
-import StageName from './components/StageNames';
+
+interface IExtendedUpdateSession extends IExtendedSession {
+  stageName?: string;
+}
 
 interface ClipsConfigProps {
   organization: IExtendedOrganization;
-  recording: IExtendedSession[];
+  recording: IExtendedUpdateSession[];
   customUrlStages: IExtendedStage[];
   liveStages: IExtendedStage[];
 }
@@ -62,46 +65,48 @@ const ClipsConfig = ({
                   </TableRow>
                 </TableHeader>
                 <TableBody className="overflow-auto">
-                  {recording.map(
-                    (session) =>
-                      session.playback?.duration &&
-                      session.playback.duration > 0 && (
-                        <TableRow key={session._id}>
-                          <TableCell className="max-w-[500px] font-medium">
-                            <Link
-                              href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=livestream`}
-                              className="hover:underline"
+                  {recording
+                    .filter(
+                      (session) =>
+                        session.playback?.duration &&
+                        session.playback.duration > 0
+                    )
+                    .map((session) => (
+                      <TableRow key={session._id}>
+                        <TableCell className="max-w-[500px] font-medium">
+                          <Link
+                            href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=livestream`}
+                            className="hover:underline"
+                          >
+                            {session.name}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          {new Date(
+                            session.createdAt as string
+                          ).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <span>{session.stageName ?? 'Stage not found'}</span>
+                        </TableCell>
+                        <TableCell>
+                          {formatTime(session.playback?.duration ?? 0)}
+                        </TableCell>
+                        <TableCell className="my-2 flex items-center space-x-2">
+                          <Link
+                            href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=recording`}
+                          >
+                            <Button
+                              variant="primary"
+                              className="flex w-full items-center gap-1"
                             >
-                              {session.name}
-                            </Link>
-                          </TableCell>
-                          <TableCell>
-                            {new Date(
-                              session.createdAt as string
-                            ).toLocaleDateString()}
-                          </TableCell>
-                          <TableCell>
-                            <StageName stageId={session.stageId as string} />
-                          </TableCell>
-                          <TableCell>
-                            {formatTime(session.playback.duration)}
-                          </TableCell>
-                          <TableCell className="my-2 flex items-center space-x-2">
-                            <Link
-                              href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=recording`}
-                            >
-                              <Button
-                                variant="primary"
-                                className="flex w-full items-center gap-1"
-                              >
-                                <ScissorsLineDashed className="h-4 w-4" />
-                                Clip
-                              </Button>
-                            </Link>
-                          </TableCell>
-                        </TableRow>
-                      )
-                  )}
+                              <ScissorsLineDashed className="h-4 w-4" />
+                              Clip
+                            </Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </div>
@@ -226,33 +231,23 @@ const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
       new Date(session?.createdAt as string) > sevenDaysAgo
   );
 
-  console.log('sessionRecordings:', sessionRecordings);
-
   const stages = await fetchStages({
     organizationId: organization._id,
   });
-
-  console.log('stages:', stages);
 
   const customUrlStages = stages.filter(
     (stage) => stage?.type === StageType.custom
   );
   const liveStages = stages.filter((stage) => stage.streamSettings?.isActive);
 
-  console.log('customUrlStages:', customUrlStages);
-  console.log('liveStages:', liveStages);
-
   // Fetch stage details for each session
   const recording = await Promise.all(
     sessionRecordings.map(async (session) => {
       if (!session.stageId) return session; // Skip if stageId is undefined
       const stage = await fetchStage({ stage: session.stageId.toString() });
-      console.log('Fetched stage for session:', session._id, stage);
       return { ...session, stageName: stage?.name };
     })
   );
-
-  console.log('recording:', recording);
 
   return (
     <Suspense

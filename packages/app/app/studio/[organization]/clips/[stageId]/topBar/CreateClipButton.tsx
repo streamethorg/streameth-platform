@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { createClipAction } from '@/lib/actions/sessions';
+import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
 import {
   Card,
   CardContent,
@@ -33,19 +33,47 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from 'sonner';
+import useSearchParams from '@/lib/hooks/useSearchParams';
+import { fetchSession } from '@/lib/services/sessionService';
+import { IExtendedSession, IExtendedStage } from '@/lib/types';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { fetchStage } from '@/lib/services/stageService';
 
-// todo
-/*
- 
-
- - correctly implement handleCreateClip: make sure we pass unix time to createClipAction, the form is showing displaytime
- - create clip action should create a new session on the backend
- */
-const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
+const CreateClipButton = ({
+  organizationId,
+  liveRecordingId,
+}: {
+  organizationId: string;
+  liveRecordingId?: string;
+}) => {
   const { isLoading, markers, stageId, setIsCreatingClip, startTime, endTime } =
     useClipContext();
   const [selectedMarkerId, setSelectedMarkerId] = useState('');
   const [isCreateClip, setIsCreateClip] = useState(false);
+  const [sessionRecording, setSessionRecording] =
+    useState<IExtendedSession | null>(null);
+  const [stage, setStage] = useState<IExtendedStage | null>(null);
+  const { searchParams, handleTermChange } = useSearchParams();
+
+  const sessionId = searchParams.get('sessionId');
+
+  const getSession = async () => {
+    if (!sessionId) return;
+    const session = await fetchSession({ session: sessionId });
+    setSessionRecording(session);
+  };
+
+  const getStage = async () => {
+    if (!stageId) return;
+    const stage = await fetchStage({ stage: stageId });
+    setStage(stage);
+  };
+
+  useEffect(() => {
+    getSession();
+    getStage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId]);
 
   const selectedMarker = markers.find(
     (marker) => marker._id === selectedMarkerId
@@ -54,7 +82,7 @@ const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
     resolver: zodResolver(clipSchema),
     defaultValues: {
       name: '',
-      description: '',
+      description: 'No description',
       start: startTime.displayTime,
       end: endTime.displayTime,
       organizationId: organizationId,
@@ -67,7 +95,7 @@ const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
     if (selectedMarker) {
       form.reset({
         name: selectedMarker.name ?? '',
-        description: selectedMarker.description ?? '',
+        description: selectedMarker.description ?? 'No description',
         start: startTime.displayTime,
         end: endTime.displayTime,
         organizationId: organizationId,
@@ -75,7 +103,7 @@ const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
         speakers:
           selectedMarker.speakers?.map((speaker) => ({
             ...speaker,
-            eventId: speaker.eventId?.toString(),
+            eventId: speaker?.eventId?.toString(),
           })) ?? [],
       });
     }
@@ -83,19 +111,59 @@ const CreateClipButton = ({ organizationId }: { organizationId: string }) => {
   }, [selectedMarker]);
 
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
-    // await createClipAction({
-    //   session: values,
-    //   start: startTime.unix,
-    //   end: endTime.unix,
-    // })
-    //   .then(async () => {
-    //     toast.success('Clip created');
-    //   })
-    //   .catch(() => {
-    //     toast.error('Error creating clip');
-    //   })
-    //   .finally(() => {});
-    return;
+    setIsCreateClip(true);
+    if (!stage?.streamSettings?.playbackId) {
+      setIsCreateClip(false);
+      return toast.error('Missing stage playbackId');
+    }
+
+    if (endTime.unix < startTime.unix) {
+      setIsCreateClip(false);
+      return toast.error('End time must be greater than start time');
+    }
+
+    try {
+      const session = await createSessionAction({
+        session: {
+          name: values.name,
+          description: values.description,
+          speakers: values?.speakers,
+          type: SessionType.clip,
+          start: startTime.unix,
+          end: endTime.unix,
+          organizationId,
+          stageId,
+        },
+      });
+
+      if (!session || sessionRecording?.assetId || !liveRecordingId) {
+        throw new Error('Failed to create session or missing required data');
+      }
+
+      let clipData = {
+        playbackId: stage?.streamSettings?.playbackId,
+        start: startTime.unix,
+        end: endTime.unix,
+        sessionId: session._id,
+        recordingId: sessionRecording?.assetId ?? liveRecordingId,
+      };
+
+      await createClipAction(clipData);
+
+      toast.success('Clip created');
+      setIsCreatingClip(false);
+      handleTermChange([
+        {
+          key: 'previewId',
+          value: '66f3e52cf2d72d844d3725d1',
+        },
+      ]);
+    } catch (error) {
+      console.error('Error creating clip:', error);
+      toast.error('Error creating clip');
+    } finally {
+      setIsCreateClip(false);
+    }
   };
 
   return (

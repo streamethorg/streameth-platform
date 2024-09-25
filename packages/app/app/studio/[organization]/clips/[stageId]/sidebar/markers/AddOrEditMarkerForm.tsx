@@ -25,6 +25,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { createMarkerAction, updateMarkersAction } from '@/lib/actions/marker';
 import { useClipContext } from '../../ClipContext';
+import { IExtendedMarker } from '@/lib/types';
 
 const AddOrEditMarkerForm = ({
   organizationId,
@@ -39,6 +40,8 @@ const AddOrEditMarkerForm = ({
     setIsAddingOrEditingMarker,
     setSelectedMarkerId,
     fetchAndSetMarkers,
+    setMarkers,
+    setFilteredMarkers,
   } = useClipContext();
   const [loading, setLoading] = useState(false);
   const selectedMarker = markers.find(
@@ -73,21 +76,27 @@ const AddOrEditMarkerForm = ({
   const handleClose = () => {
     form.reset();
     setIsAddingOrEditingMarker(false);
-    fetchAndSetMarkers();
   };
-
+  console.log('form Error', form.formState.errors);
   const handleSubmit = async (values: z.infer<typeof markerSchema>) => {
     setLoading(true);
     try {
       if (selectedMarker) {
         // Update existing marker
-        await updateMarkersAction({
-          markers: {
-            ...values,
-            _id: selectedMarker._id,
-            speakers: selectedMarker.speakers,
-          },
-        });
+        const updatedMarker = {
+          ...values,
+          _id: selectedMarker._id,
+          speakers: selectedMarker.speakers,
+        };
+        await updateMarkersAction({ markers: updatedMarker });
+        // Update the markers array in the context
+        const updateMarkerInArray = (prevMarkers: IExtendedMarker[]) =>
+          prevMarkers.map((marker) =>
+            marker._id === selectedMarker._id ? updatedMarker : marker
+          );
+        setMarkers(updateMarkerInArray);
+        setFilteredMarkers(updateMarkerInArray);
+
         handleClose();
         setSelectedMarkerId('');
         toast.success('Marker updated successfully');
@@ -97,6 +106,7 @@ const AddOrEditMarkerForm = ({
           marker: { ...values, speakers: [] },
         });
         handleClose();
+        fetchAndSetMarkers();
         toast.success('Marker added successfully');
       }
     } catch (error) {

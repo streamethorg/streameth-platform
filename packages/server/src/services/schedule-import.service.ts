@@ -209,7 +209,10 @@ export default class ScheduleImporterService {
     organizationId: string,
   ): Promise<IScheduleImporter> {
     const sheetId = url.split('/')[5];
-    const speakers = await this.googleSheetService.generateSpeakers(sheetId);
+    const speakers = await this.googleSheetService.generateSpeakers(
+      sheetId,
+      organizationId,
+    );
     const stages = await this.googleSheetService.generateStages(
       sheetId,
       organizationId,

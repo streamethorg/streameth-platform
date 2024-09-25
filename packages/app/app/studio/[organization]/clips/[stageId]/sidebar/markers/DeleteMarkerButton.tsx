@@ -15,7 +15,7 @@ const DeleteMarkerButton = ({
   organizationId: string;
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  const { fetchAndSetMarkers } = useClipContext();
+  const { setMarkers, markers, setFilteredMarkers } = useClipContext();
 
   const handleDeleteMarker = async () => {
     setIsDeleting(true);
@@ -25,7 +25,12 @@ const DeleteMarkerButton = ({
     })
       .then((response) => {
         if (response) {
-          fetchAndSetMarkers();
+          // Update markers directly in the context
+          const updatedMarkers = markers.filter(
+            (marker) => marker._id !== markerId
+          );
+          setMarkers(updatedMarkers);
+          setFilteredMarkers(updatedMarkers);
           toast.success('Marker deleted');
         } else {
           toast.error('Error deleting marker');
