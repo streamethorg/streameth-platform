@@ -72,7 +72,7 @@ const VideoDownloadClient = ({
       variant={variant}
       className={className}
     >
-      <LuDownload size={24} className="p-1" />
+      <LuDownload className="w-5 h-5" />
       <p className={cn(collapsable && 'flex')}>
         {loading ? 'Downloading...' : 'Download'}
       </p>
