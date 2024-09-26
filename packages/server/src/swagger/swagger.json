@@ -3286,6 +3286,14 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"startClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"endClipTime": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
@@ -3295,7 +3303,9 @@
 					"start",
 					"end",
 					"date",
-					"color"
+					"color",
+					"startClipTime",
+					"endClipTime"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -3358,6 +3368,14 @@
 					},
 					"slug": {
 						"type": "string"
+					},
+					"startClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"endClipTime": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
@@ -3367,7 +3385,9 @@
 					"start",
 					"end",
 					"date",
-					"color"
+					"color",
+					"startClipTime",
+					"endClipTime"
 				],
 				"type": "object",
 				"additionalProperties": false

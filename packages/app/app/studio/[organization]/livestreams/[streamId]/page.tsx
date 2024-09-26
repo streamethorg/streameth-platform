@@ -17,12 +17,11 @@ import {
   fetchSession,
 } from '@/lib/services/sessionService';
 import Sidebar from './components/Sidebar';
-import Preview from '../../clips/[stageId]/sidebar/clips/Preview';
 import { fetchStageRecordings } from '@/lib/services/stageService';
 import EditLivestream from '../components/EditLivestream';
 import ShareAndEmbed from './components/ShareAndEmbed';
 
-const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
+const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null;
 
   const stream = await fetchStage({ stage: params.streamId });
@@ -38,39 +37,10 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
     await fetchAllSessions({ stageId: stream._id?.toString() })
   ).sessions;
 
-  const previewAsset = await (async function () {
-    if (searchParams.previewId) {
-      const session = await fetchSession({
-        session: searchParams.previewId,
-      });
-      if (session) {
-        return await fetchAsset({
-          assetId: session.assetId as string,
-        });
-      }
-    }
-    return undefined;
-  })();
-
-  const stageRecordings = await fetchStageRecordings({
-    streamId: stream.streamSettings?.streamId ?? '',
-  });
-
-  const latestRecordingId = stageRecordings?.recordings[0]?.id;
-
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${params.organization}/livestream?stage=${stream._id}`;
 
   return (
     <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-[1000px]">
-      {previewAsset && (
-        <Preview
-          initialIsOpen={searchParams.previewId !== ''}
-          organizationId={organization._id as string}
-          asset={previewAsset}
-          sessionId={searchParams.previewId}
-          organizationSlug={params.organization}
-        />
-      )}
       <StreamHeader
         organizationSlug={params.organization}
         stream={stream}
@@ -118,9 +88,9 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
               variant="outline"
               btnText="Edit Livestream"
             />
-            {stream.streamSettings?.isActive && latestRecordingId && (
+            {stream.streamSettings?.isActive && (
               <Link
-                href={`/studio/${params.organization}/clips?stage=${stream._id}&selectedRecording=${latestRecordingId}`}
+                href={`/studio/${params.organization}/clips/${stream._id}?videoType=livestream`}
               >
                 <Button variant="primary" className="flex items-center gap-1">
                   Clip Live

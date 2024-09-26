@@ -9,6 +9,8 @@ const MarkerSchema = new Schema<IMarker>(
     stageId: { type: Schema.Types.ObjectId, index: true, ref: 'Stage' },
     start: { type: Number, default: 0, required: true },
     end: { type: Number, default: 0, required: true },
+    startClipTime: { type: Number, default: 0, required: true },
+    endClipTime: { type: Number, default: 0, required: true },
     date: { type: String, default: '', required: true },
     color: { type: String, default: '#FFA500', required: true },
     speakers: [

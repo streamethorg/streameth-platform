@@ -233,6 +233,8 @@ export const markerSchema = z
     color: z.string().min(1, 'Color is required'),
     speakers: z.array(speakerSchema).optional(),
     description: z.string().optional(),
+    startClipTime: z.number().min(0, 'Start Clip Time is required'),
+    endClipTime: z.number().min(0, 'End Clip Time is required'),
   })
   .refine((data) => data.end > data.start, {
     message: 'End time must be greater than start time',
@@ -254,4 +256,6 @@ export const clipSchema = z.object({
   stageId: z.string().min(1, 'Stage ID is required'),
   description: z.string().optional(),
   speakers: z.array(speakerSchema).optional(),
+  startClipTime: z.number().min(0, 'Start Clip Time is required'),
+  endClipTime: z.number().min(0, 'End Clip Time is required'),
 });

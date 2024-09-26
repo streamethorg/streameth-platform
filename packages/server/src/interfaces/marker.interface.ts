@@ -13,4 +13,6 @@ export interface IMarker {
   color: string;
   speakers?: ISpeaker[];
   slug?: string;
+  startClipTime: number;
+  endClipTime: number;
 }

@@ -230,15 +230,15 @@ export const ClipProvider = ({
 
   const handleMarkerClick = (marker: IExtendedMarker) => {
     if (videoRef.current) {
-      videoRef.current.currentTime = marker.start;
+      videoRef.current.currentTime = marker.startClipTime;
       setStartTime({
-        displayTime: marker.start,
-        unix: convertSecondsToUnix(marker.start),
+        displayTime: marker.startClipTime,
+        unix: convertSecondsToUnix(marker.startClipTime),
       });
 
       setEndTime({
-        displayTime: marker.end,
-        unix: convertSecondsToUnix(marker.end),
+        displayTime: marker.endClipTime,
+        unix: convertSecondsToUnix(marker.endClipTime),
       });
 
       videoRef.current.play();

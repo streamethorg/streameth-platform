@@ -44,4 +44,12 @@ export class CreateMarkerDto implements IMarker {
   @IsOptional()
   @IsArray()
   speakers?: ISpeaker[];
+
+  @IsNotEmpty()
+  @IsNumber()
+  startClipTime: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  endClipTime: number;
 }

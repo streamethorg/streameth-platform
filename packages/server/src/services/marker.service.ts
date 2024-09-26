@@ -101,7 +101,23 @@ export default class MarkerService {
         organizationId: d.organizationId,
       });
     }
-    const markers = sessions.map((session) => {
+    // formatting startClipTime and endClipTime to video timeline in secs
+    const sortedSessions = sessions.sort((a, b) => a.start - b.start);
+    const firstSessionStart = sortedSessions[0].start;
+
+    const markers = sortedSessions.map((session, index) => {
+      let startClipTime: number;
+      let endClipTime: number;
+
+      if (index === 0) {
+        // Ensure the first session always starts at 0 seconds
+        startClipTime = 0;
+        endClipTime = (session.end - session.start) / 1000;
+      } else {
+        startClipTime = (session.start - firstSessionStart) / 1000;
+        endClipTime = (session.end - firstSessionStart) / 1000;
+      }
+
       return {
         name: session.name,
         description: session.description,
@@ -112,8 +128,11 @@ export default class MarkerService {
         speakers: session.speakers,
         slug: session.slug,
         stageId: d.stageId,
+        startClipTime,
+        endClipTime,
       };
     });
+
     return await Markers.create(markers);
   }
 
@@ -138,7 +157,16 @@ export default class MarkerService {
           roomCount === 1 || generateId(roomName) === d.roomId;
         if (!shouldImportRoom) continue;
 
-        for (const session of sessions as any[]) {
+        const sortedSessions = (sessions as any[]).sort(
+          (a, b) =>
+            new Date(a.date + 'T' + a.start).getTime() -
+            new Date(b.date + 'T' + b.start).getTime(),
+        );
+        const firstSessionStart = new Date(
+          sortedSessions[0].date + 'T' + sortedSessions[0].start,
+        ).getTime();
+
+        sortedSessions.forEach((session, index) => {
           const speakers = session.persons.map((person: any) => {
             return {
               name: person.public_name,
@@ -152,6 +180,18 @@ export default class MarkerService {
             session.start,
             session.duration,
           );
+          // formatting startClipTime and endClipTime to video timeline in secs
+          let startClipTime: number;
+          let endClipTime: number;
+
+          if (index === 0) {
+            startClipTime = 0;
+            endClipTime = (sessionTime.end - sessionTime.start) / 1000;
+          } else {
+            startClipTime = (sessionTime.start - firstSessionStart) / 1000;
+            endClipTime = (sessionTime.end - firstSessionStart) / 1000;
+          }
+
           const markerData = {
             name: session.title,
             description: session.description,
@@ -162,9 +202,11 @@ export default class MarkerService {
             speakers: speakers,
             slug: generateId(session.title),
             stageId: d.stageId,
+            startClipTime,
+            endClipTime,
           };
           markersData.push(markerData);
-        }
+        });
       }
     }
 

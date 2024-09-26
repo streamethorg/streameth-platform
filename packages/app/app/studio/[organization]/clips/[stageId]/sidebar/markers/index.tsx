@@ -52,14 +52,6 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
       </div>
     );
   }
-  // Empty markers state
-  if (markers.length === 0) {
-    return (
-      <div className="flex h-full w-full items-center justify-center border-l bg-white text-gray-500">
-        No markers available
-      </div>
-    );
-  }
 
   return (
     <div className="h-full w-full border-l">

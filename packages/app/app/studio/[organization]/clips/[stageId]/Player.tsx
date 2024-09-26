@@ -65,7 +65,9 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
           setPlaybackStatus(playbackRef.current);
 
           setTimeReference({
-            unixTime: new Date(data.frag.rawProgramDateTime).getTime(),
+            unixTime: new Date(
+              data.frag.rawProgramDateTime as string
+            ).getTime(),
             currentTime: progress,
           });
         }

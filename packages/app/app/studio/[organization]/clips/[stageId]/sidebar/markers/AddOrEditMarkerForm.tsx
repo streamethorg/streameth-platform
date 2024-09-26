@@ -68,8 +68,10 @@ const AddOrEditMarkerForm = ({
           organizationId: organizationId,
           date: new Date().toISOString(),
           color: '#FFA500',
-          start: currentTime,
-          end: currentTime + 1,
+          start: new Date().getTime(),
+          end: new Date().getTime() + 1,
+          startClipTime: currentTime,
+          endClipTime: currentTime + 1,
         },
   });
 
@@ -77,7 +79,7 @@ const AddOrEditMarkerForm = ({
     form.reset();
     setIsAddingOrEditingMarker(false);
   };
-  console.log('form Error', form.formState.errors);
+
   const handleSubmit = async (values: z.infer<typeof markerSchema>) => {
     setLoading(true);
     try {
@@ -151,7 +153,7 @@ const AddOrEditMarkerForm = ({
             <div className="flex flex-row w-full space-x-2">
               <FormField
                 control={form.control}
-                name="start"
+                name="startClipTime"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex flex-col w-full gap-2">
@@ -177,7 +179,7 @@ const AddOrEditMarkerForm = ({
 
               <FormField
                 control={form.control}
-                name="end"
+                name="endClipTime"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex flex-col w-full gap-2">
@@ -193,15 +195,15 @@ const AddOrEditMarkerForm = ({
                             const value = Number(e.target.value);
                             field.onChange(value);
                             // Ensure end time is greater than start time
-                            const startValue = form.getValues('start');
+                            const startValue = form.getValues('startClipTime');
                             if (value <= startValue || value > maxEndTime) {
-                              form.setError('end', {
+                              form.setError('endClipTime', {
                                 type: 'manual',
                                 message:
                                   'End time must be greater than start time and less than the video duration',
                               });
                             } else {
-                              form.clearErrors('end');
+                              form.clearErrors('endClipTime');
                             }
                           }}
                           max={maxEndTime}

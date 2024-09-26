@@ -40,7 +40,7 @@ const Timeline = () => {
       >
         {filteredMarkers &&
           filteredMarkers.map((marker) => {
-            if (marker.start > maxLength) return null;
+            if (marker.startClipTime > maxLength) return null;
             return (
               <div
                 key={marker._id}
@@ -51,8 +51,8 @@ const Timeline = () => {
                   border: `2px solid ${
                     selectedMarkerId === marker._id ? '#066FF9' : marker.color
                   }`,
-                  left: `${(marker.start / maxLength) * timelineWidth}px`,
-                  width: `${((marker.end - marker.start) / maxLength) * timelineWidth}px`,
+                  left: `${(marker.startClipTime / maxLength) * timelineWidth}px`,
+                  width: `${((marker.endClipTime - marker.startClipTime) / maxLength) * timelineWidth}px`,
                 }}
               />
             );

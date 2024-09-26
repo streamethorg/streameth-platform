@@ -95,7 +95,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
       {isOpen && asset && (
         <Preview
           isOpen={isOpen}
-          asset={asset}
+          // asset={asset}
           organizationId={session.organizationId as string}
           session={session}
           setIsOpen={setIsOpen}

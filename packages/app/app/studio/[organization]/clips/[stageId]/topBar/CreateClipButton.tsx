@@ -83,11 +83,13 @@ const CreateClipButton = ({
     defaultValues: {
       name: '',
       description: 'No description',
-      start: startTime.displayTime,
-      end: endTime.displayTime,
+      start: new Date().getTime(),
+      end: new Date().getTime(),
       organizationId: organizationId,
       stageId: stageId,
       speakers: [],
+      startClipTime: startTime.displayTime,
+      endClipTime: endTime.displayTime,
     },
   });
 
@@ -96,8 +98,10 @@ const CreateClipButton = ({
       form.reset({
         name: selectedMarker.name ?? '',
         description: selectedMarker.description ?? 'No description',
-        start: startTime.displayTime,
-        end: endTime.displayTime,
+        start: selectedMarker.start,
+        end: selectedMarker.end,
+        startClipTime: startTime.displayTime,
+        endClipTime: endTime.displayTime,
         organizationId: organizationId,
         stageId: stageId,
         speakers:
@@ -132,8 +136,10 @@ const CreateClipButton = ({
           description: values.description,
           speakers: values?.speakers,
           type: SessionType.clip,
-          start: startTime.unix,
-          end: endTime.unix,
+          startClipTime: startTime.unix,
+          endClipTime: endTime.unix,
+          start: values.start,
+          end: values.end,
           organizationId,
           stageId,
         },

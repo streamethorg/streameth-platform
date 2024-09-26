@@ -71,7 +71,8 @@ const Marker = ({
             </div>
           </div>
           <span className="text-sm text-gray-500">
-            IN {formatTime(marker.start)} - OUT {formatTime(marker.end)}
+            IN {formatTime(marker.startClipTime)} - OUT{' '}
+            {formatTime(marker.endClipTime)}
           </span>
         </div>
       </div>

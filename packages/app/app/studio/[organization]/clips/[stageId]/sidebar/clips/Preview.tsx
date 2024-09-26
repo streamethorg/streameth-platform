@@ -18,13 +18,11 @@ import { IExtendedSession } from '@/lib/types';
 
 const Preview = ({
   isOpen,
-  asset,
   organizationId,
   session,
   setIsOpen,
 }: {
   isOpen: boolean;
-  asset?: Asset | null;
   organizationId: string;
   session: IExtendedSession;
   setIsOpen: (isOpen: boolean) => void;
@@ -66,8 +64,8 @@ const Preview = ({
             src={[
               {
                 src:
-                  (asset?.playbackUrl as '${string}m3u8') ??
-                  `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${asset?.playbackId}/index.m3u8`,
+                  (session?.videoUrl as '${string}m3u8') ??
+                  `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${session?.playbackId}/index.m3u8`,
                 width: 1920,
                 height: 1080,
                 mime: 'application/vnd.apple.mpegurl',
