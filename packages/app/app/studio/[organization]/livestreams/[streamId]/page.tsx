@@ -11,14 +11,13 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import ImportDataButton from './components/StageDataImport/ImportDataButton';
 import {
   fetchAllSessions,
   fetchAsset,
   fetchSession,
 } from '@/lib/services/sessionService';
 import Sidebar from './components/Sidebar';
-import Preview from '../../Preview';
+import Preview from '../../clips/[stageId]/sidebar/clips/Preview';
 import { fetchStageRecordings } from '@/lib/services/stageService';
 import EditLivestream from '../components/EditLivestream';
 import ShareAndEmbed from './components/ShareAndEmbed';

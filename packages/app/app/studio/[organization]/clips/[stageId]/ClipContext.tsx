@@ -145,32 +145,10 @@ export const ClipProvider = ({
   }, [stageId]);
 
   useEffect(() => {
-    if (handleTermChange) {
-      handleTermChange([
-        { key: 'start', value: String(startTime.displayTime) },
-        { key: 'end', value: String(endTime.displayTime) },
-        { key: 'currentTime', value: String(videoRef.current?.currentTime) },
-      ]);
-    }
-  }, [startTime.displayTime, endTime.displayTime]);
-
-  useEffect(() => {
-    if (Number(start) !== 0 && Number(end) !== 0) {
-      setStartTime({
-        unix: convertSecondsToUnix(Number(start)),
-        displayTime: startTime.displayTime,
-      });
-
-      setEndTime({
-        unix: convertSecondsToUnix(Number(end)),
-        displayTime: endTime.displayTime,
-      });
-    } else {
-      setEndTime({
-        unix: convertSecondsToUnix(30),
-        displayTime: 30,
-      });
-    }
+    setEndTime({
+      unix: convertSecondsToUnix(30),
+      displayTime: 30,
+    });
   }, []);
 
   const convertSecondsToUnix = (seconds: number) => {
@@ -212,7 +190,7 @@ export const ClipProvider = ({
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: convertSecondsToUnix(newTime),
+              unix: hls.playingDate.getTime(),
               displayTime: newTime,
             });
           }
@@ -222,7 +200,7 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: convertSecondsToUnix(newTime),
+              unix: hls.playingDate.getTime(),
               displayTime: newTime,
             });
           }
