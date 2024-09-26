@@ -22,6 +22,7 @@ import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import { Button } from '@/components/ui/button';
+import { getTypeLabel } from '@/lib/utils/utils';
 
 const TableCells = async ({
   item,
@@ -55,18 +56,6 @@ const TableCells = async ({
       case 'video':
       default:
         return <Video className="w-4 h-4 text-sky-500" />;
-    }
-  };
-
-  const getTypeLabel = (type: string) => {
-    switch (type) {
-      case 'clip':
-        return 'Clip';
-      case 'livestream':
-        return 'Livestream';
-      case 'video':
-      default:
-        return 'Video';
     }
   };
 
