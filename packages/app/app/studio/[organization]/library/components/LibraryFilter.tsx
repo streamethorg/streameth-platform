@@ -17,55 +17,39 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import useSearchParams from '@/lib/hooks/useSearchParams';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Check, Clapperboard, Eye, GraduationCap } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   const { searchParams, handleTermChange } = useSearchParams();
   const [selectedStage, setSelectedStage] = useState(
-    searchParams.get('stage') || undefined
+    searchParams?.get('stage') || ''
   );
   const [selectedType, setSelectedType] = useState(
-    searchParams.get('type') || undefined
+    searchParams?.get('type') || ''
   );
   const [selectedVisibility, setSelectedVisibility] = useState(
-    searchParams.get('published') || undefined
+    searchParams?.get('published') || ''
   );
   const [openPopover, setOpenPopover] = useState(false);
 
-  const count = [selectedStage, selectedType, selectedVisibility].reduce(
-    (count, item) => count + (item !== undefined ? 1 : 0),
-    0
-  );
+  const count = [selectedStage, selectedType, selectedVisibility].filter(
+    Boolean
+  ).length;
+
   const handleClearFilter = () => {
-    setSelectedStage(undefined);
-    setSelectedType(undefined);
-    setSelectedVisibility(undefined);
+    setSelectedStage('');
+    setSelectedType('');
+    setSelectedVisibility('');
   };
+
   const handleSaveFilter = () => {
     handleTermChange([
-      {
-        key: 'stage',
-        value: selectedStage,
-      },
-      {
-        key: 'type',
-        value: selectedType,
-      },
-      {
-        key: 'published',
-        value: selectedVisibility,
-      },
-      {
-        key: 'page',
-        value: '1',
-      },
+      { key: 'stage', value: selectedStage },
+      { key: 'type', value: selectedType },
+      { key: 'published', value: selectedVisibility },
+      { key: 'page', value: '1' },
     ]);
     setOpenPopover(false);
   };
@@ -80,119 +64,99 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
       <PopoverTrigger asChild>
         <Button variant="outline" className="flex items-center gap-2">
           <FaFilter />
-          Filter <span>{count > 0 && `| ${count}`}</span>
+          Filter {count > 0 && <span>| {count}</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="space-y-4 p-0">
-        <div className="flex items-center justify-between gap-2 border-b border-secondary p-2">
+      <PopoverContent className="w-80 space-y-4 p-4">
+        <div className="flex items-center justify-between">
+          <h4 className="font-bold">Filters</h4>
           <Button onClick={handleClearFilter} size="sm" variant="outline">
-            Clear
-          </Button>
-          <h4 className="text-center font-bold">Filters</h4>
-          <Button onClick={handleSaveFilter} size="sm" variant="primary">
-            Save
+            Clear Filters
           </Button>
         </div>
-        <Accordion type="multiple">
-          <AccordionItem value="stage">
-            <AccordionTrigger className="px-2 py-3">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  checked={!!selectedStage}
-                  onCheckedChange={() => setSelectedStage(undefined)}
-                />
-                <h4 className="text-sm font-medium">Stage</h4>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="p-2">
-              <Select
-                value={selectedStage}
-                onValueChange={(value) => setSelectedStage(value)}
-              >
-                <SelectTrigger>
-                  <SelectValue
-                    defaultValue={selectedStage}
-                    placeholder={'Select a stage'}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {stages.map((stage) => (
-                      <SelectItem key={stage._id} value={stage._id!}>
-                        {stage.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </AccordionContent>
-          </AccordionItem>
 
-          <AccordionItem value="type">
-            <AccordionTrigger className="px-2 py-3">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  checked={!!selectedType}
-                  onCheckedChange={() => setSelectedType(undefined)}
-                />
-                <h4 className="text-sm font-medium">Video type</h4>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="p-2">
-              <Select
-                value={selectedType}
-                onValueChange={(value) => setSelectedType(value)}
-              >
-                <SelectTrigger>
-                  <SelectValue
-                    defaultValue={selectedType}
-                    placeholder={'Select video type'}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {sessionTypes.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
-                        {type.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </AccordionContent>
-          </AccordionItem>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label
+              htmlFor="stage"
+              className="text-sm font-medium flex items-center gap-2"
+            >
+              <GraduationCap className="w-5 h-5" />
+              Stage
+              {selectedStage && <Check className="w-4 h-4 text-green-500" />}
+            </label>
+            <Select value={selectedStage} onValueChange={setSelectedStage}>
+              <SelectTrigger id="stage">
+                <SelectValue placeholder="Select a stage" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {stages.map((stage) => (
+                    <SelectItem key={stage._id} value={stage._id!}>
+                      {stage.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
 
-          <AccordionItem value="visibility">
-            <AccordionTrigger className="px-2 py-3">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  checked={!!selectedVisibility}
-                  onCheckedChange={() => setSelectedVisibility(undefined)}
-                />
-                <h4 className="text-sm font-medium">Visibility</h4>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="p-2">
-              <Select
-                value={selectedVisibility}
-                onValueChange={(value) => setSelectedVisibility(value)}
-              >
-                <SelectTrigger>
-                  <SelectValue
-                    defaultValue={selectedVisibility}
-                    placeholder={'Select visibility'}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="false">private</SelectItem>
-                    <SelectItem value="true">public</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+          <div className="space-y-2">
+            <label
+              htmlFor="type"
+              className="text-sm font-medium flex items-center gap-2"
+            >
+              <Clapperboard className="w-5 h-5" />
+              Video Type
+              {selectedType && <Check className="w-4 h-4 text-green-500" />}
+            </label>
+            <Select value={selectedType} onValueChange={setSelectedType}>
+              <SelectTrigger id="type">
+                <SelectValue placeholder="Select video type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {sessionTypes.map((type) => (
+                    <SelectItem key={type.value} value={type.value}>
+                      {type.label.charAt(0).toUpperCase() + type.label.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <label
+              htmlFor="visibility"
+              className="text-sm font-medium flex items-center gap-2"
+            >
+              <Eye className="w-5 h-5" />
+              Visibility
+              {selectedVisibility && (
+                <Check className="w-4 h-4 text-green-500" />
+              )}
+            </label>
+            <Select
+              value={selectedVisibility}
+              onValueChange={setSelectedVisibility}
+            >
+              <SelectTrigger id="visibility">
+                <SelectValue placeholder="Select visibility" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="false">Private</SelectItem>
+                  <SelectItem value="true">Public</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <Button onClick={handleSaveFilter} className="w-full" variant="primary">
+          Apply Filters
+        </Button>
       </PopoverContent>
     </Popover>
   );

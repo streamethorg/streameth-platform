@@ -26,14 +26,13 @@ const LibraryListLayout = async ({
           <TableHead className="cursor-pointer">
             <TableSort title="Title" sortBy="name" />
           </TableHead>
-          <TableHead>Visibility</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Duration</TableHead>
           <TableHead className="cursor-pointer">
             <TableSort title="Created at" sortBy="date" />
           </TableHead>
           <TableHead>Views</TableHead>
-          <TableHead>
-            <LayoutSelection />
-          </TableHead>
+          <TableHead>{/* <LayoutSelection /> */}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="overflow-auto">
