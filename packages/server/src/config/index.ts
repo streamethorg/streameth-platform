@@ -18,6 +18,7 @@ export const config = {
   cors: {
     origin: validatedEnv.CORS_ORIGIN,
     credentials: validatedEnv.CORS_CREDENTIALS,
+    host: validatedEnv.CORS_PROXY_URL,
   },
   jwt: {
     secret: validatedEnv.JWT_SECRET,

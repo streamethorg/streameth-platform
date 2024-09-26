@@ -19,7 +19,7 @@ import TableSkeleton from '@/components/misc/Table/TableSkeleton';
 
 export const Loading = () => {
   return (
-    <div className="flex h-full flex-col bg-white">
+    <div className="flex flex-col h-full bg-white">
       <TableSkeleton />
     </div>
   );
@@ -43,12 +43,12 @@ export const Livestreams = async ({
   );
 
   return (
-    <div className="flex h-full flex-col rounded-xl border bg-white">
+    <div className="flex flex-col h-full bg-white rounded-xl border">
       <Card
         style={{
           backgroundImage: `url(/backgrounds/livestreamBg.png)`,
         }}
-        className="rounded-none border-none bg-cover bg-no-repeat p-4 shadow-none"
+        className="p-4 bg-no-repeat bg-cover rounded-none border-none shadow-none"
       >
         <CardHeader>
           <CardTitle>Livestreams</CardTitle>
@@ -70,8 +70,8 @@ export const Livestreams = async ({
         />
       ) : (
         <div>
-          <div className="flex h-10 justify-end border-y border-muted bg-white"></div>
-          <div className="m-auto flex h-96 flex-col items-center justify-center gap-4 bg-white">
+          <div className="flex justify-end h-10 bg-white border-y border-muted"></div>
+          <div className="flex flex-col gap-4 justify-center items-center m-auto h-96 bg-white">
             <EmptyFolder />
             <CardTitle className="text-2xl font-semibold">
               The livestream is empty
@@ -79,7 +79,7 @@ export const Livestreams = async ({
             <CardDescription>
               Create your first livestream to get started!
             </CardDescription>
-            <div className="mt-2 w-fit overflow-auto">
+            <div className="overflow-auto mt-2 w-fit">
               <CreateLivestreamModal organization={organization} />
             </div>
           </div>

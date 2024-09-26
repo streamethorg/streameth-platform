@@ -14,6 +14,7 @@ const validateEnv = () => {
     LOG_DIR: str(),
     CORS_ORIGIN: str(),
     CORS_CREDENTIALS: bool(),
+    CORS_PROXY_URL: str(),
     JWT_SECRET: str(),
     JWT_EXPIRY: str(),
     LIVEPEER_BASE_URL: str(),
