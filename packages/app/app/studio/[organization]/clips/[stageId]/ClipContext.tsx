@@ -155,7 +155,7 @@ export const ClipProvider = ({
   }, [startTime.displayTime, endTime.displayTime]);
 
   useEffect(() => {
-    if (start && end) {
+    if (Number(start) !== 0 && Number(end) !== 0) {
       setStartTime({
         unix: convertSecondsToUnix(Number(start)),
         displayTime: startTime.displayTime,
@@ -174,13 +174,6 @@ export const ClipProvider = ({
   }, []);
 
   const convertSecondsToUnix = (seconds: number) => {
-    console.log(
-      'timeReference',
-      timeReference,
-      timeReference.unixTime,
-      Number(seconds),
-      timeReference.currentTime
-    );
     if (timeReference.currentTime < seconds) {
       return Math.round(
         timeReference.unixTime + (seconds - timeReference.currentTime) * 1000
@@ -219,7 +212,7 @@ export const ClipProvider = ({
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: hls.playingDate.getTime(),
+              unix: convertSecondsToUnix(newTime),
               displayTime: newTime,
             });
           }
@@ -229,7 +222,7 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: hls.playingDate.getTime(),
+              unix: convertSecondsToUnix(newTime),
               displayTime: newTime,
             });
           }
