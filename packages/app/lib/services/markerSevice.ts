@@ -45,12 +45,11 @@ export const updateMarkers = async ({
       },
       body: JSON.stringify(rest),
     });
-    const responseData = await response.json();
-    console.log('responseData', responseData);
+
     if (!response.ok) {
       throw new Error('Error updating markers');
     }
-    return responseData.data;
+    return (await response.json()).data;
   } catch (error) {
     console.error('Error updating markers:', error);
     throw error;

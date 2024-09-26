@@ -2,69 +2,51 @@
 
 import { useEffect, useState } from 'react';
 import Player from '@/components/ui/Player';
-import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import ShareButton from '@/components/misc/interact/ShareButton';
-import useSearchParams from '@/lib/hooks/useSearchParams';
 import { deleteSessionAction } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
 import { Asset } from 'livepeer/models/components';
 import { Button } from '@/components/ui/button';
+import { useParams } from 'next/navigation';
+import { IExtendedSession } from '@/lib/types';
 
 const Preview = ({
-  initialIsOpen,
+  isOpen,
   asset,
   organizationId,
-  sessionId,
-  organizationSlug,
+  session,
+  setIsOpen,
 }: {
-  initialIsOpen: boolean;
+  isOpen: boolean;
   asset?: Asset | null;
   organizationId: string;
-  sessionId: string;
-  organizationSlug: string;
+  session: IExtendedSession;
+  setIsOpen: (isOpen: boolean) => void;
 }) => {
-  const { handleTermChange } = useSearchParams();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const { status, playbackUrl, playbackId } = asset as Asset;
-  useEffect(() => {
-    setIsOpen(initialIsOpen);
-  }, [initialIsOpen, playbackId]);
-
-  useEffect(() => {
-    if (status?.phase === 'processing') {
-      const interval = setInterval(() => {
-        handleTermChange([
-          { key: 'poll', value: new Date().getTime().toString() },
-        ]);
-      }, 10000);
-      return () => clearInterval(interval);
-    }
-  }, [status?.phase, handleTermChange]);
-
   const [shareUrl, setShareUrl] = useState('');
-
-  useEffect(() => {
-    if (!asset?.playbackUrl || (asset && 'errors' in asset && asset.errors)) {
-      toast.error('Error processing video');
-    }
-  }, [asset]);
+  const params = useParams();
+  const organizationSlug = params.organization as string;
 
   useEffect(() => {
     setShareUrl(
-      `${window.location.origin}/${organizationSlug}/watch?session=${sessionId}`
+      `${window.location.origin}/${organizationSlug}/watch?session=${session._id}`
     );
-  }, [organizationSlug, sessionId]);
+  }, [organizationSlug, session._id]);
 
   const handleClose = () => {
-    handleTermChange([{ key: 'previewId', value: undefined }]);
     setIsOpen(false);
   };
 
   const handleDelete = () => {
     deleteSessionAction({
       organizationId,
-      sessionId,
+      sessionId: session._id,
     })
       .then(() => {
         toast.success('Session deleted');
@@ -78,27 +60,22 @@ const Preview = ({
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="w-full max-w-4xl bg-transparent text-white">
+        <DialogTitle>{session.name}</DialogTitle>
         <div className="space-y-2 p-4">
-          {status?.phase === 'processing' ? (
-            <div className="flex aspect-video flex-col items-center justify-center rounded-lg bg-background p-4 text-black">
-              <p className="">Video is processing</p>
-              <p>{Math.round(Number(status?.progress ?? 0) * 100)}% complete</p>
-            </div>
-          ) : (
-            <Player
-              src={[
-                {
-                  src:
-                    (playbackUrl as '${string}m3u8') ??
-                    `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`,
-                  width: 1920,
-                  height: 1080,
-                  mime: 'application/vnd.apple.mpegurl',
-                  type: 'hls',
-                },
-              ]}
-            />
-          )}
+          <Player
+            src={[
+              {
+                src:
+                  (asset?.playbackUrl as '${string}m3u8') ??
+                  `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${asset?.playbackId}/index.m3u8`,
+                width: 1920,
+                height: 1080,
+                mime: 'application/vnd.apple.mpegurl',
+                type: 'hls',
+              },
+            ]}
+          />
+
           <DialogFooter className="flex flex-row text-black">
             <Button
               className="mr-auto"

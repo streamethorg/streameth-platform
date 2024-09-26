@@ -137,13 +137,12 @@ export const createSession = async ({
       },
       body: JSON.stringify(session),
     });
-    const responseData = await response.json();
-    console.log('responseData', responseData);
+
     if (!response.ok) {
       throw 'Error creating session';
     }
     revalidatePath('/studio');
-    return responseData.data;
+    return (await response.json()).data;
   } catch (e) {
     console.log('error in createSession', e);
     throw e;
@@ -204,7 +203,6 @@ export const updateSession = async ({
       body: JSON.stringify(modifiedSession),
     });
     if (!response.ok) {
-      console.log('error in updateSession', await response.json());
       throw 'Error updating session';
     }
     return (await response.json()).data;
@@ -274,13 +272,12 @@ export const createClip = async ({
         recordingId,
       }),
     });
-    const responseData = await response.json();
-    console.log('Clipping responseData', responseData);
+
     if (!response.ok) {
       throw 'Error creating clip';
     }
     revalidatePath('/studio');
-    return responseData.data;
+    return (await response.json()).data;
   } catch (e) {
     console.log('error in createClip', e);
     throw e;
@@ -349,12 +346,12 @@ export const createAsset = async ({
     });
 
     if (!response.ok) {
-      throw 'Error updating session';
+      throw 'Error creating asset';
     }
     revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
-    console.log('error in updateSession', e);
+    console.log('error in createAsset', e);
     throw e;
   }
 };
@@ -377,12 +374,11 @@ export const generateThumbnail = async ({
       }),
     });
     if (!response.ok) {
-      throw 'Error updating session';
+      throw 'Error generating thumbnail';
     }
     revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
-    console.log('error in updateSession', e);
     throw e;
   }
 };

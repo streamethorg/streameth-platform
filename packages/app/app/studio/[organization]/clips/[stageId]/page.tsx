@@ -17,11 +17,10 @@ import TopBar from './topBar';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import Preview from './sidebar/clips/Preview';
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { organization, stageId } = params;
-  const { videoType, sessionId, previewId } = searchParams;
+  const { videoType, sessionId } = searchParams;
 
   const organizationId = (
     await fetchOrganization({ organizationSlug: organization })
@@ -56,8 +55,18 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     const session = await fetchSession({
       session: sessionId,
     });
-    if (!session || !session.videoUrl) return <div>No session found</div>;
-    videoSrc = session?.videoUrl;
+    if (!session || !session.playbackId || !session.assetId)
+      return <div>No session found</div>;
+    const stage = await fetchStage({
+      stage: session.stageId as string,
+    });
+    if (!stage || !stage?.streamSettings?.playbackId)
+      return <div>No stage found</div>;
+
+    videoSrc = getLiveStageSrcValue({
+      playbackId: stage?.streamSettings?.playbackId,
+      recordingId: session?.assetId,
+    });
     type = 'livepeer';
   }
 
@@ -80,20 +89,6 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     })
   ).sessions;
 
-  const previewAsset = await (async function () {
-    if (previewId) {
-      const session = await fetchSession({
-        session: previewId,
-      });
-      if (session) {
-        return await fetchAsset({
-          assetId: session.assetId as string,
-        });
-      }
-    }
-    return undefined;
-  })();
-
   return (
     <ClipProvider organizationId={organizationId} stageId={stageId}>
       <div className="flex flex-row w-full h-full">
@@ -112,15 +107,6 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             organizationId={organizationId}
           />
         </div>
-        {previewId && previewAsset && (
-          <Preview
-            initialIsOpen={!!previewAsset?.playbackUrl}
-            asset={previewAsset}
-            organizationId={organizationId}
-            sessionId={previewId}
-            organizationSlug={organization}
-          />
-        )}
       </div>
     </ClipProvider>
   );

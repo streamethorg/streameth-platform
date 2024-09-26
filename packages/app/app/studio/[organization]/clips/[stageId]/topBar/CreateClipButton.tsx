@@ -112,9 +112,12 @@ const CreateClipButton = ({
 
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
     setIsCreateClip(true);
-    if (!stage?.streamSettings?.playbackId) {
+    if (
+      !stage?.streamSettings?.playbackId ||
+      (!sessionRecording?.assetId && !liveRecordingId)
+    ) {
       setIsCreateClip(false);
-      return toast.error('Missing stage playbackId');
+      return toast.error('Missing required data for clip creation');
     }
 
     if (endTime.unix < startTime.unix) {
@@ -136,8 +139,8 @@ const CreateClipButton = ({
         },
       });
 
-      if (!session || sessionRecording?.assetId || !liveRecordingId) {
-        throw new Error('Failed to create session or missing required data');
+      if (!session) {
+        throw new Error('Failed to create session');
       }
 
       let clipData = {
@@ -145,19 +148,13 @@ const CreateClipButton = ({
         start: startTime.unix,
         end: endTime.unix,
         sessionId: session._id,
-        recordingId: sessionRecording?.assetId ?? liveRecordingId,
+        recordingId: sessionRecording?.assetId ?? liveRecordingId ?? '',
       };
 
       await createClipAction(clipData);
 
       toast.success('Clip created');
       setIsCreatingClip(false);
-      handleTermChange([
-        {
-          key: 'previewId',
-          value: '66f3e52cf2d72d844d3725d1',
-        },
-      ]);
     } catch (error) {
       console.error('Error creating clip:', error);
       toast.error('Error creating clip');
