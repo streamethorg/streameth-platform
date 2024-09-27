@@ -114,12 +114,12 @@ const ClipsConfig = ({
         </section>
       )}
 
-      <InjectUrlInput
+      {/* <InjectUrlInput
         organizationSlug={organization.slug as string}
         organizationId={organization._id as string}
-      />
+      /> */}
 
-      {customUrlStages.length > 0 && (
+      {/* {customUrlStages.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Custom URL Stages</h2>
           <div className="mb-10 w-full rounded-xl border bg-white p-1">
@@ -157,7 +157,7 @@ const ClipsConfig = ({
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {liveStages.length > 0 && (
         <section className="w-full">
