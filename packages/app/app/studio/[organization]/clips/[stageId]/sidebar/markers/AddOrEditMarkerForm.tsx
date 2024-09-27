@@ -60,6 +60,7 @@ const AddOrEditMarkerForm = ({
           speakers: selectedMarker.speakers?.map((speaker) => ({
             ...speaker,
             eventId: speaker?.eventId?.toString(),
+            organizationId: speaker?.organizationId?.toString(),
           })),
         }
       : {

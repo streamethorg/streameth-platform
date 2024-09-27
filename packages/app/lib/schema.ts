@@ -107,6 +107,7 @@ const speakerSchema = z.object({
   website: z.string().optional(),
   photo: z.string().optional(),
   company: z.string().optional(),
+  organizationId: z.string().optional(),
 });
 
 export const sessionSchema = z.object({

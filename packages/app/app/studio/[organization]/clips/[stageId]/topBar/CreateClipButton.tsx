@@ -46,14 +46,22 @@ const CreateClipButton = ({
   organizationId: string;
   liveRecordingId?: string;
 }) => {
-  const { isLoading, markers, stageId, setIsCreatingClip, startTime, endTime } =
-    useClipContext();
-  const [selectedMarkerId, setSelectedMarkerId] = useState('');
+  const {
+    isLoading,
+    markers,
+    stageId,
+    setIsCreatingClip,
+    startTime,
+    endTime,
+    selectedMarkerId,
+    setSelectedMarkerId,
+  } = useClipContext();
+  // const [selectedMarkerId, setSelectedMarkerId] = useState('');
   const [isCreateClip, setIsCreateClip] = useState(false);
   const [sessionRecording, setSessionRecording] =
     useState<IExtendedSession | null>(null);
   const [stage, setStage] = useState<IExtendedStage | null>(null);
-  const { searchParams, handleTermChange } = useSearchParams();
+  const { searchParams } = useSearchParams();
 
   const sessionId = searchParams.get('sessionId');
 
@@ -107,6 +115,7 @@ const CreateClipButton = ({
         speakers:
           selectedMarker.speakers?.map((speaker) => ({
             ...speaker,
+            organizationId: speaker?.organizationId?.toString(),
             eventId: speaker?.eventId?.toString(),
           })) ?? [],
       });
@@ -128,7 +137,6 @@ const CreateClipButton = ({
       setIsCreateClip(false);
       return toast.error('End time must be greater than start time');
     }
-
     try {
       const session = await createSessionAction({
         session: {
@@ -145,7 +153,7 @@ const CreateClipButton = ({
         },
       });
 
-      if (!session) {
+      if (!session || !session._id) {
         throw new Error('Failed to create session');
       }
 
@@ -163,7 +171,9 @@ const CreateClipButton = ({
       setIsCreatingClip(false);
     } catch (error) {
       console.error('Error creating clip:', error);
-      toast.error('Error creating clip');
+      toast.error(
+        error instanceof Error ? error.message : 'Error creating clip'
+      );
     } finally {
       setIsCreateClip(false);
     }
@@ -184,7 +194,10 @@ const CreateClipButton = ({
             {markers && markers.length > 0 && (
               <>
                 <FormLabel>Select Marker for Clip</FormLabel>
-                <Select onValueChange={(value) => setSelectedMarkerId(value)}>
+                <Select
+                  value={selectedMarkerId}
+                  onValueChange={(value) => setSelectedMarkerId(value)}
+                >
                   <SelectTrigger className="rounded-lg border bg-white">
                     <SelectValue placeholder="select marker"></SelectValue>
                   </SelectTrigger>

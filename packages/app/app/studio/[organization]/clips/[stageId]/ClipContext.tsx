@@ -70,6 +70,8 @@ type ClipContextType = {
       unixTime: number;
     }>
   >;
+  pixelsPerSecond: number;
+  setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -115,7 +117,7 @@ export const ClipProvider = ({
   const [selectedMarkerId, setSelectedMarkerId] = useState<string>('');
   const [isImportingMarkers, setIsImportingMarkers] = useState<boolean>(false);
   const maxLength = videoRef.current?.duration || 0;
-  const pixelsPerSecond = 4;
+  const [pixelsPerSecond, setPixelsPerSecond] = useState(3);
   const timelineWidth = maxLength * pixelsPerSecond;
   const [hls, setHls] = useState<Hls | null>(null);
   const [timeReference, setTimeReference] = useState<{
@@ -241,6 +243,8 @@ export const ClipProvider = ({
         unix: convertSecondsToUnix(marker.endClipTime),
       });
 
+      setSelectedMarkerId(marker._id);
+
       videoRef.current.play();
     }
   };
@@ -313,6 +317,8 @@ export const ClipProvider = ({
         setHls,
         timeReference,
         setTimeReference,
+        pixelsPerSecond,
+        setPixelsPerSecond,
       }}
     >
       {children}

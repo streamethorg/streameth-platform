@@ -27,53 +27,53 @@ const TrimmControls = ({
     handleMouseDown,
   } = useClipContext();
 
-  // const handle1SecondIncrementDecrement = useCallback(
-  //   (increment: boolean, marker: string) => {
-  //     if (videoRef.current && playbackStatus) {
-  //       const time =
-  //         marker === 'start' ? startTime.displayTime : endTime.displayTime;
-  //       const newTime = increment ? time + 1 : time - 1;
-  //       if (marker === 'start') {
-  //         if (newTime >= 0 && newTime < endTime.displayTime) {
-  //           debouncedUpdate(setStartTime, {
-  //             unix: Date.now() - playbackStatus.offset,
-  //             displayTime: newTime,
-  //           });
-  //         }
-  //       } else if (marker === 'end') {
-  //         if (
-  //           newTime > startTime.displayTime &&
-  //           newTime <= videoRef.current.duration
-  //         ) {
-  //           debouncedUpdate(setEndTime, {
-  //             unix: Date.now() - playbackStatus.offset,
-  //             displayTime: newTime,
-  //           });
-  //         }
-  //       }
-  //       videoRef.current.currentTime = newTime;
-  //     }
-  //   },
-  //   [
-  //     videoRef,
-  //     playbackStatus,
-  //     startTime.displayTime,
-  //     endTime.displayTime,
-  //     setStartTime,
-  //     setEndTime,
-  //   ]
-  // );
+  const handle1SecondIncrementDecrement = useCallback(
+    (increment: boolean, marker: string) => {
+      if (videoRef.current && playbackStatus) {
+        const time =
+          marker === 'start' ? startTime.displayTime : endTime.displayTime;
+        const newTime = increment ? time + 1 : time - 1;
+        if (marker === 'start') {
+          if (newTime >= 0 && newTime < endTime.displayTime) {
+            debouncedUpdate(setStartTime, {
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: newTime,
+            });
+          }
+        } else if (marker === 'end') {
+          if (
+            newTime > startTime.displayTime &&
+            newTime <= videoRef.current.duration
+          ) {
+            debouncedUpdate(setEndTime, {
+              unix: Date.now() - playbackStatus.offset,
+              displayTime: newTime,
+            });
+          }
+        }
+        videoRef.current.currentTime = newTime;
+      }
+    },
+    [
+      videoRef,
+      playbackStatus,
+      startTime.displayTime,
+      endTime.displayTime,
+      setStartTime,
+      setEndTime,
+    ]
+  );
 
   useEffect(() => {
     const preventDefault = (e: Event) => e.preventDefault();
 
     window.addEventListener('keydown', (e) => {
       if (selectedTooltip) {
-        // if (e.key === 'ArrowRight') {
-        //   handle1SecondIncrementDecrement(true, selectedTooltip);
-        // } else if (e.key === 'ArrowLeft') {
-        //   handle1SecondIncrementDecrement(false, selectedTooltip);
-        // }
+        if (e.key === 'ArrowRight') {
+          handle1SecondIncrementDecrement(true, selectedTooltip);
+        } else if (e.key === 'ArrowLeft') {
+          handle1SecondIncrementDecrement(false, selectedTooltip);
+        }
       }
 
       if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {

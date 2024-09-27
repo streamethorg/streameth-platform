@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
-import { PlayIcon, PauseIcon } from 'lucide-react';
+import { PlayIcon, PauseIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,8 @@ const Controls = () => {
     isImportingMarkers,
     setSelectedMarkerId,
     isCreatingClip,
+    pixelsPerSecond,
+    setPixelsPerSecond,
   } = useClipContext();
 
   const spaceBarHandler = (e: KeyboardEvent) => {
@@ -35,9 +37,20 @@ const Controls = () => {
     };
   }, [videoRef]);
 
+  const handleZoomIn = () => {
+    setPixelsPerSecond((prev) => Math.min(prev * 1.2, 10));
+  };
+
+  const handleZoomOut = () => {
+    setPixelsPerSecond((prev) => Math.max(prev / 1.2, 0.1));
+  };
+
+  const isMaxZoom = pixelsPerSecond >= 10;
+  const isMinZoom = pixelsPerSecond <= 0.1;
+
   return (
     <div className="bg-white flex w-full flex-row border-b items-center border-t p-2">
-      <div className="space-x-8 flex flex-row">
+      <div className="space-x-8 flex flex-row items-center">
         {videoRef.current?.paused ? (
           <button onClick={() => videoRef.current?.play()}>
             <PlayIcon />
@@ -72,6 +85,24 @@ const Controls = () => {
             ? formatTime(videoRef.current.duration)
             : '00:00:00'}
         </span>
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={handleZoomOut}
+            className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Zoom out"
+            disabled={isMinZoom}
+          >
+            <ZoomOutIcon size={20} />
+          </button>
+          <button
+            onClick={handleZoomIn}
+            className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Zoom in"
+            disabled={isMaxZoom}
+          >
+            <ZoomInIcon size={20} />
+          </button>
+        </div>
       </div>
       <Button
         disabled={

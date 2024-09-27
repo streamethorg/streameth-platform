@@ -114,7 +114,10 @@ const ClipsConfig = ({
         </section>
       )}
 
-      <InjectUrlInput organizationId={organization._id as string} />
+      <InjectUrlInput
+        organizationSlug={organization.slug as string}
+        organizationId={organization._id as string}
+      />
 
       {customUrlStages.length > 0 && (
         <section className="w-full">

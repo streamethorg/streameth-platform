@@ -14,17 +14,20 @@ const Playhead: React.FC<TimelinePlayheadProps> = ({
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [initialEventStart, setInitialEventStart] = useState(0);
   const { videoRef } = useClipContext();
-  const playerTime = videoRef.current?.currentTime || 0;
 
-  const [currentTime, setCurrentTime] = useState(
-    videoRef.current?.currentTime || 0
-  );
+  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    if (!draggingPlayhead) {
-      setCurrentTime(playerTime);
-    }
-  }, [playerTime]);
+    const updateTime = () => {
+      if (!draggingPlayhead && videoRef.current) {
+        setCurrentTime(videoRef.current.currentTime);
+      }
+    };
+
+    const intervalId = setInterval(updateTime, 1000 / 30); // Update 30 times per second
+
+    return () => clearInterval(intervalId);
+  }, [draggingPlayhead, videoRef]);
 
   const getMarkerPosition = (time: number) =>
     (time / maxLength) * timelineWidth;

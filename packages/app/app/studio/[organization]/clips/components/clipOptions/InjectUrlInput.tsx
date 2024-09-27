@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import useSearchParams from '@/lib/hooks/useSearchParams';
 import { injectUrlSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -27,11 +26,18 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Link2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
-  const { handleTermChange } = useSearchParams();
+const InjectUrlInput = ({
+  organizationId,
+  organizationSlug,
+}: {
+  organizationId: string;
+  organizationSlug: string;
+}) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof injectUrlSchema>>({
     resolver: zodResolver(injectUrlSchema),
     defaultValues: {
@@ -49,11 +55,11 @@ const InjectUrlInput = ({ organizationId }: { organizationId: string }) => {
         organizationId,
       };
       const response = await createHlsStageAction({ hlsStage });
-      if (response && response._id) {
-        handleTermChange([
-          { key: 'stageId', value: response._id.toString() },
-          { key: 'videoType', value: 'customUrl' },
-        ]);
+      if (response._id) {
+        router.push(
+          `/studio/${organizationSlug}/clips/${response._id}?videoType=customUrl`
+        );
+
         setOpen(false); // Close the dialog on successful submission
       } else {
         toast.error('Error getting HLS URL');
