@@ -259,4 +259,7 @@ export interface IExtendedScheduleImporter extends IScheduleImporter {
 
 export interface IExtendedMarker extends Omit<IMarker, '_id'> {
   _id: string;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: string;
 }

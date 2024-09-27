@@ -25,6 +25,13 @@ export default class MarkerService {
     return await this.controller.store.update(markerId, marker, marker.name);
   }
 
+  async updateMany(markers: IMarker[]): Promise<IMarker[]> {
+    const markerPromises = markers.map((marker) =>
+      this.controller.store.update(marker._id.toString(), marker, marker.name),
+    );
+    return await Promise.all(markerPromises);
+  }
+
   async importMarkers(d: {
     url: string;
     type: string;

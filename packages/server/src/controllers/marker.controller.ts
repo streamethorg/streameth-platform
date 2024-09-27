@@ -1,4 +1,5 @@
 import { CreateMarkerDto } from '@dtos/marker/create-marker.dto';
+import { UpdateMarkerDto } from '@dtos/marker/update-marker.dto';
 import { IMarker } from '@interfaces/marker.interface';
 import MarkerService from '@services/marker.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -33,6 +34,19 @@ export class MarkerController extends Controller {
   ): Promise<IStandardResponse<IMarker>> {
     const marker = await this.markerService.create(body);
     return SendApiResponse('marker created', marker);
+  }
+
+  /**
+   * @summary Update multiple markers
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Put('bulk')
+  async updateMarkers(
+    @Body() body: UpdateMarkerDto,
+  ): Promise<IStandardResponse<IMarker[]>> {
+    const updatedMarkers = await this.markerService.updateMany(body.markers);
+    return SendApiResponse('markers updated', updatedMarkers);
   }
 
   /**

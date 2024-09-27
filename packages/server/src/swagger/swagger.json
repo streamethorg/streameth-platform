@@ -3392,6 +3392,47 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_IMarker-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateMarkerDto": {
+				"properties": {
+					"organizationId": {
+						"type": "string"
+					},
+					"markers": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"organizationId",
+					"markers"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStandardResponse_Array_IMarker__": {
 				"properties": {
 					"status": {
@@ -6502,6 +6543,45 @@
 						}
 					}
 				]
+			}
+		},
+		"/markers/bulk": {
+			"put": {
+				"operationId": "UpdateMarkers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IMarker-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Update multiple markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateMarkerDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/markers/{markerId}": {

@@ -64,7 +64,7 @@ const Timeline = () => {
       const screenWidth = window.innerWidth;
       const minScale = 0.1; // Further reduced minimum pixels per second
       const maxScale = 10; // Maximum pixels per second
-      const targetWidth = screenWidth * 0.7; // Increased target timeline width to 90% of screen width
+      const targetWidth = screenWidth * 0.7; // Increased target timeline width to 70% of screen width
 
       // Calculate initial scale
       let scale = targetWidth / maxLength;

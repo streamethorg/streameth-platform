@@ -72,6 +72,8 @@ type ClipContextType = {
   >;
   pixelsPerSecond: number;
   setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
+  currentTime: number;
+  setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -127,6 +129,29 @@ export const ClipProvider = ({
     currentTime: 0,
     unixTime: 0,
   });
+
+  // We create a state for currentTime to trigger re-renders when the video time changes.
+  // This allows components using this context to update based on the current playback time.
+  // By using requestAnimationFrame, we limit updates to the browser's refresh rate,
+  // preventing excessive re-renders and improving performance.
+  const [currentTime, setCurrentTime] = useState(0);
+  const requestRef = useRef<number>();
+
+  const animate = useCallback(() => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+    requestRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+    };
+  }, [animate]);
 
   const fetchAndSetMarkers = async () => {
     if (stageId) {
@@ -319,6 +344,8 @@ export const ClipProvider = ({
         setTimeReference,
         pixelsPerSecond,
         setPixelsPerSecond,
+        currentTime,
+        setCurrentTime,
       }}
     >
       {children}

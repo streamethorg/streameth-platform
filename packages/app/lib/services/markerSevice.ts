@@ -56,6 +56,33 @@ export const updateMarkers = async ({
   }
 };
 
+export const updateMultipleMarkers = async ({
+  organizationId,
+  markers,
+  authToken,
+}: {
+  organizationId: string;
+  markers: IExtendedMarker[];
+  authToken: string;
+}): Promise<IExtendedMarker[]> => {
+  const response = await fetch(`${apiUrl()}/markers/bulk`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify({
+      organizationId,
+      markers,
+    }),
+  });
+
+  if (!response.ok) {
+    throw 'Error updating markers';
+  }
+  return (await response.json()).data;
+};
+
 // fetch all markers for a stage
 export async function fetchMarkers({
   organizationId,

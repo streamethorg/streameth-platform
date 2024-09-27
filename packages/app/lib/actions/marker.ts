@@ -6,6 +6,7 @@ import {
   deleteMarker,
   importMarkers,
   updateMarkers,
+  updateMultipleMarkers,
 } from '../services/markerSevice';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { IExtendedMarker } from '../types';
@@ -45,6 +46,29 @@ export const updateMarkersAction = async ({
 
   const response = await updateMarkers({
     markers: { ...markers },
+    authToken,
+  });
+  if (!response) {
+    throw new Error('Error updating markers');
+  }
+  revalidatePath('/studio');
+  return response;
+};
+
+export const updateMultipleMarkersAction = async ({
+  organizationId,
+  markers,
+}: {
+  organizationId: string;
+  markers: IExtendedMarker[];
+}) => {
+  const authToken = cookies().get('user-session')?.value;
+  if (!authToken) {
+    throw new Error('No user session found');
+  }
+  const response = await updateMultipleMarkers({
+    organizationId,
+    markers,
     authToken,
   });
   if (!response) {

@@ -1,11 +1,12 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PlayIcon, PauseIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
+import PushMarkersButton from './PushMarkersButton';
 
-const Controls = () => {
+const Controls = ({ organizationId }: { organizationId: string }) => {
   const {
     videoRef,
     isAddingOrEditingMarker,
@@ -15,6 +16,7 @@ const Controls = () => {
     isCreatingClip,
     pixelsPerSecond,
     setPixelsPerSecond,
+    currentTime,
   } = useClipContext();
 
   const spaceBarHandler = (e: KeyboardEvent) => {
@@ -77,10 +79,7 @@ const Controls = () => {
           </select>
         </label>
         <span>
-          {videoRef?.current?.currentTime
-            ? formatTime(videoRef.current.currentTime)
-            : '00:00:00'}
-          /{' '}
+          {formatTime(currentTime)} /{' '}
           {videoRef?.current?.duration
             ? formatTime(videoRef.current.duration)
             : '00:00:00'}
@@ -104,6 +103,7 @@ const Controls = () => {
           </button>
         </div>
       </div>
+      <PushMarkersButton organizationId={organizationId} />
       <Button
         disabled={
           isAddingOrEditingMarker || isImportingMarkers || isCreatingClip

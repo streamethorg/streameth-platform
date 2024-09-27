@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useClipContext } from '../ClipContext';
 
 interface TimelinePlayheadProps {
@@ -13,24 +13,11 @@ const Playhead: React.FC<TimelinePlayheadProps> = ({
   const [draggingPlayhead, setDraggingPlayhead] = useState(false);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [initialEventStart, setInitialEventStart] = useState(0);
-  const { videoRef } = useClipContext();
-
-  const [currentTime, setCurrentTime] = useState(0);
-
-  useEffect(() => {
-    const updateTime = () => {
-      if (!draggingPlayhead && videoRef.current) {
-        setCurrentTime(videoRef.current.currentTime);
-      }
-    };
-
-    const intervalId = setInterval(updateTime, 1000 / 30); // Update 30 times per second
-
-    return () => clearInterval(intervalId);
-  }, [draggingPlayhead, videoRef]);
+  const { videoRef, currentTime, setCurrentTime } = useClipContext();
 
   const getMarkerPosition = (time: number) =>
     (time / maxLength) * timelineWidth;
+
   const handlePlayheadMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
     setDraggingPlayhead(true);
@@ -77,7 +64,7 @@ const Playhead: React.FC<TimelinePlayheadProps> = ({
 
   return (
     <div
-      className="absolute top-0 bottom-0 w-1 bg-black border-white  cursor-ew-resize z-10"
+      className="absolute top-0 bottom-0 w-1 bg-black border-white cursor-ew-resize z-10"
       style={{ left: `${getMarkerPosition(currentTime)}px` }}
       onMouseDown={handlePlayheadMouseDown}
     >
