@@ -11,17 +11,12 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import {
-  fetchAllSessions,
-  fetchAsset,
-  fetchSession,
-} from '@/lib/services/sessionService';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import Sidebar from './components/Sidebar';
-import { fetchStageRecordings } from '@/lib/services/stageService';
 import EditLivestream from '../components/EditLivestream';
 import ShareAndEmbed from './components/ShareAndEmbed';
 
-const Livestream = async ({ params }: LivestreamPageParams) => {
+const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   if (!params.streamId) return null;
 
   const stream = await fetchStage({ stage: params.streamId });
