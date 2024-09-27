@@ -43,10 +43,15 @@ const PushMarkersButton = ({ organizationId }: { organizationId: string }) => {
 
   return (
     <div className="flex items-center space-x-2 ml-auto">
+      <p className="text-sm">Seconds:</p>
       <Input
         type="number"
+        step="any"
         value={secondsToAdd}
-        onChange={(e) => setSecondsToAdd(Number(e.target.value))}
+        onChange={(e) => {
+          const value = e.target.value === '' ? '' : Number(e.target.value);
+          setSecondsToAdd(value || 0);
+        }}
         className="w-20"
         placeholder="Secs"
       />

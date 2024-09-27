@@ -162,14 +162,19 @@ const AddOrEditMarkerForm = ({
                       <FormControl className="w-full">
                         <Input
                           type="number"
+                          step="any"
                           {...field}
                           placeholder="Input start"
                           className="bg-white w-full"
+                          min={0}
+                          max={maxEndTime}
                           onChange={(e) => {
-                            const value = Number(e.target.value);
+                            const value =
+                              e.target.value === ''
+                                ? ''
+                                : Number(e.target.value);
                             field.onChange(value);
                           }}
-                          max={maxEndTime}
                         />
                       </FormControl>
                     </div>
@@ -188,25 +193,18 @@ const AddOrEditMarkerForm = ({
                       <FormControl>
                         <Input
                           type="number"
+                          step="any"
                           {...field}
                           placeholder="Input end"
                           className="bg-white"
-                          // value={endTime.displayTime.toFixed(0)}
                           onChange={(e) => {
-                            const value = Number(e.target.value);
+                            const value =
+                              e.target.value === ''
+                                ? ''
+                                : Number(e.target.value);
                             field.onChange(value);
-                            // Ensure end time is greater than start time
-                            const startValue = form.getValues('startClipTime');
-                            if (value <= startValue || value > maxEndTime) {
-                              form.setError('endClipTime', {
-                                type: 'manual',
-                                message:
-                                  'End time must be greater than start time and less than the video duration',
-                              });
-                            } else {
-                              form.clearErrors('endClipTime');
-                            }
                           }}
+                          min={form.getValues('startClipTime') + 1}
                           max={maxEndTime}
                         />
                       </FormControl>
