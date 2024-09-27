@@ -7,6 +7,7 @@ import {
   Scissors,
   Radio,
   FilePenLine,
+  ScissorsLineDashed,
 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDuration } from '@/lib/utils/time';
@@ -95,6 +96,19 @@ const TableCells = async ({
       </TableCell>
       <TableCell>
         <div className="flex items-center space-x-2">
+          {/* and less than 7 days old */}
+          {item.type === 'livestream' &&
+            item.createdAt &&
+            new Date(item.createdAt).getTime() >
+              Date.now() - 7 * 24 * 60 * 60 * 1000 && (
+              <Link
+                href={`/studio/${organization}/clips/stage?sessionId=${item._id}&videoType=${item.type}`}
+              >
+                <Button variant="primary" size="icon" className="mr-2">
+                  <ScissorsLineDashed className="w-5 h-5 cursor-pointer" />
+                </Button>
+              </Link>
+            )}
           <Link href={`/studio/${organization}/library/${item._id}`}>
             <Button variant="outline" size="icon" className="mr-2">
               <FilePenLine className="w-5 h-5 cursor-pointer" />
