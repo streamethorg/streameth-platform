@@ -1,3 +1,4 @@
+import moment from 'moment';
 import path from 'path';
 /**
  * @method isEmpty
@@ -104,4 +105,26 @@ export const getSourceType = (
   } else {
     return { type: 'custom', header: [] };
   }
+};
+
+export const formatDate = (date: Date): string => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = `${d.getMonth() + 1}`.padStart(2, '0');
+  const day = `${d.getDate()}`.padStart(2, '0');
+  return `${day}/${month}/${year}`;
+};
+
+export const getStartAndEndTime = (
+  date: string,
+  start: string,
+  duration: string,
+): { start: number; end: number } => {
+  const startDate = moment(`${date.split('T')[0]}T${start}`);
+  const [hours, minutes] = duration.split(':').map(Number);
+  const endDate = startDate.clone().add(hours, 'hours').add(minutes, 'minutes');
+  return {
+    start: startDate.valueOf(),
+    end: endDate.valueOf(),
+  };
 };

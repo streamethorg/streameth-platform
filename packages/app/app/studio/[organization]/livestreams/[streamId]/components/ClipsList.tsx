@@ -2,11 +2,13 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import useSearchParams from '@/lib/hooks/useSearchParams';
 import { IExtendedSession } from '@/lib/types';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { Clapperboard } from 'lucide-react';
+import { useState } from 'react';
+import Preview from '../../../clips/[stageId]/sidebar/clips/Preview';
+import { Card, CardContent } from '@/components/ui/card';
 
 const ClipsList = ({
   sessions,
@@ -15,7 +17,6 @@ const ClipsList = ({
   sessions: IExtendedSession[];
   organizationSlug: string;
 }) => {
-  const { handleTermChange } = useSearchParams();
   const sortedSessions = sessions.sort((a, b) => {
     return (
       new Date(b.createdAt ?? 0).getTime() -
@@ -34,7 +35,6 @@ const ClipsList = ({
           organizationSlug={organizationSlug}
           key={session._id}
           session={session}
-          handleTermChange={handleTermChange}
         />
       ))}
     </>
@@ -43,44 +43,53 @@ const ClipsList = ({
 
 const ClipItem = ({
   session,
-  handleTermChange,
   organizationSlug,
 }: {
   session: IExtendedSession;
-  handleTermChange: (params: { key: string; value: string }[]) => void;
   organizationSlug: string;
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const imageUrl = useGenerateThumbnail({ session });
 
   return (
-    <div className="flex items-start py-2 px-4 w-full">
-      <div
-        className="cursor-pointer flex-shrink-0 mr-3"
-        onClick={() =>
-          handleTermChange([{ key: 'previewId', value: session._id }])
-        }
+    <>
+      <Card
+        onClick={() => setIsOpen(true)}
+        className="overflow-hidden m-2 py-2 px-2  cursor-pointer"
       >
-        <div className="w-[80px] h-[45px]">
-          <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
-        </div>
-      </div>
-      <div className="flex-grow">
-        <h3 className="text-sm font-medium truncate">{session.name}</h3>
-        <p className="text-xs text-gray-400 truncate">
-          {session.description || 'No description provided'}
-        </p>
-      </div>
+        <CardContent className="flex justify-between items-center m-0 p-0 lg:p-0">
+          <div className="flex w-full items-center gap-2">
+            <div className="flex-shrink-0 w-1/3">
+              <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
+            </div>
+            <div className="flex flex-col">
+              <h3 className="text-sm font-medium line-clamp-2">
+                {session.name}
+              </h3>
+              <p className="text-xs text-gray-400 line-clamp-1">
+                {session.description || 'No description provided'}
+              </p>
+            </div>
+          </div>
+          <Link
+            href={`/studio/${organizationSlug}/library/${session._id}`}
+            passHref
+          >
+            <Button variant="primary" className="w-20 h-8 ml-2">
+              Edit
+              <Clapperboard className="ml-2 w-4 h-4" />
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
 
-      <Link
-        href={`/studio/${organizationSlug}/library/${session._id}`}
-        passHref
-      >
-        <Button variant="primary" className="w-20 h-8 ml-2">
-          Edit
-          <Clapperboard className="ml-2 w-4 h-4" />
-        </Button>
-      </Link>
-    </div>
+      <Preview
+        isOpen={isOpen}
+        organizationId={session.organizationId as string}
+        session={session}
+        setIsOpen={setIsOpen}
+      />
+    </>
   );
 };
 

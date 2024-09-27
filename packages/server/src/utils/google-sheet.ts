@@ -63,13 +63,17 @@ export default class GoogleSheetService {
     }
   }
 
-  async generateSpeakers(sheetId: string): Promise<
+  async generateSpeakers(
+    sheetId: string,
+    organizationId: string,
+  ): Promise<
     Array<{
       name: string;
       bio: string;
       photo: string;
       twitter: string;
       slug: string;
+      organizationId: string;
     }>
   > {
     const data = await this.getDataForRange(
@@ -83,9 +87,10 @@ export default class GoogleSheetService {
       const speaker = {
         name,
         bio: description || 'No description',
-        photo: avatar || 'No photo',
+        photo: avatar || '',
         twitter: twitterHandle,
         slug: generateId(name),
+        organizationId: organizationId,
       };
       speakers.push(speaker);
     }
@@ -222,7 +227,7 @@ export default class GoogleSheetService {
         const date = Day.split('/');
         return `${date[2]}-${date[1]}-${date[0]}`;
       };
-      const speakers = await this.generateSpeakers(d.sheetId);
+      const speakers = await this.generateSpeakers(d.sheetId, d.organizationId);
       const speakersData = speakerIdsRaw
         .filter(Boolean)
         .map((id) => {
@@ -231,6 +236,7 @@ export default class GoogleSheetService {
           return speaker;
         })
         .filter(Boolean);
+
       const session = {
         _id: new Types.ObjectId().toString(),
         name: Name,
@@ -247,7 +253,8 @@ export default class GoogleSheetService {
         stageId: d.stageId,
         speakers: speakersData,
         track: row[13] || 'No track',
-        coverImage: row[17] || 'No cover image',
+        coverImage: row[17] || '',
+        day: Day,
       };
       sessions.push(session);
     }

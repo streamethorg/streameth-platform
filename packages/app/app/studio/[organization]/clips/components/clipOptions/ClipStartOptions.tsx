@@ -12,11 +12,13 @@ const ClipStartOptions = ({
   pastRecordings,
   liveStages,
   customUrlStages,
+  organizationSlug,
 }: {
   organizationId: string;
   pastRecordings: IExtendedSession[];
   liveStages: IExtendedStage[];
   customUrlStages: IExtendedStage[];
+  organizationSlug: string;
 }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
@@ -78,7 +80,10 @@ const ClipStartOptions = ({
       )}
 
       {selectedOption === 'custom' && (
-        <InjectUrlInput organizationId={organizationId} />
+        <InjectUrlInput
+          organizationSlug={organizationSlug}
+          organizationId={organizationId}
+        />
       )}
     </div>
   );

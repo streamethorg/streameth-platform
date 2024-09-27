@@ -1,34 +1,230 @@
-import React, { Suspense } from 'react';
-import { ClipsPageParams } from '@/lib/types';
+import {
+  ClipsPageParams,
+  IExtendedOrganization,
+  IExtendedSession,
+  IExtendedStage,
+} from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
-import { Card } from '@/components/ui/card';
-import ClipStartOptions from './components/clipOptions/ClipStartOptions';
 import { fetchAllSessions } from '@/lib/data';
-import ClippingInterface from './components/clippingInterface/ClippingInterface';
-import { fetchSession } from '@/lib/services/sessionService';
-import {
-  fetchStage,
-  fetchStageRecordings,
-  fetchStages,
-} from '@/lib/services/stageService';
-import { getLiveStageSrcValue } from '@/lib/utils/utils';
+import { fetchStages, fetchStage } from '@/lib/services/stageService';
 import { StageType } from 'streameth-new-server/src/interfaces/stage.interface';
+import Link from 'next/link';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { ScissorsLineDashed } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Suspense } from 'react';
+import { formatTime } from '@/lib/utils/time';
+import TableSort from '@/components/misc/TableSort';
 
-const ClipContainer = ({ children }: { children: React.ReactNode }) => (
-  <div className="h-full w-full">
-    <div className="mx-auto flex h-full w-full flex-row">{children}</div>
+import InjectUrlInput from './components/clipOptions/InjectUrlInput';
+
+interface IExtendedUpdateSession extends IExtendedSession {
+  stageName?: string;
+}
+
+interface ClipsConfigProps {
+  organization: IExtendedOrganization;
+  recording: IExtendedUpdateSession[];
+  customUrlStages: IExtendedStage[];
+  liveStages: IExtendedStage[];
+}
+
+const ClipsConfig = ({
+  organization,
+  recording,
+  customUrlStages,
+  liveStages,
+}: ClipsConfigProps) => {
+  return (
+    <div className="flex flex-col items-start w-full min-h-screen px-4 md:px-8 py-6 space-y-8 overflow-auto">
+      {recording?.length > 0 && (
+        <section className="w-full">
+          <h2 className="text-2xl font-bold mb-4">Past Recordings</h2>
+          <div className="mb-10 w-full rounded-xl border bg-white p-1">
+            <div className="max-h-[400px] overflow-auto">
+              <Table className="rounded-xl bg-white p-1">
+                <TableHeader className="sticky top-0 z-50 border-b bg-white">
+                  <TableRow className="rounded-t-xl hover:bg-white">
+                    <TableHead>Title</TableHead>
+                    <TableHead>
+                      <TableSort title="Created At" sortBy="createdAt" />
+                    </TableHead>
+                    <TableHead>Stage Name</TableHead>
+                    <TableHead>
+                      <TableSort title="Duration" sortBy="duration" />
+                    </TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="overflow-auto">
+                  {recording
+                    .filter(
+                      (session) =>
+                        session.playback?.duration &&
+                        session.playback.duration > 0
+                    )
+                    .map((session) => (
+                      <TableRow key={session._id}>
+                        <TableCell className="max-w-[500px] font-medium">
+                          <Link
+                            href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=livestream`}
+                            className="hover:underline"
+                          >
+                            {session.name}
+                          </Link>
+                        </TableCell>
+                        <TableCell>
+                          {new Date(
+                            session.createdAt as string
+                          ).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <span>{session.stageName ?? 'Stage not found'}</span>
+                        </TableCell>
+                        <TableCell>
+                          {formatTime(session.playback?.duration ?? 0)}
+                        </TableCell>
+                        <TableCell className="my-2 flex items-center space-x-2">
+                          <Link
+                            href={`/studio/${organization.slug}/clips/${session.stageId}?sessionId=${session._id}&videoType=recording`}
+                          >
+                            <Button
+                              variant="primary"
+                              className="flex w-full items-center gap-1"
+                            >
+                              <ScissorsLineDashed className="h-4 w-4" />
+                              Clip
+                            </Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* <InjectUrlInput
+        organizationSlug={organization.slug as string}
+        organizationId={organization._id as string}
+      /> */}
+
+      {/* {customUrlStages.length > 0 && (
+        <section className="w-full">
+          <h2 className="text-2xl font-bold mb-4">Custom URL Stages</h2>
+          <div className="mb-10 w-full rounded-xl border bg-white p-1">
+            <div className="max-h-[400px] overflow-auto">
+              <Table className="rounded-xl bg-white p-1">
+                <TableHeader className="sticky top-0 z-50 border-b bg-white">
+                  <TableRow className="rounded-t-xl hover:bg-white">
+                    <TableHead>Stage Name</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="overflow-auto">
+                  {customUrlStages.map((stage) => (
+                    <TableRow key={stage._id}>
+                      <TableCell className="max-w-[500px] font-medium">
+                        {stage.name}
+                      </TableCell>
+                      <TableCell className="my-2 flex items-center space-x-2">
+                        <Link
+                          href={`/studio/${organization.slug}/clips/${stage._id}?videoType=customUrl`}
+                        >
+                          <Button
+                            variant="primary"
+                            className="flex w-full items-center gap-1"
+                          >
+                            <ScissorsLineDashed className="h-4 w-4" />
+                            Clip
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </section>
+      )} */}
+
+      {liveStages.length > 0 && (
+        <section className="w-full">
+          <h2 className="text-2xl font-bold mb-4">Active Livestreams</h2>
+          <div className="mb-10 w-full rounded-xl border bg-white p-1">
+            <div className="max-h-[400px] overflow-auto">
+              <Table className="rounded-xl bg-white p-1">
+                <TableHeader className="sticky top-0 z-50 border-b bg-white">
+                  <TableRow className="rounded-t-xl hover:bg-white">
+                    <TableHead>Stage Name</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="overflow-auto">
+                  {liveStages.map((stage) => (
+                    <TableRow key={stage._id}>
+                      <TableCell className="max-w-[500px] font-medium">
+                        {stage.name}
+                      </TableCell>
+                      <TableCell className="my-2 flex items-center space-x-2">
+                        <Link
+                          href={`/studio/${organization.slug}/clips/${stage._id}?videoType=livestream`}
+                        >
+                          <Button
+                            variant="primary"
+                            className="flex w-full items-center gap-1"
+                          >
+                            <ScissorsLineDashed className="h-4 w-4" />
+                            Clip
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </section>
+      )}
+    </div>
+  );
+};
+
+const Skeleton = () => (
+  <div className="flex flex-col items-start w-full h-screen px-4 md:px-8 py-6 overflow-y-auto space-y-8">
+    {[1, 2, 3].map((i) => (
+      <section key={i} className="w-full">
+        <div className="h-8 w-48 bg-gray-200 rounded mb-4"></div>
+        <div className="overflow-hidden w-full" style={{ height: '400px' }}>
+          <div className="animate-pulse space-y-4">
+            {[1, 2, 3, 4, 5].map((j) => (
+              <div key={j} className="h-10 bg-gray-200 rounded"></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
   </div>
 );
 
-const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
-  const { videoType, sessionId, stageId } = searchParams;
+const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   });
   if (!organization) return notFound();
 
-  // get all recordings from sessions from the last 7 days (This might change if clipping engine can handle older recordings)
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
   const sessionRecordings = (
     await fetchAllSessions({ organizationSlug: params.organization })
@@ -38,157 +234,37 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       new Date(session?.createdAt as string) > sevenDaysAgo
   );
 
-  // stages
   const stages = await fetchStages({
     organizationId: organization._id,
   });
+
   const customUrlStages = stages.filter(
     (stage) => stage?.type === StageType.custom
   );
   const liveStages = stages.filter((stage) => stage.streamSettings?.isActive);
 
-  // if no videoType, render the ClipStartOptions component
-  if (!videoType)
-    return (
-      <ClipContainer>
-        <Card className="mx-auto bg-white shadow-none mb-auto flex h-auto w-full max-w-[500px] flex-col items-center space-y-4 p-4  mt-4">
-          <ClipStartOptions
-            pastRecordings={sessionRecordings}
-            liveStages={liveStages}
-            organizationId={organization._id}
-            customUrlStages={customUrlStages}
-          />
-        </Card>
-      </ClipContainer>
-    );
-
-  if (videoType === 'livestream' && stageId) {
-    // Fetch live recording for the selected stage
-    const liveStage = liveStages.find((stage) => stage._id === stageId);
-    const streamId = liveStage?.streamSettings?.streamId;
-    if (!streamId) return <div>live stage not found</div>;
-
-    const stageRecordings = await fetchStageRecordings({ streamId });
-    const liveRecording = stageRecordings?.recordings[0] ?? null;
-    console.log(liveRecording);
-    return (
-      <ClipContainer>
-        <ClippingInterface
-          src={getLiveStageSrcValue({
-            playbackId: liveRecording?.playbackId,
-            recordingId: liveRecording?.id,
-          })}
-          type={'livepeer'}
-        />
-      </ClipContainer>
-    );
-  }
-
-  // if videoType === 'recording' and sessionId is provided, render the ClippingInterface component
-  if (videoType === 'recording' && sessionId) {
-    const session = await fetchSession({
-      session: sessionId,
-    });
-    if (!session || !session.videoUrl) return <div>No session found</div>;
-    return (
-      <ClipContainer>
-        <ClippingInterface src={session?.videoUrl} type={'livepeer'} />;
-      </ClipContainer>
-    );
-  }
-
-  if (videoType === 'customUrl' && stageId) {
-    const stage = await fetchStage({
-      stage: stageId,
-    });
-    if (!stage || !stage?.source?.m3u8Url) return <div>No stage found</div>;
-
-    return (
-      <ClipContainer>
-        <ClippingInterface
-          src={stage?.source?.m3u8Url}
-          type={stage?.source?.type}
-        />
-      </ClipContainer>
-    );
-  }
-
-  return <div>No or wrong videoType provided</div>;
-};
-
-// Renders the ClipsConfig component with a fallback skeleton
-const ClipsPage = async ({ params, searchParams }: ClipsPageParams) => {
-  const Skeleton = () => (
-    <div className="mx-auto mb-auto flex w-full max-w-[500px] flex-col space-y-4 p-4">
-      {/* SelectSession Skeleton */}
-      <div className="animate-pulse">
-        <div className="h-8 rounded bg-gray-200"></div>
-      </div>
-
-      {/* Main Content Skeleton */}
-      <div className="animate-pulse">
-        <div className="mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 rounded-lg border bg-background bg-white p-8 text-center">
-          <div className="h-16 w-16 rounded-lg bg-gray-200 p-4"></div>
-          <div className="h-6 w-32 rounded bg-gray-200 text-lg font-bold"></div>
-          <div className="text-foreground-muted text-sm">
-            <div className="h-4 w-3/4 rounded bg-gray-200"></div>
-            <div className="h-4 w-4/5 rounded bg-gray-200"></div>
-            <div className="h-4 w-3/4 rounded bg-gray-200"></div>
-          </div>
-          <div className="h-10 w-32 rounded bg-gray-200"></div>
-        </div>
-      </div>
-    </div>
+  // Fetch stage details for each session
+  const recording = await Promise.all(
+    sessionRecordings.map(async (session) => {
+      if (!session.stageId) return session; // Skip if stageId is undefined
+      const stage = await fetchStage({ stage: session.stageId.toString() });
+      return { ...session, stageName: stage?.name };
+    })
   );
 
-  const Skeleton2 = () => (
-    <div className="flex w-full flex-row">
-      <div className="flex w-full flex-col p-8">
-        <div className="my-4 flex w-full flex-row justify-center space-x-4">
-          <div className="animate-pulse">
-            <div className="h-8 w-full rounded-xl bg-gray-200"></div>
-          </div>
-          <div className="animate-pulse">
-            <div className="h-8 w-full rounded-xl bg-gray-200"></div>
-          </div>
-        </div>
-        <div className="flex h-full w-full flex-col space-y-4 overflow-auto">
-          <div className="animate-pulse">
-            <div className="aspect-video w-full rounded bg-gray-200"></div>
-          </div>
-          {/* Clip Control Loading State */}
-          <div className="animate-pulse">
-            <div className="flex flex-col space-y-4">
-              <div className="flex w-full flex-row items-center justify-center space-x-2">
-                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
-                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
-                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
-                <div className="h-8 w-full rounded-xl bg-gray-200"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/*Skeleton Sidebar */}
-      <div className="flex h-full w-1/3 flex-col border-l bg-background bg-white">
-        <div className="h-[calc(100%-50px)] space-y-4 overflow-y-clip">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="animate-pulse p-4">
-              <div className="aspect-video w-full rounded bg-gray-200 p-4"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
   return (
     <Suspense
       key={searchParams.videoType}
-      fallback={searchParams.videoType ? <Skeleton2 /> : <Skeleton />}
+      fallback={searchParams.videoType ? <Skeleton /> : <Skeleton />}
     >
-      <ClipsConfig params={params} searchParams={searchParams} />
+      <ClipsConfig
+        organization={organization}
+        recording={recording}
+        customUrlStages={customUrlStages}
+        liveStages={liveStages}
+      />
     </Suspense>
   );
 };
+
 export default ClipsPage;

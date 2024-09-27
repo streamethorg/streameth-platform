@@ -127,7 +127,7 @@ export const createSession = async ({
 }: {
   session: ISession;
   authToken: string;
-}): Promise<ISession> => {
+}): Promise<IExtendedSession> => {
   try {
     const response = await fetch(`${apiUrl()}/sessions`, {
       method: 'POST',
@@ -137,14 +137,14 @@ export const createSession = async ({
       },
       body: JSON.stringify(session),
     });
+
     if (!response.ok) {
-      console.log('error in createSession', await response.json());
-      throw 'Error updating session';
+      throw 'Error creating session';
     }
     revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
-    console.log('error in updateSession', e);
+    console.log('error in createSession', e);
     throw e;
   }
 };
@@ -203,7 +203,6 @@ export const updateSession = async ({
       body: JSON.stringify(modifiedSession),
     });
     if (!response.ok) {
-      console.log('error in updateSession', await response.json());
       throw 'Error updating session';
     }
     return (await response.json()).data;
@@ -275,12 +274,12 @@ export const createClip = async ({
     });
 
     if (!response.ok) {
-      throw 'Error updating session';
+      throw 'Error creating clip';
     }
     revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
-    console.log('error in updateSession', e);
+    console.log('error in createClip', e);
     throw e;
   }
 };
@@ -347,12 +346,12 @@ export const createAsset = async ({
     });
 
     if (!response.ok) {
-      throw 'Error updating session';
+      throw 'Error creating asset';
     }
     revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
-    console.log('error in updateSession', e);
+    console.log('error in createAsset', e);
     throw e;
   }
 };
@@ -375,12 +374,11 @@ export const generateThumbnail = async ({
       }),
     });
     if (!response.ok) {
-      throw 'Error updating session';
+      throw 'Error generating thumbnail';
     }
     revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
-    console.log('error in updateSession', e);
     throw e;
   }
 };
