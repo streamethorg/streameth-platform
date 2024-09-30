@@ -68,7 +68,7 @@ const SessionSchema = new Schema<ISessionModel>(
       chunks: [
         {
           text: { type: String, default: '' },
-          tiimestamp: [{ type: Number }],
+          timestamp: [{ type: Number }],
         },
       ],
       text: { type: String, default: '' },
