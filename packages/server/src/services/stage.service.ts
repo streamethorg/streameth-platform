@@ -50,6 +50,14 @@ export default class StageService {
   async get(stageId: string): Promise<IStage> {
     const findStage = await this.controller.store.findById(stageId);
     if (!findStage) throw new HttpException(404, 'Stage not found');
+    // if (findStage.type === StageType.custom) {
+    //   let source = await this.getVideoSource(findStage.source.url);
+    //   return await this.update(stageId, {
+    //     source,
+    //     name: findStage.name,
+    //     organizationId: findStage.organizationId,
+    //   });
+    // }
     return findStage;
   }
 
@@ -112,28 +120,11 @@ export default class StageService {
     organizationId: string;
   }): Promise<IStage> {
     try {
-      let hlsUrl = '';
-      const source = getSourceType(d.url);
-      if (source.type === 'youtube' || source.type === 'twitter') {
-        let output = await youtubedl(d.url, {
-          dumpSingleJson: true,
-          noWarnings: true,
-          preferFreeFormats: true,
-          addHeader: source.header,
-        });
-        const hlsFormat = output.formats.find(
-          (format) =>
-            format.protocol === 'm3u8_native' &&
-            format.ext === 'mp4' &&
-            source.resolutions?.includes(format.resolution),
-        );
-        hlsUrl = hlsFormat.manifest_url;
-      } else {
-        hlsUrl = d.url;
-      }
+      const source = await this.getVideoSource(d.url);
+      console.log('source', source);
       return await this.controller.store.create(d.name, {
         name: d.name,
-        source: { url: d.url, type: source.type, m3u8Url: hlsUrl },
+        source,
         organizationId: d.organizationId,
         type: StageType.custom,
       });
@@ -194,5 +185,38 @@ export default class StageService {
       broadcastId: stream.broadcastId,
     });
     return stream;
+  }
+
+  private async getVideoSource(
+    url: string,
+  ): Promise<{ url: string; type: string; m3u8Url: string }> {
+    try {
+      let m3u8Url = url;
+      const source = getSourceType(url);
+      if (source.type === 'youtube' || source.type === 'twitter') {
+        let output = await youtubedl(url, {
+          dumpSingleJson: true,
+          noWarnings: true,
+          preferFreeFormats: true,
+          addHeader: source.header,
+        });
+        const hlsFormat = output.formats.find(
+          (format) =>
+            format.protocol === 'm3u8_native' &&
+            format.ext === 'mp4' &&
+            source.resolutions?.includes(format.resolution),
+        );
+        if (hlsFormat.manifest_url) {
+          m3u8Url = hlsFormat.manifest_url;
+        }
+      }
+      return {
+        url: url,
+        type: source.type,
+        m3u8Url,
+      };
+    } catch (e) {
+      throw new HttpException(400, 'Error getting HLS URL');
+    }
   }
 }
