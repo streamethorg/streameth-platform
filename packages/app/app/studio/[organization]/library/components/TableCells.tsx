@@ -95,8 +95,7 @@ const TableCells = async ({
         </div>
       </TableCell>
       <TableCell>
-        <div className="flex items-center space-x-2">
-          {/* and less than 7 days old */}
+        <div className="flex items-center space-x-2 justify-end max-w-[100px]">
           {item.type === 'livestream' &&
             item.createdAt &&
             new Date(item.createdAt).getTime() >
