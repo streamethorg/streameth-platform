@@ -64,7 +64,7 @@ const CreateClipButton = ({
   const [stage, setStage] = useState<IExtendedStage | null>(null);
   const { searchParams } = useSearchParams();
 
-  const sessionId = searchParams.get('sessionId');
+  const sessionId = searchParams?.get('sessionId');
 
   const getSession = async () => {
     if (!sessionId) return;
