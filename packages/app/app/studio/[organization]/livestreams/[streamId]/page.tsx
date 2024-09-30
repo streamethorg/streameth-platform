@@ -15,6 +15,8 @@ import { fetchAllSessions } from '@/lib/services/sessionService';
 import Sidebar from './components/Sidebar';
 import EditLivestream from '../components/EditLivestream';
 import ShareAndEmbed from './components/ShareAndEmbed';
+import { Session } from 'inspector';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 
 const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -29,7 +31,11 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   }
 
   const stageSessions = (
-    await fetchAllSessions({ stageId: stream._id?.toString() })
+    await fetchAllSessions({
+      stageId: stream._id?.toString(),
+      type: SessionType.clip,
+      onlyVideos: true,
+    })
   ).sessions;
 
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${params.organization}/livestream?stage=${stream._id}`;
