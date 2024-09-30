@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { updateMultipleMarkersAction } from '@/lib/actions/marker';
-import { useClipContext } from '../ClipContext';
+import { useClipContext } from '../../ClipContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
@@ -42,26 +42,29 @@ const PushMarkersButton = ({ organizationId }: { organizationId: string }) => {
   };
 
   return (
-    <div className="flex items-center space-x-2 ml-auto">
-      <p className="text-sm">Seconds:</p>
-      <Input
-        type="number"
-        step="any"
-        value={secondsToAdd}
-        onChange={(e) => {
-          const value = e.target.value === '' ? '' : Number(e.target.value);
-          setSecondsToAdd(value || 0);
-        }}
-        className="w-20"
-        placeholder="Secs"
-      />
-      <Button
-        disabled={isPushingMarkers}
-        onClick={handleAddSeconds}
-        variant="outline"
-      >
-        {isPushingMarkers ? 'Pushing...' : 'Push Markers'}
-      </Button>
+    <div className="flex flex-col gap-2 m-2 border-b border-gray-200 pb-2">
+      <p className="text-sm font-semibold">Push Markers by X seconds</p>
+      <div className="flex items-center gap-2">
+        <p className="text-sm">Seconds:</p>
+        <Input
+          type="number"
+          step="any"
+          value={secondsToAdd}
+          onChange={(e) => {
+            const value = e.target.value === '' ? '' : Number(e.target.value);
+            setSecondsToAdd(value || 0);
+          }}
+          className="w-20"
+          placeholder="Secs"
+        />
+        <Button
+          disabled={isPushingMarkers}
+          onClick={handleAddSeconds}
+          variant="outline"
+        >
+          {isPushingMarkers ? 'Pushing...' : 'Push'}
+        </Button>
+      </div>
     </div>
   );
 };
