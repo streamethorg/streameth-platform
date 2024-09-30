@@ -9,6 +9,7 @@ import { Clapperboard } from 'lucide-react';
 import { useState } from 'react';
 import Preview from '../../../clips/[stageId]/sidebar/clips/Preview';
 import { Card, CardContent } from '@/components/ui/card';
+import { LuScissorsLineDashed } from 'react-icons/lu';
 
 const ClipsList = ({
   sessions,
@@ -25,7 +26,17 @@ const ClipsList = ({
   });
 
   if (sortedSessions.length === 0) {
-    return <div className="flex justify-center mt-10">No clips yet</div>;
+    return (
+      <div className="flex flex-col items-center justify-center mt-14 text-muted-foreground">
+        There are no clips yet.
+        <Link href={`/studio/${organizationSlug}/clips`}>
+          <Button variant="primary" className="mt-2">
+            Create a clip
+            <LuScissorsLineDashed className="w-4 h-4 ml-2" />
+          </Button>
+        </Link>
+      </div>
+    );
   }
 
   return (
