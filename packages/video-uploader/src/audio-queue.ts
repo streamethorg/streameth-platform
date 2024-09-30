@@ -1,8 +1,9 @@
 import { config } from 'dotenv';
 import FormData from 'form-data';
-import fs, { stat } from 'fs';
-import { MongoClient, ObjectId } from 'mongodb';
+import fs from 'fs';
+import { ObjectId } from 'mongodb';
 import fetch from 'node-fetch';
+import db from './utils/db';
 import { errorMessageToStatusCode } from './utils/errors';
 import { downloadM3U8ToMP3 } from './utils/ffmpeg';
 import { jsonToVtt, uploadFile } from './utils/helper';
@@ -10,14 +11,12 @@ import { logger } from './utils/logger';
 import connection from './utils/mq';
 config();
 
-const client = new MongoClient(process.env.DB_HOST);
-const db = client.db(process.env.DB_NAME);
 const sessions = db.collection('sessions');
 const states = db.collection('states');
 
 const convertAudioToText = async (
   sessionId: string,
-  filepath: string
+  filepath: string,
 ): Promise<{ url: string; text: string; chunks: string[] }> => {
   try {
     logger.info('Converting audio to text');
@@ -33,7 +32,7 @@ const convertAudioToText = async (
           ...form.getHeaders(),
         },
         body: form,
-      }
+      },
     );
     if (response.status === 400) {
       logger.error('error', {
@@ -53,7 +52,7 @@ const convertAudioToText = async (
     const transcriptions = jsonToVtt(data);
     const url = await uploadFile(
       `transcriptions/${sessionId}.vtt`,
-      transcriptions
+      transcriptions,
     );
     logger.info('Audio to text conversion completed');
     return {
@@ -79,11 +78,12 @@ const updateAudioState = async (sessionId: string, status: string) => {
       $set: {
         status: status,
       },
-    }
+    },
   );
 };
 
 async function audioConverter() {
+  logger.info('Audio Converter Queue is running');
   try {
     const queue = 'audio';
     const channel = await (await connection).createChannel();
@@ -100,11 +100,11 @@ async function audioConverter() {
           await downloadM3U8ToMP3(
             data.session.videoUrl,
             data.session.slug,
-            './tmp'
+            './tmp',
           );
           const transcript = await convertAudioToText(
             data.sessionId,
-            `./tmp/${data.session.slug}.mp3`
+            `./tmp/${data.session.slug}.mp3`,
           );
           await sessions.findOneAndUpdate(
             { _id: ObjectId.createFromHexString(data.sessionId) },
@@ -116,7 +116,7 @@ async function audioConverter() {
                   text: transcript.text,
                 },
               },
-            }
+            },
           );
           await updateAudioState(data.sessionId, 'completed');
           fs.unlinkSync(`./tmp/${data.session.slug}.mp3`);
@@ -137,7 +137,7 @@ async function audioConverter() {
       },
       {
         noAck: true,
-      }
+      },
     );
   } catch (e) {
     logger.error('error', e);
