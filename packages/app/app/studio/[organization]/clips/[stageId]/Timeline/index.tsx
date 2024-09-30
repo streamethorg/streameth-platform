@@ -137,7 +137,13 @@ const Timeline = () => {
                   left: `${(marker.startClipTime / maxLength) * timelineWidth}px`,
                   width: `${((marker.endClipTime - marker.startClipTime) / maxLength) * timelineWidth}px`,
                 }}
-              />
+              >
+                <p className="text-[10px] text-white truncate">
+                  {marker.name.length > 20
+                    ? `${marker.name.substring(0, 20)}...`
+                    : marker.name}
+                </p>
+              </div>
             );
           })}
         <Playhead maxLength={maxLength} timelineWidth={timelineWidth} />
