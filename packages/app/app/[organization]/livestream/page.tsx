@@ -1,6 +1,10 @@
 'use server';
 import SessionInfoBox from '@/components/sessions/SessionInfoBox';
-import { IExtendedSession, OrganizationPageProps } from '@/lib/types';
+import {
+  IExtendedSession,
+  IExtendedStage,
+  OrganizationPageProps,
+} from '@/lib/types';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { generalMetadata, livestreamMetadata } from '@/lib/utils/metadata';
@@ -62,7 +66,7 @@ export default async function Livestream({
             name={stage.name}
             description={stage.description ?? ''}
             date={stage.streamDate as string}
-            video={stage as IExtendedSession}
+            video={stage as IExtendedStage}
           />
         </div>
         <div className="px-4 md:px-0">

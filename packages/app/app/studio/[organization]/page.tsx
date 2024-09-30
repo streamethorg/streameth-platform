@@ -11,6 +11,10 @@ import { sortArray } from '@/lib/utils/utils';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
 import UploadVideoDialog from './library/components/UploadVideoDialog';
 import ImportSchedule from './livestreams/components/ImportSchedule';
+import { Button } from '@/components/ui/button';
+import { FaFileImport, FaHandScissors } from 'react-icons/fa';
+import { ScissorsLineDashed } from 'lucide-react';
+import Link from 'next/link';
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -40,7 +44,19 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <UploadVideoDialog organizationId={organization._id.toString()} />
-          <ImportSchedule organizationId={organization._id.toString()} />
+          {/* Clip Content Button*/}
+          <Link href={`/studio/${organization.slug}/clips`}>
+            <Button
+              variant={'outline'}
+              className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
+            >
+              <div className="rounded-xl border bg-primary p-4 text-white">
+                <ScissorsLineDashed size={25} />
+              </div>
+              <span className="text-sm">Clip Content</span>
+            </Button>
+          </Link>
+          {/* End Clip Content Button */}
         </div>
       </div>
       <div className="flex h-[80%] flex-col">

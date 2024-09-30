@@ -1,6 +1,6 @@
 import { PlayerWithControls } from '@/components/ui/Player';
 import SessionInfoBox from '@/components/sessions/SessionInfoBox';
-import { OrganizationPageProps } from '@/lib/types';
+import { IExtendedSession, OrganizationPageProps } from '@/lib/types';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { generalMetadata, watchMetadata } from '@/lib/utils/metadata';
@@ -88,7 +88,7 @@ export default async function Watch({
               playbackId={session.playbackId}
               organizationSlug={params.organization}
               vod={true}
-              video={session}
+              video={session as IExtendedSession}
             />
           </div>
         </div>

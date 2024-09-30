@@ -1,3 +1,4 @@
+import moment from 'moment';
 import path from 'path';
 /**
  * @method isEmpty
@@ -72,3 +73,58 @@ export function parseVTT(vttData: string) {
 
   return keyframe;
 }
+
+export const getSourceType = (
+  url: string,
+): { header: Array<string>; type: string; resolutions?: Array<string> } => {
+  const resolutions = [
+    '364x640',
+    '528x960',
+    '576x1024',
+    '720x1280',
+    '1280x720',
+    '1920x960',
+    '1920x1080',
+    '2560x1280',
+  ];
+  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+  const twitterRegex = /^https?:\/\/(www\.)?(twitter\.com|x\.com)\/.+$/i;
+  if (youtubeRegex.test(url)) {
+    return {
+      type: 'youtube',
+      header: ['referer:youtube.com'],
+      resolutions,
+    };
+  }
+  if (twitterRegex.test(url)) {
+    return {
+      type: 'twitter',
+      header: [],
+      resolutions,
+    };
+  } else {
+    return { type: 'custom', header: [] };
+  }
+};
+
+export const formatDate = (date: Date): string => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = `${d.getMonth() + 1}`.padStart(2, '0');
+  const day = `${d.getDate()}`.padStart(2, '0');
+  return `${day}/${month}/${year}`;
+};
+
+export const getStartAndEndTime = (
+  date: string,
+  start: string,
+  duration: string,
+): { start: number; end: number } => {
+  const startDate = moment(`${date.split('T')[0]}T${start}`);
+  const [hours, minutes] = duration.split(':').map(Number);
+  const endDate = startDate.clone().add(hours, 'hours').add(minutes, 'minutes');
+  return {
+    start: startDate.valueOf(),
+    end: endDate.valueOf(),
+  };
+};

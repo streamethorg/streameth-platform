@@ -472,6 +472,37 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse__type-string--url-string__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"url": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"url",
+							"type"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"SheetType": {
 				"enum": [
 					"gsheet",
@@ -798,6 +829,13 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"StageType": {
+				"enum": [
+					"custom",
+					"livepeer"
+				],
+				"type": "string"
+			},
 			"IStage": {
 				"properties": {
 					"_id": {
@@ -905,6 +943,28 @@
 					"recordingIndex": {
 						"type": "number",
 						"format": "double"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StageType"
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -1012,11 +1072,168 @@
 					"recordingIndex": {
 						"type": "number",
 						"format": "double"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StageType"
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
 					"name",
 					"organizationId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateHlsStageDto": {
+				"properties": {
+					"_id": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"eventId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"streamSettings": {
+						"$ref": "#/components/schemas/IStreamSettings"
+					},
+					"plugins": {
+						"items": {
+							"$ref": "#/components/schemas/IPlugin"
+						},
+						"type": "array"
+					},
+					"order": {
+						"type": "number",
+						"format": "double"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"published": {
+						"type": "boolean"
+					},
+					"isMultipleDate": {
+						"type": "boolean"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"thumbnail": {
+						"type": "string"
+					},
+					"streamDate": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"streamEndDate": {
+						"anyOf": [
+							{
+								"type": "string",
+								"format": "date-time"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"mintable": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"nftCollections": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							}
+						]
+					},
+					"recordingIndex": {
+						"type": "number",
+						"format": "double"
+					},
+					"type": {
+						"$ref": "#/components/schemas/StageType"
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"url"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -1639,7 +1856,6 @@
 				},
 				"required": [
 					"name",
-					"description",
 					"start",
 					"end",
 					"organizationId",
@@ -1875,7 +2091,6 @@
 				"required": [
 					"organizationId",
 					"name",
-					"description",
 					"start",
 					"end",
 					"type"
@@ -2076,10 +2291,10 @@
 				"required": [
 					"organizationId",
 					"name",
-					"description",
 					"start",
 					"end",
 					"type",
+					"description",
 					"speakers"
 				],
 				"type": "object",
@@ -3007,6 +3222,228 @@
 					"data": {
 						"items": {
 							"$ref": "#/components/schemas/INftCollection"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IMarker": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"startClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"endClipTime": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"stageId",
+					"start",
+					"end",
+					"date",
+					"color",
+					"startClipTime",
+					"endClipTime"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IMarker_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IMarker"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateMarkerDto": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"stageId": {
+						"type": "string"
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"startClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"endClipTime": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"stageId",
+					"start",
+					"end",
+					"date",
+					"color",
+					"startClipTime",
+					"endClipTime"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IMarker-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateMarkerDto": {
+				"properties": {
+					"organizationId": {
+						"type": "string"
+					},
+					"markers": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"organizationId",
+					"markers"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IMarker__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
 						},
 						"type": "array"
 					}
@@ -4204,6 +4641,47 @@
 				}
 			}
 		},
+		"/streams/hls": {
+			"post": {
+				"operationId": "GetHls",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__type-string--url-string__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get HLS url",
+				"tags": [
+					"Stream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"url": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"url"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/states": {
 			"post": {
 				"operationId": "CreateState",
@@ -4417,6 +4895,45 @@
 						}
 					}
 				]
+			}
+		},
+		"/stages/hls": {
+			"post": {
+				"operationId": "CreateHlsStage",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IStage_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create HLS Stage",
+				"tags": [
+					"Stage"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateHlsStageDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/stages/{stageId}": {
@@ -5941,6 +6458,273 @@
 						}
 					}
 				]
+			}
+		},
+		"/markers": {
+			"post": {
+				"operationId": "CreateMarker",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IMarker_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMarkerDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetAllMarkers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IMarker__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "organization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "stageId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "date",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/markers/bulk": {
+			"put": {
+				"operationId": "UpdateMarkers",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IMarker-Array_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Update multiple markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateMarkerDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/markers/{markerId}": {
+			"put": {
+				"operationId": "UpdateMarker",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IMarker_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Update marker",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "markerId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMarkerDto"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteMarker",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete marker",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "markerId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/markers/import": {
+			"post": {
+				"operationId": "ImportMarkers",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IMarker__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Import markers",
+				"tags": [
+					"Marker"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"stageId": {
+										"type": "string"
+									},
+									"organizationId": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									},
+									"url": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"stageId",
+									"organizationId",
+									"type",
+									"url"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/": {

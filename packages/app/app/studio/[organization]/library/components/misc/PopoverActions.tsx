@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 import { ShareModalContent } from '@/components/misc/interact/ShareButton';
 import GetHashButton from '../GetHashButton';
+import VisibilityButton from '../VisibilityButton';
 
 export const PopoverActions = ({
   session,
@@ -42,21 +43,14 @@ export const PopoverActions = ({
     <div className="grid gap-4">
       <div className="grid gap-2">
         <Link
-          href={`/studio/${organizationSlug}/library/${session._id as string}`}
-        >
-          <Button variant={'ghost'} className="w-full !justify-start space-x-2">
-            <FilePenLine />
-            <p className="">Edit</p>
-          </Button>
-        </Link>
-        <Link
           href={`/${organizationSlug}/watch?session=${session._id as string}`}
         >
           <Button variant={'ghost'} className="w-full !justify-start space-x-2">
-            <Eye />
+            <Eye className="w-5 h-5" />
             <p className="">View</p>
           </Button>
         </Link>
+        <VisibilityButton session={session} />
         {layout === eLayout.grid &&
           (session.ipfsURI ? (
             <Button
@@ -78,7 +72,7 @@ export const PopoverActions = ({
                 className: 'w-full !justify-start space-x-2',
               })}
             >
-              <Share2 />
+              <Share2 className="w-5 h-5" />
               <p>Share</p>
             </span>
           </DialogTrigger>
@@ -102,7 +96,7 @@ export const PopoverActions = ({
                   'flex cursor-pointer !justify-start space-x-2 hover:bg-gray-100',
               })}
             >
-              <Trash2 className="text-destructive" />
+              <Trash2 className="w-5 h-5 text-destructive" />
               <p>Delete</p>
             </span>
           }

@@ -1,54 +1,62 @@
 'use server';
 
 import React from 'react';
-import LivestreamEmbedCode from './components/LivestreamEmbedCode';
 import { fetchStage } from '@/lib/services/stageService';
 import { LivestreamPageParams } from '@/lib/types';
 import StreamConfigWithPlayer from './components/StreamConfigWithPlayer';
 import StreamHeader from './components/StreamHeader';
-import ShareButton from '@/components/misc/interact/ShareButton';
 import NotFound from '@/app/not-found';
-import Destinations from './components/Destinations';
 import StreamHealth from './components/StreamHealth';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
-import ShareLivestream from '../components/ShareLivestream';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import ImportDataButton from './components/StageDataImport/ImportDataButton';
-import ViewSessionsDialog from './components/StageDataImport/ViewSessionsDialog';
 import { fetchAllSessions } from '@/lib/services/sessionService';
+import Sidebar from './components/Sidebar';
+import EditLivestream from '../components/EditLivestream';
+import ShareAndEmbed from './components/ShareAndEmbed';
+import { Session } from 'inspector';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 
-const Livestream = async ({ params }: LivestreamPageParams) => {
+const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   if (!params.streamId) return null;
+
   const stream = await fetchStage({ stage: params.streamId });
   const organization = await fetchOrganization({
     organizationId: params.organization,
   });
-  const stageSessions = (await fetchAllSessions({ stageId: params.streamId }))
-    .sessions;
 
   if (!stream || !organization) {
     return NotFound();
   }
 
+  const stageSessions = (
+    await fetchAllSessions({
+      stageId: stream._id?.toString(),
+      type: SessionType.clip,
+      onlyVideos: true,
+    })
+  ).sessions;
+
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${params.organization}/livestream?stage=${stream._id}`;
+
   return (
-    <div className="max-w-screen-3xl flex h-full max-h-[1000px] w-full flex-col p-4">
+    <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-[1000px]">
       <StreamHeader
         organizationSlug={params.organization}
         stream={stream}
         isLiveStreamPage
       />
-      <div className="flex w-full flex-grow flex-row space-x-4">
-        <div className="flex w-2/3 flex-col">
+      <div className="flex flex-row flex-grow space-x-4 w-full">
+        <div className="flex flex-col w-2/3">
           <StreamConfigWithPlayer
             stream={stream}
             streamId={params.streamId}
             organization={params.organization}
           />
-          <div className="flex w-full flex-col items-center gap-2 py-2 md:flex-row md:flex-wrap">
-            <div className="flex items-center justify-start space-x-2">
-              <span className="text-xl font-bold pr-4">{stream.name}</span>
+          <div className="flex flex-col gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
+            <div className="flex justify-start items-center space-x-2">
+              <span className="pr-4 text-xl font-bold">{stream.name}</span>
               <StreamHealth
                 stream={stream}
                 streamId={stream?.streamSettings?.streamId || ''}
@@ -57,14 +65,10 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               />
             </div>
 
-            <LivestreamEmbedCode
-              streamId={stream._id}
+            <ShareAndEmbed
+              url={shareUrl}
+              streamId={stream._id as string}
               playerName={stream?.name}
-            />
-            <ShareLivestream
-              streamId={params.streamId}
-              variant={'outline'}
-              organization={params.organization}
             />
 
             <Link
@@ -72,27 +76,34 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
               target="_blank"
             >
               <Button variant="outline">
-                View Livestream
+                Watch Livestream
                 <div>
-                  <ArrowRight className="h-4 w-4 pl-1" />
+                  <ArrowRight className="ml-1 w-5 h-5" />
                 </div>
               </Button>
             </Link>
 
-            {stageSessions.length > 0 && (
-              <ViewSessionsDialog sessions={stageSessions.reverse()} />
-            )}
-
-            <ImportDataButton
-              organizationId={organization._id}
-              stageId={params.streamId}
+            <EditLivestream
               stage={stream}
+              organizationSlug={organization.slug!}
+              variant="outline"
+              btnText="Edit Livestream"
             />
+            {stream.streamSettings?.isActive && (
+              <Link
+                href={`/studio/${params.organization}/clips/${stream._id}?videoType=livestream`}
+              >
+                <Button variant="primary" className="flex items-center gap-1">
+                  Clip Live
+                  <ScissorsLineDashed className="ml-1 h-5 w-5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
-        <Destinations
-          stream={stream}
-          organizationSlug={params.organization}
+        <Sidebar
+          stage={stream}
+          sessions={stageSessions}
           organization={organization}
         />
       </div>

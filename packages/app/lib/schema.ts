@@ -99,14 +99,15 @@ export const StageSchema = z.object({
 
 // Define a schema for the speaker
 const speakerSchema = z.object({
-  name: z.string().optional(),
-  bio: z.string().optional(),
-  eventId: z.string(),
+  name: z.string(),
+  bio: z.string(),
+  eventId: z.string().optional(),
   twitter: z.string().optional(),
   github: z.string().optional(),
   website: z.string().optional(),
   photo: z.string().optional(),
   company: z.string().optional(),
+  organizationId: z.string().optional(),
 });
 
 export const sessionSchema = z.object({
@@ -215,4 +216,47 @@ export const ScheduleImportSchema = z.object({
   url: z.string().url(),
   organizationId: z.string(),
   stageId: z.string().optional(),
+});
+
+export const injectUrlSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  url: z.string().url({ message: 'Invalid URL' }),
+});
+
+export const markerSchema = z
+  .object({
+    name: z.string().min(1, 'Name is required'),
+    start: z.number().min(0, 'Start is required'),
+    end: z.number().min(0, 'End is required'),
+    organizationId: z.string().min(1, 'Organization ID is required'),
+    stageId: z.string().min(1, 'Stage ID is required'),
+    date: z.string(),
+    color: z.string().min(1, 'Color is required'),
+    speakers: z.array(speakerSchema).optional(),
+    description: z.string().optional(),
+    startClipTime: z.number().min(0, 'Start Clip Time is required'),
+    endClipTime: z.number().min(0, 'End Clip Time is required'),
+  })
+  .refine((data) => data.end > data.start, {
+    message: 'End time must be greater than start time',
+    path: ['end'], // This will make the error appear on the "end" field
+  });
+
+export const markersImportSchema = z.object({
+  type: z.string().min(1, 'Source is required'),
+  url: z.string().url(),
+  organizationId: z.string(),
+  stageId: z.string(),
+});
+
+export const clipSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  start: z.number().min(0, 'Start is required'),
+  end: z.number().min(0, 'End is required'),
+  organizationId: z.string().min(1, 'Organization ID is required'),
+  stageId: z.string().min(1, 'Stage ID is required'),
+  description: z.string().optional(),
+  speakers: z.array(speakerSchema).optional(),
+  startClipTime: z.number().min(0, 'Start Clip Time is required'),
+  endClipTime: z.number().min(0, 'End Clip Time is required'),
 });

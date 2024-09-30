@@ -19,7 +19,7 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description: string;
 

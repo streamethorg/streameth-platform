@@ -33,4 +33,5 @@ export interface RecordingSessionPayload {
   recordingUrl: string;
   mp4Url: string;
   assetId: string;
+  recordingId: string;
 }

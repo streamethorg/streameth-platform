@@ -212,7 +212,6 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
-    if (!stage) throw new HttpException(404, 'Stage not found');
     const asset = await getAsset(payload.assetId);
     const session = await this.create({
       name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),

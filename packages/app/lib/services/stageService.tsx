@@ -1,7 +1,6 @@
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedStage } from '../types';
-import { fetchEvents } from './eventService';
 import { Session, Stream } from 'livepeer/dist/models/components';
 
 export async function fetchStage({
@@ -292,4 +291,59 @@ export async function createSocialLivestreamStage({
 
     throw errorObject;
   }
+}
+
+export async function getHlsUrl({
+  url,
+  authToken,
+}: {
+  url: string;
+  authToken: string;
+}): Promise<{ type: string; url: string }> {
+  try {
+    const response = await fetch(`${apiUrl()}/streams/hls`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ url }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      const errorMessage = `Error ${response.status}: ${error.message || 'Error getting HLS URL'}`;
+      throw new Error(errorMessage);
+    }
+    return (await response.json()).data;
+  } catch (error) {
+    const errorObject = {
+      message: 'Error getting HLS URL',
+      details: error instanceof Error ? error.message : 'Unknown error',
+    };
+
+    throw errorObject;
+  }
+}
+
+export async function createHlsStage({
+  hlsStage,
+  authToken,
+}: {
+  hlsStage: IStage;
+  authToken: string;
+}): Promise<IStage> {
+  const response = await fetch(`${apiUrl()}/stages/hls`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify(hlsStage),
+  });
+
+  if (!response.ok) {
+    throw 'Error creating stage';
+  }
+  return (await response.json()).data;
 }

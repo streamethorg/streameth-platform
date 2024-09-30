@@ -32,7 +32,8 @@ const LivestreamEmbedCode = ({ streamId, playerName }: IGenerateEmbed) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex gap-1">
-          <Code2 className="h-4 w-4" /> <p>Copy Embed Code</p>
+          Copy Embed Code
+          <Code2 className="ml-2 h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="w-[450px]">

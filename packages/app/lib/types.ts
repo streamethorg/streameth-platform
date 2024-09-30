@@ -9,6 +9,7 @@ import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface'
 import { IState } from 'streameth-new-server/src/interfaces/state.interface';
 import { IUser } from 'streameth-new-server/src/interfaces/user.interface';
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
+import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 
@@ -120,15 +121,15 @@ export interface nftPageParams {
 export interface ClipsPageParams {
   params: {
     organization: string;
-    session: string;
-    eventId: string;
+    stageId: string;
   };
   searchParams: {
-    stage: string;
-    selectedSession: string;
-    selectedRecording: string;
-    replaceAsset: string;
+    videoType: 'livestream' | 'recording' | 'customUrl';
+    sessionId: string;
+    stageId: string;
+    // replaceAsset: string;
     previewId: string;
+    type: string;
   };
 }
 
@@ -206,7 +207,12 @@ export interface LivestreamPageParams {
     organization: string;
     streamId: string;
   };
-  searchParams: { layout: eLayout; sort: eSort; show: boolean };
+  searchParams: {
+    layout: eLayout;
+    sort: eSort;
+    show: boolean;
+    previewId: string;
+  };
 }
 
 export interface IGenerateEmbed {
@@ -249,4 +255,11 @@ export interface ChunkDataTypes {
 }
 export interface IExtendedScheduleImporter extends IScheduleImporter {
   _id: string;
+}
+
+export interface IExtendedMarker extends Omit<IMarker, '_id'> {
+  _id: string;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: string;
 }

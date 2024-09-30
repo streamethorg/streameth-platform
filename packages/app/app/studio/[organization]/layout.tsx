@@ -27,7 +27,7 @@ const Layout = async ({
   return (
     <div className="flex h-screen w-screen flex-row">
       <SidebarMenu organizationSlug={params.organization} />
-      <div className="flex w-full flex-col">
+      <div className="flex max-w-[calc(100%-73px)] w-full flex-col">
         <HomePageNavbar
           pages={[]}
           showLogo={false}
@@ -36,7 +36,7 @@ const Layout = async ({
           organizations={userData?.organizations}
         />
 
-        <div className="top-[54px] flex h-[calc(100vh-54px)] flex-col overflow-hidden border-t border-secondary">
+        <div className="w-full top-[54px] flex h-[calc(100vh-54px)] flex-col overflow-hidden border-t border-secondary">
           {!hasOrganization(userData?.organizations, params.organization) ? (
             <div className="mx-auto flex h-screen w-4/5 flex-col items-center justify-center text-center">
               Organization not found or You do not belong to this organization,
@@ -50,10 +50,8 @@ const Layout = async ({
             </div>
           ) : (
             <div className="flex h-full w-full flex-row">
-              <div className="h-full w-full">
-                {children}
-                <Support />
-              </div>
+              {children}
+              <Support />
             </div>
           )}
         </div>

@@ -8,7 +8,7 @@ import { Schema, model } from 'mongoose';
 const SessionSchema = new Schema<ISessionModel>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
-    description: { type: String, default: '', required: true },
+    description: { type: String, default: '' },
     start: { type: Number },
     end: { type: Number },
     startClipTime: { type: Number },

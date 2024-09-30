@@ -132,7 +132,9 @@ const SessionInfoBox = async ({
   vod?: boolean;
   organizationSlug?: string;
   viewCount?: boolean;
-  video?: IExtendedStage;
+  video?:
+    | (IExtendedSession & { isMultipleDate?: boolean; streamEndDate?: string })
+    | IExtendedStage;
 }) => {
   const nftCollection = await fetchNFTCollection({
     collectionId: video?.nftCollections?.[0],
@@ -150,7 +152,7 @@ const SessionInfoBox = async ({
         </CardTitle>
         <InfoBoxDescription speakers={speakers} description={description} />
         <div className="flex items-center space-x-2 text-sm">
-          <Timezone date={date} video={video} />
+          <Timezone date={date} video={video as IExtendedStage} />
           {playbackId && (
             <>
               <span className="font-bold">|</span>
@@ -165,7 +167,7 @@ const SessionInfoBox = async ({
             name={name}
             description={description}
             date={date}
-            video={video as IExtendedSession}
+            video={video as IExtendedSession | undefined}
             nftCollection={nftCollection}
             vod={vod}
           />
@@ -175,7 +177,7 @@ const SessionInfoBox = async ({
             name={name}
             description={description}
             date={date}
-            video={video as IExtendedSession}
+            video={video as IExtendedSession | undefined}
             nftCollection={nftCollection}
             vod={vod}
           />
