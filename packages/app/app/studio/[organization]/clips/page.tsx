@@ -25,6 +25,7 @@ import { formatTime } from '@/lib/utils/time';
 import TableSort from '@/components/misc/TableSort';
 
 import InjectUrlInput from './components/clipOptions/InjectUrlInput';
+import { LuRadar, LuRadiation, LuRadio } from 'react-icons/lu';
 
 interface IExtendedUpdateSession extends IExtendedSession {
   stageName?: string;
@@ -45,6 +46,22 @@ const ClipsConfig = ({
 }: ClipsConfigProps) => {
   return (
     <div className="flex flex-col items-start w-full min-h-screen px-4 md:px-8 py-6 space-y-8 overflow-auto">
+      {recording?.length === 0 && liveStages.length === 0 && (
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <h1 className="text-2xl font-bold">
+            No past Recordings or Live Stage found
+          </h1>
+          <p className="text-sm text-gray-500">
+            There are no past recordings or live stages for this organization.
+          </p>
+          <Link href={`/studio/${organization.slug}?show=true`}>
+            <Button className="mt-4" variant="primary">
+              <LuRadio className="h-4 w-4 mr-2" />
+              Create Livestream
+            </Button>
+          </Link>
+        </div>
+      )}
       {recording?.length > 0 && (
         <section className="w-full">
           <h2 className="text-2xl font-bold mb-4">Past Recordings</h2>
