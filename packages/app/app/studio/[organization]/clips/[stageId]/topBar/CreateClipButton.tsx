@@ -38,6 +38,7 @@ import { fetchSession } from '@/lib/services/sessionService';
 import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { fetchStage } from '@/lib/services/stageService';
+import { LuRotateCcw } from 'react-icons/lu';
 
 const CreateClipButton = ({
   organizationId,
@@ -100,6 +101,19 @@ const CreateClipButton = ({
       endClipTime: endTime.displayTime,
     },
   });
+
+  const handleClearMarker = () => {
+    setSelectedMarkerId('');
+    form.reset({
+      name: '',
+      description: 'No description',
+      start: new Date().getTime(),
+      end: new Date().getTime(),
+      organizationId: organizationId,
+      stageId: stageId,
+      speakers: [],
+    });
+  };
 
   useEffect(() => {
     if (selectedMarker) {
@@ -193,7 +207,18 @@ const CreateClipButton = ({
           <CardContent className="border space-y-4 pt-2">
             {markers && markers.length > 0 && (
               <>
-                <FormLabel>Select Marker for Clip</FormLabel>
+                <div className="flex items-center justify-between">
+                  <FormLabel>Select Marker for Clip</FormLabel>
+                  <Button
+                    className="ml-2"
+                    variant={'outline'}
+                    onClick={handleClearMarker}
+                    type="button"
+                  >
+                    <LuRotateCcw size={16} className="mr-2" />
+                    Clear
+                  </Button>
+                </div>
                 <Select
                   value={selectedMarkerId}
                   onValueChange={(value) => setSelectedMarkerId(value)}
