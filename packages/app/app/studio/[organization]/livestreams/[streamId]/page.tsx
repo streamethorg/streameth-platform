@@ -41,7 +41,7 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${params.organization}/livestream?stage=${stream._id}`;
 
   return (
-    <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-[1000px]">
+    <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-screen">
       <StreamHeader
         organizationSlug={params.organization}
         stream={stream}
@@ -54,7 +54,7 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
             streamId={params.streamId}
             organization={params.organization}
           />
-          <div className="flex flex-col gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
+          <div className="flex flex-row gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
             <div className="flex justify-start items-center space-x-2">
               <span className="pr-4 text-xl font-bold">{stream.name}</span>
               <StreamHealth
@@ -63,42 +63,44 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
                 organization={params.organization}
                 isLive={stream.streamSettings?.isActive}
               />
+              <EditLivestream
+                stage={stream}
+                organizationSlug={organization.slug!}
+                variant="outline"
+                btnText="Edit"
+              />
             </div>
 
-            <ShareAndEmbed
-              url={shareUrl}
-              streamId={stream._id as string}
-              playerName={stream?.name}
-            />
+            <div className="flex flex-row gap-2 ml-auto">
+              <ShareAndEmbed
+                url={shareUrl}
+                streamId={stream._id as string}
+                playerName={stream?.name}
+              />
 
-            <Link
-              href={`/${params.organization}/livestream?stage=${stream._id}`}
-              target="_blank"
-            >
-              <Button variant="outline">
-                Watch Livestream
-                <div>
-                  <ArrowRight className="ml-1 w-5 h-5" />
-                </div>
-              </Button>
-            </Link>
-
-            <EditLivestream
-              stage={stream}
-              organizationSlug={organization.slug!}
-              variant="outline"
-              btnText="Edit Livestream"
-            />
-            {stream.streamSettings?.isActive && (
               <Link
-                href={`/studio/${params.organization}/clips/${stream._id}?videoType=livestream`}
+                href={`/${params.organization}/livestream?stage=${stream._id}`}
+                target="_blank"
               >
-                <Button variant="primary" className="flex items-center gap-1">
-                  Clip Live
-                  <ScissorsLineDashed className="ml-1 h-5 w-5" />
+                <Button variant="outline">
+                  Watch
+                  <div>
+                    <ArrowRight className="ml-1 w-5 h-5" />
+                  </div>
                 </Button>
               </Link>
-            )}
+
+              {stream.streamSettings?.isActive && (
+                <Link
+                  href={`/studio/${params.organization}/clips/${stream._id}?videoType=livestream`}
+                >
+                  <Button variant="primary" className="flex items-center gap-1">
+                    Clip Live
+                    <ScissorsLineDashed className="ml-1 h-5 w-5" />
+                  </Button>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
         <Sidebar
