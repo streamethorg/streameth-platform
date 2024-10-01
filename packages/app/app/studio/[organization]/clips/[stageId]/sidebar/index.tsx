@@ -37,7 +37,7 @@ export default function Sidebar({
   ];
 
   return (
-    <div className="h-full w-full border-l bg-white relative flex flex-col">
+    <div className="h-full w-full bg-white relative flex flex-col">
       {overlayComponents.map(
         ({ condition, Component, usesLiveRecordingId }) =>
           condition && (
