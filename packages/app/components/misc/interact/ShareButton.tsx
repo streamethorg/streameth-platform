@@ -107,8 +107,8 @@ const ShareButton = ({
     <Credenza>
       <CredenzaTrigger>
         <span className={buttonClassNames}>
+          <Share2 className="mr-2 h-5 w-5" />
           {title}
-          <Share2 className="ml-2 h-4 w-4" />
         </span>
       </CredenzaTrigger>
       <ShareModalContent url={url} shareFor={shareFor} />
