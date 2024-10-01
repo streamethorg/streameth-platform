@@ -33,7 +33,7 @@ const Marker = ({
     >
       <div className="flex flex-grow flex-row items-center h-full">
         <div className="h-full flex items-center">
-          <div className="relative w-4 h-full">
+          <div className="relative w-2 h-full">
             <p
               style={{
                 backgroundColor: marker.color,

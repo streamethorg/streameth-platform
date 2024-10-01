@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import CopyText from '../../../../../../components/misc/CopyText';
-import PlayerWithControls from '@/components/ui/Player';
 import { IExtendedStage } from '@/lib/types';
 import { fetchStage } from '@/lib/services/stageService';
 import dynamic from 'next/dynamic';
@@ -43,7 +42,7 @@ const StreamConfigWithPlayer = ({
 
   return (
     <>
-      <div className="aspect-video w-full max-w-5xl">
+      <div className="aspect-video w-full ">
         {!isLive ? (
           <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black p-4 text-white">
             <h3 className="mb-2 text-center text-3xl font-semibold lg:text-4xl">
@@ -66,7 +65,7 @@ const StreamConfigWithPlayer = ({
             </div>
           </div>
         ) : (
-          <div className="aspect-video w-full max-w-5xl">
+          <div className="aspect-video w-full ">
             <ClientSidePlayer
               name={stream.name || 'Live Stream'}
               thumbnail=""

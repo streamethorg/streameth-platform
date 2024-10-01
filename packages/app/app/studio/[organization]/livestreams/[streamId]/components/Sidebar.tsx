@@ -21,10 +21,10 @@ const Sidebar = ({
 }) => {
   return (
     <Card className="w-1/3 flex flex-col h-[calc(100vh-12rem)] mb-4 overflow-hidden">
-      <Tabs defaultValue="clips" className="flex flex-col h-full">
+      <Tabs defaultValue="destinations" className="flex flex-col h-full">
         <TabsList className="grid grid-cols-2 w-full">
-          <TabsTrigger value="clips">Clips</TabsTrigger>
           <TabsTrigger value="destinations">Destinations</TabsTrigger>
+          <TabsTrigger value="clips">Clips</TabsTrigger>
         </TabsList>
         <TabsContent className="flex-grow overflow-hidden" value="clips">
           <div className="h-full overflow-y-auto">
