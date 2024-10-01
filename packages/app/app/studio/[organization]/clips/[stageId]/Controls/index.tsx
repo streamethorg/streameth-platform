@@ -4,9 +4,8 @@ import { PlayIcon, PauseIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
-import PushMarkersButton from './PushMarkersButton';
 
-const Controls = ({ organizationId }: { organizationId: string }) => {
+const Controls = () => {
   const {
     videoRef,
     isAddingOrEditingMarker,
@@ -103,7 +102,7 @@ const Controls = ({ organizationId }: { organizationId: string }) => {
           </button>
         </div>
       </div>
-      <PushMarkersButton organizationId={organizationId} />
+
       <Button
         disabled={
           isAddingOrEditingMarker || isImportingMarkers || isCreatingClip

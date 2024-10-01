@@ -95,7 +95,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
           <TopBar />
           <ReactHlsPlayer src={videoSrc} type={type} />
-          <Controls organizationId={organizationId} />
+          <Controls />
           <div className="w-full p-2 bg-white">
             <Timeline />
           </div>

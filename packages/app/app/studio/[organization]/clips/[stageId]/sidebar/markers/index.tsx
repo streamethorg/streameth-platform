@@ -12,6 +12,7 @@ import { CardTitle } from '@/components/ui/card';
 import Marker from './Marker';
 import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
+import PushMarkersButton from './PushMarkersButton';
 
 const Markers = ({ organizationId }: { organizationId: string }) => {
   const { isLoading, markers, setFilteredMarkers, filteredMarkers } =
@@ -57,6 +58,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
     <div className="h-full w-full border-l">
       <CardTitle className="w-full border-b bg-white p-2 text-lg">
         <div className="flex flex-col space-y-2">
+          <p className="text-sm font-semibold">Filter by Date</p>
           <Select defaultValue={selectedDate} onValueChange={handleDateChange}>
             <SelectTrigger className="bg-white">
               <SelectValue
@@ -76,6 +78,9 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
           </Select>
         </div>
       </CardTitle>
+      {filteredMarkers.length > 0 && (
+        <PushMarkersButton organizationId={organizationId} />
+      )}
       <div className="h-[calc(100%-130px)] w-full overflow-y-auto">
         {filteredMarkers.length > 0 ? (
           filteredMarkers.map((marker: IExtendedMarker) => (
