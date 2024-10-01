@@ -4,7 +4,7 @@ import { useClipContext } from '../ClipContext';
 import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
 const Timeline = () => {
   const {
@@ -12,7 +12,7 @@ const Timeline = () => {
     dragging,
     isLoading,
     filteredMarkers,
-    handleMouseDown: handleTrimmControlsMouseDown, // Rename this to avoid confusion
+    handleMouseDown, // Rename this to avoid confusion
     handleMarkerClick,
     goToClickTime,
     selectedMarkerId,
@@ -20,41 +20,7 @@ const Timeline = () => {
     setPixelsPerSecond,
   } = useClipContext();
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
   const timelineRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent, marker?: string) => {
-      if (marker) {
-        // This is a TrimmControls mousedown event
-        handleTrimmControlsMouseDown(marker, e);
-      } else {
-        // This is a Timeline mousedown event
-        if (!timelineRef.current) return;
-        setIsDragging(true);
-        setStartX(e.pageX - timelineRef.current.offsetLeft);
-        setScrollLeft(timelineRef.current.scrollLeft);
-      }
-    },
-    [handleTrimmControlsMouseDown]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging || !timelineRef.current) return;
-      e.preventDefault();
-      const x = e.pageX - timelineRef.current.offsetLeft;
-      const walk = (x - startX) * 2; // Adjust scrolling speed
-      timelineRef.current.scrollLeft = scrollLeft - walk;
-    },
-    [isDragging, startX, scrollLeft]
-  );
 
   const maxLength = videoRef.current?.duration || 0;
   const timelineWidth = maxLength * pixelsPerSecond;
@@ -108,14 +74,7 @@ const Timeline = () => {
   return (
     <div
       ref={timelineRef}
-      className={`relative flex flex-col w-full bg-white h-[200px] overflow-x-scroll overflow-y-hidden ${
-        isDragging ? 'cursor-grabbing' : 'cursor-grab'
-      }`}
-      onClick={(e) => !isDragging && goToClickTime(e)}
-      onMouseDown={(e) => handleMouseDown(e)}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onMouseMove={handleMouseMove}
+      className={`relative flex flex-col w-full bg-white h-[200px] overflow-x-scroll overflow-y-hidden`}
     >
       <div
         className="h-[100px] relative"
@@ -155,7 +114,7 @@ const Timeline = () => {
         <TrimmControls
           {...{
             handleMouseDown: (e: React.MouseEvent) =>
-              handleMouseDown(e, 'start'),
+              handleMouseDown('start', e),
             marker: 'start',
             blocked: isLoading && dragging !== 'start',
           }}
@@ -163,7 +122,7 @@ const Timeline = () => {
         <TrimmOverlay />
         <TrimmControls
           {...{
-            handleMouseDown: (e: React.MouseEvent) => handleMouseDown(e, 'end'),
+            handleMouseDown: (e: React.MouseEvent) => handleMouseDown('end', e),
             marker: 'end',
             blocked: isLoading && dragging !== 'end',
           }}
