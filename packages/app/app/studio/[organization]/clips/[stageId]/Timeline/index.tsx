@@ -82,7 +82,11 @@ const Timeline = () => {
       >
         {filteredMarkers &&
           filteredMarkers.map((marker) => {
-            if (marker.startClipTime > maxLength) return null;
+            if (
+              marker.startClipTime > maxLength ||
+              marker.endClipTime > maxLength
+            )
+              return null;
             return (
               <div
                 key={marker._id}
