@@ -71,9 +71,9 @@ const Multistream = ({
           </CardContent>
           <Card className="bg-white shadow-none">
             <Table>
-              <TableHeader className="sticky top-0 z-50">
-                <TableRow>
-                  <TableHead className="min-w-[100px]">Name</TableHead>
+              <TableHeader className="sticky top-0 z-50 w-full">
+                <TableRow className="w-full">
+                  <TableHead className="min-w-[100px] w-full">Name</TableHead>
                 </TableRow>
               </TableHeader>
 
