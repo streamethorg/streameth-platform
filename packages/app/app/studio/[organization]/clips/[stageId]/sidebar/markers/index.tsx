@@ -1,17 +1,17 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import { CardTitle } from '@/components/ui/card';
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
-import { CardTitle } from '@/components/ui/card';
-import Marker from './Marker';
-import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
+import React, { useMemo, useState } from 'react';
+import { useClipContext } from '../../ClipContext';
+import Marker from './Marker';
 import PushMarkersButton from './PushMarkersButton';
 
 const Markers = ({ organizationId }: { organizationId: string }) => {
@@ -55,8 +55,8 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
   }
 
   return (
-    <div className="h-full w-full border-l">
-      <CardTitle className="w-full border-b bg-white p-2 text-lg">
+    <div className="h-full w-full border-l flex flex-col">
+      <CardTitle className="w-full border-b bg-white p-2 text-lg flex-shrink-0">
         <div className="flex flex-col space-y-2">
           <p className="text-sm font-semibold">Filter by Date</p>
           <Select defaultValue={selectedDate} onValueChange={handleDateChange}>
@@ -81,7 +81,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
       {filteredMarkers.length > 0 && (
         <PushMarkersButton organizationId={organizationId} />
       )}
-      <div className="h-[calc(100%-130px)] w-full overflow-y-auto">
+      <div className="flex-grow overflow-y-auto">
         {filteredMarkers.length > 0 ? (
           filteredMarkers.map((marker: IExtendedMarker) => (
             <div key={marker._id} className="w-full px-4 py-2">
