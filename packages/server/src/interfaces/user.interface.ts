@@ -6,10 +6,10 @@ export enum UserRole {
   admin = 'admin',
 }
 export interface IUser {
-  walletAddress?: string;
   organizations?: IOrganization[];
   role?: UserRole;
   token?: string;
   did?: string;
+  email: string;
 }
 export interface IUserModel extends IUser, Document {}

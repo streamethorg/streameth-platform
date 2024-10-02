@@ -1,9 +1,9 @@
-import { IUser } from '@interfaces/user.interface';
-import { HttpException } from '@exceptions/HttpException';
-import jwt from 'jsonwebtoken';
 import { config } from '@config';
+import { HttpException } from '@exceptions/HttpException';
+import { IUser } from '@interfaces/user.interface';
+import { validateToken } from '@utils/oauth';
+import jwt from 'jsonwebtoken';
 import UserService from './user.service';
-import privy from '@utils/privy';
 
 export default class AuthService {
   private userService = new UserService();
@@ -14,38 +14,34 @@ export default class AuthService {
 
   async login(data: IUser): Promise<{ user: IUser; token: string }> {
     let verifyToken = await this.verifyAuthToken(data.token);
-    let user = await privy.getUser(verifyToken.userId);
-    let existingUser = await this.userService.findOne({
-      walletAddress: user.wallet.address,
-    });
-
-    if (!existingUser) {
-      await privy.deleteUser(verifyToken.userId);
-      throw new HttpException(404, 'User not found');
+    let user = await this.userService.findOne({ email: verifyToken.email });
+    if (!user) {
+      user = await this.userService.create({
+        email: verifyToken.email,
+        did: verifyToken.userId,
+      });
     }
-
-    let token = jwt.sign(
-      { id: existingUser.walletAddress },
-      config.jwt.secret,
-      {
-        expiresIn: config.jwt.expiry,
-      },
-    );
-    return { user: existingUser, token: token };
+    let token = jwt.sign({ id: verifyToken.userId }, config.jwt.secret, {
+      expiresIn: config.jwt.expiry,
+    });
+    return { user, token };
   }
 
   async verifyAuthToken(
     token: string,
-  ): Promise<{ userId: string; sessionId: string }> {
+  ): Promise<{ userId: string; email: string }> {
     try {
-      const authToken = await privy.verifyAuthToken(token);
+      const authToken = await validateToken(token);
       return {
         userId: authToken.userId,
-        sessionId: authToken.sessionId,
+        email: authToken.email,
       };
     } catch (e) {
-      if (e.code == 'ERR_JWT_EXPIRED') {
-        throw new HttpException(401, 'Jwt Expired');
+      if (e.message === 'Invalid or expired token') {
+        throw new HttpException(401, 'Invalid token');
+      }
+      if(e.message === 'Token expired') {
+        throw new HttpException(401, 'Token expired');
       }
     }
   }
