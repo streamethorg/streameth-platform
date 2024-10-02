@@ -10,6 +10,6 @@ export interface IUser {
   role?: UserRole;
   token?: string;
   did?: string;
-  email: string;
+  email?: string;
 }
 export interface IUserModel extends IUser, Document {}
