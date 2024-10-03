@@ -29,7 +29,7 @@ const Preview = ({
 }) => {
   const [shareUrl, setShareUrl] = useState('');
   const params = useParams();
-  const organizationSlug = params.organization as string;
+  const organizationSlug = params?.organization as string;
 
   useEffect(() => {
     setShareUrl(
