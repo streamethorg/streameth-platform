@@ -1,52 +1,217 @@
 'use client';
 
-import React, {
-  useEffect,
+import { createSessionAction } from '@/lib/actions/sessions';
+import * as z from 'zod';
+import {
   useState,
   useCallback,
   forwardRef,
-  MutableRefObject,
+  useRef,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { FileUp } from 'lucide-react';
 import uploadVideo from '@/lib/uploadVideo';
 import { getUrlAction } from '@/lib/actions/livepeer';
+import { toast } from 'sonner';
+import { sessionSchema } from '@/lib/schema';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { createStateAction } from '@/lib/actions/state';
+import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
+import { Uploads } from '../UploadVideoDialog';
 
 interface DropzoneProps {
-  onChange: (assetId: string) => void;
-  abortControllerRef: MutableRefObject<AbortController>;
+  organizationId: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOnEdit: Dispatch<SetStateAction<string | null>>;
+  uploads: Uploads;
+  setUploads: Dispatch<SetStateAction<Uploads>>;
 }
 
 const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
-  const { onChange, abortControllerRef } = props;
-  const [progress, setProgress] = useState<number>(0);
-  const [isUploading, setIsUploading] = useState(false);
-  const [assetId, setAssetId] = useState<string | null>(null);
+  const { organizationId, setOpen, uploads, setUploads, setOnEdit } = props;
   const [error, setError] = useState<string | null>(null);
+  const abortControllersRef = useRef<{ [uploadId: string]: AbortController }>(
+    {}
+  );
 
-  const startUpload = async (file: File) => {
-    setIsUploading(true);
-    const uploadUrl = await getUrlAction(file.name);
-    if (uploadUrl) {
-      uploadVideo(
-        file,
-        uploadUrl?.tusEndpoint as string,
-        abortControllerRef,
-        (percentage) => setProgress(percentage),
-        async () => {
-          setAssetId(uploadUrl.assetId as string);
-        }
-      );
-    }
+  const handleEditClick = (uploadId: string) => {
+    setOnEdit(uploadId);
+    setOpen(true);
   };
 
-  const onDrop = useCallback(
-    async (acceptedFiles: File[]) => {
-      if (acceptedFiles.length > 0) {
-        const file = acceptedFiles[0];
-
-        startUpload(file);
+  const cancelUpload = useCallback(
+    (uploadId: string, toastId: string | number) => {
+      if (!abortControllersRef.current[uploadId]) {
+        console.log('AbortController not found for uploadId:', uploadId);
+        return;
       }
+      abortControllersRef.current[uploadId].abort();
+
+      const filename = uploads[uploadId]?.session.name || 'Unknown file';
+      toast.error(`Upload cancelled for ${filename}`, { id: toastId });
+
+      setUploads((prev) => {
+        const { [uploadId]: _, ...rest } = prev;
+        return rest;
+      });
+
+      delete abortControllersRef.current[uploadId];
+      toast.dismiss(toastId);
+    },
+    [uploads]
+  );
+
+  const finishUpload = useCallback(
+    (values: z.infer<typeof sessionSchema>) => {
+      createSessionAction({
+        session: {
+          ...values,
+          coverImage: '',
+          organizationId,
+          speakers: [],
+          start: 0,
+          end: 0,
+          type: SessionType.video,
+          eventId: '',
+          stageId: '',
+        },
+      })
+        .then(async (session) => {
+          await createStateAction({
+            state: {
+              sessionId: session._id,
+              type: StateType.video,
+              sessionSlug: session.slug,
+              organizationId: session.organizationId,
+            },
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error('Error creating Session');
+        });
+    },
+    [organizationId]
+  );
+
+  const startUpload = useCallback(
+    async (file: File) => {
+      const uploadId = Date.now().toString();
+      abortControllersRef.current[uploadId] = new AbortController();
+
+      setOpen(false);
+      setUploads((prev) => ({
+        ...prev,
+        [uploadId]: {
+          progress: 0,
+          session: {
+            name: file.name,
+            assetId: '',
+            published: false,
+            description: 'No description',
+            coverImage: '',
+          },
+        },
+      }));
+
+      const toastId = toast.loading(`Preparing to upload ${file.name}...`);
+
+      try {
+        const uploadUrl = await getUrlAction(file.name);
+        if (!uploadUrl) {
+          throw new Error('Failed to get upload URL');
+        }
+
+        await new Promise<string>((resolve, reject) => {
+          uploadVideo(
+            file,
+            uploadUrl.tusEndpoint as string,
+            abortControllersRef.current[uploadId],
+            (percentage) => {
+              setUploads((prev) => ({
+                ...prev,
+                [uploadId]: { ...prev[uploadId], progress: percentage },
+              }));
+
+              toast.loading(
+                `Uploading ${file.name} - ${Math.round(percentage)}%`,
+                {
+                  cancel: {
+                    label: 'Cancel',
+                    onClick: () => cancelUpload(uploadId, toastId),
+                  },
+                  // TODO: Add edit button back in once we now how to fix it
+                  // action: {
+                  //   label: 'Edit',
+                  //   onClick: (event) => {
+                  //     event.preventDefault(); // Prevent the toast from closing
+                  //     console.log('Edit button clicked for:', uploadId);
+                  //     handleEditClick(uploadId);
+                  //   },
+                  // },
+                  id: toastId,
+                }
+              );
+            },
+            async () => {
+              const assetId = uploadUrl.assetId as string;
+              console.log('assetId', assetId);
+
+              setUploads((prev) => {
+                const updatedUpload = {
+                  ...prev[uploadId],
+                  session: {
+                    ...prev[uploadId].session,
+                    assetId: assetId,
+                  },
+                };
+
+                finishUpload({
+                  name: updatedUpload.session.name,
+                  description: updatedUpload.session.description,
+                  assetId: assetId,
+                  published: updatedUpload.session.published,
+                });
+
+                return {
+                  ...prev,
+                  [uploadId]: updatedUpload,
+                };
+              });
+
+              resolve(assetId);
+            }
+          );
+        });
+
+        toast.success(`${file.name} uploaded successfully`, { id: toastId });
+      } catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.log('Upload was cancelled');
+        } else {
+          toast.error(
+            error instanceof Error ? error.message : 'Upload failed',
+            {
+              id: toastId,
+            }
+          );
+        }
+      } finally {
+        setUploads((prev) => {
+          const { [uploadId]: _, ...rest } = prev;
+          return rest;
+        });
+        delete abortControllersRef.current[uploadId];
+      }
+    },
+    [cancelUpload, finishUpload, handleEditClick]
+  );
+
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      acceptedFiles.forEach((file) => startUpload(file));
     },
     [startUpload]
   );
@@ -54,65 +219,25 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
   const onDropRejected = useCallback((fileRejections: FileRejection[]) => {
     const { code, message } = fileRejections[0].errors[0];
     if (code === 'file-too-large') {
-      setError(`File is too large. Max size is 5GB.`);
+      setError(`File is too large. Max size is 8GB.`);
     } else {
       setError(message);
     }
 
     setTimeout(() => {
-      setError('');
+      setError(null);
     }, 8000);
   }, []);
-
-  useEffect(() => {
-    if (assetId) {
-      onChange(assetId);
-    }
-  }, [isUploading, assetId, onChange]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'video/*': ['.mp4', '.mov'],
     },
     maxSize: 8 * 1024 * 1024 * 1024, // 8 GB in bytes
-    maxFiles: 1,
+    maxFiles: 5,
     onDrop,
     onDropRejected,
   });
-
-  if (isUploading && progress >= 100) {
-    return (
-      <div
-        ref={ref}
-        className="flex flex-col justify-center items-center w-full h-40 text-sm bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video"
-      >
-        <p className="m-2">
-          Uploading finished! Processing now... Please proceed...
-        </p>
-      </div>
-    );
-  }
-
-  if (isUploading && progress < 100) {
-    return (
-      <div
-        ref={ref}
-        className="flex flex-col justify-center items-center p-2 w-full h-40 bg-gray-100 rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer hover:bg-gray-200 aspect-video"
-      >
-        <div className="flex relative justify-center items-center w-full h-full">
-          <div className="absolute top-0 left-0 w-full h-full bg-gray-300 rounded-md opacity-50"></div>
-          <div
-            className="absolute top-0 left-0 h-full bg-purple-400 rounded-md"
-            style={{ width: `${progress}%` }}
-          ></div>
-          <div className="flex z-10 flex-col justify-center items-center">
-            <p>{progress}%</p>
-            <p>Uploading. Please wait...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -130,10 +255,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
       ) : (
         <div className="mx-4">
           <p>Drag and drop videos to upload... Or just click here!</p>
-          <p>
-            Maximum video file size is 5GB. Best resolution of 1920 x 1080.
-            Aspect ratio of 16:9
-          </p>
+          <p>Maximum video file size is 8GB. Best resolution is 1920 x 1080.</p>
         </div>
       )}
     </div>
