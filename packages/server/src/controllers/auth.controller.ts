@@ -1,8 +1,8 @@
-import { Controller, Route, Tags, SuccessResponse, Body, Post } from 'tsoa';
-import AuthService from '@services/auth.service';
-import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { UserDto } from '@dtos/user/user.dto';
 import { IUser } from '@interfaces/user.interface';
+import AuthService from '@services/auth.service';
+import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import { Body, Controller, Post, Route, SuccessResponse, Tags } from 'tsoa';
 
 @Tags('Auth')
 @Route('auth')
@@ -32,4 +32,18 @@ export class AuthController extends Controller {
     const status = await this.authService.verifyToken(body.token);
     return SendApiResponse('Success', status);
   }
+
+    /**
+   * @summary Get token
+   */
+    @SuccessResponse('201')
+    @Post('/token')
+    async getToken(
+      @Body() body: UserDto,
+    ): Promise<IStandardResponse<IUser>> {
+      const payload = await this.authService.getTokenPayload(body.token);
+      return SendApiResponse('Success', payload);
+    }
+
+
 }

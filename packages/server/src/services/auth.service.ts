@@ -60,4 +60,21 @@ export default class AuthService {
       return false;
     }
   }
+
+  async getTokenPayload(token:string):Promise<IUser>{
+    try{
+      const decoded = jwt.verify(token, config.jwt.secret);
+      if (typeof decoded !== 'string' && 'id' in decoded) {
+        return this.userService.findOne({ did: decoded.id });
+      }
+    }catch(e){
+      if (
+        e instanceof jwt.TokenExpiredError ||
+        e instanceof jwt.JsonWebTokenError
+      ) {
+        throw new HttpException(401, 'Invalid token');
+      }
+    }
+
+  }
 }
