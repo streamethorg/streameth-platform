@@ -11,9 +11,7 @@ const useUserData = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const userData = await fetchUserAction({
-          userId: address as string,
-        });
+        const userData = await fetchUserAction();
         setUserData(userData);
       } catch (error) {
         console.error(error);

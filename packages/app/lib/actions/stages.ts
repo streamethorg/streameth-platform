@@ -63,17 +63,13 @@ export const createMultistreamAction = async (
   const streamKey = formData.get('streamKey') as string;
   const organizationId = formData.get('organizationId') as string;
 
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
   try {
     const response = await createMultistream({
       streamId,
       name,
       targetURL: url,
       targetStreamKey: streamKey,
-      authToken,
+
       organizationId,
     });
     revalidatePath('/studio');
@@ -92,15 +88,10 @@ export const deleteMultistreamAction = async (
   organizationId: string,
   targetId: string
 ) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
   const response = await deleteMultistream({
     streamId,
     targetId,
     organizationId,
-    authToken,
   });
   if (!response) {
     throw new Error('Error deleting stage');
@@ -136,17 +127,12 @@ export const createSocialLivestreamStageAction = async ({
   socialType: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
   try {
     const response = await createSocialLivestreamStage({
       stageId: stageId,
       socialId: socialId,
       socialType: socialType,
       organizationId: organizationId,
-      authToken,
     });
 
     if (!response) {
@@ -162,14 +148,8 @@ export const createSocialLivestreamStageAction = async ({
 };
 
 export const getHlsUrlAction = async ({ url }: { url: string }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await getHlsUrl({
     url,
-    authToken,
   });
   if (!response) {
     throw new Error('Error getting HLS URL');
@@ -183,13 +163,8 @@ export const createHlsStageAction = async ({
 }: {
   hlsStage: IStage;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
   const response = await createHlsStage({
     hlsStage,
-    authToken,
   });
   if (!response) {
     throw new Error('Error creating HLS stage');

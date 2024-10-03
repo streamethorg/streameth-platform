@@ -1,8 +1,11 @@
 import { Card, CardContent } from '@/components/ui/card';
 import CreateOrganizationForm from '../components/CreateOrganizationForm';
 import Image from 'next/image';
+import { fetchUserAction } from '@/lib/actions/users';
+import { IExtendedUser } from '@/lib/types';
 
-const CreateOrganization = () => {
+const CreateOrganization = async () => {
+  const userData: IExtendedUser = await fetchUserAction();
   return (
     <div className="mx-auto mt-12 flex w-full max-w-4xl flex-row">
       <div className="w-1/3 space-y-4 rounded-l-xl bg-neutrals-100 p-6">
@@ -15,7 +18,7 @@ const CreateOrganization = () => {
       </div>
       <Card className="m-auto w-2/3 rounded-r-xl border-none bg-white shadow-none">
         <CardContent>
-          <CreateOrganizationForm />
+          <CreateOrganizationForm userAddress={userData?.email!} />
         </CardContent>
       </Card>
     </div>

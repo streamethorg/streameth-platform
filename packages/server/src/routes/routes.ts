@@ -78,7 +78,6 @@ const models: TsoaRoute.Models = {
             "accentColor": {"dataType":"string"},
             "slug": {"dataType":"string"},
             "banner": {"dataType":"string"},
-            "walletAddress": {"dataType":"string"},
             "address": {"dataType":"string"},
             "socials": {"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},
         },
@@ -879,7 +878,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"walletAddress":{"dataType":"string"},"address":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -896,8 +895,7 @@ const models: TsoaRoute.Models = {
             "location": {"dataType":"string"},
             "accentColor": {"dataType":"string"},
             "banner": {"dataType":"string"},
-            "walletAddress": {"dataType":"string","required":true},
-            "address": {"dataType":"string"},
+            "address": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -909,7 +907,7 @@ const models: TsoaRoute.Models = {
             "description": {"dataType":"string"},
             "logo": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
-            "walletAddress": {"dataType":"string","required":true},
+            "address": {"dataType":"string","required":true},
             "banner": {"dataType":"string"},
             "organizationId": {"dataType":"string"},
             "url": {"dataType":"string"},
@@ -919,7 +917,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_CreateOrganizationDto.address_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"address":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"address":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_Array_IOrganization__": {
@@ -940,11 +938,6 @@ const models: TsoaRoute.Models = {
             "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IUser"}},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_CreateOrganizationDto.walletAddress_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"walletAddress":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftCollectionType": {
@@ -1339,16 +1332,6 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "token": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_boolean_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"boolean"},
         },
         "additionalProperties": false,
     },
@@ -2953,7 +2936,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             async function OrganizationController_deleteOrgMember(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"ref":"Pick_CreateOrganizationDto.walletAddress_"},
+                    body: {"in":"body","name":"body","required":true,"ref":"Pick_CreateOrganizationDto.address_"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

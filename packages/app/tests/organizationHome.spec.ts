@@ -36,10 +36,6 @@ const test = base.extend<{ organization: IOrganization }>({
       (cookie) => cookie.name === 'user-address'
     )?.value;
 
-    if (!authToken) {
-      throw new Error('Authentication token not found');
-    }
-
     if (!walletAddress) {
       throw new Error('Wallet address not found');
     }
@@ -60,7 +56,6 @@ const test = base.extend<{ organization: IOrganization }>({
 
     const createdOrg = await createOrganization({
       organization: organizationData,
-      authToken: authToken,
     });
 
     if (!createdOrg) {

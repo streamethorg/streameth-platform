@@ -11,6 +11,8 @@ import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components';
 import FuzzySearch from 'fuzzy-search';
+import { auth } from '@/auth';
+import { fetchClient } from './fetch-client';
 
 interface ApiParams {
   event?: string;
@@ -123,17 +125,14 @@ export async function fetchAllSessions({
 
 export const createSession = async ({
   session,
-  authToken,
 }: {
   session: ISession;
-  authToken: string;
 }): Promise<IExtendedSession> => {
   try {
-    const response = await fetch(`${apiUrl()}/sessions`, {
+    const response = await fetchClient(`${apiUrl()}/sessions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(session),
     });
@@ -178,10 +177,8 @@ export const fetchSession = async ({
 
 export const updateSession = async ({
   session,
-  authToken,
 }: {
   session: IExtendedSession;
-  authToken: string;
 }): Promise<ISessionModel> => {
   const modifiedSession = (({
     _id,
@@ -194,11 +191,10 @@ export const updateSession = async ({
   }) => rest)(session);
 
   try {
-    const response = await fetch(`${apiUrl()}/sessions/${session._id}`, {
+    const response = await fetchClient(`${apiUrl()}/sessions/${session._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(modifiedSession),
     });
@@ -215,19 +211,16 @@ export const updateSession = async ({
 export const deleteSession = async ({
   sessionId,
   organizationId,
-  authToken,
 }: {
   sessionId: string;
   organizationId: string;
-  authToken: string;
 }) => {
   try {
-    const response = await fetch(`${apiUrl()}/sessions/${sessionId}`, {
+    const response = await fetchClient(`${apiUrl()}/sessions/${sessionId}`, {
       method: 'DELETE',
       body: JSON.stringify({ organizationId }),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
     });
 
@@ -247,22 +240,19 @@ export const createClip = async ({
   end,
   playbackId,
   recordingId,
-  authToken,
   sessionId,
 }: {
   sessionId: string;
-  authToken: string;
   playbackId: string;
   recordingId: string;
   start: number;
   end: number;
 }): Promise<ISession> => {
   try {
-    const response = await fetch(`${apiUrl()}/streams/clip`, {
+    const response = await fetchClient(`${apiUrl()}/streams/clip`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
         end,
@@ -330,17 +320,14 @@ export const fetchAsset = async ({
 
 export const createAsset = async ({
   fileName,
-  authToken,
 }: {
   fileName: string;
-  authToken: string;
 }): Promise<any> => {
   try {
-    const response = await fetch(`${apiUrl()}/streams/asset`, {
+    const response = await fetchClient(`${apiUrl()}/streams/asset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ fileName }),
     });
@@ -387,21 +374,18 @@ export const uploadSessionToSocialsRequest = async ({
   type,
   organizationId,
   socialId,
-  authToken,
 }: {
   sessionId: string;
   type: string;
   organizationId: string;
-  authToken: string;
   socialId: string;
 }): Promise<any> => {
   try {
-    const response = await fetch(`${apiUrl()}/sessions/upload`, {
+    const response = await fetchClient(`${apiUrl()}/sessions/upload`, {
       method: 'POST',
       cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
         type,
@@ -426,19 +410,16 @@ export const sessionImport = async ({
   url,
   type,
   organizationId,
-  authToken,
 }: {
   url: string;
   type: string;
   organizationId: string;
-  authToken: string;
 }): Promise<IExtendedScheduleImporter> => {
   try {
-    const response = await fetch(`${apiUrl()}/schedule/import`, {
+    const response = await fetchClient(`${apiUrl()}/schedule/import`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
         url,
@@ -461,21 +442,18 @@ export const stageSessionImport = async ({
   url,
   type,
   organizationId,
-  authToken,
   stageId,
 }: {
   url: string;
   type: string;
   organizationId: string;
-  authToken: string;
   stageId: string;
 }): Promise<IExtendedScheduleImporter> => {
   try {
-    const response = await fetch(`${apiUrl()}/schedule/import/stage`, {
+    const response = await fetchClient(`${apiUrl()}/schedule/import/stage`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
         url,
@@ -495,20 +473,17 @@ export const stageSessionImport = async ({
 };
 
 export const saveSessionImport = async ({
-  authToken,
   scheduleId,
   organizationId,
 }: {
-  authToken: string;
   scheduleId: string;
   organizationId: string;
 }): Promise<string> => {
   try {
-    const response = await fetch(`${apiUrl()}/schedule/import/save`, {
+    const response = await fetchClient(`${apiUrl()}/schedule/import/save`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
         scheduleId,
@@ -527,20 +502,17 @@ export const saveSessionImport = async ({
 };
 
 export const generateTranscriptions = async ({
-  authToken,
   sessionId,
   organizationId,
 }: {
-  authToken: string;
   sessionId: string;
   organizationId: string;
 }): Promise<string> => {
   try {
-    const response = await fetch(`${apiUrl()}/sessions/transcriptions`, {
+    const response = await fetchClient(`${apiUrl()}/sessions/transcriptions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({
         sessionId,

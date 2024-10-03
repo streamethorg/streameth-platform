@@ -28,11 +28,13 @@ import { IExtendedOrganization } from '@/lib/types';
 
 interface CreateOrganizationFormProps {
   organization?: IExtendedOrganization;
+  userAddress: string;
   disableName?: boolean;
 }
 
 export default function CreateOrganizationForm({
   organization,
+  userAddress,
   disableName = false,
 }: CreateOrganizationFormProps) {
   const router = useRouter();
@@ -46,6 +48,7 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
+      address: userAddress,
     },
   });
 
@@ -200,7 +203,7 @@ export default function CreateOrganizationForm({
                 <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
               </>
             ) : organization ? (
-              'Update'
+              'Update '
             ) : (
               'Create'
             )}

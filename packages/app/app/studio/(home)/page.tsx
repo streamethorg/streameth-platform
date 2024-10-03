@@ -66,7 +66,7 @@ const Studio = async () => {
               <CardTitle>Create an organization to get started</CardTitle>
             </CardHeader>
             <CardContent>
-              <CreateOrganizationForm />
+              <CreateOrganizationForm userAddress={userData?.email!} />
             </CardContent>
           </Card>
         )}

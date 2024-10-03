@@ -177,6 +177,7 @@ export const organizationSchema = z.object({
     .max(400, { message: 'Description is too long' })
     .optional(),
   email: z.string().email().min(1, 'Email is required'),
+  address: z.string().email(),
   // url: z.string().optional(),
 });
 

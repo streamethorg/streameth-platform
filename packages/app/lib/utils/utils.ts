@@ -16,7 +16,6 @@ import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface
 import { UseFormProps, UseFormReturn } from 'react-hook-form';
 import { getDateInUTC } from './time';
 import { toast } from 'sonner';
-import { auth } from '@/auth';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -397,14 +396,4 @@ export const getLiveStageSrcValue = ({
   recordingId?: string;
 }) => {
   return `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${recordingId}/output.m3u8`;
-};
-
-export const fetchClient = async (url: string, options: RequestInit) => {
-  const session = await auth();
-  return fetch(url, {
-    headers: {
-      ...(session && { Authorization: `Bearer ${session?.accessToken}` }),
-    },
-    ...options?.headers,
-  });
 };

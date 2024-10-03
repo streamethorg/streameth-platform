@@ -1,19 +1,14 @@
 import { apiUrl } from '../utils/utils';
 import { IExtendedUser } from '../types';
+import { fetchClient } from './fetch-client';
 
-export async function fetchUser({
-  authToken,
-}: {
-  userId?: string;
-  authToken?: string;
-}): Promise<IExtendedUser | null> {
+export async function fetchUser(): Promise<IExtendedUser | null> {
   try {
-    const data = await fetch(`${apiUrl()}/auth/token`, {
+    const data = await fetchClient(`${apiUrl()}/auth/token`, {
       cache: 'no-store',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
     });
     return (await data.json()).data;
@@ -23,20 +18,14 @@ export async function fetchUser({
   }
 }
 
-export async function fetchUserData({
-  authToken,
-}: {
-  userId?: string;
-  authToken?: string;
-}): Promise<IExtendedUser | null> {
+export async function fetchUserData(): Promise<IExtendedUser | null> {
   try {
-    const user = await fetchUser({ authToken });
-    const data = await fetch(`${apiUrl()}/users/${user?.email}`, {
+    const user = await fetchUser();
+    const data = await fetchClient(`${apiUrl()}/users/${user?.email}`, {
       cache: 'no-store',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
     });
 

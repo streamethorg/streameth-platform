@@ -18,6 +18,10 @@ export class UpdateOrganizationDto {
   @IsEmail()
   email!: string;
 
+  @IsString()
+  @IsEmail()
+  address: string;
+
   @IsOptional()
   @IsString()
   banner?: string;

@@ -55,20 +55,20 @@ const Settings = async ({
           <Table className="mt-4">
             <TableHeader className="sticky top-0 z-10 border-separate bg-gray-100">
               <TableRow className="hover:bg-whiterounded-t-xl border-b">
-                <TableHead>Wallet</TableHead>
+                <TableHead>Email</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {members?.map(({ _id, walletAddress, role }) => (
+              {members?.map(({ _id, email, role }) => (
                 <TableRow key={_id}>
-                  <TableCell>{walletAddress}</TableCell>
+                  <TableCell>{email}</TableCell>
                   <TableCell>{role}</TableCell>
 
                   <TableCell>
                     <DeleteTeamMember
-                      memberWalletAddress={walletAddress as string}
+                      memberWalletAddress={email as string}
                       organizationId={organization._id}
                     />
                   </TableCell>
