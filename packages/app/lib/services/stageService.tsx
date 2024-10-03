@@ -1,5 +1,5 @@
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
-import { apiUrl } from '@/lib/utils/utils';
+import { apiUrl, fetchClient } from '@/lib/utils/utils';
 import { IExtendedStage } from '../types';
 import { Session, Stream } from 'livepeer/dist/models/components';
 
@@ -9,7 +9,7 @@ export async function fetchStage({
   stage: string;
 }): Promise<IExtendedStage | null> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/${stage}`, {
+    const response = await fetchClient(`${apiUrl()}/stages/${stage}`, {
       cache: 'no-cache',
     });
     const data = (await response.json()).data;
@@ -134,18 +134,16 @@ export async function fetchOrganizationStages({
 
 export const updateStage = async ({
   stage,
-  authToken,
 }: {
   stage: IExtendedStage;
-  authToken: string;
+  // authToken: string;
 }): Promise<IExtendedStage> => {
   const { _id, createdAt, recordingIndex, updatedAt, __v, ...rest } = stage;
   try {
-    const response = await fetch(`${apiUrl()}/stages/${_id}`, {
+    const response = await fetchClient(`${apiUrl()}/stages/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(rest),
     });

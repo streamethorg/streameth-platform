@@ -1,50 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from './auth';
-import NextAuth from 'next-auth';
 
-// export function middleware(request: NextRequest) {
-//   const { pathname, origin } = new URL(request.url);
+function matcher(request: NextRequest) {
+  const { pathname, origin } = new URL(request.url);
 
-//   // First URL pattern
-//   const firstPattern = /^\/([^/]+)\/([^/]+)\/archive$/;
-//   const firstMatch = pathname.match(firstPattern);
+  // URL patterns for redirection
+  const patterns = [
+    { regex: /^\/([^/]+)\/([^/]+)\/archive$/, newPath: '/archive?event=' },
+    {
+      regex: /^\/([^/]+)\/([^/]+)\/session\/([^/]+)$/,
+      newPath: '/watch?event=',
+    },
+  ];
 
-//   if (firstMatch) {
-//     const baseEvent = firstMatch[2];
-//     const newUrl = `${origin}/archive?event=${encodeURIComponent(baseEvent)}`;
-//     return NextResponse.redirect(newUrl);
-//   }
+  for (const { regex, newPath } of patterns) {
+    const match = pathname.match(regex);
+    if (match) {
+      const event = encodeURIComponent(match[2]);
+      let newUrl = `${origin}${newPath}${event}`;
+      if (newPath.includes('watch')) {
+        newUrl += `&session=${encodeURIComponent(match[3])}`;
+      }
+      return NextResponse.redirect(newUrl);
+    }
+  }
 
-//   // Second URL pattern
-//   const secondPattern = /^\/([^/]+)\/([^/]+)\/session\/([^/]+)$/;
-//   const secondMatch = pathname.match(secondPattern);
+  return NextResponse.next();
+}
 
-//   if (secondMatch) {
-//     const event = secondMatch[2];
-//     const videoName = secondMatch[3];
-//     const newUrl = `${origin}/watch?event=${encodeURIComponent(
-//       event
-//     )}&session=${encodeURIComponent(videoName)}`;
-//     return NextResponse.redirect(newUrl);
-//   }
-
-//   return NextResponse.next();
-// }
-
-export const apiAuthPrefix = '/api/auth';
+const apiAuthPrefix = '/api/auth';
 const authRoutes = ['/login'];
 const publicRoutes = ['/'];
-const protectedRoutes = ['/studio'];
+const protectedRoutes = '/studio';
 
 export default auth((req) => {
   const { nextUrl } = req;
-  const userSession = req.cookies.get('user-session')?.value;
+
   const isLoggedIn = !!req.auth;
-  console.log('ROUTE', req.nextUrl.pathname);
-  console.log('IS LOGGED IN', isLoggedIn);
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
-  const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
+  const isProtectedRoute = nextUrl.pathname.startsWith(protectedRoutes);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const DEFAULT_LOGIN_REDIRECT = '/studio';
 
@@ -56,15 +50,22 @@ export default auth((req) => {
     if (isLoggedIn) {
       return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
-    return null;
+    return;
   }
 
-  if (!isLoggedIn && !isPublicRoute) {
+  if (!isLoggedIn && isProtectedRoute) {
     return NextResponse.redirect(new URL('/login', nextUrl));
   }
+
+  // Call the middleware function for URL pattern matching
+  const middlewareResult = matcher(req);
+  if (middlewareResult) {
+    return middlewareResult;
+  }
+
   // Allow users visiting public routes to access them
   return NextResponse.next();
-});
+}); // Temporary type assertion
 
 export const config = {
   matcher: [

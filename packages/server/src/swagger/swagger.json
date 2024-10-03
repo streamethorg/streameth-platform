@@ -113,9 +113,6 @@
 			},
 			"IUser": {
 				"properties": {
-					"walletAddress": {
-						"type": "string"
-					},
 					"organizations": {
 						"items": {
 							"$ref": "#/components/schemas/IOrganization"
@@ -129,6 +126,9 @@
 						"type": "string"
 					},
 					"did": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					}
 				},
@@ -4171,11 +4171,7 @@
 				"tags": [
 					"User"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -7219,6 +7215,38 @@
 						}
 					}
 				}
+			}
+		},
+		"/auth/token": {
+			"get": {
+				"operationId": "GetTokenPayload",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IUser_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get token",
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},

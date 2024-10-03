@@ -1,7 +1,14 @@
-import NextAuth from 'next-auth';
+import NextAuth, { DefaultSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import AppleProvider from 'next-auth/providers/apple';
 import { apiUrl } from './lib/utils/utils';
+
+// Extend the built-in session type
+declare module 'next-auth' {
+  interface Session extends DefaultSession {
+    accessToken?: string;
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -16,29 +23,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, account, profile }) {
-      console.log('account', account);
-      console.log('profile', profile);
+    async jwt({ token, account }) {
       if (account) {
-        token.provider = account.provider;
-        token.providerAccountId = account.providerAccountId;
-        token.email = profile?.email;
+        token.access_token = account.id_token;
       }
       return token;
     },
     async session({ session, token }) {
-      // Exchange the NextAuth token for your backend JWT
-      const response = await fetch(`${apiUrl}/login'`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          provider: token.provider,
-          providerAccountId: token.providerAccountId,
-          email: token.email,
-        }),
-      });
-      const data = await response.json();
-      session.sessionToken = data.token;
+      // Exchange the NextAuth token for backend JWT
+      try {
+        const response = await fetch(`${apiUrl()}/auth/login`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: token.access_token,
+          }),
+        });
+        const data = (await response.json()).data;
+        session.accessToken = data?.token;
+      } catch (error) {
+        console.error('Error fetching session token:', error);
+      }
       return session;
     },
   },
