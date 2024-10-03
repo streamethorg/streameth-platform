@@ -142,14 +142,15 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                     label: 'Cancel',
                     onClick: () => cancelUpload(uploadId, toastId),
                   },
-                  action: {
-                    label: 'Edit',
-                    onClick: (event) => {
-                      event.preventDefault(); // Prevent the toast from closing
-                      console.log('Edit button clicked for:', uploadId);
-                      handleEditClick(uploadId);
-                    },
-                  },
+                  // TODO: Add edit button back in once we now how to fix it
+                  // action: {
+                  //   label: 'Edit',
+                  //   onClick: (event) => {
+                  //     event.preventDefault(); // Prevent the toast from closing
+                  //     console.log('Edit button clicked for:', uploadId);
+                  //     handleEditClick(uploadId);
+                  //   },
+                  // },
                   id: toastId,
                 }
               );
