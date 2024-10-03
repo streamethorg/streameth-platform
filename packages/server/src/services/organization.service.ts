@@ -26,9 +26,9 @@ export default class OrganizationService {
       data,
       this.path,
     );
-    const wallets = [...config.wallets.trim().split(','), data.walletAddress];
+    const emails = [...config.wallets.trim().split(','), data.address];
     await User.updateMany(
-      { walletAddress: { $in: wallets } },
+      { email: { $in: emails } },
       { $addToSet: { organizations: createOrg._id } },
     );
     return createOrg;
@@ -83,11 +83,11 @@ export default class OrganizationService {
   }
 
   async getOrgMembers(organizationId: string): Promise<Array<IUser>> {
-    const walletAddresses = config.wallets.trim().split(',');
+    const emails = config.wallets.trim().split(',');
     const users = await User.find(
       {
         organizations: organizationId,
-        walletAddress: { $nin: walletAddresses },
+        email: { $nin: emails },
       },
       { did: 0 },
     );
@@ -102,10 +102,10 @@ export default class OrganizationService {
     );
   }
 
-  async deleteOrgMember(organizationId: string, walletAddress: string) {
+  async deleteOrgMember(organizationId: string, email: string) {
     await this.get(organizationId);
     await User.findOneAndUpdate(
-      { walletAddress: walletAddress },
+      { email },
       { $pull: { organizations: organizationId } },
     );
   }
