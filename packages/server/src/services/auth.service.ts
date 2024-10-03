@@ -46,18 +46,17 @@ export default class AuthService {
     }
   }
 
-  async verifyToken(token: string): Promise<boolean> {
+  async verifyToken(token: string): Promise<void> {
     try {
       jwt.verify(token, config.jwt.secret);
-      return true;
     } catch (e) {
       if (
         e instanceof jwt.TokenExpiredError ||
         e instanceof jwt.JsonWebTokenError
       ) {
-        return false;
+        throw new HttpException(401, 'Invalid token');
       }
-      return false;
+      throw new HttpException(401, 'Invalid token');
     }
   }
 

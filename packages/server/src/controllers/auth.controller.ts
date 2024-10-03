@@ -28,9 +28,9 @@ export class AuthController extends Controller {
   @Post('/verify-token')
   async verifyToken(
     @Body() body: UserDto,
-  ): Promise<IStandardResponse<boolean>> {
-    const status = await this.authService.verifyToken(body.token);
-    return SendApiResponse('Success', status);
+  ): Promise<IStandardResponse<void>> {
+    await this.authService.verifyToken(body.token);
+    return SendApiResponse('Success');
   }
 
     /**
