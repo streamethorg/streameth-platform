@@ -20,10 +20,6 @@ export class UpdateOrganizationDto {
 
   @IsOptional()
   @IsString()
-  walletAddress: string;
-
-  @IsOptional()
-  @IsString()
   banner?: string;
 
   @IsOptional()
