@@ -46,18 +46,15 @@ export async function fetchStages({
 export async function deleteStage({
   stageId,
   organizationId,
-  authToken,
 }: {
   stageId: string;
   organizationId: string;
-  authToken: string;
 }): Promise<IExtendedStage> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/${stageId}`, {
+    const response = await fetchClient(`${apiUrl()}/stages/${stageId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ organizationId }),
     });
@@ -73,16 +70,13 @@ export async function deleteStage({
 
 export async function createStage({
   stage,
-  authToken,
 }: {
   stage: IExtendedStage;
-  authToken: string;
 }): Promise<IStage> {
-  const response = await fetch(`${apiUrl()}/stages`, {
+  const response = await fetchClient(`${apiUrl()}/stages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(stage),
   });
@@ -136,7 +130,6 @@ export const updateStage = async ({
   stage,
 }: {
   stage: IExtendedStage;
-  // authToken: string;
 }): Promise<IExtendedStage> => {
   const { _id, createdAt, recordingIndex, updatedAt, __v, ...rest } = stage;
   try {
@@ -198,7 +191,6 @@ export async function createMultistream({
 export async function deleteMultistream({
   streamId,
   targetId,
-  authToken,
   organizationId,
 }: {
   streamId: string;
@@ -207,11 +199,10 @@ export async function deleteMultistream({
   organizationId?: string;
 }): Promise<IExtendedStage> {
   try {
-    const response = await fetch(`${apiUrl()}/streams/multistream`, {
+    const response = await fetchClient(`${apiUrl()}/streams/multistream`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ streamId, targetId, organizationId }),
     });
