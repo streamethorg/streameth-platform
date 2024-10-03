@@ -94,7 +94,7 @@ export default class OrganizationService {
     return users;
   }
 
-  async addOrgMembers(organizationId:string, email:string){
+  async addOrgMember(organizationId:string, email:string){
     await this.get(organizationId);
     await User.findOneAndUpdate(
       { email },
