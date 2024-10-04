@@ -5,6 +5,7 @@ import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
+import { generateId } from '@utils/util';
 import UserService from './user.service';
 
 export default class OrganizationService {
@@ -17,7 +18,7 @@ export default class OrganizationService {
   }
   async create(data: IOrganization): Promise<IOrganization> {
     const findOrg = await this.controller.store.findOne(
-      { name: data.name },
+      { slug: generateId(data.name) },
       this.path,
     );
     if (findOrg) throw new HttpException(409, 'Organization already exists');
