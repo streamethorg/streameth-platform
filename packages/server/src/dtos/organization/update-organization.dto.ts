@@ -18,9 +18,9 @@ export class UpdateOrganizationDto {
   @IsEmail()
   email!: string;
 
-  @IsOptional()
   @IsString()
-  walletAddress: string;
+  @IsEmail()
+  address: string;
 
   @IsOptional()
   @IsString()

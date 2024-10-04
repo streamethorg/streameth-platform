@@ -6,9 +6,6 @@ export const removeStage = async (
   context: BrowserContext,
   organization: IOrganization
 ) => {
-  const cookies = await context.cookies();
-  const authtoken =
-    cookies.find((cookie) => cookie.name === 'user-session')?.value || '';
   const stages = await fetchStages({
     organizationId: organization._id?.toString() || '',
   });
@@ -17,7 +14,6 @@ export const removeStage = async (
     await deleteStage({
       stageId: stage._id!,
       organizationId: organization._id?.toString() || '',
-      authToken: authtoken,
     });
 
     console.log('Removed stage');

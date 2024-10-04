@@ -1,12 +1,11 @@
+import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
-import { config } from '@config';
-import { isEthereumAddress } from '@utils/util';
-import privy from '@utils/privy';
+import { generateId } from '@utils/util';
 import UserService from './user.service';
 
 export default class OrganizationService {
@@ -19,7 +18,7 @@ export default class OrganizationService {
   }
   async create(data: IOrganization): Promise<IOrganization> {
     const findOrg = await this.controller.store.findOne(
-      { name: data.name },
+      { slug: generateId(data.name) },
       this.path,
     );
     if (findOrg) throw new HttpException(409, 'Organization already exists');
@@ -28,9 +27,9 @@ export default class OrganizationService {
       data,
       this.path,
     );
-    const wallets = [...config.wallets.trim().split(','), data.walletAddress];
+    const emails = [...config.wallets.trim().split(','), data.address];
     await User.updateMany(
-      { walletAddress: { $in: wallets } },
+      { email: { $in: emails } },
       { $addToSet: { organizations: createOrg._id } },
     );
     return createOrg;
@@ -85,52 +84,29 @@ export default class OrganizationService {
   }
 
   async getOrgMembers(organizationId: string): Promise<Array<IUser>> {
-    const walletAddresses = config.wallets.trim().split(',');
+    const emails = config.wallets.trim().split(',');
     const users = await User.find(
       {
         organizations: organizationId,
-        walletAddress: { $nin: walletAddresses },
+        email: { $nin: emails },
       },
       { did: 0 },
     );
     return users;
   }
 
-  async addOrgMember(organizationId: string, address: string) {
+  async addOrgMember(organizationId: string, email: string) {
     await this.get(organizationId);
-    const isWalletAddress = isEthereumAddress(address);
-    let walletAddress: string = '';
-    if (isWalletAddress) walletAddress = address;
-    if (!isWalletAddress) {
-      let user = await privy.getUserByEmail(address);
-      if (!user) {
-        let newAccount = await privy.importUser({
-          linkedAccounts: [
-            //@ts-ignore
-            {
-              type: 'email',
-              address: address,
-            },
-          ],
-          createEmbeddedWallet: true,
-        });
-        walletAddress = newAccount.wallet.address;
-        await this.userService.create({
-          did: newAccount.id,
-          walletAddress: newAccount.wallet.address,
-        });
-      } else walletAddress = user.wallet.address;
-    }
     await User.findOneAndUpdate(
-      { walletAddress: walletAddress },
+      { email },
       { $addToSet: { organizations: organizationId } },
     );
   }
 
-  async deleteOrgMember(organizationId: string, walletAddress: string) {
+  async deleteOrgMember(organizationId: string, email: string) {
     await this.get(organizationId);
     await User.findOneAndUpdate(
-      { walletAddress: walletAddress },
+      { email },
       { $pull: { organizations: organizationId } },
     );
   }

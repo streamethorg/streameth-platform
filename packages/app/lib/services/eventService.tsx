@@ -1,4 +1,3 @@
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 import { apiUrl } from '@/lib/utils/utils';
 import {
   IEvent,
@@ -6,6 +5,7 @@ import {
 } from 'streameth-new-server/src/interfaces/event.interface';
 import { fetchOrganization } from './organizationService';
 import { IExtendedEvent } from '../types';
+import { fetchClient } from './fetch-client';
 
 export async function fetchEvents({
   organizationId,
@@ -80,17 +80,14 @@ export async function fetchEvent({
 
 export const createEvent = async ({
   event,
-  authToken,
 }: {
   event: IEvent;
-  authToken: string;
 }): Promise<IEventModel> => {
   try {
-    const response = await fetch(`${apiUrl()}/events`, {
+    const response = await fetchClient(`${apiUrl()}/events`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(event),
     });
@@ -107,17 +104,14 @@ export const createEvent = async ({
 
 export const updateEvent = async ({
   event,
-  authToken,
 }: {
   event: IExtendedEvent;
-  authToken: string;
 }): Promise<IEventModel> => {
   const modifiedObject = (({ _id, ...rest }) => rest)(event);
-  const response = await fetch(`${apiUrl()}/events/${event._id}`, {
+  const response = await fetchClient(`${apiUrl()}/events/${event._id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(modifiedObject),
   });
@@ -130,18 +124,15 @@ export const updateEvent = async ({
 export const deleteEvent = async ({
   eventId,
   organizationId,
-  authToken,
 }: {
   eventId: string;
   organizationId: string;
-  authToken: string;
 }): Promise<IEventModel> => {
   try {
-    const response = await fetch(`${apiUrl()}/events/${eventId}`, {
+    const response = await fetchClient(`${apiUrl()}/events/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ organizationId }),
     });
@@ -159,17 +150,14 @@ export const deleteEvent = async ({
 export const syncEventImport = async ({
   eventId,
   organizationId,
-  authToken,
 }: {
   eventId: string;
   organizationId: string;
-  authToken: string;
 }): Promise<IEventModel> => {
-  const response = await fetch(`${apiUrl()}/events/import/${eventId}`, {
+  const response = await fetchClient(`${apiUrl()}/events/import/${eventId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify({ organizationId }),
   });

@@ -2,6 +2,7 @@ import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedStage } from '../types';
 import { Session, Stream } from 'livepeer/dist/models/components';
+import { fetchClient } from './fetch-client';
 
 export async function fetchStage({
   stage,
@@ -29,7 +30,7 @@ export async function fetchStages({
   organizationId: string;
 }): Promise<IExtendedStage[]> {
   try {
-    const stages = await fetch(
+    const stages = await fetchClient(
       `${apiUrl()}/stages/organization/${organizationId}`,
       {
         cache: 'no-cache',
@@ -46,18 +47,15 @@ export async function fetchStages({
 export async function deleteStage({
   stageId,
   organizationId,
-  authToken,
 }: {
   stageId: string;
   organizationId: string;
-  authToken: string;
 }): Promise<IExtendedStage> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/${stageId}`, {
+    const response = await fetchClient(`${apiUrl()}/stages/${stageId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ organizationId }),
     });
@@ -73,16 +71,13 @@ export async function deleteStage({
 
 export async function createStage({
   stage,
-  authToken,
 }: {
   stage: IExtendedStage;
-  authToken: string;
 }): Promise<IStage> {
-  const response = await fetch(`${apiUrl()}/stages`, {
+  const response = await fetchClient(`${apiUrl()}/stages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(stage),
   });
@@ -134,18 +129,15 @@ export async function fetchOrganizationStages({
 
 export const updateStage = async ({
   stage,
-  authToken,
 }: {
   stage: IExtendedStage;
-  authToken: string;
 }): Promise<IExtendedStage> => {
   const { _id, createdAt, recordingIndex, updatedAt, __v, ...rest } = stage;
   try {
-    const response = await fetch(`${apiUrl()}/stages/${_id}`, {
+    const response = await fetchClient(`${apiUrl()}/stages/${_id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(rest),
     });
@@ -165,21 +157,18 @@ export async function createMultistream({
   streamId,
   targetURL,
   targetStreamKey,
-  authToken,
   organizationId,
 }: {
   name: string;
   streamId: string;
   targetStreamKey: string;
   targetURL: string;
-  authToken: string;
   organizationId?: string;
 }): Promise<{ message: string; status: string }> {
-  const response = await fetch(`${apiUrl()}/streams/multistream`, {
+  const response = await fetchClient(`${apiUrl()}/streams/multistream`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify({
       name,
@@ -200,20 +189,17 @@ export async function createMultistream({
 export async function deleteMultistream({
   streamId,
   targetId,
-  authToken,
   organizationId,
 }: {
   streamId: string;
   targetId: string;
-  authToken: string;
   organizationId?: string;
 }): Promise<IExtendedStage> {
   try {
-    const response = await fetch(`${apiUrl()}/streams/multistream`, {
+    const response = await fetchClient(`${apiUrl()}/streams/multistream`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ streamId, targetId, organizationId }),
     });
@@ -253,13 +239,11 @@ export async function createSocialLivestreamStage({
   socialId,
   socialType,
   organizationId,
-  authToken,
 }: {
   stageId: string;
   socialId: string;
   socialType: string;
   organizationId: string;
-  authToken: string;
 }): Promise<{
   error: { details: string };
   data: {
@@ -268,11 +252,10 @@ export async function createSocialLivestreamStage({
   };
 }> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/livestream`, {
+    const response = await fetchClient(`${apiUrl()}/stages/livestream`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ stageId, socialId, socialType, organizationId }),
     });
@@ -295,17 +278,14 @@ export async function createSocialLivestreamStage({
 
 export async function getHlsUrl({
   url,
-  authToken,
 }: {
   url: string;
-  authToken: string;
 }): Promise<{ type: string; url: string }> {
   try {
-    const response = await fetch(`${apiUrl()}/streams/hls`, {
+    const response = await fetchClient(`${apiUrl()}/streams/hls`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ url }),
     });
@@ -328,16 +308,13 @@ export async function getHlsUrl({
 
 export async function createHlsStage({
   hlsStage,
-  authToken,
 }: {
   hlsStage: IStage;
-  authToken: string;
 }): Promise<IStage> {
-  const response = await fetch(`${apiUrl()}/stages/hls`, {
+  const response = await fetchClient(`${apiUrl()}/stages/hls`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(hlsStage),
   });

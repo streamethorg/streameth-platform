@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateOrganizationForm from '../../(home)/components/CreateOrganizationForm';
-import { studioPageParams } from '@/lib/types';
+import { IExtendedUser, studioPageParams } from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import {
   Card,
@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { fetchUserAction } from '@/lib/actions/users';
 
 const Settings = async ({
   params,
@@ -21,7 +22,7 @@ const Settings = async ({
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   });
-
+  const userData: IExtendedUser = await fetchUserAction();
   if (!organization) return null;
 
   return (
@@ -35,6 +36,7 @@ const Settings = async ({
         </CardHeader>
         <CardContent>
           <CreateOrganizationForm
+            userAddress={userData?.email!}
             disableName={true}
             organization={organization}
           />

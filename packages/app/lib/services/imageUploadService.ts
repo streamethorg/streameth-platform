@@ -1,19 +1,16 @@
 import { apiUrl } from '../utils/utils';
+import { fetchClient } from './fetch-client';
 
 export const imageUpload = async ({
   data,
-  authToken,
 }: {
   data: FormData;
-  authToken: string;
 }): Promise<string> => {
   try {
-    const response = await fetch(`${apiUrl()}/upload`, {
+    const response = await fetchClient(`${apiUrl()}/upload`, {
       method: 'POST',
       cache: 'no-cache',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
+      headers: {},
       body: data,
     });
 

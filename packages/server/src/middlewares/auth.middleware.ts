@@ -23,7 +23,7 @@ export const expressAuthentication = async (
     }
     try {
       const decoded: any = jwt.verify(token, config.jwt.secret);
-      const user = await User.findOne({ walletAddress: decoded.id });
+      const user = await User.findOne({ did: decoded.id });
       if (!user) {
         throw new Error('Authentication Failed/Invalid Token');
       }

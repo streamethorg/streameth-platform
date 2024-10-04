@@ -22,7 +22,6 @@ export interface IOrganization {
   accentColor?: string;
   slug?: string;
   banner?: string;
-  walletAddress?: string;
   address?: string;
   socials?: ISocials[];
 }

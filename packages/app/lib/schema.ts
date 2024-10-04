@@ -152,6 +152,7 @@ const blacklistedPatterns = [
   /[\x00-\x1F\x7F]/, // Control characters
   /create/, // 'create'
   /admin/i, // 'admin' case-insensitive
+  /streameth/i, // 'streameth' case-insensitive
   /root/i, // 'root' case-insensitive
   /<script>/i, // '<script>' case-insensitive
   /<img>/i, // '<img>' case-insensitive
@@ -177,6 +178,7 @@ export const organizationSchema = z.object({
     .max(400, { message: 'Description is too long' })
     .optional(),
   email: z.string().email().min(1, 'Email is required'),
+  address: z.string().email(),
   // url: z.string().optional(),
 });
 

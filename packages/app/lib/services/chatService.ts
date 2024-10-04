@@ -1,6 +1,7 @@
 import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
 import { IExtendedChat } from '../types';
 import { apiUrl } from '../utils/utils';
+import { fetchClient } from './fetch-client';
 
 export async function fetchChat({
   stageId,
@@ -28,18 +29,14 @@ export async function fetchChat({
 
 export const createChat = async ({
   chat,
-  authToken,
 }: {
   chat: IChat;
-  authToken: string;
 }): Promise<IExtendedChat> => {
-  console.log('createChat', chat);
   try {
-    const response = await fetch(`${apiUrl()}/chats`, {
+    const response = await fetchClient(`${apiUrl()}/chats`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(chat),
     });

@@ -1,5 +1,5 @@
 'use server';
-
+// deprecated
 import { cookies } from 'next/headers';
 
 export async function storeSession({

@@ -14,13 +14,8 @@ import GoogleSheetService from '@/lib/services/googleSheetService';
 import GoogleDriveService from '@/lib/services/googleDriveService';
 
 export const createEventAction = async ({ event }: { event: IEvent }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
   const response = await createEvent({
     event: { ...event, unlisted: true },
-    authToken,
   });
 
   if (!response) {
@@ -35,11 +30,6 @@ export const updateEventAction = async ({
 }: {
   event: IExtendedEvent;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   // TODO
   // @ts-ignore
   delete event.createdAt;
@@ -50,7 +40,6 @@ export const updateEventAction = async ({
 
   const response = await updateEvent({
     event: { ...event },
-    authToken,
   });
   if (!response) {
     throw new Error('Error updating event');
@@ -66,16 +55,9 @@ export const deleteEventAction = async ({
   eventId: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await deleteEvent({
     eventId,
     organizationId,
-    authToken,
   });
   if (!response) {
     throw new Error('Error deleting event');
@@ -127,15 +109,9 @@ export const syncEventImportAction = async ({
   eventId: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await syncEventImport({
     eventId,
     organizationId,
-    authToken,
   });
   if (!response) {
     throw new Error('Error syncing event');
@@ -150,10 +126,6 @@ export const createGoogleSheetAction = async ({
   eventName: string;
 }) => {
   const templateSheetId = '1VaukqmViY09M_xuXT3GkaY6sAet5KeKZmjMuhT_C-kc';
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
 
   const googleDriveService = new GoogleDriveService();
   const sheetId = await googleDriveService.copyFile(templateSheetId, eventName);

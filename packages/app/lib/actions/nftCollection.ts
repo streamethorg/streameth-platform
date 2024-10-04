@@ -14,14 +14,8 @@ export const createNFTCollectionAction = async ({
 }: {
   nftCollection: INftCollection;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await createNFTCollection({
     nftCollection: nftCollection,
-    authToken,
   });
 
   if (!response) {
@@ -37,14 +31,8 @@ export const updateNFTCollectionAction = async ({
 }: {
   collection: IExtendedNftCollections;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await updateNFTCollection({
     collection: { ...collection },
-    authToken,
   });
   if (!response) {
     throw new Error('Error updating collection');
@@ -58,14 +46,8 @@ export const generateNFTCollectionMetadataAction = async ({
 }: {
   nftCollection: INftCollection;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await generateNFTCollectionMetadata({
     nftCollection: nftCollection,
-    authToken,
   });
 
   if (!response) {

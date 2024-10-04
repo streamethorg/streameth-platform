@@ -83,9 +83,6 @@
 					"banner": {
 						"type": "string"
 					},
-					"walletAddress": {
-						"type": "string"
-					},
 					"address": {
 						"type": "string"
 					},
@@ -113,9 +110,6 @@
 			},
 			"IUser": {
 				"properties": {
-					"walletAddress": {
-						"type": "string"
-					},
 					"organizations": {
 						"items": {
 							"$ref": "#/components/schemas/IOrganization"
@@ -129,6 +123,9 @@
 						"type": "string"
 					},
 					"did": {
+						"type": "string"
+					},
+					"email": {
 						"type": "string"
 					}
 				},
@@ -2778,9 +2775,6 @@
 					"banner": {
 						"type": "string"
 					},
-					"walletAddress": {
-						"type": "string"
-					},
 					"address": {
 						"type": "string"
 					}
@@ -2831,9 +2825,6 @@
 					"banner": {
 						"type": "string"
 					},
-					"walletAddress": {
-						"type": "string"
-					},
 					"address": {
 						"type": "string"
 					}
@@ -2842,7 +2833,7 @@
 					"name",
 					"email",
 					"logo",
-					"walletAddress"
+					"address"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -2861,7 +2852,7 @@
 					"email": {
 						"type": "string"
 					},
-					"walletAddress": {
+					"address": {
 						"type": "string"
 					},
 					"banner": {
@@ -2878,7 +2869,7 @@
 					"name",
 					"logo",
 					"email",
-					"walletAddress"
+					"address"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -2889,6 +2880,9 @@
 						"type": "string"
 					}
 				},
+				"required": [
+					"address"
+				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
@@ -2935,18 +2929,6 @@
 				],
 				"type": "object",
 				"additionalProperties": false
-			},
-			"Pick_CreateOrganizationDto.walletAddress_": {
-				"properties": {
-					"walletAddress": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"walletAddress"
-				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"NftCollectionType": {
 				"enum": [
@@ -4116,25 +4098,6 @@
 				],
 				"type": "object",
 				"additionalProperties": false
-			},
-			"IStandardResponse_boolean_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"type": "boolean"
-					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -4171,11 +4134,7 @@
 				"tags": [
 					"User"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [
 					{
 						"in": "path",
@@ -6142,7 +6101,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.walletAddress_"
+								"$ref": "#/components/schemas/Pick_CreateOrganizationDto.address_"
 							}
 						}
 					}
@@ -7197,7 +7156,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_boolean_"
+									"$ref": "#/components/schemas/IStandardResponse_void_"
 								}
 							}
 						}
@@ -7219,6 +7178,38 @@
 						}
 					}
 				}
+			}
+		},
+		"/auth/token": {
+			"get": {
+				"operationId": "GetTokenPayload",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IUser_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get token",
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "Authorization",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},
