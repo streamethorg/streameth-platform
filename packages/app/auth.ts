@@ -54,10 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               token: token.access_token,
             }),
           });
-          const data = await response.json();
-
-          if (data.data === false) {
-            // Token is invalid or expired, log out the user
+          if (!response.ok) {
             await signOut({ redirect: false });
             return session;
           }
