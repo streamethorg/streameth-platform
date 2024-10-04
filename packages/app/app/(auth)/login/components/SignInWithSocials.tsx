@@ -2,14 +2,15 @@
 
 import { signIn } from 'next-auth/react';
 import { Button } from '../../../../components/ui/button';
-import { SiApple, SiGoogle } from 'react-icons/si';
+import { SiGoogle } from 'react-icons/si';
 
-const SignInWithSocials = () => {
-  const handleOnClick = (provider: 'google' | 'github') => {
+const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
+  const handleOnClick = (provider: 'google') => {
     signIn(provider, {
-      callbackUrl: '/studio',
+      callbackUrl: callbackUrl,
     });
   };
+
   return (
     <div className="flex w-full flex-col space-y-4">
       <Button
@@ -19,15 +20,6 @@ const SignInWithSocials = () => {
       >
         <SiGoogle className="h-5 w-5" />
         Continue with Google
-      </Button>
-
-      <Button
-        onClick={() => handleOnClick('github')}
-        className="flex w-full flex-row rounded-xl border bg-black text-white"
-        size="lg"
-      >
-        <SiApple className="h-5 w-5" />
-        <p className="mx-2">Continue with Apple</p>
       </Button>
     </div>
   );

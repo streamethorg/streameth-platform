@@ -45,7 +45,7 @@ const DeleteTeamMember = ({
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button variant={'outline'}>
           <Trash2 className="h-5 w-5 text-destructive" />
         </Button>

@@ -11,7 +11,13 @@ import Image from 'next/image';
 import LoginBackground from '@/public/login-background.png';
 import SignInWithSocials from './components/SignInWithSocials';
 
-const LoginPage = () => {
+const LoginPage = ({
+  searchParams,
+}: {
+  searchParams: { callbackUrl?: string };
+}) => {
+  const callbackUrl = searchParams.callbackUrl || '/studio';
+
   return (
     <div className="flex h-screen w-screen flex-row">
       <div className="flex h-full w-1/2 flex-col items-center justify-center">
@@ -23,8 +29,7 @@ const LoginPage = () => {
             </CardDescription>
             <div className="flex flex-col divide-y gap-4">
               <div className="flex flex-col w-full items-center justify-center pt-[20px]">
-                <SignInWithSocials />
-                {/* <LoginForm /> */}
+                <SignInWithSocials callbackUrl={callbackUrl} />
               </div>
 
               <div className="pt-6 text-sm">

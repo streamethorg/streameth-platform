@@ -54,7 +54,10 @@ export default auth((req) => {
   }
 
   if (!isLoggedIn && isProtectedRoute) {
-    return NextResponse.redirect(new URL('/login', nextUrl));
+    const callbackUrl = encodeURIComponent(nextUrl.pathname + nextUrl.search);
+    return NextResponse.redirect(
+      new URL(`/login?callbackUrl=${callbackUrl}`, nextUrl)
+    );
   }
 
   // Call the middleware function for URL pattern matching
@@ -65,7 +68,7 @@ export default auth((req) => {
 
   // Allow users visiting public routes to access them
   return NextResponse.next();
-}); // Temporary type assertion
+});
 
 export const config = {
   matcher: [
