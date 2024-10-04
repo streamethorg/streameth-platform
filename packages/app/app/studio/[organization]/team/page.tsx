@@ -68,7 +68,7 @@ const Settings = async ({
 
                   <TableCell>
                     <DeleteTeamMember
-                      memberWalletAddress={email as string}
+                      memberEmail={email as string}
                       organizationId={organization._id}
                     />
                   </TableCell>

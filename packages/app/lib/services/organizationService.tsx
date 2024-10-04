@@ -148,13 +148,11 @@ export async function fetchOrganizationMembers({
 }
 
 export async function deleteTeamMember({
-  memberWalletAddress,
-
+  memberEmail,
   organizationId,
 }: {
-  memberWalletAddress: string;
-
-  organizationId?: string;
+  memberEmail: string;
+  organizationId: string;
 }): Promise<IExtendedUser> {
   try {
     const response = await fetchClient(
@@ -164,17 +162,18 @@ export async function deleteTeamMember({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ walletAddress: memberWalletAddress }),
+        body: JSON.stringify({ address: memberEmail }),
       }
     );
 
     if (!response.ok) {
-      throw 'Error deleting team member';
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error deleting team member');
     }
     return await response.json();
-  } catch (e) {
-    console.log('error in delete team member', e);
-    throw e;
+  } catch (error) {
+    console.error('Error in delete team member:', error);
+    throw error;
   }
 }
 

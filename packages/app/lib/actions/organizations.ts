@@ -68,21 +68,23 @@ export const addOrganizationMemberAction = async ({
 };
 
 export const deleteTeamMemberAction = async ({
-  memberWalletAddress,
+  memberEmail,
   organizationId,
 }: {
-  memberWalletAddress: string;
+  memberEmail: string;
   organizationId: string;
 }) => {
-  const response = await deleteTeamMember({
-    memberWalletAddress,
-    organizationId,
-  });
-  if (!response) {
-    throw new Error('Error deleting team member action');
+  try {
+    const response = await deleteTeamMember({
+      memberEmail,
+      organizationId,
+    });
+    revalidatePath('/studio');
+    return response;
+  } catch (error) {
+    console.error('Error deleting team member:', error);
+    throw new Error('Error deleting team member');
   }
-  revalidatePath('/studio');
-  return response;
 };
 
 export const deleteDestinationAction = async ({
