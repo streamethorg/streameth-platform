@@ -40,7 +40,7 @@ export default class AuthService {
       if (e.message === 'Invalid or expired token') {
         throw new HttpException(401, 'Invalid token');
       }
-      if(e.message === 'Token expired') {
+      if (e.message === 'Token expired') {
         throw new HttpException(401, 'Token expired');
       }
     }
@@ -60,13 +60,13 @@ export default class AuthService {
     }
   }
 
-  async getTokenPayload(token:string):Promise<IUser>{
-    try{
+  async getTokenPayload(token: string): Promise<IUser> {
+    try {
       const decoded = jwt.verify(token, config.jwt.secret);
       if (typeof decoded !== 'string' && 'id' in decoded) {
         return this.userService.findOne({ did: decoded.id });
       }
-    }catch(e){
+    } catch (e) {
       if (
         e instanceof jwt.TokenExpiredError ||
         e instanceof jwt.JsonWebTokenError
@@ -74,6 +74,5 @@ export default class AuthService {
         throw new HttpException(401, 'Invalid token');
       }
     }
-
   }
 }

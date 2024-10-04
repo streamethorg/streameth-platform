@@ -54,7 +54,7 @@ export const validateToken = async (
       if (e.message.includes('Invalid token signature')) {
         throw new Error('Invalid or expired token');
       }
-      if(e.message.includes('Token used too late')){
+      if (e.message.includes('Token used too late')) {
         throw new Error('Token expired');
       }
     }
