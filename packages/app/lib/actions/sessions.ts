@@ -44,14 +44,8 @@ export const createSessionAction = async ({
 }: {
   session: ISession;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await createSession({
     session,
-    authToken,
   });
   if (!response) {
     throw new Error('Error creating session');
@@ -72,17 +66,12 @@ export const createClipAction = async ({
   end: number;
   recordingId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await createClip({
     end,
     playbackId,
     sessionId,
     start,
-    authToken,
+
     recordingId,
   });
   if (!response) {
@@ -97,14 +86,8 @@ export const updateSessionAction = async ({
 }: {
   session: IExtendedSession | ISession;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await updateSession({
     session: session as IExtendedSession,
-    authToken,
   });
   if (!response) {
     throw new Error('Error updating session');
@@ -120,15 +103,9 @@ export const deleteSessionAction = async ({
   organizationId: string;
   sessionId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await deleteSession({
     sessionId,
     organizationId,
-    authToken,
   });
   if (!response) {
     throw new Error('Error updating session');
@@ -138,13 +115,8 @@ export const deleteSessionAction = async ({
 };
 
 export const createAssetAction = async ({ fileName }: { fileName: string }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   try {
-    const asset = await createAsset({ fileName, authToken });
+    const asset = await createAsset({ fileName });
     if (!asset) {
       return null;
     }
@@ -177,18 +149,12 @@ export const uploadSessionToSocialsAction = async ({
   socialId: string;
   type: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   try {
     const res = await uploadSessionToSocialsRequest({
       sessionId,
       organizationId,
       socialId,
       type,
-      authToken,
     });
     revalidatePath('/studio');
 
@@ -208,17 +174,11 @@ export const sessionImportAction = async ({
   organizationId: string;
   type: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   try {
     const res = await sessionImport({
       url,
       organizationId,
       type,
-      authToken,
     });
     revalidatePath('/studio');
 
@@ -240,8 +200,7 @@ export const stageSessionImportAction = async ({
   type: string;
   stageId?: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken || !stageId) {
+  if (!stageId) {
     throw new Error('No user session found');
   }
 
@@ -250,7 +209,7 @@ export const stageSessionImportAction = async ({
       url,
       organizationId,
       type,
-      authToken,
+
       stageId,
     });
     revalidatePath('/studio');
@@ -269,15 +228,10 @@ export const saveSessionImportAction = async ({
   scheduleId: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   try {
     const res = await saveSessionImport({
       scheduleId,
-      authToken,
+
       organizationId,
     });
     revalidatePath('/studio');
@@ -296,16 +250,10 @@ export const generateTranscriptionActions = async ({
   sessionId: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   try {
     const res = await generateTranscriptions({
       sessionId,
       organizationId,
-      authToken,
     });
     revalidatePath('/studio');
 

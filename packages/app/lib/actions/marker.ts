@@ -1,5 +1,5 @@
 'use server';
-import { cookies } from 'next/headers';
+
 import { revalidatePath } from 'next/cache';
 import {
   createMarker,
@@ -12,14 +12,9 @@ import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { IExtendedMarker } from '../types';
 
 export const createMarkerAction = async ({ marker }: { marker: IMarker }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    return { error: 'No user session found' };
-  }
   try {
     const response = await createMarker({
       marker,
-      authToken,
     });
 
     if (!response) {
@@ -39,14 +34,8 @@ export const updateMarkersAction = async ({
 }: {
   markers: IExtendedMarker;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await updateMarkers({
     markers: { ...markers },
-    authToken,
   });
   if (!response) {
     throw new Error('Error updating markers');
@@ -62,14 +51,9 @@ export const updateMultipleMarkersAction = async ({
   organizationId: string;
   markers: IExtendedMarker[];
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
   const response = await updateMultipleMarkers({
     organizationId,
     markers,
-    authToken,
   });
   if (!response) {
     throw new Error('Error updating markers');
@@ -85,15 +69,9 @@ export const deleteMarkerAction = async ({
   markerId: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await deleteMarker({
     markerId,
     organizationId,
-    authToken,
   });
   if (!response) {
     throw new Error('Error deleting marker');
@@ -113,17 +91,12 @@ export const importMarkersAction = async ({
   type: string;
   url: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    return { error: 'No user session found' };
-  }
   try {
     const response = await importMarkers({
       stageId,
       organizationId,
       type,
       url,
-      authToken,
     });
     revalidatePath('/studio');
     return { data: response };

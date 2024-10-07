@@ -259,7 +259,11 @@ const PCNavBar = ({
             </Button>
           </Link>
         )}
-        {isStudio && <SignInUserButton />}
+        {isStudio && (
+          <Link href="/logout">
+            <Button>Sign out</Button>
+          </Link>
+        )}
       </div>
     </NavigationMenu>
   );

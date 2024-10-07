@@ -1,10 +1,10 @@
 import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import {
-  IsNotEmpty,
-  IsString,
-  IsEmail,
-  IsOptional,
   IsArray,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
 } from 'class-validator';
 
 export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
@@ -27,7 +27,7 @@ export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
 
   @IsNotEmpty()
   @IsString()
-  walletAddress: string;
+  address: string;
 
   @IsOptional()
   @IsString()
@@ -36,8 +36,6 @@ export class CreateOrganizationDto implements Omit<IOrganization, '_id'> {
   @IsOptional()
   @IsString()
   url?: string;
-
-  address?: string;
 
   @IsOptional()
   @IsArray()

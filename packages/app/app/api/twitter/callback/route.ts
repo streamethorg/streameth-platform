@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest, NextResponse } from 'next/server';
 import { createOAuth, getUserProfileImage } from '@/lib/utils/twitterAuth';
+import { fetchClient } from '@/lib/services/fetch-client';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -11,12 +12,12 @@ export async function GET(request: NextRequest) {
   const oauthVerifier = searchParams.get('oauth_verifier');
   const redirectUrl = decodeURIComponent(searchParams.get('redirectUrl')!);
   const organizationId = searchParams.get('organizationId');
-  const authToken = cookies().get('user-session')?.value;
+
   const GOOGLE_OAUTH_SECRET = process.env.GOOGLE_OAUTH_SECRET!;
   const oAuthSecret: any = JSON.parse(GOOGLE_OAUTH_SECRET);
   const originUrl = oAuthSecret.web.javascript_origins;
 
-  if (!oauthToken || !authToken) {
+  if (!oauthToken) {
     console.error('Twitter oauth token does not exist');
     return redirect(originUrl + redirectUrl);
   }
@@ -50,14 +51,13 @@ export async function GET(request: NextRequest) {
     // }
     // const userProfileImageUrl = await getUserProfileImage(screenName)
 
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/socials/${organizationId}`,
       {
         method: 'PUT',
         cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({
           type: 'twitter',

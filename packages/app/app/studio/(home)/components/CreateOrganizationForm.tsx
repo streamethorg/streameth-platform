@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -28,15 +28,18 @@ import { IExtendedOrganization } from '@/lib/types';
 
 interface CreateOrganizationFormProps {
   organization?: IExtendedOrganization;
+  userAddress: string;
   disableName?: boolean;
 }
 
 export default function CreateOrganizationForm({
   organization,
+  userAddress,
   disableName = false,
 }: CreateOrganizationFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [nameError, setNameError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
@@ -46,11 +49,13 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
+      address: userAddress,
     },
   });
 
   function onSubmit(values: z.infer<typeof organizationSchema>) {
     setIsLoading(true);
+    setNameError(null);
 
     if (organization) {
       updateOrganizationAction({
@@ -78,8 +83,12 @@ export default function CreateOrganizationForm({
         toast.success('Organization created');
         router.push(`/studio/${response.slug}`);
       })
-      .catch(() => {
-        toast.error('Error creating organization');
+      .catch((error) => {
+        if (error) {
+          setNameError('Organization name already taken');
+        } else {
+          toast.error('Error creating organization');
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -148,6 +157,11 @@ export default function CreateOrganizationForm({
                 <Input disabled={disableName} placeholder="Name" {...field} />
               </FormControl>
               <FormMessage />
+              {nameError && (
+                <p className="text-sm font-medium text-destructive mt-2">
+                  {nameError}
+                </p>
+              )}
             </FormItem>
           )}
         />
@@ -200,7 +214,7 @@ export default function CreateOrganizationForm({
                 <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
               </>
             ) : organization ? (
-              'Update'
+              'Update '
             ) : (
               'Create'
             )}

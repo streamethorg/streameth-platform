@@ -7,16 +7,17 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { deleteTeamMemberAction } from '@/lib/actions/organizations';
 
 const DeleteTeamMember = ({
-  memberWalletAddress,
+  memberEmail,
   organizationId,
 }: {
-  memberWalletAddress: string;
+  memberEmail: string;
   organizationId: string;
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -25,7 +26,7 @@ const DeleteTeamMember = ({
   const handleDeleteMember = async () => {
     setIsDeleting(true);
     await deleteTeamMemberAction({
-      memberWalletAddress,
+      memberEmail,
       organizationId,
     })
       .then((response) => {
@@ -45,12 +46,13 @@ const DeleteTeamMember = ({
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button variant={'outline'}>
           <Trash2 className="h-5 w-5 text-destructive" />
         </Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col items-center justify-center gap-5">
+        <DialogTitle>Delete Member</DialogTitle>
         <div className="rounded-full bg-destructive p-3">
           <Trash2 className="h-5 w-5 text-white" />
         </div>

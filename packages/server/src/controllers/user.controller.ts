@@ -16,7 +16,7 @@ import {
 export class UserController extends Controller {
   private userService = new UserService();
 
-  @Security('jwt')
+  // @Security('jwt')
   @SuccessResponse('200')
   @Get('{walletAddress}')
   async getUserById(

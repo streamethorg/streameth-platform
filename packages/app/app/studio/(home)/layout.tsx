@@ -4,11 +4,6 @@ import AuthorizationMessage from '@/components/authorization/AuthorizationMessag
 import Support from '@/components/misc/Support';
 
 const StudioLayout = async (props: { children: React.ReactNode }) => {
-  const isAuthorized = await CheckAuthorization();
-  if (!isAuthorized) {
-    return <AuthorizationMessage />;
-  }
-
   return (
     <div className="h-screen w-screen">
       <HomePageNavbar pages={[]} showLogo={true} showSearchBar={false} />

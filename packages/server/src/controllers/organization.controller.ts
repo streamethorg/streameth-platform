@@ -1,5 +1,4 @@
 import { CreateOrganizationDto } from '@dtos/organization/create-organization.dto';
-import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { UpdateOrganizationDto } from '@dtos/organization/update-organization.dto';
 import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
@@ -126,11 +125,11 @@ export class OrganizationController extends Controller {
   @Delete('/member/{organizationId}')
   async deleteOrgMember(
     @Path() organizationId: string,
-    @Body() body: Pick<CreateOrganizationDto, 'walletAddress'>,
+    @Body() body: Pick<CreateOrganizationDto, 'address'>,
   ): Promise<IStandardResponse<void>> {
     const org = await this.organizationService.deleteOrgMember(
       organizationId,
-      body.walletAddress,
+      body.address,
     );
     return SendApiResponse('memeber deleted', org);
   }

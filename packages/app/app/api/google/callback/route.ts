@@ -1,3 +1,4 @@
+import { fetchClient } from '@/lib/services/fetch-client';
 import {
   generateGoogleAccessToken,
   isStreamingEnabled,
@@ -14,13 +15,12 @@ export async function GET(request: NextRequest) {
   const state = searchParams.get('state');
   const decodedState = state ? JSON.parse(decodeURIComponent(state)) : '';
   const { redirectUrl, organizationId } = decodedState;
-  const authToken = cookies().get('user-session')?.value;
   const GOOGLE_OAUTH_SECRET = process.env.GOOGLE_OAUTH_SECRET!;
   const oAuthSecret: any = JSON.parse(GOOGLE_OAUTH_SECRET);
   const originUrl = oAuthSecret.web.javascript_origins;
 
   const parsedRedirectUrl = redirectUrl ? originUrl + redirectUrl : `/studio`;
-  // Temporary remove authToken check
+
   if (!code) {
     console.error('Google or auth token does not exist');
     return redirect(parsedRedirectUrl);
@@ -46,14 +46,13 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(new URL(parsedRedirectUrl, request.url));
     } else if (streamEnabled) {
       // Add new auth to streamETh server storage
-      const response = await fetch(
+      const response = await fetchClient(
         `${apiUrl()}/organizations/socials/${organizationId}`,
         {
           method: 'PUT',
           cache: 'no-cache',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify({
             type: 'youtube',

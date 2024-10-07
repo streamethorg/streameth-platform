@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { redirect } from 'next/navigation';
 
 const Studio = async () => {
-  const userData: IExtendedUser = await fetchUserAction({});
+  const userData: IExtendedUser = await fetchUserAction();
 
   if (userData?.organizations?.length === 1) {
     redirect(`/studio/${userData.organizations[0].slug}`);
@@ -66,7 +66,7 @@ const Studio = async () => {
               <CardTitle>Create an organization to get started</CardTitle>
             </CardHeader>
             <CardContent>
-              <CreateOrganizationForm />
+              <CreateOrganizationForm userAddress={userData?.email!} />
             </CardContent>
           </Card>
         )}

@@ -17,17 +17,10 @@ export const createOrganizationAction = async ({
 }: {
   organization: IOrganization;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  const walletAddress = cookies().get('user-address')?.value;
-  if (!authToken || !walletAddress) {
-    throw new Error('No user session or wallet address found');
-  }
   const response = await createOrganization({
     organization: {
       ...organization,
-      walletAddress: walletAddress,
     },
-    authToken,
   });
 
   if (!response) {
@@ -42,17 +35,10 @@ export const updateOrganizationAction = async ({
 }: {
   organization: IExtendedOrganization;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  const walletAddress = cookies().get('user-address')?.value;
-  if (!authToken || !walletAddress) {
-    throw new Error('No user session or wallet address found');
-  }
   const response = await updateOrganization({
     organization: {
       ...organization,
-      walletAddress: walletAddress,
     },
-    authToken,
   });
 
   if (!response) {
@@ -69,15 +55,9 @@ export const addOrganizationMemberAction = async ({
   organizationId: string;
   memberAddress: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session or wallet address found');
-  }
-
   const response = await addOrganizationMember({
     organizationId,
     memberAddress,
-    authToken,
   });
 
   if (!response) {
@@ -88,27 +68,23 @@ export const addOrganizationMemberAction = async ({
 };
 
 export const deleteTeamMemberAction = async ({
-  memberWalletAddress,
+  memberEmail,
   organizationId,
 }: {
-  memberWalletAddress: string;
+  memberEmail: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
+  try {
+    const response = await deleteTeamMember({
+      memberEmail,
+      organizationId,
+    });
+    revalidatePath('/studio');
+    return response;
+  } catch (error) {
+    console.error('Error deleting team member:', error);
+    throw new Error('Error deleting team member');
   }
-
-  const response = await deleteTeamMember({
-    memberWalletAddress,
-    organizationId,
-    authToken,
-  });
-  if (!response) {
-    throw new Error('Error deleting team member action');
-  }
-  revalidatePath('/studio');
-  return response;
 };
 
 export const deleteDestinationAction = async ({
@@ -118,15 +94,9 @@ export const deleteDestinationAction = async ({
   destinationId: string;
   organizationId: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await deleteDestination({
     destinationId,
     organizationId,
-    authToken,
   });
   if (!response) {
     throw new Error('Error deleting team member action');
