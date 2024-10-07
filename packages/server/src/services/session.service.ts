@@ -2,7 +2,11 @@ import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { RecordingSessionPayload } from '@interfaces/livepeer.webhook.interface';
-import { ISession, SessionType } from '@interfaces/session.interface';
+import {
+  ClippingStatus,
+  ISession,
+  SessionType,
+} from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IUploadSession } from '@interfaces/upload.session.interface';
 import Event from '@models/event.model';
@@ -47,7 +51,13 @@ export default class SessionService {
     }
     return this.controller.store.create(
       data.name,
-      { ...data, eventSlug: eventSlug, eventId: eventId, stageId: stageId },
+      {
+        ...data,
+        eventSlug: eventSlug,
+        eventId: eventId,
+        stageId: stageId,
+        clippingStatus: ClippingStatus.pending,
+      },
       `${this.path}/${eventId}`,
     );
   }

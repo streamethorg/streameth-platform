@@ -15,6 +15,7 @@ import { IExtendedSession } from '@/lib/types';
 import { Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useState } from 'react';
+import { toast } from 'sonner';
 
 const DeleteAsset = ({
   session,
@@ -27,6 +28,7 @@ const DeleteAsset = ({
 }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {
     setLoading(true);
@@ -35,6 +37,8 @@ const DeleteAsset = ({
       sessionId: session._id,
     });
     setLoading(false);
+    setOpen(false);
+    toast.success('Asset deleted');
 
     if (href) {
       router.push(href);
@@ -42,7 +46,7 @@ const DeleteAsset = ({
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{TriggerComponent}</DialogTrigger>
       <DialogContent className="p-10">
         <DialogHeader className="mx-auto space-y-4">

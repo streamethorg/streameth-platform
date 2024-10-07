@@ -42,7 +42,6 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     },
     []
   );
-
   useEffect(() => {
     if (pendingUpdate) {
       const { uploadId, updatedSession } = pendingUpdate;
@@ -57,13 +56,13 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
         },
       }));
 
-      updateSessionAction({ session: updatedSession as IExtendedSession })
-        .then(() => {
-          console.log('Session updated successfully');
-        })
-        .catch((error) => {
-          console.error('Failed to update session:', error);
-        });
+      // updateSessionAction({ session: updatedSession as IExtendedSession })
+      //   .then(() => {
+      //     console.log('Session updated successfully');
+      //   })
+      //   .catch((error) => {
+      //     console.error('Failed to update session:', error);
+      //   });
 
       setOnEdit(null);
       setOpen(false);
