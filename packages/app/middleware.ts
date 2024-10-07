@@ -29,16 +29,19 @@ function matcher(request: NextRequest) {
 }
 
 const apiAuthPrefix = '/api/auth';
-const authRoutes = ['/auth/login'];
+const authRoutes = ['/auth/login', '/auth/auth-success', '/auth/auth-error'];
 const publicRoutes = ['/'];
-const protectedRoutes = '/studio';
+const studioPath = '/studio';
+const protectedRoutes = ['/data-request'];
 
 export default auth((req) => {
   const { nextUrl } = req;
 
   const isLoggedIn = !!req.auth;
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isProtectedRoute = nextUrl.pathname.startsWith(protectedRoutes);
+  const isProtectedRoute =
+    nextUrl.pathname.startsWith(studioPath) ||
+    protectedRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const DEFAULT_LOGIN_REDIRECT = '/studio';
 

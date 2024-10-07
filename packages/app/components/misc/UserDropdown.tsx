@@ -7,12 +7,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
 import { ConnectWalletButton } from './ConnectWalletButton';
-import { SignInUserButton } from './SignInUserButton';
+
 import { Button } from '../ui/button';
 import { IExtendedOrganization } from '@/lib/types';
 import { Label } from '@radix-ui/react-dropdown-menu';
+import Link from 'next/link';
 
 const UserDropdown = ({
   organization,
@@ -36,7 +36,9 @@ const UserDropdown = ({
           <DropdownMenuItem className="flex flex-col"></DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <SignInUserButton />
+            <Link href="/auth/logout">
+              <Button>Sign out</Button>
+            </Link>
           </DropdownMenuItem>
         </div>
       </DropdownMenuContent>
