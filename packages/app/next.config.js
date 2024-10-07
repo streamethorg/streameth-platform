@@ -145,7 +145,7 @@ let nextConfig = {
     return config;
   },
   images: {
-    unoptimized: false,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
