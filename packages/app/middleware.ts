@@ -29,7 +29,7 @@ function matcher(request: NextRequest) {
 }
 
 const apiAuthPrefix = '/api/auth';
-const authRoutes = ['/login'];
+const authRoutes = ['/auth/login'];
 const publicRoutes = ['/'];
 const protectedRoutes = '/studio';
 
@@ -56,7 +56,7 @@ export default auth((req) => {
   if (!isLoggedIn && isProtectedRoute) {
     const callbackUrl = encodeURIComponent(nextUrl.pathname + nextUrl.search);
     return NextResponse.redirect(
-      new URL(`/login?callbackUrl=${callbackUrl}`, nextUrl)
+      new URL(`/auth/login?callbackUrl=${callbackUrl}`, nextUrl)
     );
   }
 

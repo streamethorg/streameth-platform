@@ -13,7 +13,7 @@ import LoginBackground from '@/public/login-background.png';
 import Image from 'next/image';
 
 import Link from 'next/link';
-import SignInWithSocials from '../../app/(auth)/login/components/SignInWithSocials';
+import SignInWithSocials from '../../app/auth/login/components/SignInWithSocials';
 
 const AuthorizationMessage = () => {
   return (
@@ -66,11 +66,6 @@ const AuthorizationMessage = () => {
           layout="fill"
           objectFit="cover"
         />
-        {/* <img
-          src="/login-background.png"
-          alt="login background"
-          className="object-cover w-full h-full"
-        /> */}
       </div>
     </div>
   );
