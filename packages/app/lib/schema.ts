@@ -262,3 +262,7 @@ export const clipSchema = z.object({
   startClipTime: z.number().min(0, 'Start Clip Time is required'),
   endClipTime: z.number().min(0, 'End Clip Time is required'),
 });
+
+export const EmailSignInSchema = z.object({
+  email: z.string().email(),
+});

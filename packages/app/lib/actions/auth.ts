@@ -1,19 +1,16 @@
 'use server';
-// deprecated
-import { cookies } from 'next/headers';
 
-export async function storeSession({
-  token,
-  address,
-}: {
-  token: string;
-  address: string;
-}) {
-  cookies().set('user-session', token);
-  cookies().set('user-address', address);
-}
+import { revalidatePath } from 'next/cache';
+import { emailSignIn } from '../services/authService';
 
-export async function deleteSession() {
-  cookies().delete('user-session');
-  cookies().delete('user-address');
-}
+export const emailSignInAction = async ({ email }: { email: string }) => {
+  const response = await emailSignIn({
+    email,
+  });
+
+  if (!response) {
+    throw new Error('Error creating stage');
+  }
+  revalidatePath('/studio');
+  return response;
+};

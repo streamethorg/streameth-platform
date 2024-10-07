@@ -1,6 +1,5 @@
 import NextAuth, { DefaultSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import AppleProvider from 'next-auth/providers/apple';
 import { apiUrl, getTokenExpiration } from './lib/utils/utils';
 
 // Extend the built-in session type
@@ -16,10 +15,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: { params: { access_type: 'offline', prompt: 'consent' } },
-    }),
-    AppleProvider({
-      clientId: process.env.APPLE_CLIENT_ID,
-      clientSecret: process.env.APPLE_CLIENT_SECRET,
     }),
   ],
   callbacks: {
