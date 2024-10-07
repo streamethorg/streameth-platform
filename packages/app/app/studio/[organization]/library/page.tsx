@@ -78,12 +78,9 @@ const Library = async ({
     type: searchParams.type,
   });
 
-  let filteredSession = sessions.sessions.filter(
-    (session) => session.playbackId
-  );
-
+  // We do not need to refilter sessions since we are fetching onlyVideos
   const sortedSessions = sortArray(
-    filteredSession,
+    sessions.sessions,
     searchParams.sort
   ) as unknown as IExtendedSession[];
 

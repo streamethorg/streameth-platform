@@ -168,17 +168,18 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                   },
                 };
 
-                finishUpload({
-                  name: updatedUpload.session.name,
-                  description: updatedUpload.session.description,
-                  assetId: assetId,
-                  published: updatedUpload.session.published,
-                });
-
                 return {
                   ...prev,
                   [uploadId]: updatedUpload,
                 };
+              });
+
+              // Call finishUpload only once, after setUploads
+              finishUpload({
+                name: file.name,
+                description: 'No description',
+                assetId: assetId,
+                published: false,
               });
 
               resolve(assetId);
