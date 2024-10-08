@@ -8,3 +8,11 @@ export interface IMultiStream {
   socialType?: string;
   broadcastId?: string;
 }
+
+export interface ICreateClip {
+  sessionId: string;
+  organizationId: string;
+  m3u8Url: string;
+  start: string;
+  end: string;
+}

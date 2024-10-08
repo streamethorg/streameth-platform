@@ -19,7 +19,7 @@ async function getYoutubeClient(accessToken: string) {
 
 async function checkVideoProcessingStatus(
   videoId: string,
-  youtube: youtube_v3.Youtube
+  youtube: youtube_v3.Youtube,
 ): Promise<string> {
   const response = await youtube.videos.list({
     id: [videoId],
@@ -30,7 +30,7 @@ async function checkVideoProcessingStatus(
 
 async function downloadImage(
   url: string,
-  filePath: string
+  filePath: string,
 ): Promise<{ success: boolean; message?: string }> {
   return new Promise((resolve) => {
     https
@@ -62,7 +62,7 @@ async function downloadImage(
 async function setThumbnail(
   youtube: youtube_v3.Youtube,
   videoId: string,
-  filePath: string
+  filePath: string,
 ): Promise<void> {
   try {
     const response = await youtube.thumbnails.set({
@@ -86,7 +86,7 @@ export async function uploadToYouTube(
     coverImage: string;
   },
   videoFilePath: string,
-  accessToken: string
+  accessToken: string,
 ): Promise<void> {
   try {
     const youtube = await getYoutubeClient(accessToken);
@@ -114,7 +114,7 @@ export async function uploadToYouTube(
     while (processingStatus === 'processing') {
       processingStatus = await checkVideoProcessingStatus(
         insertResponse.data.id,
-        youtube
+        youtube,
       );
       if (processingStatus === 'processing') {
         await delay(180000); // Delay for 3 minutes

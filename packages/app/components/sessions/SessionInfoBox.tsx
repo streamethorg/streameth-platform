@@ -1,22 +1,22 @@
 'use server';
 
+import ViewCounts from '@/app/[organization]/components/ViewCounts';
+import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder';
 import { CardTitle } from '@/components/ui/card';
-import InfoBoxDescription from './InfoBoxDescription';
+import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
 import {
   IExtendedNftCollections,
   IExtendedSession,
+  IExtendedSpeaker,
   IExtendedStage,
 } from '@/lib/types';
-import ShareButton from '../misc/interact/ShareButton';
-import CollectVideButton from './CollectVideButton';
-import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
 import { formatDate } from '@/lib/utils/time';
-import ViewCounts from '@/app/[organization]/components/ViewCounts';
-import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder';
-import { IExtendedSpeaker } from '@/lib/types';
-import VideoDownloadClient from '../misc/VideoDownloadClient';
-import TranscriptionModal from './TranscriptionModal';
 import Timezone from '@/lib/utils/timezone';
+import ShareButton from '../misc/interact/ShareButton';
+import VideoDownloadClient from '../misc/VideoDownloadClient';
+import CollectVideButton from './CollectVideButton';
+import InfoBoxDescription from './InfoBoxDescription';
+import TranscriptionModal from './TranscriptionModal';
 
 const DesktopButtons = ({
   name,

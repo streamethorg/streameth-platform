@@ -26,7 +26,7 @@ function getAuthHeaders(
   token: { key: string; secret: string },
   url: string,
   method: string,
-  params?: {}
+  params?: {},
 ) {
   const payload = {
     url: url,
@@ -37,14 +37,14 @@ function getAuthHeaders(
     oauth.authorize(payload, {
       key: token.key,
       secret: token.secret,
-    })
+    }),
   );
 }
 
 function readChunk(
   filePath: string,
   start: number,
-  end: number
+  end: number,
 ): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
@@ -57,7 +57,7 @@ function readChunk(
 
 async function initializeUpload(
   filePath: string,
-  token: { key: string; secret: string }
+  token: { key: string; secret: string },
 ): Promise<string> {
   const params = {
     command: 'INIT',
@@ -82,7 +82,7 @@ async function uploadVideoChunks(
   filePath: string,
   mediaId: string,
   fileSize: number,
-  token: { key: string; secret: string }
+  token: { key: string; secret: string },
 ) {
   const chunkSize = 5 * 1024 * 1024; // 5 MB in bytes
   let segmentIndex = 0;
@@ -114,7 +114,7 @@ async function uploadVideoChunks(
 
 async function finalizeUpload(
   mediaId: string,
-  token: { key: string; secret: string }
+  token: { key: string; secret: string },
 ) {
   let status = 'pending';
   do {
@@ -127,7 +127,7 @@ async function finalizeUpload(
       token,
       TWITTER_UPLOAD_URL,
       'POST',
-      params
+      params,
     );
     const response = await fetch(TWITTER_UPLOAD_URL, {
       method: 'POST',
@@ -144,7 +144,7 @@ async function finalizeUpload(
       throw new Error('Media processing failed');
     } else {
       logger.info(
-        'Media processing is still pending, waiting for completion...'
+        'Media processing is still pending, waiting for completion...',
       );
       await delay(data.processing_info.check_after_secs * 1000);
     }
@@ -154,7 +154,7 @@ async function finalizeUpload(
 async function tweetWithMediaV2(
   mediaId: string,
   text: string,
-  token: { key: string; secret: string }
+  token: { key: string; secret: string },
 ) {
   try {
     const authHeader = getAuthHeaders(token, TWEET_URL_V2, 'POST');
@@ -187,7 +187,7 @@ export async function uploadToTwitter(
     coverImage: string;
   },
   videoFilePath: string,
-  token: { key: string; secret: string }
+  token: { key: string; secret: string },
 ): Promise<void> {
   const fileSize = fs.statSync(videoFilePath).size;
   const mediaId = await initializeUpload(videoFilePath, token);

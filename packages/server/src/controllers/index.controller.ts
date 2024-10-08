@@ -94,7 +94,7 @@ export class IndexController extends Controller {
     await this.sessionService.update(session._id.toString(), {
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
-      'playback.videOUrl': asset.playbackUrl,
+      'playback.videoUrl': asset.playbackUrl,
       'playback.format': asset.videoSpec?.format ?? '',
       'playback.duration': asset.videoSpec?.duration ?? 0,
       clippingStatus: ClippingStatus.completed,

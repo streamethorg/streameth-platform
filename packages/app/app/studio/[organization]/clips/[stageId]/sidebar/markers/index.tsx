@@ -1,17 +1,17 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import { CardTitle } from '@/components/ui/card';
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
-import { CardTitle } from '@/components/ui/card';
-import Marker from './Marker';
-import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
+import React, { useMemo, useState } from 'react';
+import { useClipContext } from '../../ClipContext';
+import Marker from './Marker';
 import PushMarkersButton from './PushMarkersButton';
 
 const Markers = ({ organizationId }: { organizationId: string }) => {

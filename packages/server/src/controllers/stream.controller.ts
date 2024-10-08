@@ -1,6 +1,8 @@
 import { CreateClipDto } from '@dtos/stream/create-clip.dto';
 import { CreateMultiStreamDto } from '@dtos/stream/create-multistream.dto';
 import { DeleteMultiStreamDto } from '@dtos/stream/delete-multistream.dto';
+import { ICreateClip } from '@interfaces/stream.interface';
+import StreamService from '@services/stream.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
   createAsset,
@@ -10,7 +12,6 @@ import {
   generateThumbnail,
   getAsset,
   getDownloadUrl,
-  getHlsUrl,
   getSessionMetrics,
   getStreamInfo,
   getStreamRecordings,
@@ -33,6 +34,7 @@ import {
 @Tags('Stream')
 @Route('streams')
 export class StreamController extends Controller {
+  private streamService = new StreamService();
   /**
    * @summary  Create Multistream
    */
@@ -171,7 +173,9 @@ export class StreamController extends Controller {
    */
   @SuccessResponse('201')
   @Post('thumbnail/generate')
-  async generateThumbnail(@Body() body: any): Promise<IStandardResponse<any>> {
+  async generateThumbnail(
+    @Body() body: { playbackId: string; assetId?: string },
+  ): Promise<IStandardResponse<any>> {
     const thumbnail = await generateThumbnail({
       assetId: body.assetId,
       playbackId: body.playbackId,
@@ -180,14 +184,14 @@ export class StreamController extends Controller {
   }
 
   /**
-   * @summary  Get HLS url
+   * @summary  Create clip 2.0
    */
   @SuccessResponse('201')
-  @Post('hls')
-  async getHls(
-    @Body() body: { url: string },
-  ): Promise<IStandardResponse<{ type: string; url: string }>> {
-    const hlsUrl = await getHlsUrl(body.url);
-    return SendApiResponse('HLS url generated', hlsUrl);
+  @Post('clip2')
+  async createClip2(
+    @Body() body: ICreateClip,
+  ): Promise<IStandardResponse<void>> {
+    await this.streamService.createClip(body);
+    return SendApiResponse('clipped');
   }
 }

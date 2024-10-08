@@ -1,9 +1,9 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { PlayIcon, PauseIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
-import { useClipContext } from '../ClipContext';
-import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
+import { formatTime } from '@/lib/utils/time';
+import { PauseIcon, PlayIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useClipContext } from '../ClipContext';
 
 const Controls = () => {
   const {
