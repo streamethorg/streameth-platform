@@ -22,6 +22,10 @@ export const config = {
   jwt: {
     secret: validatedEnv.JWT_SECRET,
     expiry: validatedEnv.JWT_EXPIRY,
+    magicLink: {
+      secret: validatedEnv.MAGIC_LINK_SECRET,
+      expiry: validatedEnv.MAGIC_LINK_EXPIRY,
+    },
   },
   telegram: {
     apiKey: validatedEnv.TELEGRAM_API_KEY,

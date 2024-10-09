@@ -16,6 +16,8 @@ const validateEnv = () => {
     CORS_CREDENTIALS: bool(),
     JWT_SECRET: str(),
     JWT_EXPIRY: str(),
+    MAGIC_LINK_SECRET: str(),
+    MAGIC_LINK_EXPIRY: str(),
     LIVEPEER_BASE_URL: str(),
     LIVEPEER_API_KEY: str(),
     WALLET_ADDRESSES: str(),

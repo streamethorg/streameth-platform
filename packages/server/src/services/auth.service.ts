@@ -4,7 +4,7 @@ import { AuthType, IAuth } from '@interfaces/auth.interface';
 import { IUser } from '@interfaces/user.interface';
 import EmailService from '@utils/mail.service';
 import { validateToken } from '@utils/oauth';
-import { replacePlaceHolders } from '@utils/util';
+import { generateDID, replacePlaceHolders } from '@utils/util';
 import crypto from 'crypto';
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
@@ -27,7 +27,7 @@ export default class AuthService {
     if (!user) {
       user = await this.userService.create({
         email: verifyToken.email,
-        did: verifyToken.userId,
+        did: generateDID(),
       });
     }
     let token = jwt.sign({ id: user.did }, config.jwt.secret, {
@@ -40,19 +40,17 @@ export default class AuthService {
     token: string;
     type: string;
     email?: string;
-  }): Promise<{ userId: string; email: string }> {
+  }): Promise<{ email: string }> {
     try {
       if (d.type === AuthType.email) {
-        await this.verifyToken(d.token);
+        await this.verifyMagicLinkToken(d.token);
         return {
-          userId: '',
           email: d.email,
         };
       }
       if (d.type === AuthType.google) {
         const authToken = await validateToken(d.token);
         return {
-          userId: authToken.userId,
           email: authToken.email,
         };
       }
@@ -63,6 +61,20 @@ export default class AuthService {
       if (e.message === 'Token expired') {
         throw new HttpException(401, 'Token expired');
       }
+    }
+  }
+
+  async verifyMagicLinkToken(token: string): Promise<void> {
+    try {
+      jwt.verify(token, config.jwt.magicLink.secret);
+    } catch (e) {
+      if (
+        e instanceof jwt.TokenExpiredError ||
+        e instanceof jwt.JsonWebTokenError
+      ) {
+        throw new HttpException(401, 'Token expired');
+      }
+      throw new HttpException(401, 'Invalid token');
     }
   }
 
@@ -101,15 +113,19 @@ export default class AuthService {
       path.join(__dirname, 'templates/login.html'),
       'utf8',
     );
-    const token = jwt.sign({ id: crypto.randomUUID() }, config.jwt.secret, {
-      expiresIn: '1d',
-    });
+    const token = jwt.sign(
+      { id: crypto.randomUUID() },
+      config.jwt.magicLink.secret,
+      {
+        expiresIn: config.jwt.magicLink.expiry,
+      },
+    );
     const htmlContent = replacePlaceHolders(emailTemplate, {
-      invitationLink: `${config.baseUrl}/auth/signin?token=${token}`,
+      link: `${config.baseUrl}/auth/magic-link?token=${token}&email=${email}`,
     });
     const user = await this.userService.findOne({ email });
     if (!user) {
-      await this.userService.create({ email, did: crypto.randomUUID() });
+      await this.userService.create({ email, did: generateDID() });
     }
     await this.mailService.simpleSend({
       from: '',
