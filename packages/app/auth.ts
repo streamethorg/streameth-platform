@@ -1,5 +1,6 @@
 import NextAuth, { DefaultSession } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import { apiUrl, getTokenExpiration } from './lib/utils/utils';
 
 // Extend the built-in session type
@@ -16,10 +17,50 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: { params: { access_type: 'offline', prompt: 'consent' } },
     }),
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        token: { label: 'Token', type: 'text' },
+      },
+      async authorize(credentials) {
+        const response = await fetch(`${apiUrl()}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: credentials.token,
+            type: 'email',
+            email: credentials.email,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Login failed or token expired'); // Throw an error for failed login
+        }
+
+        const data = await response.json();
+
+        const userData = {
+          email: credentials.email as string,
+          token: data.data?.token,
+        };
+        return userData;
+      },
+    }),
   ],
+  pages: {
+    signIn: '/auth/login',
+    signOut: '/auth/logout',
+    error: '/auth/auth-error',
+    verifyRequest: '/auth/magic-link',
+  },
   callbacks: {
     async jwt({ token, account, user }) {
-      if (account && user) {
+      if (account?.provider === 'credentials' && user) {
+        const userWithToken = user as { token: string }; // Type assertion
+        token.access_token = userWithToken.token;
+      }
+      if (account && account?.provider === 'google') {
         // Exchange the NextAuth token for backend JWT
         try {
           const response = await fetch(`${apiUrl()}/auth/login`, {
@@ -28,6 +69,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               token: account.id_token,
+              type: 'google',
             }),
           });
           const data = await response.json();

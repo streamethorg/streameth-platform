@@ -4087,14 +4087,44 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UserDto": {
+			"AuthType": {
+				"enum": [
+					"email",
+					"google"
+				],
+				"type": "string"
+			},
+			"AuthDto": {
 				"properties": {
 					"token": {
+						"type": "string"
+					},
+					"type": {
+						"$ref": "#/components/schemas/AuthType"
+					},
+					"email": {
 						"type": "string"
 					}
 				},
 				"required": [
 					"token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_unknown_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -7140,7 +7170,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserDto"
+								"$ref": "#/components/schemas/AuthDto"
 							}
 						}
 					}
@@ -7173,7 +7203,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UserDto"
+								"$ref": "#/components/schemas/AuthDto"
 							}
 						}
 					}
@@ -7210,6 +7240,46 @@
 						}
 					}
 				]
+			}
+		},
+		"/auth/magic-link": {
+			"post": {
+				"operationId": "SendMagicLink",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_unknown_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

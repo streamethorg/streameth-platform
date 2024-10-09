@@ -29,7 +29,12 @@ function matcher(request: NextRequest) {
 }
 
 const apiAuthPrefix = '/api/auth';
-const authRoutes = ['/auth/login', '/auth/auth-success', '/auth/auth-error'];
+const authRoutes = [
+  '/auth/login',
+  '/auth/auth-success',
+  '/auth/auth-error',
+  '/auth/magic-link',
+];
 const publicRoutes = ['/'];
 const studioPath = '/studio';
 const protectedRoutes = ['/data-request'];

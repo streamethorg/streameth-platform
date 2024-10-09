@@ -128,7 +128,7 @@ export default class AuthService {
       await this.userService.create({ email, did: generateDID() });
     }
     await this.mailService.simpleSend({
-      from: '',
+      from: 'noreply@streameth.org',
       recipient: email,
       subject: 'Login to Streameth',
       html: htmlContent,

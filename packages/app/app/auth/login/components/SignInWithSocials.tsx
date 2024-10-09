@@ -16,10 +16,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { EmailSignInSchema } from '@/lib/schema';
-import { emailSignInAction } from '@/lib/actions/auth';
+import { magicLinkSignInAction } from '@/lib/actions/auth';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
+  const [isSendingMagicLink, setIsSendingMagicLink] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof EmailSignInSchema>>({
     resolver: zodResolver(EmailSignInSchema),
@@ -35,9 +37,12 @@ const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
   };
 
   const onSubmit = async (values: z.infer<typeof EmailSignInSchema>) => {
+    setIsSendingMagicLink(true);
     try {
       // call magic link action
-      const response = await emailSignInAction({ email: values.email });
+      const response = await magicLinkSignInAction({
+        email: values.email.trim(),
+      });
       if (response) {
         router.push('/auth/auth-success');
       }
@@ -45,6 +50,7 @@ const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
       console.error(error);
       router.push('/auth/auth-error');
     }
+    setIsSendingMagicLink(false);
   };
 
   return (
@@ -87,7 +93,11 @@ const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="ml-auto w-4/5">
+          <Button
+            loading={isSendingMagicLink}
+            type="submit"
+            className="ml-auto w-4/5"
+          >
             Continue with email
           </Button>
         </form>

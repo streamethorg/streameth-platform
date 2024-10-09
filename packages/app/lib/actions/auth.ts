@@ -1,16 +1,15 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import { emailSignIn } from '../services/authService';
+import { magicLinkSignIn } from '../services/authService';
 
-export const emailSignInAction = async ({ email }: { email: string }) => {
-  const response = await emailSignIn({
+export const magicLinkSignInAction = async ({ email }: { email: string }) => {
+  const response = await magicLinkSignIn({
     email,
   });
 
   if (!response) {
-    throw new Error('Error creating stage');
+    throw new Error('Error sending magic link');
   }
-  revalidatePath('/studio');
+
   return response;
 };

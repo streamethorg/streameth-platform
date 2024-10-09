@@ -16,7 +16,7 @@ const AuthErrorPage = () => {
       <div className="flex h-full w-full md:w-1/2  flex-col items-center justify-center">
         <Card className="max-w-[480px] shadow-none">
           <CardHeader className="text-center lg:pb-0">
-            <CardTitle className="text-2xl">
+            <CardTitle className="text-2xl text-destructive">
               Oops, something went wrong.
             </CardTitle>
             <CardDescription></CardDescription>
