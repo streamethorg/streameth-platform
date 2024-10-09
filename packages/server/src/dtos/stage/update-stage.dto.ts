@@ -76,4 +76,8 @@ export class UpdateStageDto {
     m3u8Url: string;
     type: string;
   };
+
+  @IsOptional()
+  @IsString()
+  type?: string;
 }

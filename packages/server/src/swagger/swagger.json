@@ -1295,6 +1295,28 @@
 								"type": "array"
 							}
 						]
+					},
+					"source": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"m3u8Url": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"m3u8Url",
+							"url"
+						],
+						"type": "object"
+					},
+					"type": {
+						"type": "string"
 					}
 				},
 				"required": [
