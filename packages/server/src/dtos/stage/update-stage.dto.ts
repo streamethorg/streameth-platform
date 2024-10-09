@@ -1,4 +1,8 @@
-import { IPlugin, IStreamSettings } from '@interfaces/stage.interface';
+import {
+  IPlugin,
+  IStreamSettings,
+  StageType,
+} from '@interfaces/stage.interface';
 import {
   IsArray,
   IsBoolean,
@@ -79,5 +83,5 @@ export class UpdateStageDto {
 
   @IsOptional()
   @IsString()
-  type?: string;
+  type?: StageType;
 }

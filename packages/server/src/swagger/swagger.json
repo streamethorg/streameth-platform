@@ -1316,7 +1316,7 @@
 						"type": "object"
 					},
 					"type": {
-						"type": "string"
+						"$ref": "#/components/schemas/StageType"
 					}
 				},
 				"required": [

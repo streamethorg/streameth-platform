@@ -501,7 +501,7 @@ const models: TsoaRoute.Models = {
             "mintable": {"dataType":"boolean"},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
-            "type": {"dataType":"string"},
+            "type": {"ref":"StageType"},
         },
         "additionalProperties": false,
     },
