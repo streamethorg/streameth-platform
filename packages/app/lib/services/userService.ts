@@ -11,7 +11,9 @@ export async function fetchUser(): Promise<IExtendedUser | null> {
         'Content-Type': 'application/json',
       },
     });
-    return (await data.json()).data;
+    const responseData = await data.json();
+
+    return responseData.data;
   } catch (e) {
     console.log('error in fetchUser', e);
     throw e;

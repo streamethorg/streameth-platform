@@ -14,21 +14,27 @@ import SignInWithSocials from './components/SignInWithSocials';
 const LoginPage = ({
   searchParams,
 }: {
-  searchParams: { callbackUrl?: string };
+  searchParams: { callbackUrl?: string; error: string };
 }) => {
   const callbackUrl = searchParams.callbackUrl || '/studio';
+  const isOAuthError = searchParams.error === 'OAuthCallbackError';
 
   return (
     <div className="flex h-screen w-screen flex-row">
-      <div className="flex h-full w-1/2 flex-col items-center justify-center">
-        <Card className="max-w-[500px] shadow-none">
+      <div className="flex h-full w-full md:w-1/2  flex-col items-center justify-center">
+        <Card className="max-w-[480px] shadow-none">
           <CardHeader className="text-center">
             <CardTitle>Welcome to StreamETH</CardTitle>
-            <CardDescription>
-              Click the sign in button to connect to StreamETH
-            </CardDescription>
+            <CardDescription>Sign in to connect to StreamETH</CardDescription>
             <div className="flex flex-col divide-y gap-4">
               <div className="flex flex-col w-full items-center justify-center pt-[20px]">
+                {searchParams.error && (
+                  <div className="text-destructive text-sm pb-4">
+                    {isOAuthError
+                      ? 'Error logging in, please try again'
+                      : searchParams.error}
+                  </div>
+                )}
                 <SignInWithSocials callbackUrl={callbackUrl} />
               </div>
 
@@ -59,7 +65,7 @@ const LoginPage = ({
           </CardContent>
         </Card>
       </div>
-      <div className="relative h-full w-1/2 bg-primary">
+      <div className="relative h-full hidden md:block w-1/2 bg-primary">
         <Image
           quality={100}
           alt="login background"

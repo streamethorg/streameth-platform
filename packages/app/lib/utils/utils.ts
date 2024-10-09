@@ -397,3 +397,13 @@ export const getLiveStageSrcValue = ({
 }) => {
   return `https://link.storjshare.io/raw/juixm77hfsmhyslrxtycnqfmnlfq/catalyst-recordings-com/hls/${playbackId}/${recordingId}/output.m3u8`;
 };
+
+export const getTokenExpiration = (token: string): number | null => {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.exp;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+};

@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
 import { NavBarProps } from '@/lib/types';
-import { SignInUserButton } from '../misc/SignInUserButton';
+import { Button } from '../ui/button';
 
 const NavBarButton = ({
   isNavVisible,
@@ -90,7 +90,9 @@ export default function NavbarTop({
               setIsNavVisible={setMenuVisible}
             />
           )}
-          <SignInUserButton />
+          <Link href="/auth/logout">
+            <Button>Sign out</Button>
+          </Link>
         </div>
       </div>
     </NavigationMenu>
