@@ -68,4 +68,12 @@ export class UpdateStageDto {
   @IsOptional()
   @IsArray()
   nftCollections?: Types.ObjectId | string[];
+
+  @IsOptional()
+  @IsObject()
+  source?: {
+    url?: string;
+    m3u8Url?: string;
+    type?: string;
+  };
 }
