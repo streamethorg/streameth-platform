@@ -14,7 +14,6 @@ const validateEnv = () => {
     LOG_DIR: str(),
     CORS_ORIGIN: str(),
     CORS_CREDENTIALS: bool(),
-    CORS_PROXY_URL: str(),
     JWT_SECRET: str(),
     JWT_EXPIRY: str(),
     LIVEPEER_BASE_URL: str(),
@@ -53,6 +52,10 @@ const validateEnv = () => {
     GOOGLE_API_KEY: str(),
     SERVICE_ACCOUNT_PRIVATE_KEY: str(),
     SERVICE_ACCOUNT_EMAIL: str(),
+    MAIL_HOST: str(),
+    MAIL_PORT: port(),
+    MAIL_USER: str(),
+    MAIL_PASS: str(),
   });
 };
 

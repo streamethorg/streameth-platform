@@ -18,7 +18,6 @@ export const config = {
   cors: {
     origin: validatedEnv.CORS_ORIGIN,
     credentials: validatedEnv.CORS_CREDENTIALS,
-    host: validatedEnv.CORS_PROXY_URL,
   },
   jwt: {
     secret: validatedEnv.JWT_SECRET,
@@ -79,5 +78,11 @@ export const config = {
     apiKey: validatedEnv.GOOGLE_API_KEY,
     privateKey: validatedEnv.SERVICE_ACCOUNT_PRIVATE_KEY,
     accountEmail: validatedEnv.SERVICE_ACCOUNT_EMAIL,
+  },
+  mail: {
+    host: validatedEnv.MAIL_HOST,
+    port: validatedEnv.MAIL_PORT,
+    user: validatedEnv.MAIL_USER,
+    pass: validatedEnv.MAIL_PASS,
   },
 };
