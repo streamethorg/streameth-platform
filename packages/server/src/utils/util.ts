@@ -128,3 +128,11 @@ export const getStartAndEndTime = (
     end: endDate.valueOf(),
   };
 };
+
+export const replacePlaceHolders = (template, data) => {
+  let result = template;
+  for (const [key, value] of Object.entries(data)) {
+    result = result.replace(new RegExp(`{{${key}}}`, 'g'), value);
+  }
+  return result;
+};
