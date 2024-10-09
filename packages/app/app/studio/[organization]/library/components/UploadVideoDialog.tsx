@@ -9,73 +9,108 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import UploadVideoForm from './upload/UploadVideoForm';
-import { useState } from 'react';
-import UploadComplete from '@/lib/svg/UploadComplete';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useCallback } from 'react';
 import { LuFileUp } from 'react-icons/lu';
+import Dropzone from './upload/Dropzone';
+import UploadVideoForm from './upload/UploadVideoForm';
+import * as z from 'zod';
+import { sessionSchema } from '@/lib/schema';
+import { updateSessionAction } from '@/lib/actions/sessions';
+import { IExtendedSession } from '@/lib/types';
+
+type UploadStatus = {
+  progress: number;
+  session: z.infer<typeof sessionSchema>;
+};
+
+export type Uploads = {
+  [uploadId: string]: UploadStatus;
+};
 
 const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
   const [open, setOpen] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
-  const router = useRouter();
+  const [onEdit, setOnEdit] = useState<string | null>(null);
+  const [uploads, setUploads] = useState<Uploads>({});
+  const [pendingUpdate, setPendingUpdate] = useState<{
+    uploadId: string;
+    updatedSession: z.infer<typeof sessionSchema>;
+  } | null>(null);
 
-  const onFinish = () => {
-    setIsUploaded(true);
+  const handleSessionUpdate = useCallback(
+    (uploadId: string, updatedSession: z.infer<typeof sessionSchema>) => {
+      setPendingUpdate({ uploadId, updatedSession });
+    },
+    []
+  );
+  useEffect(() => {
+    if (pendingUpdate) {
+      const { uploadId, updatedSession } = pendingUpdate;
+      setUploads((prevUploads) => ({
+        ...prevUploads,
+        [uploadId]: {
+          ...prevUploads[uploadId],
+          session: {
+            ...prevUploads[uploadId].session,
+            ...updatedSession,
+          },
+        },
+      }));
 
-    setTimeout(() => {
-      setIsUploaded(false);
-    }, 10000);
-  };
+      // updateSessionAction({ session: updatedSession as IExtendedSession })
+      //   .then(() => {
+      //     console.log('Session updated successfully');
+      //   })
+      //   .catch((error) => {
+      //     console.error('Failed to update session:', error);
+      //   });
+
+      setOnEdit(null);
+      setOpen(false);
+      setPendingUpdate(null);
+    }
+  }, [pendingUpdate]);
+
+  const dialogContent =
+    onEdit && uploads[onEdit] ? (
+      <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
+        <DialogHeader>
+          <DialogTitle>Edit Asset</DialogTitle>
+          <DialogDescription>Change details of the asset</DialogDescription>
+        </DialogHeader>
+        <Separator />
+        <UploadVideoForm
+          session={uploads[onEdit].session}
+          onSessionUpdate={(updatedSession) =>
+            handleSessionUpdate(onEdit, updatedSession)
+          }
+        />
+      </DialogContent>
+    ) : (
+      <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
+        <DialogHeader>
+          <DialogTitle>Upload Asset</DialogTitle>
+          <DialogDescription>Upload a video to your library</DialogDescription>
+        </DialogHeader>
+        <Separator />
+        <Dropzone
+          setOnEdit={setOnEdit}
+          setOpen={setOpen}
+          uploads={uploads}
+          setUploads={setUploads}
+          organizationId={organizationId}
+        />
+      </DialogContent>
+    );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="flex w-fit flex-row items-center space-x-4 rounded-xl border bg-white p-2 pr-4 hover:bg-secondary">
-        <div className="rounded-xl border bg-primary p-4 text-white">
+      <DialogTrigger className="flex flex-row items-center p-2 pr-4 space-x-4 bg-white rounded-xl border w-fit hover:bg-secondary">
+        <div className="p-4 text-white rounded-xl border bg-primary">
           <LuFileUp size={25} />
         </div>
         <span className="text-sm">Upload Video</span>
       </DialogTrigger>
-      <DialogContent className="bg-white sm:max-h-[800px] sm:max-w-[525px]">
-        {isUploaded ? (
-          <>
-            <DialogHeader className="space-y-4 p-10">
-              <div className="mx-auto p-4">
-                <UploadComplete />
-              </div>
-              <div className="flex flex-col items-center space-y-2">
-                <DialogTitle>Video uploaded succesfully! 🎉</DialogTitle>
-                <DialogDescription>
-                  Your video is currently being processed. This could take
-                  several minutes.
-                </DialogDescription>
-              </div>
-            </DialogHeader>
-            <Button
-              variant={'secondary'}
-              className="mx-auto w-1/3 border-2"
-              onClick={() => router.refresh()}
-            >
-              Go back to Assets
-            </Button>
-          </>
-        ) : (
-          <>
-            <DialogHeader>
-              <DialogTitle>Upload Asset</DialogTitle>
-              <DialogDescription>
-                Upload a video to your library
-              </DialogDescription>
-            </DialogHeader>
-            <Separator />
-            <UploadVideoForm
-              organizationId={organizationId}
-              onFinish={onFinish}
-            />
-          </>
-        )}
-      </DialogContent>
+      {dialogContent}
     </Dialog>
   );
 };

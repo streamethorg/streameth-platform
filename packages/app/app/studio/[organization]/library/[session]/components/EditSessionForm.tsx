@@ -69,11 +69,14 @@ const EditSessionForm = ({
         type: session.type,
       },
     })
-      .then(() => toast.success('Session updated'))
+      .then(() => {
+        toast.success('Session updated');
+        form.reset(values); // Reset the form with the current values
+      })
       .catch(() => toast.error('Error updating session'))
       .finally(() => {
         setIsLoading(false);
-        router.push(`/studio/${organizationSlug}/library`);
+        router.refresh();
       });
   }
 

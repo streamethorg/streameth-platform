@@ -121,7 +121,7 @@ export const sessionSchema = z.object({
       message: 'Description is too long. The maximum length is 600 characters.',
     }),
   coverImage: z.string().optional(),
-  assetId: z.string().min(1, { message: 'Please upload a video.' }),
+  assetId: z.string().min(1, { message: 'Please upload a video.' }).optional(),
   published: z.boolean().default(false),
 });
 
@@ -152,6 +152,7 @@ const blacklistedPatterns = [
   /[\x00-\x1F\x7F]/, // Control characters
   /create/, // 'create'
   /admin/i, // 'admin' case-insensitive
+  /streameth/i, // 'streameth' case-insensitive
   /root/i, // 'root' case-insensitive
   /<script>/i, // '<script>' case-insensitive
   /<img>/i, // '<img>' case-insensitive
@@ -177,6 +178,7 @@ export const organizationSchema = z.object({
     .max(400, { message: 'Description is too long' })
     .optional(),
   email: z.string().email().min(1, 'Email is required'),
+  address: z.string().email(),
   // url: z.string().optional(),
 });
 

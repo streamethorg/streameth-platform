@@ -1,5 +1,5 @@
 'use server';
-import { cookies } from 'next/headers';
+
 import { createSupportTicket } from '../services/supportService';
 
 export const createSupportTicketAction = async ({
@@ -13,17 +13,11 @@ export const createSupportTicketAction = async ({
   email?: string;
   image?: string;
 }) => {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw new Error('No user session found');
-  }
-
   const response = await createSupportTicket({
     message,
     telegram,
     email,
     image,
-    authToken,
   });
 
   if (!response) {

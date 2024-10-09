@@ -3,8 +3,6 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { fetchUserAction } from '@/lib/actions/users';
 import SwitchOrganization from './components/SwitchOrganization';
-import AuthorizationMessage from '@/components/authorization/AuthorizationMessage';
-import CheckAuthorization from '@/components/authorization/CheckAuthorization';
 import { hasOrganization } from '@/lib/utils/utils';
 import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import Link from 'next/link';
@@ -18,11 +16,7 @@ const Layout = async ({
   children: React.ReactNode;
   params: studioPageParams['params'];
 }) => {
-  const isAuthorized = await CheckAuthorization();
-  if (!isAuthorized) {
-    return <AuthorizationMessage />;
-  }
-  const userData = await fetchUserAction({});
+  const userData = await fetchUserAction();
 
   return (
     <div className="flex h-screen w-screen flex-row">

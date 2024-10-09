@@ -6,20 +6,18 @@ import {
 import { IExtendedState } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { revalidatePath } from 'next/cache';
+import { fetchClient } from './fetch-client';
 
 export const createState = async ({
   state,
-  authToken,
 }: {
   state: IState;
-  authToken: string;
 }): Promise<IState> => {
   try {
-    const response = await fetch(`${apiUrl()}/states`, {
+    const response = await fetchClient(`${apiUrl()}/states`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(state),
     });

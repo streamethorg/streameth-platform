@@ -4,7 +4,7 @@ import { Upload } from 'tus-js-client';
 const uploadVideo = (
   video: File,
   url: string,
-  abortControllerRef: MutableRefObject<AbortController>,
+  abortControllerRef: AbortController,
   onProgress: (percentage: number) => void,
   onSuccess: () => void
 ) => {
@@ -31,8 +31,8 @@ const uploadVideo = (
     },
   });
 
-  abortControllerRef.current = new AbortController();
-  abortControllerRef.current.signal.addEventListener('abort', () => {
+  //abortControllerRef.current = new AbortController();
+  abortControllerRef.signal.addEventListener('abort', () => {
     console.log('Aborting upload');
     upload.abort();
   });

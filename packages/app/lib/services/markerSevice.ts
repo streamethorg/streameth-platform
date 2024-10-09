@@ -1,21 +1,18 @@
 import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedMarker } from '../types';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
+import { fetchClient } from './fetch-client';
 
 // create marker for a stage
 export async function createMarker({
   marker,
-  authToken,
 }: {
   marker: IMarker;
-  authToken: string;
 }): Promise<IExtendedMarker> {
-  console.log('markers', JSON.stringify(marker));
-  const response = await fetch(`${apiUrl()}/markers`, {
+  const response = await fetchClient(`${apiUrl()}/markers`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(marker),
   });
@@ -29,19 +26,16 @@ export async function createMarker({
 // update marker
 export const updateMarkers = async ({
   markers,
-  authToken,
 }: {
   markers: IExtendedMarker;
-  authToken: string;
 }): Promise<IExtendedMarker> => {
   const { _id, ...rest } = markers;
 
   try {
-    const response = await fetch(`${apiUrl()}/markers/${markers._id}`, {
+    const response = await fetchClient(`${apiUrl()}/markers/${markers._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(rest),
     });
@@ -59,17 +53,14 @@ export const updateMarkers = async ({
 export const updateMultipleMarkers = async ({
   organizationId,
   markers,
-  authToken,
 }: {
   organizationId: string;
   markers: IExtendedMarker[];
-  authToken: string;
 }): Promise<IExtendedMarker[]> => {
-  const response = await fetch(`${apiUrl()}/markers/bulk`, {
+  const response = await fetchClient(`${apiUrl()}/markers/bulk`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify({
       organizationId,
@@ -114,18 +105,15 @@ export async function fetchMarkers({
 export async function deleteMarker({
   markerId,
   organizationId,
-  authToken,
 }: {
   markerId: string;
   organizationId: string;
-  authToken: string;
 }): Promise<IExtendedMarker> {
   try {
-    const response = await fetch(`${apiUrl()}/markers/${markerId}`, {
+    const response = await fetchClient(`${apiUrl()}/markers/${markerId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ organizationId }),
     });
@@ -144,19 +132,16 @@ export const importMarkers = async ({
   organizationId,
   type,
   url,
-  authToken,
 }: {
   stageId: string;
   organizationId: string;
   type: string;
   url: string;
-  authToken: string;
 }): Promise<IExtendedMarker> => {
-  const response = await fetch(`${apiUrl()}/markers/import`, {
+  const response = await fetchClient(`${apiUrl()}/markers/import`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify({ stageId, organizationId, type, url }),
   });

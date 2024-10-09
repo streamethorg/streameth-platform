@@ -2,6 +2,7 @@ import { apiUrl } from '@/lib/utils/utils';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
 import { IExtendedOrganization, IExtendedUser } from '../types';
 import { cookies } from 'next/headers';
+import { fetchClient } from './fetch-client';
 
 export async function fetchOrganization({
   organizationSlug,
@@ -41,21 +42,14 @@ export async function fetchOrganizations(): Promise<IExtendedOrganization[]> {
 
 export async function createOrganization({
   organization,
-  authToken,
 }: {
   organization: IOrganization;
-  authToken: string;
 }): Promise<IOrganization> {
-  if (!authToken) {
-    throw 'No auth token';
-  }
-
   try {
-    const response = await fetch(`${apiUrl()}/organizations`, {
+    const response = await fetchClient(`${apiUrl()}/organizations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify(organization),
     });
@@ -73,24 +67,18 @@ export async function createOrganization({
 
 export async function updateOrganization({
   organization,
-  authToken,
 }: {
   organization: IExtendedOrganization;
-  authToken: string;
 }): Promise<IOrganization> {
-  if (!authToken) {
-    throw 'No auth token';
-  }
   const modifiedObject = (({ _id, ...rest }) => rest)(organization);
 
   try {
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/${organization._id}`,
       {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify(modifiedObject),
       }
@@ -110,24 +98,17 @@ export async function updateOrganization({
 export async function addOrganizationMember({
   organizationId,
   memberAddress,
-  authToken,
 }: {
   organizationId: string;
   memberAddress: string;
-  authToken: string;
 }): Promise<IOrganization> {
-  if (!authToken) {
-    throw 'No auth token';
-  }
-
   try {
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/member/${organizationId}`,
       {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ address: memberAddress }),
       }
@@ -149,18 +130,12 @@ export async function fetchOrganizationMembers({
 }: {
   organizationId: string;
 }): Promise<IExtendedUser[]> {
-  const authToken = cookies().get('user-session')?.value;
-  if (!authToken) {
-    throw 'No auth token';
-  }
-
   try {
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/member/${organizationId}`,
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
       }
     );
@@ -173,34 +148,32 @@ export async function fetchOrganizationMembers({
 }
 
 export async function deleteTeamMember({
-  memberWalletAddress,
-  authToken,
+  memberEmail,
   organizationId,
 }: {
-  memberWalletAddress: string;
-  authToken: string;
-  organizationId?: string;
+  memberEmail: string;
+  organizationId: string;
 }): Promise<IExtendedUser> {
   try {
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/member/${organizationId}`,
       {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ walletAddress: memberWalletAddress }),
+        body: JSON.stringify({ address: memberEmail }),
       }
     );
 
     if (!response.ok) {
-      throw 'Error deleting team member';
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error deleting team member');
     }
     return await response.json();
-  } catch (e) {
-    console.log('error in delete team member', e);
-    throw e;
+  } catch (error) {
+    console.error('Error in delete team member:', error);
+    throw error;
   }
 }
 
@@ -214,17 +187,12 @@ export async function fetchOrganizationSocials({
     if (!organizationId) {
       return null;
     }
-    const authToken = cookies().get('user-session')?.value;
-    if (!authToken) {
-      throw 'No auth token';
-    }
 
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/${organizationId}`,
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
       }
     );
@@ -239,21 +207,20 @@ export async function fetchOrganizationSocials({
 
 export async function deleteDestination({
   destinationId,
-  authToken,
+
   organizationId,
 }: {
   destinationId: string;
-  authToken: string;
+
   organizationId?: string;
 }): Promise<IExtendedOrganization> {
   try {
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/socials/${organizationId}`,
       {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ destinationId }),
       }

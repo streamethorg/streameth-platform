@@ -1,19 +1,17 @@
 import { apiUrl } from '@/lib/utils/utils';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 import { IExtendedNftCollections } from '../types';
+import { fetchClient } from './fetch-client';
 
 export async function createNFTCollection({
   nftCollection,
-  authToken,
 }: {
   nftCollection: INftCollection;
-  authToken: string;
 }): Promise<INftCollection> {
-  const response = await fetch(`${apiUrl()}/collections`, {
+  const response = await fetchClient(`${apiUrl()}/collections`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
     },
     body: JSON.stringify(nftCollection),
   });
@@ -26,22 +24,23 @@ export async function createNFTCollection({
 
 export const updateNFTCollection = async ({
   collection,
-  authToken,
 }: {
   collection: IExtendedNftCollections;
-  authToken: string;
+
   collectionId?: string;
 }): Promise<IExtendedNftCollections> => {
   const { _id, videos, createdAt, updatedAt, __v, ...rest } = collection;
   try {
-    const response = await fetch(`${apiUrl()}/collections/${collection._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(rest),
-    });
+    const response = await fetchClient(
+      `${apiUrl()}/collections/${collection._id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rest),
+      }
+    );
 
     if (!response.ok) {
       throw 'Error updating collection';
@@ -96,19 +95,19 @@ export async function fetchNFTCollection({
 
 export async function generateNFTCollectionMetadata({
   nftCollection,
-  authToken,
 }: {
   nftCollection: INftCollection;
-  authToken: string;
 }): Promise<INftCollection> {
-  const response = await fetch(`${apiUrl()}/collections/metadata/generate`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
-    body: JSON.stringify(nftCollection),
-  });
+  const response = await fetchClient(
+    `${apiUrl()}/collections/metadata/generate`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nftCollection),
+    }
+  );
 
   if (!response.ok) {
     throw 'Error generating collection metadata';
