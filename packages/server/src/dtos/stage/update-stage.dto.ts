@@ -72,8 +72,8 @@ export class UpdateStageDto {
   @IsOptional()
   @IsObject()
   source?: {
-    url?: string;
-    m3u8Url?: string;
-    type?: string;
+    url: string;
+    m3u8Url: string;
+    type: string;
   };
 }
