@@ -1,19 +1,15 @@
 'use server';
-// deprecated
-import { cookies } from 'next/headers';
 
-export async function storeSession({
-  token,
-  address,
-}: {
-  token: string;
-  address: string;
-}) {
-  cookies().set('user-session', token);
-  cookies().set('user-address', address);
-}
+import { magicLinkSignIn } from '../services/authService';
 
-export async function deleteSession() {
-  cookies().delete('user-session');
-  cookies().delete('user-address');
-}
+export const magicLinkSignInAction = async ({ email }: { email: string }) => {
+  const response = await magicLinkSignIn({
+    email,
+  });
+
+  if (!response) {
+    throw new Error('Error sending magic link');
+  }
+
+  return response;
+};

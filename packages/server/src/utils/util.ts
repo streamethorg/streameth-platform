@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { customAlphabet } from 'nanoid';
 import path from 'path';
 /**
  * @method isEmpty
@@ -127,4 +128,18 @@ export const getStartAndEndTime = (
     start: startDate.valueOf(),
     end: endDate.valueOf(),
   };
+};
+
+export const replacePlaceHolders = (template, data) => {
+  let result = template;
+  for (const [key, value] of Object.entries(data)) {
+    result = result.replace(new RegExp(`{{${key}}}`, 'g'), value);
+  }
+  return result;
+};
+
+export const generateDID = (): string => {
+  const alphabets = '0123456789ABCDEFGHJKMNPQRSTVWXYZabcdefghjkmnpqrstvwxyz';
+  const id = customAlphabet(alphabets, 25)();
+  return `did:${id}`;
 };
