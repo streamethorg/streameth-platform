@@ -3,21 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join StreamETH Team</title>
+    <title>Login to StreamETH</title>
     <style>
       body {
         font-family: Arial, sans-serif;
         line-height: 1.6;
         color: #333;
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
       }
       .container {
-        background-color: #f9f9f9;
-        border-radius: 5px;
+        max-width: 600px;
+        margin: 20px auto;
         padding: 20px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
       .logo {
         text-align: center;
@@ -29,26 +31,38 @@
       }
       h1 {
         color: #2c3e50;
+        text-align: center;
+      }
+      p {
+        margin-bottom: 15px;
       }
       .btn {
-        display: inline-block;
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 10px 20px;
         background-color: #3498db;
         color: white;
-        padding: 10px 20px;
+        text-align: center;
         text-decoration: none;
         border-radius: 5px;
-        margin-top: 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
       }
       .btn:hover {
         background-color: #2980b9;
       }
-      @media (max-width: 600px) {
-        body {
-          padding: 10px;
-        }
-        .container {
-          padding: 15px;
-        }
+      .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #7f8c8d;
+      }
+      .expiry-notice {
+        font-style: italic;
+        color: #e74c3c;
+        text-align: center;
+        margin-top: 15px;
       }
     </style>
   </head>
@@ -57,14 +71,27 @@
       <div class="logo">
         <img src="" alt="StreamETH Logo" />
       </div>
-      <h1>Join your team on StreamETH</h1>
+      <h1>Welcome to StreamETH</h1>
+      <p>Hello,</p>
       <p>
-        You have been invited to create a user on StreamETH. To accept the
-        invite, please click the button below.
+        You've requested to log in to your StreamETH account. To access your
+        account, please click the button below:
       </p>
-      <a href="{{invitationLink}}" class="btn">Accept Invitation</a>
-      <p>If you have any questions, please don't hesitate to contact us.</p>
-      <p>Best regards,<br />The StreamETH Team</p>
+      <a href="{{link}}" class="btn">Log In to StreamETH</a>
+      <p class="expiry-notice">
+        This login link will expire in 30 minutes for security reasons.
+      </p>
+      <p>
+        If you didn't request this login, please ignore this email or contact
+        our support team if you have any concerns.
+      </p>
+      <div class="footer">
+        <p>
+          If you have any questions, please don't hesitate to contact us at
+          <a href="mailto:support@streameth.com">support@streameth.com</a>.
+        </p>
+        <p>Best regards,<br />The StreamETH Team</p>
+      </div>
     </div>
   </body>
 </html>
