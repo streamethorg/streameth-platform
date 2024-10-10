@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon --config nodemon.json",
-    "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json && ncp src/templates dist/templates",
+    "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json && ncp templates dist/templates",
     "test": "mocha",
     "prettier:fix": "prettier --write './src' './test'",
     "prettier:check": "prettier --check './src' './test'",
