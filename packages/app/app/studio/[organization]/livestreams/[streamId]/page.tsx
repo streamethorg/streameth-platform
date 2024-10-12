@@ -15,7 +15,6 @@ import { fetchAllSessions } from '@/lib/services/sessionService';
 import Sidebar from './components/Sidebar';
 import EditLivestream from '../components/EditLivestream';
 import ShareAndEmbed from './components/ShareAndEmbed';
-import { Session } from 'inspector';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 
 const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
@@ -37,8 +36,6 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
       onlyVideos: true,
     })
   ).sessions;
-
-  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${params.organization}/livestream?stage=${stream._id}`;
 
   return (
     <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-screen">
@@ -73,7 +70,7 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
 
             <div className="flex flex-row gap-2 ml-auto">
               <ShareAndEmbed
-                url={shareUrl}
+                organizationSlug={params.organization}
                 streamId={stream._id as string}
                 playerName={stream?.name}
               />
