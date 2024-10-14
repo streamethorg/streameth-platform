@@ -21,6 +21,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+
+import { Switch } from '@/components/ui/switch';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -39,7 +41,8 @@ import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { fetchStage } from '@/lib/services/stageService';
 import { LuRotateCcw } from 'react-icons/lu';
-
+import { Label } from '@/components/ui/label';
+import ImageUpload from '@/components/misc/form/imageUpload';
 const CreateClipButton = ({
   organizationId,
   liveRecordingId,
@@ -202,7 +205,7 @@ const CreateClipButton = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleCreateClip)}
-          className="space-y-2"
+          className="space-y-2 h-full"
         >
           <CardContent className="border space-y-4 pt-2">
             {markers && markers.length > 0 && (
@@ -236,7 +239,6 @@ const CreateClipButton = ({
                 </Select>
               </>
             )}
-
             <FormField
               control={form.control}
               name="name"
@@ -275,7 +277,56 @@ const CreateClipButton = ({
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex flex-col gap-2">
+                    <FormControl>
+                      <div className="flex items-center space-x-2">
+                        <Switch id="airplane-mode" />
+                        <Label htmlFor="airplane-mode">Captions</Label>
+                      </div>
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="flex flex-row w-full space-x-2">
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <div className="flex flex-col gap-2 w-full">
+                      <FormLabel className="">Intro animation</FormLabel>
+                      <FormControl>
+                        <ImageUpload path="" className="w-full" options={{}} />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <div className="flex flex-col gap-2 w-full">
+                      <FormLabel className="">Outro animation</FormLabel>
+                      <FormControl>
+                        <ImageUpload path="" className="w-full" options={{}} />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            {/* <div className="flex flex-row w-full space-x-2">
               <FormField
                 control={form.control}
                 name="start"
@@ -321,7 +372,7 @@ const CreateClipButton = ({
                   </FormItem>
                 )}
               />
-            </div>
+            </div> */}
           </CardContent>
           <CardFooter>
             <div className="flex gap-2 w-full">
