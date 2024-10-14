@@ -300,9 +300,7 @@ export default class SessionService {
     }
     if (data.type == 'youtube') {
       data.token = {
-        secret: await refreshAccessToken(
-          token?.refreshToken ? token.refreshToken : data.refreshToken,
-        ),
+        secret: await refreshAccessToken(token?.refreshToken),
       };
     }
     if (data.type == 'twitter') {
