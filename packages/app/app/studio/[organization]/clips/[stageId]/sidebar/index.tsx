@@ -52,7 +52,7 @@ export default function Sidebar({
             </div>
           )
       )}
-      <Tabs defaultValue="clips" className=" h-full ">
+      <Tabs defaultValue="markers" className=" h-full ">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="markers">Markers</TabsTrigger>
           <TabsTrigger value="clips">Clips</TabsTrigger>
