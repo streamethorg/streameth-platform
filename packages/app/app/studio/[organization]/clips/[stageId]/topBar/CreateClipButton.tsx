@@ -43,6 +43,8 @@ import { fetchStage } from '@/lib/services/stageService';
 import { LuRotateCcw } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
 import ImageUpload from '@/components/misc/form/imageUpload';
+import Dropzone from '../../../library/components/upload/Dropzone';
+import { Uploads } from '../../../library/components/UploadVideoDialog';
 const CreateClipButton = ({
   organizationId,
   liveRecordingId,
@@ -66,7 +68,9 @@ const CreateClipButton = ({
     useState<IExtendedSession | null>(null);
   const [stage, setStage] = useState<IExtendedStage | null>(null);
   const { searchParams } = useSearchParams();
-
+  const [open, setOpen] = useState(false);
+  const [onEdit, setOnEdit] = useState<string | null>(null);
+  const [uploads, setUploads] = useState<Uploads>({});
   const sessionId = searchParams?.get('sessionId');
 
   const getSession = async () => {
@@ -303,7 +307,13 @@ const CreateClipButton = ({
                     <div className="flex flex-col gap-2 w-full">
                       <FormLabel className="">Intro animation</FormLabel>
                       <FormControl>
-                        <ImageUpload path="" className="w-full" options={{}} />
+                        <Dropzone
+                          setOnEdit={setOnEdit}
+                          setOpen={setOpen}
+                          uploads={uploads}
+                          setUploads={setUploads}
+                          organizationId={organizationId}
+                        />
                       </FormControl>
                     </div>
                     <FormMessage />
@@ -318,7 +328,13 @@ const CreateClipButton = ({
                     <div className="flex flex-col gap-2 w-full">
                       <FormLabel className="">Outro animation</FormLabel>
                       <FormControl>
-                        <ImageUpload path="" className="w-full" options={{}} />
+                        <Dropzone
+                          setOnEdit={setOnEdit}
+                          setOpen={setOpen}
+                          uploads={uploads}
+                          setUploads={setUploads}
+                          organizationId={organizationId}
+                        />
                       </FormControl>
                     </div>
                     <FormMessage />
