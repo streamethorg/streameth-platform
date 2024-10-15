@@ -6,7 +6,6 @@ import { mainnet, base, baseSepolia } from 'wagmi/chains';
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ProviderContext from './ProviderContext';
 
 const config = createConfig(
   getDefaultConfig({
@@ -35,13 +34,11 @@ const queryClient = new QueryClient();
 
 const SiweContext = (props: PropsWithChildren) => {
   return (
-    <ProviderContext>
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <ConnectKitProvider>{props.children}</ConnectKitProvider>
-        </QueryClientProvider>
-      </WagmiProvider>
-    </ProviderContext>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <ConnectKitProvider>{props.children}</ConnectKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 };
 

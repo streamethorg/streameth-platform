@@ -1,3 +1,4 @@
+import { AuthDto } from '@dtos/auth/auth.dto';
 import { UserDto } from '@dtos/user/user.dto';
 import { IUser } from '@interfaces/user.interface';
 import AuthService from '@services/auth.service';
@@ -24,7 +25,7 @@ export class AuthController extends Controller {
   @SuccessResponse('201')
   @Post('login')
   async login(
-    @Body() body: UserDto,
+    @Body() body: AuthDto,
   ): Promise<IStandardResponse<{ user: IUser; token: string }>> {
     const user = await this.authService.login(body);
     return SendApiResponse('logged in', user);
@@ -35,7 +36,7 @@ export class AuthController extends Controller {
    */
   @SuccessResponse('201')
   @Post('/verify-token')
-  async verifyToken(@Body() body: UserDto): Promise<IStandardResponse<void>> {
+  async verifyToken(@Body() body: AuthDto): Promise<IStandardResponse<void>> {
     await this.authService.verifyToken(body.token);
     return SendApiResponse('Success');
   }
@@ -51,5 +52,12 @@ export class AuthController extends Controller {
     token = token.split('Bearer ')[1];
     const payload = await this.authService.getTokenPayload(token);
     return SendApiResponse('Success', payload);
+  }
+
+  @SuccessResponse('201')
+  @Post('/magic-link')
+  async sendMagicLink(@Body() body: { email: string }) {
+    await this.authService.generateMagicLink(body.email);
+    return SendApiResponse('Success');
   }
 }

@@ -1,19 +1,16 @@
 'use client';
 import { CardContent } from '@/components/ui/card';
-import { useAccount } from 'wagmi';
 import { Button } from '@/components/ui/button';
 import { LuMail } from 'react-icons/lu';
 
-const CreateRequest = () => {
-  const { address } = useAccount();
-
+const CreateRequest = ({ userEmail }: { userEmail?: string }) => {
   const handleEmailClick = () => {
     const subject = encodeURIComponent('Request for Personal Data');
     const body = encodeURIComponent(`Dear StreamETH Support,
 
 I would like to request all my personal data saved by StreamETH.
 
-My login address is: ${address || 'Unknown'}
+My login address is: ${userEmail || 'Unknown'}
 
 Please provide me with the following information:
 
@@ -36,8 +33,7 @@ Best regards,
       </p>
       <ul className="space-y-2 text-sm list-disc list-inside text-gray-600">
         <li>
-          Your login address:{' '}
-          <span className="font-mono">{address || 'Not connected'}</span>
+          Your login address: <span className="font-mono">{userEmail}</span>
         </li>
         <li>Specify what personal data you are requesting</li>
       </ul>

@@ -15,15 +15,11 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda';
-import { usePrivy } from '@privy-io/react-auth';
-import { useAccount } from 'wagmi';
-import { ConnectWalletButton } from '../ConnectWalletButton';
 
 const Support = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
-  const { authenticated } = usePrivy();
-  const { address } = useAccount();
+
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof supportSchema>>({
     resolver: zodResolver(supportSchema),
@@ -37,10 +33,6 @@ const Support = () => {
 
   function onSubmit(values: z.infer<typeof supportSchema>) {
     setIsLoading(true);
-    if (!authenticated) {
-      toast.error('No wallet address found');
-      return;
-    }
 
     createSupportTicketAction({
       ...values,
@@ -57,12 +49,6 @@ const Support = () => {
         setIsLoading(false);
       });
   }
-
-  const handleClose = () => {
-    setMessageSent(false);
-    setOpen(false);
-  };
-  const isAuthenticated = authenticated || address;
 
   return (
     <Credenza open={open} onOpenChange={setOpen}>
@@ -97,25 +83,6 @@ const Support = () => {
               support@streameth.com
             </a>
           </p>
-
-          {!isAuthenticated ? (
-            <div>
-              <p className="py-2">Sign in to send us a message</p>
-              <ConnectWalletButton />
-            </div>
-          ) : messageSent ? (
-            <div>
-              <p className="pb-2 font-bold">Message sent 🎉!!</p>
-              <Button onClick={handleClose}>Close</Button>
-            </div>
-          ) : (
-            <SupportForm
-              form={form}
-              onSubmit={onSubmit}
-              isLoading={isLoading}
-              handleClose={handleClose}
-            />
-          )}
         </div>
       </CredenzaContent>
       <CredenzaTrigger>
