@@ -1,8 +1,10 @@
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
+import { IClip } from '@interfaces/clip.interface';
 import { ClippingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IMultiStream } from '@interfaces/stream.interface';
+import ClipEditor from '@models/clip.editor.model';
 import Organization from '@models/organization.model';
 import SessionModel from '@models/session.model';
 import Stage from '@models/stage.model';
@@ -393,80 +395,82 @@ export const getHlsUrl = async (
   }
 };
 
-export const createClip = async (data: {
-  playbackId: string;
-  sessionId: string;
-  recordingId: string;
-  start: number;
-  end: number;
-}) => {
+export const createClip = async (data: IClip) => {
   try {
-    const clip = await livepeer.stream.createClip({
-      endTime: data.end,
-      startTime: data.start,
-      sessionId: data.recordingId,
-      playbackId: data.playbackId,
-    });
-    const parsedClip = JSON.parse(clip.rawResponse.data.toString());
-    let session = await SessionModel.findById(data.sessionId);
-    await SessionModel.findOneAndUpdate(
-      { _id: data.sessionId },
-      {
-        $set: {
-          assetId: parsedClip.asset.id,
-          playbackId: parsedClip.asset.playbackId,
-          start: new Date().getTime(),
-          end: new Date().getTime(),
-          startClipTime: data.start,
-          endClipTime: data.end,
-          type: SessionType.clip,
-          createdAt: new Date(),
-          clippingStatus: ClippingStatus.pending,
-        },
-      },
-      {
-        new: true,
-        timestamps: false, // Disable automatic timestamp handling
-      },
-    );
-    if (session.firebaseId) {
-      const speakerNames = session.speakers
-        .map((speaker) => speaker.name)
-        .join(', ');
-      const newData = {
-        fullTitle: `${speakerNames} :  ${session.name}`,
-        title: session.name,
-        speaker: speakerNames,
-        description: session.description,
-        date: new Date(),
-        type: session.talkType,
-        track: session.track.map((track) => track).join(', '),
-        url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/index.m3u8`,
-        mp4Url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/1080p0.mp4`,
-        assetId: parsedClip.asset.id,
-        iframeUrl: `<iframe src="http://streameth.org/embed?session=${session._id}&vod=true&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
-      };
-      // Update Firebase
-      await createEventVideoById(session.firebaseId, newData);
-    }
-    const state = await State.findOne({
-      sessionId: session._id.toString(),
-      type: StateType.video,
-    });
-    if (state) {
-      await state.updateOne({
-        status: StateStatus.pending,
+    if (data.isEditorEnabled) {
+      await ClipEditor.create({
+        stageId: data.stageId,
+        organizationId: data.organizationId,
+        ...data.editorOptions,
       });
     } else {
-      await State.create({
-        sessionId: session._id.toString(),
-        sessionSlug: session.slug,
-        organizationId: session.organizationId.toString(),
-        type: StateType.video,
-        status: StateStatus.pending,
+      const clip = await livepeer.stream.createClip({
+        endTime: data.end,
+        startTime: data.start,
+        sessionId: data.recordingId,
+        playbackId: data.playbackId,
       });
+      const parsedClip = JSON.parse(clip.rawResponse.data.toString());
+      let session = await SessionModel.findById(data.sessionId);
+      await SessionModel.findOneAndUpdate(
+        { _id: data.sessionId },
+        {
+          $set: {
+            assetId: parsedClip.asset.id,
+            playbackId: parsedClip.asset.playbackId,
+            start: new Date().getTime(),
+            end: new Date().getTime(),
+            startClipTime: data.start,
+            endClipTime: data.end,
+            type: SessionType.clip,
+            createdAt: new Date(),
+            clippingStatus: ClippingStatus.pending,
+          },
+        },
+        {
+          new: true,
+          timestamps: false, // Disable automatic timestamp handling
+        },
+      );
+      if (session.firebaseId) {
+        const speakerNames = session.speakers
+          .map((speaker) => speaker.name)
+          .join(', ');
+        const newData = {
+          fullTitle: `${speakerNames} :  ${session.name}`,
+          title: session.name,
+          speaker: speakerNames,
+          description: session.description,
+          date: new Date(),
+          type: session.talkType,
+          track: session.track.map((track) => track).join(', '),
+          url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/index.m3u8`,
+          mp4Url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/1080p0.mp4`,
+          assetId: parsedClip.asset.id,
+          iframeUrl: `<iframe src="http://streameth.org/embed?session=${session._id}&vod=true&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
+        };
+        // Update Firebase
+        await createEventVideoById(session.firebaseId, newData);
+      }
+      const state = await State.findOne({
+        sessionId: session._id.toString(),
+        type: StateType.video,
+      });
+      if (state) {
+        await state.updateOne({
+          status: StateStatus.pending,
+        });
+      } else {
+        await State.create({
+          sessionId: session._id.toString(),
+          sessionSlug: session.slug,
+          organizationId: session.organizationId.toString(),
+          type: StateType.video,
+          status: StateStatus.pending,
+        });
+      }
+      return parsedClip;
     }
-    return parsedClip;
   } catch (e) {
     console.log('error', e);
     throw new HttpException(400, 'Error creating clip');
