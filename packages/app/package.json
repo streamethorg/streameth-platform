@@ -18,7 +18,7 @@
 		"@livekit/components-react": "^1.5.3",
 		"@livekit/components-styles": "^1.0.9",
 		"livekit-server-sdk": "^1.2.7",
-		"mux-embed": "^5.2.1",
+		"mux-embed": "^5.3.3",
 		"@aws-sdk/client-s3": "^3.670.0",
 		"@hookform/resolvers": "^3.3.4",
 		"@livepeer/react": "^4.2.7",
