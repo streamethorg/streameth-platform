@@ -5,8 +5,6 @@
 	"workspaces": {
 		"packages": [
 			"packages/app",
-			"packages/tools/av-tools/utils",
-			"packages/tools/ai-tools",
 			"packages/server",
 			"packages/contracts",
 			"packages/video-uploader"
