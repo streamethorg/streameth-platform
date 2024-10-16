@@ -1,6 +1,13 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IClip } from '@interfaces/clip.interface';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export class CreateClipDto {
+export class CreateClipDto implements IClip {
   @IsNotEmpty()
   @IsString()
   playbackId!: string;
@@ -20,4 +27,25 @@ export class CreateClipDto {
   @IsNotEmpty()
   @IsNumber()
   end!: number;
+
+  @IsOptional()
+  @IsString()
+  organizationId!: string;
+
+  @IsOptional()
+  @IsString()
+  isEditorEnabled?: boolean;
+
+  @IsOptional()
+  @IsObject()
+  editorOptions?: {
+    frameRate: number;
+    events: Array<{ label: string; sessionId: string }>;
+    selectedAspectRatio: string;
+    captionEnabled: boolean;
+    captionPosition: string;
+    captionLinesPerPage: number;
+    captionFont: string;
+    captionColor: string;
+  };
 }
