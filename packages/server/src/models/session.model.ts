@@ -73,6 +73,10 @@ const SessionSchema = new Schema<ISessionModel>(
       ],
       text: { type: String, default: '' },
     },
+    animation: {
+      label: { type: String, default: '' },
+      type: { type: String, default: '' },
+    },
     createdAt: { type: Date, default: Date.now },
   },
   {

@@ -129,6 +129,10 @@ export class UpdateSessionDto {
   socials?: { name: string; date: number }[];
 
   @IsOptional()
+  @IsObject()
+  animation?: { label: string; type: string };
+
+  @IsOptional()
   @IsString()
   createdAt?: string;
 }

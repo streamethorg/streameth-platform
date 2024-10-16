@@ -19,6 +19,7 @@ export enum SessionType {
   clip = 'clip',
   livestream = 'livestream',
   video = 'video',
+  animation = 'animation',
 }
 
 export enum ClippingStatus {
@@ -68,6 +69,10 @@ export interface ISession {
       text: string;
     }[];
     text: string;
+  };
+  animation?: {
+    label: string;
+    type: string;
   };
 }
 
