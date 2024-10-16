@@ -9,6 +9,7 @@ import {
   LuShare2,
   LuLock,
   LuBookOpen,
+  LuDollarSign,
 } from 'react-icons/lu';
 
 const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
@@ -38,6 +39,11 @@ const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
       text: 'Team',
       url: `/studio/${organizationSlug}/team`,
       icon: <LuUsers size={25} />,
+    },
+    {
+      text: 'Pricing',
+      url: `/studio/${organizationSlug}/pricing`,
+      icon: <LuDollarSign size={25} />,
     },
     {
       text: 'Settings',
