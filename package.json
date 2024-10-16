@@ -3,7 +3,14 @@
 	"version": "1.0.0",
 	"private": true,
 	"workspaces": {
-		"packages": ["packages/*"]
+		"packages": [
+			"packages/app",
+			"packages/tools/av-tools/utils",
+			"packages/tools/ai-tools",
+			"packages/server",
+			"packages/contracts",
+			"packages/video-uploader"
+		]
 	},
 	"scripts": {
 		"build": "yarn workspace @streameth/streameth-app build",
