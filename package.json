@@ -19,12 +19,7 @@
 		"prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix && yarn workspace streameth-new-server prettier:fix",
 		"prettier:check": "yarn workspace @streameth/streameth-app prettier:check && yarn workspace streameth-new-server prettier:check",
 		"precommit": "lint-staged --verbose",
-		"tools": "yarn workspace @streameth/av-tools tools",
-		"split": "yarn workspace @streameth/av-tools run:split",
-		"join": "yarn workspace @streameth/av-tools run:join",
-		"upload": "yarn workspace @streameth/av-tools run:upload",
-		"install:all": "yarn --cwd @streameth/av-tools && yarn --cwd @streameth/server/ && yarn",
-		"install:server": "yarn workspace @streameth/av-utils install && yarn workspace @streameth/ai-tools install",
+		"install:all": "yarn --cwd @streameth/server/ && yarn",
 		"build:server": "yarn workspace streameth-new-server build",
 		"start:server": "yarn workspace streameth-new-server start",
 		"prepare": "husky"
