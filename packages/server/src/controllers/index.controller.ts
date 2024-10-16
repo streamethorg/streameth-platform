@@ -1,6 +1,6 @@
 import { HttpException } from '@exceptions/HttpException';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
-import { ClippingStatus } from '@interfaces/session.interface';
+import { ClippingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
@@ -91,15 +91,28 @@ export class IndexController extends Controller {
     const asset = await getAsset(id);
     const session = await this.sessionService.findOne({ assetId: asset.id });
     if (!session) throw new HttpException(404, 'No session found');
-    await this.sessionService.update(session._id.toString(), {
+    let sessionParams = {
+      name: session.name,
+      start: session.start,
+      end: session.end,
+      organizationId: session.organizationId,
+      type: session.type,
       videoUrl: asset.playbackUrl,
       playbackId: asset.playbackId,
-      'playback.videOUrl': asset.playbackUrl,
+      'playback.videoUrl': asset.playbackUrl,
       'playback.format': asset.videoSpec?.format ?? '',
       'playback.duration': asset.videoSpec?.duration ?? 0,
-      clippingStatus: ClippingStatus.completed,
-    } as any);
-
+    };
+    if (session.type === SessionType.animation) {
+      await this.sessionService.update(session._id.toString(), {
+        ...sessionParams,
+      });
+    } else {
+      await this.sessionService.update(session._id.toString(), {
+        ...sessionParams,
+        clippingStatus: ClippingStatus.completed,
+      });
+    }
     if (session.firebaseId && asset.playbackUrl) {
       await updateEventVideoById(session.firebaseId, {
         url: asset.playbackUrl,
@@ -108,17 +121,18 @@ export class IndexController extends Controller {
     }
     const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
-      type: StateType.video,
+      type: StateType.video ?? StateType.animation,
     });
     if (!state) throw new HttpException(404, 'No state found');
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
     });
-
-    await this.sessionService.sessionTranscriptions({
-      organizationId: session.organizationId.toString(),
-      sessionId: session._id.toString(),
-    });
+    if (state.type !== StateType.animation) {
+      await this.sessionService.sessionTranscriptions({
+        organizationId: session.organizationId.toString(),
+        sessionId: session._id.toString(),
+      });
+    }
   }
 
   private async assetFailed(id: string) {
