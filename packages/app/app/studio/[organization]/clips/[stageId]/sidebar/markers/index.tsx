@@ -81,7 +81,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
       {filteredMarkers.length > 0 && (
         <PushMarkersButton organizationId={organizationId} />
       )}
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto pb-4">
         {filteredMarkers.length > 0 ? (
           filteredMarkers.map((marker: IExtendedMarker) => (
             <div key={marker._id} className="w-full px-4 py-2">
