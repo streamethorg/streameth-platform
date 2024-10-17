@@ -403,6 +403,20 @@ export const createClip = async (data: IClip) => {
         organizationId: data.organizationId,
         ...data.editorOptions,
       });
+      return {
+        task: { id: '' },
+        asset: {
+          id: '',
+          playbackId: '',
+          userId: '',
+          createdAt: '',
+          createdByTokenName: '',
+          status: [],
+          name: '',
+          source: [],
+          projectId: '',
+        },
+      };
     } else {
       const clip = await livepeer.stream.createClip({
         endTime: data.end,
