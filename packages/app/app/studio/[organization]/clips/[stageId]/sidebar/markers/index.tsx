@@ -15,7 +15,7 @@ import { IExtendedMarker } from '@/lib/types';
 import PushMarkersButton from './PushMarkersButton';
 
 const Markers = ({ organizationId }: { organizationId: string }) => {
-  const { isLoading, markers, setFilteredMarkers, filteredMarkers } =
+  const { isLoadingMarkers, markers, setFilteredMarkers, filteredMarkers } =
     useClipContext();
 
   // Find unique dates among markers
@@ -40,7 +40,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
     );
   };
 
-  if (isLoading) {
+  if (isLoadingMarkers) {
     return (
       <div className="flex h-full w-full flex-col border-l bg-background bg-white">
         <div className="h-[calc(100%-50px)] space-y-4 overflow-y-clip">

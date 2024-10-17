@@ -76,6 +76,8 @@ type ClipContextType = {
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
   playheadPosition: number;
   setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
+  isLoadingMarkers: boolean;
+  setIsLoadingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -131,6 +133,7 @@ export const ClipProvider = ({
     currentTime: 0,
     unixTime: 0,
   });
+  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
 
   // We create a state for currentTime to trigger re-renders when the video time changes.
   // This allows components using this context to update based on the current playback time.
@@ -159,14 +162,20 @@ export const ClipProvider = ({
 
   const fetchAndSetMarkers = async () => {
     if (stageId) {
-      setIsLoading(true);
-      const markers = await fetchMarkers({
-        organizationId,
-        stageId,
-      });
-      setMarkers(markers);
-      setFilteredMarkers(markers);
-      setIsLoading(false);
+      setIsLoadingMarkers(true);
+      try {
+        const markers = await fetchMarkers({
+          organizationId,
+          stageId,
+        });
+        setMarkers(markers);
+        setFilteredMarkers(markers);
+      } catch (error) {
+        console.error('Error fetching markers:', error);
+        // Optionally, you can show an error toast here
+      } finally {
+        setIsLoadingMarkers(false);
+      }
     }
   };
 
@@ -379,6 +388,8 @@ export const ClipProvider = ({
         setCurrentTime,
         playheadPosition,
         setPlayheadPosition,
+        isLoadingMarkers,
+        setIsLoadingMarkers,
       }}
     >
       {children}
