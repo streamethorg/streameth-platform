@@ -21,6 +21,7 @@ import { IExtendedSession } from '@/lib/types';
 type UploadStatus = {
   progress: number;
   session: z.infer<typeof sessionSchema>;
+  duration?: number;
 };
 
 export type Uploads = {

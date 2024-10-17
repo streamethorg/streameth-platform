@@ -1,44 +1,21 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
 import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import React, { useState, useEffect } from 'react';
 import { useClipContext } from '../ClipContext';
-
 import { clipSchema } from '@/lib/schema';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { toast } from 'sonner';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { fetchSession } from '@/lib/services/sessionService';
 import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { fetchStage } from '@/lib/services/stageService';
-import { LuRotateCcw } from 'react-icons/lu';
+import { Uploads } from '../../../library/components/UploadVideoDialog';
+import CreateClipForm from './CreateClipForm';
 
 const CreateClipButton = ({
   organizationId,
@@ -99,8 +76,23 @@ const CreateClipButton = ({
       speakers: [],
       startClipTime: startTime.displayTime,
       endClipTime: endTime.displayTime,
+      captionEnabled: false,
+      introAnimation: '',
+      outroAnimation: '',
+      selectedAspectRatio: '16:9',
     },
   });
+
+  // New function to check for caption and animations
+  const checkEditorOptions = (values: z.infer<typeof clipSchema>) => {
+    return (
+      values.captionEnabled ||
+      Boolean(values.introAnimation) ||
+      Boolean(values.outroAnimation) ||
+      values.selectedAspectRatio !== '16:9'
+    );
+  };
+  const hasEditorOptions = checkEditorOptions(form.getValues());
 
   const handleClearMarker = () => {
     setSelectedMarkerId('');
@@ -151,35 +143,75 @@ const CreateClipButton = ({
       setIsCreateClip(false);
       return toast.error('End time must be greater than start time');
     }
+
+    const mainClipSession = {
+      name: values.name,
+      description: values.description,
+      speakers: values?.speakers,
+      startClipTime: startTime.unix,
+      endClipTime: endTime.unix,
+      start: values.start,
+      end: values.end,
+      organizationId,
+      stageId,
+    };
+
+    const sessionType = hasEditorOptions
+      ? SessionType.editorClip
+      : SessionType.clip;
+
     try {
       const session = await createSessionAction({
-        session: {
-          name: values.name,
-          description: values.description,
-          speakers: values?.speakers,
-          type: SessionType.clip,
-          startClipTime: startTime.unix,
-          endClipTime: endTime.unix,
-          start: values.start,
-          end: values.end,
-          organizationId,
-          stageId,
-        },
+        session: { ...mainClipSession, type: sessionType },
       });
 
       if (!session || !session._id) {
         throw new Error('Failed to create session');
       }
 
-      let clipData = {
+      const mainClipData = {
         playbackId: stage?.streamSettings?.playbackId,
         start: startTime.unix,
         end: endTime.unix,
         sessionId: session._id,
         recordingId: sessionRecording?.assetId ?? liveRecordingId ?? '',
+        organizationId,
       };
 
-      await createClipAction(clipData);
+      // Call to create and process the clip
+      await createClipAction({ ...mainClipData, isEditorEnabled: false });
+
+      if (hasEditorOptions) {
+        const clipCreationOptions = {
+          ...mainClipData,
+          isEditorEnabled: true,
+          editorOptions: {
+            events: [
+              {
+                sessionId: values.outroAnimation as string,
+                label: 'outro',
+              },
+              {
+                sessionId: values.introAnimation as string,
+                label: 'intro',
+              },
+              {
+                sessionId: session._id as string,
+                label: 'main',
+              },
+            ],
+            captionEnabled: values.captionEnabled,
+            selectedAspectRatio: values.selectedAspectRatio as string,
+            frameRate: 30,
+            captionPosition: 'bottom',
+            captionLinesPerPage: 2,
+            captionColor: '#000',
+            captionFont: 'Arial',
+          },
+        };
+        // Call createClipAction with the prepared editor options
+        await createClipAction(clipCreationOptions);
+      }
 
       toast.success('Clip created');
       setIsCreatingClip(false);
@@ -199,151 +231,19 @@ const CreateClipButton = ({
         <CardTitle className="text-lg">Create Clip</CardTitle>
       </CardHeader>
 
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleCreateClip)}
-          className="space-y-2"
-        >
-          <CardContent className="border space-y-4 pt-2">
-            {markers && markers.length > 0 && (
-              <>
-                <div className="flex items-center justify-between">
-                  <FormLabel>Select Marker for Clip</FormLabel>
-                  <Button
-                    className="ml-2"
-                    variant={'outline'}
-                    onClick={handleClearMarker}
-                    type="button"
-                  >
-                    <LuRotateCcw size={16} className="mr-2" />
-                    Clear
-                  </Button>
-                </div>
-                <Select
-                  value={selectedMarkerId}
-                  onValueChange={(value) => setSelectedMarkerId(value)}
-                >
-                  <SelectTrigger className="rounded-lg border bg-white">
-                    <SelectValue placeholder="select marker"></SelectValue>
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
-                    {markers.map((marker) => (
-                      <SelectItem key={marker._id} value={marker._id}>
-                        {marker.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </>
-            )}
-
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex flex-col gap-2">
-                    <FormLabel className="">Name:</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Input name"
-                        className="bg-white"
-                      />
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex flex-col gap-2">
-                    <FormLabel className="">Description:</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        {...field}
-                        placeholder="Clip description"
-                        className="bg-white"
-                      />
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex flex-row w-full space-x-2">
-              <FormField
-                control={form.control}
-                name="start"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col w-full gap-2">
-                      <FormLabel>Start:</FormLabel>
-                      <FormControl className="w-full">
-                        <Input
-                          type="number"
-                          {...field}
-                          disabled
-                          placeholder="Input start"
-                          className="bg-white w-full"
-                          value={startTime.displayTime.toFixed(0)}
-                        />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="end"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col w-full gap-2">
-                      <FormLabel className="">End: </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          {...field}
-                          disabled
-                          placeholder="Input end"
-                          className="bg-white"
-                          value={endTime.displayTime.toFixed(0)}
-                        />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <div className="flex gap-2 w-full">
-              <Button
-                className="w-1/4"
-                variant={'outline'}
-                onClick={() => setIsCreatingClip(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="w-3/4"
-                variant="primary"
-                type="submit"
-                loading={isLoading || isCreateClip}
-              >
-                {isCreateClip ? 'Creating...' : 'Create'}
-              </Button>
-            </div>
-          </CardFooter>
-        </form>
-      </Form>
+      <CreateClipForm
+        form={form}
+        handleCreateClip={handleCreateClip}
+        markers={markers}
+        selectedMarkerId={selectedMarkerId}
+        setSelectedMarkerId={setSelectedMarkerId}
+        handleClearMarker={handleClearMarker}
+        organizationId={organizationId}
+        stageId={stageId}
+        isLoading={isLoading}
+        isCreateClip={isCreateClip}
+        setIsCreatingClip={setIsCreatingClip}
+      />
     </Card>
   );
 };

@@ -240,12 +240,27 @@ export const createClip = async ({
   playbackId,
   recordingId,
   sessionId,
+  isEditorEnabled,
+  editorOptions,
+  organizationId,
 }: {
   sessionId: string;
   playbackId: string;
   recordingId: string;
   start: number;
   end: number;
+  isEditorEnabled: boolean;
+  editorOptions?: {
+    frameRate: number;
+    events: Array<{ label: string; sessionId: string }>;
+    selectedAspectRatio: string;
+    captionEnabled: boolean;
+    captionPosition: string;
+    captionLinesPerPage: number;
+    captionFont: string;
+    captionColor: string;
+  };
+  organizationId?: string;
 }): Promise<ISession> => {
   try {
     const response = await fetchClient(`${apiUrl()}/streams/clip`, {
@@ -259,14 +274,18 @@ export const createClip = async ({
         sessionId,
         start,
         recordingId,
+        isEditorEnabled,
+        editorOptions,
+        organizationId,
       }),
     });
+    const responseData = await response.json();
 
     if (!response.ok) {
       throw 'Error creating clip';
     }
     revalidatePath('/studio');
-    return (await response.json()).data;
+    return responseData.data;
   } catch (e) {
     console.log('error in createClip', e);
     throw e;

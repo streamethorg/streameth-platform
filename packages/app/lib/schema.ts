@@ -261,6 +261,10 @@ export const clipSchema = z.object({
   speakers: z.array(speakerSchema).optional(),
   startClipTime: z.number().min(0, 'Start Clip Time is required'),
   endClipTime: z.number().min(0, 'End Clip Time is required'),
+  outroAnimation: z.string().optional(),
+  introAnimation: z.string().optional(),
+  captionEnabled: z.boolean(),
+  selectedAspectRatio: z.string().optional(),
 });
 
 export const EmailSignInSchema = z.object({
