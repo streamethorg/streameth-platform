@@ -108,11 +108,12 @@ export default function CreateOrganizationForm({
                   <ImageUpload
                     className="w-full h-40 rounded-xl bg-neutrals-300"
                     options={{
-                      requireExactSize: { width: 1500, height: 500 },
-                      resize: false,
+                      resize: true,
+                      resizeDimensions: { width: 1500, height: 500 },
                       placeholder:
-                        'Click to upload image here. Image must be exactly 1500x500 pixels. Maximum file size is 2MB.',
+                        'Click to upload image here. Image will be resized to cover 1500x500 pixels. Maximum file size is 2MB.',
                       aspectRatio: 3 / 1,
+                      coverImage: true,
                     }}
                     path="organizations"
                     {...field}

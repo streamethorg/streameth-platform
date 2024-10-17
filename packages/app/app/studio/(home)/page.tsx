@@ -26,7 +26,7 @@ const Studio = async () => {
         {userData?.organizations?.length > 0 ? (
           <>
             <div className="flex w-full flex-row items-center justify-between py-2">
-              <CardTitle> Your organizations</CardTitle>
+              <CardTitle>Your organizations</CardTitle>
               <Link href="/studio/create">
                 <Button className="w-full">Create Organization</Button>
               </Link>
