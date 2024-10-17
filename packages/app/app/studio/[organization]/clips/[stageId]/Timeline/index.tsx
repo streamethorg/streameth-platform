@@ -25,6 +25,17 @@ const Timeline = () => {
   const maxLength = videoRef.current?.duration || 0;
   const timelineWidth = maxLength * pixelsPerSecond;
 
+  const handleTimelineClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (timelineRef.current && videoRef.current) {
+      const rect = timelineRef.current.getBoundingClientRect();
+      const clickX = e.clientX - rect.left + timelineRef.current.scrollLeft;
+      const clickTime = (clickX / timelineWidth) * maxLength;
+
+      // Update video current time
+      videoRef.current.currentTime = clickTime;
+    }
+  };
+
   useEffect(() => {
     const calculateScale = () => {
       const screenWidth = window.innerWidth;
@@ -80,6 +91,7 @@ const Timeline = () => {
     <div
       ref={timelineRef}
       className={`relative flex flex-col w-full bg-white h-[200px] overflow-x-scroll overflow-y-hidden`}
+      onClick={handleTimelineClick}
     >
       <div
         className="h-[100px] relative"
