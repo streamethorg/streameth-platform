@@ -24,5 +24,5 @@ const ClipEditorSchema = new Schema<IClipEditor>(
   },
 );
 
-const ClipEditor = model<IClipEditor>('Clip', ClipEditorSchema);
+const ClipEditor = model<IClipEditor>('ClipEditor', ClipEditorSchema);
 export default ClipEditor;
