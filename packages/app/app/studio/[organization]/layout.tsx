@@ -16,6 +16,7 @@ const Layout = async ({
   children: React.ReactNode;
   params: studioPageParams['params'];
 }) => {
+  console.log('params', params);
   const userData = await fetchUserAction();
 
   return (
