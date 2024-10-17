@@ -74,6 +74,8 @@ type ClipContextType = {
   setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
   currentTime: number;
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
+  playheadPosition: number;
+  setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -136,6 +138,8 @@ export const ClipProvider = ({
   // preventing excessive re-renders and improving performance.
   const [currentTime, setCurrentTime] = useState(0);
   const requestRef = useRef<number>();
+
+  const [playheadPosition, setPlayheadPosition] = useState<number>(0);
 
   const animate = useCallback(() => {
     if (videoRef.current) {
@@ -214,16 +218,20 @@ export const ClipProvider = ({
     //     });
     //   }
     // };
-
     setInitialMousePos(event.clientX);
     setInitialMarkerPos(
       marker === 'start' ? startTime.displayTime : endTime.displayTime
     );
+
+    // Capture the current playhead position
+    if (videoRef.current) {
+      setPlayheadPosition(videoRef.current.currentTime);
+    }
   };
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
-      if (dragging && videoRef.current && hls?.playingDate) {
+      if (dragging && videoRef.current && playbackStatus) {
         const mouseDelta = event.clientX - initialMousePos;
         const timeDelta = (mouseDelta / timelineWidth) * maxLength;
         const newTime = Math.max(
@@ -234,7 +242,7 @@ export const ClipProvider = ({
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: hls.playingDate.getTime(),
+              unix: Date.now() - playbackStatus.offset,
               displayTime: newTime,
             });
           }
@@ -244,13 +252,14 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: hls.playingDate.getTime(),
+              unix: Date.now() - playbackStatus.offset,
               displayTime: newTime,
             });
           }
         }
 
-        videoRef.current.currentTime = newTime;
+        // Update currentTime state without changing video's currentTime
+        setCurrentTime(newTime);
       }
     },
     [
@@ -265,12 +274,17 @@ export const ClipProvider = ({
       setEndTime,
       videoRef,
       playbackStatus,
+      setCurrentTime,
     ]
   );
 
   const handleMouseUp = useCallback(() => {
     setDragging(null);
-  }, []);
+    // Set the video's currentTime to match the dragged position
+    if (videoRef.current) {
+      videoRef.current.currentTime = currentTime;
+    }
+  }, [currentTime]);
 
   const handleMarkerClick = (marker: IExtendedMarker) => {
     if (videoRef.current) {
@@ -317,7 +331,7 @@ export const ClipProvider = ({
       window.removeEventListener('dragstart', preventDefault);
       window.removeEventListener('dragover', preventDefault);
     };
-  }, [handleMouseMove, handleMouseUp, selectedTooltip, videoRef]);
+  }, [handleMouseMove, handleMouseUp]);
 
   return (
     <ClipContext.Provider
@@ -363,6 +377,8 @@ export const ClipProvider = ({
         setPixelsPerSecond,
         currentTime,
         setCurrentTime,
+        playheadPosition,
+        setPlayheadPosition,
       }}
     >
       {children}
