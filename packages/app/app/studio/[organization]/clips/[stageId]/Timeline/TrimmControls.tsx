@@ -94,7 +94,9 @@ const TrimmControls = ({
 
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
-      return (time / videoRef.current.duration) * 100;
+      // Ensure the initial position is within the video duration
+      const adjustedTime = Math.min(time, videoRef.current.duration);
+      return (adjustedTime / videoRef.current.duration) * 100;
     }
     return 0;
   };
