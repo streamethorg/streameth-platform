@@ -91,18 +91,18 @@ export const ClipProvider = ({
 }) => {
   const { handleTermChange, searchParams } = useSearchParams();
 
-  const start = searchParams.get('start');
-  const end = searchParams.get('end');
+  const start = searchParams?.get('start');
+  const end = searchParams?.get('end');
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );
-  const [startTime, setStartTime] = useState<PlaybackTime>({
+  const [startTime, setStartTime] = useState({
+    unix: Date.now(),
     displayTime: 0,
-    unix: 0,
   });
-  const [endTime, setEndTime] = useState<PlaybackTime>({
-    displayTime: 0,
-    unix: 30,
+  const [endTime, setEndTime] = useState({
+    unix: Date.now() + 10000, // 10 seconds later
+    displayTime: 10,
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -197,6 +197,23 @@ export const ClipProvider = ({
   const handleMouseDown = (marker: string, event: React.MouseEvent) => {
     setDragging(marker);
     setSelectedTooltip(marker);
+
+    // const updateTime = (newTime: number) => {
+    //   if (marker === 'start') {
+    //     setStartTime({
+    //       unix: Date.now() - (playbackStatus?.offset ?? 0),
+    //       displayTime: Math.max(0, Math.min(newTime, endTime.displayTime - 1)),
+    //     });
+    //   } else if (marker === 'end') {
+    //     setEndTime({
+    //       unix: Date.now() - (playbackStatus?.offset ?? 0),
+    //       displayTime: Math.min(
+    //         videoRef.current?.duration || Infinity,
+    //         Math.max(newTime, startTime.displayTime + 1)
+    //       ),
+    //     });
+    //   }
+    // };
 
     setInitialMousePos(event.clientX);
     setInitialMarkerPos(
