@@ -121,7 +121,7 @@ export async function generateMetadata({
   if (!session || !organization) return generalMetadata;
 
   const thumbnail =
-    session.coverImage ?? (await generateThumbnailAction(session));
-
+    session.coverImage || (await generateThumbnailAction(session));
+  console.log('thumbnail', thumbnail);
   return watchMetadata({ organization, session: session, thumbnail });
 }
