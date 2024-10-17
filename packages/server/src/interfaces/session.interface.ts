@@ -20,6 +20,7 @@ export enum SessionType {
   livestream = 'livestream',
   video = 'video',
   animation = 'animation',
+  editorClip = 'editorClip',
 }
 
 export enum ClippingStatus {

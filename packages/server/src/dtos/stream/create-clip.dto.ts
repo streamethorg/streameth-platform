@@ -28,7 +28,7 @@ export class CreateClipDto implements IClip {
   @IsNumber()
   end!: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   organizationId!: string;
 

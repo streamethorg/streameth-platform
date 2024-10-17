@@ -59,20 +59,37 @@ export const createClipAction = async ({
   start,
   end,
   recordingId,
+  isEditorEnabled,
+  editorOptions,
+  organizationId,
 }: {
   playbackId: string;
   sessionId: string;
   start: number;
   end: number;
   recordingId: string;
+  isEditorEnabled: boolean;
+  editorOptions?: {
+    frameRate: number;
+    events: Array<{ label: string; sessionId: string }>;
+    selectedAspectRatio: string;
+    captionEnabled: boolean;
+    captionPosition: string;
+    captionLinesPerPage: number;
+    captionFont: string;
+    captionColor: string;
+  };
+  organizationId: string;
 }) => {
   const response = await createClip({
     end,
     playbackId,
     sessionId,
     start,
-
+    isEditorEnabled,
+    editorOptions,
     recordingId,
+    organizationId,
   });
   if (!response) {
     throw new Error('Error creating session');

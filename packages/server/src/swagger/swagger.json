@@ -457,6 +457,71 @@
 					"end": {
 						"type": "number",
 						"format": "double"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"stageId": {
+						"type": "string"
+					},
+					"isEditorEnabled": {
+						"type": "boolean"
+					},
+					"editorOptions": {
+						"properties": {
+							"captionColor": {
+								"type": "string"
+							},
+							"captionFont": {
+								"type": "string"
+							},
+							"captionLinesPerPage": {
+								"type": "number",
+								"format": "double"
+							},
+							"captionPosition": {
+								"type": "string"
+							},
+							"captionEnabled": {
+								"type": "boolean"
+							},
+							"selectedAspectRatio": {
+								"type": "string"
+							},
+							"events": {
+								"items": {
+									"properties": {
+										"sessionId": {
+											"type": "string"
+										},
+										"label": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"sessionId",
+										"label"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"frameRate": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"captionColor",
+							"captionFont",
+							"captionLinesPerPage",
+							"captionPosition",
+							"captionEnabled",
+							"selectedAspectRatio",
+							"events",
+							"frameRate"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -464,7 +529,8 @@
 					"sessionId",
 					"recordingId",
 					"start",
-					"end"
+					"end",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -530,7 +596,8 @@
 					"event",
 					"video",
 					"transcrpition",
-					"social"
+					"social",
+					"animation"
 				],
 				"type": "string"
 			},
@@ -1653,7 +1720,9 @@
 				"enum": [
 					"clip",
 					"livestream",
-					"video"
+					"video",
+					"animation",
+					"editorClip"
 				],
 				"type": "string"
 			},
@@ -1869,6 +1938,21 @@
 							"text",
 							"chunks",
 							"subtitleUrl"
+						],
+						"type": "object"
+					},
+					"animation": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"label": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"label"
 						],
 						"type": "object"
 					}
@@ -2105,6 +2189,21 @@
 							"subtitleUrl"
 						],
 						"type": "object"
+					},
+					"animation": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"label": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"label"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -2300,6 +2399,21 @@
 						],
 						"type": "object"
 					},
+					"animation": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"label": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"label"
+						],
+						"type": "object"
+					},
 					"autolabels": {
 						"items": {
 							"type": "string"
@@ -2446,6 +2560,21 @@
 							"type": "object"
 						},
 						"type": "array"
+					},
+					"animation": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"label": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"label"
+						],
+						"type": "object"
 					},
 					"createdAt": {
 						"type": "string"
