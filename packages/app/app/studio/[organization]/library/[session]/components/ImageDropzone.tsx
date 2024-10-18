@@ -59,7 +59,13 @@ const ImageDropzone = forwardRef<HTMLDivElement, ImageDropzoneProps>(
     const onDrop = useCallback(
       async (acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
-          const processedFile = await resizeImage(acceptedFiles[0]);
+          const processedFile = await resizeImage(acceptedFiles[0], {
+            width: 1500,
+            height: 500,
+            quality: 0.8,
+            cover: true,
+            contentType: 'image/jpeg',
+          });
           const { displayUrl } = getImageData(processedFile);
 
           setPreview(displayUrl);
