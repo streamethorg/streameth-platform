@@ -1,5 +1,5 @@
 import {
-  ClippingStatus,
+  ProcessingStatus,
   type ISessionModel,
   SessionType,
 } from '@interfaces/session.interface';
@@ -62,7 +62,7 @@ const SessionSchema = new Schema<ISessionModel>(
     ],
     firebaseId: { type: String, default: '' },
     talkType: { type: String, default: '' },
-    clippingStatus: { type: String, enum: Object.keys(ClippingStatus) },
+    processingStatus: { type: String, enum: Object.keys(ProcessingStatus) },
     transcripts: {
       subtitleUrl: { type: String, default: '' },
       chunks: [
