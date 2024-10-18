@@ -239,6 +239,7 @@ export default class SessionService {
         format: asset.videoSpec?.format ?? '',
         duration: asset.videoSpec?.duration ?? 0,
       },
+      processingStatus: ProcessingStatus.completed,
     });
     await stage.updateOne({ $inc: { recordingIndex: 1 } });
     await this.sessionTranscriptions({
