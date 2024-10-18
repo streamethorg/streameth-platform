@@ -1726,7 +1726,7 @@
 				],
 				"type": "string"
 			},
-			"ClippingStatus": {
+			"ProcessingStatus": {
 				"enum": [
 					"pending",
 					"failed",
@@ -1900,8 +1900,8 @@
 					"talkType": {
 						"type": "string"
 					},
-					"clippingStatus": {
-						"$ref": "#/components/schemas/ClippingStatus"
+					"processingStatus": {
+						"$ref": "#/components/schemas/ProcessingStatus"
 					},
 					"transcripts": {
 						"properties": {
@@ -2149,8 +2149,8 @@
 					"talkType": {
 						"type": "string"
 					},
-					"clippingStatus": {
-						"$ref": "#/components/schemas/ClippingStatus"
+					"processingStatus": {
+						"$ref": "#/components/schemas/ProcessingStatus"
 					},
 					"transcripts": {
 						"properties": {
@@ -2358,8 +2358,8 @@
 					"talkType": {
 						"type": "string"
 					},
-					"clippingStatus": {
-						"$ref": "#/components/schemas/ClippingStatus"
+					"processingStatus": {
+						"$ref": "#/components/schemas/ProcessingStatus"
 					},
 					"transcripts": {
 						"properties": {

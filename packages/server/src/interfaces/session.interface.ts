@@ -23,7 +23,7 @@ export enum SessionType {
   editorClip = 'editorClip',
 }
 
-export enum ClippingStatus {
+export enum ProcessingStatus {
   pending = 'pending',
   failed = 'failed',
   completed = 'completed',
@@ -62,7 +62,7 @@ export interface ISession {
   socials?: { name: string; date: number }[];
   firebaseId?: string;
   talkType?: string;
-  clippingStatus?: ClippingStatus;
+  processingStatus?: ProcessingStatus;
   transcripts?: {
     subtitleUrl: string;
     chunks: {

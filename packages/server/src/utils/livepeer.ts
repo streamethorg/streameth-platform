@@ -1,16 +1,16 @@
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
 import { IClip } from '@interfaces/clip.interface';
-import { ClippingStatus, SessionType } from '@interfaces/session.interface';
+import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
-import { IMultiStream } from '@interfaces/stream.interface';
+import type { IMultiStream } from '@interfaces/stream.interface';
 import ClipEditor from '@models/clip.editor.model';
 import Organization from '@models/organization.model';
 import SessionModel from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
 import { Livepeer } from 'livepeer';
-import { Session, Stream } from 'livepeer/dist/models/components';
+import type { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
 import youtubedl from 'youtube-dl-exec';
 import { createEventVideoById } from './firebase';
@@ -370,7 +370,7 @@ export const getHlsUrl = async (
     let hlsUrl = '';
     const source = getSourceType(url);
     if (source.type === 'youtube' || source.type === 'twitter') {
-      let output = await youtubedl(url, {
+      const output = await youtubedl(url, {
         dumpSingleJson: true,
         noWarnings: true,
         preferFreeFormats: true,
@@ -425,7 +425,7 @@ export const createClip = async (data: IClip) => {
         playbackId: data.playbackId,
       });
       const parsedClip = JSON.parse(clip.rawResponse.data.toString());
-      let session = await SessionModel.findById(data.sessionId);
+      const session = await SessionModel.findById(data.sessionId);
       await SessionModel.findOneAndUpdate(
         { _id: data.sessionId },
         {
@@ -438,7 +438,7 @@ export const createClip = async (data: IClip) => {
             endClipTime: data.end,
             type: SessionType.clip,
             createdAt: new Date(),
-            clippingStatus: ClippingStatus.pending,
+            processingStatus: ProcessingStatus.pending,
           },
         },
         {
@@ -499,7 +499,7 @@ export const refetchAssets = async () => {
     if (sessions.length === 0) return;
     const sessionPromise = sessions.map(async (session) => {
       try {
-        let asset = await getAsset(session.assetId);
+        const asset = await getAsset(session.assetId);
         if (!asset) {
           return;
         }

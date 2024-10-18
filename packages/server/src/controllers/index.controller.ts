@@ -1,6 +1,6 @@
 import { HttpException } from '@exceptions/HttpException';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
-import { ClippingStatus, SessionType } from '@interfaces/session.interface';
+import { ProcessingStatus } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
@@ -102,17 +102,9 @@ export class IndexController extends Controller {
       'playback.videoUrl': asset.playbackUrl,
       'playback.format': asset.videoSpec?.format ?? '',
       'playback.duration': asset.videoSpec?.duration ?? 0,
+      processingStatus: ProcessingStatus.completed,
     };
-    if (session.type === SessionType.animation) {
-      await this.sessionService.update(session._id.toString(), {
-        ...sessionParams,
-      });
-    } else {
-      await this.sessionService.update(session._id.toString(), {
-        ...sessionParams,
-        clippingStatus: ClippingStatus.completed,
-      });
-    }
+    await this.sessionService.update(session._id.toString(), sessionParams);
     if (session.firebaseId && asset.playbackUrl) {
       await updateEventVideoById(session.firebaseId, {
         url: asset.playbackUrl,
@@ -150,7 +142,7 @@ export class IndexController extends Controller {
     if (!state) throw new HttpException(404, 'No state found');
 
     await this.sessionService.update(session._id.toString(), {
-      clippingStatus: ClippingStatus.failed,
+      ProcessingStatus: ProcessingStatus.failed,
     } as any);
 
     await this.stateService.update(state._id.toString(), {
