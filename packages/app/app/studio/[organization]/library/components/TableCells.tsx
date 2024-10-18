@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/popover';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
-import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import { Button } from '@/components/ui/button';
 import { getTypeLabel } from '@/lib/utils/utils';
 
@@ -38,8 +38,8 @@ const TableCells = async ({
   ).viewCount;
 
   if (
-    item.clippingStatus === ClippingStatus.pending ||
-    item.clippingStatus === ClippingStatus.failed
+    item.processingStatus === ProcessingStatus.pending ||
+    item.processingStatus === ProcessingStatus.failed
   ) {
     return <ProcessingSkeleton item={item} />;
   }
