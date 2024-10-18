@@ -4,7 +4,7 @@ import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical, Loader2 } from 'lucide-react';
 import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
-import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import DeleteAsset from '@/app/studio/[organization]/library/components/DeleteAsset';
 import { Button } from '@/components/ui/button';
 import { LuTrash2 } from 'react-icons/lu';
@@ -15,7 +15,7 @@ const VideoCardProcessing = async ({
   session: IExtendedSession;
 }) => {
   const thumbnail = useGenerateThumbnail({ session });
-  const isPending = session.clippingStatus === ClippingStatus.pending;
+  const isPending = session.processingStatus === ProcessingStatus.pending;
 
   return (
     <div
