@@ -1,8 +1,0 @@
-{
-  "name": "@streameth/ai-tools",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "openai": "^4.24.4"
-  }
-}

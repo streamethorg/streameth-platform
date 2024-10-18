@@ -8,73 +8,57 @@
  * @param [options.height=720] - The target height of the resized image in pixels.
  * @param [options.contentType='image/jpeg'] - The MIME type of the output image.
  * @param [options.quality=0.9] - The quality of the output image, between 0 and 1.
+ * @param [options.cover=false] - Whether to resize and crop the image to fit the specified dimensions.
  * @returns {Promise<File>} A promise that resolves with the resized image as a new File object.
  * @throws If there's an issue loading the image or creating the resized version.
  */
 export const resizeImage = async (
   file: File,
-  options = {
-    width: 1280,
-    height: 720,
-    contentType: 'image/jpeg',
-    quality: 0.9,
+  options: {
+    width: number;
+    height: number;
+    contentType: string;
+    quality: number;
+    cover?: boolean;
   }
 ): Promise<File> => {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = options.width;
-      canvas.height = options.height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) {
-        reject(new Error('Failed to get canvas context'));
-        return;
-      }
-
-      ctx.fillStyle = 'black';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const scale = Math.min(
-        canvas.width / img.width,
-        canvas.height / img.height
-      );
-
-      const newWidth = Math.round(img.width * scale);
-      const newHeight = Math.round(img.height * scale);
-
-      const x = Math.round((canvas.width - newWidth) / 2);
-      const y = Math.round((canvas.height - newHeight) / 2);
-
-      ctx.drawImage(img, x, y, newWidth, newHeight);
-
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            reject(new Error('Failed to create blob'));
-            return;
-          }
-          const resizedFile = new File([blob], file.name, {
-            type: options.contentType,
-            lastModified: new Date().getTime(),
-          });
-          resolve(resizedFile);
-        },
-        options.contentType,
-        options.quality
-      );
-    };
-
-    img.onerror = () => {
-      reject(new Error('Failed to load image'));
-    };
-
+  return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e) => {
+      const img = document.createElement('img');
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = options.width;
+        canvas.height = options.height;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('Could not get canvas context');
+
+        if (options.cover) {
+          const scale = Math.max(
+            options.width / img.width,
+            options.height / img.height
+          );
+          const x = options.width / 2 - (img.width / 2) * scale;
+          const y = options.height / 2 - (img.height / 2) * scale;
+          ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+        } else {
+          ctx.drawImage(img, 0, 0, options.width, options.height);
+        }
+
+        canvas.toBlob(
+          (blob) => {
+            const resizedFile = new File([blob!], file.name, {
+              type: options.contentType,
+              lastModified: Date.now(),
+            });
+            resolve(resizedFile);
+          },
+          options.contentType,
+          options.quality
+        );
+      };
       img.src = e.target?.result as string;
-    };
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
     };
     reader.readAsDataURL(file);
   });

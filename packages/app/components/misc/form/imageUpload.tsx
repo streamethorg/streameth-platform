@@ -78,6 +78,8 @@ interface ImageUploadProps extends React.InputHTMLAttributes<HTMLInputElement> {
     requireExactSize?: { width: number; height: number };
     isProfileImage?: boolean;
     resize?: boolean;
+    resizeDimensions?: { width: number; height: number };
+    coverImage?: boolean;
   };
 }
 
@@ -93,6 +95,8 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
         maxSize = 2000000,
         isProfileImage = false,
         resize = false,
+        resizeDimensions,
+        coverImage = false,
       },
       onChange,
       value,
@@ -140,17 +144,27 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
         if (!file) return '';
 
         try {
-          const isValidSize = await validateImage(file);
-          if (!isValidSize) {
-            throw new Error('Invalid image size');
+          let resizedFile = file;
+          if (resize && resizeDimensions) {
+            resizedFile = await resizeImage(file, {
+              width: resizeDimensions.width,
+              height: resizeDimensions.height,
+              contentType: file.type,
+              quality: 0.8,
+              cover: coverImage,
+            });
           }
 
           const data = new FormData();
           data.set(
             'file',
-            new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
-              type: file.type,
-            })
+            new File(
+              [resizedFile],
+              resizedFile.name.replace(/[^a-zA-Z0-9.]/g, '_'),
+              {
+                type: resizedFile.type,
+              }
+            )
           );
           data.set('directory', path);
           const imageUrl = await imageUploadAction({ data });
@@ -166,7 +180,7 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
           setIsUploading(false);
         }
       },
-      [path, validateImage]
+      [path, resize, resizeDimensions, coverImage]
     );
 
     const onDropRejected = useCallback(
@@ -185,7 +199,12 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
       async (acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
           const file = resize
-            ? await resizeImage(acceptedFiles[0])
+            ? await resizeImage(acceptedFiles[0], {
+                width: resizeDimensions?.width ?? 1280,
+                height: resizeDimensions?.height ?? 720,
+                contentType: acceptedFiles[0].type,
+                quality: 0.8,
+              })
             : acceptedFiles[0];
           const { displayUrl } = getImageData(file);
 
@@ -244,7 +263,9 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
 
     const imageClasses = isProfileImage
       ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'
-      : 'w-full h-full object-contain';
+      : coverImage
+        ? 'w-full h-full object-cover'
+        : 'w-full h-full object-contain';
 
     const placeholderClasses = isProfileImage
       ? 'flex cursor-pointer flex-col items-center justify-center w-full h-full rounded-full border border-dotted bg-secondary'
