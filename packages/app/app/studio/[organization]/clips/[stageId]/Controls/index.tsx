@@ -16,6 +16,8 @@ const Controls = () => {
     pixelsPerSecond,
     setPixelsPerSecond,
     currentTime,
+    setIsCreatingClip,
+    setIsImportingMarkers,
   } = useClipContext();
 
   const spaceBarHandler = (e: KeyboardEvent) => {
@@ -48,10 +50,11 @@ const Controls = () => {
 
   const isMaxZoom = pixelsPerSecond >= 10;
   const isMinZoom = pixelsPerSecond <= 0.1;
-
+  const isDisabled =
+    isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
   return (
-    <div className="bg-white flex w-full flex-row border-b items-center border-t p-2">
-      <div className="space-x-8 flex flex-row items-center">
+    <div className="bg-white flex w-full justify-between border-b items-center border-t p-2 gap-4">
+      <div className="space-x-6 flex flex-row items-center">
         {videoRef.current?.paused ? (
           <button onClick={() => videoRef.current?.play()}>
             <PlayIcon />
@@ -102,20 +105,38 @@ const Controls = () => {
           </button>
         </div>
       </div>
-
-      <Button
-        disabled={
-          isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-        }
-        onClick={() => {
-          setIsAddingOrEditingMarker(true);
-          setSelectedMarkerId('');
-        }}
-        variant="outline"
-        className="ml-auto"
-      >
-        Add marker
-      </Button>
+      <div className="flex items-center space-x-2">
+        <div className="hidden xl:flex space-x-2">
+          <Button
+            disabled={isDisabled}
+            variant={'primary'}
+            className="bg-blue-500 text-white"
+            onClick={() => setIsCreatingClip(true)}
+          >
+            Create Clip
+          </Button>
+          <Button
+            disabled={isDisabled}
+            variant={'outline'}
+            onClick={() => setIsImportingMarkers(true)}
+          >
+            Import Markers
+          </Button>
+        </div>
+        <Button
+          disabled={
+            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+          }
+          onClick={() => {
+            setIsAddingOrEditingMarker(true);
+            setSelectedMarkerId('');
+          }}
+          variant="outline"
+          className="ml-auto"
+        >
+          Add marker
+        </Button>
+      </div>
     </div>
   );
 };

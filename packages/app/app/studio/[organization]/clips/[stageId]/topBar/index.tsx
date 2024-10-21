@@ -12,7 +12,7 @@ const TopBar = () => {
   const isDisabled =
     isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
   return (
-    <div className="w-full bg-white p-4 flex justify-end gap-4">
+    <div className="flex xl:hidden  w-full bg-white p-4 justify-end gap-4">
       <Button
         disabled={isDisabled}
         variant={'outline'}
