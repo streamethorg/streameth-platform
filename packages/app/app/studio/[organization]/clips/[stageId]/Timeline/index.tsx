@@ -35,12 +35,6 @@ const Timeline = () => {
       // Calculate initial scale
       let scale = targetWidth / maxLength;
 
-      // Adjust initial scale to ensure the 10-second range is visible
-      // This will make the slider be clearly draggable on the timeline from the edges
-      const minInitialScale = (targetWidth * 0.3) / 10; // 30% of target width for 10 seconds
-      scale = Math.max(scale, minInitialScale);
-
-      // Adjust scale for longer videos
       if (maxLength > 10800) {
         // More than 3 hours
         scale = Math.min(scale, 0.15); // Limit scale to 0.2 pixels per second for extremely long videos
