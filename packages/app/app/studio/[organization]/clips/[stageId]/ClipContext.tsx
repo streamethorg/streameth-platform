@@ -122,6 +122,8 @@ export const ClipProvider = ({
   const [pixelsPerSecond, setPixelsPerSecond] = useState(3);
   const timelineWidth = maxLength * pixelsPerSecond;
   const [hls, setHls] = useState<Hls | null>(null);
+  const [hasMouseMoved, setHasMouseMoved] = useState<boolean>(false); // New state to track mouse movement
+
   const [timeReference, setTimeReference] = useState<{
     currentTime: number;
     unixTime: number;
@@ -197,27 +199,40 @@ export const ClipProvider = ({
   const handleMouseDown = (marker: string, event: React.MouseEvent) => {
     setDragging(marker);
     setSelectedTooltip(marker);
-
     setInitialMousePos(event.clientX);
     setInitialMarkerPos(
       marker === 'start' ? startTime.displayTime : endTime.displayTime
     );
+
+    // Reset the hasMouseMoved flag
+    setHasMouseMoved(false);
+
+    // Calculate the initial position based on the marker type
+    if (marker === 'overlay') {
+      const timelineRect = event.currentTarget.getBoundingClientRect();
+      const relativeClickX = event.clientX - timelineRect.left; // Get the click position relative to the timeline
+      const clickTime = (relativeClickX / timelineWidth) * maxLength; // Convert to time
+      setInitialMarkerPos(clickTime); // Set the initial marker position based on the click
+    }
   };
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
-      if (dragging && videoRef.current && hls?.playingDate) {
-        const mouseDelta = event.clientX - initialMousePos;
-        const timeDelta = (mouseDelta / timelineWidth) * maxLength;
+      if (dragging && videoRef.current) {
+        // Set hasMouseMoved to true if the mouse has moved
+        setHasMouseMoved(true);
+
+        const mouseDelta = event.clientX - initialMousePos; // Calculate the change in mouse position
+        const timeDelta = (mouseDelta / timelineWidth) * maxLength; // Convert to time
         const newTime = Math.max(
           0,
           Math.min(maxLength, initialMarkerPos + timeDelta)
-        );
+        ); // Calculate new time
 
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: hls.playingDate.getTime(),
+              unix: hls?.playingDate?.getTime() ?? 0,
               displayTime: newTime,
             });
           }
@@ -227,13 +242,32 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: hls.playingDate.getTime(),
+              unix: hls?.playingDate?.getTime() ?? 0,
               displayTime: newTime,
             });
           }
-        }
+        } else if (dragging === 'overlay') {
+          const newStartTime = Math.max(
+            0,
+            Math.min(newTime, endTime.displayTime)
+          );
+          const newEndTime = Math.max(
+            newStartTime,
+            Math.min(
+              newTime + (endTime.displayTime - startTime.displayTime),
+              videoRef.current.duration
+            )
+          );
 
-        videoRef.current.currentTime = newTime;
+          setStartTime({
+            unix: hls?.playingDate?.getTime() ?? 0,
+            displayTime: newStartTime,
+          });
+          setEndTime({
+            unix: hls?.playingDate?.getTime() ?? 0,
+            displayTime: newEndTime,
+          });
+        }
       }
     },
     [
@@ -247,7 +281,7 @@ export const ClipProvider = ({
       setStartTime,
       setEndTime,
       videoRef,
-      playbackStatus,
+      hls,
     ]
   );
 

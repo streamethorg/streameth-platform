@@ -141,21 +141,40 @@ const TrimmControls = ({
 export default TrimmControls;
 
 export const TrimmOverlay = () => {
-  const { startTime, endTime, videoRef } = useClipContext();
+  const {
+    startTime,
+    endTime,
+    videoRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+  } = useClipContext();
+
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
       return (time / videoRef.current.duration) * 100;
     }
     return 0;
   };
+
+  const handleMouseDownOverlay = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent default behavior
+    handleMouseDown('overlay', e); // Start dragging as overlay
+
+    // Attach mouse move and up events
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
   return (
     <div
-      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6 "
+      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6 cursor-grab"
       style={{
         background: 'rgba(200, 75, 80, 0.4)',
         left: `${+getMarkerPosition(startTime.displayTime)}%`,
         right: `${100 - getMarkerPosition(endTime.displayTime)}%`,
       }}
+      onMouseDown={handleMouseDownOverlay} // Add mouse down event
     ></div>
   );
 };
