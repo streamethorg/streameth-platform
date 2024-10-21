@@ -186,12 +186,17 @@ export const ClipProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stageId]);
 
+  // Make the slider clearly draggable at first sight by setting the end time to 90% of the duration
   useEffect(() => {
-    setEndTime({
-      unix: convertSecondsToUnix(30),
-      displayTime: 30,
-    });
-  }, []);
+    if (videoRef.current) {
+      const duration = videoRef.current.duration;
+      setEndTime({
+        unix: convertSecondsToUnix(duration * 0.9), // Set to 90% of the duration
+        displayTime: duration * 0.9,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoRef.current?.duration]);
 
   const convertSecondsToUnix = (seconds: number) => {
     if (timeReference.currentTime < seconds) {
