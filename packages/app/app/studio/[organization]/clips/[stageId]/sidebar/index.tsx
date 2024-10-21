@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markers from './markers/index';
 import SessionSidebar from './clips';
 import { useClipContext } from '../ClipContext';
-import CreateClipButton from '../topBar/CreateClipButton';
+import CreateClipButton from '../Controls/CreateClipButton';
 import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
 import { IExtendedSession } from '@/lib/types';
 import ImportMarkersForm from './markers/ImportMarkersForm';

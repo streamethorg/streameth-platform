@@ -11,8 +11,10 @@ const Controls = () => {
     isAddingOrEditingMarker,
     setIsAddingOrEditingMarker,
     isImportingMarkers,
+    setIsImportingMarkers,
     setSelectedMarkerId,
     isCreatingClip,
+    setIsCreatingClip,
     pixelsPerSecond,
     setPixelsPerSecond,
     currentTime,
@@ -103,19 +105,40 @@ const Controls = () => {
         </div>
       </div>
 
-      <Button
-        disabled={
-          isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-        }
-        onClick={() => {
-          setIsAddingOrEditingMarker(true);
-          setSelectedMarkerId('');
-        }}
-        variant="outline"
-        className="ml-auto"
-      >
-        Add marker
-      </Button>
+      <div className="ml-auto space-x-2 flex items-center">
+        <Button
+          disabled={
+            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+          }
+          variant="outline"
+          onClick={() => setIsImportingMarkers(true)}
+        >
+          Import Markers
+        </Button>
+
+        <Button
+          disabled={
+            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+          }
+          onClick={() => {
+            setIsAddingOrEditingMarker(true);
+            setSelectedMarkerId('');
+          }}
+          variant="outline"
+        >
+          Add marker
+        </Button>
+        <Button
+          disabled={
+            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+          }
+          variant="primary"
+          className="bg-blue-500 text-white"
+          onClick={() => setIsCreatingClip(true)}
+        >
+          Create Clip
+        </Button>
+      </div>
     </div>
   );
 };
