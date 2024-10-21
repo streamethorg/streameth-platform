@@ -105,8 +105,8 @@ export const ClipProvider = ({
     displayTime: 0,
   });
   const [endTime, setEndTime] = useState({
-    unix: Date.now() + 10000, // 10 seconds later
-    displayTime: 10,
+    unix: Date.now() + 30000,
+    displayTime: 30,
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -186,7 +186,7 @@ export const ClipProvider = ({
 
   useEffect(() => {
     setEndTime({
-      unix: convertSecondsToUnix(30),
+      unix: Date.now() + 30000,
       displayTime: 30,
     });
   }, []);
