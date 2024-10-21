@@ -110,16 +110,6 @@ const Controls = () => {
           disabled={
             isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
           }
-          variant="outline"
-          onClick={() => setIsImportingMarkers(true)}
-        >
-          Import Markers
-        </Button>
-
-        <Button
-          disabled={
-            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-          }
           onClick={() => {
             setIsAddingOrEditingMarker(true);
             setSelectedMarkerId('');
@@ -128,16 +118,27 @@ const Controls = () => {
         >
           Add marker
         </Button>
-        <Button
-          disabled={
-            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-          }
-          variant="primary"
-          className="bg-blue-500 text-white"
-          onClick={() => setIsCreatingClip(true)}
-        >
-          Create Clip
-        </Button>
+        <div className="hidden xl:flex space-x-2">
+          <Button
+            disabled={
+              isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+            }
+            variant="outline"
+            onClick={() => setIsImportingMarkers(true)}
+          >
+            Import Markers
+          </Button>
+          <Button
+            disabled={
+              isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
+            }
+            variant="primary"
+            className="bg-blue-500 text-white"
+            onClick={() => setIsCreatingClip(true)}
+          >
+            Create Clip
+          </Button>
+        </div>
       </div>
     </div>
   );

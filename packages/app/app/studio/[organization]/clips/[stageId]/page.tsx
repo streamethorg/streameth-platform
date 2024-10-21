@@ -16,6 +16,7 @@ import { getLiveStageSrcValue } from '@/lib/utils/utils';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import TopBar from './topBar';
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { organization, stageId } = params;
@@ -92,6 +93,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     <ClipProvider organizationId={organizationId} stageId={stageId}>
       <div className="flex flex-row w-full h-full">
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
+          <TopBar />
           <ReactHlsPlayer src={videoSrc} type={type} />
           <Controls />
           <div className="w-full p-2 bg-white">
