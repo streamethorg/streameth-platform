@@ -7,12 +7,12 @@ import DefaultThumbnail from '@/lib/svg/DefaultThumbnail';
 import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import { formatDate } from '@/lib/utils/time';
 import { IExtendedSession } from '@/lib/types';
-import { ClippingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import DeleteAsset from '../DeleteAsset';
 import { Button } from '@/components/ui/button';
 
 const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
-  const isPending = item.clippingStatus === ClippingStatus.pending;
+  const isPending = item.processingStatus === ProcessingStatus.pending;
 
   const getStatusClassName = () =>
     isPending ? 'bg-muted cursor-not-allowed opacity-50' : '';

@@ -19,10 +19,11 @@ import Livepeer from '@/public/livepeer-logo.png';
 import Image from 'next/image';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAccount, useEnsName } from 'wagmi';
-import { SignInUserButton } from '@/components/misc/SignInUserButton';
+
 import { IExtendedChat } from '@/lib/types';
 import { createChatAction } from '@/lib/actions/chat';
 import { useSIWE } from 'connectkit';
+import Link from 'next/link';
 interface Props {
   participantName: string;
   stageId: string;
@@ -248,7 +249,7 @@ function Chat({ participantName, stageId, prevChatMessages }: Props) {
         </div>
       ) : (
         <div className="flex flex-col gap-2">
-          <SignInUserButton />
+          <Link href={'/auth/login'}>Sign in</Link>
         </div>
       )}
     </>

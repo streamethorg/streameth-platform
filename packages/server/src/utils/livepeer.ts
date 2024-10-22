@@ -1,6 +1,6 @@
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
-import { ClippingStatus, SessionType } from '@interfaces/session.interface';
+import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import { IMultiStream } from '@interfaces/stream.interface';
 import Organization from '@models/organization.model';
@@ -421,7 +421,7 @@ export const createClip = async (data: {
           endClipTime: data.end,
           type: SessionType.clip,
           createdAt: new Date(),
-          clippingStatus: ClippingStatus.pending,
+          ProcessingStatus: ProcessingStatus.pending,
         },
       },
       {

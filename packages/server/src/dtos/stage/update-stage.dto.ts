@@ -1,4 +1,8 @@
-import { IPlugin, IStreamSettings } from '@interfaces/stage.interface';
+import {
+  IPlugin,
+  IStreamSettings,
+  StageType,
+} from '@interfaces/stage.interface';
 import {
   IsArray,
   IsBoolean,
@@ -68,4 +72,16 @@ export class UpdateStageDto {
   @IsOptional()
   @IsArray()
   nftCollections?: Types.ObjectId | string[];
+
+  @IsOptional()
+  @IsObject()
+  source?: {
+    url: string;
+    m3u8Url: string;
+    type: string;
+  };
+
+  @IsOptional()
+  @IsString()
+  type?: StageType;
 }

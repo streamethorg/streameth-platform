@@ -1,6 +1,4 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar';
-import CheckAuthorization from '@/components/authorization/CheckAuthorization';
-import AuthorizationMessage from '@/components/authorization/AuthorizationMessage';
 import Support from '@/components/misc/Support';
 
 const StudioLayout = async (props: { children: React.ReactNode }) => {

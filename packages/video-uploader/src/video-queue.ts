@@ -55,14 +55,14 @@ async function videoUploader() {
             data.session.slug,
             './tmp'
           );
-          if(data.type === 'youtube') {
+          if (data.type === 'youtube') {
             await uploadToYouTube(
               data.session,
               `./tmp/${data.session.slug}.mp4`,
               data.token
             );
           }
-          if(data.type === 'twitter') {
+          if (data.type === 'twitter') {
             await uploadToTwitter(
               data.session,
               `./tmp/${data.session.slug}.mp4`,

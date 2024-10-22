@@ -1,14 +1,8 @@
 'use client';
 import Link from 'next/link';
-import {
-  NavigationMenuItem,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
+import { NavigationMenuItem } from '@/components/ui/navigation-menu';
 import { NavBarProps } from '@/lib/types';
-import { SignInUserButton } from '../misc/SignInUserButton';
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
-import { ConnectWalletButton } from '../misc/ConnectWalletButton';
+
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
 
@@ -68,7 +62,11 @@ export default function Navbar({
           </NavigationMenuItem>
         ))}
         <NavigationMenuItem key={'connect'} className="lg:hidden">
-          {isStudio && <SignInUserButton className="w-full rounded-none" />}
+          {isStudio && (
+            <Link href="/auth/logout">
+              <Button>Sign out</Button>
+            </Link>
+          )}
         </NavigationMenuItem>
       </ul>
     </div>

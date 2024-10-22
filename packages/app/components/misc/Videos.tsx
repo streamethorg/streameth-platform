@@ -1,5 +1,6 @@
 'use client';
-import { IExtendedSession } from '@/lib/types';
+
+import type { IExtendedSession } from '@/lib/types';
 import VideoCardWithMenu from './VideoCard/VideoCardWithMenu';
 import { Suspense } from 'react';
 import { Card, CardHeader, CardDescription } from '@/components/ui/card';
@@ -25,7 +26,9 @@ export default function VideoGrid({
         } gap-8 gap-x-4 md:grid-cols-3 lg:grid lg:grid-cols-3`}
       >
         {videos.map((video, index) =>
-          ({ maxVideos }) && maxVideos && index > maxVideos ? null : (
+          typeof maxVideos === 'number' &&
+          maxVideos > 0 &&
+          index >= maxVideos ? null : (
             <div
               key={video._id}
               className={`${
@@ -34,9 +37,9 @@ export default function VideoGrid({
             >
               <Suspense
                 fallback={
-                  <Card key={index} className="border-none shadow-none">
+                  <Card key={video._id} className="border-none shadow-none">
                     <div className="min-h-full rounded-xl uppercase">
-                      <div className="aspect-video w-full animate-pulse bg-secondary"></div>
+                      <div className="aspect-video w-full animate-pulse bg-secondary" />
                       <CardHeader className="mt-1 rounded bg-white bg-opacity-10 px-2 lg:p-0 lg:py-2">
                         <CardDescription className="flex flex-col space-y-2">
                           <div className="h-5 w-full animate-pulse bg-secondary" />

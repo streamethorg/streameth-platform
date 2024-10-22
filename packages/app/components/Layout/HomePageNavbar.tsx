@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
 import { Menu, X } from 'lucide-react';
 import Navbar from './Navbar';
-import { SignInUserButton } from '../misc/SignInUserButton';
 import { Search } from 'lucide-react';
 import { Page } from '@/lib/types';
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
@@ -260,7 +259,7 @@ const PCNavBar = ({
           </Link>
         )}
         {isStudio && (
-          <Link href="/logout">
+          <Link href="/auth/logout">
             <Button>Sign out</Button>
           </Link>
         )}

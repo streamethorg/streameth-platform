@@ -86,10 +86,10 @@ export async function uploadToYouTube(
     coverImage: string;
   },
   videoFilePath: string,
-  accessToken: string
+  token: { key?: string; secret: string }
 ): Promise<void> {
   try {
-    const youtube = await getYoutubeClient(accessToken);
+    const youtube = await getYoutubeClient(token.secret);
     const insertResponse = await youtube.videos.insert({
       part: ['status', 'snippet'],
       requestBody: {
@@ -112,6 +112,7 @@ export async function uploadToYouTube(
 
     let processingStatus = 'processing';
     while (processingStatus === 'processing') {
+      logger.info('Video is still processing');
       processingStatus = await checkVideoProcessingStatus(
         insertResponse.data.id,
         youtube
@@ -122,13 +123,17 @@ export async function uploadToYouTube(
         return;
       }
     }
-    const filePath = `./tmp/${session.slug}.jpg`;
-    const imageResponse = await downloadImage(session.coverImage, filePath);
-    if (imageResponse.success) {
-      await setThumbnail(youtube, insertResponse.data.id, filePath);
-      unlinkSync(filePath);
-      return;
+    if (session.coverImage) {
+      logger.info('Downloading image:', session.coverImage);
+      const filePath = `./tmp/${session.slug}.jpg`;
+      const imageResponse = await downloadImage(session.coverImage, filePath);
+      if (imageResponse.success) {
+        await setThumbnail(youtube, insertResponse.data.id, filePath);
+        unlinkSync(filePath);
+        return;
+      }
     }
+    logger.info('Video uploaded successfully');
     return;
   } catch (error) {
     logger.error('An error occurred:', error);

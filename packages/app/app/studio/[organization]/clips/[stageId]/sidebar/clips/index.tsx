@@ -50,8 +50,8 @@ const SessionSidebar = ({
   }, [sessions, selectedDate, searchTerm]);
 
   return (
-    <div className="h-full w-full">
-      <CardTitle className="w-full border-b bg-white p-2 text-lg">
+    <div className="h-full w-full flex flex-col">
+      <CardTitle className="w-full border-b bg-white p-2 text-lg flex-shrink-0">
         <div className="flex flex-col space-y-2">
           <Select
             defaultValue={selectedDate}
@@ -81,7 +81,7 @@ const SessionSidebar = ({
           />
         </div>
       </CardTitle>
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto pb-4">
         {filteredSessions.length > 0 ? (
           filteredSessions.map((session) => (
             <div key={session._id} className="w-full px-4 py-2">
