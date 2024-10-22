@@ -418,7 +418,7 @@ export const calculateTimelineScale = ({
   const maxLength = videoRef.current?.duration || 0;
   const screenWidth = window.innerWidth;
   const minScale = 0.1; // Further reduced minimum pixels per second
-  const maxScale = 10; // Maximum pixels per second
+  const maxScale = 14; // Maximum pixels per second
   const targetWidth = timelineContainerWidth || screenWidth;
   // Calculate initial scale
   let scale = targetWidth / maxLength;
