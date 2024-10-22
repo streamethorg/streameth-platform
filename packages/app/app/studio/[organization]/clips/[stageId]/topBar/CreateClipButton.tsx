@@ -14,7 +14,6 @@ import { fetchSession } from '@/lib/services/sessionService';
 import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { fetchStage } from '@/lib/services/stageService';
-import { Uploads } from '../../../library/components/UploadVideoDialog';
 import CreateClipForm from './CreateClipForm';
 
 const CreateClipButton = ({
