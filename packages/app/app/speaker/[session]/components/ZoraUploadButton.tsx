@@ -28,6 +28,7 @@ import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import Link from 'next/link';
 import CopyText from '@/components/misc/CopyText';
+import { LuCircle, LuCircleDot, LuDot } from 'react-icons/lu';
 
 const BASE_CHAIN_ID = 8453;
 
@@ -69,7 +70,7 @@ async function getDownloadUrl(assetId: string): Promise<string> {
 const ZoraUploadButton = ({
   session,
   state,
-  variant = 'primary',
+  variant = 'outline',
 }: {
   session: IExtendedSession;
   state: IExtendedState[];
@@ -181,8 +182,10 @@ const ZoraUploadButton = ({
           uploadToZora();
         }}
         disabled={isDisabled}
-        variant={variant}
+        variant={'outline'}
+        className="flex items-center bg-gradient-to-bl from-white via-purple-700 to-purple-800 text-white hover:text-white min-w-[200px]"
       >
+        <LuCircle className="mr-2 w-4 h-4" />
         {isUploading
           ? 'Uploading...'
           : !state[0]

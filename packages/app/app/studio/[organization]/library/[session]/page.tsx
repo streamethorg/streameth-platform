@@ -25,6 +25,7 @@ import SessionTranscriptions from './components/SessionTranscriptions';
 import { Button } from '@/components/ui/button';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 import { fetchAllStates } from '@/lib/services/stateService';
+import ZoraUploadButton from '@/app/speaker/[session]/components/ZoraUploadButton';
 
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
@@ -39,6 +40,10 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     sessionId: session._id,
     type: StateType.transcrpition,
   });
+
+  const state = (await fetchAllStates({ sessionId: session._id })).filter(
+    (state) => state.type === StateType.nft
+  ) as IExtendedState[];
 
   const videoUrl = await getVideoUrlAction(session);
   if (!videoUrl) return notFound();
@@ -122,6 +127,11 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                       organization={organization}
                       organizationSlug={params.organization}
                       sessionId={session._id}
+                    />
+                    <ZoraUploadButton
+                      session={session}
+                      state={state}
+                      variant="primary"
                     />
                   </div>
                 </AccordionContent>
