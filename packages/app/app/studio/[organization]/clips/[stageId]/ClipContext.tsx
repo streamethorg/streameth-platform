@@ -78,6 +78,8 @@ type ClipContextType = {
   setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
   isLoadingMarkers: boolean;
   setIsLoadingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
+  timelineContainerWidth: number;
+  setTimelineContainerWidth: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -136,6 +138,8 @@ export const ClipProvider = ({
     unixTime: 0,
   });
   const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
+  const [timelineContainerWidth, setTimelineContainerWidth] =
+    useState<number>(0);
 
   // We create a state for currentTime to trigger re-renders when the video time changes.
   // This allows components using this context to update based on the current playback time.
@@ -430,6 +434,8 @@ export const ClipProvider = ({
         setPlayheadPosition,
         isLoadingMarkers,
         setIsLoadingMarkers,
+        timelineContainerWidth,
+        setTimelineContainerWidth,
       }}
     >
       {children}
