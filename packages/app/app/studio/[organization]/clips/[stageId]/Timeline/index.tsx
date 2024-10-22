@@ -5,6 +5,7 @@ import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
 import { useEffect, useRef } from 'react';
+import { calculateTimelineScale } from '@/lib/utils/utils';
 
 const Timeline = () => {
   const {
@@ -12,12 +13,13 @@ const Timeline = () => {
     dragging,
     isLoading,
     filteredMarkers,
-    handleMouseDown, // Rename this to avoid confusion
+    handleMouseDown,
     handleMarkerClick,
     goToClickTime,
     selectedMarkerId,
     pixelsPerSecond,
     setPixelsPerSecond,
+    setTimelineContainerWidth,
   } = useClipContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -25,32 +27,29 @@ const Timeline = () => {
   const maxLength = videoRef.current?.duration || 0;
   const timelineWidth = maxLength * pixelsPerSecond;
 
+  // Get the width of the timeline container
+  const timelineContainerWidth = timelineRef.current?.offsetWidth || 0;
+
+  useEffect(() => {
+    const updateTimelineContainerWidth = () => {
+      setTimelineContainerWidth(timelineRef.current?.offsetWidth || 0);
+    };
+
+    updateTimelineContainerWidth(); // Set initial width on mount
+    window.addEventListener('resize', updateTimelineContainerWidth); // Update on resize
+
+    return () => {
+      window.removeEventListener('resize', updateTimelineContainerWidth);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timelineContainerWidth]);
+
   useEffect(() => {
     const calculateScale = () => {
-      const screenWidth = window.innerWidth;
-      const minScale = 0.1; // Further reduced minimum pixels per second
-      const maxScale = 10; // Maximum pixels per second
-      const targetWidth = screenWidth * 0.7; // Increased target timeline width to 70% of screen width
-
-      // Calculate initial scale
-      let scale = targetWidth / maxLength;
-
-      if (maxLength > 10800) {
-        // More than 3 hours
-        scale = Math.min(scale, 0.15); // Limit scale to 0.2 pixels per second for extremely long videos
-      } else if (maxLength > 7200) {
-        // 2 to 3 hours
-        scale = Math.min(scale, 0.5); // Limit scale to 0.5 pixels per second
-      } else if (maxLength > 3600) {
-        // 1 to 2 hours
-        scale = Math.min(scale, 1); // Limit scale to 1 pixel per second
-      } else if (maxLength > 1800) {
-        // 30 minutes to 1 hour
-        scale = Math.min(scale, 2); // Limit scale to 2 pixels per second
-      }
-
-      scale = Math.max(minScale, Math.min(maxScale, scale));
-
+      const scale = calculateTimelineScale({
+        videoRef,
+        timelineContainerWidth,
+      });
       setPixelsPerSecond(scale);
     };
 
@@ -60,7 +59,7 @@ const Timeline = () => {
     return () => {
       window.removeEventListener('resize', calculateScale);
     };
-  }, [maxLength]);
+  }, [maxLength, setPixelsPerSecond, videoRef, timelineContainerWidth]);
 
   if (!maxLength || !timelineWidth || !videoRef.current)
     return (

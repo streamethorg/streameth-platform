@@ -39,6 +39,7 @@ import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { fetchStage } from '@/lib/services/stageService';
 import { LuRotateCcw } from 'react-icons/lu';
+import { formatClipTime } from '@/lib/utils/time';
 
 const CreateClipButton = ({
   organizationId,
@@ -285,12 +286,12 @@ const CreateClipButton = ({
                       <FormLabel>Start:</FormLabel>
                       <FormControl className="w-full">
                         <Input
-                          type="number"
+                          type="text"
                           {...field}
                           disabled
                           placeholder="Input start"
                           className="bg-white w-full"
-                          value={startTime.displayTime.toFixed(0)}
+                          value={formatClipTime(startTime.displayTime)}
                         />
                       </FormControl>
                     </div>
@@ -308,12 +309,12 @@ const CreateClipButton = ({
                       <FormLabel className="">End: </FormLabel>
                       <FormControl>
                         <Input
-                          type="number"
+                          type="text"
                           {...field}
                           disabled
                           placeholder="Input end"
                           className="bg-white"
-                          value={endTime.displayTime.toFixed(0)}
+                          value={formatClipTime(endTime.displayTime)}
                         />
                       </FormControl>
                     </div>

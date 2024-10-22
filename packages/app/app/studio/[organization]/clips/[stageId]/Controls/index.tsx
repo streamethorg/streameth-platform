@@ -4,6 +4,7 @@ import { PlayIcon, PauseIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
+import { calculateTimelineScale } from '@/lib/utils/utils';
 
 const Controls = () => {
   const {
@@ -18,6 +19,7 @@ const Controls = () => {
     pixelsPerSecond,
     setPixelsPerSecond,
     currentTime,
+    timelineContainerWidth,
   } = useClipContext();
 
   const spaceBarHandler = (e: KeyboardEvent) => {
@@ -40,20 +42,41 @@ const Controls = () => {
     };
   }, [videoRef]);
 
-  const handleZoomIn = () => {
-    setPixelsPerSecond((prev) => Math.min(prev * 1.2, 10));
-  };
+  const [isFit, setIsFit] = useState(false);
+  const isMaxZoom = pixelsPerSecond >= 10;
+  const isMinZoom = pixelsPerSecond <= 0.1 || isFit;
+
+  useEffect(() => {
+    if (
+      pixelsPerSecond <=
+      calculateTimelineScale({ videoRef, timelineContainerWidth })
+    ) {
+      setIsFit(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pixelsPerSecond]);
 
   const handleZoomOut = () => {
     setPixelsPerSecond((prev) => Math.max(prev / 1.2, 0.1));
   };
 
-  const isMaxZoom = pixelsPerSecond >= 10;
-  const isMinZoom = pixelsPerSecond <= 0.1;
+  const handleZoomIn = () => {
+    setIsFit(false); // Reset fit state when zooming out
+    setPixelsPerSecond((prev) => Math.min(prev * 1.2, 10));
+  };
+
+  const handleFit = () => {
+    const scale = calculateTimelineScale({ videoRef, timelineContainerWidth });
+    setPixelsPerSecond(scale);
+    setIsFit(true); // Set fit state to true when fit is applied
+  };
+
+  const isDisabled =
+    isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
 
   return (
-    <div className="bg-white flex w-full flex-row border-b items-center border-t p-2">
-      <div className="space-x-8 flex flex-row items-center">
+    <div className="bg-white flex w-full justify-between border-b items-center border-t p-2 gap-4">
+      <div className="space-x-6 flex flex-row items-center">
         {videoRef.current?.paused ? (
           <button onClick={() => videoRef.current?.play()}>
             <PlayIcon />
@@ -85,31 +108,33 @@ const Controls = () => {
             ? formatTime(videoRef.current.duration)
             : '00:00:00'}
         </span>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-3">
           <button
             onClick={handleZoomOut}
+            // variant={'outline'}
             className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Zoom out"
-            disabled={isMinZoom}
+            disabled={isMinZoom || isFit}
           >
-            <ZoomOutIcon size={20} />
+            <ZoomOutIcon size={22} />
           </button>
+          <Button onClick={handleFit} disabled={isFit} variant={'outline'}>
+            Fit
+          </Button>
           <button
             onClick={handleZoomIn}
             className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Zoom in"
             disabled={isMaxZoom}
           >
-            <ZoomInIcon size={20} />
+            <ZoomInIcon size={22} />
           </button>
         </div>
       </div>
 
       <div className="ml-auto space-x-2 flex items-center">
         <Button
-          disabled={
-            isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-          }
+          disabled={isDisabled}
           onClick={() => {
             setIsAddingOrEditingMarker(true);
             setSelectedMarkerId('');
@@ -120,18 +145,14 @@ const Controls = () => {
         </Button>
         <div className="hidden xl:flex space-x-2">
           <Button
-            disabled={
-              isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-            }
+            disabled={isDisabled}
             variant="outline"
             onClick={() => setIsImportingMarkers(true)}
           >
             Import Markers
           </Button>
           <Button
-            disabled={
-              isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-            }
+            disabled={isDisabled}
             variant="primary"
             className="bg-blue-500 text-white"
             onClick={() => setIsCreatingClip(true)}

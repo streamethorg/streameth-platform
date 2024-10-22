@@ -35,7 +35,7 @@ export async function generateMetadata({
   if (!searchParams.session) return generalMetadata;
 
   if (!video) return generalMetadata;
-  const thumbnail = video.coverImage ?? (await generateThumbnailAction(video));
+  const thumbnail = video.coverImage || (await generateThumbnailAction(video));
 
   return watchMetadata({ session: video, thumbnail });
 }

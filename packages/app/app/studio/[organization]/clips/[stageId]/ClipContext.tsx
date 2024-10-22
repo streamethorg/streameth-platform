@@ -78,6 +78,8 @@ type ClipContextType = {
   setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
   isLoadingMarkers: boolean;
   setIsLoadingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
+  timelineContainerWidth: number;
+  setTimelineContainerWidth: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -126,6 +128,8 @@ export const ClipProvider = ({
   const [pixelsPerSecond, setPixelsPerSecond] = useState(3);
   const timelineWidth = maxLength * pixelsPerSecond;
   const [hls, setHls] = useState<Hls | null>(null);
+  const [hasMouseMoved, setHasMouseMoved] = useState<boolean>(false); // New state to track mouse movement
+
   const [timeReference, setTimeReference] = useState<{
     currentTime: number;
     unixTime: number;
@@ -134,6 +138,8 @@ export const ClipProvider = ({
     unixTime: 0,
   });
   const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
+  const [timelineContainerWidth, setTimelineContainerWidth] =
+    useState<number>(0);
 
   // We create a state for currentTime to trigger re-renders when the video time changes.
   // This allows components using this context to update based on the current playback time.
@@ -184,12 +190,17 @@ export const ClipProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stageId]);
 
+  // Make the slider clearly draggable at first sight by setting the end time to 90% of the duration
   useEffect(() => {
-    setEndTime({
-      unix: Date.now() + 60000,
-      displayTime: 60,
-    });
-  }, []);
+    if (videoRef.current) {
+      const duration = videoRef.current.duration;
+      setEndTime({
+        unix: convertSecondsToUnix(duration * 0.9), // Set to 90% of the duration
+        displayTime: duration * 0.9,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoRef.current?.duration]);
 
   const convertSecondsToUnix = (seconds: number) => {
     if (timeReference.currentTime < seconds) {
@@ -232,21 +243,33 @@ export const ClipProvider = ({
       marker === 'start' ? startTime.displayTime : endTime.displayTime
     );
 
+    // Reset the hasMouseMoved flag
+    setHasMouseMoved(false);
+
     // Capture the current playhead position
     if (videoRef.current) {
       setPlayheadPosition(videoRef.current.currentTime);
+    }
+    // Calculate the initial position based on the marker type
+    if (marker === 'overlay') {
+      const timelineRect = event.currentTarget.getBoundingClientRect();
+      const relativeClickX = event.clientX - timelineRect.left; // Get the click position relative to the timeline
+      const clickTime = (relativeClickX / timelineWidth) * maxLength; // Convert to time
+      setInitialMarkerPos(clickTime); // Set the initial marker position based on the click
     }
   };
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
       if (dragging && videoRef.current && playbackStatus) {
+        // Set hasMouseMoved to true if the mouse has moved
+        setHasMouseMoved(true);
         const mouseDelta = event.clientX - initialMousePos;
         const timeDelta = (mouseDelta / timelineWidth) * maxLength;
         const newTime = Math.max(
           0,
           Math.min(maxLength, initialMarkerPos + timeDelta)
-        );
+        ); // Calculate new time
 
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
@@ -265,8 +288,28 @@ export const ClipProvider = ({
               displayTime: newTime,
             });
           }
-        }
+        } else if (dragging === 'overlay') {
+          const newStartTime = Math.max(
+            0,
+            Math.min(newTime, endTime.displayTime)
+          );
+          const newEndTime = Math.max(
+            newStartTime,
+            Math.min(
+              newTime + (endTime.displayTime - startTime.displayTime),
+              videoRef.current.duration
+            )
+          );
 
+          setStartTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: newStartTime,
+          });
+          setEndTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: newEndTime,
+          });
+        }
         // Update currentTime state without changing video's currentTime
         setCurrentTime(newTime);
       }
@@ -282,6 +325,7 @@ export const ClipProvider = ({
       setStartTime,
       setEndTime,
       videoRef,
+      hls,
       playbackStatus,
       setCurrentTime,
     ]
@@ -390,6 +434,8 @@ export const ClipProvider = ({
         setPlayheadPosition,
         isLoadingMarkers,
         setIsLoadingMarkers,
+        timelineContainerWidth,
+        setTimelineContainerWidth,
       }}
     >
       {children}

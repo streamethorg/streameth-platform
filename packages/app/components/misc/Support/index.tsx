@@ -7,14 +7,14 @@ import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import SupportForm from './SupportForm';
-import { Button } from '../../ui/button';
+
 import {
   Credenza,
   CredenzaContent,
   CredenzaTitle,
   CredenzaTrigger,
 } from '@/components/ui/crezenda';
+import { usePathname } from 'next/navigation';
 
 const Support = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,8 +49,10 @@ const Support = () => {
         setIsLoading(false);
       });
   }
+  const pathname = usePathname();
+  const isClipPage = pathname.includes('/clips');
 
-  return (
+  return isClipPage ? null : (
     <Credenza open={open} onOpenChange={setOpen}>
       <CredenzaContent className="max-h-[700px] p-6 md:overflow-auto">
         <CredenzaTitle>Contact Support</CredenzaTitle>

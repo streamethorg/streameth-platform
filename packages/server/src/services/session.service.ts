@@ -3,7 +3,7 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { RecordingSessionPayload } from '@interfaces/livepeer.webhook.interface';
 import {
-  ClippingStatus,
+  ProcessingStatus,
   ISession,
   SessionType,
 } from '@interfaces/session.interface';
@@ -56,7 +56,7 @@ export default class SessionService {
         eventSlug: eventSlug,
         eventId: eventId,
         stageId: stageId,
-        clippingStatus: ClippingStatus.pending,
+        processingStatus: ProcessingStatus.pending,
       },
       `${this.path}/${eventId}`,
     );
@@ -239,6 +239,7 @@ export default class SessionService {
         format: asset.videoSpec?.format ?? '',
         duration: asset.videoSpec?.duration ?? 0,
       },
+      processingStatus: ProcessingStatus.completed,
     });
     await stage.updateOne({ $inc: { recordingIndex: 1 } });
     await this.sessionTranscriptions({
