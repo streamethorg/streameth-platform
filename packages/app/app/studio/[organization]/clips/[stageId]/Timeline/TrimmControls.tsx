@@ -170,13 +170,13 @@ export const TrimmOverlay = () => {
 
   return (
     <div
-      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6 cursor-grab"
+      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6"
       style={{
         background: 'rgba(200, 75, 80, 0.4)',
         left: `${+getMarkerPosition(startTime.displayTime)}%`,
         right: `${100 - getMarkerPosition(endTime.displayTime)}%`,
       }}
-      onMouseDown={handleMouseDownOverlay} // Add mouse down event
+      // onMouseDown={handleMouseDownOverlay} // Add mouse down event
     ></div>
   );
 };

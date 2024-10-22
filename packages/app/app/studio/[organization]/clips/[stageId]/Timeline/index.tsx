@@ -41,7 +41,8 @@ const Timeline = () => {
     return () => {
       window.removeEventListener('resize', updateTimelineContainerWidth);
     };
-  }, [setTimelineContainerWidth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timelineContainerWidth]);
 
   useEffect(() => {
     const calculateScale = () => {
