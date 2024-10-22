@@ -21,40 +21,9 @@ const Controls = () => {
     currentTime,
     timelineContainerWidth,
   } = useClipContext();
-
-  const spaceBarHandler = (e: KeyboardEvent) => {
-    if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
-      if (videoRef.current) {
-        if (videoRef.current.paused) {
-          videoRef.current.play();
-        } else {
-          videoRef.current.pause();
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', spaceBarHandler);
-
-    return () => {
-      window.removeEventListener('keydown', spaceBarHandler);
-    };
-  }, [videoRef]);
-
   const [isFit, setIsFit] = useState(false);
   const isMaxZoom = pixelsPerSecond >= 10;
   const isMinZoom = pixelsPerSecond <= 0.1 || isFit;
-
-  useEffect(() => {
-    if (
-      pixelsPerSecond <=
-      calculateTimelineScale({ videoRef, timelineContainerWidth })
-    ) {
-      setIsFit(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pixelsPerSecond]);
 
   const handleZoomOut = () => {
     setPixelsPerSecond((prev) => Math.max(prev / 1.2, 0.1));
@@ -68,8 +37,48 @@ const Controls = () => {
   const handleFit = () => {
     const scale = calculateTimelineScale({ videoRef, timelineContainerWidth });
     setPixelsPerSecond(scale);
-    setIsFit(true); // Set fit state to true when fit is applied
+    setIsFit(true);
   };
+
+  const spaceBarHandler = (e: KeyboardEvent) => {
+    if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
+      if (videoRef.current) {
+        if (videoRef.current.paused) {
+          videoRef.current.play();
+        } else {
+          videoRef.current.pause();
+        }
+      }
+    }
+
+    // New keyboard shortcuts for zooming and fitting
+    if (e.key === '-') {
+      if (!isFit) handleZoomOut();
+    } else if (e.key === '+' || e.key === '=') {
+      handleZoomIn();
+    } else if (e.key === '0') {
+      if (!isFit) handleFit();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', spaceBarHandler);
+
+    return () => {
+      window.removeEventListener('keydown', spaceBarHandler);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoRef, timelineContainerWidth, isFit]);
+
+  useEffect(() => {
+    if (
+      pixelsPerSecond <=
+      calculateTimelineScale({ videoRef, timelineContainerWidth })
+    ) {
+      setIsFit(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pixelsPerSecond]);
 
   const isDisabled =
     isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
@@ -111,9 +120,8 @@ const Controls = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={handleZoomOut}
-            // variant={'outline'}
             className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Zoom out"
+            aria-label="Zoom out -"
             disabled={isMinZoom || isFit}
           >
             <ZoomOutIcon size={22} />
@@ -124,7 +132,7 @@ const Controls = () => {
           <button
             onClick={handleZoomIn}
             className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Zoom in"
+            aria-label="Zoom in +"
             disabled={isMaxZoom}
           >
             <ZoomInIcon size={22} />
