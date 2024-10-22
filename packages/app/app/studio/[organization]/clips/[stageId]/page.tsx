@@ -13,10 +13,10 @@ import {
   fetchSession,
 } from '@/lib/services/sessionService';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
-import TopBar from './topBar';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import TopBar from './topBar';
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { organization, stageId } = params;
