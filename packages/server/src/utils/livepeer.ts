@@ -10,11 +10,13 @@ import SessionModel from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
 import { Livepeer } from 'livepeer';
-import type { Session, Stream } from 'livepeer/dist/models/components';
+import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
 import youtubedl from 'youtube-dl-exec';
 import { createEventVideoById } from './firebase';
+import { AgendaJobs } from './job-worker';
 import { refreshAccessToken } from './oauth';
+import pulse from './pulse.cron';
 import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 const { host, secretKey } = config.livepeer;
@@ -395,6 +397,20 @@ export const getHlsUrl = async (
   }
 };
 
+export const getClipEditorStatus = async (
+  data: Pick<IClip, 'editorOptions'>,
+): Promise<boolean> => {
+  const sessionPromises = data.editorOptions.events.map(
+    async (event: { sessionId: string }) => {
+      const session = await SessionModel.findById(event.sessionId);
+      if (!session) return true;
+      return session.processingStatus !== ProcessingStatus.pending;
+    },
+  );
+  const results = await Promise.all(sessionPromises);
+  return results.every(Boolean);
+};
+
 export const createClip = async (data: IClip) => {
   try {
     if (data.isEditorEnabled) {
@@ -402,6 +418,10 @@ export const createClip = async (data: IClip) => {
         stageId: data.stageId,
         organizationId: data.organizationId,
         ...data.editorOptions,
+      });
+      await pulse.schedule(new Date(), AgendaJobs.CLIP_EDITOR_STATUS, {
+        data,
+        attempts: 5,
       });
       return {
         task: { id: '' },
