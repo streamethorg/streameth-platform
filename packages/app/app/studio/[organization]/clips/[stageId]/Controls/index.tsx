@@ -12,13 +12,13 @@ const Controls = () => {
     isAddingOrEditingMarker,
     setIsAddingOrEditingMarker,
     isImportingMarkers,
+    setIsImportingMarkers,
     setSelectedMarkerId,
     isCreatingClip,
+    setIsCreatingClip,
     pixelsPerSecond,
     setPixelsPerSecond,
     currentTime,
-    setIsCreatingClip,
-    setIsImportingMarkers,
     timelineContainerWidth,
   } = useClipContext();
 
@@ -131,31 +131,29 @@ const Controls = () => {
           </button>
         </div>
       </div>
-      <div className="flex items-center space-x-2">
+
+      <div className="ml-auto space-x-2 flex items-center">
         <Button
           disabled={isDisabled}
-          variant={'outline'}
-          onClick={() => setIsImportingMarkers(true)}
+          onClick={() => {
+            setIsAddingOrEditingMarker(true);
+            setSelectedMarkerId('');
+          }}
+          variant="outline"
         >
-          Import Markers
+          Add marker
         </Button>
         <div className="hidden xl:flex space-x-2">
           <Button
-            disabled={
-              isAddingOrEditingMarker || isImportingMarkers || isCreatingClip
-            }
-            onClick={() => {
-              setIsAddingOrEditingMarker(true);
-              setSelectedMarkerId('');
-            }}
+            disabled={isDisabled}
             variant="outline"
-            className="ml-auto"
+            onClick={() => setIsImportingMarkers(true)}
           >
-            Add marker
+            Import Markers
           </Button>
           <Button
             disabled={isDisabled}
-            variant={'primary'}
+            variant="primary"
             className="bg-blue-500 text-white"
             onClick={() => setIsCreatingClip(true)}
           >
