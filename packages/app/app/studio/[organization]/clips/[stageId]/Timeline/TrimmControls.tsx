@@ -102,7 +102,7 @@ const TrimmControls = ({
   };
   return (
     <div
-      className={`absolute h-[calc(100%-20px)] w-[15px] top-6`}
+      className={`absolute h-[calc(100%-20px)] w-[10px] top-6`}
       style={{
         left: `${getMarkerPosition(
           marker === 'start' ? startTime.displayTime : endTime.displayTime

@@ -107,8 +107,8 @@ export const ClipProvider = ({
     displayTime: 0,
   });
   const [endTime, setEndTime] = useState({
-    unix: Date.now() + 10000, // 10 seconds later
-    displayTime: 10,
+    unix: Date.now() + 60000,
+    displayTime: 60,
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);

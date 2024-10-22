@@ -337,7 +337,7 @@ const CreateClipButton = ({
                 className="w-3/4"
                 variant="primary"
                 type="submit"
-                loading={isLoading || isCreateClip}
+                loading={isCreateClip}
               >
                 {isCreateClip ? 'Creating...' : 'Create'}
               </Button>
