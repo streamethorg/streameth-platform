@@ -270,7 +270,7 @@ export const ClipProvider = ({
           0,
           Math.min(maxLength, initialMarkerPos + timeDelta)
         ); // Calculate new time
-        console.log('newTime', newTime, 'currentTime', currentTime);
+
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
