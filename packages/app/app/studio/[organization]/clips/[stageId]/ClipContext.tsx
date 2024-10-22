@@ -190,13 +190,13 @@ export const ClipProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stageId]);
 
-  // Make the slider clearly draggable at first sight by setting the end time to 90% of the duration
+  // Make the slider clearly draggable at first sight by setting the end time to 100% of the duration
   useEffect(() => {
     if (videoRef.current) {
       const duration = videoRef.current.duration;
       setEndTime({
-        unix: convertSecondsToUnix(duration * 0.9), // Set to 90% of the duration
-        displayTime: duration * 0.9,
+        unix: convertSecondsToUnix(duration * 1),
+        displayTime: duration * 1,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -270,7 +270,7 @@ export const ClipProvider = ({
           0,
           Math.min(maxLength, initialMarkerPos + timeDelta)
         ); // Calculate new time
-
+        console.log('newTime', newTime, 'currentTime', currentTime);
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
