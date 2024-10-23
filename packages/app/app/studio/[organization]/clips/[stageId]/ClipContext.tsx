@@ -190,14 +190,17 @@ export const ClipProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stageId]);
 
-  // Make the slider clearly draggable at first sight by setting the end time to 100% of the duration
+  // Track if the effect has set end time
+  const hasSetEndTimeRef = useRef(false);
+
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current?.duration && !hasSetEndTimeRef.current) {
       const duration = videoRef.current.duration;
       setEndTime({
         unix: convertSecondsToUnix(duration * 1),
         displayTime: duration * 1,
       });
+      hasSetEndTimeRef.current = true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef.current?.duration]);
