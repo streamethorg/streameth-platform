@@ -1,10 +1,20 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { PlayIcon, PauseIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
+import {
+  PlayIcon,
+  PauseIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+  InfoIcon,
+} from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
 import { calculateTimelineScale } from '@/lib/utils/utils';
+import { HoverCard } from '@radix-ui/react-hover-card';
+import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { LuInfo } from 'react-icons/lu';
+import { Badge } from '@/components/ui/badge';
 
 const Controls = () => {
   const {
@@ -137,6 +147,51 @@ const Controls = () => {
           >
             <ZoomInIcon size={22} />
           </button>
+          <HoverCard>
+            <HoverCardTrigger>
+              <LuInfo />
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="text-xs text-gray-700">
+                <p>
+                  <Badge variant="outline">
+                    <code>Space</code>
+                  </Badge>{' '}
+                  Play/Pause
+                </p>
+                <p>
+                  <Badge variant="outline">
+                    <code>+</code>
+                  </Badge>{' '}
+                  Zoom in
+                </p>
+                <p>
+                  <Badge variant="outline">
+                    <code>-</code>
+                  </Badge>{' '}
+                  Zoom out
+                </p>
+                <p>
+                  <Badge variant="outline">
+                    <code>0</code>
+                  </Badge>{' '}
+                  Zoom to fit
+                </p>
+                <p>
+                  <Badge variant="outline">
+                    <code>i</code>
+                  </Badge>{' '}
+                  Slider start
+                </p>
+                <p>
+                  <Badge variant="outline">
+                    <code>o</code>
+                  </Badge>{' '}
+                  Slider end
+                </p>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
         </div>
       </div>
 
