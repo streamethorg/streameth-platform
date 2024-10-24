@@ -94,13 +94,15 @@ const TrimmControls = ({
 
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
-      return (time / videoRef.current.duration) * 100;
+      // Ensure the initial position is within the video duration
+      const adjustedTime = Math.min(time, videoRef.current.duration);
+      return (adjustedTime / videoRef.current.duration) * 100;
     }
     return 0;
   };
   return (
     <div
-      className={`absolute h-[calc(100%-20px)] w-[15px] top-6`}
+      className={`absolute h-[calc(100%-20px)] w-[10px] top-6`}
       style={{
         left: `${getMarkerPosition(
           marker === 'start' ? startTime.displayTime : endTime.displayTime
@@ -141,21 +143,41 @@ const TrimmControls = ({
 export default TrimmControls;
 
 export const TrimmOverlay = () => {
-  const { startTime, endTime, videoRef } = useClipContext();
+  const {
+    startTime,
+    endTime,
+    videoRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+  } = useClipContext();
+
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
       return (time / videoRef.current.duration) * 100;
     }
     return 0;
   };
+
+  // currently disabled because slider jumps when dragging
+  const handleMouseDownOverlay = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent default behavior
+    handleMouseDown('overlay', e); // Start dragging as overlay
+
+    // Attach mouse move and up events
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
   return (
     <div
-      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6 "
+      className="absolute flex rounded-xl h-[calc(100%-20px)] top-6"
       style={{
         background: 'rgba(200, 75, 80, 0.4)',
         left: `${+getMarkerPosition(startTime.displayTime)}%`,
         right: `${100 - getMarkerPosition(endTime.displayTime)}%`,
       }}
+      // onMouseDown={handleMouseDownOverlay} // Add mouse down event
     ></div>
   );
 };

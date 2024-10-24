@@ -11,6 +11,7 @@ import useSearchParams from '@/lib/hooks/useSearchParams';
 import { IExtendedMarker } from '@/lib/types';
 import { fetchMarkers } from '@/lib/services/markerSevice';
 import Hls from 'hls.js';
+import { convertSecondsToUnix } from '@/lib/utils/utils';
 
 type PlaybackStatus = {
   progress: number;
@@ -74,6 +75,12 @@ type ClipContextType = {
   setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
   currentTime: number;
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
+  playheadPosition: number;
+  setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
+  isLoadingMarkers: boolean;
+  setIsLoadingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
+  timelineContainerWidth: number;
+  setTimelineContainerWidth: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -91,19 +98,11 @@ export const ClipProvider = ({
 }) => {
   const { handleTermChange, searchParams } = useSearchParams();
 
-  const start = searchParams.get('start');
-  const end = searchParams.get('end');
+  const start = searchParams?.get('start');
+  const end = searchParams?.get('end');
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );
-  const [startTime, setStartTime] = useState<PlaybackTime>({
-    displayTime: 0,
-    unix: 0,
-  });
-  const [endTime, setEndTime] = useState<PlaybackTime>({
-    displayTime: 0,
-    unix: 30,
-  });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -122,6 +121,8 @@ export const ClipProvider = ({
   const [pixelsPerSecond, setPixelsPerSecond] = useState(3);
   const timelineWidth = maxLength * pixelsPerSecond;
   const [hls, setHls] = useState<Hls | null>(null);
+  const [hasMouseMoved, setHasMouseMoved] = useState<boolean>(false); // New state to track mouse movement
+
   const [timeReference, setTimeReference] = useState<{
     currentTime: number;
     unixTime: number;
@@ -129,6 +130,17 @@ export const ClipProvider = ({
     currentTime: 0,
     unixTime: 0,
   });
+  const [startTime, setStartTime] = useState({
+    unix: convertSecondsToUnix(timeReference, 0),
+    displayTime: 0,
+  });
+  const [endTime, setEndTime] = useState({
+    unix: Date.now() + 60000,
+    displayTime: 60,
+  });
+  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
+  const [timelineContainerWidth, setTimelineContainerWidth] =
+    useState<number>(0);
 
   // We create a state for currentTime to trigger re-renders when the video time changes.
   // This allows components using this context to update based on the current playback time.
@@ -136,6 +148,8 @@ export const ClipProvider = ({
   // preventing excessive re-renders and improving performance.
   const [currentTime, setCurrentTime] = useState(0);
   const requestRef = useRef<number>();
+
+  const [playheadPosition, setPlayheadPosition] = useState<number>(0);
 
   const animate = useCallback(() => {
     if (videoRef.current) {
@@ -155,14 +169,20 @@ export const ClipProvider = ({
 
   const fetchAndSetMarkers = async () => {
     if (stageId) {
-      setIsLoading(true);
-      const markers = await fetchMarkers({
-        organizationId,
-        stageId,
-      });
-      setMarkers(markers);
-      setFilteredMarkers(markers);
-      setIsLoading(false);
+      setIsLoadingMarkers(true);
+      try {
+        const markers = await fetchMarkers({
+          organizationId,
+          stageId,
+        });
+        setMarkers(markers);
+        setFilteredMarkers(markers);
+      } catch (error) {
+        console.error('Error fetching markers:', error);
+        // Optionally, you can show an error toast here
+      } finally {
+        setIsLoadingMarkers(false);
+      }
     }
   };
 
@@ -171,23 +191,20 @@ export const ClipProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stageId]);
 
-  useEffect(() => {
-    setEndTime({
-      unix: convertSecondsToUnix(30),
-      displayTime: 30,
-    });
-  }, []);
+  // Track if the effect has set end time
+  const hasSetEndTimeRef = useRef(false);
 
-  const convertSecondsToUnix = (seconds: number) => {
-    if (timeReference.currentTime < seconds) {
-      return Math.round(
-        timeReference.unixTime + (seconds - timeReference.currentTime) * 1000
-      );
+  useEffect(() => {
+    if (videoRef.current?.duration && !hasSetEndTimeRef.current) {
+      const duration = videoRef.current.duration;
+      setEndTime({
+        unix: convertSecondsToUnix(timeReference, duration * 1),
+        displayTime: duration * 1,
+      });
+      hasSetEndTimeRef.current = true;
     }
-    return Math.round(
-      timeReference.unixTime - (timeReference.currentTime - seconds) * 1000
-    );
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoRef.current?.duration]);
 
   const updateClipBounds = (start: number, end: number) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
@@ -198,26 +215,59 @@ export const ClipProvider = ({
     setDragging(marker);
     setSelectedTooltip(marker);
 
+    // const updateTime = (newTime: number) => {
+    //   if (marker === 'start') {
+    //     setStartTime({
+    //       unix: Date.now() - (playbackStatus?.offset ?? 0),
+    //       displayTime: Math.max(0, Math.min(newTime, endTime.displayTime - 1)),
+    //     });
+    //   } else if (marker === 'end') {
+    //     setEndTime({
+    //       unix: Date.now() - (playbackStatus?.offset ?? 0),
+    //       displayTime: Math.min(
+    //         videoRef.current?.duration || Infinity,
+    //         Math.max(newTime, startTime.displayTime + 1)
+    //       ),
+    //     });
+    //   }
+    // };
     setInitialMousePos(event.clientX);
     setInitialMarkerPos(
       marker === 'start' ? startTime.displayTime : endTime.displayTime
     );
+
+    // Reset the hasMouseMoved flag
+    setHasMouseMoved(false);
+
+    // Capture the current playhead position
+    if (videoRef.current) {
+      setPlayheadPosition(videoRef.current.currentTime);
+    }
+    // Calculate the initial position based on the marker type
+    if (marker === 'overlay') {
+      const timelineRect = event.currentTarget.getBoundingClientRect();
+      const relativeClickX = event.clientX - timelineRect.left; // Get the click position relative to the timeline
+      const clickTime = (relativeClickX / timelineWidth) * maxLength; // Convert to time
+      setInitialMarkerPos(clickTime); // Set the initial marker position based on the click
+    }
   };
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
-      if (dragging && videoRef.current && hls?.playingDate) {
+      if (dragging && videoRef.current && playbackStatus) {
+        // Set hasMouseMoved to true if the mouse has moved
+        setHasMouseMoved(true);
         const mouseDelta = event.clientX - initialMousePos;
         const timeDelta = (mouseDelta / timelineWidth) * maxLength;
         const newTime = Math.max(
           0,
           Math.min(maxLength, initialMarkerPos + timeDelta)
-        );
+        ); // Calculate new time
 
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: hls.playingDate.getTime(),
+              unix: Date.now() - playbackStatus.offset,
               displayTime: newTime,
             });
           }
@@ -227,13 +277,34 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: hls.playingDate.getTime(),
+              unix: Date.now() - playbackStatus.offset,
               displayTime: newTime,
             });
           }
-        }
+        } else if (dragging === 'overlay') {
+          const newStartTime = Math.max(
+            0,
+            Math.min(newTime, endTime.displayTime)
+          );
+          const newEndTime = Math.max(
+            newStartTime,
+            Math.min(
+              newTime + (endTime.displayTime - startTime.displayTime),
+              videoRef.current.duration
+            )
+          );
 
-        videoRef.current.currentTime = newTime;
+          setStartTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: newStartTime,
+          });
+          setEndTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: newEndTime,
+          });
+        }
+        // Update currentTime state without changing video's currentTime
+        setCurrentTime(newTime);
       }
     },
     [
@@ -247,25 +318,31 @@ export const ClipProvider = ({
       setStartTime,
       setEndTime,
       videoRef,
+      hls,
       playbackStatus,
+      setCurrentTime,
     ]
   );
 
   const handleMouseUp = useCallback(() => {
     setDragging(null);
-  }, []);
+    // Set the video's currentTime to match the dragged position
+    if (videoRef.current) {
+      videoRef.current.currentTime = currentTime;
+    }
+  }, [currentTime]);
 
   const handleMarkerClick = (marker: IExtendedMarker) => {
     if (videoRef.current) {
       videoRef.current.currentTime = marker.startClipTime;
       setStartTime({
         displayTime: marker.startClipTime,
-        unix: convertSecondsToUnix(marker.startClipTime),
+        unix: convertSecondsToUnix(timeReference, marker.startClipTime),
       });
 
       setEndTime({
         displayTime: marker.endClipTime,
-        unix: convertSecondsToUnix(marker.endClipTime),
+        unix: convertSecondsToUnix(timeReference, marker.endClipTime),
       });
 
       setSelectedMarkerId(marker._id);
@@ -300,7 +377,7 @@ export const ClipProvider = ({
       window.removeEventListener('dragstart', preventDefault);
       window.removeEventListener('dragover', preventDefault);
     };
-  }, [handleMouseMove, handleMouseUp, selectedTooltip, videoRef]);
+  }, [handleMouseMove, handleMouseUp]);
 
   return (
     <ClipContext.Provider
@@ -346,6 +423,12 @@ export const ClipProvider = ({
         setPixelsPerSecond,
         currentTime,
         setCurrentTime,
+        playheadPosition,
+        setPlayheadPosition,
+        isLoadingMarkers,
+        setIsLoadingMarkers,
+        timelineContainerWidth,
+        setTimelineContainerWidth,
       }}
     >
       {children}
