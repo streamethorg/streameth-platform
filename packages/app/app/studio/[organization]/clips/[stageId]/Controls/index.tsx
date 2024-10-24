@@ -127,32 +127,87 @@ const Controls = () => {
             ? formatTime(videoRef.current.duration)
             : '00:00:00'}
         </span>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleZoomOut}
-            className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Zoom out -"
-            disabled={isMinZoom || isFit}
-          >
-            <ZoomOutIcon size={22} />
-          </button>
-          <Button onClick={handleFit} disabled={isFit} variant={'outline'}>
-            Fit
-          </Button>
-          <button
-            onClick={handleZoomIn}
-            className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label="Zoom in +"
-            disabled={isMaxZoom}
-          >
-            <ZoomInIcon size={22} />
-          </button>
+        <div className="flex items-center gap-2">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <button
+                onClick={handleZoomOut}
+                className="p-1 rounded hover:bg-gray-200 disabled:opacity-50"
+                aria-label="Zoom out -"
+                disabled={isMinZoom || isFit}
+              >
+                <ZoomOutIcon size={22} />
+              </button>
+            </HoverCardTrigger>
+            <HoverCardContent className="text-xs w-fit px-2 py-1 rounded-lg">
+              <p>
+                Zoom out
+                <Badge
+                  className="px-1.5 py-1 ml-2 bg-gray-400 text-white"
+                  variant="outline"
+                >
+                  <code>-</code>
+                </Badge>{' '}
+              </p>
+            </HoverCardContent>
+          </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button
+                className="disabled:pointer-events-auto"
+                onClick={handleFit}
+                disabled={isFit}
+                variant={'outline'}
+                size={'icon'}
+              >
+                Fit
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="text-xs w-fit px-2 py-1 rounded-lg">
+              <p>
+                Zoom to fit
+                <Badge
+                  className="px-1.5 py-1 ml-2 bg-gray-400 text-white"
+                  variant="outline"
+                >
+                  <code>0</code>
+                </Badge>{' '}
+              </p>
+            </HoverCardContent>
+          </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <button
+                onClick={handleZoomIn}
+                className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Zoom in +"
+                disabled={isMaxZoom}
+              >
+                <ZoomInIcon size={22} />
+              </button>
+            </HoverCardTrigger>
+            <HoverCardContent className="text-xs w-fit px-2 py-1 rounded-lg">
+              <p>
+                Zoom in
+                <Badge
+                  className="px-1.5 py-1 ml-2 bg-gray-400 text-white"
+                  variant="outline"
+                >
+                  <code>+</code>
+                </Badge>{' '}
+              </p>
+            </HoverCardContent>
+          </HoverCard>
+
           <HoverCard>
             <HoverCardTrigger>
               <LuInfo />
             </HoverCardTrigger>
             <HoverCardContent>
               <div className="text-xs text-gray-700">
+                <p className="font-semibold pb-2">Keyboard shortcuts</p>
                 <p>
                   <Badge variant="outline">
                     <code>Space</code>
