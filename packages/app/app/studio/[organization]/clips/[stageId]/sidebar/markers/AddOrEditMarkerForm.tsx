@@ -71,8 +71,8 @@ const AddOrEditMarkerForm = ({
           color: '#FFA500',
           start: new Date().getTime(),
           end: new Date().getTime() + 1,
-          startClipTime: currentTime,
-          endClipTime: currentTime + 1,
+          startClipTime: Math.round(Number(currentTime)),
+          endClipTime: Math.round(Number(currentTime + 1)),
         },
   });
 
@@ -175,33 +175,33 @@ const AddOrEditMarkerForm = ({
                       <div className="flex flex-col w-full gap-2">
                         <div className="flex items-center w-full gap-2">
                           <FormLabel>Start:</FormLabel>
-                          <Button
-                            onClick={() => handleSetStartOrSetEnd('start')}
-                            type="button"
-                            variant={'outline'}
-                            size={'sm'}
-                          >
-                            Set Start
-                          </Button>
+                          <FormControl className="w-full">
+                            <Input
+                              type="number"
+                              step="1"
+                              {...field}
+                              placeholder="Input start"
+                              className="bg-white"
+                              min={0}
+                              max={maxEndTime}
+                              onChange={(e) => {
+                                const value =
+                                  e.target.value === ''
+                                    ? ''
+                                    : Math.round(Number(e.target.value));
+                                field.onChange(value);
+                              }}
+                            />
+                          </FormControl>
                         </div>
-                        <FormControl className="w-full">
-                          <Input
-                            type="number"
-                            step="1"
-                            {...field}
-                            placeholder="Input start"
-                            className="bg-white w-full"
-                            min={0}
-                            max={maxEndTime}
-                            onChange={(e) => {
-                              const value =
-                                e.target.value === ''
-                                  ? ''
-                                  : Math.round(Number(e.target.value));
-                              field.onChange(value);
-                            }}
-                          />
-                        </FormControl>
+
+                        <Button
+                          onClick={() => handleSetStartOrSetEnd('start')}
+                          type="button"
+                          variant={'outline'}
+                        >
+                          Set Start
+                        </Button>
                       </div>
                       <FormMessage />
                     </FormItem>
@@ -218,33 +218,33 @@ const AddOrEditMarkerForm = ({
                       <div className="flex flex-col w-full gap-2">
                         <div className="flex items-center gap-2">
                           <FormLabel className="">End: </FormLabel>
-                          <Button
-                            type="button"
-                            onClick={() => handleSetStartOrSetEnd('end')}
-                            variant={'outline'}
-                            size={'sm'}
-                          >
-                            Set End
-                          </Button>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              step="1"
+                              {...field}
+                              placeholder="Input end"
+                              className="bg-white"
+                              onChange={(e) => {
+                                const value =
+                                  e.target.value === ''
+                                    ? ''
+                                    : Math.round(Number(e.target.value));
+                                field.onChange(value);
+                              }}
+                              min={form.getValues('startClipTime') + 1}
+                              max={maxEndTime}
+                            />
+                          </FormControl>
                         </div>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            step="1"
-                            {...field}
-                            placeholder="Input end"
-                            className="bg-white"
-                            onChange={(e) => {
-                              const value =
-                                e.target.value === ''
-                                  ? ''
-                                  : Math.round(Number(e.target.value));
-                              field.onChange(value);
-                            }}
-                            min={form.getValues('startClipTime') + 1}
-                            max={maxEndTime}
-                          />
-                        </FormControl>
+                        <Button
+                          type="button"
+                          onClick={() => handleSetStartOrSetEnd('end')}
+                          variant={'outline'}
+                          size={'sm'}
+                        >
+                          Set End
+                        </Button>
                       </div>
                       <FormMessage />
                     </FormItem>
