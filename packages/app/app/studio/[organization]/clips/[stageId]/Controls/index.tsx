@@ -143,7 +143,7 @@ const Controls = () => {
               <p>
                 Zoom out
                 <Badge
-                  className="px-1.5 py-1 ml-2 bg-gray-400 text-white"
+                  className="px-1 py-0.5 ml-2 bg-gray-400 text-white"
                   variant="outline"
                 >
                   <code>-</code>
@@ -168,7 +168,7 @@ const Controls = () => {
               <p>
                 Zoom to fit
                 <Badge
-                  className="px-1.5 py-1 ml-2 bg-gray-400 text-white"
+                  className="px-1 py-0.5 ml-2 bg-gray-400 text-white"
                   variant="outline"
                 >
                   <code>0</code>
@@ -192,7 +192,7 @@ const Controls = () => {
               <p>
                 Zoom in
                 <Badge
-                  className="px-1.5 py-1 ml-2 bg-gray-400 text-white"
+                  className="px-1 py-0.5 ml-2 bg-gray-400 text-white"
                   variant="outline"
                 >
                   <code>+</code>
