@@ -11,6 +11,7 @@ import useSearchParams from '@/lib/hooks/useSearchParams';
 import { IExtendedMarker } from '@/lib/types';
 import { fetchMarkers } from '@/lib/services/markerSevice';
 import Hls from 'hls.js';
+import { convertSecondsToUnix } from '@/lib/utils/utils';
 
 type PlaybackStatus = {
   progress: number;
@@ -102,14 +103,6 @@ export const ClipProvider = ({
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );
-  const [startTime, setStartTime] = useState({
-    unix: Date.now(),
-    displayTime: 0,
-  });
-  const [endTime, setEndTime] = useState({
-    unix: Date.now() + 60000,
-    displayTime: 60,
-  });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -136,6 +129,14 @@ export const ClipProvider = ({
   }>({
     currentTime: 0,
     unixTime: 0,
+  });
+  const [startTime, setStartTime] = useState({
+    unix: convertSecondsToUnix(timeReference, 0),
+    displayTime: 0,
+  });
+  const [endTime, setEndTime] = useState({
+    unix: Date.now() + 60000,
+    displayTime: 60,
   });
   const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
   const [timelineContainerWidth, setTimelineContainerWidth] =
@@ -190,28 +191,20 @@ export const ClipProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stageId]);
 
-  // Make the slider clearly draggable at first sight by setting the end time to 90% of the duration
+  // Track if the effect has set end time
+  const hasSetEndTimeRef = useRef(false);
+
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current?.duration && !hasSetEndTimeRef.current) {
       const duration = videoRef.current.duration;
       setEndTime({
-        unix: convertSecondsToUnix(duration * 0.9), // Set to 90% of the duration
-        displayTime: duration * 0.9,
+        unix: convertSecondsToUnix(timeReference, duration * 1),
+        displayTime: duration * 1,
       });
+      hasSetEndTimeRef.current = true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef.current?.duration]);
-
-  const convertSecondsToUnix = (seconds: number) => {
-    if (timeReference.currentTime < seconds) {
-      return Math.round(
-        timeReference.unixTime + (seconds - timeReference.currentTime) * 1000
-      );
-    }
-    return Math.round(
-      timeReference.unixTime - (timeReference.currentTime - seconds) * 1000
-    );
-  };
 
   const updateClipBounds = (start: number, end: number) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
@@ -344,12 +337,12 @@ export const ClipProvider = ({
       videoRef.current.currentTime = marker.startClipTime;
       setStartTime({
         displayTime: marker.startClipTime,
-        unix: convertSecondsToUnix(marker.startClipTime),
+        unix: convertSecondsToUnix(timeReference, marker.startClipTime),
       });
 
       setEndTime({
         displayTime: marker.endClipTime,
-        unix: convertSecondsToUnix(marker.endClipTime),
+        unix: convertSecondsToUnix(timeReference, marker.endClipTime),
       });
 
       setSelectedMarkerId(marker._id);

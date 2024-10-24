@@ -71,8 +71,8 @@ const AddOrEditMarkerForm = ({
           color: '#FFA500',
           start: new Date().getTime(),
           end: new Date().getTime() + 1,
-          startClipTime: currentTime,
-          endClipTime: currentTime + 1,
+          startClipTime: Math.round(Number(currentTime)),
+          endClipTime: Math.round(Number(currentTime + 1)),
         },
   });
 
@@ -121,6 +121,20 @@ const AddOrEditMarkerForm = ({
     }
   };
 
+  const handleSetStartOrSetEnd = (set: 'start' | 'end') => {
+    if (set === 'start') {
+      if (form.getValues('endClipTime') > currentTime) {
+        form.setValue('startClipTime', Math.round(Number(currentTime)));
+      } else {
+        toast.error('Start time must be less than end time');
+      }
+    } else if (form.getValues('startClipTime') < currentTime) {
+      form.setValue('endClipTime', Math.round(Number(currentTime)));
+    } else {
+      toast.error('End time must be greater than start time');
+    }
+  };
+
   return (
     <Card className="border-none rounded-none shadow-none">
       <CardHeader>
@@ -151,68 +165,92 @@ const AddOrEditMarkerForm = ({
               )}
             />
 
-            <div className="flex flex-row w-full space-x-2">
-              <FormField
-                control={form.control}
-                name="startClipTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col w-full gap-2">
-                      <FormLabel>Start:</FormLabel>
-                      <FormControl className="w-full">
-                        <Input
-                          type="number"
-                          step="any"
-                          {...field}
-                          placeholder="Input start"
-                          className="bg-white w-full"
-                          min={0}
-                          max={maxEndTime}
-                          onChange={(e) => {
-                            const value =
-                              e.target.value === ''
-                                ? ''
-                                : Number(e.target.value);
-                            field.onChange(value);
-                          }}
-                        />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="flex flex-row w-full space-x-6">
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="startClipTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="flex flex-col w-full gap-2">
+                        <div className="flex items-center w-full gap-2">
+                          <FormLabel>Start:</FormLabel>
+                          <FormControl className="w-full">
+                            <Input
+                              type="number"
+                              step="1"
+                              {...field}
+                              placeholder="Input start"
+                              className="bg-white"
+                              min={0}
+                              max={maxEndTime}
+                              onChange={(e) => {
+                                const value =
+                                  e.target.value === ''
+                                    ? ''
+                                    : Math.round(Number(e.target.value));
+                                field.onChange(value);
+                              }}
+                            />
+                          </FormControl>
+                        </div>
 
-              <FormField
-                control={form.control}
-                name="endClipTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col w-full gap-2">
-                      <FormLabel className="">End: </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          step="any"
-                          {...field}
-                          placeholder="Input end"
-                          className="bg-white"
-                          onChange={(e) => {
-                            const value =
-                              e.target.value === ''
-                                ? ''
-                                : Number(e.target.value);
-                            field.onChange(value);
-                          }}
-                          min={form.getValues('startClipTime') + 1}
-                          max={maxEndTime}
-                        />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                        <Button
+                          onClick={() => handleSetStartOrSetEnd('start')}
+                          type="button"
+                          variant={'outline'}
+                        >
+                          Set Start
+                        </Button>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="w-full">
+                <FormField
+                  control={form.control}
+                  name="endClipTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="flex flex-col w-full gap-2">
+                        <div className="flex items-center gap-2">
+                          <FormLabel className="">End: </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              step="1"
+                              {...field}
+                              placeholder="Input end"
+                              className="bg-white"
+                              onChange={(e) => {
+                                const value =
+                                  e.target.value === ''
+                                    ? ''
+                                    : Math.round(Number(e.target.value));
+                                field.onChange(value);
+                              }}
+                              min={form.getValues('startClipTime') + 1}
+                              max={maxEndTime}
+                            />
+                          </FormControl>
+                        </div>
+                        <Button
+                          type="button"
+                          onClick={() => handleSetStartOrSetEnd('end')}
+                          variant={'outline'}
+                          size={'sm'}
+                        >
+                          Set End
+                        </Button>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
             <FormField
               control={form.control}

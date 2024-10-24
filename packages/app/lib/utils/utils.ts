@@ -418,7 +418,7 @@ export const calculateTimelineScale = ({
   const maxLength = videoRef.current?.duration || 0;
   const screenWidth = window.innerWidth;
   const minScale = 0.1; // Further reduced minimum pixels per second
-  const maxScale = 10; // Maximum pixels per second
+  const maxScale = 14; // Maximum pixels per second
   const targetWidth = timelineContainerWidth || screenWidth;
   // Calculate initial scale
   let scale = targetWidth / maxLength;
@@ -439,4 +439,18 @@ export const calculateTimelineScale = ({
   }
   scale = Math.max(minScale, Math.min(maxScale, scale));
   return scale;
+};
+
+export const convertSecondsToUnix = (
+  timeReference: { currentTime: number; unixTime: number },
+  seconds: number
+) => {
+  if (timeReference.currentTime < seconds) {
+    return Math.round(
+      timeReference.unixTime + (seconds - timeReference.currentTime) * 1000
+    );
+  }
+  return Math.round(
+    timeReference.unixTime - (timeReference.currentTime - seconds) * 1000
+  );
 };

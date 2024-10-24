@@ -159,6 +159,7 @@ export const TrimmOverlay = () => {
     return 0;
   };
 
+  // currently disabled because slider jumps when dragging
   const handleMouseDownOverlay = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent default behavior
     handleMouseDown('overlay', e); // Start dragging as overlay
