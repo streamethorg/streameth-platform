@@ -440,3 +440,17 @@ export const calculateTimelineScale = ({
   scale = Math.max(minScale, Math.min(maxScale, scale));
   return scale;
 };
+
+export const convertSecondsToUnix = (
+  timeReference: { currentTime: number; unixTime: number },
+  seconds: number
+) => {
+  if (timeReference.currentTime < seconds) {
+    return Math.round(
+      timeReference.unixTime + (seconds - timeReference.currentTime) * 1000
+    );
+  }
+  return Math.round(
+    timeReference.unixTime - (timeReference.currentTime - seconds) * 1000
+  );
+};

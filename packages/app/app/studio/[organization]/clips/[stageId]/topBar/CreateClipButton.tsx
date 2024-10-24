@@ -338,6 +338,7 @@ const CreateClipButton = ({
                 variant="primary"
                 type="submit"
                 loading={isCreateClip}
+                disabled={endTime.unix < startTime.unix}
               >
                 {isCreateClip ? 'Creating...' : 'Create'}
               </Button>
