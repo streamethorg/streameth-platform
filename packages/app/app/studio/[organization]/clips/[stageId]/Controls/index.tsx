@@ -205,7 +205,7 @@ const Controls = () => {
             <HoverCardTrigger>
               <LuInfo />
             </HoverCardTrigger>
-            <HoverCardContent>
+            <HoverCardContent className="z-[9999]">
               <div className="text-xs text-gray-700">
                 <p className="font-semibold pb-2">Keyboard shortcuts</p>
                 <p>
