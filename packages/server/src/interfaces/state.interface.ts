@@ -25,6 +25,7 @@ export enum StateType {
   transcrpition = 'transcrpition',
   social = 'social',
   animation = 'animation',
+  clip = 'clip',
 }
 
 export interface IState {
