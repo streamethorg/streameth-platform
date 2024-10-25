@@ -58,6 +58,9 @@ const validateEnv = () => {
     MAIL_PORT: port(),
     MAIL_USER: str(),
     MAIL_PASS: str(),
+    REMOTION_BASE_URL: str(),
+    REMOTION_WEBHOOK_SECRET: str(),
+    REMOTION_ID: str(),
   });
 };
 
