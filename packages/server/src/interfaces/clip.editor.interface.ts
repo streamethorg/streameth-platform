@@ -1,6 +1,7 @@
 import { Types } from 'mongoose';
 
 export interface IClipEditor {
+  renderId: string;
   organizationId: Types.ObjectId;
   stageId: Types.ObjectId;
   frameRate: number;

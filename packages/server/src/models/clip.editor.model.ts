@@ -3,6 +3,7 @@ import { model, Schema } from 'mongoose';
 
 const ClipEditorSchema = new Schema<IClipEditor>(
   {
+    renderId: { type: String, default: '', index: true },
     organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
     stageId: { type: Schema.Types.ObjectId, ref: 'Stage' },
     frameRate: { type: Number, default: 30 },
