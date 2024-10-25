@@ -1,15 +1,22 @@
 import { HttpException } from '@exceptions/HttpException';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
-import { ProcessingStatus } from '@interfaces/session.interface';
+import { RemotionPayload } from '@interfaces/remotion.webhook.interface';
+import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
+import ClipEditor from '@models/clip.editor.model';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import { updateEventVideoById } from '@utils/firebase';
-import { getAsset, getDownloadUrl } from '@utils/livepeer';
+import { createAssetFromUrl, getAsset, getDownloadUrl } from '@utils/livepeer';
 import StorageService from '@utils/s3';
-import { validateWebhook } from '@utils/validateWebhook';
+import {
+  validateRemotionWebhook,
+  validateWebhook,
+} from '@utils/validateWebhook';
+import { create } from 'domain';
+import express from 'express';
 import {
   Body,
   Controller,
@@ -17,12 +24,13 @@ import {
   Get,
   Header,
   Post,
+  Request,
+  Response,
   Route,
   Security,
   Tags,
   UploadedFile,
 } from 'tsoa';
-
 @Tags('Index')
 @Route('')
 export class IndexController extends Controller {
@@ -87,6 +95,65 @@ export class IndexController extends Controller {
     return SendApiResponse('OK');
   }
 
+  @Post('/webhook/remotion')
+  async webhookRemotion(
+    @Request() req: express.Request,
+    @Body() payload: RemotionPayload,
+  ) {
+    const remotionSignature = req.header('X-Remotion-Signature');
+    const remotionStatus = req.header('X-Remotion-Status');
+
+    if (!remotionSignature || !remotionStatus) {
+      throw new HttpException(400, 'Missing required headers');
+    }
+
+    if (remotionStatus !== 'success') {
+      return SendApiResponse('Acknowledged', '204');
+    }
+
+    const isValidSignature = validateRemotionWebhook(
+      remotionSignature.split('=')[1],
+      payload,
+    );
+    if (!isValidSignature) {
+      throw new HttpException(401, 'Invalid signature');
+    }
+
+    const clipEditor = await ClipEditor.findOne({ renderId: payload.renderId });
+    if (!clipEditor) {
+      throw new HttpException(404, 'Clip editor not found');
+    }
+    const event = clipEditor.events?.find((e) => e.label === 'main');
+    if (!event?.sessionId) {
+      throw new HttpException(404, 'event not found');
+    }
+
+    const session = await this.sessionService.findOne({
+      _id: event.sessionId,
+    });
+    if (!session) {
+      throw new HttpException(404, 'Session not found');
+    }
+    const assetId = await createAssetFromUrl(session.name, payload.outputUrl);
+
+    const createSession = await this.sessionService.create({
+      name: session.name,
+      description: session.description,
+      assetId,
+      start: session.start,
+      end: session.end,
+      organizationId: session.organizationId,
+      type: SessionType.clip,
+    });
+    await this.stateService.create({
+      organizationId: createSession.organizationId,
+      sessionId: createSession._id.toString(),
+      type: StateType.clip,
+      status: StateStatus.pending,
+    });
+    return SendApiResponse('Webhook processed successfully');
+  }
+
   private async assetReady(id: string) {
     const asset = await getAsset(id);
     const session = await this.sessionService.findOne({ assetId: asset.id });
@@ -113,7 +180,7 @@ export class IndexController extends Controller {
     }
     const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
-      type: StateType.video ?? StateType.animation,
+      type: session.type,
     });
     if (!state) throw new HttpException(404, 'No state found');
     await this.stateService.update(state._id.toString(), {
