@@ -115,6 +115,30 @@ export const createAsset = async (
   }
 };
 
+export const createAssetFromUrl = async (
+  fileName: string,
+  url: string,
+): Promise<string> => {
+  try {
+    const response = await fetch(`${host}/api/asset/upload/url`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${secretKey}`,
+      },
+      body: JSON.stringify({
+        name: `${fileName}.mp4`,
+        url: url,
+      }),
+    });
+    if (response.status !== 201 && response.status !== 200) return '';
+    const data = await response.json();
+    return data.asset.id;
+  } catch (e) {
+    throw new HttpException(400, 'Error creating asset');
+  }
+};
+
 export const getPlayback = async (assetId: string): Promise<string> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
@@ -399,28 +423,44 @@ export const getHlsUrl = async (
 
 export const getClipEditorStatus = async (
   data: Pick<IClip, 'editorOptions'>,
-): Promise<boolean> => {
-  const sessionPromises = data.editorOptions.events.map(
-    async (event: { sessionId: string }) => {
+): Promise<{ status: boolean; events: Array<any> }> => {
+  const DEFAULT_EVENT = { id: '', label: '', type: '', url: '' };
+
+  const eventPromises = data.editorOptions.events.map(
+    async (event: { sessionId: string; label: string }) => {
       const session = await SessionModel.findById(event.sessionId);
-      if (!session) return true;
-      return session.processingStatus !== ProcessingStatus.pending;
+      if (!session) return { status: true, ...DEFAULT_EVENT };
+      if (session.processingStatus === ProcessingStatus.completed) {
+        const url = session.videoUrl.replace('index.m3u8', '1080p0.mp4');
+        return {
+          status: true,
+          id: event.label,
+          label: event.label,
+          type: 'media',
+          url,
+        };
+      }
+      return { status: false, ...DEFAULT_EVENT };
     },
   );
-  const results = await Promise.all(sessionPromises);
-  return results.every(Boolean);
+  const events = await Promise.all(eventPromises);
+  return {
+    status: events.every((result) => result.status),
+    events,
+  };
 };
 
 export const createClip = async (data: IClip) => {
   try {
     if (data.isEditorEnabled) {
-      await ClipEditor.create({
+      const create = await ClipEditor.create({
         stageId: data.stageId,
         organizationId: data.organizationId,
         ...data.editorOptions,
       });
+      const clipPayload = { ...data, clipEditorId: create._id.toString() };
       await pulse.schedule(new Date(), AgendaJobs.CLIP_EDITOR_STATUS, {
-        data,
+        data: clipPayload,
         attempts: 5,
       });
       return {
