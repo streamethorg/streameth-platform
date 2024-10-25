@@ -1,3 +1,6 @@
+import { config } from '@config';
+import ClipEditor from '@models/clip.editor.model';
+import crypto from 'crypto';
 import { getClipEditorStatus, refetchAssets } from './livepeer';
 import { logger } from './logger';
 import pulse from './pulse.cron';
@@ -21,12 +24,37 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
   try {
     const { data, attempts } = job.attrs.data;
     const result = await getClipEditorStatus(data);
-    if (result) {
+    if (result.status) {
+      const payload = {
+        id: config.remotion.id,
+        inputProps: {
+          ...data.editorOptions,
+          events: result.events
+            .filter((e) => e.id && e.url)
+            .map(({ status, ...rest }) => rest),
+          captionLinesPerPage:
+            data.editorOptions.captionLinesPerPage.toString(),
+        },
+      };
+      const response = await fetch(
+        `${config.remotion.host}/api/lambda/render`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+      const res = await response.json();
+      if (res.type === 'error') return;
+      await ClipEditor.findByIdAndUpdate(data.clipEditorId, {
+        renderId: res.data.renderId,
+      });
       logger.info('Clip editor status job completed');
       job.remove();
-      return;
     }
-    if (job.attrs.attempts < attempts) {
+    if (!result.status && job.attrs.attempts < attempts) {
       await pulse.schedule(
         new Date(Date.now() + POLLING_INTERVAL),
         'clipEditorStatus',
