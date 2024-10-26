@@ -64,33 +64,33 @@ const TrimmControls = ({
   //   ]
   // );
 
-  useEffect(() => {
-    const preventDefault = (e: Event) => e.preventDefault();
+  // useEffect(() => {
+  //   const preventDefault = (e: Event) => e.preventDefault();
 
-    window.addEventListener('keydown', (e) => {
-      if (selectedTooltip) {
-        // if (e.key === 'ArrowRight') {
-        //   handle1SecondIncrementDecrement(true, selectedTooltip);
-        // } else if (e.key === 'ArrowLeft') {
-        //   handle1SecondIncrementDecrement(false, selectedTooltip);
-        // }
-      }
+  //   window.addEventListener('keydown', (e) => {
+  //     if (selectedTooltip) {
+  //       // if (e.key === 'ArrowRight') {
+  //       //   handle1SecondIncrementDecrement(true, selectedTooltip);
+  //       // } else if (e.key === 'ArrowLeft') {
+  //       //   handle1SecondIncrementDecrement(false, selectedTooltip);
+  //       // }
+  //     }
 
-      if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
-        if (videoRef.current) {
-          if (videoRef.current.paused) {
-            videoRef.current.play();
-          } else {
-            videoRef.current.pause();
-          }
-        }
-      }
-    });
-    return () => {
-      window.removeEventListener('dragstart', preventDefault);
-      window.removeEventListener('dragover', preventDefault);
-    };
-  }, [selectedTooltip, videoRef]);
+  //     if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
+  //       if (videoRef.current) {
+  //         if (videoRef.current.paused) {
+  //           videoRef.current.play();
+  //         } else {
+  //           videoRef.current.pause();
+  //         }
+  //       }
+  //     }
+  //   });
+  //   return () => {
+  //     window.removeEventListener('dragstart', preventDefault);
+  //     window.removeEventListener('dragover', preventDefault);
+  //   };
+  // }, [selectedTooltip, videoRef]);
 
   const getMarkerPosition = (time: number) => {
     if (videoRef.current && videoRef.current.duration) {
@@ -102,7 +102,7 @@ const TrimmControls = ({
   };
   return (
     <div
-      className={`absolute h-[calc(100%-20px)] w-[10px] top-6`}
+      className={`absolute h-[calc(100%-20px)] w-[10px] top-6 z-40`}
       style={{
         left: `${getMarkerPosition(
           marker === 'start' ? startTime.displayTime : endTime.displayTime
