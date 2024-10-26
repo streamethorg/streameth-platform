@@ -32,6 +32,7 @@ const CreateClipButton = ({
     endTime,
     selectedMarkerId,
     setSelectedMarkerId,
+    videoRef,
   } = useClipContext();
   // const [selectedMarkerId, setSelectedMarkerId] = useState('');
   const [isCreateClip, setIsCreateClip] = useState(false);
@@ -59,6 +60,13 @@ const CreateClipButton = ({
     getStage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
+
+  const handlePreview = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = startTime.displayTime;
+      videoRef.current.play();
+    }
+  };
 
   const selectedMarker = markers.find(
     (marker) => marker._id === selectedMarkerId
