@@ -41,6 +41,7 @@ const KeyboardShortcuts = ({
   const maxLength = videoRef.current?.duration || 0;
 
   const handleKeyDown = (event: KeyboardEvent) => {
+    // disable shortcuts when creating clip or markers
     if (!isCreatingClipOrMarker) {
       // Pause/play in player
       if (
@@ -53,6 +54,8 @@ const KeyboardShortcuts = ({
           if (videoRef.current.paused) {
             videoRef.current.play();
           } else {
+            setPlaybackRate(1);
+            setCurrentPlaybackRateIndex(1);
             videoRef.current.pause();
           }
         }
@@ -77,17 +80,18 @@ const KeyboardShortcuts = ({
           } else {
             toast.error('End time must be greater than start time');
           }
-        } else if (event.key === 'r') {
-          // Reset start and end times
-          setStartTime({
-            unix: Date.now() - playbackStatus.offset,
-            displayTime: currentTime,
-          });
-          setEndTime({
-            unix: Date.now() - playbackStatus.offset,
-            displayTime: currentTime,
-          });
         }
+        // } else if (event.key === 'r') {
+        //   // Reset start and end times
+        //   setStartTime({
+        //     unix: Date.now() - playbackStatus.offset,
+        //     displayTime: currentTime,
+        //   });
+        //   setEndTime({
+        //     unix: Date.now() - playbackStatus.offset,
+        //     displayTime: currentTime,
+        //   });
+        // }
       }
 
       // keyboard shortcuts for zooming and fitting

@@ -197,12 +197,7 @@ const Controls = () => {
               <HoverCardContent className="z-[9999] w-[400px] overflow-auto">
                 <div className="text-xs text-gray-700">
                   <p className="font-semibold pb-2">Keyboard shortcuts</p>
-                  <div>
-                    <Badge variant="outline">
-                      <code>Spacebar</code>
-                    </Badge>{' '}
-                    Play/Pause
-                  </div>
+
                   <div>
                     <Badge variant="outline">
                       <code>k</code>
@@ -213,43 +208,43 @@ const Controls = () => {
                     <Badge variant="outline">
                       <code>+</code>
                     </Badge>{' '}
-                    Zoom in
+                    Zoom in.
                   </div>
                   <div>
                     <Badge variant="outline">
                       <code>-</code>
                     </Badge>{' '}
-                    Zoom out
+                    Zoom out.
                   </div>
                   <div>
                     <Badge variant="outline">
                       <code>0</code>
                     </Badge>{' '}
-                    Zoom to fit
+                    Zoom to fit.
                   </div>
                   <div>
                     <Badge variant="outline">
                       <code>i</code>
                     </Badge>{' '}
-                    Slider start
+                    Slider start.
                   </div>
                   <div>
                     <Badge variant="outline">
                       <code>o</code>
                     </Badge>{' '}
-                    Slider end
+                    Slider end.
                   </div>
                   <div>
                     <Badge variant="outline">
                       <code>r</code>
                     </Badge>{' '}
-                    Reset slider
+                    Reset slider.
                   </div>
                   <div>
                     <Badge variant="outline">
                       <code>j</code>
                     </Badge>{' '}
-                    Speed up the video playback rate
+                    Speed up the video playback rate.
                   </div>
                   <div>
                     <Badge variant="outline">
