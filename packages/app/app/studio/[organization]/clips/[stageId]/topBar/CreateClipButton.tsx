@@ -34,7 +34,6 @@ const CreateClipButton = ({
     setSelectedMarkerId,
     videoRef,
   } = useClipContext();
-  // const [selectedMarkerId, setSelectedMarkerId] = useState('');
   const [isCreateClip, setIsCreateClip] = useState(false);
   const [sessionRecording, setSessionRecording] =
     useState<IExtendedSession | null>(null);
@@ -90,7 +89,7 @@ const CreateClipButton = ({
     },
   });
 
-  // New function to check for caption and animations
+  // Check for caption and animations
   const checkEditorOptions = (values: z.infer<typeof clipSchema>) => {
     return (
       values.captionEnabled ||
@@ -241,15 +240,10 @@ const CreateClipButton = ({
       <CreateClipForm
         form={form}
         handleCreateClip={handleCreateClip}
-        markers={markers}
-        selectedMarkerId={selectedMarkerId}
-        setSelectedMarkerId={setSelectedMarkerId}
         handleClearMarker={handleClearMarker}
         organizationId={organizationId}
-        stageId={stageId}
-        isLoading={isLoading}
         isCreateClip={isCreateClip}
-        setIsCreatingClip={setIsCreatingClip}
+        handlePreview={handlePreview}
       />
     </Card>
   );

@@ -27,37 +27,39 @@ import {
 import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { clipSchema } from '@/lib/schema';
-import { IExtendedMarker } from '@/lib/types';
 import { Uploads } from '../../../library/components/UploadVideoDialog';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { formatClipTime } from '@/lib/utils/time';
+import { useClipContext } from '../ClipContext';
 
 const CreateClipForm = ({
   form,
   handleCreateClip,
-  markers,
-  selectedMarkerId,
-  setSelectedMarkerId,
   handleClearMarker,
   organizationId,
-  stageId,
-  isLoading,
   isCreateClip,
-  setIsCreatingClip,
+  handlePreview,
 }: {
   form: UseFormReturn<z.infer<typeof clipSchema>>;
   handleCreateClip: (values: z.infer<typeof clipSchema>) => void;
-  markers: IExtendedMarker[];
-  selectedMarkerId: string;
-  setSelectedMarkerId: (id: string) => void;
+
   handleClearMarker: () => void;
   organizationId: string;
-  stageId: string;
-  isLoading: boolean;
   isCreateClip: boolean;
-  setIsCreatingClip: Dispatch<SetStateAction<boolean>>;
+  handlePreview: () => void;
 }) => {
   const [introUpload, setIntroUpload] = useState<Uploads>({});
   const [outroUpload, setOutroUpload] = useState<Uploads>({});
+  const {
+    isLoading,
+    markers,
+    stageId,
+    setIsCreatingClip,
+    startTime,
+    endTime,
+    selectedMarkerId,
+    setSelectedMarkerId,
+  } = useClipContext();
   return (
     <Form {...form}>
       <form
@@ -228,53 +230,53 @@ const CreateClipForm = ({
               )}
             />
           </div>
-          {/* <div className="flex flex-row w-full space-x-2">
-              <FormField
-                control={form.control}
-                name="start"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col w-full gap-2">
-                      <FormLabel>Start:</FormLabel>
-                      <FormControl className="w-full">
-                        <Input
-                          type="number"
-                          {...field}
-                          disabled
-                          placeholder="Input start"
-                          className="bg-white w-full"
-                          value={startTime.displayTime.toFixed(0)}
-                        />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <div className="flex flex-row w-full space-x-2">
+            <FormField
+              control={form.control}
+              name="start"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex flex-col w-full gap-2">
+                    <FormLabel>Start:</FormLabel>
+                    <FormControl className="w-full">
+                      <Input
+                        type="text"
+                        {...field}
+                        disabled
+                        placeholder="Input start"
+                        className="bg-white w-full"
+                        value={formatClipTime(startTime.displayTime)}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="end"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col w-full gap-2">
-                      <FormLabel className="">End: </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          {...field}
-                          disabled
-                          placeholder="Input end"
-                          className="bg-white"
-                          value={endTime.displayTime.toFixed(0)}
-                        />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div> */}
+            <FormField
+              control={form.control}
+              name="end"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex flex-col w-full gap-2">
+                    <FormLabel className="">End: </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        disabled
+                        placeholder="Input end"
+                        className="bg-white"
+                        value={formatClipTime(endTime.displayTime)}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </CardContent>
         <CardFooter>
           <div className="flex gap-2 w-full">
@@ -284,6 +286,9 @@ const CreateClipForm = ({
               onClick={() => setIsCreatingClip(false)}
             >
               Cancel
+            </Button>
+            <Button variant={'secondary'} onClick={handlePreview} type="button">
+              Preview
             </Button>
             <Button
               className="w-3/4"
