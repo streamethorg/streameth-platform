@@ -234,12 +234,12 @@ const Controls = () => {
                     </Badge>{' '}
                     Slider end.
                   </div>
-                  <div>
+                  {/* <div>
                     <Badge variant="outline">
                       <code>r</code>
                     </Badge>{' '}
                     Reset slider.
-                  </div>
+                  </div> */}
                   <div>
                     <Badge variant="outline">
                       <code>j</code>
