@@ -240,9 +240,9 @@ export const ClipProvider = ({
     setHasMouseMoved(false);
 
     // Capture the current playhead position
-    if (videoRef.current) {
-      setPlayheadPosition(videoRef.current.currentTime);
-    }
+    // if (videoRef.current) {
+    //   setPlayheadPosition(videoRef.current.currentTime);
+    // }
     // Calculate the initial position based on the marker type
     if (marker === 'overlay') {
       const timelineRect = event.currentTarget.getBoundingClientRect();
@@ -304,7 +304,7 @@ export const ClipProvider = ({
           });
         }
         // Update currentTime state without changing video's currentTime
-        setCurrentTime(newTime);
+        // setCurrentTime(newTime);
       }
     },
     [

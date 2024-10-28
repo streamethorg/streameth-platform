@@ -6,7 +6,6 @@ import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
 import { useEffect, useRef } from 'react';
 import { calculateTimelineScale } from '@/lib/utils/utils';
-import { toast } from 'sonner';
 
 const Timeline = () => {
   const {
@@ -21,12 +20,7 @@ const Timeline = () => {
     pixelsPerSecond,
     setPixelsPerSecond,
     setTimelineContainerWidth,
-    currentTime,
-    setStartTime,
-    playbackStatus,
-    setEndTime,
-    startTime,
-    endTime,
+    setCurrentTime,
   } = useClipContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -68,39 +62,16 @@ const Timeline = () => {
     };
   }, [maxLength, setPixelsPerSecond, videoRef, timelineContainerWidth]);
 
-  // Handle keyboard shortcuts for trimming
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (playbackStatus) {
-        if (event.key === 'i') {
-          if (endTime.displayTime > currentTime) {
-            setStartTime({
-              unix: Date.now() - playbackStatus.offset,
-              displayTime: currentTime,
-            });
-          } else {
-            toast.error('Start time must be less than end time');
-          }
-        } else if (event.key === 'o') {
-          if (startTime.displayTime < currentTime) {
-            setEndTime({
-              unix: Date.now() - playbackStatus.offset,
-              displayTime: currentTime,
-            });
-          } else {
-            toast.error('End time must be greater than start time');
-          }
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTime, handleMouseDown, playbackStatus, startTime, endTime]);
+  const handleTimelineClick = (event: React.MouseEvent) => {
+    if (videoRef.current) {
+      const timelineElement = event.currentTarget as HTMLElement;
+      const timelineRect = timelineElement.getBoundingClientRect();
+      const relativeClickX = event.clientX - timelineRect.left;
+      const clickTime = (relativeClickX / timelineWidth) * maxLength;
+      videoRef.current.currentTime = clickTime;
+      setCurrentTime(clickTime);
+    }
+  };
 
   if (!maxLength || !timelineWidth || !videoRef.current)
     return (
@@ -129,7 +100,7 @@ const Timeline = () => {
             return (
               <div
                 key={marker._id}
-                className={`absolute h-[20px] border bg-opacity-20 rounded`}
+                className={`absolute h-[20px] border bg-opacity-20 rounded z-[21]`}
                 onClick={() => handleMarkerClick(marker)}
                 style={{
                   backgroundColor: marker.color,
@@ -149,11 +120,16 @@ const Timeline = () => {
             );
           })}
         <Playhead maxLength={maxLength} timelineWidth={timelineWidth} />
-        <TimelineDrawing
-          maxLength={maxLength}
-          timelineWidth={timelineWidth}
-          scale={pixelsPerSecond}
-        />
+        <div
+          onClick={handleTimelineClick}
+          className="absolute top-0 left-0 w-full h-full z-[20]"
+        >
+          <TimelineDrawing
+            maxLength={maxLength}
+            timelineWidth={timelineWidth}
+            scale={pixelsPerSecond}
+          />
+        </div>
         <TrimmControls
           {...{
             handleMouseDown: (e: React.MouseEvent) =>
