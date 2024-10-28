@@ -1,6 +1,5 @@
 import { config } from '@config';
 import ClipEditor from '@models/clip.editor.model';
-import crypto from 'crypto';
 import { getClipEditorStatus, refetchAssets } from './livepeer';
 import { logger } from './logger';
 import pulse from './pulse.cron';
@@ -22,7 +21,7 @@ pulse.define(AgendaJobs.REFETCH_ASSETS, async (job) => {
 
 pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
   try {
-    const { data, attempts } = job.attrs.data;
+    const { data } = job.attrs.data;
     const result = await getClipEditorStatus(data);
     if (result.status) {
       const payload = {
@@ -54,15 +53,13 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
       logger.info('Clip editor status job completed');
       job.remove();
     }
-    if (!result.status && job.attrs.attempts < attempts) {
+    if (!result.status) {
       await pulse.schedule(
         new Date(Date.now() + POLLING_INTERVAL),
         'clipEditorStatus',
         { data },
       );
-      logger.info(
-        `clipEditorStatus rescheduled. Attempt: ${job.attrs.attempts + 1}`,
-      );
+      logger.info(`clipEditorStatus rescheduled`);
     } else {
       logger.warn(`clipEditorStatus max attempts reached. Stopping polling.`);
     }
