@@ -597,7 +597,8 @@
 					"video",
 					"transcrpition",
 					"social",
-					"animation"
+					"animation",
+					"clip"
 				],
 				"type": "string"
 			},
@@ -3588,6 +3589,100 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_unknown_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RemotionPayload": {
+				"properties": {
+					"type": {
+						"type": "string"
+					},
+					"renderId": {
+						"type": "string"
+					},
+					"expectedBucketOwner": {
+						"type": "string"
+					},
+					"bucketName": {
+						"type": "string"
+					},
+					"customData": {
+						"properties": {
+							"compositionId": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"outputUrl": {
+						"type": "string"
+					},
+					"lambdaErrors": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"outputFile": {
+						"type": "string"
+					},
+					"timeToFinish": {
+						"type": "number",
+						"format": "double"
+					},
+					"costs": {
+						"properties": {
+							"estimatedDisplayCost": {
+								"type": "string"
+							},
+							"estimatedCost": {
+								"type": "number",
+								"format": "double"
+							},
+							"disclaimer": {
+								"type": "string"
+							},
+							"currency": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"estimatedDisplayCost",
+							"estimatedCost",
+							"disclaimer",
+							"currency"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"type",
+					"renderId",
+					"expectedBucketOwner",
+					"bucketName",
+					"outputUrl",
+					"lambdaErrors",
+					"outputFile",
+					"timeToFinish",
+					"costs"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"GSheetConfig": {
 				"properties": {
 					"sheetId": {
@@ -4259,23 +4354,6 @@
 				},
 				"required": [
 					"token"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_unknown_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {}
-				},
-				"required": [
-					"status",
-					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -6972,6 +7050,38 @@
 					"content": {
 						"application/json": {
 							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/webhook/remotion": {
+			"post": {
+				"operationId": "WebhookRemotion",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_unknown_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Index"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RemotionPayload"
+							}
 						}
 					}
 				}
