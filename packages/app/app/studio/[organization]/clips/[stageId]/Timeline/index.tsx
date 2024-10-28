@@ -91,7 +91,29 @@ const Timeline = () => {
           } else {
             toast.error('End time must be greater than start time');
           }
+        } else if (event.key === 'r') {
+          // Reset start and end times
+          setStartTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: currentTime,
+          });
+          setEndTime({
+            unix: Date.now() - playbackStatus.offset,
+            displayTime: currentTime,
+          });
         }
+      }
+
+      if (event.key === 'ArrowLeft' && videoRef.current) {
+        // Decrease by 5 seconds
+        const newTime = Math.max(currentTime - 5, 0);
+        setCurrentTime(newTime);
+        videoRef.current.currentTime = newTime;
+      } else if (event.key === 'ArrowRight' && videoRef.current) {
+        // Increase by 5 seconds
+        const newTime = Math.min(currentTime + 5, maxLength);
+        setCurrentTime(newTime);
+        videoRef.current.currentTime = newTime;
       }
     };
 
