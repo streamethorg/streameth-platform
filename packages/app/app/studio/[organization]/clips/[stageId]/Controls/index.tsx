@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   PlayIcon,
   PauseIcon,
@@ -33,7 +33,8 @@ const Controls = () => {
     timelineContainerWidth,
   } = useClipContext();
   const [playbackRate, setPlaybackRate] = useState(1);
-  const [currentPlaybackRateIndex, setCurrentPlaybackRateIndex] = useState(1); // Start at 1x (index of the default value)
+  const currentPlaybackRateIndexRef = useRef(1);
+
   const [isFit, setIsFit] = useState(false);
   const isMaxZoom = pixelsPerSecond >= 10;
   const isMinZoom = pixelsPerSecond <= 0.1 || isFit;
@@ -78,9 +79,11 @@ const Controls = () => {
         handleFit={handleFit}
         playbackRates={playbackRates}
         setPlaybackRate={setPlaybackRate}
-        currentPlaybackRateIndex={currentPlaybackRateIndex}
+        currentPlaybackRateIndex={currentPlaybackRateIndexRef.current}
         playbackRate={playbackRate}
-        setCurrentPlaybackRateIndex={setCurrentPlaybackRateIndex}
+        setCurrentPlaybackRateIndex={(index) => {
+          currentPlaybackRateIndexRef.current = index;
+        }}
       />
       <div className="bg-white flex w-full justify-between border-b items-center border-t p-2 gap-4">
         <div className="space-x-6 flex flex-row items-center">
@@ -99,7 +102,9 @@ const Controls = () => {
               value={playbackRate}
               onChange={(e) => {
                 if (videoRef.current) {
-                  videoRef.current.playbackRate = parseFloat(e.target.value);
+                  const newIndex = parseFloat(e.target.value);
+                  videoRef.current.playbackRate = newIndex;
+                  setPlaybackRate(newIndex);
                 }
               }}
             >

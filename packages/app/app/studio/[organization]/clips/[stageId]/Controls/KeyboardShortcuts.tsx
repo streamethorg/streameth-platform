@@ -9,12 +9,11 @@ const KeyboardShortcuts = ({
   handleZoomIn,
   handleFit,
   playbackRates,
-  playbackRate,
   currentPlaybackRateIndex,
   setCurrentPlaybackRateIndex,
 }: {
   setPlaybackRate: Dispatch<SetStateAction<number>>;
-  setCurrentPlaybackRateIndex: Dispatch<SetStateAction<number>>;
+  setCurrentPlaybackRateIndex: (index: number) => void;
   isFit: boolean;
   handleZoomOut: () => void;
   handleZoomIn: () => void;
@@ -54,6 +53,7 @@ const KeyboardShortcuts = ({
           if (videoRef.current.paused) {
             videoRef.current.play();
           } else {
+            videoRef.current.playbackRate = 1.0;
             setPlaybackRate(1);
             setCurrentPlaybackRateIndex(1);
             videoRef.current.pause();
