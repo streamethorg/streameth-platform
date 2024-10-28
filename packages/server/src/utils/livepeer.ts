@@ -431,13 +431,13 @@ export const getClipEditorStatus = async (
       const session = await SessionModel.findById(event.sessionId);
       if (!session) return { status: true, ...DEFAULT_EVENT };
       if (session.processingStatus === ProcessingStatus.completed) {
-        const url = session.videoUrl.replace('index.m3u8', '1080p0.mp4');
+        const asset = await getAsset(session.assetId);
         return {
           status: true,
           id: event.label,
           label: event.label,
           type: 'media',
-          url,
+          url: asset.downloadUrl,
         };
       }
       return { status: false, ...DEFAULT_EVENT };
@@ -454,14 +454,14 @@ export const createClip = async (data: IClip) => {
   try {
     if (data.isEditorEnabled) {
       const create = await ClipEditor.create({
+        ...data.editorOptions,
+        events: data.editorOptions.events.filter((e) => e.sessionId !== ''),
         stageId: data.stageId,
         organizationId: data.organizationId,
-        ...data.editorOptions,
       });
       const clipPayload = { ...data, clipEditorId: create._id.toString() };
       await pulse.schedule(new Date(), AgendaJobs.CLIP_EDITOR_STATUS, {
         data: clipPayload,
-        attempts: 5,
       });
       return {
         task: { id: '' },
