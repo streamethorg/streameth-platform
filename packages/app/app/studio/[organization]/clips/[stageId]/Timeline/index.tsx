@@ -73,7 +73,7 @@ const Timeline = () => {
   // Handle keyboard shortcuts for trimming
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (playbackStatus) {
+      if (playbackStatus  && !isCreatingClip) {
         if (event.key === 'i') {
           if (endTime.displayTime > currentTime) {
             setStartTime({
@@ -92,7 +92,7 @@ const Timeline = () => {
           } else {
             toast.error('End time must be greater than start time');
           }
-        } else if (event.key === 'r' && !isCreatingClip) {
+        } else if (event.key === 'r') {
           // Reset start and end times
           setStartTime({
             unix: Date.now() - playbackStatus.offset,

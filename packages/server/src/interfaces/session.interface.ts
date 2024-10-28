@@ -71,10 +71,6 @@ export interface ISession {
     }[];
     text: string;
   };
-  animation?: {
-    label: string;
-    type: string;
-  };
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

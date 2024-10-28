@@ -106,8 +106,4 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsString()
   talkType?: string;
-
-  @IsOptional()
-  @IsObject()
-  animation?: { label: string; type: string };
 }

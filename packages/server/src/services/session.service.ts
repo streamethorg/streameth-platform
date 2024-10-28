@@ -29,6 +29,7 @@ export default class SessionService {
   }
 
   async create(data: ISession): Promise<ISession> {
+    console.log('sessionData', data);
     let eventId = '';
     let eventSlug = '';
     let stageId = '';
@@ -56,6 +57,7 @@ export default class SessionService {
         eventSlug: eventSlug,
         eventId: eventId,
         stageId: stageId,
+        type: data.type,
         processingStatus: ProcessingStatus.pending,
       },
       `${this.path}/${eventId}`,

@@ -1941,21 +1941,6 @@
 							"subtitleUrl"
 						],
 						"type": "object"
-					},
-					"animation": {
-						"properties": {
-							"type": {
-								"type": "string"
-							},
-							"label": {
-								"type": "string"
-							}
-						},
-						"required": [
-							"type",
-							"label"
-						],
-						"type": "object"
 					}
 				},
 				"required": [
@@ -2190,21 +2175,6 @@
 							"subtitleUrl"
 						],
 						"type": "object"
-					},
-					"animation": {
-						"properties": {
-							"type": {
-								"type": "string"
-							},
-							"label": {
-								"type": "string"
-							}
-						},
-						"required": [
-							"type",
-							"label"
-						],
-						"type": "object"
 					}
 				},
 				"required": [
@@ -2397,21 +2367,6 @@
 							"text",
 							"chunks",
 							"subtitleUrl"
-						],
-						"type": "object"
-					},
-					"animation": {
-						"properties": {
-							"type": {
-								"type": "string"
-							},
-							"label": {
-								"type": "string"
-							}
-						},
-						"required": [
-							"type",
-							"label"
 						],
 						"type": "object"
 					},
