@@ -28,6 +28,7 @@ const Timeline = () => {
     startTime,
     endTime,
     setCurrentTime,
+    isCreatingClip,
   } = useClipContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -91,7 +92,7 @@ const Timeline = () => {
           } else {
             toast.error('End time must be greater than start time');
           }
-        } else if (event.key === 'r') {
+        } else if (event.key === 'r' && !isCreatingClip) {
           // Reset start and end times
           setStartTime({
             unix: Date.now() - playbackStatus.offset,

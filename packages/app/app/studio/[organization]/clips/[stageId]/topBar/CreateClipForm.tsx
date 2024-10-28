@@ -136,6 +136,16 @@ const CreateClipForm = ({
               </FormItem>
             )}
           />
+          <div className="flex flex-row w-full space-x-2">
+            <div className="flex gap-1">
+              <FormLabel>Start:</FormLabel>{' '}
+              <p>{formatClipTime(startTime.displayTime)}</p>
+            </div>
+            <div className="flex gap-1">
+              <FormLabel>End:</FormLabel>
+              <p>{formatClipTime(endTime.displayTime)}</p>
+            </div>
+          </div>
           <div className="flex flex-row w-full items-center space-x-4">
             <FormField
               control={form.control}
@@ -222,53 +232,6 @@ const CreateClipForm = ({
                         type={SessionType.animation}
                         maxFiles={1}
                         maxSize={50 * 1024 * 1024}
-                      />
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex flex-row w-full space-x-2">
-            <FormField
-              control={form.control}
-              name="start"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex flex-col w-full gap-2">
-                    <FormLabel>Start:</FormLabel>
-                    <FormControl className="w-full">
-                      <Input
-                        type="text"
-                        {...field}
-                        disabled
-                        placeholder="Input start"
-                        className="bg-white w-full"
-                        value={formatClipTime(startTime.displayTime)}
-                      />
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="end"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex flex-col w-full gap-2">
-                    <FormLabel className="">End: </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        disabled
-                        placeholder="Input end"
-                        className="bg-white"
-                        value={formatClipTime(endTime.displayTime)}
                       />
                     </FormControl>
                   </div>
