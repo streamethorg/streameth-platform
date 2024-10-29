@@ -6,7 +6,6 @@ import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
 import { useEffect, useRef } from 'react';
 import { calculateTimelineScale } from '@/lib/utils/utils';
-import { toast } from 'sonner';
 
 const Timeline = () => {
   const {
@@ -21,12 +20,6 @@ const Timeline = () => {
     pixelsPerSecond,
     setPixelsPerSecond,
     setTimelineContainerWidth,
-    currentTime,
-    setStartTime,
-    playbackStatus,
-    setEndTime,
-    startTime,
-    endTime,
     setCurrentTime,
     isCreatingClip,
   } = useClipContext();
@@ -69,62 +62,6 @@ const Timeline = () => {
       window.removeEventListener('resize', calculateScale);
     };
   }, [maxLength, setPixelsPerSecond, videoRef, timelineContainerWidth]);
-
-  // Handle keyboard shortcuts for trimming
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (playbackStatus  && !isCreatingClip) {
-        if (event.key === 'i') {
-          if (endTime.displayTime > currentTime) {
-            setStartTime({
-              unix: Date.now() - playbackStatus.offset,
-              displayTime: currentTime,
-            });
-          } else {
-            toast.error('Start time must be less than end time');
-          }
-        } else if (event.key === 'o') {
-          if (startTime.displayTime < currentTime) {
-            setEndTime({
-              unix: Date.now() - playbackStatus.offset,
-              displayTime: currentTime,
-            });
-          } else {
-            toast.error('End time must be greater than start time');
-          }
-        } else if (event.key === 'r') {
-          // Reset start and end times
-          setStartTime({
-            unix: Date.now() - playbackStatus.offset,
-            displayTime: currentTime,
-          });
-          setEndTime({
-            unix: Date.now() - playbackStatus.offset,
-            displayTime: currentTime,
-          });
-        }
-      }
-
-      if (event.key === 'ArrowLeft' && videoRef.current) {
-        // Decrease by 5 seconds
-        const newTime = Math.max(currentTime - 5, 0);
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
-      } else if (event.key === 'ArrowRight' && videoRef.current) {
-        // Increase by 5 seconds
-        const newTime = Math.min(currentTime + 5, maxLength);
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTime, handleMouseDown, playbackStatus, startTime, endTime]);
 
   const handleTimelineClick = (event: React.MouseEvent) => {
     if (videoRef.current) {
