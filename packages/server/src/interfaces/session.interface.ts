@@ -16,9 +16,11 @@ export interface IPlayback {
 }
 
 export enum SessionType {
-  clip = 'clip',
-  livestream = 'livestream',
   video = 'video',
+  livestream = 'livestream',
+  clip = 'clip',
+  animation = 'animation',
+  editorClip = 'editorClip',
 }
 
 export enum ProcessingStatus {

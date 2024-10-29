@@ -383,6 +383,11 @@ export const getTypeLabel = (type: string) => {
     case 'livestream':
       return 'Livestream';
     case 'video':
+      return 'Video';
+    case 'animation':
+      return 'Animation';
+    case 'editorClip':
+      return 'Edited clip';
     default:
       return 'Video';
   }
