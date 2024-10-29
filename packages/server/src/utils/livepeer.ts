@@ -453,9 +453,13 @@ export const getClipEditorStatus = async (
 export const createClip = async (data: IClip) => {
   try {
     if (data.isEditorEnabled) {
+      const events = data.editorOptions.events.filter(
+        (e) => e.sessionId !== '',
+      );
+      data.editorOptions.events = events;
       const create = await ClipEditor.create({
         ...data.editorOptions,
-        events: data.editorOptions.events.filter((e) => e.sessionId !== ''),
+        events,
         stageId: data.stageId,
         organizationId: data.organizationId,
       });
