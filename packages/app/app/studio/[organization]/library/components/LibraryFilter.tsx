@@ -62,7 +62,10 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   };
 
   const sessionTypes = Object.keys(SessionType).map((key) => ({
-    label: key,
+    label:
+      key === 'editorClip'
+        ? 'Edited clip'
+        : key.charAt(0).toUpperCase() + key.slice(1),
     value: (SessionType as any)[key],
   }));
 
