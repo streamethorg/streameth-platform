@@ -42,6 +42,13 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
     setSelectedStage('');
     setSelectedType('');
     setSelectedVisibility('');
+    handleTermChange([
+      { key: 'stage', value: '' },
+      { key: 'type', value: '' },
+      { key: 'published', value: '' },
+      { key: 'page', value: '1' },
+    ]);
+    setOpenPopover(false);
   };
 
   const handleSaveFilter = () => {
