@@ -29,7 +29,6 @@ export default class SessionService {
   }
 
   async create(data: ISession): Promise<ISession> {
-    console.log('sessionData', data);
     let eventId = '';
     let eventSlug = '';
     let stageId = '';

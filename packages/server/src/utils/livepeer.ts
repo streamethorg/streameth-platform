@@ -496,7 +496,10 @@ export const createClip = async (data: IClip) => {
             end: new Date().getTime(),
             startClipTime: data.start,
             endClipTime: data.end,
-            type: SessionType.clip,
+            type:
+              session.type === SessionType.editorClip
+                ? SessionType.editorClip
+                : SessionType.clip,
             createdAt: new Date(),
             processingStatus: ProcessingStatus.pending,
           },
