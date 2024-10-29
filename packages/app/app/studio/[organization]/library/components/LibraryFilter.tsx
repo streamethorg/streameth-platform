@@ -42,6 +42,13 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
     setSelectedStage('');
     setSelectedType('');
     setSelectedVisibility('');
+    handleTermChange([
+      { key: 'stage', value: '' },
+      { key: 'type', value: '' },
+      { key: 'published', value: '' },
+      { key: 'page', value: '1' },
+    ]);
+    setOpenPopover(false);
   };
 
   const handleSaveFilter = () => {
@@ -55,7 +62,10 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   };
 
   const sessionTypes = Object.keys(SessionType).map((key) => ({
-    label: key,
+    label:
+      key === 'editorClip'
+        ? 'Edited clip'
+        : key.charAt(0).toUpperCase() + key.slice(1),
     value: (SessionType as any)[key],
   }));
 
