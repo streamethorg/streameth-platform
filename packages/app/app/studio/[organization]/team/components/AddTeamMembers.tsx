@@ -73,10 +73,7 @@ const AddTeamMembers = ({ organizationId }: { organizationId: string }) => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input
-                    placeholder="Enter email or wallet address"
-                    {...field}
-                  />
+                  <Input placeholder="Enter email address" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
