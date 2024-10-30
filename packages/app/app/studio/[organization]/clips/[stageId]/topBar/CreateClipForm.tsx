@@ -11,10 +11,20 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Switch } from '@/components/ui/switch';
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { LuRotateCcw } from 'react-icons/lu';
+import {
+  LuRectangleHorizontal,
+  LuRectangleVertical,
+  LuRotateCcw,
+  LuScissorsLineDashed,
+  LuSmartphone,
+  LuSmartphoneCharging,
+  LuSubtitles,
+  LuEye,
+  LuX,
+  LuCross,
+} from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
 import Dropzone from '../../../library/components/upload/Dropzone';
 import {
@@ -33,7 +43,6 @@ import { formatClipTime } from '@/lib/utils/time';
 import { useClipContext } from '../ClipContext';
 import { IExtendedSession } from '@/lib/types';
 import SelectAnimationModal from './SelectAnimationModal';
-import { PlusIcon } from 'lucide-react';
 
 const CreateClipForm = ({
   form,
@@ -75,12 +84,29 @@ const CreateClipForm = ({
         className="space-y-2 h-full"
       >
         <CardContent className="space-y-4 pt-2">
+          {/* Marker Selection */}
           {markers && markers.length > 0 && (
             <>
               <div className="flex items-center justify-between">
-                <FormLabel>Select Marker for Clip</FormLabel>
+                <FormLabel>Select Marker</FormLabel>
+                <Select
+                  value={selectedMarkerId}
+                  onValueChange={(value) => setSelectedMarkerId(value)}
+                >
+                  <SelectTrigger className="rounded-lg border bg-white w-32">
+                    <SelectValue placeholder="marker"></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
+                    {markers.map((marker) => (
+                      <SelectItem key={marker._id} value={marker._id}>
+                        {marker.name.length > 20
+                          ? `${marker.name.substring(0, 20)}...`
+                          : marker.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <Button
-                  className="ml-2"
                   variant={'outline'}
                   onClick={handleClearMarker}
                   type="button"
@@ -89,30 +115,17 @@ const CreateClipForm = ({
                   Clear
                 </Button>
               </div>
-              <Select
-                value={selectedMarkerId}
-                onValueChange={(value) => setSelectedMarkerId(value)}
-              >
-                <SelectTrigger className="rounded-lg border bg-white">
-                  <SelectValue placeholder="select marker"></SelectValue>
-                </SelectTrigger>
-                <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
-                  {markers.map((marker) => (
-                    <SelectItem key={marker._id} value={marker._id}>
-                      {marker.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </>
           )}
+
+          {/* Name Field */}
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <div className="flex flex-col gap-2">
-                  <FormLabel className="">Name:</FormLabel>
+                <div className="flex gap-2 items-center">
+                  <FormLabel>Name:</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -125,13 +138,15 @@ const CreateClipForm = ({
               </FormItem>
             )}
           />
+
+          {/* Description Field */}
           <FormField
             control={form.control}
             name="description"
             render={({ field }) => (
               <FormItem>
                 <div className="flex flex-col gap-2">
-                  <FormLabel className="">Description:</FormLabel>
+                  <FormLabel>Description:</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
@@ -144,16 +159,22 @@ const CreateClipForm = ({
               </FormItem>
             )}
           />
-          <div className="flex flex-row w-full space-x-2">
-            <div className="flex gap-1">
-              <FormLabel>Start:</FormLabel>{' '}
-              <p>{formatClipTime(startTime.displayTime)}</p>
+
+          {/* Time Display */}
+          <div className="grid grid-cols-2 gap-x-2">
+            <div className="flex gap-1 items-center">
+              <FormLabel>Start:</FormLabel>
+              <p className="text-sm">{formatClipTime(startTime.displayTime)}</p>
             </div>
-            <div className="flex gap-1">
+            <div className="flex gap-1 items-center">
               <FormLabel>End:</FormLabel>
-              <p>{formatClipTime(endTime.displayTime)}</p>
+              <p className="text-sm">{formatClipTime(endTime.displayTime)}</p>
             </div>
           </div>
+
+          <div className="border-t border-gray-200"></div>
+
+          {/* Controls */}
           <div className="flex flex-row w-full items-center space-x-4">
             <FormField
               control={form.control}
@@ -162,9 +183,19 @@ const CreateClipForm = ({
                 <FormItem>
                   <div className="flex flex-col gap-2">
                     <FormControl>
-                      <div className="flex items-center space-x-2">
-                        <Switch id="captionEnabled" onChange={field.onChange} />
-                        <Label htmlFor="captionEnabled">Captions</Label>
+                      <div className="flex flex-col items-center space-x-1">
+                        <button
+                          type="button"
+                          onClick={() => field.onChange(!field.value)}
+                          className={`p-2 rounded hover:bg-gray-100 transition-colors ${
+                            field.value ? 'text-gray-900' : 'text-gray-400'
+                          }`}
+                        >
+                          <LuSubtitles size={20} />
+                        </button>
+                        <Label htmlFor="captionEnabled" className="text-xs">
+                          Captions
+                        </Label>
                       </div>
                     </FormControl>
                   </div>
@@ -179,15 +210,27 @@ const CreateClipForm = ({
                 <FormItem>
                   <div className="flex flex-col gap-2">
                     <FormControl>
-                      <div className="flex items-center space-x-2">
-                        <Switch
-                          id="aspect-ratio-switch"
-                          onChange={(checked) => {
-                            field.onChange(checked ? '9:16' : '16:9'); // Set aspect ratio based on switch state
-                          }}
-                        />
-                        <Label htmlFor="aspect-ratio-switch">
-                          9:16 (Aspect Ratio)
+                      <div className="flex flex-col items-center space-x-1">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            field.onChange(
+                              field.value === '16:9' ? '9:16' : '16:9'
+                            )
+                          }
+                          className={`p-2 rounded hover:bg-gray-100 transition-colors ${
+                            field.value === '9:16'
+                              ? 'text-gray-900'
+                              : 'text-gray-400'
+                          }`}
+                        >
+                          <LuSmartphone size={20} />
+                        </button>
+                        <Label
+                          htmlFor="aspect-ratio-switch"
+                          className="text-xs"
+                        >
+                          9:16 Format
                         </Label>
                       </div>
                     </FormControl>
@@ -197,50 +240,33 @@ const CreateClipForm = ({
               )}
             />
           </div>
-          <div className="flex flex-row w-full space-x-2">
+
+          {/* Animation Fields */}
+          <div className="grid grid-cols-2 gap-x-2">
+            {/* Left column */}
             <FormField
               control={form.control}
               name="introAnimation"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <div className="flex flex-col gap-2 w-full">
-                    <div className="flex gap-1">
-                      <FormLabel className="">Intro animation</FormLabel>{' '}
-                      <PlusIcon />
-                    </div>
+                    <FormLabel>Intro animation</FormLabel>
                     <FormControl>
-                      <div>
-                        {/* <p className="text-sm mb-2">
-                          <span
-                            onClick={() => setIntroAnimationOption('select')}
-                          >
-                            Select
-                          </span>{' '}
-                          OR{' '}
-                          <span
-                            onClick={() => setIntroAnimationOption('upload')}
-                          >
-                            Upload
-                          </span>
-                        </p> */}
-
-                        {introAnimationOption !== 'select' ? (
-                          <SelectAnimationModal
-                            onChange={field.onChange}
-                            animations={animations}
-                          />
-                        ) : (
-                          <Dropzone
-                            uploads={introUpload}
-                            setUploads={setIntroUpload}
-                            organizationId={organizationId}
-                            stageId={stageId}
-                            onChange={field.onChange}
-                            type={SessionType.animation}
-                            maxFiles={1}
-                            maxSize={50 * 1024 * 1024}
-                          />
-                        )}
+                      <div className="flex flex-col space-y-2">
+                        <SelectAnimationModal
+                          onChange={field.onChange}
+                          animations={animations}
+                        />
+                        <Dropzone
+                          uploads={introUpload}
+                          setUploads={setIntroUpload}
+                          organizationId={organizationId}
+                          stageId={stageId}
+                          onChange={field.onChange}
+                          type={SessionType.animation}
+                          maxFiles={1}
+                          maxSize={50 * 1024 * 1024}
+                        />
                       </div>
                     </FormControl>
                   </div>
@@ -248,25 +274,32 @@ const CreateClipForm = ({
                 </FormItem>
               )}
             />
+
+            {/* Right column */}
             <FormField
               control={form.control}
               name="outroAnimation"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <div className="flex flex-col gap-2 w-full">
-                    <FormLabel className="">Outro animation</FormLabel>
+                    <FormLabel>Outro animation</FormLabel>
                     <FormControl>
-                      <Dropzone
-                        uploads={outroUpload}
-                        setUploads={setOutroUpload}
-                        organizationId={organizationId}
-                        stageId={stageId}
-                        // this returns the sessionId
-                        onChange={field.onChange}
-                        type={SessionType.animation}
-                        maxFiles={1}
-                        maxSize={50 * 1024 * 1024}
-                      />
+                      <div className="flex flex-col space-y-2">
+                        <SelectAnimationModal
+                          onChange={field.onChange}
+                          animations={animations}
+                        />
+                        <Dropzone
+                          uploads={outroUpload}
+                          setUploads={setOutroUpload}
+                          organizationId={organizationId}
+                          stageId={stageId}
+                          onChange={field.onChange}
+                          type={SessionType.animation}
+                          maxFiles={1}
+                          maxSize={50 * 1024 * 1024}
+                        />
+                      </div>
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -275,6 +308,8 @@ const CreateClipForm = ({
             />
           </div>
         </CardContent>
+
+        {/* Footer */}
         <CardFooter>
           <div className="flex gap-2 w-full">
             <Button
@@ -285,6 +320,7 @@ const CreateClipForm = ({
               Cancel
             </Button>
             <Button variant={'secondary'} onClick={handlePreview} type="button">
+              <LuEye className="h-4 w-4 mr-2" />
               Preview
             </Button>
             <Button
@@ -293,7 +329,14 @@ const CreateClipForm = ({
               type="submit"
               loading={isLoading || isCreateClip}
             >
-              {isCreateClip ? 'Creating...' : 'Create'}
+              {isCreateClip ? (
+                'Creating...'
+              ) : (
+                <>
+                  <LuScissorsLineDashed className="mr-2 h-4 w-4" />
+                  Create
+                </>
+              )}
             </Button>
           </div>
         </CardFooter>
