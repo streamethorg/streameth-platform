@@ -17,7 +17,10 @@ import {
   LuArrowBigUp,
   LuArrowLeft,
   LuArrowRight,
+  LuImport,
   LuInfo,
+  LuPlus,
+  LuScissorsLineDashed,
 } from 'react-icons/lu';
 import { Badge } from '@/components/ui/badge';
 import KeyboardShortcuts from './KeyboardShortcuts';
@@ -307,6 +310,7 @@ const Controls = () => {
             }}
             variant="outline"
           >
+            <LuPlus className="w-4 h-4 mr-1" />
             Add marker
           </Button>
           <div className="hidden xl:flex space-x-2">
@@ -315,6 +319,7 @@ const Controls = () => {
               variant="outline"
               onClick={() => setIsImportingMarkers(true)}
             >
+              <LuImport className="w-4 h-4 mr-2" />
               Import Markers
             </Button>
             <Button
@@ -323,6 +328,7 @@ const Controls = () => {
               className="bg-blue-500 text-white"
               onClick={() => setIsCreatingClip(true)}
             >
+              <LuScissorsLineDashed className="w-4 h-4 mr-1" />
               Create Clip
             </Button>
           </div>
