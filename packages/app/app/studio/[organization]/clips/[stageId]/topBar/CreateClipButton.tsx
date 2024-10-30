@@ -235,10 +235,6 @@ const CreateClipButton = ({
   console.log('watch', form.watch());
   return (
     <Card className="border-none rounded-none shadow-none">
-      <CardHeader>
-        <CardTitle className="text-lg">Create Clip</CardTitle>
-      </CardHeader>
-
       <CreateClipForm
         form={form}
         handleCreateClip={handleCreateClip}

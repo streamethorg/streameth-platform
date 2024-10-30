@@ -74,7 +74,7 @@ const CreateClipForm = ({
         onSubmit={form.handleSubmit(handleCreateClip)}
         className="space-y-2 h-full"
       >
-        <CardContent className="border space-y-4 pt-2">
+        <CardContent className="space-y-4 pt-2">
           {markers && markers.length > 0 && (
             <>
               <div className="flex items-center justify-between">

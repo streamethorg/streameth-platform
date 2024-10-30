@@ -137,12 +137,6 @@ const AddOrEditMarkerForm = ({
 
   return (
     <Card className="border-none rounded-none shadow-none">
-      <CardHeader>
-        <CardTitle className="text-lg">
-          {selectedMarker ? 'Edit Marker' : 'Add Marker'}
-        </CardTitle>
-      </CardHeader>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-2">
           <CardContent className="border space-y-4 pt-2">
