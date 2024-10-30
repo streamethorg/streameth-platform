@@ -26,6 +26,7 @@ import { Input } from '@/components/ui/input';
 import { createMarkerAction, updateMarkersAction } from '@/lib/actions/marker';
 import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
+import { LuArrowLeftToLine, LuArrowRightToLine, LuPlus } from 'react-icons/lu';
 
 const AddOrEditMarkerForm = ({
   organizationId,
@@ -144,7 +145,7 @@ const AddOrEditMarkerForm = ({
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-row gap-2 items-center">
                   <FormLabel className="">Name:</FormLabel>
                   <FormControl>
                     <Input
@@ -153,7 +154,6 @@ const AddOrEditMarkerForm = ({
                       className="bg-white"
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -194,6 +194,7 @@ const AddOrEditMarkerForm = ({
                           type="button"
                           variant={'outline'}
                         >
+                          <LuArrowLeftToLine className="mr-2" />
                           Set Start
                         </Button>
                       </div>
@@ -238,6 +239,7 @@ const AddOrEditMarkerForm = ({
                           size={'sm'}
                         >
                           Set End
+                          <LuArrowRightToLine className="ml-2" />
                         </Button>
                       </div>
                       <FormMessage />
@@ -250,7 +252,7 @@ const AddOrEditMarkerForm = ({
               control={form.control}
               name="color"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-row gap-2 items-center">
                   <FormLabel className="">Color: </FormLabel>
                   <FormControl>
                     <Input type="color" {...field} className="bg-white p-0" />
@@ -279,13 +281,20 @@ const AddOrEditMarkerForm = ({
                 type="submit"
                 loading={loading}
               >
-                {loading
-                  ? selectedMarker
-                    ? 'Updating...'
-                    : 'Adding...'
-                  : selectedMarker
-                    ? 'Update'
-                    : 'Add'}
+                {loading ? (
+                  selectedMarker ? (
+                    'Updating...'
+                  ) : (
+                    'Adding...'
+                  )
+                ) : selectedMarker ? (
+                  'Update'
+                ) : (
+                  <>
+                    <LuPlus className="mr-2 h-4 w-4" />
+                    Add
+                  </>
+                )}
               </Button>
             </div>
           </CardFooter>

@@ -14,16 +14,11 @@ import {
 import { CardContent, CardFooter } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  LuRectangleHorizontal,
-  LuRectangleVertical,
   LuRotateCcw,
   LuScissorsLineDashed,
   LuSmartphone,
-  LuSmartphoneCharging,
   LuSubtitles,
   LuEye,
-  LuX,
-  LuCross,
 } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
 import Dropzone from '../../../library/components/upload/Dropzone';
