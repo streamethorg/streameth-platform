@@ -19,9 +19,11 @@ import CreateClipForm from './CreateClipForm';
 const CreateClipButton = ({
   organizationId,
   liveRecordingId,
+  animations,
 }: {
   organizationId: string;
   liveRecordingId?: string;
+  animations: IExtendedSession[];
 }) => {
   const {
     isLoading,
@@ -230,7 +232,7 @@ const CreateClipButton = ({
       setIsCreateClip(false);
     }
   };
-
+  console.log('watch', form.watch());
   return (
     <Card className="border-none rounded-none shadow-none">
       <CardHeader>
@@ -244,6 +246,7 @@ const CreateClipButton = ({
         organizationId={organizationId}
         isCreateClip={isCreateClip}
         handlePreview={handlePreview}
+        animations={animations}
       />
     </Card>
   );

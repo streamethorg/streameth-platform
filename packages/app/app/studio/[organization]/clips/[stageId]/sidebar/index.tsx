@@ -12,10 +12,12 @@ export default function Sidebar({
   organizationId,
   stageSessions,
   liveRecordingId,
+  animations,
 }: {
   organizationId: string;
   stageSessions: IExtendedSession[];
   liveRecordingId?: string;
+  animations: IExtendedSession[];
 }) {
   const { isCreatingClip, isAddingOrEditingMarker, isImportingMarkers } =
     useClipContext();
@@ -25,6 +27,7 @@ export default function Sidebar({
       condition: isCreatingClip,
       Component: CreateClipButton,
       usesLiveRecordingId: true,
+      animations: animations,
     },
     {
       condition: isAddingOrEditingMarker,
@@ -48,6 +51,7 @@ export default function Sidebar({
               <Component
                 organizationId={organizationId}
                 {...(usesLiveRecordingId ? { liveRecordingId } : {})}
+                animations={animations}
               />
             </div>
           )

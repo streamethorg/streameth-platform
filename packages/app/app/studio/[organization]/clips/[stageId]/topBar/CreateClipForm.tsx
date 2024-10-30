@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -31,6 +31,9 @@ import { Uploads } from '../../../library/components/UploadVideoDialog';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { formatClipTime } from '@/lib/utils/time';
 import { useClipContext } from '../ClipContext';
+import { IExtendedSession } from '@/lib/types';
+import SelectAnimationModal from './SelectAnimationModal';
+import { PlusIcon } from 'lucide-react';
 
 const CreateClipForm = ({
   form,
@@ -39,15 +42,19 @@ const CreateClipForm = ({
   organizationId,
   isCreateClip,
   handlePreview,
+  animations,
 }: {
   form: UseFormReturn<z.infer<typeof clipSchema>>;
   handleCreateClip: (values: z.infer<typeof clipSchema>) => void;
-
   handleClearMarker: () => void;
   organizationId: string;
   isCreateClip: boolean;
   handlePreview: () => void;
+  animations: IExtendedSession[];
 }) => {
+  const [introAnimationOption, setIntroAnimationOption] = useState<
+    'select' | 'upload' | undefined
+  >(undefined);
   const [introUpload, setIntroUpload] = useState<Uploads>({});
   const [outroUpload, setOutroUpload] = useState<Uploads>({});
   const {
@@ -60,6 +67,7 @@ const CreateClipForm = ({
     selectedMarkerId,
     setSelectedMarkerId,
   } = useClipContext();
+
   return (
     <Form {...form}>
       <form
@@ -196,18 +204,44 @@ const CreateClipForm = ({
               render={({ field }) => (
                 <FormItem className="w-full">
                   <div className="flex flex-col gap-2 w-full">
-                    <FormLabel className="">Intro animation</FormLabel>
+                    <div className="flex gap-1">
+                      <FormLabel className="">Intro animation</FormLabel>{' '}
+                      <PlusIcon />
+                    </div>
                     <FormControl>
-                      <Dropzone
-                        uploads={introUpload}
-                        setUploads={setIntroUpload}
-                        organizationId={organizationId}
-                        stageId={stageId}
-                        onChange={field.onChange}
-                        type={SessionType.animation}
-                        maxFiles={1}
-                        maxSize={50 * 1024 * 1024}
-                      />
+                      <div>
+                        {/* <p className="text-sm mb-2">
+                          <span
+                            onClick={() => setIntroAnimationOption('select')}
+                          >
+                            Select
+                          </span>{' '}
+                          OR{' '}
+                          <span
+                            onClick={() => setIntroAnimationOption('upload')}
+                          >
+                            Upload
+                          </span>
+                        </p> */}
+
+                        {introAnimationOption !== 'select' ? (
+                          <SelectAnimationModal
+                            onChange={field.onChange}
+                            animations={animations}
+                          />
+                        ) : (
+                          <Dropzone
+                            uploads={introUpload}
+                            setUploads={setIntroUpload}
+                            organizationId={organizationId}
+                            stageId={stageId}
+                            onChange={field.onChange}
+                            type={SessionType.animation}
+                            maxFiles={1}
+                            maxSize={50 * 1024 * 1024}
+                          />
+                        )}
+                      </div>
                     </FormControl>
                   </div>
                   <FormMessage />

@@ -89,6 +89,14 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     })
   ).sessions;
 
+  const animations = (
+    await fetchAllSessions({
+      organizationSlug: organization,
+      onlyVideos: true,
+      type: SessionType.animation,
+    })
+  ).sessions;
+
   return (
     <ClipProvider organizationId={organizationId} stageId={stageId}>
       <div className="flex flex-row w-full h-full">
@@ -105,6 +113,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             liveRecordingId={liveRecording?.id}
             stageSessions={stageSessions}
             organizationId={organizationId}
+            animations={animations}
           />
         </div>
       </div>

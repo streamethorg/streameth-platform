@@ -1719,9 +1719,9 @@
 			},
 			"SessionType": {
 				"enum": [
-					"clip",
-					"livestream",
 					"video",
+					"livestream",
+					"clip",
 					"animation",
 					"editorClip"
 				],

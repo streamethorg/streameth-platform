@@ -639,7 +639,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SessionType": {
         "dataType": "refEnum",
-        "enums": ["clip","livestream","video","animation","editorClip"],
+        "enums": ["video","livestream","clip","animation","editorClip"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ProcessingStatus": {
