@@ -13,7 +13,15 @@ import { Button } from '@/components/ui/button';
 import { calculateTimelineScale } from '@/lib/utils/utils';
 import { HoverCard } from '@radix-ui/react-hover-card';
 import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { LuInfo } from 'react-icons/lu';
+import {
+  LuArrowBigUp,
+  LuArrowLeft,
+  LuArrowRight,
+  LuImport,
+  LuInfo,
+  LuPlus,
+  LuScissorsLineDashed,
+} from 'react-icons/lu';
 import { Badge } from '@/components/ui/badge';
 import KeyboardShortcuts from './KeyboardShortcuts';
 
@@ -259,27 +267,33 @@ const Controls = () => {
                   </div>
                   <div>
                     <Badge variant="outline">
-                      <code>ArrowLeft</code>
+                      <LuArrowLeft size={12} />
                     </Badge>{' '}
-                    Seek backward a second in player.
+                    Seek backward one second.
                   </div>
                   <div>
                     <Badge variant="outline">
-                      <code>ArrowRight</code>
+                      <LuArrowRight size={12} />
                     </Badge>{' '}
-                    Seek forward a second in player.
+                    Seek forward one second.
                   </div>
-                  <div>
+                  <div className="flex items-center">
                     <Badge variant="outline">
-                      <code>Shift+ArrowLeft</code>
-                    </Badge>{' '}
-                    Seek backward 10 seconds in player.
+                      <code className="text-xs flex items-center">
+                        <LuArrowBigUp size={12} className="mr-1" /> +
+                        <LuArrowLeft size={12} className="ml-1" />
+                      </code>
+                    </Badge>
+                    Seek backward 10 seconds.
                   </div>
-                  <div>
+                  <div className="flex items-center">
                     <Badge variant="outline">
-                      <code>Shift+ArrowRight</code>
-                    </Badge>{' '}
-                    Seek forward 10 seconds in player.
+                      <code className="text-xs flex items-center">
+                        <LuArrowBigUp size={12} className="mr-1" /> +
+                        <LuArrowRight size={12} className="ml-1" />
+                      </code>
+                    </Badge>
+                    Seek forward 10 seconds.
                   </div>
                 </div>
               </HoverCardContent>
@@ -296,6 +310,7 @@ const Controls = () => {
             }}
             variant="outline"
           >
+            <LuPlus className="w-4 h-4 mr-1" />
             Add marker
           </Button>
           <div className="hidden xl:flex space-x-2">
@@ -304,6 +319,7 @@ const Controls = () => {
               variant="outline"
               onClick={() => setIsImportingMarkers(true)}
             >
+              <LuImport className="w-4 h-4 mr-2" />
               Import Markers
             </Button>
             <Button
@@ -312,6 +328,7 @@ const Controls = () => {
               className="bg-blue-500 text-white"
               onClick={() => setIsCreatingClip(true)}
             >
+              <LuScissorsLineDashed className="w-4 h-4 mr-1" />
               Create Clip
             </Button>
           </div>

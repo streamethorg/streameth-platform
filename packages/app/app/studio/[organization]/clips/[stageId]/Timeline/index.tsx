@@ -21,6 +21,7 @@ const Timeline = () => {
     setPixelsPerSecond,
     setTimelineContainerWidth,
     setCurrentTime,
+    isCreatingClip,
   } = useClipContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);

@@ -89,4 +89,9 @@ export const config = {
     user: validatedEnv.MAIL_USER,
     pass: validatedEnv.MAIL_PASS,
   },
+  remotion: {
+    id: validatedEnv.REMOTION_ID,
+    host: validatedEnv.REMOTION_BASE_URL,
+    webhookSecretKey: validatedEnv.REMOTION_WEBHOOK_SECRET,
+  },
 };

@@ -30,6 +30,7 @@ import {
   LuFilm,
   LuRadio,
   LuScissors,
+  LuScissorsLineDashed,
   LuVideo,
 } from 'react-icons/lu';
 
@@ -117,7 +118,7 @@ const TableCells = async ({
                 href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
               >
                 <Button variant="primary" size="icon" className="mr-2">
-                  <ScissorsLineDashed className="w-5 h-5 cursor-pointer" />
+                  <LuScissorsLineDashed className="w-5 h-5 cursor-pointer" />
                 </Button>
               </Link>
             )}
