@@ -8,6 +8,7 @@ import {
   Radio,
   FilePenLine,
   ScissorsLineDashed,
+  Film,
 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDuration } from '@/lib/utils/time';
@@ -24,6 +25,14 @@ import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import { Button } from '@/components/ui/button';
 import { getTypeLabel } from '@/lib/utils/utils';
+import {
+  LuClapperboard,
+  LuFilm,
+  LuRadio,
+  LuScissors,
+  LuScissorsLineDashed,
+  LuVideo,
+} from 'react-icons/lu';
 
 const TableCells = async ({
   item,
@@ -51,12 +60,17 @@ const TableCells = async ({
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'clip':
-        return <Scissors className="w-4 h-4 text-green-500" />;
+        return <LuScissors className="w-4 h-4 text-green-500" />;
       case 'livestream':
-        return <Radio className="w-4 h-4 text-red-500" />;
+        return <LuRadio className="w-4 h-4 text-red-500" />;
       case 'video':
+        return <LuVideo className="w-4 h-4 text-sky-500" />;
+      case 'animation':
+        return <LuClapperboard className="w-4 h-4 text-yellow-500" />;
+      case 'editorClip':
+        return <LuFilm className="w-4 h-4 text-purple-500" />;
       default:
-        return <Video className="w-4 h-4 text-sky-500" />;
+        return <LuVideo className="w-4 h-4 text-sky-500" />;
     }
   };
 
@@ -104,7 +118,7 @@ const TableCells = async ({
                 href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
               >
                 <Button variant="primary" size="icon" className="mr-2">
-                  <ScissorsLineDashed className="w-5 h-5 cursor-pointer" />
+                  <LuScissorsLineDashed className="w-5 h-5 cursor-pointer" />
                 </Button>
               </Link>
             )}

@@ -15,7 +15,6 @@ const Timeline = () => {
     filteredMarkers,
     handleMouseDown,
     handleMarkerClick,
-    goToClickTime,
     selectedMarkerId,
     pixelsPerSecond,
     setPixelsPerSecond,

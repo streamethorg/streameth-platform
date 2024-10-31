@@ -457,6 +457,71 @@
 					"end": {
 						"type": "number",
 						"format": "double"
+					},
+					"organizationId": {
+						"type": "string"
+					},
+					"stageId": {
+						"type": "string"
+					},
+					"isEditorEnabled": {
+						"type": "boolean"
+					},
+					"editorOptions": {
+						"properties": {
+							"captionColor": {
+								"type": "string"
+							},
+							"captionFont": {
+								"type": "string"
+							},
+							"captionLinesPerPage": {
+								"type": "number",
+								"format": "double"
+							},
+							"captionPosition": {
+								"type": "string"
+							},
+							"captionEnabled": {
+								"type": "boolean"
+							},
+							"selectedAspectRatio": {
+								"type": "string"
+							},
+							"events": {
+								"items": {
+									"properties": {
+										"sessionId": {
+											"type": "string"
+										},
+										"label": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"sessionId",
+										"label"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"frameRate": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"captionColor",
+							"captionFont",
+							"captionLinesPerPage",
+							"captionPosition",
+							"captionEnabled",
+							"selectedAspectRatio",
+							"events",
+							"frameRate"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -464,7 +529,8 @@
 					"sessionId",
 					"recordingId",
 					"start",
-					"end"
+					"end",
+					"organizationId"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -530,7 +596,9 @@
 					"event",
 					"video",
 					"transcrpition",
-					"social"
+					"social",
+					"animation",
+					"clip"
 				],
 				"type": "string"
 			},
@@ -1651,9 +1719,11 @@
 			},
 			"SessionType": {
 				"enum": [
-					"clip",
+					"video",
 					"livestream",
-					"video"
+					"clip",
+					"animation",
+					"editorClip"
 				],
 				"type": "string"
 			},
@@ -2446,6 +2516,21 @@
 							"type": "object"
 						},
 						"type": "array"
+					},
+					"animation": {
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"label": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type",
+							"label"
+						],
+						"type": "object"
 					},
 					"createdAt": {
 						"type": "string"
@@ -3459,6 +3544,100 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_unknown_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RemotionPayload": {
+				"properties": {
+					"type": {
+						"type": "string"
+					},
+					"renderId": {
+						"type": "string"
+					},
+					"expectedBucketOwner": {
+						"type": "string"
+					},
+					"bucketName": {
+						"type": "string"
+					},
+					"customData": {
+						"properties": {
+							"compositionId": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"outputUrl": {
+						"type": "string"
+					},
+					"lambdaErrors": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"outputFile": {
+						"type": "string"
+					},
+					"timeToFinish": {
+						"type": "number",
+						"format": "double"
+					},
+					"costs": {
+						"properties": {
+							"estimatedDisplayCost": {
+								"type": "string"
+							},
+							"estimatedCost": {
+								"type": "number",
+								"format": "double"
+							},
+							"disclaimer": {
+								"type": "string"
+							},
+							"currency": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"estimatedDisplayCost",
+							"estimatedCost",
+							"disclaimer",
+							"currency"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"type",
+					"renderId",
+					"expectedBucketOwner",
+					"bucketName",
+					"outputUrl",
+					"lambdaErrors",
+					"outputFile",
+					"timeToFinish",
+					"costs"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"GSheetConfig": {
 				"properties": {
 					"sheetId": {
@@ -4130,23 +4309,6 @@
 				},
 				"required": [
 					"token"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_unknown_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {}
-				},
-				"required": [
-					"status",
-					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -6843,6 +7005,38 @@
 					"content": {
 						"application/json": {
 							"schema": {}
+						}
+					}
+				}
+			}
+		},
+		"/webhook/remotion": {
+			"post": {
+				"operationId": "WebhookRemotion",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_unknown_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Index"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RemotionPayload"
+							}
 						}
 					}
 				}

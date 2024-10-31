@@ -246,6 +246,10 @@ const models: TsoaRoute.Models = {
             "recordingId": {"dataType":"string","required":true},
             "start": {"dataType":"double","required":true},
             "end": {"dataType":"double","required":true},
+            "organizationId": {"dataType":"string","required":true},
+            "stageId": {"dataType":"string"},
+            "isEditorEnabled": {"dataType":"boolean"},
+            "editorOptions": {"dataType":"nestedObjectLiteral","nestedProperties":{"captionColor":{"dataType":"string","required":true},"captionFont":{"dataType":"string","required":true},"captionLinesPerPage":{"dataType":"double","required":true},"captionPosition":{"dataType":"string","required":true},"captionEnabled":{"dataType":"boolean","required":true},"selectedAspectRatio":{"dataType":"string","required":true},"events":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"sessionId":{"dataType":"string","required":true},"label":{"dataType":"string","required":true}}},"required":true},"frameRate":{"dataType":"double","required":true}}},
         },
         "additionalProperties": false,
     },
@@ -277,7 +281,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "StateType": {
         "dataType": "refEnum",
-        "enums": ["nft","event","video","transcrpition","social"],
+        "enums": ["nft","event","video","transcrpition","social","animation","clip"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IState": {
@@ -635,7 +639,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SessionType": {
         "dataType": "refEnum",
-        "enums": ["clip","livestream","video"],
+        "enums": ["video","livestream","clip","animation","editorClip"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ProcessingStatus": {
@@ -772,6 +776,7 @@ const models: TsoaRoute.Models = {
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "active": {"dataType":"boolean"},
             "socials": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"date":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}}}},
+            "animation": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"label":{"dataType":"string","required":true}}},
             "createdAt": {"dataType":"string"},
         },
         "additionalProperties": false,
@@ -1103,6 +1108,33 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_unknown_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"any"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "RemotionPayload": {
+        "dataType": "refObject",
+        "properties": {
+            "type": {"dataType":"string","required":true},
+            "renderId": {"dataType":"string","required":true},
+            "expectedBucketOwner": {"dataType":"string","required":true},
+            "bucketName": {"dataType":"string","required":true},
+            "customData": {"dataType":"nestedObjectLiteral","nestedProperties":{"compositionId":{"dataType":"string"}}},
+            "outputUrl": {"dataType":"string","required":true},
+            "lambdaErrors": {"dataType":"array","array":{"dataType":"string"},"required":true},
+            "outputFile": {"dataType":"string","required":true},
+            "timeToFinish": {"dataType":"double","required":true},
+            "costs": {"dataType":"nestedObjectLiteral","nestedProperties":{"estimatedDisplayCost":{"dataType":"string","required":true},"estimatedCost":{"dataType":"double","required":true},"disclaimer":{"dataType":"string","required":true},"currency":{"dataType":"string","required":true}},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "GSheetConfig": {
         "dataType": "refObject",
         "properties": {
@@ -1341,16 +1373,6 @@ const models: TsoaRoute.Models = {
             "token": {"dataType":"string","required":true},
             "type": {"ref":"AuthType"},
             "email": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_unknown_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"any"},
         },
         "additionalProperties": false,
     },
@@ -3496,6 +3518,37 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'webhook',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/webhook/remotion',
+            ...(fetchMiddlewares<RequestHandler>(IndexController)),
+            ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.webhookRemotion)),
+
+            async function IndexController_webhookRemotion(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                    payload: {"in":"body","name":"payload","required":true,"ref":"RemotionPayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new IndexController();
+
+              await templateService.apiHandler({
+                methodName: 'webhookRemotion',
                 controller,
                 response,
                 next,

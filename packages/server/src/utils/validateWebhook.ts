@@ -1,5 +1,18 @@
-import crypto from 'crypto';
 import { config } from '@config';
+import { RemotionPayload } from '@interfaces/remotion.webhook.interface';
+import crypto from 'crypto';
+
+export function validateRemotionWebhook(
+  remotionSignature: string,
+  payload: RemotionPayload,
+): boolean {
+  const signature = crypto
+    .createHmac('sha512', config.remotion.webhookSecretKey)
+    .update(JSON.stringify(payload))
+    .digest('hex');
+  if (remotionSignature !== signature) return false;
+  return true;
+}
 
 export function validateWebhook(
   livepeerSignature: string,

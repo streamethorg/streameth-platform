@@ -89,9 +89,17 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     })
   ).sessions;
 
+  const animations = (
+    await fetchAllSessions({
+      organizationSlug: organization,
+      onlyVideos: true,
+      type: SessionType.animation,
+    })
+  ).sessions;
+
   return (
     <ClipProvider organizationId={organizationId} stageId={stageId}>
-      <div className="flex flex-row w-full h-full">
+      <div className="flex flex-row w-full h-full border-t border-gray-200">
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
           <TopBar />
           <ReactHlsPlayer src={videoSrc} type={type} />
@@ -100,11 +108,12 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             <Timeline />
           </div>
         </div>
-        <div className="flex w-[400px] h-full">
+        <div className="flex w-[400px] h-full overflow-y-auto">
           <Sidebar
             liveRecordingId={liveRecording?.id}
             stageSessions={stageSessions}
             organizationId={organizationId}
+            animations={animations}
           />
         </div>
       </div>

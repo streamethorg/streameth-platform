@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { useClipContext } from '../ClipContext';
+import { IExtendedSession } from '@/lib/types';
 
 const TopBar = () => {
   const {

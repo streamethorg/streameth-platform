@@ -56,6 +56,7 @@ export default class SessionService {
         eventSlug: eventSlug,
         eventId: eventId,
         stageId: stageId,
+        type: data.type,
         processingStatus: ProcessingStatus.pending,
       },
       `${this.path}/${eventId}`,
@@ -92,7 +93,9 @@ export default class SessionService {
     totalDocuments: number;
     pageable: { page: number; size: number };
   }> {
-    let filter = {};
+    let filter: {} = {
+      type: { $nin: [SessionType.animation, SessionType.editorClip] },
+    };
     if (d.type !== undefined) {
       filter = { ...filter, type: d.type };
     }

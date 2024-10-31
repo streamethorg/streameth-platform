@@ -24,7 +24,6 @@ const KeyboardShortcuts = ({
 }) => {
   const {
     videoRef,
-    isLoading,
     currentTime,
     setStartTime,
     playbackStatus,
@@ -35,6 +34,8 @@ const KeyboardShortcuts = ({
     timelineContainerWidth,
     isAddingOrEditingMarker,
     isCreatingClip,
+    timeReference,
+    convertSecondsToUnix,
   } = useClipContext();
   const isCreatingClipOrMarker = isCreatingClip || isAddingOrEditingMarker;
   const maxLength = videoRef.current?.duration || 0;
@@ -65,7 +66,7 @@ const KeyboardShortcuts = ({
         if (event.key === 'i') {
           if (endTime.displayTime > currentTime) {
             setStartTime({
-              unix: Date.now() - playbackStatus.offset,
+              unix: convertSecondsToUnix(timeReference, currentTime),
               displayTime: currentTime,
             });
           } else {
@@ -74,7 +75,7 @@ const KeyboardShortcuts = ({
         } else if (event.key === 'o') {
           if (startTime.displayTime < currentTime) {
             setEndTime({
-              unix: Date.now() - playbackStatus.offset,
+              unix: convertSecondsToUnix(timeReference, currentTime),
               displayTime: currentTime,
             });
           } else {
