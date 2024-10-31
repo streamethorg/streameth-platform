@@ -25,6 +25,7 @@ export enum SessionType {
 
 export enum ProcessingStatus {
   pending = 'pending',
+  rendering = 'rendering',
   failed = 'failed',
   completed = 'completed',
 }
