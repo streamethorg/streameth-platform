@@ -81,6 +81,10 @@ type ClipContextType = {
   setIsLoadingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
   timelineContainerWidth: number;
   setTimelineContainerWidth: React.Dispatch<React.SetStateAction<number>>;
+  convertSecondsToUnix: (
+    timeRef: { currentTime: number; unixTime: number },
+    seconds: number
+  ) => number;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -134,8 +138,9 @@ export const ClipProvider = ({
     unix: convertSecondsToUnix(timeReference, 0),
     displayTime: 0,
   });
+
   const [endTime, setEndTime] = useState({
-    unix: Date.now() + 60000,
+    unix: convertSecondsToUnix(timeReference, 60),
     displayTime: 60,
   });
   const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
@@ -195,8 +200,17 @@ export const ClipProvider = ({
   const hasSetEndTimeRef = useRef(false);
 
   useEffect(() => {
-    if (videoRef.current?.duration && !hasSetEndTimeRef.current) {
+    console.log(timeReference);
+    if (
+      timeReference.currentTime !== 0 &&
+      videoRef.current?.duration &&
+      !hasSetEndTimeRef.current
+    ) {
       const duration = videoRef.current.duration;
+      setStartTime({
+        unix: convertSecondsToUnix(timeReference, 0),
+        displayTime: 0,
+      });
       setEndTime({
         unix: convertSecondsToUnix(timeReference, duration * 1),
         displayTime: duration * 1,
@@ -204,7 +218,7 @@ export const ClipProvider = ({
       hasSetEndTimeRef.current = true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoRef.current?.duration]);
+  }, [videoRef.current?.duration, timeReference.currentTime]);
 
   const updateClipBounds = (start: number, end: number) => {
     setStartTime((prevState) => ({ ...prevState, displayTime: start }));
@@ -267,7 +281,7 @@ export const ClipProvider = ({
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: Date.now() - playbackStatus.offset,
+              unix: convertSecondsToUnix(timeReference, newTime),
               displayTime: newTime,
             });
           }
@@ -277,7 +291,7 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: Date.now() - playbackStatus.offset,
+              unix: convertSecondsToUnix(timeReference, newTime),
               displayTime: newTime,
             });
           }
@@ -295,11 +309,11 @@ export const ClipProvider = ({
           );
 
           setStartTime({
-            unix: Date.now() - playbackStatus.offset,
+            unix: convertSecondsToUnix(timeReference, newStartTime),
             displayTime: newStartTime,
           });
           setEndTime({
-            unix: Date.now() - playbackStatus.offset,
+            unix: convertSecondsToUnix(timeReference, newEndTime),
             displayTime: newEndTime,
           });
         }
@@ -429,6 +443,7 @@ export const ClipProvider = ({
         setIsLoadingMarkers,
         timelineContainerWidth,
         setTimelineContainerWidth,
+        convertSecondsToUnix,
       }}
     >
       {children}

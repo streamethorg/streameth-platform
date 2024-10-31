@@ -11,13 +11,20 @@ type TimeSetterProps = {
 };
 
 const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
-  const { playbackStatus, setStartTime, setEndTime, startTime, endTime } =
-    useClipContext();
+  const {
+    playbackStatus,
+    setStartTime,
+    setEndTime,
+    startTime,
+    endTime,
+    timeReference,
+    convertSecondsToUnix,
+  } = useClipContext();
 
   const handleSetTime = () => {
     if (playbackStatus) {
       const timeSetting = {
-        unix: Date.now() - playbackStatus.offset,
+        unix: convertSecondsToUnix(timeReference, playbackStatus.progress),
         displayTime: playbackStatus.progress,
       };
 
