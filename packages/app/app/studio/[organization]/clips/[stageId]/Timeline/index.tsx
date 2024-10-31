@@ -15,13 +15,11 @@ const Timeline = () => {
     filteredMarkers,
     handleMouseDown,
     handleMarkerClick,
-    goToClickTime,
     selectedMarkerId,
     pixelsPerSecond,
     setPixelsPerSecond,
     setTimelineContainerWidth,
     setCurrentTime,
-    isCreatingClip,
   } = useClipContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);

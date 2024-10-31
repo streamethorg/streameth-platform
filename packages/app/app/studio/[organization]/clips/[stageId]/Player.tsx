@@ -14,8 +14,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     setIsLoading,
     isLoading,
     videoRef,
-    playbackStatus,
-    setEndTime,
     endTime,
     startTime,
     setHls,
@@ -91,29 +89,15 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     }
   }, [proxiedSrc, setPlaybackStatus, videoRef, setIsLoading, src]);
 
-  useEffect(() => {
-    if (
-      videoRef.current &&
-      videoRef.current.duration &&
-      playbackStatus &&
-      endTime.unix === 0
-    ) {
-      setEndTime({
-        displayTime: 30, // Set end time to 30 seconds
-        unix: Date.now() - playbackStatus.offset + 30000, // Adjust unix time to 30 seconds from now
-      });
-    }
-  }, [setEndTime, videoRef, playbackStatus]);
-
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
-      {/* <div className="absolute top-0 bg-white z-[99999] p-4 border "> */}
-      {/*   <p>{'start: ' + startTime.unix.toFixed(0)}</p> */}
-      {/*   <p>{'start time: ' + startTime.displayTime}</p> */}
-      {/*   <p>{'end: ' + endTime.unix.toFixed(0)}</p> */}
-      {/*   <p>{'end time: ' + endTime.displayTime}</p> */}
-      {/*   <p>{'diff ' + (endTime.unix - startTime.unix).toFixed(0)}</p> */}
-      {/* </div> */}
+      {/* <div className="absolute top-0 bg-white z-[99999] p-4 border ">
+        <p>{'start: ' + startTime.unix.toFixed(0)}</p>
+        <p>{'start time: ' + startTime.displayTime}</p>
+        <p>{'end: ' + endTime.unix.toFixed(0)}</p>
+        <p>{'end time: ' + endTime.displayTime}</p>
+        <p>{'diff ' + ((endTime.unix - startTime.unix) / 60000).toFixed(2) + ' minutes'}</p>
+      </div> */}
       <video
         ref={videoRef}
         autoPlay={false}
