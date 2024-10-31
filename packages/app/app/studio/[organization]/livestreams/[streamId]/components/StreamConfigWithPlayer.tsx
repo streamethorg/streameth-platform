@@ -12,7 +12,7 @@ const ClientSidePlayer = dynamic(() => import('./ClientSidePlayer'), {
 
 const StreamConfigWithPlayer = ({ stream }: { stream: IExtendedStage }) => {
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
-  const streamKey = stream?.streamSettings?.isActive;
+  const streamKey = stream?.streamSettings?.streamKey;
 
   const checkIsLive = async () => {
     try {
