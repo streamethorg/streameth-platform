@@ -321,11 +321,11 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                   </button>
                 ) : (
                   <button
-                    // Enable delete after upload is done
+                    // Enable clear after upload is done
                     onClick={() => handleDelete(uploadId)}
                     className="text-red-500 hover:underline"
                   >
-                    Delete
+                    Clear
                   </button>
                 )}
               </div>

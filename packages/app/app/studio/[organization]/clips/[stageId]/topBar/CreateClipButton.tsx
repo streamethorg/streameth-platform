@@ -232,7 +232,7 @@ const CreateClipButton = ({
       setIsCreateClip(false);
     }
   };
-  console.log('watch', form.watch());
+
   return (
     <Card className="border-none rounded-none shadow-none">
       <CreateClipForm

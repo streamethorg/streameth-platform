@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -21,7 +21,6 @@ import {
   LuEye,
 } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
-import Dropzone from '../../../library/components/upload/Dropzone';
 import {
   Select,
   SelectContent,
@@ -33,11 +32,10 @@ import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { clipSchema } from '@/lib/schema';
 import { Uploads } from '../../../library/components/UploadVideoDialog';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { formatClipTime } from '@/lib/utils/time';
 import { useClipContext } from '../ClipContext';
 import { IExtendedSession } from '@/lib/types';
-import SelectAnimationModal from './SelectAnimationModal';
+import SelectAnimation from './SelectAnimation';
 
 const CreateClipForm = ({
   form,
@@ -56,15 +54,9 @@ const CreateClipForm = ({
   handlePreview: () => void;
   animations: IExtendedSession[];
 }) => {
-  const [introAnimationOption, setIntroAnimationOption] = useState<
-    'select' | 'upload' | undefined
-  >(undefined);
-  const [introUpload, setIntroUpload] = useState<Uploads>({});
-  const [outroUpload, setOutroUpload] = useState<Uploads>({});
   const {
     isLoading,
     markers,
-    stageId,
     setIsCreatingClip,
     startTime,
     endTime,
@@ -239,39 +231,23 @@ const CreateClipForm = ({
           {/* Animation Fields */}
           <div className="grid grid-cols-2 gap-x-2">
             {/* Left column */}
-            <FormField
-              control={form.control}
+            <SelectAnimation
+              animations={animations}
+              form={form}
               name="introAnimation"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <div className="flex flex-col gap-2 w-full">
-                    <FormLabel>Intro animation</FormLabel>
-                    <FormControl>
-                      <div className="flex flex-col space-y-2">
-                        <SelectAnimationModal
-                          onChange={field.onChange}
-                          animations={animations}
-                        />
-                        <Dropzone
-                          uploads={introUpload}
-                          setUploads={setIntroUpload}
-                          organizationId={organizationId}
-                          stageId={stageId}
-                          onChange={field.onChange}
-                          type={SessionType.animation}
-                          maxFiles={1}
-                          maxSize={50 * 1024 * 1024}
-                        />
-                      </div>
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
+              label="Intro animation"
+              organizationId={organizationId}
+            />
+            {/* Right column */}
+            <SelectAnimation
+              animations={animations}
+              form={form}
+              name="outroAnimation"
+              label="Outro animation"
+              organizationId={organizationId}
             />
 
-            {/* Right column */}
-            <FormField
+            {/* <FormField
               control={form.control}
               name="outroAnimation"
               render={({ field }) => (
@@ -300,7 +276,7 @@ const CreateClipForm = ({
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </div>
         </CardContent>
 
