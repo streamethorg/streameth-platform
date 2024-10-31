@@ -38,7 +38,7 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
   ).sessions;
 
   return (
-    <div className="flex flex-col p-4 w-full h-full max-w-screen-3xl max-h-screen">
+    <div className="flex flex-col p-4 w-full h-full max-h-screen max-w-screen-3xl">
       <StreamHeader
         organizationSlug={params.organization}
         stream={stream}
@@ -46,11 +46,7 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
       />
       <div className="flex flex-row flex-grow space-x-4 w-full">
         <div className="flex flex-col w-2/3">
-          <StreamConfigWithPlayer
-            stream={stream}
-            streamId={params.streamId}
-            organization={params.organization}
-          />
+          <StreamConfigWithPlayer stream={stream} />
           <div className="flex flex-row gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
             <div className="flex justify-start items-center space-x-2">
               <span className="pr-4 text-xl font-bold">{stream.name}</span>
@@ -91,9 +87,9 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
                 <Link
                   href={`/studio/${params.organization}/clips/${stream._id}?videoType=livestream`}
                 >
-                  <Button variant="primary" className="flex items-center gap-1">
+                  <Button variant="primary" className="flex gap-1 items-center">
                     Clip Live
-                    <ScissorsLineDashed className="ml-1 h-5 w-5" />
+                    <ScissorsLineDashed className="ml-1 w-5 h-5" />
                   </Button>
                 </Link>
               )}

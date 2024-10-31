@@ -4,22 +4,15 @@ import CopyText from '../../../../../../components/misc/CopyText';
 import { IExtendedStage } from '@/lib/types';
 import { fetchStage } from '@/lib/services/stageService';
 import dynamic from 'next/dynamic';
-import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton';
+import { notFound } from 'next/navigation';
 
 const ClientSidePlayer = dynamic(() => import('./ClientSidePlayer'), {
   ssr: false,
 });
 
-const StreamConfigWithPlayer = ({
-  stream,
-  streamId,
-  organization,
-}: {
-  stream: IExtendedStage;
-  streamId: string;
-  organization: string;
-}) => {
+const StreamConfigWithPlayer = ({ stream }: { stream: IExtendedStage }) => {
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
+  const streamKey = stream?.streamSettings?.isActive;
 
   const checkIsLive = async () => {
     try {
@@ -35,20 +28,24 @@ const StreamConfigWithPlayer = ({
       return;
     }
 
-    const interval = setInterval(() => {
+    setInterval(() => {
       checkIsLive();
     }, 5000);
   }, [stream?.streamSettings?.isActive]);
 
+  if (!streamKey) {
+    return notFound();
+  }
+
   return (
     <>
-      <div className="aspect-video w-full ">
+      <div className="w-full aspect-video">
         {!isLive ? (
-          <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black p-4 text-white">
-            <h3 className="mb-2 text-center text-3xl font-semibold lg:text-4xl">
+          <div className="flex flex-col justify-center items-center p-4 w-full h-full text-white bg-black rounded-lg">
+            <h3 className="mb-2 text-3xl font-semibold text-center lg:text-4xl">
               Connect your Streaming providers
             </h3>
-            <p className="mb-6 text-center text-lg lg:w-3/4">
+            <p className="mb-6 text-lg text-center lg:w-3/4">
               Copy and paste the stream key into your streaming software. Use
               either the RTMP or SRT ingest, depending on your use-case. The
               RTMP ingest is more common with OBS users
@@ -59,13 +56,14 @@ const StreamConfigWithPlayer = ({
                 text="rtmp://rtmp.livepeer.com/live"
               />
               <CopyText
-                label="Stream key"
-                text={stream?.streamSettings?.streamKey}
+                label="SRT Ingest"
+                text={`srt://rtmp.livepeer.com:2935?streamid=${streamKey}&mode=caller`}
               />
+              <CopyText label="Stream key" text={streamKey} />
             </div>
           </div>
         ) : (
-          <div className="aspect-video w-full ">
+          <div className="w-full aspect-video">
             <ClientSidePlayer
               name={stream.name || 'Live Stream'}
               thumbnail=""
