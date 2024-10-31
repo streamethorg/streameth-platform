@@ -21,14 +21,10 @@ const StreamConfig = async ({
   }
 
   return (
-    <div className="m-auto flex max-w-5xl flex-col items-center gap-4 p-4">
+    <div className="flex flex-col gap-4 items-center p-4 m-auto max-w-5xl">
       <StreamHeader organizationSlug={organizationSlug} stream={stage} />
 
-      <StreamConfigWithPlayer
-        organization={stage.organizationId as string}
-        streamId={stageId}
-        stream={stage}
-      />
+      <StreamConfigWithPlayer stream={stage} />
 
       <Multistream
         organization={organization}

@@ -13,10 +13,11 @@ const generateGoogleCalendar = ({
   start: Date;
   end: Date;
 }) => {
-  const startDate = formatDate(start, 'YYYYMMDDTHHmm00Z');
-  const endDate = formatDate(end, 'YYYYMMDDTHHmm00Z');
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const startDate = formatDate(start, 'YYYYMMDDTHHmmss', userTimezone);
+  const endDate = formatDate(end, 'YYYYMMDDTHHmmss', userTimezone);
 
-  return `${BASE_URL}?action=TEMPLATE&text=${eventName}&dates=${startDate}/${endDate}&details=${description}`;
+  return `${BASE_URL}?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}`;
 };
 
 export default generateGoogleCalendar;
