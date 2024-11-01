@@ -119,7 +119,9 @@ export class IndexController extends Controller {
       throw new HttpException(401, 'Invalid signature');
     }
 
-    const clipEditor = await ClipEditor.findOne({ renderId: payload.renderId });
+    const clipEditor = await ClipEditor.findOne({
+      renderId: payload.renderId,
+    });
     if (!clipEditor) {
       throw new HttpException(404, 'Clip editor not found');
     }

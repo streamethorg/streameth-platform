@@ -3,8 +3,8 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { RecordingSessionPayload } from '@interfaces/livepeer.webhook.interface';
 import {
-  ProcessingStatus,
   ISession,
+  ProcessingStatus,
   SessionType,
 } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
@@ -57,7 +57,7 @@ export default class SessionService {
         eventId: eventId,
         stageId: stageId,
         type: data.type,
-        processingStatus: ProcessingStatus.pending,
+        processingStatus: data?.processingStatus ?? ProcessingStatus.pending,
       },
       `${this.path}/${eventId}`,
     );
