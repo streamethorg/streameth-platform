@@ -50,6 +50,11 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
           <span className="text-destructive">Processing Failed!</span>
         )}
       </TableCell>
+      <TableCell className={`  ${getStatusClassName()}`}>
+        <div className="flex items-center space-x-1">
+          <span>n/a</span>
+        </div>
+      </TableCell>
       {item.createdAt && (
         <TableCell className={` truncate ${getStatusClassName()}`}>
           {formatDate(new Date(item.createdAt as string), 'ddd. MMM. D, YYYY')}

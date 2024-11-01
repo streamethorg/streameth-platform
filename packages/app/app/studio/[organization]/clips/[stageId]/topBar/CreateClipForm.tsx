@@ -246,37 +246,6 @@ const CreateClipForm = ({
               label="Outro animation"
               organizationId={organizationId}
             />
-
-            {/* <FormField
-              control={form.control}
-              name="outroAnimation"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <div className="flex flex-col gap-2 w-full">
-                    <FormLabel>Outro animation</FormLabel>
-                    <FormControl>
-                      <div className="flex flex-col space-y-2">
-                        <SelectAnimationModal
-                          onChange={field.onChange}
-                          animations={animations}
-                        />
-                        <Dropzone
-                          uploads={outroUpload}
-                          setUploads={setOutroUpload}
-                          organizationId={organizationId}
-                          stageId={stageId}
-                          onChange={field.onChange}
-                          type={SessionType.animation}
-                          maxFiles={1}
-                          maxSize={50 * 1024 * 1024}
-                        />
-                      </div>
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
           </div>
         </CardContent>
 
