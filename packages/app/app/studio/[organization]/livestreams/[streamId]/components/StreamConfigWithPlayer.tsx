@@ -1,41 +1,21 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CopyText from '../../../../../../components/misc/CopyText';
 import { IExtendedStage } from '@/lib/types';
-import { fetchStage } from '@/lib/services/stageService';
 import dynamic from 'next/dynamic';
-import { notFound } from 'next/navigation';
 
 const ClientSidePlayer = dynamic(() => import('./ClientSidePlayer'), {
   ssr: false,
 });
 
-const StreamConfigWithPlayer = ({ stream }: { stream: IExtendedStage }) => {
-  const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
+const StreamConfigWithPlayer = ({
+  stream,
+  isLive,
+}: {
+  stream: IExtendedStage;
+  isLive?: boolean;
+}) => {
   const streamKey = stream?.streamSettings?.streamKey;
-
-  const checkIsLive = async () => {
-    try {
-      const res = await fetchStage({ stage: stream._id as string });
-      setIsLive(res?.streamSettings?.isActive);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (stream?.streamSettings?.isActive) {
-      return;
-    }
-
-    setInterval(() => {
-      checkIsLive();
-    }, 5000);
-  }, [stream?.streamSettings?.isActive]);
-
-  if (!streamKey) {
-    return notFound();
-  }
 
   return (
     <>

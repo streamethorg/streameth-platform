@@ -3,21 +3,14 @@
 import React from 'react';
 import { fetchStage } from '@/lib/services/stageService';
 import { LivestreamPageParams } from '@/lib/types';
-import StreamConfigWithPlayer from './components/StreamConfigWithPlayer';
 import StreamHeader from './components/StreamHeader';
 import NotFound from '@/app/not-found';
-import StreamHealth from './components/StreamHealth';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, ScissorsLineDashed } from 'lucide-react';
-import Link from 'next/link';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { fetchAllSessions } from '@/lib/services/sessionService';
-import Sidebar from './components/Sidebar';
-import EditLivestream from '../components/EditLivestream';
-import ShareAndEmbed from './components/ShareAndEmbed';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import StageControls from './components/StageControls';
 
-const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
+const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null;
 
   const stream = await fetchStage({ stage: params.streamId });
@@ -44,64 +37,11 @@ const Livestream = async ({ params, searchParams }: LivestreamPageParams) => {
         stream={stream}
         isLiveStreamPage
       />
-      <div className="flex flex-row flex-grow space-x-4 w-full">
-        <div className="flex flex-col w-2/3">
-          <StreamConfigWithPlayer stream={stream} />
-          <div className="flex flex-row gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
-            <div className="flex justify-start items-center space-x-2">
-              <span className="pr-4 text-xl font-bold">{stream.name}</span>
-              <StreamHealth
-                stream={stream}
-                streamId={stream?.streamSettings?.streamId || ''}
-                organization={params.organization}
-                isLive={stream.streamSettings?.isActive}
-              />
-              <EditLivestream
-                stage={stream}
-                organizationSlug={organization.slug!}
-                variant="outline"
-                btnText="Edit"
-              />
-            </div>
-
-            <div className="flex flex-row gap-2 ml-auto">
-              <ShareAndEmbed
-                organizationSlug={params.organization}
-                streamId={stream._id as string}
-                playerName={stream?.name}
-              />
-
-              <Link
-                href={`/${params.organization}/livestream?stage=${stream._id}`}
-                target="_blank"
-              >
-                <Button variant="outline">
-                  Watch
-                  <div>
-                    <ArrowRight className="ml-1 w-5 h-5" />
-                  </div>
-                </Button>
-              </Link>
-
-              {stream.streamSettings?.isActive && (
-                <Link
-                  href={`/studio/${params.organization}/clips/${stream._id}?videoType=livestream`}
-                >
-                  <Button variant="primary" className="flex gap-1 items-center">
-                    Clip Live
-                    <ScissorsLineDashed className="ml-1 w-5 h-5" />
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-        <Sidebar
-          stage={stream}
-          sessions={stageSessions}
-          organization={organization}
-        />
-      </div>
+      <StageControls
+        organization={organization}
+        stream={stream}
+        stageSessions={stageSessions}
+      />
     </div>
   );
 };
