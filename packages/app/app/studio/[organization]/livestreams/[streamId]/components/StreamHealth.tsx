@@ -6,13 +6,9 @@ import { useEffect, useState } from 'react';
 
 const StreamHealth = ({
   stream,
-  streamId,
-  organization,
   isLive,
 }: {
   stream: IExtendedStage;
-  streamId: string;
-  organization: string;
   isLive?: boolean;
 }) => {
   const [isHealthy, setIsHealthy] = useState(stream?.streamSettings?.isHealthy);
@@ -34,7 +30,8 @@ const StreamHealth = ({
     setInterval(() => {
       checkIsHealthy();
     }, 10000);
-  }, [stream?.streamSettings?.isHealthy, isLive]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stream?.streamSettings?.isHealthy]);
 
   return (
     isLive && (
