@@ -19,7 +19,7 @@ const handleUploadToDevcon = async (sessionId: string) => {
       title: session.name,
       description: session.description,
       sources_ipfsHash: session.ipfsURI || '',
-      sources_youtubeId: session.videoUrl || '',
+      //  sources_youtubeId: session.videoUrl || '', Handled in the pipedream
       sources_swarmHash: session.videoUrl || '',
       sources_livepeerId: session.playbackId || '',
       duration: session.playback?.duration || 0,
