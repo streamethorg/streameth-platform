@@ -18,9 +18,8 @@ const handleUploadToDevcon = async (sessionId: string) => {
     const payload = {
       title: session.name,
       description: session.description,
-      sources_ipfsHash: session.ipfsURI || '',
-      //  sources_youtubeId: session.videoUrl || '', Handled in the pipedream
-      sources_swarmHash: session.videoUrl || '',
+      sources_ipfsHash: session.ipfsURI || '', // Not used
+      sources_swarmHash: session.videoUrl || '', // Not used
       sources_livepeerId: session.playbackId || '',
       duration: session.playback?.duration || 0,
     };
