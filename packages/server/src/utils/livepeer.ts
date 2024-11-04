@@ -482,13 +482,21 @@ export const createClip = async (data: IClip) => {
         },
       };
     } else {
-      const clip = await livepeer.stream.createClip({
-        endTime: data.end,
-        startTime: data.start,
-        sessionId: data.recordingId,
-        playbackId: data.playbackId,
+      const clip = await fetch(`${host}/api/clip`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${secretKey}`,
+          'X-Forwarded-For': '127.0.0.1', // TODO: Figure this out
+        },
+        body: JSON.stringify({
+          playbackId: data.playbackId,
+          startTime: data.start,
+          endTime: data.end,
+          sessionId: data.recordingId,
+        }),
       });
-      const parsedClip = JSON.parse(clip.rawResponse.data.toString());
+      const parsedClip = await clip.json();
       const session = await SessionModel.findById(data.sessionId);
       await SessionModel.findOneAndUpdate(
         { _id: data.sessionId },
