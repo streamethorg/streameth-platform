@@ -1,98 +1,159 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { IExtendedOrganization } from '@/lib/types';
+import { IExtendedOrganization, IExtendedSession } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
-import { updateSessionAction } from '@/lib/actions/sessions';
-import { useState, useEffect } from 'react';
+import {
+  generateThumbnailAction,
+  updateSessionAction,
+} from '@/lib/actions/sessions';
+import { useState, useEffect, useCallback } from 'react';
 import { Check } from 'lucide-react';
 import { toast } from 'sonner';
+import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
+import { apiUrl } from '@/lib/utils/utils';
 
-const handleUploadToDevcon = async (sessionId: string) => {
-  try {
-    const session = await fetchSession({ session: sessionId });
+// Constants
+const DEVCON_UPLOAD_ENDPOINT = 'https://eovao4e5e2kvm45.m.pipedream.net';
 
-    if (!session) {
-      throw new Error('Session not found');
-    }
+// Helper functions - simplified to match VideoDownloadClient
+const getDownloadUrl = async (assetId: string): Promise<string> => {
+  const response = await fetch(`${apiUrl()}/streams/asset/${assetId}`);
 
-    const payload = {
-      title: session.name,
-      description: session.description,
-      sources_ipfsHash: session.ipfsURI || '', // Not used
-      sources_swarmHash: session.videoUrl || '', // Not used
-      sources_livepeerId: session.playbackId || '',
-      duration: session.playback?.duration || 0,
-    };
+  if (!response.ok) {
+    throw new Error('Failed to fetch asset details');
+  }
 
-    const response = await fetch('https://eovao4e5e2kvm45.m.pipedream.net', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+  const data = await response.json();
+  return data.data.downloadUrl;
+};
 
-    if (!response.ok) {
-      throw new Error('Failed to upload to Devcon');
-    }
+const validateSession = (session: ISession | IExtendedSession) => {
+  const requiredFields = {
+    name: session.name,
+    description: session.description,
+    playbackId: session.playbackId,
+  };
 
-    await updateSessionAction({
-      session: {
-        _id: session._id,
-        name: session.name,
-        description: session.description,
-        organizationId: session.organizationId,
-        eventId: session.eventId,
-        stageId: session.stageId,
-        start: session.start ?? Number(new Date()),
-        end: session.end ?? Number(new Date()),
-        speakers: session.speakers ?? [],
-        type: session.type ?? 'video',
-        // TODO: Change this once we have a proper field to check if the session has been uploaded to Devcon
-        published: true,
-      },
-    });
+  const missingFields = Object.entries(requiredFields)
+    .filter(([_, value]) => !value)
+    .map(([key]) => key);
 
-    toast.success('Successfully uploaded to Devcon!');
-    return true;
-  } catch (error) {
-    console.error('Error uploading to Devcon:', error);
-    toast.error('Failed to upload to Devcon. Please try again.');
-    return false;
+  if (missingFields.length > 0) {
+    throw new Error(
+      `Missing required fields: ${missingFields.join(', ')}. Please fill in all required fields.`
+    );
   }
 };
+
+const prepareSessionPayload = (session: ISession | IExtendedSession) => ({
+  _id: session._id?.toString() ?? '',
+  name: session.name,
+  description: session.description,
+  organizationId: session.organizationId,
+  eventId: session.eventId,
+  stageId: session.stageId,
+  start: session.start ?? Number(new Date()),
+  end: session.end ?? Number(new Date()),
+  speakers: session.speakers ?? [],
+  type: session.type ?? 'video',
+  published: true,
+});
+
+const prepareDevconPayload = async (
+  session: ISession | IExtendedSession,
+  thumbnail: string
+) => {
+  if (!session.playbackId) {
+    throw new Error('Session playbackId is required');
+  }
+
+  // Get video URL first
+  const downloadUrl = await getDownloadUrl(
+    session.assetId || session.playbackId
+  );
+  console.log('Download URL obtained:', downloadUrl);
+
+  return {
+    title: session.name,
+    description: session.description,
+    thumbnail,
+    video: downloadUrl,
+    sources_ipfsHash: session.ipfsURI || '',
+    sources_swarmHash: 'swarmHash',
+    sources_livepeerId: session.playbackId,
+    duration: session.playback?.duration || 0,
+  };
+};
+
+interface UploadToDevconProps {
+  organization: IExtendedOrganization | null;
+  organizationSlug: string;
+  sessionId: string;
+}
 
 const UploadToDevcon = ({
   organization,
   organizationSlug,
   sessionId,
-}: {
-  organization: IExtendedOrganization | null;
-  organizationSlug: string;
-  sessionId: string;
-}) => {
+}: UploadToDevconProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Check if session is already published when component mounts
-  useEffect(() => {
-    const checkPublishStatus = async () => {
-      const session = await fetchSession({ session: sessionId });
-      if (session?.published) {
-        setIsUploaded(true);
-      }
-    };
-
-    checkPublishStatus();
+  const checkPublishStatus = useCallback(async () => {
+    const session = await fetchSession({ session: sessionId });
+    if (session?.published) {
+      setIsUploaded(true);
+    }
   }, [sessionId]);
 
-  const onClick = async () => {
+  useEffect(() => {
+    checkPublishStatus();
+  }, [checkPublishStatus]);
+
+  const handleUploadToDevcon = async () => {
     setIsLoading(true);
+    setError(null);
+
     try {
-      const success = await handleUploadToDevcon(sessionId);
-      if (success) {
-        setIsUploaded(true);
+      const session = await fetchSession({ session: sessionId });
+      if (!session) {
+        throw new Error('Session not found');
       }
+
+      // TODO: This should be the thumbnail from the devcon API
+      const thumbnail =
+        session.coverImage || (await generateThumbnailAction(session));
+      if (!thumbnail) {
+        throw new Error('Failed to generate thumbnail');
+      }
+
+      const devconPayload = await prepareDevconPayload(session, thumbnail);
+
+      const response = await fetch(DEVCON_UPLOAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(devconPayload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload to Devcon');
+      }
+
+      await updateSessionAction({
+        session: prepareSessionPayload(session),
+      });
+
+      toast.success('Successfully uploaded to Devcon!');
+      setIsUploaded(true);
+      return true;
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to upload to Devcon';
+      console.error('Error in handleUploadToDevcon:', error);
+      toast.error(errorMessage);
+      setError(errorMessage);
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -108,9 +169,12 @@ const UploadToDevcon = ({
   }
 
   return (
-    <Button onClick={onClick} disabled={isLoading}>
-      {isLoading ? 'Uploading...' : 'Upload to Devcon'}
-    </Button>
+    <div className="space-y-2">
+      <Button onClick={handleUploadToDevcon} disabled={isLoading}>
+        {isLoading ? 'Uploading...' : 'Upload to Devcon'}
+      </Button>
+      {error && <p className="text-sm text-red-500">{error}</p>}
+    </div>
   );
 };
 
