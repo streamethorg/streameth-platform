@@ -12,4 +12,5 @@ export interface IClipEditor {
   captionLinesPerPage: number;
   captionFont: string;
   captionColor: string;
+  clipSessionId: Types.ObjectId;
 }
