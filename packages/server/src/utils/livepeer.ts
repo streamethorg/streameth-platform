@@ -450,6 +450,10 @@ export const getClipEditorStatus = async (
   };
 };
 
+const generateRandomIp = () => {
+  return Math.floor(Math.random() * 256) + '.' + Math.floor(Math.random() * 256) + '.' + Math.floor(Math.random() * 256) + '.' + Math.floor(Math.random() * 256);
+}
+
 export const createClip = async (data: IClip) => {
   try {
     if (data.isEditorEnabled) {
@@ -487,7 +491,7 @@ export const createClip = async (data: IClip) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${secretKey}`,
-          'X-Forwarded-For': '127.0.0.1', // TODO: Figure this out
+          'X-Forwarded-For': generateRandomIp(),
         },
         body: JSON.stringify({
           playbackId: data.playbackId,
