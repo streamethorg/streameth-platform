@@ -4,6 +4,7 @@ import { IExtendedOrganization, IExtendedSession } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
 import {
   generateThumbnailAction,
+  updateAssetAction,
   updateSessionAction,
 } from '@/lib/actions/sessions';
 import { useState, useEffect, useCallback } from 'react';
@@ -13,7 +14,7 @@ import { ISession } from 'streameth-new-server/src/interfaces/session.interface'
 import { apiUrl } from '@/lib/utils/utils';
 
 // Constants
-const DEVCON_UPLOAD_ENDPOINT = 'https://eovao4e5e2kvm45.m.pipedream.net';
+const DEVCON_UPLOAD_ENDPOINT = 'https://eo1kfhrnvr2m9md.m.pipedream.net';
 
 // Helper functions - simplified to match VideoDownloadClient
 const getDownloadUrl = async (assetId: string): Promise<string> => {
@@ -73,15 +74,17 @@ const prepareDevconPayload = async (
   );
   console.log('Download URL obtained:', downloadUrl);
 
+  // This is what the Pipedream endpoint will receive
   return {
     title: session.name,
     description: session.description,
-    thumbnail,
+    devcon_asset_id: 'PPJHYQ', // TODO: Fetch from markers
+    thumbnail, //TODO: Fetch from Devcon API
     video: downloadUrl,
-    sources_ipfsHash: session.ipfsURI || '',
-    sources_swarmHash: 'swarmHash',
-    sources_livepeerId: session.playbackId,
     duration: session.playback?.duration || 0,
+    // sources_ipfsHash:
+    // session.ipfsURI || (await updateAssetAction(session as IExtendedSession)),
+    sources_streamethId: session._id,
   };
 };
 
@@ -121,7 +124,6 @@ const UploadToDevcon = ({
         throw new Error('Session not found');
       }
 
-      // TODO: This should be the thumbnail from the devcon API
       const thumbnail =
         session.coverImage || (await generateThumbnailAction(session));
       if (!thumbnail) {
@@ -130,14 +132,37 @@ const UploadToDevcon = ({
 
       const devconPayload = await prepareDevconPayload(session, thumbnail);
 
+      console.log('Making request with payload:', devconPayload);
+      console.log(
+        'Auth token present:',
+        !!process.env.NEXT_PUBLIC_PIPEDREAM_AUTH_TOKEN
+      );
+
       const response = await fetch(DEVCON_UPLOAD_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_PIPEDREAM_AUTH_TOKEN}`,
+        },
         body: JSON.stringify(devconPayload),
       });
 
+      console.log('Response status:', response.status);
+      console.log(
+        'Response headers:',
+        Object.fromEntries(response.headers.entries())
+      );
+
       if (!response.ok) {
-        throw new Error('Failed to upload to Devcon');
+        const errorText = await response.text();
+        console.error('Upload failed:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorText,
+        });
+        throw new Error(
+          `Failed to upload to Devcon: ${response.status} ${response.statusText}`
+        );
       }
 
       await updateSessionAction({
