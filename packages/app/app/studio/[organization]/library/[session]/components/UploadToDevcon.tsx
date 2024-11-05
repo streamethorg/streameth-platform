@@ -86,8 +86,8 @@ const prepareDevconPayload = async (
 };
 
 interface UploadToDevconProps {
-  organization: IExtendedOrganization | null;
-  organizationSlug: string;
+  // organization: IExtendedOrganization | null;
+  // organizationSlug: string;
   sessionId: string;
 }
 
