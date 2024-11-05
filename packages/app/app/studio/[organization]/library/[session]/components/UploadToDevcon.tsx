@@ -16,7 +16,7 @@ import { apiUrl } from '@/lib/utils/utils';
 // Constants
 const DEVCON_UPLOAD_ENDPOINT = 'https://eo1kfhrnvr2m9md.m.pipedream.net';
 
-// Helper functions - simplified to match VideoDownloadClient
+// Helper functions
 const getDownloadUrl = async (assetId: string): Promise<string> => {
   const response = await fetch(`${apiUrl()}/streams/asset/${assetId}`);
 
@@ -28,23 +28,23 @@ const getDownloadUrl = async (assetId: string): Promise<string> => {
   return data.data.downloadUrl;
 };
 
-const validateSession = (session: ISession | IExtendedSession) => {
-  const requiredFields = {
-    name: session.name,
-    description: session.description,
-    playbackId: session.playbackId,
-  };
+// const validateSession = (session: ISession | IExtendedSession) => {
+//   const requiredFields = {
+//     name: session.name,
+//     description: session.description,
+//     playbackId: session.playbackId,
+//   };
 
-  const missingFields = Object.entries(requiredFields)
-    .filter(([_, value]) => !value)
-    .map(([key]) => key);
+//   const missingFields = Object.entries(requiredFields)
+//     .filter(([_, value]) => !value)
+//     .map(([key]) => key);
 
-  if (missingFields.length > 0) {
-    throw new Error(
-      `Missing required fields: ${missingFields.join(', ')}. Please fill in all required fields.`
-    );
-  }
-};
+//   if (missingFields.length > 0) {
+//     throw new Error(
+//       `Missing required fields: ${missingFields.join(', ')}. Please fill in all required fields.`
+//     );
+//   }
+// };
 
 const prepareSessionPayload = (session: ISession | IExtendedSession) => ({
   _id: session._id?.toString() ?? '',
@@ -68,22 +68,19 @@ const prepareDevconPayload = async (
     throw new Error('Session playbackId is required');
   }
 
-  // Get video URL first
   const downloadUrl = await getDownloadUrl(
     session.assetId || session.playbackId
   );
   console.log('Download URL obtained:', downloadUrl);
 
-  // This is what the Pipedream endpoint will receive
   return {
     title: session.name,
     description: session.description,
     devcon_asset_id: 'PPJHYQ', // TODO: Fetch from markers
-    thumbnail, //TODO: Fetch from Devcon API
+    thumbnail,
     video: downloadUrl,
     duration: session.playback?.duration || 0,
-    // sources_ipfsHash:
-    // session.ipfsURI || (await updateAssetAction(session as IExtendedSession)),
+    sources_ipfsHash: '',
     sources_streamethId: session._id,
   };
 };
@@ -95,8 +92,8 @@ interface UploadToDevconProps {
 }
 
 const UploadToDevcon = ({
-  organization,
-  organizationSlug,
+  // organization,
+  // organizationSlug,
   sessionId,
 }: UploadToDevconProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -133,10 +130,6 @@ const UploadToDevcon = ({
       const devconPayload = await prepareDevconPayload(session, thumbnail);
 
       console.log('Making request with payload:', devconPayload);
-      console.log(
-        'Auth token present:',
-        !!process.env.NEXT_PUBLIC_PIPEDREAM_AUTH_TOKEN
-      );
 
       const response = await fetch(DEVCON_UPLOAD_ENDPOINT, {
         method: 'POST',
@@ -147,19 +140,18 @@ const UploadToDevcon = ({
         body: JSON.stringify(devconPayload),
       });
 
-      console.log('Response status:', response.status);
-      console.log(
-        'Response headers:',
-        Object.fromEntries(response.headers.entries())
-      );
+      const responseData = await response.json();
+
+      // Handle Pipedream flow response
+      if (responseData.status === 500) {
+        console.error('Upload failed:', responseData.body.error);
+        throw new Error(responseData.body.error || 'Upload failed');
+      }
 
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Upload failed:', {
-          status: response.status,
-          statusText: response.statusText,
-          error: errorText,
-        });
+        console.error(
+          `Failed to upload to Devcon: ${response.status} ${response.statusText}`
+        );
         throw new Error(
           `Failed to upload to Devcon: ${response.status} ${response.statusText}`
         );
@@ -198,6 +190,7 @@ const UploadToDevcon = ({
       <Button onClick={handleUploadToDevcon} disabled={isLoading}>
         {isLoading ? 'Uploading...' : 'Upload to Devcon'}
       </Button>
+
       {error && <p className="text-sm text-red-500">{error}</p>}
     </div>
   );
