@@ -21,8 +21,14 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
   // Find unique dates among markers
   const uniqueDates = useMemo(() => {
     const dates = Array.from(
-      new Set(markers.map((marker) => new Date(marker.date).toDateString()))
+      new Set(
+        markers.map((marker) => {
+          const date = new Date(marker.date);
+          return date.toDateString();
+        })
+      )
     ).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+
     return ['All dates', ...dates];
   }, [markers]);
 
@@ -39,7 +45,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
           )
     );
   };
-
+  console.log('unique dates', selectedDate);
   if (isLoadingMarkers) {
     return (
       <div className="flex h-full w-full flex-col border-l bg-background bg-white">
