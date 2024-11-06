@@ -48,9 +48,6 @@ const ImportDataButton = ({
 }) => {
   const [isImporting, setIsImporting] = useState(false);
   const [open, setOpen] = useState(false);
-  const [previewData, setPreviewData] = useState<IScheduleImportMetadata>();
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-  const [scheduleId, setScheduleId] = useState('');
   const form = useForm<z.infer<typeof ScheduleImportSchema>>({
     resolver: zodResolver(ScheduleImportSchema),
     defaultValues: {
@@ -75,7 +72,6 @@ const ImportDataButton = ({
         toast.error(response.error);
       } else {
         toast.success('Markers imported successfully');
-        // fetchAndSetMarkers();
       }
     } catch (error) {
       toast.error('Error importing data');
@@ -88,7 +84,7 @@ const ImportDataButton = ({
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="primary">
+          <Button variant={'outline'}>
             Import Data <FileDown className="ml-2 w-5 h-5" />
           </Button>
         </DialogTrigger>
@@ -164,14 +160,14 @@ const ImportDataButton = ({
         </DialogContent>
       </Dialog>
 
-      <ImportPreviewDialog
+      {/* <ImportPreviewDialog
         open={isPreviewOpen}
         previewData={previewData}
         setOpen={setIsPreviewOpen}
         scheduleId={scheduleId}
         organizationId={organizationId}
         stage={stage}
-      />
+      /> */}
     </>
   );
 };
