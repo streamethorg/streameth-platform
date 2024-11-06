@@ -82,6 +82,26 @@ The information we collect includes:
 
 Our use of information received from Google APIs will adhere to Google API Services User Data Policy, including the [Limited Use](https://developers.google.com/terms/api-services-user-data-policy) requirements.
 
+### YouTube Terms of Service Agreement
+By using our service, you also agree to be bound by the YouTube Terms of Service (https://www.youtube.com/t/terms). Your use of the YouTube API Services through our application is subject to your acceptance of these terms.
+
+**YouTube API Services**
+Our application uses YouTube API Services to provide functionality. By using our service, you acknowledge and agree that:
+
+1. We utilize YouTube API Services to access and process YouTube data
+2. Our use of information received from Google APIs adheres to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the Limited Use requirements
+3. Your data is also subject to the [Google Privacy Policy](https://policies.google.com/privacy)
+
+**Data Access and Control**
+You can revoke our application's access to your Google/YouTube data at any time through Google's [Security Settings page](https://security.google.com/settings/security/permissions). We recommend periodically reviewing your Google security settings to manage application access to your data.
+
+**Data Collection Through YouTube API**
+When you use YouTube-related features in our application, we may collect and process data through YouTube API Services, including but not limited to:
+- YouTube account information (such as channel ID and authentication tokens)
+- Upload-related metadata (such as video titles, descriptions, and settings)
+- Other YouTube-related activity data necessary for video upload functionality
+
+All data collected through YouTube API Services is handled in accordance with our Privacy Policy, Google's Privacy Policy, and the Google API Services User Data Policy.
 
 ## 2. HOW DO WE PROCESS YOUR INFORMATION?
 

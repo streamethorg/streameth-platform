@@ -10,6 +10,7 @@ import { IExtendedSession } from '@/lib/types';
 import { useState } from 'react';
 import { updateSessionAction } from '@/lib/actions/sessions';
 import { ChevronDown, Earth, Lock, Loader2 } from 'lucide-react';
+import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 
 const PublishCell = ({ item }: { item: IExtendedSession }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,13 +29,16 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
         end: item.end ?? Number(new Date()),
         speakers: item.speakers ?? [],
         type: item.type ?? 'video',
-        published: !item.published,
+        published: item.published,
       },
     })
       .then(() => {
-        if (item.published === true) {
+        if (item.published === eVisibilty.public) {
           toast.success('Succesfully made your asset private');
-        } else if (item.published === false) {
+        } else if (
+          item.published === eVisibilty.private ||
+          item.published === eVisibilty.unlisted
+        ) {
           toast.success('Succesfully made your asset public');
         }
         setIsLoading(false);
@@ -46,7 +50,7 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
   };
 
   return (
-    <div className="flex items-center justify-start space-x-2">
+    <div className="flex justify-start items-center space-x-2">
       {isLoading ? (
         <Loader2 className="animate-spin" />
       ) : item.published ? (
@@ -66,7 +70,7 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem
-            className="cursor-pointer space-x-2"
+            className="space-x-2 cursor-pointer"
             onClick={() => handlePublishment()}
           >
             {!item.published ? (

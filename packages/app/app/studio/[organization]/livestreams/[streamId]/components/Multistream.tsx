@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 import {
   Table,
   TableBody,
@@ -11,7 +12,6 @@ import {
 import DeleteMultistream from './DeleteMultistream';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
 import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
-import { SiYoutube } from 'react-icons/si';
 
 const Multistream = ({
   stream,
@@ -29,10 +29,15 @@ const Multistream = ({
     if (socialId) {
       const target = organization?.socials?.find((s) => s._id === socialId);
       return (
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 items-center">
           {target?.name}
           {target?.type === 'youtube' ? (
-            <SiYoutube color="#FF0000" size={25} />
+            <Image
+              src={'/images/youtube_social_icon_red.png'}
+              alt="youtube_social_icon"
+              width={20}
+              height={20}
+            />
           ) : (
             target?.type
           )}
@@ -44,8 +49,8 @@ const Multistream = ({
   return (
     <div className="w-full">
       {streamTargets?.length === 0 ? (
-        <Card className="border-none bg-white shadow-none">
-          <CardContent className="flex flex-col items-center justify-between space-y-2 p-3 lg:p-6">
+        <Card className="bg-white border-none shadow-none">
+          <CardContent className="flex flex-col justify-between items-center p-3 space-y-2 lg:p-6">
             <p className="text-muted-foreground">
               You have no destinations yet
             </p>
@@ -60,7 +65,7 @@ const Multistream = ({
           </CardContent>
         </Card>
       ) : (
-        <div className="flex w-full flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full">
           <CardContent className="flex items-center justify-between !p-0">
             <CardTitle className="text-xl font-bold">
               Multistream Channels
@@ -73,7 +78,7 @@ const Multistream = ({
             <Table>
               <TableHeader className="sticky top-0 z-50 w-full">
                 <TableRow className="w-full">
-                  <TableHead className="min-w-[100px] w-full">Name</TableHead>
+                  <TableHead className="w-full min-w-[100px]">Name</TableHead>
                 </TableRow>
               </TableHeader>
 
