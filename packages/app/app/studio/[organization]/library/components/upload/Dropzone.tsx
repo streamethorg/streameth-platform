@@ -17,7 +17,10 @@ import uploadVideo from '@/lib/uploadVideo';
 import { getUrlAction } from '@/lib/actions/livepeer';
 import { toast } from 'sonner';
 import { sessionSchema } from '@/lib/schema';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import {
+  eVisibilty,
+  SessionType,
+} from 'streameth-new-server/src/interfaces/session.interface';
 import { createStateAction } from '@/lib/actions/state';
 import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
 import { Uploads } from '../UploadVideoDialog';
@@ -115,7 +118,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
           session: {
             name: file.name,
             assetId: '',
-            published: false,
+            published: eVisibilty.private,
             description: 'No description',
             coverImage: '',
           },
@@ -206,7 +209,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                 name: file.name,
                 description: 'No description',
                 assetId: assetId,
-                published: false,
+                published: eVisibilty.private,
               });
 
               resolve(assetId);
@@ -294,12 +297,12 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
             {Object.entries(uploads).map(([uploadId, upload]) => (
               <div
                 key={uploadId}
-                className="flex justify-between flex-col items-center"
+                className="flex flex-col justify-between items-center"
               >
                 <span className="flex flex-col">
                   {upload.session.name}
                   {upload.duration !== undefined && (
-                    <span className="text-gray-500 text-center">
+                    <span className="text-center text-gray-500">
                       ({Math.round(upload.duration)} secs)
                     </span>
                   )}
