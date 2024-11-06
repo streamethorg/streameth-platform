@@ -134,7 +134,7 @@ const EditSessionForm = ({
                   <SelectContent>
                     <SelectItem value="true">Public</SelectItem>
                     <SelectItem value="false">Private</SelectItem>
-                    <SelectItem value="false">Usability</SelectItem>
+                    <SelectItem value="false">Unlisted</SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
