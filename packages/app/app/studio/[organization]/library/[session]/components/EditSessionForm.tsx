@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/input';
 import { sessionSchema } from '@/lib/schema';
 import { toast } from 'sonner';
 import { Loader2, Trash2 } from 'lucide-react';
-import { IExtendedSession } from '@/lib/types';
+import { eVisibilty, IExtendedSession } from '@/lib/types';
 import { updateSessionAction } from '@/lib/actions/sessions';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import DeleteAsset from '../../components/DeleteAsset';
@@ -132,9 +132,11 @@ const EditSessionForm = ({
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="true">Public</SelectItem>
-                    <SelectItem value="false">Private</SelectItem>
-                    <SelectItem value="false">Unlisted</SelectItem>
+                    <SelectItem value={eVisibilty.public}>Public</SelectItem>
+                    <SelectItem value={eVisibilty.unlisted}>
+                      Unlisted
+                    </SelectItem>
+                    <SelectItem value={eVisibilty.private}>Private</SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
