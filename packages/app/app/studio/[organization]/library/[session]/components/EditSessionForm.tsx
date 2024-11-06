@@ -50,7 +50,7 @@ const EditSessionForm = ({
       description: session.description,
       coverImage: session.coverImage,
       assetId: session.assetId,
-      published: session.published,
+      visibility: session.published,
     },
   });
 
@@ -119,18 +119,21 @@ const EditSessionForm = ({
 
         <FormField
           control={form.control}
-          name="published"
+          name="visibility"
           render={({ field }) => (
             <FormItem className="w-[200px]">
               <FormLabel>Visibility</FormLabel>
               <FormControl>
                 <Select
-                  onValueChange={(value) => field.onChange(value === 'true')}
+                  value={field.value}
+                  onValueChange={(value) => {
+                    console.log('New value:', value);
+                    console.log('Current field value:', field.value);
+                    field.onChange(value);
+                  }}
                 >
                   <SelectTrigger className="bg-white">
-                    <SelectValue
-                      placeholder={field.value ? 'Public' : 'Private'}
-                    />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value={eVisibilty.public}>Public</SelectItem>
@@ -141,6 +144,7 @@ const EditSessionForm = ({
                   </SelectContent>
                 </Select>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
