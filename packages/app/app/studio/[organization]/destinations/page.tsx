@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/table';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import Image from 'next/image';
-import { SiX, SiYoutube } from 'react-icons/si';
+import { SiX } from 'react-icons/si';
 import { LuRadio } from 'react-icons/lu';
 
 const AddDestination = dynamic(() => import('./components/AddDestination'), {
@@ -43,7 +43,15 @@ const Destinations = async ({
     const className = 'absolute right-0 bottom-0';
     switch (type) {
       case 'youtube':
-        return <SiYoutube color="#FF0000" className={className} />;
+        return (
+          <Image
+            src={'/images/youtube_social_icon_red.png'}
+            alt="youtube_social_icon"
+            width={20}
+            height={20}
+            className={className}
+          />
+        );
       case 'twitter':
         return null;
       default:
@@ -57,7 +65,7 @@ const Destinations = async ({
         organization={{ ...organization, slug: organization.slug || '' }}
       />
 
-      <Card className="w-full rounded-xl border bg-white shadow-none">
+      <Card className="w-full bg-white rounded-xl border shadow-none">
         <CardHeader>
           <CardTitle>Connected Destinations</CardTitle>
           <CardDescription className="mt-2">
@@ -67,8 +75,8 @@ const Destinations = async ({
 
         <CardContent>
           <Table className="mt-4">
-            <TableHeader className="sticky top-0 z-50 border-separate bg-gray-100">
-              <TableRow className="hover:bg-whiterounded-t-xl border-b">
+            <TableHeader className="sticky top-0 z-50 bg-gray-100 border-separate">
+              <TableRow className="border-b hover:bg-whiterounded-t-xl">
                 <TableHead>Name</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -76,11 +84,11 @@ const Destinations = async ({
             <TableBody>
               {organization?.socials?.map(({ _id, name, type, thumbnail }) => (
                 <TableRow key={_id}>
-                  <TableCell className="flex items-center gap-4">
+                  <TableCell className="flex gap-4 items-center">
                     <div className="relative">
                       {type === 'twitter' ? (
-                        <div className="bg-black w-[50px] h-[50px] rounded-full">
-                          <SiX color="#fff" className="w-full h-full p-3" />
+                        <div className="bg-black rounded-full w-[50px] h-[50px]">
+                          <SiX color="#fff" className="p-3 w-full h-full" />
                         </div>
                       ) : thumbnail ? (
                         <Image
@@ -91,14 +99,14 @@ const Destinations = async ({
                           alt={type}
                         />
                       ) : (
-                        <div className="w-[50px] h-[50px] rounded-full bg-gray-200" />
+                        <div className="bg-gray-200 rounded-full w-[50px] h-[50px]" />
                       )}
                       {renderSocialTypeIcon(type)}
                     </div>
 
                     <div>
                       <p className="font-semibold">{name}</p>
-                      <p className="text-ext-muted text-sm capitalize">
+                      <p className="text-sm capitalize text-ext-muted">
                         {type}
                       </p>
                     </div>
