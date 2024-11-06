@@ -165,13 +165,10 @@ export default class MarkerService {
         if (!shouldImportRoom) continue;
 
         const sortedSessions = (sessions as any[]).sort(
-          (a, b) =>
-            new Date(a.date + 'T' + a.start).getTime() -
-            new Date(b.date + 'T' + b.start).getTime(),
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
         );
-        const firstSessionStart = new Date(
-          sortedSessions[0].date + 'T' + sortedSessions[0].start,
-        ).getTime();
+
+        const firstSessionStart = new Date(sortedSessions[0].date).getTime();
 
         sortedSessions.forEach((session, index) => {
           const speakers = session.persons.map((person: any) => {
@@ -190,10 +187,9 @@ export default class MarkerService {
           // formatting startClipTime and endClipTime to video timeline in secs
           let startClipTime: number;
           let endClipTime: number;
-
           if (index === 0) {
             startClipTime = 0;
-            endClipTime = (sessionTime.end - sessionTime.start) / 1000;
+            endClipTime = (sessionTime.end - sessionTime.start) / 1000; //1500s
           } else {
             startClipTime = (sessionTime.start - firstSessionStart) / 1000;
             endClipTime = (sessionTime.end - firstSessionStart) / 1000;
@@ -205,7 +201,7 @@ export default class MarkerService {
             organizationId: d.organizationId,
             start: sessionTime.start,
             end: sessionTime.end,
-            date: formatDate(session.date),
+            date: session.date,
             speakers: speakers,
             slug: generateId(session.title),
             stageId: d.stageId,

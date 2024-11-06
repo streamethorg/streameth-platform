@@ -35,6 +35,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { FileDown } from 'lucide-react';
+import { importMarkersAction } from '@/lib/actions/marker';
 
 const ImportDataButton = ({
   organizationId,
@@ -55,8 +56,8 @@ const ImportDataButton = ({
     defaultValues: {
       type: '',
       url: '',
-      organizationId: organizationId,
-      stageId: stageId,
+      organizationId,
+      stageId,
     },
   });
   const { watch } = form;
@@ -66,26 +67,21 @@ const ImportDataButton = ({
     values: z.infer<typeof ScheduleImportSchema>
   ) => {
     setIsImporting(true);
-    await stageSessionImportAction({
-      ...values,
-    })
-      .then((response) => {
-        if (response) {
-          setPreviewData(response?.metadata);
-          setScheduleId(response?._id);
-          toast.success('Preview generated successfully');
-          setIsPreviewOpen(true);
-          setOpen(false);
-        } else {
-          toast.error('Error importing data');
-        }
-      })
-      .catch(() => {
-        toast.error('Error importing data');
-      })
-      .finally(() => {
-        setIsImporting(false);
+    try {
+      const response = await importMarkersAction({
+        ...values,
       });
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        toast.success('Markers imported successfully');
+        // fetchAndSetMarkers();
+      }
+    } catch (error) {
+      toast.error('Error importing data');
+    } finally {
+      setIsImporting(false);
+    }
   };
 
   return (

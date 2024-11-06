@@ -16,6 +16,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import Sidebar from './Sidebar';
+import ImportDataButton from './StageDataImport/ImportDataButton';
 
 const StageControls = ({
   organization,
@@ -67,6 +68,12 @@ const StageControls = ({
               btnText="Edit"
             />
           </div>
+
+          <ImportDataButton
+            organizationId={organization._id}
+            stageId={stream._id as string}
+            stage={stream}
+          />
 
           <div className="flex flex-row gap-2 ml-auto">
             <ShareAndEmbed
