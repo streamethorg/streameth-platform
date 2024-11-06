@@ -1,9 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import ImageUpload from '@/components/misc/form/imageUpload';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -14,17 +11,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { sessionSchema } from '@/lib/schema';
-import { toast } from 'sonner';
-import { Loader2, Trash2 } from 'lucide-react';
-import { IExtendedSession } from '@/lib/types';
-import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
-import { updateSessionAction } from '@/lib/actions/sessions';
-import { getFormSubmitStatus } from '@/lib/utils/utils';
-import DeleteAsset from '../../components/DeleteAsset';
-import { Textarea } from '@/components/ui/textarea';
-import ImageUpload from '@/components/misc/form/imageUpload';
-import { useRouter } from 'next/navigation';
 import {
   Select,
   SelectContent,
@@ -32,6 +18,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { updateSessionAction } from '@/lib/actions/sessions';
+import { sessionSchema } from '@/lib/schema';
+import { IExtendedSession } from '@/lib/types';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
+import * as z from 'zod';
+import DeleteAsset from '../../components/DeleteAsset';
 
 const EditSessionForm = ({
   session,
@@ -50,7 +50,7 @@ const EditSessionForm = ({
       description: session.description,
       coverImage: session.coverImage,
       assetId: session.assetId,
-      visibility: session.published,
+      published: session.published,
     },
   });
 
@@ -119,7 +119,7 @@ const EditSessionForm = ({
 
         <FormField
           control={form.control}
-          name="visibility"
+          name="published"
           render={({ field }) => (
             <FormItem className="w-[200px]">
               <FormLabel>Visibility</FormLabel>

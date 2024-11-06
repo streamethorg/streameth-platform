@@ -123,7 +123,7 @@ export const sessionSchema = z.object({
     }),
   coverImage: z.string().optional(),
   assetId: z.string().min(1, { message: 'Please upload a video.' }).optional(),
-  visibility: z.nativeEnum(eVisibilty).default(eVisibilty.private),
+  published: z.nativeEnum(eVisibilty).default(eVisibilty.private),
 });
 
 const blacklistedPatterns = [
