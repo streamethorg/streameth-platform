@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -11,13 +11,29 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { IExtendedMarker } from '@/lib/types';
-import { formatDate, getDateWithTime } from '@/lib/utils/time';
+import { formatDate } from '@/lib/utils/time';
+import { LuEye } from 'react-icons/lu';
 
-const ViewMarkersDialog = ({ markers }: { markers: IExtendedMarker[] }) => {
+const ViewMarkersDialog = ({
+  markers,
+  open,
+  setOpenPreview,
+  isFromImport,
+}: {
+  open?: boolean;
+  setOpenPreview?: Dispatch<SetStateAction<boolean>>;
+  markers: IExtendedMarker[];
+  isFromImport?: boolean;
+}) => {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpenPreview}>
       <DialogTrigger asChild>
-        <Button variant="outline">View All Markers</Button>
+        {!isFromImport && (
+          <Button variant="outline">
+            <LuEye className="mr-2 h-5 w-5" />
+            View All Markers
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogTitle>
