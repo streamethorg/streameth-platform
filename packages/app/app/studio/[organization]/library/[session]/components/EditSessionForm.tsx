@@ -127,8 +127,6 @@ const EditSessionForm = ({
                 <Select
                   value={field.value}
                   onValueChange={(value) => {
-                    console.log('New value:', value);
-                    console.log('Current field value:', field.value);
                     field.onChange(value);
                   }}
                 >
