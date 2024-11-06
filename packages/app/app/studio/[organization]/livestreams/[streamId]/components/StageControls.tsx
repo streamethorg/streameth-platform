@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {
+  IExtendedMarker,
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
@@ -17,15 +18,18 @@ import { Button } from '@/components/ui/button';
 import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import Sidebar from './Sidebar';
 import ImportDataButton from './StageDataImport/ImportDataButton';
+import ViewMarkersDialog from './StageDataImport/ViewMarkersDialog';
 
 const StageControls = ({
   organization,
   stream,
   stageSessions,
+  stageMarkers,
 }: {
   organization: IExtendedOrganization;
   stream: IExtendedStage;
   stageSessions: IExtendedSession[];
+  stageMarkers: IExtendedMarker[];
 }) => {
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
@@ -69,11 +73,17 @@ const StageControls = ({
             />
           </div>
 
-          <ImportDataButton
-            organizationId={organization._id}
-            stageId={stream._id as string}
-            stage={stream}
-          />
+          {!isLive && (
+            <>
+              <ImportDataButton
+                organizationId={organization._id}
+                stageId={stream._id as string}
+                stage={stream}
+              />
+
+              <ViewMarkersDialog markers={stageMarkers} />
+            </>
+          )}
 
           <div className="flex flex-row gap-2 ml-auto">
             <ShareAndEmbed
