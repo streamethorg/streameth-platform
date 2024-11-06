@@ -1,24 +1,23 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { fetchStage } from '@/lib/services/stageService';
 import {
   IExtendedMarker,
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
 } from '@/lib/types';
-import { fetchStage } from '@/lib/services/stageService';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import StreamConfigWithPlayer from './StreamConfigWithPlayer';
-import StreamHealth from './StreamHealth';
+import React, { useEffect, useState } from 'react';
+import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import EditLivestream from '../../components/EditLivestream';
 import ShareAndEmbed from './ShareAndEmbed';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import Sidebar from './Sidebar';
 import ImportDataButton from './StageDataImport/ImportDataButton';
-import ViewMarkersDialog from './StageDataImport/ViewMarkersDialog';
+import StreamConfigWithPlayer from './StreamConfigWithPlayer';
+import StreamHealth from './StreamHealth';
 
 const StageControls = ({
   organization,
@@ -86,7 +85,13 @@ const StageControls = ({
             )}
           </div>
 
-          <div className="flex flex-row gap-2 ">
+          <ImportDataButton
+            organizationId={organization._id}
+            stageId={stream._id as string}
+            stage={stream}
+          />
+
+          <div className="flex flex-row gap-2 ml-auto">
             <ShareAndEmbed
               organizationSlug={organization.slug as string}
               streamId={stream._id as string}

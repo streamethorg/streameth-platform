@@ -8,24 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { stageSessionImportAction } from '@/lib/actions/sessions';
-import React, { useState } from 'react';
-import { toast } from 'sonner';
-import ImportPreviewDialog from './ImportPreviewDialog';
-import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
-import { IExtendedMarker, IExtendedStage } from '@/lib/types';
-import { ScheduleImportSchema } from '@/lib/schema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { set, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -34,10 +16,26 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { FileDown } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { importMarkersAction } from '@/lib/actions/marker';
-import ViewMarkersDialog from './ViewMarkersDialog';
-import { LuImport, LuPlus } from 'react-icons/lu';
+import { stageSessionImportAction } from '@/lib/actions/sessions';
+import { ScheduleImportSchema } from '@/lib/schema';
+import { IExtendedMarker, IExtendedStage } from '@/lib/types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FileDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { set, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
+import { z } from 'zod';
+import ImportPreviewDialog from './ImportPreviewDialog';
 
 const ImportDataButton = ({
   organizationId,
@@ -77,8 +75,7 @@ const ImportDataButton = ({
         toast.error(response.error);
       } else {
         toast.success('Markers imported successfully');
-        setOpen(false);
-        setOpenPreview(true);
+        // fetchAndSetMarkers();
       }
     } catch (error) {
       toast.error('Error importing data');
