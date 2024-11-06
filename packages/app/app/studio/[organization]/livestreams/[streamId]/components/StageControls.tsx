@@ -75,6 +75,7 @@ const StageControls = ({
             {!isLive && (
               <>
                 <ImportDataButton
+                  markers={stageMarkers}
                   organizationId={organization._id}
                   stageId={stream._id as string}
                   stage={stream}

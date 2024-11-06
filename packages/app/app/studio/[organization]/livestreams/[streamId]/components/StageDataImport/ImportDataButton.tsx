@@ -21,10 +21,10 @@ import React, { useState } from 'react';
 import { toast } from 'sonner';
 import ImportPreviewDialog from './ImportPreviewDialog';
 import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
-import { IExtendedStage } from '@/lib/types';
+import { IExtendedMarker, IExtendedStage } from '@/lib/types';
 import { ScheduleImportSchema } from '@/lib/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
   Form,
@@ -36,18 +36,23 @@ import {
 } from '@/components/ui/form';
 import { FileDown } from 'lucide-react';
 import { importMarkersAction } from '@/lib/actions/marker';
+import ViewMarkersDialog from './ViewMarkersDialog';
+import { LuImport, LuPlus } from 'react-icons/lu';
 
 const ImportDataButton = ({
   organizationId,
   stageId,
   stage,
+  markers,
 }: {
   organizationId: string;
   stageId: string;
   stage?: IExtendedStage;
+  markers: IExtendedMarker[];
 }) => {
   const [isImporting, setIsImporting] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
   const form = useForm<z.infer<typeof ScheduleImportSchema>>({
     resolver: zodResolver(ScheduleImportSchema),
     defaultValues: {
@@ -72,6 +77,8 @@ const ImportDataButton = ({
         toast.error(response.error);
       } else {
         toast.success('Markers imported successfully');
+        setOpen(false);
+        setOpenPreview(true);
       }
     } catch (error) {
       toast.error('Error importing data');
@@ -85,7 +92,8 @@ const ImportDataButton = ({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant={'outline'}>
-            Import Data <FileDown className="ml-2 w-5 h-5" />
+            <LuImport className="w-4 h-4 mr-2" />
+            Import Markers
           </Button>
         </DialogTrigger>
         <DialogContent>
@@ -160,14 +168,14 @@ const ImportDataButton = ({
         </DialogContent>
       </Dialog>
 
-      {/* <ImportPreviewDialog
-        open={isPreviewOpen}
-        previewData={previewData}
-        setOpen={setIsPreviewOpen}
-        scheduleId={scheduleId}
-        organizationId={organizationId}
-        stage={stage}
-      /> */}
+      {openPreview && (
+        <ViewMarkersDialog
+          isFromImport={true}
+          open={openPreview}
+          setOpenPreview={setOpenPreview}
+          markers={markers}
+        />
+      )}
     </>
   );
 };
