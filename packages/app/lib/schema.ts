@@ -217,7 +217,7 @@ export const ScheduleImportSchema = z.object({
   type: z.string().min(1, 'Source is required'),
   url: z.string().url(),
   organizationId: z.string(),
-  stageId: z.string().optional(),
+  stageId: z.string(),
 });
 
 export const injectUrlSchema = z.object({
