@@ -1717,6 +1717,14 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"eVisibilty": {
+				"enum": [
+					"public",
+					"unlisted",
+					"private"
+				],
+				"type": "string"
+			},
 			"SessionType": {
 				"enum": [
 					"video",
@@ -1847,7 +1855,7 @@
 						"type": "boolean"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -2081,7 +2089,7 @@
 						"type": "boolean"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -2275,7 +2283,7 @@
 						"type": "boolean"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -2471,7 +2479,7 @@
 						"type": "string"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"

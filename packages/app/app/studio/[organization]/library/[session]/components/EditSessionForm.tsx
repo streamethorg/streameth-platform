@@ -131,7 +131,7 @@ const EditSessionForm = ({
                   }}
                 >
                   <SelectTrigger className="bg-white">
-                    <SelectValue />
+                    <SelectValue placeholder="Select visibility" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value={eVisibilty.public}>Public</SelectItem>
