@@ -1,6 +1,12 @@
 import type { Document, Types } from 'mongoose';
 import type { ISpeaker } from './speaker.interface';
 
+export enum eVisibilty {
+  public = 'public',
+  unlisted = 'unlisted',
+  private = 'private',
+}
+
 export interface ISource {
   streamUrl?: string;
   start?: number;
@@ -56,7 +62,7 @@ export interface ISession {
   autoLabels?: string[];
   ipfsURI?: string;
   mintable?: boolean;
-  published?: boolean;
+  published?: eVisibilty;
   type: SessionType;
   createdAt?: Date | string;
   nftCollections?: Types.ObjectId | string[];

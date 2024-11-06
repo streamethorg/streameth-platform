@@ -1,3 +1,4 @@
+import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 import * as z from 'zod';
 
 const GSheetConfigSchema = z.object({
@@ -122,7 +123,7 @@ export const sessionSchema = z.object({
     }),
   coverImage: z.string().optional(),
   assetId: z.string().min(1, { message: 'Please upload a video.' }).optional(),
-  published: z.boolean().default(false),
+  published: z.nativeEnum(eVisibilty).default(eVisibilty.private),
 });
 
 const blacklistedPatterns = [
