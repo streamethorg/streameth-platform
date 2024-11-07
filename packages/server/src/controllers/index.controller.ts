@@ -5,6 +5,7 @@ import { RemotionPayload } from '@interfaces/remotion.webhook.interface';
 import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import ClipEditor from '@models/clip.editor.model';
+import Session from '@models/session.model';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
@@ -108,6 +109,17 @@ export class IndexController extends Controller {
     }
 
     if (remotionStatus !== 'success') {
+      const clipEditor = await ClipEditor.findOne({
+        renderId: payload.renderId,
+      });
+      await Promise.all([
+        Session.findByIdAndUpdate(clipEditor.clipSessionId, {
+          status: ProcessingStatus.failed,
+        }),
+        clipEditor.updateOne({
+          status: ClipEditorStatus.failed,
+        }),
+      ]);
       return SendApiResponse('Acknowledged', '204');
     }
 
