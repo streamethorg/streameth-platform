@@ -1,16 +1,15 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { IExtendedOrganization, IExtendedSession } from '@/lib/types';
+import { IExtendedSession } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
-import {
-  generateThumbnailAction,
-  updateAssetAction,
-  updateSessionAction,
-} from '@/lib/actions/sessions';
+import { updateSessionAction } from '@/lib/actions/sessions';
 import { useState, useEffect, useCallback } from 'react';
 import { Check } from 'lucide-react';
 import { toast } from 'sonner';
-import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
+import {
+  eVisibilty,
+  ISession,
+} from 'streameth-new-server/src/interfaces/session.interface';
 import { apiUrl } from '@/lib/utils/utils';
 
 // Constants
@@ -28,24 +27,6 @@ const getDownloadUrl = async (assetId: string): Promise<string> => {
   return data.data.downloadUrl;
 };
 
-// const validateSession = (session: ISession | IExtendedSession) => {
-//   const requiredFields = {
-//     name: session.name,
-//     description: session.description,
-//     playbackId: session.playbackId,
-//   };
-
-//   const missingFields = Object.entries(requiredFields)
-//     .filter(([_, value]) => !value)
-//     .map(([key]) => key);
-
-//   if (missingFields.length > 0) {
-//     throw new Error(
-//       `Missing required fields: ${missingFields.join(', ')}. Please fill in all required fields.`
-//     );
-//   }
-// };
-
 const prepareSessionPayload = (session: ISession | IExtendedSession) => ({
   _id: session._id?.toString() ?? '',
   name: session.name,
@@ -57,13 +38,10 @@ const prepareSessionPayload = (session: ISession | IExtendedSession) => ({
   end: session.end ?? Number(new Date()),
   speakers: session.speakers ?? [],
   type: session.type ?? 'video',
-  published: true,
+  published: 'public' as eVisibilty,
 });
 
-const prepareDevconPayload = async (
-  session: ISession | IExtendedSession,
-  thumbnail: string
-) => {
+const prepareDevconPayload = async (session: ISession | IExtendedSession) => {
   if (!session.playbackId) {
     throw new Error('Session playbackId is required');
   }
@@ -77,8 +55,9 @@ const prepareDevconPayload = async (
     title: session.name,
     description: session.description,
     devcon_asset_id: 'PPJHYQ', // TODO: Fetch from markers
-    thumbnail,
-    video: downloadUrl,
+    // video: downloadUrl, // TODO: replace hardcoded url
+    video:
+      'https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/7bee0oy6uo8fdi5a/video/download.mp4',
     duration: session.playback?.duration || 0,
     sources_ipfsHash: '',
     sources_streamethId: session._id,
@@ -86,23 +65,17 @@ const prepareDevconPayload = async (
 };
 
 interface UploadToDevconProps {
-  // organization: IExtendedOrganization | null;
-  // organizationSlug: string;
   sessionId: string;
 }
 
-const UploadToDevcon = ({
-  // organization,
-  // organizationSlug,
-  sessionId,
-}: UploadToDevconProps) => {
+const UploadToDevcon = ({ sessionId }: UploadToDevconProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const checkPublishStatus = useCallback(async () => {
     const session = await fetchSession({ session: sessionId });
-    if (session?.published) {
+    if (session?.published === 'public') {
       setIsUploaded(true);
     }
   }, [sessionId]);
@@ -120,15 +93,7 @@ const UploadToDevcon = ({
       if (!session) {
         throw new Error('Session not found');
       }
-
-      const thumbnail =
-        session.coverImage || (await generateThumbnailAction(session));
-      if (!thumbnail) {
-        throw new Error('Failed to generate thumbnail');
-      }
-
-      const devconPayload = await prepareDevconPayload(session, thumbnail);
-
+      const devconPayload = await prepareDevconPayload(session);
       console.log('Making request with payload:', devconPayload);
 
       const response = await fetch(DEVCON_UPLOAD_ENDPOINT, {
@@ -140,21 +105,46 @@ const UploadToDevcon = ({
         body: JSON.stringify(devconPayload),
       });
 
-      const responseData = await response.json();
+      const responseText = await response.text();
+      console.log('Raw Pipedream Response:', responseText);
 
-      // Handle Pipedream flow response
-      if (responseData.status === 500) {
-        console.error('Upload failed:', responseData.body.error);
-        throw new Error(responseData.body.error || 'Upload failed');
-      }
+      let responseData;
+      if (responseText.trim()) {
+        try {
+          responseData = JSON.parse(responseText);
 
-      if (!response.ok) {
-        console.error(
-          `Failed to upload to Devcon: ${response.status} ${response.statusText}`
-        );
-        throw new Error(
-          `Failed to upload to Devcon: ${response.status} ${response.statusText}`
-        );
+          // Log each node's response
+          if (responseData.steps) {
+            console.log('Upload Video Step:', responseData.steps.upload_video);
+            console.log(
+              'Upload Video Response:',
+              responseData.steps.upload_video_response
+            );
+            console.log(
+              'Upload Thumbnail:',
+              responseData.steps.upload_thumbnail
+            );
+            console.log(
+              'Upload Thumbnail Response:',
+              responseData.steps.upload_thumbnail_response
+            );
+            console.log('Devcon API Response:', responseData.steps.Devcon_API);
+            console.log(
+              'Upload to Devcon Response:',
+              responseData.steps.upload_to_devcon_response
+            );
+          }
+
+          // Handle error responses
+          if (responseData.status === 500) {
+            throw new Error(
+              responseData.body?.error || 'Upload failed with server error'
+            );
+          }
+        } catch (parseError) {
+          console.error('Failed to parse response:', parseError);
+          throw new Error(`Invalid JSON response: ${responseText}`);
+        }
       }
 
       await updateSessionAction({
