@@ -3490,8 +3490,7 @@
 					"date",
 					"color",
 					"startClipTime",
-					"endClipTime",
-					"pretalxSessionCode"
+					"endClipTime"
 				],
 				"type": "object",
 				"additionalProperties": false

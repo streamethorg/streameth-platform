@@ -55,5 +55,5 @@ export class CreateMarkerDto implements IMarker {
 
   @IsOptional()
   @IsString()
-  pretalxSessionCode: string;
+  pretalxSessionCode?: string;
 }

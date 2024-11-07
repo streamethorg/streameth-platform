@@ -1081,7 +1081,7 @@ const models: TsoaRoute.Models = {
             "slug": {"dataType":"string"},
             "startClipTime": {"dataType":"double","required":true},
             "endClipTime": {"dataType":"double","required":true},
-            "pretalxSessionCode": {"dataType":"string","required":true},
+            "pretalxSessionCode": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
