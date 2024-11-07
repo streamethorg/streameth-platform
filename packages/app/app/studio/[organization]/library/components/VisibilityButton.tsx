@@ -1,17 +1,27 @@
 'use client';
-import { Button } from '@/components/ui/button';
+
 import { IExtendedSession } from '@/lib/types';
 import { updateSessionAction } from '@/lib/actions/sessions';
-import { Globe, Lock, Loader2 } from 'lucide-react';
+import { Globe, Lock, Loader2, Users, Binoculars } from 'lucide-react';
 import { useState } from 'react';
+import {
+  DropdownMenuPortal,
+  DropdownMenuRadioItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+} from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
 import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 
 const VisibilityButton = ({ session }: { session: IExtendedSession }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [visibility, setVisibility] = useState(session.published!);
 
-  const handleVisibilityToggle = async () => {
+  const handleVisibilityToggle = (newVisibility: eVisibilty) => {
     setIsLoading(true);
+
     updateSessionAction({
       session: {
         _id: session._id,
@@ -24,18 +34,19 @@ const VisibilityButton = ({ session }: { session: IExtendedSession }) => {
         end: session.end ?? Number(new Date()),
         speakers: session.speakers ?? [],
         type: session.type ?? 'video',
-        published: session.published,
+        published: newVisibility,
       },
     })
       .then(() => {
-        if (session.published === eVisibilty.public) {
-          toast.success('Succesfully made your asset private');
-        } else if (
-          session.published === eVisibilty.private ||
-          eVisibilty.unlisted
-        ) {
-          toast.success('Succesfully made your asset public');
-        }
+        setVisibility(newVisibility);
+
+        const messages = {
+          [eVisibilty.public]: 'Successfully made your asset public',
+          [eVisibilty.private]: 'Successfully made your asset private',
+          [eVisibilty.unlisted]: 'Successfully made your asset unlisted',
+        };
+
+        toast.success(messages[newVisibility]);
         setIsLoading(false);
       })
       .catch(() => {
@@ -45,21 +56,51 @@ const VisibilityButton = ({ session }: { session: IExtendedSession }) => {
   };
 
   return (
-    <Button
-      variant="ghost"
-      className="w-full !justify-start space-x-2"
-      onClick={handleVisibilityToggle}
-      disabled={isLoading}
-    >
-      {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
-      ) : session.published ? (
-        <Lock className="w-4 h-4" />
-      ) : (
-        <Globe className="w-4 h-4" />
-      )}
-      <span>{session.published ? 'Unpublish' : 'Publish'}</span>
-    </Button>
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>
+        {isLoading ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          <div className="flex justify-center items-center space-x-2">
+            <Binoculars className="w-4 h-4" />
+            <span>Visibility</span>
+          </div>
+        )}
+      </DropdownMenuSubTrigger>
+      <DropdownMenuPortal>
+        <DropdownMenuSubContent className="space-x-2 bg-gray-50">
+          <DropdownMenuRadioGroup
+            value={visibility}
+            onValueChange={(value) =>
+              handleVisibilityToggle(value as eVisibilty)
+            }
+            className="p-2 space-y-2"
+          >
+            <DropdownMenuRadioItem
+              className="flex items-center space-x-2 cursor-pointer"
+              value={eVisibilty.public}
+            >
+              <Globe className="w-4 h-4" />
+              <span>Public</span>
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem
+              className="flex items-center space-x-2 cursor-pointer"
+              value={eVisibilty.unlisted}
+            >
+              <Users className="w-4 h-4" />
+              <span>Unlisted</span>
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem
+              className="flex items-center space-x-2 cursor-pointer"
+              value={eVisibilty.private}
+            >
+              <Lock className="w-4 h-4" />
+              <span>Private</span>
+            </DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+        </DropdownMenuSubContent>
+      </DropdownMenuPortal>
+    </DropdownMenuSub>
   );
 };
 
