@@ -1,15 +1,9 @@
 import { config } from '@config';
-import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
-import { StateStatus, StateType } from '@interfaces/state.interface';
+import { ClipEditorStatus } from '@interfaces/clip.editor.interface';
 import ClipEditor from '@models/clip.editor.model';
-import SessionService from '@services/session.service';
-import StateService from '@services/state.service';
 import { getClipEditorStatus, refetchAssets } from './livepeer';
 import { logger } from './logger';
 import pulse from './pulse.cron';
-
-const sessionService = new SessionService();
-const stateService = new StateService();
 
 export enum AgendaJobs {
   REFETCH_ASSETS = 'refetch assets',
@@ -25,38 +19,6 @@ pulse.define(AgendaJobs.REFETCH_ASSETS, async (job) => {
     logger.error('Error in refetch assets job:', error);
   }
 });
-
-const createClipSession = async (clipEditorId: string, renderId: string) => {
-  const clipEditor = await ClipEditor.findById(clipEditorId);
-  if (!clipEditor) return;
-  const event = clipEditor.events?.find((e) => e.label === 'main');
-  if (!event?.sessionId) return;
-  const session = await sessionService.findOne({
-    _id: event.sessionId,
-  });
-  if (!session) return;
-  const createSession = await sessionService.create({
-    name: session.name,
-    description: session.description,
-    assetId: '',
-    start: session.start,
-    end: session.end,
-    organizationId: session.organizationId,
-    stageId: session.stageId,
-    type: SessionType.clip,
-    processingStatus: ProcessingStatus.rendering,
-  });
-  await clipEditor.updateOne({
-    renderId,
-    clipSessionId: createSession._id,
-  });
-  await stateService.create({
-    organizationId: createSession.organizationId,
-    sessionId: createSession._id.toString(),
-    type: StateType.clip,
-    status: StateStatus.pending,
-  });
-};
 
 pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
   try {
@@ -86,7 +48,10 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
       );
       const res = await response.json();
       if (res.type === 'error') return;
-      await createClipSession(data.clipEditorId, res.data.renderId);
+      await ClipEditor.findOneAndUpdate(data.clipEditorId, {
+        renderId: res.data.renderId,
+        status: ClipEditorStatus.rendering,
+      });
       logger.info('Clip editor status job completed');
       job.remove();
     }
