@@ -56,6 +56,11 @@ const ViewMarkersDialog = ({
                   <p className="text-sm text-gray-400">
                     {`${formatDate(new Date(marker.start), 'MMMM Do YYYY, h:mm a')}`}
                   </p>
+                  {marker.pretalxSessionCode && (
+                    <p className="text-xs text-gray-400">
+                      Pretalx Code: {marker.pretalxSessionCode}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
