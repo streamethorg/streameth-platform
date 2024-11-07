@@ -2,7 +2,7 @@
 
 import { IExtendedSession } from '@/lib/types';
 import { updateSessionAction } from '@/lib/actions/sessions';
-import { Globe, Lock, Loader2, Users, Binoculars } from 'lucide-react';
+import { Globe, Lock, Loader2, Binoculars, EyeClosed } from 'lucide-react';
 import { useState } from 'react';
 import {
   DropdownMenuPortal,
@@ -57,18 +57,18 @@ const VisibilityButton = ({ session }: { session: IExtendedSession }) => {
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger className="rounded-xl">
         {isLoading ? (
           <Loader2 className="w-4 h-4 animate-spin" />
         ) : (
-          <div className="flex justify-center items-center space-x-2">
+          <div className="flex items-center p-2 space-x-2">
             <Binoculars className="w-4 h-4" />
             <span>Visibility</span>
           </div>
         )}
       </DropdownMenuSubTrigger>
       <DropdownMenuPortal>
-        <DropdownMenuSubContent className="space-x-2 bg-gray-50">
+        <DropdownMenuSubContent className="space-x-2 !justify-start bg-gray-50 p-2">
           <DropdownMenuRadioGroup
             value={visibility}
             onValueChange={(value) =>
@@ -87,7 +87,7 @@ const VisibilityButton = ({ session }: { session: IExtendedSession }) => {
               className="flex items-center space-x-2 cursor-pointer"
               value={eVisibilty.unlisted}
             >
-              <Users className="w-4 h-4" />
+              <EyeClosed className="w-4 h-4" />
               <span>Unlisted</span>
             </DropdownMenuRadioItem>
             <DropdownMenuRadioItem

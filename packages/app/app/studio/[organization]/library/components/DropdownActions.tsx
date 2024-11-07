@@ -42,7 +42,7 @@ const DropdownActions = ({
         <EllipsisVertical className="w-5 h-5 cursor-pointer" />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="p-2 bg-white rounded-md shadow-md">
+      <DropdownMenuContent className="p-2 w-52 bg-white rounded-md shadow-md">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Link
