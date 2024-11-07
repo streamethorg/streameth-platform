@@ -12,9 +12,6 @@ import {
 } from 'streameth-new-server/src/interfaces/session.interface';
 import { apiUrl } from '@/lib/utils/utils';
 
-// Constants
-const DEVCON_UPLOAD_ENDPOINT = 'https://eo1kfhrnvr2m9md.m.pipedream.net';
-
 // Helper functions
 const getDownloadUrl = async (assetId: string): Promise<string> => {
   const response = await fetch(`${apiUrl()}/streams/asset/${assetId}`);
@@ -49,17 +46,15 @@ const prepareDevconPayload = async (session: ISession | IExtendedSession) => {
   const downloadUrl = await getDownloadUrl(
     session.assetId || session.playbackId
   );
-  console.log('Download URL obtained:', downloadUrl);
 
   return {
-    title: session.name,
-    description: session.description,
-    devcon_asset_id: session.pretalxSessionCode,
-    video: downloadUrl,
-    // video: 'https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/7bee0oy6uo8fdi5a/video/download.mp4',
+    title: session.name || 'No title provided',
+    description: session.description || 'No description provided',
+    devcon_asset_id: session.pretalxSessionCode || 'No session code provided',
+    video: downloadUrl || 'No download URL provided',
     duration: session.playback?.duration || 0,
     sources_ipfsHash: '',
-    sources_streamethId: session._id,
+    sources_streamethId: session._id || 'No session ID provided',
   };
 };
 
@@ -94,38 +89,25 @@ const UploadToDevcon = ({ sessionId }: UploadToDevconProps) => {
       }
 
       const devconPayload = await prepareDevconPayload(session);
-      console.log('Request Payload:', devconPayload);
 
-      const response = await fetch(DEVCON_UPLOAD_ENDPOINT, {
+      const response = await fetch('/api/pipedream', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_PIPEDREAM_AUTH_TOKEN}`,
         },
         body: JSON.stringify(devconPayload),
       });
 
-      const responseData = await response.json();
-      console.log('Response:', responseData);
-
-      // Check each step of the upload process
-      if (responseData.devconUpload.result !== null) {
-        throw new Error('Failed to upload to Devcon API');
-      } else if (responseData.video.status !== 'uploaded') {
-        throw new Error('Failed to upload video to Devcon YouTube');
-      } else if (responseData.thumbnail.status !== 200) {
-        throw new Error('Failed to upload thumbnail to Devcon YouTube');
-      }
-      // If all checks pass, update session and show success
-      else {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to upload to Devcon');
+      } else {
         await updateSessionAction({
           session: prepareSessionPayload(session),
         });
         toast.success('Successfully uploaded to Devcon!');
         setIsUploaded(true);
       }
-
-      return true;
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Failed to upload to Devcon';
