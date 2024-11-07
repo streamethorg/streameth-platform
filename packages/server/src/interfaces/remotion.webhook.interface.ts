@@ -4,14 +4,19 @@ export interface RemotionPayload {
   expectedBucketOwner: string;
   bucketName: string;
   customData?: { compositionId?: string };
-  outputUrl: string;
-  lambdaErrors: Array<string>;
-  outputFile: string;
-  timeToFinish: number;
-  costs: {
+  outputUrl?: string;
+  lambdaErrors?: Array<string>;
+  outputFile?: string;
+  timeToFinish?: number;
+  costs?: {
     currency: string;
     disclaimer: string;
     estimatedCost: number;
     estimatedDisplayCost: string;
   };
+  errors?: Array<{
+    message: string;
+    name: string;
+    stack: string;
+  }>;
 }
