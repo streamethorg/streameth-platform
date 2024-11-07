@@ -86,7 +86,6 @@ const StageControls = ({
             )}
           </div>
 
-
           <ImportDataButton
             markers={stageMarkers}
             organizationId={organization._id}
