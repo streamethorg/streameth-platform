@@ -195,6 +195,11 @@ export default class MarkerService {
             endClipTime = (sessionTime.end - firstSessionStart) / 1000;
           }
 
+          const sessionCodeMatch = session.url.match(/\/talk\/([^\/]+)\//);
+          const pretalxSessionCode = sessionCodeMatch
+            ? sessionCodeMatch[1]
+            : null;
+
           const markerData = {
             name: session.title,
             description: session.description,
@@ -207,6 +212,7 @@ export default class MarkerService {
             stageId: d.stageId,
             startClipTime,
             endClipTime,
+            pretalxSessionCode,
           };
           markersData.push(markerData);
         });
