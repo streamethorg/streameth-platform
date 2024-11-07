@@ -67,7 +67,7 @@
     "livepeer": "^3.4.0",
     "lodash": "^4.17.21",
     "lokijs": "^1.5.12",
-    "lucide-react": "^0.453.0",
+    "lucide-react": "^0.454.0",
     "moment-timezone": "^0.5.46",
     "next": "^14.2.12",
     "next-auth": "^5.0.0-beta.22",
@@ -94,7 +94,7 @@
     "tus-js-client": "^4.2.3",
     "usehooks-ts": "^2.9.1",
     "vaul": "^0.8.0",
-    "viem": "2.x",
+    "viem": ">=2.13.x",
     "wagmi": "^2.5.5",
     "zod": "^3.22.4"
   },
