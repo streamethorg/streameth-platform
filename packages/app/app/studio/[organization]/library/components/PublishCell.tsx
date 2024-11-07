@@ -17,6 +17,8 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
 
   const handlePublishment = () => {
     setIsLoading(true);
+
+    // BUG: Visibility does not change properly
     updateSessionAction({
       session: {
         _id: item._id,
@@ -73,7 +75,7 @@ const PublishCell = ({ item }: { item: IExtendedSession }) => {
             className="space-x-2 cursor-pointer"
             onClick={() => handlePublishment()}
           >
-            {!item.published ? (
+            {item.published === eVisibilty.private ? (
               <>
                 <Earth size={16} />
                 <p>Make Public</p>

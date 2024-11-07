@@ -23,6 +23,7 @@ const MarkerSchema = new Schema<IMarker>(
       },
     ],
     slug: { type: String, default: '', index: true },
+    pretalxSessionCode: { type: String, default: '' },
   },
   {
     timestamps: true,

@@ -3391,6 +3391,9 @@
 					"endClipTime": {
 						"type": "number",
 						"format": "double"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -3473,6 +3476,9 @@
 					"endClipTime": {
 						"type": "number",
 						"format": "double"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					}
 				},
 				"required": [

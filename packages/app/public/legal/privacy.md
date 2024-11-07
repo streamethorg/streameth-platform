@@ -83,7 +83,7 @@ The information we collect includes:
 Our use of information received from Google APIs will adhere to Google API Services User Data Policy, including the [Limited Use](https://developers.google.com/terms/api-services-user-data-policy) requirements.
 
 ### YouTube Terms of Service Agreement
-By using our service, you also agree to be bound by the YouTube Terms of Service (https://www.youtube.com/t/terms). Your use of the YouTube API Services through our application is subject to your acceptance of these terms.
+By using our service, you also agree to be bound by the [YouTube Terms of Service](https://www.youtube.com/static?template=terms). Your use of the YouTube API Services through our application is subject to your acceptance of these terms.
 
 **YouTube API Services**
 Our application uses YouTube API Services to provide functionality. By using our service, you acknowledge and agree that:
