@@ -78,6 +78,7 @@ export interface ISession {
     }[];
     text: string;
   };
+  pretalxSessionCode?: string;
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

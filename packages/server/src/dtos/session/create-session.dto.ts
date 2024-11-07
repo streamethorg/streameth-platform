@@ -107,4 +107,8 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   @IsOptional()
   @IsString()
   talkType?: string;
+
+  @IsOptional()
+  @IsString()
+  pretalxSessionCode?: string;
 }

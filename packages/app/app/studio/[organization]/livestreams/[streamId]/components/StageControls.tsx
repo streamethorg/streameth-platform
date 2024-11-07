@@ -86,14 +86,7 @@ const StageControls = ({
             )}
           </div>
 
-          <ImportDataButton
-            markers={stageMarkers}
-            organizationId={organization._id}
-            stageId={stream._id as string}
-            stage={stream}
-          />
-
-          <div className="flex flex-row gap-2 ml-auto">
+          <div className="flex flex-row gap-2">
             <ShareAndEmbed
               organizationSlug={organization.slug as string}
               streamId={stream._id as string}
