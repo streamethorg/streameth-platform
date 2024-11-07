@@ -16,6 +16,7 @@ import EditLivestream from '../../components/EditLivestream';
 import ShareAndEmbed from './ShareAndEmbed';
 import Sidebar from './Sidebar';
 import ImportDataButton from './StageDataImport/ImportDataButton';
+import ViewMarkersDialog from './StageDataImport/ViewMarkersDialog';
 import StreamConfigWithPlayer from './StreamConfigWithPlayer';
 import StreamHealth from './StreamHealth';
 
@@ -86,6 +87,7 @@ const StageControls = ({
           </div>
 
           <ImportDataButton
+            markers={stageMarkers}
             organizationId={organization._id}
             stageId={stream._id as string}
             stage={stream}

@@ -29,13 +29,12 @@ import { stageSessionImportAction } from '@/lib/actions/sessions';
 import { ScheduleImportSchema } from '@/lib/schema';
 import { IExtendedMarker, IExtendedStage } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FileDown } from 'lucide-react';
 import React, { useState } from 'react';
 import { set, useForm } from 'react-hook-form';
+import { LuImport } from 'react-icons/lu';
 import { toast } from 'sonner';
-import { IScheduleImportMetadata } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 import { z } from 'zod';
-import ImportPreviewDialog from './ImportPreviewDialog';
+import ViewMarkersDialog from './ViewMarkersDialog';
 
 const ImportDataButton = ({
   organizationId,
