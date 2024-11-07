@@ -20,4 +20,6 @@ export interface IClip {
     captionFont: string;
     captionColor: string;
   };
+  clipSessionId?: string;
+  clipEditorId?: string;
 }

@@ -1,4 +1,7 @@
-import { IClipEditor } from '@interfaces/clip.editor.interface';
+import {
+  ClipEditorStatus,
+  IClipEditor,
+} from '@interfaces/clip.editor.interface';
 import { model, Schema } from 'mongoose';
 
 const ClipEditorSchema = new Schema<IClipEditor>(
@@ -20,6 +23,12 @@ const ClipEditorSchema = new Schema<IClipEditor>(
     captionFont: { type: String, default: 'Arial' },
     captionColor: { type: String, default: '#000' },
     clipSessionId: { type: Schema.Types.ObjectId, ref: 'Session' },
+    statusMessage: { type: String, default: '' },
+    status: {
+      type: String,
+      enum: Object.keys(ClipEditorStatus),
+      default: ClipEditorStatus.pending,
+    },
   },
   {
     timestamps: true,

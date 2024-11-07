@@ -1,4 +1,5 @@
 import { HttpException } from '@exceptions/HttpException';
+import { ClipEditorStatus } from '@interfaces/clip.editor.interface';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import { RemotionPayload } from '@interfaces/remotion.webhook.interface';
 import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
@@ -131,14 +132,19 @@ export class IndexController extends Controller {
       throw new HttpException(404, 'Session not found');
     }
     const assetId = await createAssetFromUrl(session.name, payload.outputUrl);
-    await this.sessionService.update(session._id.toString(), {
-      assetId,
-      name: session.name,
-      start: session.start,
-      end: session.end,
-      organizationId: session.organizationId,
-      type: session.type,
-    });
+    await Promise.all([
+      this.sessionService.update(session._id.toString(), {
+        assetId,
+        name: session.name,
+        start: session.start,
+        end: session.end,
+        organizationId: session.organizationId,
+        type: session.type,
+      }),
+      clipEditor.updateOne({
+        status: ClipEditorStatus.uploading,
+      }),
+    ]);
     return SendApiResponse('Webhook processed successfully');
   }
 
@@ -174,10 +180,19 @@ export class IndexController extends Controller {
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
     });
-    if (state.type !== StateType.animation) {
+    if (
+      state.type !== StateType.animation &&
+      state.type !== StateType.editorClip
+    ) {
       await this.sessionService.sessionTranscriptions({
         organizationId: session.organizationId.toString(),
         sessionId: session._id.toString(),
+      });
+    }
+    const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
+    if (clipEditor) {
+      await clipEditor.updateOne({
+        status: ClipEditorStatus.completed,
       });
     }
   }
