@@ -62,7 +62,7 @@ const Library = async ({
     organizationSlug: params.organization,
     limit: searchParams.limit || 20,
     page: searchParams.page || 1,
-    onlyVideos: true,
+    // onlyVideos: true,
     searchQuery: searchParams.searchQuery,
     stageId: searchParams.stage,
     published: searchParams.published,

@@ -266,6 +266,7 @@ export const clipSchema = z.object({
   introAnimation: z.string().optional(),
   captionEnabled: z.boolean(),
   selectedAspectRatio: z.string().optional(),
+  pretalxSessionCode: z.string().optional(),
 });
 
 export const EmailSignInSchema = z.object({

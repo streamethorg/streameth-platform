@@ -45,6 +45,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asset?.status?.phase]);
+  // if (!assetId) return null;
 
   return (
     <>

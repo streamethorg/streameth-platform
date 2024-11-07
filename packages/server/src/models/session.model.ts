@@ -79,6 +79,7 @@ const SessionSchema = new Schema<ISessionModel>(
       text: { type: String, default: '' },
     },
     createdAt: { type: Date, default: Date.now },
+    pretalxSessionCode: { type: String, default: '' },
   },
   {
     timestamps: true,
