@@ -31,10 +31,10 @@ import { IExtendedMarker, IExtendedStage } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { set, useForm } from 'react-hook-form';
-import { LuImport } from 'react-icons/lu';
-import { toast } from 'sonner';
 import { z } from 'zod';
+import { FileDown } from 'lucide-react';
 import ViewMarkersDialog from './ViewMarkersDialog';
+import { LuImport, LuPlus } from 'react-icons/lu';
 
 const ImportDataButton = ({
   organizationId,
@@ -74,7 +74,8 @@ const ImportDataButton = ({
         toast.error(response.error);
       } else {
         toast.success('Markers imported successfully');
-        // fetchAndSetMarkers();
+        setOpen(false);
+        setOpenPreview(true);
       }
     } catch (error) {
       toast.error('Error importing data');
