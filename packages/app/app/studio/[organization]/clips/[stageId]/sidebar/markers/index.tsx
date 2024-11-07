@@ -45,7 +45,7 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
           )
     );
   };
-  console.log('unique dates', selectedDate);
+
   if (isLoadingMarkers) {
     return (
       <div className="flex h-full w-full flex-col border-l bg-background bg-white">

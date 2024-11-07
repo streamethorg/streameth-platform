@@ -1738,6 +1738,7 @@
 			"ProcessingStatus": {
 				"enum": [
 					"pending",
+					"rendering",
 					"failed",
 					"completed"
 				],
@@ -1949,6 +1950,9 @@
 							"subtitleUrl"
 						],
 						"type": "object"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -2183,6 +2187,9 @@
 							"subtitleUrl"
 						],
 						"type": "object"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -2378,6 +2385,9 @@
 						],
 						"type": "object"
 					},
+					"pretalxSessionCode": {
+						"type": "string"
+					},
 					"autolabels": {
 						"items": {
 							"type": "string"
@@ -2541,6 +2551,9 @@
 						"type": "object"
 					},
 					"createdAt": {
+						"type": "string"
+					},
+					"pretalxSessionCode": {
 						"type": "string"
 					}
 				},

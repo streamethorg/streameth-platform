@@ -140,4 +140,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   createdAt?: string;
+
+  @IsOptional()
+  @IsString()
+  pretalxSessionCode?: string;
 }

@@ -84,7 +84,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const stageSessions = (
     await fetchAllSessions({
       stageId,
-      onlyVideos: true,
+      // onlyVideos: true,
       type: SessionType.clip,
     })
   ).sessions;
