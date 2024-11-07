@@ -15,7 +15,6 @@ import {
   validateRemotionWebhook,
   validateWebhook,
 } from '@utils/validateWebhook';
-import { create } from 'domain';
 import express from 'express';
 import {
   Body,
@@ -125,33 +124,20 @@ export class IndexController extends Controller {
     if (!clipEditor) {
       throw new HttpException(404, 'Clip editor not found');
     }
-    const event = clipEditor.events?.find((e) => e.label === 'main');
-    if (!event?.sessionId) {
-      throw new HttpException(404, 'event not found');
-    }
-
     const session = await this.sessionService.findOne({
-      _id: event.sessionId,
+      _id: clipEditor.clipSessionId,
     });
     if (!session) {
       throw new HttpException(404, 'Session not found');
     }
     const assetId = await createAssetFromUrl(session.name, payload.outputUrl);
-
-    const createSession = await this.sessionService.create({
-      name: session.name,
-      description: session.description,
+    await this.sessionService.update(session._id.toString(), {
       assetId,
+      name: session.name,
       start: session.start,
       end: session.end,
       organizationId: session.organizationId,
-      type: SessionType.clip,
-    });
-    await this.stateService.create({
-      organizationId: createSession.organizationId,
-      sessionId: createSession._id.toString(),
-      type: StateType.clip,
-      status: StateStatus.pending,
+      type: session.type,
     });
     return SendApiResponse('Webhook processed successfully');
   }

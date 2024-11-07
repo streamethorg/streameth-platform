@@ -19,6 +19,7 @@ const ClipEditorSchema = new Schema<IClipEditor>(
     captionLinesPerPage: { type: Number, default: 3 },
     captionFont: { type: String, default: 'Arial' },
     captionColor: { type: String, default: '#000' },
+    clipSessionId: { type: Schema.Types.ObjectId, ref: 'Session' },
   },
   {
     timestamps: true,
