@@ -1,25 +1,10 @@
 import { TableCell } from '@/components/ui/table';
 import { IExtendedSession, eLayout } from '@/lib/types';
-import {
-  EllipsisVertical,
-  Users,
-  Video,
-  Scissors,
-  Radio,
-  FilePenLine,
-  ScissorsLineDashed,
-  Film,
-} from 'lucide-react';
+import { Users, FilePenLine } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDuration } from '@/lib/utils/time';
 import { fetchSessionMetrics } from '@/lib/services/sessionService';
 import ProcessingSkeleton from './misc/ProcessingSkeleton';
-import { PopoverActions } from './misc/PopoverActions';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
@@ -33,6 +18,7 @@ import {
   LuScissorsLineDashed,
   LuVideo,
 } from 'react-icons/lu';
+import DropdownActions from './DropdownActions';
 
 const TableCells = async ({
   item,
@@ -76,14 +62,14 @@ const TableCells = async ({
 
   return (
     <>
-      <TableCell className="relative max-w-[300px] font-medium">
-        <div className="flex w-full flex-row items-center space-x-4">
+      <TableCell className="relative font-medium max-w-[300px]">
+        <div className="flex flex-row items-center space-x-4 w-full">
           <div className="min-w-[100px]">
             <Thumbnail imageUrl={item.coverImage} fallBack={imageUrl} />
           </div>
           <div className="flex flex-col">
             <Link href={`/studio/${organization}/library/${item._id}`}>
-              <span className="line-clamp-2 hover:underline">{item.name}</span>
+              <span className="hover:underline line-clamp-2">{item.name}</span>
             </Link>
           </div>
         </div>
@@ -109,7 +95,7 @@ const TableCells = async ({
         </div>
       </TableCell>
       <TableCell>
-        <div className="flex items-center space-x-2 justify-end max-w-[100px]">
+        <div className="flex justify-end items-center space-x-2 max-w-[100px]">
           {item.type === 'livestream' &&
             item.createdAt &&
             new Date(item.createdAt).getTime() >
@@ -127,18 +113,7 @@ const TableCells = async ({
               <FilePenLine className="w-5 h-5 cursor-pointer" />
             </Button>
           </Link>
-          <Popover>
-            <PopoverTrigger className="z-10">
-              <EllipsisVertical className="w-5 h-5 cursor-pointer" />
-            </PopoverTrigger>
-            <PopoverContent className="w-fit">
-              <PopoverActions
-                session={item}
-                organizationSlug={organization}
-                layout={eLayout.list}
-              />
-            </PopoverContent>
-          </Popover>
+          <DropdownActions session={item} organizationSlug={organization} />
         </div>
       </TableCell>
     </>

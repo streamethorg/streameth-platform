@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/table';
 import TableCells from './TableCells';
 import { IExtendedSession } from '@/lib/types';
-import LayoutSelection from './LayoutSelection';
 import TableSort from '@/components/misc/TableSort';
 
 const LibraryListLayout = async ({
@@ -32,7 +31,6 @@ const LibraryListLayout = async ({
             <TableSort title="Created at" sortBy="date" />
           </TableHead>
           <TableHead>Views</TableHead>
-          <TableHead>{/* <LayoutSelection /> */}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="overflow-auto">
