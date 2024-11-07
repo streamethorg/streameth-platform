@@ -1,4 +1,5 @@
 import {
+  eVisibilty,
   IPlayback,
   ISession,
   ISource,
@@ -92,8 +93,8 @@ export class CreateSessionDto implements Omit<ISession, '_id'> {
   ipfsURI?: string;
 
   @IsOptional()
-  @IsBoolean()
-  published?: boolean;
+  @IsString()
+  published?: eVisibilty;
 
   @IsNotEmpty()
   @IsString()

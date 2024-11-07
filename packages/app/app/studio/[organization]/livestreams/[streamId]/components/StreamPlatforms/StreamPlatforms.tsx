@@ -24,7 +24,7 @@ const Block = ({
   return (
     <div
       key={index}
-      className="flex flex-col items-center justify-between rounded bg-white py-4 shadow transition-colors hover:cursor-pointer hover:bg-gray-100"
+      className="flex flex-col justify-between items-center py-4 bg-white rounded shadow transition-colors hover:bg-gray-100 hover:cursor-pointer"
       onClick={handleClick}
     >
       <span className="my-auto">{item.icon}</span>
@@ -56,10 +56,6 @@ const StreamPlatformGrid = ({
   }
 
   const StreamTarget: StreamTargetItem[] = [
-    // {
-    //   title: 'X (WIP)',
-    //   icon: <SiX size={35} />,
-    // },
     {
       title: 'YouTube',
       icon: <SiYoutube size={45} color="#ff0000" />,

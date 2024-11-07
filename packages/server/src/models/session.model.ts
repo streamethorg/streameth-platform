@@ -1,7 +1,8 @@
 import {
   ProcessingStatus,
-  type ISessionModel,
   SessionType,
+  eVisibilty,
+  type ISessionModel,
 } from '@interfaces/session.interface';
 import { Schema, model } from 'mongoose';
 
@@ -51,7 +52,11 @@ const SessionSchema = new Schema<ISessionModel>(
     autoLabels: [{ type: String }],
     ipfsURI: { type: String, default: '' },
     mintable: { type: Boolean, default: false },
-    published: { type: Boolean, default: false },
+    published: {
+      type: String,
+      enum: Object.keys(eVisibilty),
+      default: eVisibilty.private,
+    },
     type: { type: String, enum: Object.keys(SessionType) },
     nftCollections: [{ type: String, ref: 'Nft-Collection' }],
     socials: [
