@@ -88,6 +88,7 @@ const CreateClipButton = ({
       introAnimation: '',
       outroAnimation: '',
       selectedAspectRatio: '16:9',
+      pretalxSessionCode: '',
     },
   });
 
@@ -132,6 +133,7 @@ const CreateClipButton = ({
             organizationId: speaker?.organizationId?.toString(),
             eventId: speaker?.eventId?.toString(),
           })) ?? [],
+        pretalxSessionCode: selectedMarker.pretalxSessionCode,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -162,6 +164,7 @@ const CreateClipButton = ({
       end: values.end,
       organizationId,
       stageId,
+      pretalxSessionCode: values.pretalxSessionCode,
     };
 
     const sessionType = hasEditorOptions
