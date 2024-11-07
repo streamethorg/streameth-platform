@@ -250,6 +250,8 @@ const models: TsoaRoute.Models = {
             "stageId": {"dataType":"string"},
             "isEditorEnabled": {"dataType":"boolean"},
             "editorOptions": {"dataType":"nestedObjectLiteral","nestedProperties":{"captionColor":{"dataType":"string","required":true},"captionFont":{"dataType":"string","required":true},"captionLinesPerPage":{"dataType":"double","required":true},"captionPosition":{"dataType":"string","required":true},"captionEnabled":{"dataType":"boolean","required":true},"selectedAspectRatio":{"dataType":"string","required":true},"events":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"sessionId":{"dataType":"string","required":true},"label":{"dataType":"string","required":true}}},"required":true},"frameRate":{"dataType":"double","required":true}}},
+            "clipSessionId": {"dataType":"string"},
+            "clipEditorId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -281,7 +283,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "StateType": {
         "dataType": "refEnum",
-        "enums": ["nft","event","video","transcrpition","social","animation","clip"],
+        "enums": ["nft","event","video","transcrpition","social","animation","clip","editorClip"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IState": {

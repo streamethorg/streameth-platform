@@ -522,6 +522,12 @@
 							"frameRate"
 						],
 						"type": "object"
+					},
+					"clipSessionId": {
+						"type": "string"
+					},
+					"clipEditorId": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -598,7 +604,8 @@
 					"transcrpition",
 					"social",
 					"animation",
-					"clip"
+					"clip",
+					"editorClip"
 				],
 				"type": "string"
 			},

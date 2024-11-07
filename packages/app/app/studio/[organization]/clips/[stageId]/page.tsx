@@ -1,21 +1,20 @@
-import React from 'react';
-import ReactHlsPlayer from './Player';
-import { ClipProvider } from './ClipContext';
-import Controls from './Controls';
-import Timeline from './Timeline';
-import Sidebar from './sidebar';
-import { ClipsPageParams } from '@/lib/types';
-import { fetchStage } from '@/lib/services/stageService';
-import { fetchStageRecordings } from '@/lib/services/stageService';
+import { fetchOrganization } from '@/lib/services/organizationService';
 import {
   fetchAllSessions,
   fetchAsset,
   fetchSession,
 } from '@/lib/services/sessionService';
+import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
+import { ClipsPageParams } from '@/lib/types';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
-import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
+import React from 'react';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { ClipProvider } from './ClipContext';
+import Controls from './Controls';
+import ReactHlsPlayer from './Player';
+import Timeline from './Timeline';
+import Sidebar from './sidebar';
 import TopBar from './topBar';
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
