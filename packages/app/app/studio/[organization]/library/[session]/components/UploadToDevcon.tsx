@@ -55,9 +55,8 @@ const prepareDevconPayload = async (session: ISession | IExtendedSession) => {
     title: session.name,
     description: session.description,
     devcon_asset_id: 'PPJHYQ', // TODO: Fetch from markers
-    // video: downloadUrl, // TODO: replace hardcoded url
-    video:
-      'https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/7bee0oy6uo8fdi5a/video/download.mp4',
+    video: downloadUrl,
+    // video: 'https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/7bee0oy6uo8fdi5a/video/download.mp4',
     duration: session.playback?.duration || 0,
     sources_ipfsHash: '',
     sources_streamethId: session._id,
