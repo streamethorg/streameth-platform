@@ -130,7 +130,7 @@ const UploadToDevcon = ({ sessionId }: UploadToDevconProps) => {
   }
 
   return (
-    <div className="space-y-2">
+    <>
       <Button
         onClick={async () => await handleUploadToDevcon()}
         disabled={isLoading}
@@ -153,7 +153,7 @@ const UploadToDevcon = ({ sessionId }: UploadToDevconProps) => {
           <p>{error}</p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

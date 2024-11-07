@@ -124,9 +124,9 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                       organizationSlug={params.organization}
                       sessionId={session._id}
                     />
-                    {/* {params.organization === 'devcon_7_sea' && ( */}
-                    <UploadToDevcon sessionId={session._id} />
-                    {/* )} */}
+                    {params.organization === 'devcon_7_sea' && (
+                      <UploadToDevcon sessionId={session._id} />
+                    )}
                   </div>
                 </AccordionContent>
               </AccordionItem>
