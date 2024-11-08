@@ -488,7 +488,10 @@ const createClipSession = async (clipEditorId: string): Promise<string> => {
     stageId: session.stageId,
     type: SessionType.clip,
     processingStatus: ProcessingStatus.pending,
+    pretalxSessionCode: session.pretalxSessionCode,
+    speakers: session.speakers,
   });
+  console.log('created session clip', createSession);
   await clipEditor.updateOne({
     clipSessionId: createSession._id,
   });

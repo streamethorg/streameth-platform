@@ -213,6 +213,7 @@ export default class MarkerService {
             startClipTime,
             endClipTime,
             pretalxSessionCode,
+            talkType: session?.track,
           };
           markersData.push(markerData);
         });
