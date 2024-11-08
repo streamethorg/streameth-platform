@@ -163,6 +163,7 @@ export const getPlayback = async (assetId: string): Promise<string> => {
     console.error(`Error fetching asset:`, e);
   }
 };
+
 export const getDownloadUrl = async (assetId: string): Promise<string> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
@@ -488,6 +489,8 @@ const createClipSession = async (clipEditorId: string): Promise<string> => {
     stageId: session.stageId,
     type: SessionType.clip,
     processingStatus: ProcessingStatus.pending,
+    pretalxSessionCode: session.pretalxSessionCode,
+    speakers: session.speakers,
   });
   await clipEditor.updateOne({
     clipSessionId: createSession._id,
@@ -501,7 +504,7 @@ const createClipSession = async (clipEditorId: string): Promise<string> => {
   return createSession._id.toString();
 };
 
-const createClipState = async (sessionId: string) => {
+const createClipState = async (sessionId: string): Promise<void> => {
   const session = await sessionService.findOne({ _id: sessionId });
   if (!session) return;
   const state = await State.findOne({
@@ -549,9 +552,11 @@ export const createClip = async (data: IClip) => {
         clipEditorId: create._id.toString(),
         clipSessionId,
       };
-      await pulse.schedule(new Date(), AgendaJobs.CLIP_EDITOR_STATUS, {
+      const job = pulse.create(AgendaJobs.CLIP_EDITOR_STATUS, {
         data: clipPayload,
       });
+      job.unique({ 'data.clipEditorId': create._id.toString() });
+      await job.save();
       return {
         task: { id: '' },
         asset: {
@@ -622,7 +627,6 @@ export const createClip = async (data: IClip) => {
       return parsedClip;
     }
   } catch (e) {
-    console.log('error', e);
     throw new HttpException(400, 'Error creating clip');
   }
 };

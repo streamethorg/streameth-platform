@@ -56,4 +56,8 @@ export class CreateMarkerDto implements IMarker {
   @IsOptional()
   @IsString()
   pretalxSessionCode?: string;
+
+  @IsOptional()
+  @IsString()
+  talkType?: string;
 }

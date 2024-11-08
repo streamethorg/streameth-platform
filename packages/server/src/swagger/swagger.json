@@ -3414,6 +3414,9 @@
 					},
 					"pretalxSessionCode": {
 						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -3498,6 +3501,9 @@
 						"format": "double"
 					},
 					"pretalxSessionCode": {
+						"type": "string"
+					},
+					"talkType": {
 						"type": "string"
 					}
 				},

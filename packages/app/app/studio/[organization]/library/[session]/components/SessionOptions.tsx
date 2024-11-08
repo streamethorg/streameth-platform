@@ -22,7 +22,11 @@ const SessionOptions = ({
       <ShareButton
         className="w-full"
         variant="outline"
-        url={`${location.origin}/${organizationSlug}/watch?session=${sessionId}`}
+        url={
+          typeof window !== 'undefined'
+            ? `${window.location.origin}/${organizationSlug}/watch?session=${sessionId}`
+            : ''
+        }
         shareFor="video"
       />
       <EmbedButton

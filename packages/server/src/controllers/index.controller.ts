@@ -18,6 +18,7 @@ import {
   validateWebhook,
 } from '@utils/validateWebhook';
 import express from 'express';
+import { Types } from 'mongoose';
 import {
   Body,
   Controller,
@@ -113,9 +114,12 @@ export class IndexController extends Controller {
         renderId: payload.renderId,
       });
       await Promise.all([
-        Session.findByIdAndUpdate(clipEditor.clipSessionId, {
-          status: ProcessingStatus.failed,
-        }),
+        Session.findOneAndUpdate(
+          { _id: new Types.ObjectId(clipEditor.clipSessionId) },
+          {
+            status: ProcessingStatus.failed,
+          },
+        ),
         clipEditor.updateOne({
           status: ClipEditorStatus.failed,
         }),
