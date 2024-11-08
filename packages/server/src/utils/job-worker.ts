@@ -48,7 +48,7 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
       );
       const res = await response.json();
       if (res.type === 'error') return;
-      await ClipEditor.findOneAndUpdate(data.clipEditorId, {
+      await ClipEditor.findByIdAndUpdate(data.clipEditorId, {
         renderId: res.data.renderId,
         status: ClipEditorStatus.rendering,
       });
