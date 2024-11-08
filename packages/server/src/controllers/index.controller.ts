@@ -218,19 +218,15 @@ export class IndexController extends Controller {
     const session = await this.sessionService.findOne({
       assetId: asset.id,
     });
-
     if (!session) throw new HttpException(404, 'No session found');
-
     const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
-      type: StateType.video,
+      type: session.type,
     });
     if (!state) throw new HttpException(404, 'No state found');
-
     await this.sessionService.update(session._id.toString(), {
       ProcessingStatus: ProcessingStatus.failed,
     } as any);
-
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.failed,
     });

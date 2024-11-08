@@ -5,12 +5,8 @@ import { logger } from './logger';
 const pulse = new Pulse({
   db: { address: config.db.host, collection: 'agendajobs' },
   defaultConcurrency: 20,
-  maxConcurrency: 30,
+  maxConcurrency: 40,
   resumeOnRestart: true,
-});
-
-pulse.on('complete', (job) => {
-  logger.info('Job completed', job.attrs.name);
 });
 
 pulse.on('fail', (job) => {

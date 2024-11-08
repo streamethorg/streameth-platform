@@ -52,12 +52,13 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
         renderId: res.data.renderId,
         status: ClipEditorStatus.rendering,
       });
-      logger.info('Clip editor status job completed');
       job.remove();
+      logger.info('Clip editor status job completed');
     }
     if (!result.status) {
       job.attrs.nextRunAt = new Date(Date.now() + POLLING_INTERVAL);
       job.attrs.lastRunAt = new Date();
+      job.attrs.runCount = 1;
       await job.save();
       logger.info(`clipEditorStatus rescheduled`);
     }
