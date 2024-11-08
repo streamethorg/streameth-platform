@@ -449,6 +449,9 @@ export const getClipEditorStatus = async (
         session.processingStatus === ProcessingStatus.failed &&
         event.label === 'main'
       ) {
+        const jobs = await pulse.jobs({
+          'data.data.clipEditorId': data.clipEditorId,
+        });
         const clipEditor = await ClipEditor.findById(data.clipEditorId);
         await Promise.all([
           SessionModel.findByIdAndUpdate(clipEditor.clipSessionId, {
@@ -459,6 +462,7 @@ export const getClipEditorStatus = async (
             message: 'main session polling failed',
           }),
         ]);
+        await Promise.all(jobs.map((job) => job.remove()));
       }
       return { status: false, ...DEFAULT_EVENT };
     },
@@ -650,7 +654,6 @@ export const refetchAssets = async () => {
     });
     await Promise.all(sessionPromise);
   } catch (e) {
-    console.log('error', e);
     throw new HttpException(400, 'Error processing asset');
   }
 };
