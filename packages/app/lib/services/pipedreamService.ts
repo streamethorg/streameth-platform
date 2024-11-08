@@ -12,6 +12,8 @@ export interface IPipedreamUpload {
 }
 
 export const uploadToDevcon = async (payload: IPipedreamUpload) => {
+  //   console.log('Frontend - Sending payload to backend:', payload);
+
   const response = await fetch(`${apiUrl()}/pipedream/upload`, {
     method: 'POST',
     headers: {
@@ -23,10 +25,12 @@ export const uploadToDevcon = async (payload: IPipedreamUpload) => {
     }),
   });
 
+  const responseData = await response.json();
+  //   console.log('Frontend - Received response from backend:', responseData);
+
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Failed to upload to Devcon');
+    throw new Error(responseData.message || 'Failed to upload to Devcon');
   }
 
-  return response.json();
+  return responseData;
 };

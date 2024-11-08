@@ -14,6 +14,8 @@ export class PipedreamController extends Controller {
   async uploadToDevcon(
     @Body() body: PipedreamUploadDto,
   ): Promise<IStandardResponse<IPipedreamResponse>> {
+    // console.log('Backend - Received request payload:', body);
+
     const DEVCON_UPLOAD_ENDPOINT = process.env.DEVCON_UPLOAD_ENDPOINT;
     const PIPEDREAM_AUTH_TOKEN = process.env.PIPEDREAM_AUTH_TOKEN;
 
@@ -33,6 +35,7 @@ export class PipedreamController extends Controller {
       });
 
       const responseData = await response.json();
+      //   console.log('Backend - Received Pipedream response:', responseData);
 
       if (responseData.devconUpload?.result !== null) {
         this.setStatus(400);
@@ -49,6 +52,7 @@ export class PipedreamController extends Controller {
 
       return SendApiResponse('Successfully uploaded to Devcon', responseData);
     } catch (error) {
+      console.error('Backend - Error:', error);
       this.setStatus(500);
       return SendApiResponse('Internal server error');
     }

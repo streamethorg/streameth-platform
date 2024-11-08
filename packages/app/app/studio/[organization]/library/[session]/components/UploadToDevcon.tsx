@@ -94,7 +94,10 @@ const UploadToDevcon = ({
       }
 
       const devconPayload = await prepareDevconPayload(session);
-      await uploadToDevcon(devconPayload);
+      // console.log('Component - Prepared payload:', devconPayload);
+
+      const response = await uploadToDevcon(devconPayload);
+      // console.log('Component - Final response:', response);
 
       await updateSessionAction({
         session: prepareSessionPayload(session),
@@ -105,7 +108,7 @@ const UploadToDevcon = ({
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Failed to upload to Devcon';
-      console.error('Upload Error:', error);
+      console.error('Component - Error:', error);
       toast.error(errorMessage);
       setError(errorMessage);
       return false;
