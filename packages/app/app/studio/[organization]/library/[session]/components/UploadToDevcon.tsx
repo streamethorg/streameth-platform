@@ -11,6 +11,7 @@ import {
   ISession,
 } from 'streameth-new-server/src/interfaces/session.interface';
 import { apiUrl } from '@/lib/utils/utils';
+import { uploadToDevcon } from '@/lib/services/pipedreamService';
 
 // Helper functions
 const getDownloadUrl = async (assetId: string): Promise<string> => {
@@ -54,7 +55,7 @@ const prepareDevconPayload = async (session: ISession | IExtendedSession) => {
     video: downloadUrl || 'No download URL provided',
     duration: session.playback?.duration || 0,
     sources_ipfsHash: '',
-    sources_streamethId: session._id || 'No session ID provided',
+    sources_streamethId: session._id?.toString() || 'No session ID provided',
   };
 };
 
@@ -93,25 +94,14 @@ const UploadToDevcon = ({
       }
 
       const devconPayload = await prepareDevconPayload(session);
+      await uploadToDevcon(devconPayload);
 
-      const response = await fetch('/api/pipedream', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(devconPayload),
+      await updateSessionAction({
+        session: prepareSessionPayload(session),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to upload to Devcon');
-      } else {
-        await updateSessionAction({
-          session: prepareSessionPayload(session),
-        });
-        toast.success('Successfully uploaded to Devcon!');
-        setIsUploaded(true);
-      }
+      toast.success('Successfully uploaded to Devcon!');
+      setIsUploaded(true);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Failed to upload to Devcon';
