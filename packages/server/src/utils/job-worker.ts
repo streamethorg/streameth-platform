@@ -7,6 +7,7 @@ import pulse from './pulse.cron';
 
 export enum AgendaJobs {
   REFETCH_ASSETS = 'refetch assets',
+  CLIP_EDITOR_STATUS = 'clipEditorStatus',
 }
 
 const POLLING_INTERVAL = 30000; // 30 sconds
@@ -51,8 +52,8 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
         renderId: res.data.renderId,
         status: ClipEditorStatus.rendering,
       });
-      logger.info('Clip editor status job completed');
       job.remove();
+      logger.info('Clip editor status job completed');
     }
     if (!result.status) {
       job.attrs.nextRunAt = new Date(Date.now() + POLLING_INTERVAL);
