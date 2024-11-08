@@ -12,27 +12,30 @@ import LoginBackground from '@/public/login-background.png';
 
 const AuthErrorPage = () => {
   return (
-    <div className="flex h-screen w-screen flex-row">
-      <div className="flex h-full w-full md:w-1/2  flex-col items-center justify-center">
-        <Card className="max-w-[480px] shadow-none">
+    <div className="flex flex-row w-screen h-screen">
+      <div className="flex flex-col justify-center items-center w-full h-full md:w-1/2">
+        <Card className="shadow-none max-w-[480px]">
           <CardHeader className="text-center lg:pb-0">
             <CardTitle className="text-2xl text-destructive">
-              Oops, something went wrong.
+              Authentication Failed
             </CardTitle>
-            <CardDescription></CardDescription>
+            <CardDescription>
+              <p>You do not currently have access to this organization.</p>
+              <p>Need access? Contact the StreamETH team to request access.</p>
+            </CardDescription>
           </CardHeader>
 
-          <CardContent className="p-4 lg:p-4 flex flex-col items-center justify-center">
-            <p className="text-lg mt-4 text-center">
+          <CardContent className="flex flex-col justify-center items-center p-4 lg:p-4">
+            <p className="mt-4 text-lg text-center">
               {'To go back to the sign-in page, '}
-              <Link href="/auth/login" className="text-primary underline">
+              <Link href="/auth/login" className="underline text-primary">
                 Click here
               </Link>
             </p>
           </CardContent>
         </Card>
       </div>
-      <div className="relative h-full hidden md:block w-1/2 bg-primary">
+      <div className="hidden relative w-1/2 h-full md:block bg-primary">
         <Image
           quality={100}
           alt="login background"
