@@ -60,9 +60,13 @@ const prepareDevconPayload = async (session: ISession | IExtendedSession) => {
 
 interface UploadToDevconProps {
   sessionId: string;
+  organizationSlug: string;
 }
 
-const UploadToDevcon = ({ sessionId }: UploadToDevconProps) => {
+const UploadToDevcon = ({
+  sessionId,
+  organizationSlug,
+}: UploadToDevconProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -131,30 +135,33 @@ const UploadToDevcon = ({ sessionId }: UploadToDevconProps) => {
 
   return (
     <>
-      <Button
-        onClick={async () => await handleUploadToDevcon()}
-        disabled={isLoading}
-        variant={error ? 'outline' : 'default'}
-      >
-        {isLoading ? (
-          <span className="flex items-center gap-2">
-            <span className="animate-spin">⏳</span> Uploading...
-          </span>
-        ) : error ? (
-          <span className="flex items-center gap-2">❌ Upload Failed</span>
-        ) : (
-          'Upload to Devcon'
-        )}
-      </Button>
+      {organizationSlug === 'devcon_7_sea' && (
+        <>
+          <Button
+            onClick={async () => await handleUploadToDevcon()}
+            disabled={isLoading}
+            variant={error ? 'outline' : 'default'}
+          >
+            {isLoading ? (
+              <span className="flex items-center gap-2">
+                <span className="animate-spin">⏳</span> Uploading...
+              </span>
+            ) : error ? (
+              <span className="flex items-center gap-2">❌ Upload Failed</span>
+            ) : (
+              'Upload to Devcon'
+            )}
+          </Button>
 
-      {error && (
-        <div className="text-sm text-red-500 bg-red-50 p-2 rounded-md border border-red-200">
-          <p className="font-semibold">Upload Error:</p>
-          <p>{error}</p>
-        </div>
+          {error && (
+            <div className="text-sm text-red-500 bg-red-50 p-2 rounded-md border border-red-200">
+              <p className="font-semibold">Upload Error:</p>
+              <p>{error}</p>
+            </div>
+          )}
+        </>
       )}
     </>
   );
 };
-
 export default UploadToDevcon;

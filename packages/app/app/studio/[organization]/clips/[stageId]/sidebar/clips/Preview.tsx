@@ -83,9 +83,10 @@ const Preview = ({
             >
               Delete
             </Button>
-            {params?.organization === 'devcon_7_sea' && (
-              <UploadToDevcon sessionId={session._id} />
-            )}
+            <UploadToDevcon
+              sessionId={session._id}
+              organizationSlug={organizationSlug}
+            />
 
             <ShareButton url={shareUrl} shareFor="video" />
             <Button variant={'outline'} onClick={handleClose}>
