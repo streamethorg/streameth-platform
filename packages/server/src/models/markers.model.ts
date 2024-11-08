@@ -24,6 +24,7 @@ const MarkerSchema = new Schema<IMarker>(
     ],
     slug: { type: String, default: '', index: true },
     pretalxSessionCode: { type: String, default: '' },
+    talkType: { type: String, default: '' },
   },
   {
     timestamps: true,

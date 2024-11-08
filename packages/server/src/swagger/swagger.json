@@ -3414,6 +3414,9 @@
 					},
 					"pretalxSessionCode": {
 						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -3498,6 +3501,9 @@
 						"format": "double"
 					},
 					"pretalxSessionCode": {
+						"type": "string"
+					},
+					"talkType": {
 						"type": "string"
 					}
 				},
@@ -3656,18 +3662,35 @@
 							"currency"
 						],
 						"type": "object"
+					},
+					"errors": {
+						"items": {
+							"properties": {
+								"stack": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"message": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"stack",
+								"name",
+								"message"
+							],
+							"type": "object"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
 					"type",
 					"renderId",
 					"expectedBucketOwner",
-					"bucketName",
-					"outputUrl",
-					"lambdaErrors",
-					"outputFile",
-					"timeToFinish",
-					"costs"
+					"bucketName"
 				],
 				"type": "object",
 				"additionalProperties": false
