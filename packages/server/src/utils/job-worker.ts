@@ -10,7 +10,7 @@ export enum AgendaJobs {
   CLIP_EDITOR_STATUS = 'clipEditorStatus',
 }
 
-const POLLING_INTERVAL = 60000; // 1 minute
+const POLLING_INTERVAL = 30000; // 30 sconds
 pulse.define(AgendaJobs.REFETCH_ASSETS, async (job) => {
   try {
     await refetchAssets();
@@ -56,14 +56,10 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
       job.remove();
     }
     if (!result.status) {
-      await pulse.schedule(
-        new Date(Date.now() + POLLING_INTERVAL),
-        'clipEditorStatus',
-        { data },
-      );
+      job.attrs.nextRunAt = new Date(Date.now() + POLLING_INTERVAL);
+      job.attrs.lastRunAt = new Date();
+      await job.save();
       logger.info(`clipEditorStatus rescheduled`);
-    } else {
-      logger.warn(`clipEditorStatus max attempts reached. Stopping polling.`);
     }
   } catch (error) {
     logger.error('Error in clip editor status job:', error);
