@@ -20,8 +20,8 @@ const AuthErrorPage = () => {
               Authentication Failed
             </CardTitle>
             <CardDescription>
-              <p>You do not currently have access to this organization.</p>
-              <p>Need access? Contact the StreamETH team to request access.</p>
+              You do not currently have access to this organization. Need
+              access? Contact the StreamETH team to request access.
             </CardDescription>
           </CardHeader>
 
