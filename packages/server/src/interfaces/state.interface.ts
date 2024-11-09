@@ -26,6 +26,7 @@ export enum StateType {
   social = 'social',
   animation = 'animation',
   clip = 'clip',
+  editorClip = 'editorClip',
 }
 
 export interface IState {

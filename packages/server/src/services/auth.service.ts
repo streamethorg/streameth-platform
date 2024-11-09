@@ -24,12 +24,18 @@ export default class AuthService {
     let user = await this.userService.findOne({
       email: verifyToken.email,
     });
+
     if (!user) {
       user = await this.userService.create({
         email: verifyToken.email,
         did: generateDID(),
       });
     }
+
+    if (user.organizations.length === 0) {
+      throw new HttpException(403, 'User is not whitelisted');
+    }
+
     let token = jwt.sign({ id: user.did }, config.jwt.secret, {
       expiresIn: config.jwt.expiry,
     });

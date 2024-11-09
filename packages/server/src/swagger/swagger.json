@@ -522,6 +522,12 @@
 							"frameRate"
 						],
 						"type": "object"
+					},
+					"clipSessionId": {
+						"type": "string"
+					},
+					"clipEditorId": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -598,7 +604,8 @@
 					"transcrpition",
 					"social",
 					"animation",
-					"clip"
+					"clip",
+					"editorClip"
 				],
 				"type": "string"
 			},
@@ -1717,6 +1724,14 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"eVisibilty": {
+				"enum": [
+					"public",
+					"unlisted",
+					"private"
+				],
+				"type": "string"
+			},
 			"SessionType": {
 				"enum": [
 					"video",
@@ -1730,6 +1745,7 @@
 			"ProcessingStatus": {
 				"enum": [
 					"pending",
+					"rendering",
 					"failed",
 					"completed"
 				],
@@ -1847,7 +1863,7 @@
 						"type": "boolean"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -1941,6 +1957,9 @@
 							"subtitleUrl"
 						],
 						"type": "object"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -2081,7 +2100,7 @@
 						"type": "boolean"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -2175,6 +2194,9 @@
 							"subtitleUrl"
 						],
 						"type": "object"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -2275,7 +2297,7 @@
 						"type": "boolean"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -2369,6 +2391,9 @@
 							"subtitleUrl"
 						],
 						"type": "object"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
 					},
 					"autolabels": {
 						"items": {
@@ -2471,7 +2496,7 @@
 						"type": "string"
 					},
 					"published": {
-						"type": "boolean"
+						"$ref": "#/components/schemas/eVisibilty"
 					},
 					"type": {
 						"$ref": "#/components/schemas/SessionType"
@@ -2533,6 +2558,9 @@
 						"type": "object"
 					},
 					"createdAt": {
+						"type": "string"
+					},
+					"pretalxSessionCode": {
 						"type": "string"
 					}
 				},
@@ -2824,6 +2852,105 @@
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"IPipedreamResponse": {
+				"properties": {
+					"devconUpload": {
+						"properties": {
+							"result": {}
+						},
+						"required": [
+							"result"
+						],
+						"type": "object"
+					},
+					"video": {
+						"properties": {
+							"status": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"status"
+						],
+						"type": "object"
+					},
+					"thumbnail": {
+						"properties": {
+							"status": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"status"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"devconUpload",
+					"video",
+					"thumbnail"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IPipedreamResponse_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IPipedreamResponse"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PipedreamUploadDto": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"devcon_asset_id": {
+						"type": "string"
+					},
+					"video": {
+						"type": "string"
+					},
+					"duration": {
+						"type": "number",
+						"format": "double"
+					},
+					"sources_ipfsHash": {
+						"type": "string"
+					},
+					"sources_streamethId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"title",
+					"description",
+					"devcon_asset_id",
+					"video",
+					"duration",
+					"sources_ipfsHash",
+					"sources_streamethId"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"IStandardResponse_IOrganization_": {
 				"properties": {
@@ -3383,6 +3510,12 @@
 					"endClipTime": {
 						"type": "number",
 						"format": "double"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -3465,6 +3598,12 @@
 					"endClipTime": {
 						"type": "number",
 						"format": "double"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -3622,18 +3761,35 @@
 							"currency"
 						],
 						"type": "object"
+					},
+					"errors": {
+						"items": {
+							"properties": {
+								"stack": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"message": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"stack",
+								"name",
+								"message"
+							],
+							"type": "object"
+						},
+						"type": "array"
 					}
 				},
 				"required": [
 					"type",
 					"renderId",
 					"expectedBucketOwner",
-					"bucketName",
-					"outputUrl",
-					"lambdaErrors",
-					"outputFile",
-					"timeToFinish",
-					"costs"
+					"bucketName"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -6014,6 +6170,39 @@
 									"scheduleId"
 								],
 								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/pipedream/upload": {
+			"post": {
+				"operationId": "UploadToDevcon",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IPipedreamResponse_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Upload to Devcon",
+				"tags": [
+					"Pipedream"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PipedreamUploadDto"
 							}
 						}
 					}

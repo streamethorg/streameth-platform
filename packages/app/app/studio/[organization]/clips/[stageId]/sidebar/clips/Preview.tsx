@@ -15,6 +15,7 @@ import { Asset } from 'livepeer/models/components';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
+import UploadToDevcon from '@/app/studio/[organization]/library/[session]/components/UploadToDevcon';
 
 const Preview = ({
   isOpen,
@@ -82,6 +83,10 @@ const Preview = ({
             >
               Delete
             </Button>
+            <UploadToDevcon
+              sessionId={session._id}
+              organizationSlug={organizationSlug}
+            />
 
             <ShareButton url={shareUrl} shareFor="video" />
             <Button variant={'outline'} onClick={handleClose}>

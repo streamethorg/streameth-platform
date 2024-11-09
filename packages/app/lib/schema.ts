@@ -1,3 +1,4 @@
+import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 import * as z from 'zod';
 
 const GSheetConfigSchema = z.object({
@@ -122,7 +123,7 @@ export const sessionSchema = z.object({
     }),
   coverImage: z.string().optional(),
   assetId: z.string().min(1, { message: 'Please upload a video.' }).optional(),
-  published: z.boolean().default(false),
+  published: z.nativeEnum(eVisibilty).default(eVisibilty.private),
 });
 
 const blacklistedPatterns = [
@@ -217,7 +218,7 @@ export const ScheduleImportSchema = z.object({
   type: z.string().min(1, 'Source is required'),
   url: z.string().url(),
   organizationId: z.string(),
-  stageId: z.string().optional(),
+  stageId: z.string(),
 });
 
 export const injectUrlSchema = z.object({
@@ -265,6 +266,7 @@ export const clipSchema = z.object({
   introAnimation: z.string().optional(),
   captionEnabled: z.boolean(),
   selectedAspectRatio: z.string().optional(),
+  pretalxSessionCode: z.string().optional(),
 });
 
 export const EmailSignInSchema = z.object({

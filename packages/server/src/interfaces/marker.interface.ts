@@ -15,4 +15,6 @@ export interface IMarker {
   slug?: string;
   startClipTime: number;
   endClipTime: number;
+  pretalxSessionCode?: string;
+  talkType?: string;
 }

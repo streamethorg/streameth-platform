@@ -1,6 +1,12 @@
 import type { Document, Types } from 'mongoose';
 import type { ISpeaker } from './speaker.interface';
 
+export enum eVisibilty {
+  public = 'public',
+  unlisted = 'unlisted',
+  private = 'private',
+}
+
 export interface ISource {
   streamUrl?: string;
   start?: number;
@@ -25,6 +31,7 @@ export enum SessionType {
 
 export enum ProcessingStatus {
   pending = 'pending',
+  rendering = 'rendering',
   failed = 'failed',
   completed = 'completed',
 }
@@ -55,7 +62,7 @@ export interface ISession {
   autoLabels?: string[];
   ipfsURI?: string;
   mintable?: boolean;
-  published?: boolean;
+  published?: eVisibilty;
   type: SessionType;
   createdAt?: Date | string;
   nftCollections?: Types.ObjectId | string[];
@@ -71,6 +78,7 @@ export interface ISession {
     }[];
     text: string;
   };
+  pretalxSessionCode?: string;
 }
 
 export interface ISessionModel extends Omit<ISession, '_id'>, Document {}

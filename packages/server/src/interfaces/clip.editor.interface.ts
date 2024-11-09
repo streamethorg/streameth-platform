@@ -1,5 +1,13 @@
 import { Types } from 'mongoose';
 
+export enum ClipEditorStatus {
+  pending = 'pending',
+  failed = 'failed',
+  rendering = 'rendering',
+  rendered = 'rendered',
+  uploading = 'uploading',
+  completed = 'completed',
+}
 export interface IClipEditor {
   renderId: string;
   organizationId: Types.ObjectId;
@@ -12,4 +20,7 @@ export interface IClipEditor {
   captionLinesPerPage: number;
   captionFont: string;
   captionColor: string;
+  clipSessionId: Types.ObjectId;
+  status: ClipEditorStatus;
+  statusMessage: string;
 }

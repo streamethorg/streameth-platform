@@ -1,4 +1,5 @@
 import { config } from '@config';
+import { ClipEditorStatus } from '@interfaces/clip.editor.interface';
 import ClipEditor from '@models/clip.editor.model';
 import { getClipEditorStatus, refetchAssets } from './livepeer';
 import { logger } from './logger';
@@ -9,7 +10,7 @@ export enum AgendaJobs {
   CLIP_EDITOR_STATUS = 'clipEditorStatus',
 }
 
-const POLLING_INTERVAL = 60000; // 1 minute
+const POLLING_INTERVAL = 30000; // 30 sconds
 pulse.define(AgendaJobs.REFETCH_ASSETS, async (job) => {
   try {
     await refetchAssets();
@@ -49,19 +50,17 @@ pulse.define(AgendaJobs.CLIP_EDITOR_STATUS, async (job) => {
       if (res.type === 'error') return;
       await ClipEditor.findByIdAndUpdate(data.clipEditorId, {
         renderId: res.data.renderId,
+        status: ClipEditorStatus.rendering,
       });
-      logger.info('Clip editor status job completed');
       job.remove();
+      logger.info('Clip editor status job completed');
     }
     if (!result.status) {
-      await pulse.schedule(
-        new Date(Date.now() + POLLING_INTERVAL),
-        'clipEditorStatus',
-        { data },
-      );
+      job.attrs.nextRunAt = new Date(Date.now() + POLLING_INTERVAL);
+      job.attrs.lastRunAt = new Date();
+      job.attrs.runCount = 1;
+      await job.save();
       logger.info(`clipEditorStatus rescheduled`);
-    } else {
-      logger.warn(`clipEditorStatus max attempts reached. Stopping polling.`);
     }
   } catch (error) {
     logger.error('Error in clip editor status job:', error);

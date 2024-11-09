@@ -19,6 +19,8 @@ import { SessionController } from './../controllers/session.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ScheduleImporterController } from './../controllers/schedule-import.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { PipedreamController } from './../controllers/pipedream.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { OrganizationController } from './../controllers/organization.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { NftCollectionRouter } from './../controllers/nft.controller';
@@ -250,6 +252,8 @@ const models: TsoaRoute.Models = {
             "stageId": {"dataType":"string"},
             "isEditorEnabled": {"dataType":"boolean"},
             "editorOptions": {"dataType":"nestedObjectLiteral","nestedProperties":{"captionColor":{"dataType":"string","required":true},"captionFont":{"dataType":"string","required":true},"captionLinesPerPage":{"dataType":"double","required":true},"captionPosition":{"dataType":"string","required":true},"captionEnabled":{"dataType":"boolean","required":true},"selectedAspectRatio":{"dataType":"string","required":true},"events":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"sessionId":{"dataType":"string","required":true},"label":{"dataType":"string","required":true}}},"required":true},"frameRate":{"dataType":"double","required":true}}},
+            "clipSessionId": {"dataType":"string"},
+            "clipEditorId": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -281,7 +285,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "StateType": {
         "dataType": "refEnum",
-        "enums": ["nft","event","video","transcrpition","social","animation","clip"],
+        "enums": ["nft","event","video","transcrpition","social","animation","clip","editorClip"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IState": {
@@ -637,6 +641,11 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "eVisibilty": {
+        "dataType": "refEnum",
+        "enums": ["public","unlisted","private"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SessionType": {
         "dataType": "refEnum",
         "enums": ["video","livestream","clip","animation","editorClip"],
@@ -644,7 +653,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ProcessingStatus": {
         "dataType": "refEnum",
-        "enums": ["pending","failed","completed"],
+        "enums": ["pending","rendering","failed","completed"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ISession": {
@@ -675,7 +684,7 @@ const models: TsoaRoute.Models = {
             "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
             "ipfsURI": {"dataType":"string"},
             "mintable": {"dataType":"boolean"},
-            "published": {"dataType":"boolean"},
+            "published": {"ref":"eVisibilty"},
             "type": {"ref":"SessionType","required":true},
             "createdAt": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
@@ -684,6 +693,7 @@ const models: TsoaRoute.Models = {
             "talkType": {"dataType":"string"},
             "processingStatus": {"ref":"ProcessingStatus"},
             "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"timestamp":{"dataType":"array","array":{"dataType":"double"},"required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true}}},
+            "pretalxSessionCode": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -700,7 +710,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_ISession.Exclude_keyofISession._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"name":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"slug":{"dataType":"string"},"description":{"dataType":"string"},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"startClipTime":{"dataType":"double"},"endClipTime":{"dataType":"double"},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"speakers":{"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},"source":{"ref":"ISource"},"assetId":{"dataType":"string"},"playback":{"ref":"IPlayback"},"videoUrl":{"dataType":"string"},"playbackId":{"dataType":"string"},"track":{"dataType":"array","array":{"dataType":"string"}},"coverImage":{"dataType":"string"},"eventSlug":{"dataType":"string"},"videoTranscription":{"dataType":"string"},"aiDescription":{"dataType":"string"},"autoLabels":{"dataType":"array","array":{"dataType":"string"}},"ipfsURI":{"dataType":"string"},"mintable":{"dataType":"boolean"},"published":{"dataType":"boolean"},"type":{"ref":"SessionType","required":true},"createdAt":{"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"datetime"}]},"nftCollections":{"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},"socials":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"date":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}}}},"firebaseId":{"dataType":"string"},"talkType":{"dataType":"string"},"processingStatus":{"ref":"ProcessingStatus"},"transcripts":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"timestamp":{"dataType":"array","array":{"dataType":"double"},"required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true}}}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"name":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"slug":{"dataType":"string"},"description":{"dataType":"string"},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"startClipTime":{"dataType":"double"},"endClipTime":{"dataType":"double"},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"speakers":{"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},"source":{"ref":"ISource"},"assetId":{"dataType":"string"},"playback":{"ref":"IPlayback"},"videoUrl":{"dataType":"string"},"playbackId":{"dataType":"string"},"track":{"dataType":"array","array":{"dataType":"string"}},"coverImage":{"dataType":"string"},"eventSlug":{"dataType":"string"},"videoTranscription":{"dataType":"string"},"aiDescription":{"dataType":"string"},"autoLabels":{"dataType":"array","array":{"dataType":"string"}},"ipfsURI":{"dataType":"string"},"mintable":{"dataType":"boolean"},"published":{"ref":"eVisibilty"},"type":{"ref":"SessionType","required":true},"createdAt":{"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"datetime"}]},"nftCollections":{"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},"socials":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"date":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}}}},"firebaseId":{"dataType":"string"},"talkType":{"dataType":"string"},"processingStatus":{"ref":"ProcessingStatus"},"transcripts":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"timestamp":{"dataType":"array","array":{"dataType":"double"},"required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true}}},"pretalxSessionCode":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateSessionDto": {
@@ -730,7 +740,7 @@ const models: TsoaRoute.Models = {
             "autoLabels": {"dataType":"array","array":{"dataType":"string"}},
             "ipfsURI": {"dataType":"string"},
             "mintable": {"dataType":"boolean"},
-            "published": {"dataType":"boolean"},
+            "published": {"ref":"eVisibilty"},
             "type": {"ref":"SessionType","required":true},
             "createdAt": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"datetime"}]},
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
@@ -739,6 +749,7 @@ const models: TsoaRoute.Models = {
             "talkType": {"dataType":"string"},
             "processingStatus": {"ref":"ProcessingStatus"},
             "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"timestamp":{"dataType":"array","array":{"dataType":"double"},"required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true}}},
+            "pretalxSessionCode": {"dataType":"string"},
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
         },
         "additionalProperties": false,
@@ -769,7 +780,7 @@ const models: TsoaRoute.Models = {
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
             "assetId": {"dataType":"string"},
             "ipfsURI": {"dataType":"string"},
-            "published": {"dataType":"boolean"},
+            "published": {"ref":"eVisibilty"},
             "type": {"ref":"SessionType","required":true},
             "nftURI": {"dataType":"string"},
             "mintable": {"dataType":"boolean"},
@@ -778,6 +789,7 @@ const models: TsoaRoute.Models = {
             "socials": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"date":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}}}},
             "animation": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"label":{"dataType":"string","required":true}}},
             "createdAt": {"dataType":"string"},
+            "pretalxSessionCode": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -871,6 +883,40 @@ const models: TsoaRoute.Models = {
     "Pick_IScheduleImporterDto.url-or-type-or-organizationId-or-stageId_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"stageId":{"dataType":"string","required":true},"type":{"ref":"ImportType","required":true},"url":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IPipedreamResponse": {
+        "dataType": "refObject",
+        "properties": {
+            "devconUpload": {"dataType":"nestedObjectLiteral","nestedProperties":{"result":{"dataType":"any","required":true}},"required":true},
+            "video": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true}},"required":true},
+            "thumbnail": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"double","required":true}},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_IPipedreamResponse_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"ref":"IPipedreamResponse"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "PipedreamUploadDto": {
+        "dataType": "refObject",
+        "properties": {
+            "title": {"dataType":"string","required":true},
+            "description": {"dataType":"string","required":true},
+            "devcon_asset_id": {"dataType":"string","required":true},
+            "video": {"dataType":"string","required":true},
+            "duration": {"dataType":"double","required":true},
+            "sources_ipfsHash": {"dataType":"string","required":true},
+            "sources_streamethId": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_IOrganization_": {
@@ -1045,6 +1091,8 @@ const models: TsoaRoute.Models = {
             "slug": {"dataType":"string"},
             "startClipTime": {"dataType":"double","required":true},
             "endClipTime": {"dataType":"double","required":true},
+            "pretalxSessionCode": {"dataType":"string"},
+            "talkType": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -1075,6 +1123,8 @@ const models: TsoaRoute.Models = {
             "slug": {"dataType":"string"},
             "startClipTime": {"dataType":"double","required":true},
             "endClipTime": {"dataType":"double","required":true},
+            "pretalxSessionCode": {"dataType":"string"},
+            "talkType": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
@@ -1126,11 +1176,12 @@ const models: TsoaRoute.Models = {
             "expectedBucketOwner": {"dataType":"string","required":true},
             "bucketName": {"dataType":"string","required":true},
             "customData": {"dataType":"nestedObjectLiteral","nestedProperties":{"compositionId":{"dataType":"string"}}},
-            "outputUrl": {"dataType":"string","required":true},
-            "lambdaErrors": {"dataType":"array","array":{"dataType":"string"},"required":true},
-            "outputFile": {"dataType":"string","required":true},
-            "timeToFinish": {"dataType":"double","required":true},
-            "costs": {"dataType":"nestedObjectLiteral","nestedProperties":{"estimatedDisplayCost":{"dataType":"string","required":true},"estimatedCost":{"dataType":"double","required":true},"disclaimer":{"dataType":"string","required":true},"currency":{"dataType":"string","required":true}},"required":true},
+            "outputUrl": {"dataType":"string"},
+            "lambdaErrors": {"dataType":"array","array":{"dataType":"string"}},
+            "outputFile": {"dataType":"string"},
+            "timeToFinish": {"dataType":"double"},
+            "costs": {"dataType":"nestedObjectLiteral","nestedProperties":{"estimatedDisplayCost":{"dataType":"string","required":true},"estimatedCost":{"dataType":"double","required":true},"disclaimer":{"dataType":"string","required":true},"currency":{"dataType":"string","required":true}}},
+            "errors": {"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"stack":{"dataType":"string","required":true},"name":{"dataType":"string","required":true},"message":{"dataType":"string","required":true}}}},
         },
         "additionalProperties": false,
     },
@@ -2742,6 +2793,36 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'save',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/pipedream/upload',
+            ...(fetchMiddlewares<RequestHandler>(PipedreamController)),
+            ...(fetchMiddlewares<RequestHandler>(PipedreamController.prototype.uploadToDevcon)),
+
+            async function PipedreamController_uploadToDevcon(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"PipedreamUploadDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PipedreamController();
+
+              await templateService.apiHandler({
+                methodName: 'uploadToDevcon',
                 controller,
                 response,
                 next,

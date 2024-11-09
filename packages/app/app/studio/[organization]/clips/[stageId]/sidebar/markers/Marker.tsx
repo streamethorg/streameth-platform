@@ -74,6 +74,11 @@ const Marker = ({
             IN {formatTime(marker.startClipTime)} - OUT{' '}
             {formatTime(marker.endClipTime)}
           </span>
+          {marker.pretalxSessionCode && (
+            <p className="text-xs text-gray-400">
+              Pretalx Code: {marker.pretalxSessionCode}
+            </p>
+          )}
         </div>
       </div>
     </Card>

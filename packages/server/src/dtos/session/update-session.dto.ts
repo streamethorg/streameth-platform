@@ -1,4 +1,9 @@
-import { IPlayback, ISource, SessionType } from '@interfaces/session.interface';
+import {
+  eVisibilty,
+  IPlayback,
+  ISource,
+  SessionType,
+} from '@interfaces/session.interface';
 import { ISpeaker } from '@interfaces/speaker.interface';
 import {
   IsArray,
@@ -101,8 +106,8 @@ export class UpdateSessionDto {
   ipfsURI?: string;
 
   @IsOptional()
-  @IsBoolean()
-  published?: boolean;
+  @IsString()
+  published?: eVisibilty;
 
   @IsOptional()
   @IsString()
@@ -135,4 +140,8 @@ export class UpdateSessionDto {
   @IsOptional()
   @IsString()
   createdAt?: string;
+
+  @IsOptional()
+  @IsString()
+  pretalxSessionCode?: string;
 }

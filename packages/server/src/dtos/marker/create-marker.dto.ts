@@ -52,4 +52,12 @@ export class CreateMarkerDto implements IMarker {
   @IsNotEmpty()
   @IsNumber()
   endClipTime: number;
+
+  @IsOptional()
+  @IsString()
+  pretalxSessionCode?: string;
+
+  @IsOptional()
+  @IsString()
+  talkType?: string;
 }

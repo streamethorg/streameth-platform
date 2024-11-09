@@ -60,8 +60,8 @@ const ShareAndEmbed: React.FC<ShareAndEmbedProps> = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="flex gap-1">
+          <Share2 className="mr-2 h-4 w-4" />
           Share
-          <Share2 className="ml-2 h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

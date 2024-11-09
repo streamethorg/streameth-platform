@@ -1,15 +1,15 @@
 'use client';
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { Card, CardContent } from '@/components/ui/card';
+import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
+import { fetchAsset } from '@/lib/services/sessionService';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
-import Thumbnail from '@/components/misc/VideoCard/thumbnail';
-import { useEffect, useState } from 'react';
-import Preview from './Preview';
 import { Asset } from 'livepeer/models/components';
-import { fetchAsset } from '@/lib/services/sessionService';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import Preview from './Preview';
 
 export default function Clip({ session }: { session: IExtendedSession }) {
   const { name, coverImage, assetId } = session;
@@ -45,7 +45,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asset?.status?.phase]);
-  if (!assetId) return null;
+  // if (!assetId) return null;
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { config } from '@config';
 import { HttpException } from '@exceptions/HttpException';
+import { ClipEditorStatus } from '@interfaces/clip.editor.interface';
 import { IClip } from '@interfaces/clip.interface';
 import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
@@ -9,6 +10,8 @@ import Organization from '@models/organization.model';
 import SessionModel from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
+import SessionService from '@services/session.service';
+import StateService from '@services/state.service';
 import { Livepeer } from 'livepeer';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
@@ -23,6 +26,8 @@ const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
   apiKey: secretKey,
 });
+const sessionService = new SessionService();
+const stateService = new StateService();
 
 export const createStream = async (
   name: string,
@@ -158,6 +163,7 @@ export const getPlayback = async (assetId: string): Promise<string> => {
     console.error(`Error fetching asset:`, e);
   }
 };
+
 export const getDownloadUrl = async (assetId: string): Promise<string> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
@@ -422,10 +428,9 @@ export const getHlsUrl = async (
 };
 
 export const getClipEditorStatus = async (
-  data: Pick<IClip, 'editorOptions'>,
+  data: IClip,
 ): Promise<{ status: boolean; events: Array<any> }> => {
   const DEFAULT_EVENT = { id: '', label: '', type: '', url: '' };
-
   const eventPromises = data.editorOptions.events.map(
     async (event: { sessionId: string; label: string }) => {
       const session = await SessionModel.findById(event.sessionId);
@@ -440,6 +445,25 @@ export const getClipEditorStatus = async (
           url: asset.downloadUrl,
         };
       }
+      if (
+        session.processingStatus === ProcessingStatus.failed &&
+        event.label === 'main'
+      ) {
+        const jobs = await pulse.jobs({
+          'data.data.clipEditorId': data.clipEditorId,
+        });
+        const clipEditor = await ClipEditor.findById(data.clipEditorId);
+        await Promise.all([
+          SessionModel.findByIdAndUpdate(clipEditor.clipSessionId, {
+            processingStatus: ProcessingStatus.failed,
+          }),
+          clipEditor.updateOne({
+            status: ClipEditorStatus.failed,
+            message: 'main session polling failed',
+          }),
+        ]);
+        await Promise.all(jobs.map((job) => job.remove()));
+      }
       return { status: false, ...DEFAULT_EVENT };
     },
   );
@@ -448,6 +472,62 @@ export const getClipEditorStatus = async (
     status: events.every((result) => result.status),
     events,
   };
+};
+
+const createClipSession = async (clipEditorId: string): Promise<string> => {
+  const clipEditor = await ClipEditor.findById(clipEditorId);
+  if (!clipEditor) return;
+  const event = clipEditor.events?.find((e) => e.label === 'main');
+  if (!event?.sessionId) return;
+  const session = await sessionService.findOne({
+    _id: event.sessionId,
+  });
+  if (!session) return;
+  const createSession = await sessionService.create({
+    name: session.name,
+    description: session.description,
+    assetId: '',
+    start: session.start,
+    end: session.end,
+    organizationId: session.organizationId,
+    stageId: session.stageId,
+    type: SessionType.clip,
+    processingStatus: ProcessingStatus.pending,
+    pretalxSessionCode: session.pretalxSessionCode,
+    speakers: session.speakers,
+  });
+  await clipEditor.updateOne({
+    clipSessionId: createSession._id,
+  });
+  await stateService.create({
+    organizationId: createSession.organizationId,
+    sessionId: createSession._id.toString(),
+    type: StateType.clip,
+    status: StateStatus.pending,
+  });
+  return createSession._id.toString();
+};
+
+const createClipState = async (sessionId: string): Promise<void> => {
+  const session = await sessionService.findOne({ _id: sessionId });
+  if (!session) return;
+  const state = await State.findOne({
+    sessionId: session._id.toString(),
+    type: session.type,
+  });
+  if (state) {
+    await stateService.update(state._id.toString(), {
+      status: StateStatus.pending,
+    });
+  } else {
+    await stateService.create({
+      sessionId: session._id.toString(),
+      sessionSlug: session.slug,
+      organizationId: session.organizationId.toString(),
+      type: session.type as any,
+      status: StateStatus.pending,
+    });
+  }
 };
 
 export const createClip = async (data: IClip) => {
@@ -463,10 +543,24 @@ export const createClip = async (data: IClip) => {
         stageId: data.stageId,
         organizationId: data.organizationId,
       });
-      const clipPayload = { ...data, clipEditorId: create._id.toString() };
-      await pulse.schedule(new Date(), AgendaJobs.CLIP_EDITOR_STATUS, {
+      const mainEvent = data.editorOptions?.events.find(
+        (e) => e.label === 'main',
+      );
+      if (!mainEvent?.sessionId) return;
+      const [clipSessionId] = await Promise.all([
+        createClipSession(create._id.toString()),
+        createClipState(mainEvent.sessionId),
+      ]);
+      const clipPayload = {
+        ...data,
+        clipEditorId: create._id.toString(),
+        clipSessionId,
+      };
+      const job = pulse.create(AgendaJobs.CLIP_EDITOR_STATUS, {
         data: clipPayload,
       });
+      job.unique({ 'data.clipEditorId': create._id.toString() });
+      await job.save();
       return {
         task: { id: '' },
         asset: {
@@ -533,27 +627,10 @@ export const createClip = async (data: IClip) => {
         // Update Firebase
         await createEventVideoById(session.firebaseId, newData);
       }
-      const state = await State.findOne({
-        sessionId: session._id.toString(),
-        type: StateType.video,
-      });
-      if (state) {
-        await state.updateOne({
-          status: StateStatus.pending,
-        });
-      } else {
-        await State.create({
-          sessionId: session._id.toString(),
-          sessionSlug: session.slug,
-          organizationId: session.organizationId.toString(),
-          type: StateType.video,
-          status: StateStatus.pending,
-        });
-      }
+      await createClipState(data.sessionId);
       return parsedClip;
     }
   } catch (e) {
-    console.log('error', e);
     throw new HttpException(400, 'Error creating clip');
   }
 };
@@ -577,7 +654,6 @@ export const refetchAssets = async () => {
     });
     await Promise.all(sessionPromise);
   } catch (e) {
-    console.log('error', e);
     throw new HttpException(400, 'Error processing asset');
   }
 };

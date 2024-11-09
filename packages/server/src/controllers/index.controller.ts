@@ -1,9 +1,11 @@
 import { HttpException } from '@exceptions/HttpException';
+import { ClipEditorStatus } from '@interfaces/clip.editor.interface';
 import { LivepeerEvent } from '@interfaces/livepeer.interface';
 import { RemotionPayload } from '@interfaces/remotion.webhook.interface';
 import { ProcessingStatus, SessionType } from '@interfaces/session.interface';
 import { StateStatus, StateType } from '@interfaces/state.interface';
 import ClipEditor from '@models/clip.editor.model';
+import Session from '@models/session.model';
 import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
@@ -15,8 +17,8 @@ import {
   validateRemotionWebhook,
   validateWebhook,
 } from '@utils/validateWebhook';
-import { create } from 'domain';
 import express from 'express';
+import { Types } from 'mongoose';
 import {
   Body,
   Controller,
@@ -108,6 +110,20 @@ export class IndexController extends Controller {
     }
 
     if (remotionStatus !== 'success') {
+      const clipEditor = await ClipEditor.findOne({
+        renderId: payload.renderId,
+      });
+      await Promise.all([
+        Session.findOneAndUpdate(
+          { _id: new Types.ObjectId(clipEditor.clipSessionId) },
+          {
+            status: ProcessingStatus.failed,
+          },
+        ),
+        clipEditor.updateOne({
+          status: ClipEditorStatus.failed,
+        }),
+      ]);
       return SendApiResponse('Acknowledged', '204');
     }
 
@@ -125,34 +141,26 @@ export class IndexController extends Controller {
     if (!clipEditor) {
       throw new HttpException(404, 'Clip editor not found');
     }
-    const event = clipEditor.events?.find((e) => e.label === 'main');
-    if (!event?.sessionId) {
-      throw new HttpException(404, 'event not found');
-    }
-
     const session = await this.sessionService.findOne({
-      _id: event.sessionId,
+      _id: clipEditor.clipSessionId,
     });
     if (!session) {
       throw new HttpException(404, 'Session not found');
     }
     const assetId = await createAssetFromUrl(session.name, payload.outputUrl);
-
-    const createSession = await this.sessionService.create({
-      name: session.name,
-      description: session.description,
-      assetId,
-      start: session.start,
-      end: session.end,
-      organizationId: session.organizationId,
-      type: SessionType.clip,
-    });
-    await this.stateService.create({
-      organizationId: createSession.organizationId,
-      sessionId: createSession._id.toString(),
-      type: StateType.clip,
-      status: StateStatus.pending,
-    });
+    await Promise.all([
+      this.sessionService.update(session._id.toString(), {
+        assetId,
+        name: session.name,
+        start: session.start,
+        end: session.end,
+        organizationId: session.organizationId,
+        type: session.type,
+      }),
+      clipEditor.updateOne({
+        status: ClipEditorStatus.uploading,
+      }),
+    ]);
     return SendApiResponse('Webhook processed successfully');
   }
 
@@ -188,10 +196,19 @@ export class IndexController extends Controller {
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
     });
-    if (state.type !== StateType.animation) {
+    if (
+      state.type !== StateType.animation &&
+      state.type !== StateType.editorClip
+    ) {
       await this.sessionService.sessionTranscriptions({
         organizationId: session.organizationId.toString(),
         sessionId: session._id.toString(),
+      });
+    }
+    const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
+    if (clipEditor) {
+      await clipEditor.updateOne({
+        status: ClipEditorStatus.completed,
       });
     }
   }
@@ -201,19 +218,15 @@ export class IndexController extends Controller {
     const session = await this.sessionService.findOne({
       assetId: asset.id,
     });
-
     if (!session) throw new HttpException(404, 'No session found');
-
     const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
-      type: StateType.video,
+      type: session.type,
     });
     if (!state) throw new HttpException(404, 'No state found');
-
     await this.sessionService.update(session._id.toString(), {
       ProcessingStatus: ProcessingStatus.failed,
     } as any);
-
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.failed,
     });

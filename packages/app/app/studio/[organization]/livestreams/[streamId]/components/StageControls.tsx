@@ -1,30 +1,35 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { fetchStage } from '@/lib/services/stageService';
 import {
+  IExtendedMarker,
   IExtendedOrganization,
   IExtendedSession,
   IExtendedStage,
 } from '@/lib/types';
-import { fetchStage } from '@/lib/services/stageService';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import StreamConfigWithPlayer from './StreamConfigWithPlayer';
-import StreamHealth from './StreamHealth';
+import React, { useEffect, useState } from 'react';
+import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import EditLivestream from '../../components/EditLivestream';
 import ShareAndEmbed from './ShareAndEmbed';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import Sidebar from './Sidebar';
+import ImportDataButton from './StageDataImport/ImportDataButton';
+import ViewMarkersDialog from './StageDataImport/ViewMarkersDialog';
+import StreamConfigWithPlayer from './StreamConfigWithPlayer';
+import StreamHealth from './StreamHealth';
 
 const StageControls = ({
   organization,
   stream,
   stageSessions,
+  stageMarkers,
 }: {
   organization: IExtendedOrganization;
   stream: IExtendedStage;
   stageSessions: IExtendedSession[];
+  stageMarkers: IExtendedMarker[];
 }) => {
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
@@ -56,7 +61,7 @@ const StageControls = ({
     <div className="flex flex-row flex-grow space-x-4 w-full">
       <div className="flex flex-col w-2/3">
         <StreamConfigWithPlayer stream={stream} isLive={isLive} />
-        <div className="flex flex-row gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
+        <div className="flex flex-row md:justify-between gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
           <div className="flex justify-start items-center space-x-2">
             <span className="pr-4 text-xl font-bold">{stream.name}</span>
             <StreamHealth isLive={isLive} stream={stream} />
@@ -66,9 +71,22 @@ const StageControls = ({
               variant="outline"
               btnText="Edit"
             />
+
+            {!isLive && (
+              <>
+                <ImportDataButton
+                  markers={stageMarkers}
+                  organizationId={organization._id}
+                  stageId={stream._id as string}
+                  stage={stream}
+                />
+
+                <ViewMarkersDialog markers={stageMarkers} />
+              </>
+            )}
           </div>
 
-          <div className="flex flex-row gap-2 ml-auto">
+          <div className="flex flex-row gap-2">
             <ShareAndEmbed
               organizationSlug={organization.slug as string}
               streamId={stream._id as string}
