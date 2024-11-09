@@ -20,8 +20,6 @@ const WatchGrid = async ({
     })
   ).sessions;
 
-  console.log(videos);
-
   return (
     <div className="w-full">
       <div className="flex items-center justify-between pb-4">
