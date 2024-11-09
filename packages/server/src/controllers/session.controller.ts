@@ -146,7 +146,7 @@ export class SessionController extends Controller {
     @Query() size?: number,
     @Query() timestamp?: number,
     @Query() assetId?: string,
-    @Query() published?: boolean,
+    @Query() published?: string,
     @Query() type?: string,
   ): Promise<
     IStandardResponse<{
