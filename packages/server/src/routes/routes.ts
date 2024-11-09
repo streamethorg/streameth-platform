@@ -2654,7 +2654,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                     size: {"in":"query","name":"size","dataType":"double"},
                     timestamp: {"in":"query","name":"timestamp","dataType":"double"},
                     assetId: {"in":"query","name":"assetId","dataType":"string"},
-                    published: {"in":"query","name":"published","dataType":"boolean"},
+                    published: {"in":"query","name":"published","dataType":"string"},
                     type: {"in":"query","name":"type","dataType":"string"},
             };
 

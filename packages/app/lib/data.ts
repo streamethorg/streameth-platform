@@ -14,7 +14,7 @@ interface ApiParams {
   page?: number;
   size?: number;
   onlyVideos?: boolean;
-  published?: boolean;
+  published?: string;
   speakerIds?: string[]; // Assuming speakerIds is an array of strings
   date?: Date;
   type?: string;
@@ -48,7 +48,7 @@ export async function fetchAllSessions({
   stageId?: string;
   speakerIds?: string[];
   onlyVideos?: boolean;
-  published?: boolean;
+  published?: string;
   page?: number;
   limit?: number;
   searchQuery?: string;
