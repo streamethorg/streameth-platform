@@ -183,7 +183,7 @@ export async function uploadToTwitter(
     name: string;
     description: string;
     slug: string;
-    published: boolean;
+    published: string;
     coverImage: string;
   },
   videoFilePath: string,

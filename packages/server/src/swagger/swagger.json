@@ -5730,7 +5730,7 @@
 						"name": "published",
 						"required": false,
 						"schema": {
-							"type": "boolean"
+							"type": "string"
 						}
 					},
 					{

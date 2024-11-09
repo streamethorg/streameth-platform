@@ -33,7 +33,7 @@ const ArchiveVideos = ({
       event: event,
       limit: 12,
       onlyVideos: true,
-      published: true,
+      published: 'public',
       searchQuery,
       page,
     })

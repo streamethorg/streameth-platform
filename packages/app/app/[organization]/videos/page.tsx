@@ -45,7 +45,7 @@ export default async function ArchivePage({
         await fetchAllSessions({
           event: event._id.toString(),
           onlyVideos: true,
-          published: true,
+          published: 'public',
         })
       ).sessions;
 

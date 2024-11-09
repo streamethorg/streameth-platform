@@ -3,6 +3,7 @@ import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
 import { RecordingSessionPayload } from '@interfaces/livepeer.webhook.interface';
 import {
+  eVisibilty,
   ISession,
   ProcessingStatus,
   SessionType,
@@ -86,7 +87,7 @@ export default class SessionService {
     onlyVideos: boolean;
     size: number;
     page: number;
-    published: boolean;
+    published: string;
     type: string;
   }): Promise<{
     sessions: Array<ISession>;
@@ -194,7 +195,7 @@ export default class SessionService {
     for (const event of events) {
       let session = await this.getAll({
         event: event._id,
-        published: true,
+        published: eVisibilty.public,
         onlyVideos: true,
       } as any);
       sessions.push(session.sessions);

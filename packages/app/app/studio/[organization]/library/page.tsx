@@ -44,7 +44,7 @@ const Library = async ({
     searchQuery?: string;
     stage?: string;
     type?: string;
-    published?: boolean;
+    published?: string;
   };
 }) => {
   const organization = await fetchOrganization({
