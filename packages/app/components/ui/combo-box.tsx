@@ -40,6 +40,7 @@ export default function Combobox({
   setValue,
   logo,
   variant = 'outline',
+  disabled = false,
 }: {
   placeholder?: string;
   items?: Item[];
@@ -48,10 +49,13 @@ export default function Combobox({
   labelKey?: string;
   logo?: boolean;
   variant?: 'outline' | 'primary' | 'ghost';
+  disabled?: boolean;
   setValue: (value: string) => void;
 }) {
   const [open, setOpen] = React.useState(false);
-  const orgLogo = items.find((item) => item.label === value)?.logo;
+  const orgLogo = items.find((item) => item.value === value)?.logo;
+
+  const selectedLabel = items?.find((item) => item?.value === value)?.label;
 
   return (
     <Popover modal={true} open={open} onOpenChange={setOpen}>
@@ -61,9 +65,12 @@ export default function Combobox({
           role="combobox"
           aria-expanded={open}
           className="w-full justify-between"
+          disabled={disabled}
         >
           {logo && renderLogo(orgLogo)}
-          <p className="truncate ...">{value ? value : placeholder}</p>
+          <p className="truncate ...">
+            {selectedLabel ? selectedLabel : placeholder}
+          </p>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -74,23 +81,22 @@ export default function Combobox({
           <CommandGroup>
             {items.map((item) => (
               <CommandItem
+                className="max-w-[300px]"
                 key={item.value}
-                value={item.label}
+                value={item.value}
                 onSelect={(currentValue) => {
-                  setValue(
-                    currentValue.toLowerCase() === item.label.toLowerCase()
-                      ? item.value
-                      : value
-                  );
+                  setValue(currentValue === item.value ? item.value : value);
                   setOpen(false);
                 }}
               >
-                <Check
-                  className={cn(
-                    'mr-2 h-4 w-4',
-                    value === item.label ? 'opacity-100' : 'opacity-0'
-                  )}
-                />
+                <div>
+                  <Check
+                    className={cn(
+                      'mr-2 h-4 w-4',
+                      value === item.value ? 'opacity-100' : 'opacity-0'
+                    )}
+                  />
+                </div>
                 {item.label}
               </CommandItem>
             ))}

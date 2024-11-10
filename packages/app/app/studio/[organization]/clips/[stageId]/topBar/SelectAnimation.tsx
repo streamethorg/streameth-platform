@@ -2,13 +2,6 @@
 
 import React, { useState } from 'react';
 import { IExtendedSession } from '@/lib/types';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { Uploads } from '../../../library/components/UploadVideoDialog';
 import Dropzone from '../../../library/components/upload/Dropzone';
@@ -25,6 +18,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { clipSchema } from '@/lib/schema';
 import { Button } from '@/components/ui/button';
+import Combobox from '@/components/ui/combo-box';
 
 const SelectAnimation = ({
   animations,
@@ -60,35 +54,31 @@ const SelectAnimation = ({
             <FormLabel>{label}</FormLabel>
             <FormControl>
               <div className="flex flex-col space-y-2">
-                <Select
-                  value={field.value}
-                  onValueChange={(value) => {
-                    if (value) {
-                      field.onChange(value);
-                      // Clear uploads when an animation is selected
-                      setUpload({});
-                    }
-                  }}
-                  disabled={isAnimationUploading()}
-                >
-                  <SelectTrigger className="rounded-lg border bg-white">
-                    <SelectValue placeholder="select animation"></SelectValue>
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
-                    {animations.map((animation) => (
-                      <SelectItem key={animation._id} value={animation._id}>
-                        {animation.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="max-w-[200px]">
+                  <Combobox
+                    items={[
+                      ...animations.map((animation) => ({
+                        label: animation.name,
+                        value: animation._id,
+                      })),
+                    ]}
+                    variant="outline"
+                    value={field.value as string}
+                    setValue={(value) => {
+                      if (value) {
+                        field.onChange(value);
+                        // Clear uploads when an animation is selected
+                        setUpload({});
+                      }
+                    }}
+                    disabled={isAnimationUploading()}
+                  />
+                </div>
+
                 {field.value ? ( // Check if an animation is selected
                   <div className="flex flex-col items-center justify-center gap-1 border-2 p-2 h-40 border-dashed rounded-md">
                     <span>
-                      {
-                        animations.find((anim) => anim._id === field.value)
-                          ?.name
-                      }
+                      {animations.find((a) => a._id === field.value)?.name}
                     </span>
                     <Button
                       variant={'destructive'}
