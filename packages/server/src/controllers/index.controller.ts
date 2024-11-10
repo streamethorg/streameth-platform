@@ -117,7 +117,7 @@ export class IndexController extends Controller {
         Session.findOneAndUpdate(
           { _id: new Types.ObjectId(clipEditor.clipSessionId) },
           {
-            status: ProcessingStatus.failed,
+            processingStatus: ProcessingStatus.failed,
           },
         ),
         clipEditor.updateOne({
