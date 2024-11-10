@@ -61,10 +61,13 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
           {formatDate(new Date(item.createdAt as string), 'ddd. MMM. D, YYYY')}
         </TableCell>
       )}
-      <TableCell className={`relative bg-muted opacity-50`}>
+
+      <TableCell
+        className={`relative ${isPending ? 'bg-muted' : ''} opacity-50`}
+      >
         <CopyText
           classNames="!justify-start gap-4"
-          width="100%"
+          width="fit-content"
           label="ID"
           text={item._id}
         />

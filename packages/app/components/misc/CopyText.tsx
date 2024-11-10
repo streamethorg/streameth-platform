@@ -26,7 +26,7 @@ const CopyText = ({
     <div>
       <Copy
         onClick={() => copyToClipboard(text)}
-        className="h-5 w-5 cursor-pointer text-primary"
+        className="h-4 w-4 cursor-pointer text-primary"
       />
     </div>
   </div>
