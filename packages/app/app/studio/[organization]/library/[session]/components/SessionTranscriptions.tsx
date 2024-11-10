@@ -53,7 +53,11 @@ const SessionTranscriptions = ({
         <div className="flex items-center">
           <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
           transcription...{' '}
-          <p className="pl-2" title="refresh" onClick={() => router.refresh()}>
+          <p
+            className="pl-2 cursor-pointer"
+            title="refresh"
+            onClick={() => router.refresh()}
+          >
             <LuRefreshCcw />
           </p>
         </div>

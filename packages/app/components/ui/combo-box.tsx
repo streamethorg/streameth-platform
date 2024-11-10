@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
-
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -83,9 +82,9 @@ export default function Combobox({
               <CommandItem
                 className="max-w-[300px]"
                 key={item.value}
-                value={item.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === item.value ? item.value : value);
+                value={item.label}
+                onSelect={() => {
+                  setValue(item.value);
                   setOpen(false);
                 }}
               >

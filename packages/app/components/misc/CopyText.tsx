@@ -6,14 +6,16 @@ const CopyText = ({
   label,
   text = '',
   width = '450px',
+  classNames = '',
 }: {
   label: string;
   text?: string;
   width?: string;
+  classNames?: string;
 }) => (
   <div
     style={{ width: width }}
-    className="flex items-center justify-between overflow-hidden rounded-lg bg-muted pr-2"
+    className={`flex items-center justify-between overflow-hidden rounded-lg bg-muted pr-2 ${classNames}`}
   >
     <div className="flex items-center gap-1 text-muted-foreground">
       <div className="border-red border-r p-2 text-sm">
@@ -21,10 +23,12 @@ const CopyText = ({
       </div>
       <p className="overflow-auto text-sm">{text}</p>
     </div>
-    <Copy
-      onClick={() => copyToClipboard(text)}
-      className="h-5 w-5 cursor-pointer text-primary"
-    />
+    <div>
+      <Copy
+        onClick={() => copyToClipboard(text)}
+        className="h-5 w-5 cursor-pointer text-primary"
+      />
+    </div>
   </div>
 );
 export default CopyText;
