@@ -1,5 +1,4 @@
 import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
-import { Types } from 'mongoose';
 
 export class PipedreamUploadDto {
   @IsString()
@@ -27,4 +26,10 @@ export class PipedreamUploadDto {
   @IsString()
   @IsNotEmpty()
   sources_streamethId: string;
+
+  @IsString()
+  transcript_vtt: string;
+
+  @IsString()
+  transcript_text: string;
 }
