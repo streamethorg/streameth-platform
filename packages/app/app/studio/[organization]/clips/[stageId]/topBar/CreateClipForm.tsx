@@ -21,21 +21,15 @@ import {
   LuEye,
 } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+
 import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { clipSchema } from '@/lib/schema';
-import { Uploads } from '../../../library/components/UploadVideoDialog';
 import { formatClipTime } from '@/lib/utils/time';
 import { useClipContext } from '../ClipContext';
 import { IExtendedSession } from '@/lib/types';
 import SelectAnimation from './SelectAnimation';
+import Combobox from '@/components/ui/combo-box';
 
 const CreateClipForm = ({
   form,
@@ -74,32 +68,30 @@ const CreateClipForm = ({
           {/* Marker Selection */}
           {markers && markers.length > 0 && (
             <>
-              <div className="flex items-center justify-between">
-                <FormLabel>Select Marker</FormLabel>
-                <Select
-                  value={selectedMarkerId}
-                  onValueChange={(value) => setSelectedMarkerId(value)}
-                >
-                  <SelectTrigger className="rounded-lg border bg-white w-32">
-                    <SelectValue placeholder="marker"></SelectValue>
-                  </SelectTrigger>
-                  <SelectContent className="rounded-lg border-white border-opacity-10 bg-white">
-                    {markers.map((marker) => (
-                      <SelectItem key={marker._id} value={marker._id}>
-                        {marker.name.length > 20
-                          ? `${marker.name.substring(0, 20)}...`
-                          : marker.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="flex items-center justify-between gap-2">
+                <FormLabel className="w-full">Select Marker</FormLabel>
+
+                <div className="w-full max-w-[200px]">
+                  <Combobox
+                    items={[
+                      ...markers.map((marker) => ({
+                        label: marker.name,
+                        value: marker._id,
+                      })),
+                    ]}
+                    variant="outline"
+                    value={selectedMarkerId}
+                    setValue={(value) => setSelectedMarkerId(value)}
+                  />
+                </div>
+
                 <Button
                   variant={'outline'}
                   onClick={handleClearMarker}
                   type="button"
                 >
-                  <LuRotateCcw size={16} className="mr-2" />
-                  Clear
+                  <LuRotateCcw size={16} />
+                  {/* Clear */}
                 </Button>
               </div>
             </>

@@ -14,9 +14,7 @@ const sortOptions = [
 const MintNftSort = () => {
   const { searchParams, handleTermChange } = useSearchParams();
   const currentSort = searchParams.get('sort') as eSort;
-  const selectedSort = sortOptions?.find(
-    (s) => s?.value === currentSort
-  )?.label;
+
   return (
     <div className="flex items-center gap-2 font-medium">
       <p className="w-full">Sort By</p>
@@ -24,7 +22,7 @@ const MintNftSort = () => {
       <Combobox
         items={sortOptions as any[]}
         variant="ghost"
-        value={selectedSort || 'name'}
+        value={currentSort || 'name'}
         setValue={(value) => {
           handleTermChange([{ key: 'sort', value: value }]);
         }}

@@ -92,7 +92,7 @@ function EmbedButton({
 }) {
   return (
     <Credenza>
-      <CredenzaTrigger>
+      <CredenzaTrigger asChild>
         <Button className={`bg-white ${className}`} variant="outline">
           <Code size={24} className="p-1" />
           Embed
