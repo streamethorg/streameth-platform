@@ -9,6 +9,8 @@ export interface IPipedreamUpload {
   duration: number;
   sources_ipfsHash: string;
   sources_streamethId: string;
+  transcript_vtt: string;
+  transcript_text: string;
 }
 
 export const uploadToDevcon = async (payload: IPipedreamUpload) => {

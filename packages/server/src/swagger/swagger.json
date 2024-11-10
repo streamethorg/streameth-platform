@@ -2938,6 +2938,12 @@
 					},
 					"sources_streamethId": {
 						"type": "string"
+					},
+					"transcript_vtt": {
+						"type": "string"
+					},
+					"transcript_text": {
+						"type": "string"
 					}
 				},
 				"required": [
@@ -2947,7 +2953,9 @@
 					"video",
 					"duration",
 					"sources_ipfsHash",
-					"sources_streamethId"
+					"sources_streamethId",
+					"transcript_vtt",
+					"transcript_text"
 				],
 				"type": "object",
 				"additionalProperties": false

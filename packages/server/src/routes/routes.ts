@@ -915,6 +915,8 @@ const models: TsoaRoute.Models = {
             "duration": {"dataType":"double","required":true},
             "sources_ipfsHash": {"dataType":"string","required":true},
             "sources_streamethId": {"dataType":"string","required":true},
+            "transcript_vtt": {"dataType":"string","required":true},
+            "transcript_text": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },

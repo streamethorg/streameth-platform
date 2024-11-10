@@ -225,7 +225,7 @@ export class IndexController extends Controller {
     });
     if (!state) throw new HttpException(404, 'No state found');
     await this.sessionService.update(session._id.toString(), {
-      ProcessingStatus: ProcessingStatus.failed,
+      processingStatus: ProcessingStatus.failed,
     } as any);
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.failed,
