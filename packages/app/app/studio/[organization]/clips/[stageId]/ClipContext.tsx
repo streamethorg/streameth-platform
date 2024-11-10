@@ -180,11 +180,13 @@ export const ClipProvider = ({
           organizationId,
           stageId,
         });
-        setMarkers(markers);
-        setFilteredMarkers(markers);
+        const sortedMarkers = markers.sort(
+          (a, b) => a.startClipTime - b.startClipTime
+        );
+        setMarkers(sortedMarkers);
+        setFilteredMarkers(sortedMarkers);
       } catch (error) {
         console.error('Error fetching markers:', error);
-        // Optionally, you can show an error toast here
       } finally {
         setIsLoadingMarkers(false);
       }

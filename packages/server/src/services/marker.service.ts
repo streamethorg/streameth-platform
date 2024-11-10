@@ -174,8 +174,8 @@ export default class MarkerService {
           const speakers = session.persons.map((person: any) => {
             return {
               name: person.public_name,
-              bio: person.biography,
-              photo: person.avatar,
+              bio: person.biography || '',
+              photo: person.avatar || '',
               organizationId: d.organizationId,
             };
           });

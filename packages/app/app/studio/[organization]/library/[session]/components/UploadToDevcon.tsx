@@ -2,7 +2,10 @@
 import { Button } from '@/components/ui/button';
 import { IExtendedSession } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
-import { updateSessionAction } from '@/lib/actions/sessions';
+import {
+  generateTranscriptionActions,
+  updateSessionAction,
+} from '@/lib/actions/sessions';
 import { useState, useEffect, useCallback } from 'react';
 import { Check } from 'lucide-react';
 import { toast } from 'sonner';
@@ -56,6 +59,8 @@ const prepareDevconPayload = async (session: ISession | IExtendedSession) => {
     duration: session.playback?.duration || 0,
     sources_ipfsHash: '',
     sources_streamethId: session._id?.toString() || 'No session ID provided',
+    transcript_vtt: session.transcripts?.subtitleUrl || 'No VTT link provided',
+    transcript_text: session.transcripts?.text || 'No transcript text provided',
   };
 };
 

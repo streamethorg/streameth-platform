@@ -8,6 +8,8 @@ export interface IPipedreamUpload {
   duration: number;
   sources_ipfsHash: string;
   sources_streamethId: string | Types.ObjectId;
+  transcript_vtt: string;
+  transcript_text: string;
 }
 
 export interface IPipedreamResponse {
