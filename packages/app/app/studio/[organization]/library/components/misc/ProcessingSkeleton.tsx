@@ -10,6 +10,7 @@ import { IExtendedSession } from '@/lib/types';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import DeleteAsset from '../DeleteAsset';
 import { Button } from '@/components/ui/button';
+import CopyText from '@/components/misc/CopyText';
 
 const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
   const isPending = item.processingStatus === ProcessingStatus.pending;
@@ -60,10 +61,18 @@ const ProcessingSkeleton = ({ item }: { item: IExtendedSession }) => {
           {formatDate(new Date(item.createdAt as string), 'ddd. MMM. D, YYYY')}
         </TableCell>
       )}
-      <TableCell className={`relative  ${getStatusClassName()}`}>
-        <div className="h-[15px] w-[200px] animate-pulse rounded-md bg-gray-200"></div>
+
+      <TableCell
+        className={`relative ${isPending ? 'bg-muted' : ''} opacity-50`}
+      >
+        <CopyText
+          classNames="!justify-start gap-4"
+          width="fit-content"
+          label="ID"
+          text={item._id}
+        />
       </TableCell>
-      <TableCell className={`  ${getStatusClassName()}`}>
+      <TableCell className={`${getStatusClassName()}`}>
         {!isPending && (
           <DeleteAsset
             session={item}

@@ -11,9 +11,7 @@ const SwitchOrganization = ({
   organizations?: IExtendedOrganization[];
 }) => {
   const router = useRouter();
-  const selectedSort = organizations?.find(
-    (o) => o?.slug === organization
-  )?.name;
+
   return (
     <div className="px-2">
       <Combobox
@@ -26,7 +24,7 @@ const SwitchOrganization = ({
         ]}
         logo
         variant="ghost"
-        value={selectedSort || ''}
+        value={organization || ''}
         setValue={(org) => {
           router.push(`/studio/${org}`);
         }}
