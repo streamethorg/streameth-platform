@@ -14,5 +14,5 @@ export class UpdateMarkerDto {
 
   @IsNotEmpty()
   @IsArray()
-  markers: IMarker[];
+  markers: Omit<IMarker, 'talkType'>[];
 }

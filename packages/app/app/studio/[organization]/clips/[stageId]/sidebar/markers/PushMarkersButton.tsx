@@ -15,7 +15,7 @@ const PushMarkersButton = ({ organizationId }: { organizationId: string }) => {
   const addSecondsToMarkers = async (seconds: number) => {
     setIsPushingMarkers(true);
     const updatedMarkers = markers.map(
-      ({ createdAt, updatedAt, __v, ...marker }) => ({
+      ({ createdAt, updatedAt, __v, talkType, ...marker }) => ({
         ...marker,
         startClipTime: marker.startClipTime + seconds,
         endClipTime: marker.endClipTime + seconds,
