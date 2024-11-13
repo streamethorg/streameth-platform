@@ -1141,11 +1141,21 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pick_IMarker.Exclude_keyofIMarker.talkType__": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"_id":{"ref":"mongoose.Types.ObjectId"},"name":{"dataType":"string","required":true},"slug":{"dataType":"string"},"description":{"dataType":"string"},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"startClipTime":{"dataType":"double","required":true},"endClipTime":{"dataType":"double","required":true},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"speakers":{"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"}},"pretalxSessionCode":{"dataType":"string"},"date":{"dataType":"string","required":true},"color":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Omit_IMarker.talkType_": {
+        "dataType": "refAlias",
+        "type": {"ref":"Pick_IMarker.Exclude_keyofIMarker.talkType__","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UpdateMarkerDto": {
         "dataType": "refObject",
         "properties": {
             "organizationId": {"dataType":"string","required":true},
-            "markers": {"dataType":"array","array":{"dataType":"refObject","ref":"IMarker"},"required":true},
+            "markers": {"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_IMarker.talkType_"},"required":true},
         },
         "additionalProperties": false,
     },

@@ -63,6 +63,7 @@ const AddOrEditMarkerForm = ({
             eventId: speaker?.eventId?.toString(),
             organizationId: speaker?.organizationId?.toString(),
           })),
+          pretalxSessionCode: selectedMarker.pretalxSessionCode,
         }
       : {
           name: '',

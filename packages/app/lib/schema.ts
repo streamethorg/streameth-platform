@@ -239,6 +239,7 @@ export const markerSchema = z
     description: z.string().optional(),
     startClipTime: z.number().min(0, 'Start Clip Time is required'),
     endClipTime: z.number().min(0, 'End Clip Time is required'),
+    pretalxSessionCode: z.string().optional(),
   })
   .refine((data) => data.end > data.start, {
     message: 'End time must be greater than start time',
