@@ -1,7 +1,6 @@
 import { ISpeakerModel } from 'streameth-new-server/src/interfaces/speaker.interface';
 
 import { NavBarProps, IPagination, IExtendedSession } from './types';
-import FuzzySearch from 'fuzzy-search';
 import { apiUrl } from '@/lib/utils/utils';
 
 import { fetchEvent } from '@/lib/services/eventService';
@@ -9,7 +8,7 @@ import { fetchEventStages } from '@/lib/services/stageService';
 
 interface ApiParams {
   event?: string;
-  organization?: string;
+  organizationId?: string;
   stageId?: string;
   page?: number;
   size?: number;
@@ -33,7 +32,7 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
 
 export async function fetchAllSessions({
   event,
-  organizationSlug,
+  organizationId,
   stageId,
   speakerIds,
   onlyVideos,
@@ -44,7 +43,7 @@ export async function fetchAllSessions({
   type,
 }: {
   event?: string;
-  organizationSlug?: string;
+  organizationId?: string;
   stageId?: string;
   speakerIds?: string[];
   onlyVideos?: boolean;
@@ -59,8 +58,8 @@ export async function fetchAllSessions({
 }> {
   const params: ApiParams = {
     event,
+    organizationId,
     stageId,
-    organization: organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
@@ -68,52 +67,9 @@ export async function fetchAllSessions({
     speakerIds,
     type,
   };
-
-  const response = await fetch(
-    constructApiUrl(`${apiUrl()}/sessions`, params),
-    {
-      cache: 'no-store',
-    }
-  );
+  const response = await fetch(constructApiUrl(`${apiUrl()}/sessions`, params));
   const a = await response.json();
-  const allSessions = a.data;
-  if (searchQuery) {
-    const normalizedQuery = searchQuery.toLowerCase();
-    const fuzzySearch = new FuzzySearch(
-      allSessions?.sessions,
-      ['name', 'description', 'speakers.name'],
-      {
-        caseSensitive: false,
-        sort: true,
-      }
-    );
-
-    allSessions.sessions = fuzzySearch.search(normalizedQuery);
-  }
-
-  // Calculate total items and total pages
-  const totalItems = searchQuery
-    ? allSessions.sessions.length
-    : allSessions.totalDocuments;
-  const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
-
-  // Implement manual pagination for fuzzy search
-  const startIndex = (page - 1) * limit!;
-  const endIndex = startIndex + limit!;
-  const paginatedSessions = allSessions.sessions.slice(startIndex, endIndex);
-
-  // Return paginated data and pagination metadata
-  return {
-    sessions: searchQuery ? paginatedSessions : allSessions.sessions,
-    pagination: allSessions?.pagination
-      ? allSessions.pagination
-      : {
-          currentPage: page,
-          totalPages,
-          totalItems,
-          limit,
-        },
-  };
+  return a.data;
 }
 
 export async function fetchEventSpeakers({

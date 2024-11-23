@@ -61,7 +61,7 @@ const ClipItem = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const imageUrl = useGenerateThumbnail({ session });
-
+  //const imageUrl = session.coverImage;
   return (
     <>
       <Card className="overflow-hidden m-2 py-2 px-2  cursor-pointer">

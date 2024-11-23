@@ -2658,7 +2658,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             async function SessionController_getAllSessions(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     event: {"in":"query","name":"event","dataType":"string"},
-                    organization: {"in":"query","name":"organization","dataType":"string"},
+                    organizationId: {"in":"query","name":"organizationId","dataType":"string"},
                     speaker: {"in":"query","name":"speaker","dataType":"string"},
                     stageId: {"in":"query","name":"stageId","dataType":"string"},
                     onlyVideos: {"in":"query","name":"onlyVideos","dataType":"boolean"},

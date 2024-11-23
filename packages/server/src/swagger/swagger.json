@@ -5752,7 +5752,7 @@
 					},
 					{
 						"in": "query",
-						"name": "organization",
+						"name": "organizationId",
 						"required": false,
 						"schema": {
 							"type": "string"

@@ -80,7 +80,7 @@ export default class SessionService {
 
   async getAll(d: {
     event: string;
-    organization: string;
+    organizationId: string;
     speaker: string;
     stageId: string;
     assetId: string;
@@ -94,9 +94,11 @@ export default class SessionService {
     totalDocuments: number;
     pageable: { page: number; size: number };
   }> {
+    console.time('getAllExecutionTime');
     let filter: {} = {
       type: { $nin: [SessionType.animation, SessionType.editorClip] },
     };
+
     if (d.type !== undefined) {
       filter = { ...filter, type: d.type };
     }
@@ -108,10 +110,8 @@ export default class SessionService {
       let event = await Event.findOne(query);
       filter = { ...filter, eventId: event?._id };
     }
-    if (d.organization != undefined) {
-      let query = this.queryByIdOrSlug(d.organization);
-      let org = await Organization.findOne(query);
-      filter = { ...filter, organizationId: org?._id };
+    if (d.organizationId != undefined) {
+      filter = { ...filter, organizationId: d.organizationId };
     }
     if (d.onlyVideos) {
       filter = {
@@ -127,21 +127,22 @@ export default class SessionService {
       let stage = await Stage.findOne(query);
       filter = { ...filter, stageId: stage?._id };
     }
-    const pageSize = Number(d.size) || 0; //total documents to be fetched
+
+    const pageSize = Number(d.size) || 0;
     const pageNumber = Number(d.page) || 0;
     const skip = pageSize * pageNumber - pageSize;
-    const [sessions, totalDocuments] = await Promise.all([
-      await this.controller.store.findAllAndSort(
-        filter,
-        this.path,
-        skip,
-        pageSize,
-      ),
-      await this.controller.store.findAll(filter, {}, this.path, 0, 0),
-    ]);
+
+    const sessions = await this.controller.store.findAll(
+      filter,
+      {},
+      this.path,
+      skip,
+      pageSize,
+    );
+    console.timeEnd('getAllExecutionTime');
     return {
       sessions: sessions,
-      totalDocuments: totalDocuments.length,
+      totalDocuments: 1000,
       pageable: {
         page: pageNumber,
         size: pageSize,

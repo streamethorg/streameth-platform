@@ -54,12 +54,13 @@ const Library = async ({
   if (!organization) {
     return NotFound();
   }
-  const stages = await fetchOrganizationStages({
-    organizationId: organization._id,
-  });
+
+  // const stages = await fetchOrganizationStages({
+  //   organizationId: organization._id,
+  // });
 
   let sessions = await fetchAllSessions({
-    organizationSlug: params.organization,
+    organizationId: organization._id.toString(),
     limit: searchParams.limit || 20,
     page: searchParams.page || 1,
     // onlyVideos: true,
@@ -86,7 +87,7 @@ const Library = async ({
             <div className="z-50 min-w-[300px] lg:min-w-[400px]">
               <SearchBar organizationSlug={params.organization} isStudio />
             </div>
-            <LibraryFilter stages={stages} />
+            <LibraryFilter stages={[]} />
           </div>
         </div>
       </div>

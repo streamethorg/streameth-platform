@@ -138,7 +138,7 @@ export class SessionController extends Controller {
   @Get()
   async getAllSessions(
     @Query() event?: string,
-    @Query() organization?: string,
+    @Query() organizationId?: string,
     @Query() speaker?: string,
     @Query() stageId?: string,
     @Query() onlyVideos?: boolean,
@@ -157,7 +157,7 @@ export class SessionController extends Controller {
   > {
     const queryParams = {
       event: event,
-      organization: organization,
+      organizationId: organizationId,
       speaker: speaker,
       stageId: stageId,
       onlyVideos: onlyVideos,
