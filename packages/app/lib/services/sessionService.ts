@@ -369,7 +369,7 @@ export const generateThumbnail = async ({
   try {
     const response = await fetch(`${apiUrl()}/streams/thumbnail/generate`, {
       method: 'POST',
-      cache: 'no-cache',
+      cache: 'force-cache',
       headers: {
         'Content-Type': 'application/json',
       },

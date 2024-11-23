@@ -18,7 +18,7 @@ export const SidebarUI = ({
   children: ReactNode;
   initalExpanded?: boolean;
 }) => {
-  const [expanded, setExpanded] = useState(initalExpanded ?? false);
+  const [expanded, setExpanded] = useState(true);
 
   return (
     <aside className="flex h-screen flex-col border-r bg-white">

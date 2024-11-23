@@ -6020,6 +6020,14 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"in": "query",
+						"name": "organizationId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
 					}
 				]
 			}

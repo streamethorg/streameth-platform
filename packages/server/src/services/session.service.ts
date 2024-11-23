@@ -206,21 +206,23 @@ export default class SessionService {
 
   async filterSessions(
     query: string,
-    organizationSlug?: string,
+    organizationId?: string,
   ): Promise<Array<ISession>> {
-    const options = {
-      keys: ['name', 'description', 'speakers.name'],
-    };
-    const sessions = await this.getAll({
-      organization: organizationSlug,
-      page: 0,
-      size: 0,
-      onlyVideos: true,
-    } as any);
-
-    const fuse = new Fuse(sessions.sessions, options);
-    const result: any = fuse.search(query);
-    return result;
+    console.time('filterSessionsExecutionTime');
+    console.log(query);
+    const sessions = await this.controller.store.findAll(
+      {
+        name: { $regex: query, $options: 'i' },
+        organizationId: organizationId ? organizationId : '',
+      },
+      {},
+      this.path,
+      0,
+      10,
+    );
+    console.log(sessions);
+    console.timeEnd('filterSessionsExecutionTime');
+    return sessions;
   }
 
   async createStreamRecordings(payload: RecordingSessionPayload) {

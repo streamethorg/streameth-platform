@@ -10,8 +10,18 @@ import {
   LuLock,
   LuBookOpen,
 } from 'react-icons/lu';
+import { IExtendedOrganization } from '@/lib/types';
+import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
 
-const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
+const SidebarMenu = ({
+  organizationSlug,
+  organizations,
+  currentOrganization,
+}: {
+  organizationSlug: string;
+  organizations: IExtendedOrganization[];
+  currentOrganization: string;
+}) => {
   const navigationItems = [
     {
       text: 'Home',
@@ -54,6 +64,12 @@ const SidebarMenu = ({ organizationSlug }: { organizationSlug: string }) => {
   return (
     <div className="relative w-[1/4]">
       <SidebarUI>
+        {organizations && (
+          <SwitchOrganization
+            organization={currentOrganization}
+            organizations={organizations}
+          />
+        )}
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}

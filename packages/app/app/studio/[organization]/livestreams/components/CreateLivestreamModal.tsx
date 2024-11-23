@@ -134,10 +134,10 @@ const CreateLivestreamModal = ({
       <DialogTrigger asChild>
         <Button
           variant={'outline'}
-          className="flex flex-row justify-start items-center p-2 pr-4 space-x-4 h-auto bg-white rounded-xl border w-fit"
+          className="flex flex-row justify-start items-center p-2 bg-white rounded-xl border w-fit"
         >
-          <div className="p-4 text-white rounded-xl border bg-primary">
-            <LuRadio size={25} />
+          <div className="p-2 text-white rounded-xl">
+            <LuRadio size={20} className="text-primary" />
           </div>
           <span className="text-sm">Create Livestream</span>
         </Button>

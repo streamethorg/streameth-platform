@@ -2505,6 +2505,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             async function SessionController_filterSession(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     search: {"in":"query","name":"search","required":true,"dataType":"string"},
+                    organizationId: {"in":"query","name":"organizationId","dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

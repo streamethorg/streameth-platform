@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { fetchUserAction } from '@/lib/actions/users';
 import SwitchOrganization from './components/SwitchOrganization';
 import { hasOrganization } from '@/lib/utils/utils';
-import HomePageNavbar from '@/components/Layout/HomePageNavbar';
+import NavbarStudio from '@/components/Layout/NavbarStudio';
 import Link from 'next/link';
 import SidebarMenu from '@/components/Sidebar/SidebarMenu';
 import Support from '@/components/misc/Support';
@@ -20,9 +20,13 @@ const Layout = async ({
 
   return (
     <div className="flex h-screen w-screen flex-row">
-      <SidebarMenu organizationSlug={params.organization} />
+      <SidebarMenu
+        organizationSlug={params.organization}
+        organizations={userData?.organizations}
+        currentOrganization={params.organization}
+      />
       <div className="flex max-w-[calc(100%-73px)] w-full flex-col">
-        <HomePageNavbar
+        <NavbarStudio
           pages={[]}
           showLogo={false}
           showSearchBar={false}
