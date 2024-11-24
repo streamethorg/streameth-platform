@@ -63,10 +63,8 @@ const UploadTwitterButton = ({
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger>
-        <Button className="min-w-[200px] bg-[#121212]">
-          <SiX className="mr-2" /> Publish to X
-        </Button>
+      <DialogTrigger className="min-w-[200px] bg-[#121212]  text-sm flex flex-row text-white items-center justify-center rounded-xl px-4 py-2">
+        <SiX className="mr-2" /> Publish to X
       </DialogTrigger>
       <DialogContent className="px-8 z-[99999999999999999]">
         <p className="font-medium">Select Twitter Destination</p>

@@ -19,22 +19,17 @@ const Layout = async ({
   const userData = await fetchUserAction();
 
   return (
-    <div className="flex h-screen w-screen flex-row">
-      <SidebarMenu
-        organizationSlug={params.organization}
-        organizations={userData?.organizations}
+    <div className="flex h-screen w-screen flex-col">
+      <NavbarStudio
+        showLogo={false}
+        showSearchBar={false}
         currentOrganization={params.organization}
+        organizations={userData?.organizations}
       />
-      <div className="flex max-w-[calc(100%-73px)] w-full flex-col">
-        <NavbarStudio
-          pages={[]}
-          showLogo={false}
-          showSearchBar={false}
-          currentOrganization={params.organization}
-          organizations={userData?.organizations}
-        />
+      <div className=" flex-row top-[72px] flex h-[calc(100vh-72px)]">
+        <SidebarMenu organizationSlug={params.organization} />
 
-        <div className="w-full top-[54px] flex h-[calc(100vh-54px)] flex-col overflow-hidden border-t border-secondary">
+        <div className="w-full max-w-[calc(100%-73px)] h-full  flex-col overflow-hidden border-t ">
           {!hasOrganization(userData?.organizations, params.organization) ? (
             <div className="mx-auto flex h-screen w-4/5 flex-col items-center justify-center text-center">
               Organization not found or You do not belong to this organization,
@@ -47,7 +42,7 @@ const Layout = async ({
               </div>
             </div>
           ) : (
-            <div className="flex h-full w-full flex-row">
+            <div className="flex h-full w-full flex-row bg-white">
               {children}
               <Support />
             </div>

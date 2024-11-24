@@ -21,23 +21,7 @@ export const SidebarUI = ({
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <aside className="flex h-screen flex-col border-r bg-white">
-      <div className="flex items-center justify-between p-4">
-        <div
-          className={`flex items-center overflow-hidden transition-all ${
-            expanded ? 'w-40' : 'w-10'
-          }`}
-        >
-          <div className="transition-all">
-            {expanded ? (
-              <Image src={LogoDark} width={140} height={40} alt="log" />
-            ) : (
-              <Image src={Logo} width={40} height={40} alt="log" />
-            )}
-          </div>
-        </div>
-      </div>
-
+    <aside className="flex h-full min-w-[250px] flex-col border-r bg-white">
       <SidebarContext.Provider value={{ expanded }}>
         <ul className="flex-1 space-y-4 px-3">{children}</ul>
       </SidebarContext.Provider>

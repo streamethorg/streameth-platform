@@ -1,4 +1,3 @@
-'use client';
 import { SidebarUI, SidebarItem } from './Sidebar';
 
 import {
@@ -10,18 +9,22 @@ import {
   LuLock,
   LuBookOpen,
 } from 'react-icons/lu';
+import Image from 'next/image';
 import { IExtendedOrganization } from '@/lib/types';
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { fetchOrganization } from '@/lib/services/organizationService';
 
-const SidebarMenu = ({
+const SidebarMenu = async ({
   organizationSlug,
-  organizations,
-  currentOrganization,
 }: {
   organizationSlug: string;
-  organizations: IExtendedOrganization[];
-  currentOrganization: string;
 }) => {
+  const organization = await fetchOrganization({
+    organizationSlug,
+  });
+
   const navigationItems = [
     {
       text: 'Home',
@@ -49,11 +52,11 @@ const SidebarMenu = ({
       url: `/studio/${organizationSlug}/team`,
       icon: <LuUsers size={25} />,
     },
-    {
-      text: 'Settings',
-      url: `/studio/${organizationSlug}/settings`,
-      icon: <LuSettings size={25} />,
-    },
+    // {
+    //   text: 'Settings',
+    //   url: `/studio/${organizationSlug}/settings`,
+    //   icon: <LuSettings size={25} />,
+    // },
     {
       text: 'Docs',
       url: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
@@ -62,14 +65,35 @@ const SidebarMenu = ({
   ];
 
   return (
-    <div className="relative w-[1/4]">
+    <div className="relative w-[1/4] h-full border-t">
       <SidebarUI>
-        {organizations && (
-          <SwitchOrganization
-            organization={currentOrganization}
-            organizations={organizations}
-          />
-        )}
+        <div className="flex flex-col items-center justify-center p-2">
+          {organization?.logo ? (
+            <Image
+              className="rounded-full"
+              src={organization.logo}
+              alt="Logo"
+              width={70}
+              height={70}
+            />
+          ) : (
+            <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
+              {organization?.name.slice(0, 2)}
+            </div>
+          )}
+          <p className="text-lg font-bold">{organization?.name}</p>
+          <div className="flex flex-row items-center space-x-2">
+            <Button variant={'secondary'} size={'sm'}>
+              <Link href={`/studio/${organizationSlug}/settings`}>
+                Settings
+              </Link>
+            </Button>
+
+            <Button variant={'primary'} size={'sm'}>
+              <Link href={`/${organizationSlug}`}>Channel </Link>
+            </Button>
+          </div>
+        </div>
         {navigationItems.map((item, index) => (
           <SidebarItem
             key={index}

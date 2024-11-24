@@ -169,7 +169,7 @@ const EditSessionForm = ({
           )}
         />
 
-        <div className="flex justify-end items-end space-x-2">
+        <div className="flex justify-start items-start space-x-2">
           <DeleteAsset
             session={session}
             href={`/studio/${organizationSlug}/library`}
