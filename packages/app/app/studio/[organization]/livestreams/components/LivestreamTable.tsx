@@ -1,38 +1,37 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import Link from 'next/link';
 import React from 'react';
-import ToggleLivestreamVisibility from './ToggleLivestreamVisibility';
-import TableSort from '@/components/misc/TableSort';
 import { EllipsisVertical } from 'lucide-react';
-import Thumbnail from '@/components/misc/VideoCard/thumbnail';
-import DefaultThumbnail from '@/lib/svg/DefaultThumbnail';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import LivestreamActions from './LivestreamActions';
-import { Button } from '@/components/ui/button';
-import { ScissorsLineDashed } from 'lucide-react';
 import { CardDescription, CardTitle } from '@/components/ui/card';
 import EmptyFolder from '@/lib/svg/EmptyFolder';
+import { fetchOrganizationStages } from '@/lib/services/stageService';
+import PlayerWithControls from '@/components/ui/Player';
+import { buildPlaybackUrl } from '@/lib/utils/utils';
+import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 
-const LivestreamTable = ({
-  streams,
+const LivestreamTable = async ({
+  organizationId,
   organizationSlug,
+  fromDate,
+  untilDate,
 }: {
-  streams: IExtendedStage[];
+  organizationId: string;
   organizationSlug: string;
+  fromDate?: string;
+  untilDate?: string;
 }) => {
+  const streams = await fetchOrganizationStages({
+    organizationId,
+    fromDate,
+    untilDate,
+  });
+
   if (streams.length === 0) {
     return (
       <div className="flex h-96 w-full flex-col items-center justify-center gap-4 rounded-xl border bg-white">
@@ -47,112 +46,61 @@ const LivestreamTable = ({
     );
   }
   return (
-    <div className="mb-10 h-[95%] w-full rounded-xl border bg-white p-1">
-      <Table className="rounded-xl bg-white p-1">
-        <TableHeader className="sticky top-0 z-50 border-b bg-white">
-          <TableRow className="rounded-t-xl hover:bg-white">
-            <TableHead>
-              <TableSort title="Title" sortBy="name" />
-            </TableHead>
-            <TableHead>
-              <TableSort title="Date" sortBy="date" />
-            </TableHead>
-            <TableHead>Visibility</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="overflow-auto">
-          {streams?.map((stream) => (
-            <TableRow key={stream._id}>
-              <TableCell className="max-w-[500px] font-medium">
-                <div className="flex w-full flex-row items-center space-x-4">
-                  <div className="relative w-[100px] min-w-[100px] overflow-hidden">
-                    {stream.thumbnail ? (
-                      <Thumbnail imageUrl={stream.thumbnail} />
-                    ) : (
-                      <DefaultThumbnail />
+    <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {streams?.map((stream) => (
+        <Link
+          key={stream._id}
+          href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
+          className="flex flex-col rounded-xl border"
+        >
+          <div className="relative w-full">
+            {stream.streamSettings?.isActive &&
+            stream.streamSettings?.playbackId ? (
+              <PlayerWithControls
+                thumbnail={stream.thumbnail}
+                name={stream.name}
+                src={[
+                  {
+                    src: buildPlaybackUrl(
+                      stream.streamSettings?.playbackId
+                    ) as `${string} m3u8`,
+                    width: 1920,
+                    height: 1080,
+                    mime: 'application/vnd.apple.mpegurl',
+                    type: 'hls',
+                  },
+                ]}
+              />
+            ) : (
+              <Thumbnail imageUrl={stream.thumbnail} />
+            )}
+          </div>
+          <div className="p-4 flex flex-row justify-between">
+            <div className="flex flex-col">
+              <p className="line-clamp-3 font-medium">{stream?.name}</p>
+              <p className="text-sm">
+                {stream?.streamDate
+                  ? formatDate(new Date(stream?.streamDate), 'MMM D, YYYY')
+                  : formatDate(
+                      new Date(stream?.createdAt as string),
+                      'MMM D, YYYY'
                     )}
-                    {stream.streamSettings?.isActive && (
-                      <p className="absolute right-0 top-0 bg-destructive p-1 text-sm text-white">
-                        live
-                      </p>
-                    )}
-                  </div>
-
-                  <Link
-                    key={stream._id}
-                    href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
-                  >
-                    <p className="line-clamp-3 hover:underline">
-                      {stream?.name}
-                    </p>
-                  </Link>
-                </div>
-              </TableCell>
-              <TableCell>
-                {stream?.streamDate ? (
-                  <p className="text-sm">
-                    {formatDate(
-                      new Date(stream?.streamDate),
-                      'ddd. MMMM D, YYYY, HH:mm a'
-                    )}{' '}
-                    {stream.isMultipleDate &&
-                      stream.streamEndDate &&
-                      ' - ' +
-                        formatDate(
-                          new Date(stream?.streamEndDate),
-                          'ddd. MMMM D, YYYY, HH:mm a'
-                        )}
-                    {new Date(stream.streamDate) > new Date() && (
-                      <span className="block text-sm text-muted-foreground">
-                        Scheduled
-                      </span>
-                    )}
-                  </p>
-                ) : (
-                  formatDate(
-                    new Date(stream?.createdAt as string),
-                    'ddd. MMMM. D, YYYY'
-                  )
-                )}
-              </TableCell>
-              <TableCell>
-                <ToggleLivestreamVisibility item={stream} />
-              </TableCell>
-              <TableCell className="my-2 flex items-center space-x-2">
-                <Link
-                  key={stream._id}
-                  href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
-                >
-                  <Button variant="outlinePrimary">Manage</Button>
-                </Link>
-                <Link
-                  href={`/studio/${organizationSlug}/clips?stage=${stream._id}`}
-                >
-                  <Button
-                    variant="primary"
-                    className="flex w-full items-center gap-1"
-                  >
-                    <ScissorsLineDashed className="h-4 w-4" />
-                    Clip
-                  </Button>
-                </Link>
-                <Popover>
-                  <PopoverTrigger className="z-10 flex items-center">
-                    <EllipsisVertical />
-                  </PopoverTrigger>
-                  <PopoverContent className="w-fit">
-                    <LivestreamActions
-                      stream={stream}
-                      organizationSlug={organizationSlug}
-                    />
-                  </PopoverContent>
-                </Popover>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+              </p>
+            </div>
+            <Popover>
+              <PopoverTrigger className="z-10 flex items-center">
+                <EllipsisVertical />
+              </PopoverTrigger>
+              <PopoverContent className="w-fit">
+                <LivestreamActions
+                  stream={stream}
+                  organizationSlug={organizationSlug}
+                />
+              </PopoverContent>
+            </Popover>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };

@@ -72,17 +72,15 @@ const UploadToYoutubeButton = ({
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger>
-        <Button variant={'outline'} className="bg-white min-w-[200px]">
-          <Image
-            src={'/images/youtube_social_icon_red.png'}
-            alt="youtube_social_icon"
-            className="mr-2"
-            width={20}
-            height={20}
-          />
-          Publish to YouTube
-        </Button>
+      <DialogTrigger className="flex items-center text-sm border border-gray-200 rounded-xl px-4 py-2">
+        <Image
+          src={'/images/youtube_social_icon_red.png'}
+          alt="youtube_social_icon"
+          className="mr-2"
+          width={20}
+          height={20}
+        />
+        Publish to YouTube
       </DialogTrigger>
       <DialogContent className="px-8 z-[99999999999999999]">
         <p className="font-medium">Select YouTube Destination</p>

@@ -79,11 +79,7 @@ const AddTeamMembers = ({ organizationId }: { organizationId: string }) => {
               </FormItem>
             )}
           />
-          <Button
-            disabled={isAddingMember}
-            variant="outlinePrimary"
-            type="submit"
-          >
+          <Button disabled={isAddingMember} variant="primary" type="submit">
             Invite
           </Button>
         </div>

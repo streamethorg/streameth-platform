@@ -60,7 +60,7 @@ const Destinations = async ({
   };
 
   return (
-    <div className="mx-auto mt-12 flex flex-col h-[90%] w-full max-w-4xl">
+    <div className=" p-4 flex flex-col h-[90%] w-full max-w-4xl">
       <AddDestination
         organization={{ ...organization, slug: organization.slug || '' }}
       />

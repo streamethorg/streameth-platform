@@ -105,9 +105,9 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="flex flex-row items-center p-2 pr-4 space-x-4 bg-white rounded-xl border w-fit hover:bg-secondary">
-        <div className="p-4 text-white rounded-xl border bg-primary">
-          <LuFileUp size={25} />
+      <DialogTrigger className="flex flex-row items-center pr-2 bg-white rounded-xl border w-fit hover:bg-secondary">
+        <div className="p-2 text-white rounded-xl">
+          <LuFileUp size={20} className="text-primary" />
         </div>
         <span className="text-sm">Upload Video</span>
       </DialogTrigger>

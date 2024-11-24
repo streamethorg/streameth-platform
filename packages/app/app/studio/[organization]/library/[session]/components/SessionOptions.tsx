@@ -18,7 +18,7 @@ const SessionOptions = ({
   sessionId: string;
 }) => {
   return (
-    <div className="flex w-full flex-wrap items-center gap-2">
+    <div className="flex flex-row w-full items-center gap-2">
       <ShareButton
         className="w-full"
         variant="outline"

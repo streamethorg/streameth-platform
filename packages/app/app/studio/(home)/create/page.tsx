@@ -3,9 +3,12 @@ import CreateOrganizationForm from '../components/CreateOrganizationForm';
 import Image from 'next/image';
 import { fetchUserAction } from '@/lib/actions/users';
 import { IExtendedUser } from '@/lib/types';
-
+import { notFound } from 'next/navigation';
 const CreateOrganization = async () => {
-  const userData: IExtendedUser = await fetchUserAction();
+  const userData: IExtendedUser | null = await fetchUserAction();
+  if (!userData) {
+    return notFound();
+  }
   return (
     <div className="mx-auto mt-12 flex w-full max-w-4xl flex-row">
       <div className="w-1/3 space-y-4 rounded-l-xl bg-neutrals-100 p-6">

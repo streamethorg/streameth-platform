@@ -20,7 +20,7 @@ const Sidebar = ({
   organization: IExtendedOrganization;
 }) => {
   return (
-    <Card className="w-1/3 flex flex-col h-[calc(100vh-12rem)] mb-4 overflow-hidden">
+    <Card className="md:shadow-none w-full flex flex-col h-[calc(100vh-12rem)] mb-4 overflow-hidden">
       <Tabs defaultValue="destinations" className="flex flex-col h-full">
         <TabsList className="grid grid-cols-2 w-full">
           <TabsTrigger value="destinations">Destinations</TabsTrigger>

@@ -94,9 +94,7 @@ export async function fetchEventStages({
   eventId?: string;
 }): Promise<IExtendedStage[]> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/event/${eventId}`, {
-      cache: 'no-store',
-    });
+    const response = await fetch(`${apiUrl()}/stages/event/${eventId}`);
 
     const data = (await response.json()).data;
     return data.map((stage: IStage) => stage);
@@ -108,15 +106,18 @@ export async function fetchEventStages({
 
 export async function fetchOrganizationStages({
   organizationId,
+  fromDate,
+  untilDate,
 }: {
   organizationId?: string;
+  fromDate?: string;
+  untilDate?: string;
 }): Promise<IExtendedStage[]> {
   try {
+    const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
+    const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
     const response = await fetch(
-      `${apiUrl()}/stages/organization/${organizationId}`,
-      {
-        cache: 'no-store',
-      }
+      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`
     );
 
     const data = (await response.json()).data;

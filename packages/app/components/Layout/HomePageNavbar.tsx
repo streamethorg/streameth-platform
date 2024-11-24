@@ -17,7 +17,7 @@ import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
-
+import UserProfile from '@/app/studio/[organization]/components/UserProfile';
 const HomePageNavbar = ({
   logo,
   pages,
@@ -30,7 +30,7 @@ const HomePageNavbar = ({
   pages: Page[];
   showLogo?: boolean;
   showSearchBar?: boolean;
-  organizations?: IExtendedOrganization[];
+  organizations: IExtendedOrganization[] | null;
   currentOrganization?: string;
 }) => {
   if (logo === '') {
@@ -70,7 +70,7 @@ const MobileNavBar = ({
   logo?: string;
   pages: Page[];
   showSearchBar: boolean;
-  organizations?: IExtendedOrganization[];
+  organizations: IExtendedOrganization[] | null;
   currentOrganization: string;
   showLogo?: boolean;
 }) => {
@@ -100,7 +100,11 @@ const MobileNavBar = ({
 
       {searchVisible && showSearchBar && (
         <div className="absolute w-full bottom-[-56px] bg-secondary">
-          <SearchBar organizationSlug={currentOrganization} isMobile={true} />
+          <SearchBar
+            organizationSlug={currentOrganization}
+            organizationId={currentOrganization}
+            isMobile={true}
+          />
         </div>
       )}
       <div
@@ -128,10 +132,10 @@ const MobileNavBar = ({
           showLogo && (
             <Link href={`/${currentOrganization}`}>
               <Image
-                src={logo ?? '/logo.png'}
+                src={'/logo_dark.png'}
                 alt="Logo"
-                height={36}
-                width={36}
+                height={50}
+                width={230}
                 className="h-full aspect-square"
               />
             </Link>
@@ -191,77 +195,47 @@ const PCNavBar = ({
   pages: Page[];
   showLogo: boolean;
   showSearchBar: boolean;
-  organizations?: IExtendedOrganization[];
+  organizations: IExtendedOrganization[] | null;
   currentOrganization: string;
 }) => {
-  const { isConnected } = useAccount();
   const pathname = usePathname();
-  const { searchParams, handleTermChange } = useSearchParams();
-  const isStudio = pathname.includes('studio');
+  const { searchParams } = useSearchParams();
 
   const showGoBack =
     pathname.includes('clips') && searchParams.has('videoType');
 
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white md:hidden lg:flex z-[30]">
+    <NavigationMenu className="h-18 border-b w-full hidden sticky top-0 flex-row justify-between items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>
             <Image
-              src={logo ?? '/logo_dark.png'}
+              src={'/logo_dark.png'}
               alt="Logo"
-              width={logo ? 50 : 230}
-              height={logo ? 50 : 30}
+              width={230}
+              height={50}
               className="hidden lg:block"
             />
           </Link>
         )}
-        {organizations && (
-          <div className="flex flex-row space-x-1">
-            {showGoBack && (
-              <Link href={`/studio/${currentOrganization}/clips`}>
-                <Button className="hidden lg:block" variant={'outline'}>
-                  <div className="flex items-center">
-                    <IconLeft className="mr-1" /> Go back
-                  </div>
-                </Button>
-              </Link>
-            )}
-            <Link href={`/${currentOrganization}`}>
-              <Button className="hidden lg:block" variant={'primary'}>
-                View channel page
-              </Button>
-            </Link>
-          </div>
-        )}
       </div>
-      <div className="flex flex-grow-0 justify-center items-center mx-auto w-2/5">
-        {showSearchBar && (
-          <SearchBar
-            searchVisible={showSearchBar}
-            organizationSlug={currentOrganization}
-          />
-        )}
+      <div className="flex justify-center items-center mx-auto w-full max-w-md">
+        <SearchBar
+          searchVisible={showSearchBar}
+          organizationSlug={currentOrganization}
+          organizationId={currentOrganization}
+        />
       </div>
       <div className="flex flex-1 justify-end items-center">
-        {organizations && (
-          <SwitchOrganization
+        {organizations ? (
+          <UserProfile
             organization={currentOrganization}
             organizations={organizations}
           />
-        )}
-        <Navbar organization={currentOrganization} pages={pages} />
-        {organizations && organizations.length === 1 && (
-          <Link href="/studio/create">
-            <Button className="mr-2" variant="outlinePrimary">
-              Create Organization
-            </Button>
-          </Link>
-        )}
-        {isStudio && (
-          <Link href="/auth/logout">
-            <Button>Sign out</Button>
-          </Link>
+        ) : (
+          <Button variant="primary">
+            <Link href={`/studio/login`}>Login</Link>
+          </Button>
         )}
       </div>
     </NavigationMenu>

@@ -71,10 +71,17 @@ export default async function Livestream({
         </div>
         <div className="px-4 md:px-0">
           <div className="md:hidden">
-            <WatchGrid organizationSlug={params.organization} />
+            <WatchGrid
+              organizationId={organization._id}
+              organizationSlug={params.organization}
+            />
           </div>
           <div className="hidden md:block">
-            <WatchGrid organizationSlug={params.organization} gridLength={6} />
+            <WatchGrid
+              organizationId={organization._id}
+              organizationSlug={params.organization}
+              gridLength={6}
+            />
           </div>
         </div>
       </div>

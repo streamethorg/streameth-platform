@@ -22,8 +22,8 @@ const Settings = async ({
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   });
-  const userData: IExtendedUser = await fetchUserAction();
-  if (!organization) return null;
+  const userData: IExtendedUser | null = await fetchUserAction();
+  if (!organization || !userData) return null;
 
   return (
     <div className="mx-auto my-12 flex w-full max-w-4xl">

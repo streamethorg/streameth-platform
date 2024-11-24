@@ -1,8 +1,6 @@
 import { notFound } from 'next/navigation';
-import Navbar from '@/components/Layout/NavbarTop';
 import { fetchNavBarRoutes } from '@/lib/data';
 import { fetchEvent } from '@/lib/services/eventService';
-import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 const Layout = async ({
   children,
   params,
@@ -31,11 +29,6 @@ const Layout = async ({
 
   return (
     <div className="z-1 flex h-full min-h-screen w-full flex-col" style={style}>
-      <HomePageNavbar
-        logo={event?.logo}
-        pages={navbarRoutes.pages}
-        showSearchBar={false}
-      />
       <main className={`top-[74px] ml-auto flex w-full flex-grow lg:h-full`}>
         {children}
       </main>

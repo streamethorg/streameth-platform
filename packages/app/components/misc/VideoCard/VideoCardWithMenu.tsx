@@ -1,5 +1,3 @@
-'use client';
-
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {

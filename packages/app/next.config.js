@@ -2,6 +2,7 @@ const shouldAnalyzeBundles = process.env.ANALYZE === true;
 /** @type {import('next').NextConfig} */
 
 let nextConfig = {
+
   redirects: async () => [
     {
       source: '/',
@@ -145,7 +146,7 @@ let nextConfig = {
     return config;
   },
   images: {
-    unoptimized: false,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

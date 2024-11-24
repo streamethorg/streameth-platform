@@ -42,6 +42,7 @@ const Explore = async ({ searchParams }: HomePageProps) => {
       <HomePageNavbar
         logo=""
         currentOrganization=""
+        organizations={[]}
         pages={pages}
         showSearchBar={true}
       />

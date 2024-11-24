@@ -1,12 +1,6 @@
 'use client';
-import React, { useState } from 'react';
-import { FaFilter } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { IExtendedStage } from '@/lib/types';
 import {
   Select,
@@ -18,9 +12,12 @@ import {
 } from '@/components/ui/select';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { Check, Clapperboard, Eye, GraduationCap } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import DatePicker from '@/components/misc/form/datePicker';
 const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   const { searchParams, handleTermChange } = useSearchParams();
   const [selectedStage, setSelectedStage] = useState(
@@ -32,34 +29,60 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   const [selectedVisibility, setSelectedVisibility] = useState(
     searchParams?.get('published') || ''
   );
-  const [openPopover, setOpenPopover] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(
+    searchParams?.get('date') || ''
+  );
+  const [selectedItemStatus, setSelectedItemStatus] = useState(
+    searchParams?.get('itemStatus') || ''
+  );
+  const [selectedClipable, setSelectedClipable] = useState(
+    searchParams?.get('clipable') || ''
+  );
+  const [activeFilterCount, setActiveFilterCount] = useState(0);
 
-  const count = [selectedStage, selectedType, selectedVisibility].filter(
-    Boolean
-  ).length;
+  const updateFilter = (key: string, value: string) => {
+    handleTermChange([
+      { key, value },
+      { key: 'page', value: '1' },
+    ]);
+  };
 
   const handleClearFilter = () => {
     setSelectedStage('');
     setSelectedType('');
     setSelectedVisibility('');
+    setSelectedDate('');
+    setSelectedItemStatus('');
+    setSelectedClipable('');
     handleTermChange([
       { key: 'stage', value: '' },
       { key: 'type', value: '' },
       { key: 'published', value: '' },
+      { key: 'itemDate', value: '' },
+      { key: 'itemStatus', value: '' },
+      { key: 'clipable', value: '' },
       { key: 'page', value: '1' },
     ]);
-    setOpenPopover(false);
   };
 
-  const handleSaveFilter = () => {
-    handleTermChange([
-      { key: 'stage', value: selectedStage },
-      { key: 'type', value: selectedType },
-      { key: 'published', value: selectedVisibility },
-      { key: 'page', value: '1' },
-    ]);
-    setOpenPopover(false);
-  };
+  useEffect(() => {
+    const count = [
+      selectedStage,
+      selectedType,
+      selectedVisibility,
+      selectedDate,
+      selectedItemStatus,
+      selectedClipable,
+    ].filter(Boolean).length;
+    setActiveFilterCount(count);
+  }, [
+    selectedStage,
+    selectedType,
+    selectedVisibility,
+    selectedDate,
+    selectedItemStatus,
+    selectedClipable,
+  ]);
 
   const sessionTypes = Object.keys(SessionType).map((key) => ({
     label:
@@ -70,32 +93,29 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
   }));
 
   return (
-    <Popover open={openPopover} onOpenChange={setOpenPopover}>
+    <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
-          <FaFilter />
-          Filter {count > 0 && <span>| {count}</span>}
+        <Button variant="outline" size="sm">
+          Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 space-y-4 p-4">
-        <div className="flex items-center justify-between">
-          <h4 className="font-bold">Filters</h4>
+      <PopoverContent className="p-4">
+        <div className="flex flex-col gap-4">
           <Button onClick={handleClearFilter} size="sm" variant="outline">
             Clear Filters
           </Button>
-        </div>
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label
-              htmlFor="stage"
-              className="text-sm font-medium flex items-center gap-2"
-            >
-              <GraduationCap className="w-5 h-5" />
+          <div className="flex flex-col items-start gap-1">
+            <label htmlFor="stage" className="text-sm font-medium">
               Stage
-              {selectedStage && <Check className="w-4 h-4 text-green-500" />}
             </label>
-            <Select value={selectedStage} onValueChange={setSelectedStage}>
+            <Select
+              value={selectedStage}
+              onValueChange={(value) => {
+                setSelectedStage(value);
+                updateFilter('stage', value);
+              }}
+            >
               <SelectTrigger id="stage">
                 <SelectValue placeholder="Select a stage" />
               </SelectTrigger>
@@ -111,16 +131,17 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             </Select>
           </div>
 
-          <div className="space-y-2">
-            <label
-              htmlFor="type"
-              className="text-sm font-medium flex items-center gap-2"
-            >
-              <Clapperboard className="w-5 h-5" />
-              Video Type
-              {selectedType && <Check className="w-4 h-4 text-green-500" />}
+          <div className="flex flex-col items-start gap-1">
+            <label htmlFor="type" className="text-sm font-medium">
+              Type
             </label>
-            <Select value={selectedType} onValueChange={setSelectedType}>
+            <Select
+              value={selectedType}
+              onValueChange={(value) => {
+                setSelectedType(value);
+                updateFilter('type', value);
+              }}
+            >
               <SelectTrigger id="type">
                 <SelectValue placeholder="Select video type" />
               </SelectTrigger>
@@ -136,20 +157,16 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
             </Select>
           </div>
 
-          <div className="space-y-2">
-            <label
-              htmlFor="visibility"
-              className="text-sm font-medium flex items-center gap-2"
-            >
-              <Eye className="w-5 h-5" />
+          <div className="flex flex-col items-start gap-1">
+            <label htmlFor="visibility" className="text-sm font-medium">
               Visibility
-              {selectedVisibility && (
-                <Check className="w-4 h-4 text-green-500" />
-              )}
             </label>
             <Select
               value={selectedVisibility}
-              onValueChange={setSelectedVisibility}
+              onValueChange={(value) => {
+                setSelectedVisibility(value);
+                updateFilter('published', value);
+              }}
             >
               <SelectTrigger id="visibility">
                 <SelectValue placeholder="Select visibility" />
@@ -162,11 +179,69 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
               </SelectContent>
             </Select>
           </div>
-        </div>
 
-        <Button onClick={handleSaveFilter} className="w-full" variant="primary">
-          Apply Filters
-        </Button>
+          <div className="flex flex-col items-start gap-1">
+            <label htmlFor="itemDate" className="text-sm font-medium">
+              Date
+            </label>
+            <DatePicker
+              allowPast
+              value={new Date(Number(selectedDate))}
+              onChange={(value) => {
+                const unixTimestamp = Math.floor(value.getTime());
+                setSelectedDate(unixTimestamp.toString());
+                updateFilter('itemDate', unixTimestamp.toString());
+              }}
+            />
+          </div>
+
+          <div className="flex flex-col items-start gap-1">
+            <label htmlFor="itemStatus" className="text-sm font-medium">
+              Status
+            </label>
+            <Select
+              value={selectedItemStatus}
+              onValueChange={(value) => {
+                setSelectedItemStatus(value);
+                updateFilter('itemStatus', value);
+              }}
+            >
+              <SelectTrigger id="itemStatus">
+                <SelectValue placeholder="Select status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="failed">Failed</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex flex-col items-start gap-1">
+            <label htmlFor="clipable" className="text-sm font-medium">
+              Clipable
+            </label>
+            <Select
+              value={selectedClipable}
+              onValueChange={(value) => {
+                setSelectedClipable(value);
+                updateFilter('clipable', value);
+              }}
+            >
+              <SelectTrigger id="clipable">
+                <SelectValue placeholder="Select clipable status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="true">Yes</SelectItem>
+                  <SelectItem value="false">No</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
       </PopoverContent>
     </Popover>
   );
