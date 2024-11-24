@@ -19,7 +19,7 @@ const CreateNFT = async ({
   )?._id;
   const videos = (
     await fetchAllSessions({
-      organizationSlug: params.organization,
+      organizationId: organizationId,
       onlyVideos: true,
     })
   ).sessions;

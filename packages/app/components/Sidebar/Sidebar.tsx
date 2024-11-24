@@ -25,19 +25,6 @@ export const SidebarUI = ({
       <SidebarContext.Provider value={{ expanded }}>
         <ul className="flex-1 space-y-4 px-3">{children}</ul>
       </SidebarContext.Provider>
-      <button
-        onClick={() => setExpanded((curr) => !curr)}
-        className="mx-auto mb-4 p-1.5 text-black"
-      >
-        {expanded ? (
-          <span className="flex w-full flex-row">
-            <ChevronFirst />
-            Collapse
-          </span>
-        ) : (
-          <ChevronLast />
-        )}
-      </button>
     </aside>
   );
 };

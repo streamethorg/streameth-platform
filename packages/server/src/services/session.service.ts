@@ -115,7 +115,6 @@ export default class SessionService {
     }
     if (d.itemDate != undefined) {
       const itemDateNumber = Number(d.itemDate);
-      console.log('itemDateNumber', new Date(itemDateNumber).toDateString());
       const startOfDay = new Date(itemDateNumber);
       startOfDay.setHours(0, 0, 0, 0);
       const endOfDay = new Date(itemDateNumber);
@@ -124,7 +123,6 @@ export default class SessionService {
       filter = { ...filter, createdAt: { $gte: startOfDay, $lte: endOfDay } };
     }
     if (d.clipable) {
-      console.log('clipable', d.clipable);
       // its clippable if createdAt not older than 7 days and processingStatus is completed and type is livestream
       const clipableDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
       filter = {

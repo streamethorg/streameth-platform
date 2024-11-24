@@ -12,6 +12,9 @@ const useUserData = () => {
     const getUserData = async () => {
       try {
         const userData = await fetchUserAction();
+        if (!userData) {
+          return null;
+        }
         setUserData(userData);
       } catch (error) {
         console.error(error);

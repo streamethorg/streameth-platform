@@ -5546,6 +5546,22 @@
 						"schema": {
 							"type": "string"
 						}
+					},
+					{
+						"in": "query",
+						"name": "fromDate",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "untilDate",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
 					}
 				]
 			}

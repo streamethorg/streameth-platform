@@ -40,7 +40,11 @@ export default class DB<T> implements IStorageController<T> {
     skip: number,
     pageSize: number,
   ): Promise<Array<T>> {
-    return await this.model.find(query, fields).skip(skip).limit(pageSize);
+    return await this.model
+      .find(query, fields)
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 });
   }
 
   async countDocuments(query: {}): Promise<number> {

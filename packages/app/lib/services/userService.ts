@@ -15,7 +15,7 @@ export async function fetchUser(): Promise<IExtendedUser | null> {
     return responseData.data;
   } catch (e) {
     console.log('error in fetchUser', e);
-    throw e;
+    return null;
   }
 }
 
@@ -36,6 +36,6 @@ export async function fetchUserData(): Promise<IExtendedUser | null> {
     return (await data.json()).data;
   } catch (e) {
     console.log('error in fetchUser', e);
-    throw e;
+    return null;
   }
 }

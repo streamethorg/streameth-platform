@@ -14,7 +14,11 @@ import { Button } from '@/components/ui/button';
 import { redirect } from 'next/navigation';
 
 const Studio = async () => {
-  const userData: IExtendedUser = await fetchUserAction();
+  const userData: IExtendedUser | null = await fetchUserAction();
+
+  if (!userData) {
+    redirect('/studio/login');
+  }
 
   if (userData?.organizations?.length === 1) {
     redirect(`/studio/${userData.organizations[0].slug}`);

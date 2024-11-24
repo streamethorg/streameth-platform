@@ -10,7 +10,7 @@ import { Suspense } from 'react';
 import WatchGrid from '../components/WatchGrid';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
-
+import Link from 'next/link';
 const Loading = () => {
   return (
     <div className="mx-auto flex h-full w-full max-w-7xl animate-pulse flex-col gap-4">
@@ -93,11 +93,24 @@ export default async function Watch({
           </div>
         </div>
         <div className="px-4">
+          <div className="flex items-center justify-between pb-4">
+            <h1 className="text-2xl font-bold">More videos</h1>
+            <Link href={`/${params.organization}`}>
+              <h3 className="text-sm hover:underline">See more videos</h3>
+            </Link>
+          </div>
           <div className="md:hidden">
-            <WatchGrid organizationSlug={params.organization} />
+            <WatchGrid
+              organizationSlug={params.organization}
+              organizationId={organization._id}
+            />
           </div>
           <div className="hidden md:block">
-            <WatchGrid organizationSlug={params.organization} gridLength={6} />
+            <WatchGrid
+              organizationSlug={params.organization}
+              organizationId={organization._id}
+              gridLength={8}
+            />
           </div>
         </div>
       </div>

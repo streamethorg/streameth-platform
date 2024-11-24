@@ -31,8 +31,13 @@ const NavbarStudio = ({
 
   return (
     <NavigationMenu className="h-18 w-full hidden sticky top-0 flex items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
-      <Image src={LogoDark} width={140} height={40} alt="log" />
-
+      <Image
+        src={'/logo_dark.png'}
+        alt="Logo"
+        width={230}
+        height={50}
+        className="hidden lg:block"
+      />
       <div className="flex flex-grow justify-center items-center">
         <SearchBar
           searchVisible={showSearchBar}

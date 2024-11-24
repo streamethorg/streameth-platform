@@ -106,12 +106,18 @@ export async function fetchEventStages({
 
 export async function fetchOrganizationStages({
   organizationId,
+  fromDate,
+  untilDate,
 }: {
   organizationId?: string;
+  fromDate?: string;
+  untilDate?: string;
 }): Promise<IExtendedStage[]> {
   try {
+    const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
+    const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
     const response = await fetch(
-      `${apiUrl()}/stages/organization/${organizationId}`
+      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`
     );
 
     const data = (await response.json()).data;
