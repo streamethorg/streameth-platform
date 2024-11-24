@@ -83,12 +83,12 @@ const NavbarStudio = ({
       <div className="flex flex-row space-x-2">
         <CreateLivestreamModal organization={organization} />
         <UploadVideoDialog organizationId={organization._id.toString()} />
-        {organizations && (
+        {/* {organizations && (
           <UserProfile
             organization={organization._id}
             organizations={organizations}
           />
-        )}
+        )} */}
       </div>
     </NavigationMenu>
   );

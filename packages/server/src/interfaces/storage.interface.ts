@@ -16,5 +16,6 @@ export interface IStorageController<T> {
     skip?: number,
     pageSize?: number,
   ) => Promise<Array<T>>;
+  countDocuments?: (query: {}) => Promise<number>;
   delete: (id: string) => Promise<void>;
 }

@@ -67,9 +67,9 @@ const TableCells = async ({
   return (
     <>
       <TableCell
-        className={`relative font-medium max-w-[300px] ${rowBackgroundClass}`}
+        className={`p-2 md:p-2 relative font-medium max-w-[300px] h-20 ${rowBackgroundClass}`}
       >
-        <div className="flex flex-row items-center space-x-4 w-full">
+        <div className="flex flex-row items-center space-x-4 w-full h-full max-w-[500px]">
           <div className="min-w-[100px]">
             <Thumbnail imageUrl={item.coverImage} fallBack={imageUrl} />
           </div>
@@ -86,7 +86,7 @@ const TableCells = async ({
           </div>
         </div>
       </TableCell>
-      <TableCell className={rowBackgroundClass}>
+      <TableCell className={`${rowBackgroundClass} max-w-[100px]`}>
         <div className="flex items-center space-x-1">
           {getTypeIcon(item.type)}
           <span>{getTypeLabel(item.type)}</span>

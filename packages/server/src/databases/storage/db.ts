@@ -43,6 +43,10 @@ export default class DB<T> implements IStorageController<T> {
     return await this.model.find(query, fields).skip(skip).limit(pageSize);
   }
 
+  async countDocuments(query: {}): Promise<number> {
+    return await this.model.countDocuments(query);
+  }
+
   async findAllAndSort(
     query: {},
     path: string,

@@ -15,8 +15,10 @@ interface ApiParams {
   onlyVideos?: boolean;
   published?: string;
   speakerIds?: string[]; // Assuming speakerIds is an array of strings
-  date?: Date;
+  itemDate?: string;
   type?: string;
+  itemStatus?: string;
+  clipable?: boolean;
 }
 
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
@@ -41,6 +43,9 @@ export async function fetchAllSessions({
   limit,
   searchQuery = '',
   type,
+  itemStatus,
+  itemDate,
+  clipable,
 }: {
   event?: string;
   organizationId?: string;
@@ -52,6 +57,9 @@ export async function fetchAllSessions({
   limit?: number;
   searchQuery?: string;
   type?: string;
+  itemStatus?: string;
+  itemDate?: string;
+  clipable?: boolean;
 }): Promise<{
   sessions: IExtendedSession[];
   pagination: IPagination;
@@ -66,8 +74,16 @@ export async function fetchAllSessions({
     published,
     speakerIds,
     type,
+    itemStatus,
+    itemDate,
+    clipable,
   };
-  const response = await fetch(constructApiUrl(`${apiUrl()}/sessions`, params));
+  const response = await fetch(
+    constructApiUrl(`${apiUrl()}/sessions`, params),
+    {
+      cache: 'no-store',
+    }
+  );
   const a = await response.json();
   return a.data;
 }

@@ -152,11 +152,18 @@ export class SessionController extends Controller {
     @Query() assetId?: string,
     @Query() published?: string,
     @Query() type?: string,
+    @Query() itemStatus?: string,
+    @Query() itemDate?: string,
+    @Query() clipable?: boolean,
   ): Promise<
     IStandardResponse<{
       sessions: Array<ISession>;
-      totalDocuments: number;
-      pageable: { page: number; size: number };
+      pagination: {
+        currentPage: number;
+        totalPages: number;
+        totalItems: number;
+        limit: number;
+      };
     }>
   > {
     const queryParams = {
@@ -171,6 +178,9 @@ export class SessionController extends Controller {
       assetId: assetId,
       published: published,
       type: type,
+      itemStatus: itemStatus,
+      itemDate: itemDate,
+      clipable: clipable,
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);

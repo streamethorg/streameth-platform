@@ -823,12 +823,12 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
+    "IStandardResponse__sessions-Array_ISession_--pagination_58__currentPage-number--totalPages-number--totalItems-number--limit-number___": {
         "dataType": "refObject",
         "properties": {
             "status": {"dataType":"string","required":true},
             "message": {"dataType":"string","required":true},
-            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"pageable":{"dataType":"nestedObjectLiteral","nestedProperties":{"size":{"dataType":"double","required":true},"page":{"dataType":"double","required":true}},"required":true},"totalDocuments":{"dataType":"double","required":true},"sessions":{"dataType":"array","array":{"dataType":"refObject","ref":"ISession"},"required":true}}},
+            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"pagination":{"dataType":"nestedObjectLiteral","nestedProperties":{"limit":{"dataType":"double","required":true},"totalItems":{"dataType":"double","required":true},"totalPages":{"dataType":"double","required":true},"currentPage":{"dataType":"double","required":true}},"required":true},"sessions":{"dataType":"array","array":{"dataType":"refObject","ref":"ISession"},"required":true}}},
         },
         "additionalProperties": false,
     },
@@ -2669,6 +2669,9 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                     assetId: {"in":"query","name":"assetId","dataType":"string"},
                     published: {"in":"query","name":"published","dataType":"string"},
                     type: {"in":"query","name":"type","dataType":"string"},
+                    itemStatus: {"in":"query","name":"itemStatus","dataType":"string"},
+                    itemDate: {"in":"query","name":"itemDate","dataType":"string"},
+                    clipable: {"in":"query","name":"clipable","dataType":"boolean"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

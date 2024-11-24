@@ -2655,7 +2655,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___": {
+			"IStandardResponse__sessions-Array_ISession_--pagination_58__currentPage-number--totalPages-number--totalItems-number--limit-number___": {
 				"properties": {
 					"status": {
 						"type": "string"
@@ -2665,26 +2665,32 @@
 					},
 					"data": {
 						"properties": {
-							"pageable": {
+							"pagination": {
 								"properties": {
-									"size": {
+									"limit": {
 										"type": "number",
 										"format": "double"
 									},
-									"page": {
+									"totalItems": {
+										"type": "number",
+										"format": "double"
+									},
+									"totalPages": {
+										"type": "number",
+										"format": "double"
+									},
+									"currentPage": {
 										"type": "number",
 										"format": "double"
 									}
 								},
 								"required": [
-									"size",
-									"page"
+									"limit",
+									"totalItems",
+									"totalPages",
+									"currentPage"
 								],
 								"type": "object"
-							},
-							"totalDocuments": {
-								"type": "number",
-								"format": "double"
 							},
 							"sessions": {
 								"items": {
@@ -2694,8 +2700,7 @@
 							}
 						},
 						"required": [
-							"pageable",
-							"totalDocuments",
+							"pagination",
 							"sessions"
 						],
 						"type": "object"
@@ -5730,7 +5735,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse__sessions-Array_ISession_--totalDocuments-number--pageable_58__page-number--size-number___"
+									"$ref": "#/components/schemas/IStandardResponse__sessions-Array_ISession_--pagination_58__currentPage-number--totalPages-number--totalItems-number--limit-number___"
 								}
 							}
 						}
@@ -5831,6 +5836,30 @@
 						"required": false,
 						"schema": {
 							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "itemStatus",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "itemDate",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "clipable",
+						"required": false,
+						"schema": {
+							"type": "boolean"
 						}
 					}
 				]
