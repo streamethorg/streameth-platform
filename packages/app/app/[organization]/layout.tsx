@@ -5,7 +5,7 @@ import Footer from '@/components/Layout/Footer';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import NotFound from '@/not-found';
 import Support from '@/components/misc/Support';
-
+import { fetchUserAction } from '@/lib/actions/users';
 const Layout = async ({
   params,
   children,
@@ -31,6 +31,8 @@ const Layout = async ({
     organizationSlug: params.organization,
   });
 
+  const userData = await fetchUserAction();
+
   if (!organization) {
     return NotFound();
   }
@@ -42,6 +44,8 @@ const Layout = async ({
         currentOrganization={params.organization}
         pages={pages}
         showSearchBar
+        showLogo={true}
+        organizations={userData?.organizations || null}
       />
       <div className="h-full w-full flex-grow">
         {children}

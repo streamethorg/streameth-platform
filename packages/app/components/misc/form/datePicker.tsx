@@ -14,9 +14,11 @@ import cn from 'classnames';
 export default function DatePicker({
   value,
   onChange,
+  allowPast = false,
 }: {
   value: Date;
   onChange: (value: Date) => void;
+  allowPast?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -38,13 +40,13 @@ export default function DatePicker({
         <Calendar
           mode="single"
           selected={new Date(value)}
-          fromDate={new Date()}
+          fromDate={allowPast ? new Date('1900-01-01') : new Date()}
           onSelect={(date) => {
             onChange(date ?? new Date());
             setIsOpen(false);
           }}
           disabled={(date) =>
-            date == new Date() || date < new Date('1900-01-01')
+            !allowPast && (date == new Date() || date < new Date('1900-01-01'))
           }
           initialFocus
         />

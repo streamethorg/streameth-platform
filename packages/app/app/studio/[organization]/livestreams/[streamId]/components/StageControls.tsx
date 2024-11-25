@@ -23,12 +23,10 @@ import StreamHealth from './StreamHealth';
 const StageControls = ({
   organization,
   stream,
-  stageSessions,
   stageMarkers,
 }: {
   organization: IExtendedOrganization;
   stream: IExtendedStage;
-  stageSessions: IExtendedSession[];
   stageMarkers: IExtendedMarker[];
 }) => {
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
@@ -58,71 +56,63 @@ const StageControls = ({
     return notFound();
   }
   return (
-    <div className="flex flex-row flex-grow space-x-4 w-full">
-      <div className="flex flex-col w-2/3">
-        <StreamConfigWithPlayer stream={stream} isLive={isLive} />
-        <div className="flex flex-row md:justify-between gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
-          <div className="flex justify-start items-center space-x-2">
-            <span className="pr-4 text-xl font-bold">{stream.name}</span>
-            <StreamHealth isLive={isLive} stream={stream} />
-            <EditLivestream
-              stage={stream}
-              organizationSlug={organization.slug!}
-              variant="outline"
-              btnText="Edit"
-            />
+    <div>
+      <StreamConfigWithPlayer stream={stream} isLive={isLive} />
+      <div className="flex flex-row md:justify-between gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
+        <div className="flex justify-start items-center space-x-2">
+          <span className="pr-4 text-xl font-bold">{stream.name}</span>
+          <StreamHealth isLive={isLive} stream={stream} />
+          <EditLivestream
+            stage={stream}
+            organizationSlug={organization.slug!}
+            variant="outline"
+            btnText="Edit"
+          />
+          {!isLive && (
+            <>
+              <ImportDataButton
+                markers={stageMarkers}
+                organizationId={organization._id}
+                stageId={stream._id as string}
+                stage={stream}
+              />
 
-            {!isLive && (
-              <>
-                <ImportDataButton
-                  markers={stageMarkers}
-                  organizationId={organization._id}
-                  stageId={stream._id as string}
-                  stage={stream}
-                />
+              <ViewMarkersDialog markers={stageMarkers} />
+            </>
+          )}
+        </div>
 
-                <ViewMarkersDialog markers={stageMarkers} />
-              </>
-            )}
-          </div>
+        <div className="flex flex-row gap-2">
+          <ShareAndEmbed
+            organizationSlug={organization.slug as string}
+            streamId={stream._id as string}
+            playerName={stream?.name}
+          />
 
-          <div className="flex flex-row gap-2">
-            <ShareAndEmbed
-              organizationSlug={organization.slug as string}
-              streamId={stream._id as string}
-              playerName={stream?.name}
-            />
+          <Link
+            href={`/${organization.slug as string}/livestream?stage=${stream._id}`}
+            target="_blank"
+          >
+            <Button variant="outline">
+              Watch
+              <div>
+                <LuArrowRight className="ml-1 w-5 h-5" />
+              </div>
+            </Button>
+          </Link>
 
+          {isLive && (
             <Link
-              href={`/${organization.slug as string}/livestream?stage=${stream._id}`}
-              target="_blank"
+              href={`/studio/${organization.slug as string}/clips/${stream._id}?videoType=livestream`}
             >
-              <Button variant="outline">
-                Watch
-                <div>
-                  <LuArrowRight className="ml-1 w-5 h-5" />
-                </div>
+              <Button variant="primary" className="flex gap-1 items-center">
+                Clip Live
+                <LuScissorsLineDashed className="ml-1 w-5 h-5" />
               </Button>
             </Link>
-
-            {isLive && (
-              <Link
-                href={`/studio/${organization.slug as string}/clips/${stream._id}?videoType=livestream`}
-              >
-                <Button variant="primary" className="flex gap-1 items-center">
-                  Clip Live
-                  <LuScissorsLineDashed className="ml-1 w-5 h-5" />
-                </Button>
-              </Link>
-            )}
-          </div>
+          )}
         </div>
       </div>
-      <Sidebar
-        stage={stream}
-        sessions={stageSessions}
-        organization={organization}
-      />
     </div>
   );
 };

@@ -32,6 +32,10 @@ class App {
     this.initializeSwagger();
     this.initializeErrorHandling();
     this.initializeJobs();
+
+    process.on('unhandledRejection', (reason, promise) => {
+      logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    });
   }
 
   listen() {

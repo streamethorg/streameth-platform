@@ -2,6 +2,7 @@ const shouldAnalyzeBundles = process.env.ANALYZE === true;
 /** @type {import('next').NextConfig} */
 
 let nextConfig = {
+
   redirects: async () => [
     {
       source: '/',

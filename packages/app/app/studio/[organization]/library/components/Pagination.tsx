@@ -11,6 +11,7 @@ const Pagination = (props: IPagination) => {
   const { handleTermChange, searchParams } = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
+  console.log(props);
   return (
     <div className="flex flex-row items-center justify-center p-2">
       <div className="flex items-center gap-3">

@@ -18,7 +18,6 @@ import State from '@models/state.model';
 import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import connection from '@utils/rabbitmq';
-import Fuse from 'fuse.js';
 import { Types } from 'mongoose';
 
 export default class SessionService {
@@ -80,7 +79,7 @@ export default class SessionService {
 
   async getAll(d: {
     event: string;
-    organization: string;
+    organizationId: string;
     speaker: string;
     stageId: string;
     assetId: string;
@@ -89,29 +88,57 @@ export default class SessionService {
     page: number;
     published: string;
     type: string;
+    itemStatus: string;
+    itemDate: string; // unix timestamp
+    clipable: boolean;
   }): Promise<{
     sessions: Array<ISession>;
-    totalDocuments: number;
-    pageable: { page: number; size: number };
+    pagination: {
+      currentPage: number;
+      totalPages: number;
+      totalItems: number;
+      limit: number;
+    };
   }> {
     let filter: {} = {
       type: { $nin: [SessionType.animation, SessionType.editorClip] },
     };
+
     if (d.type !== undefined) {
       filter = { ...filter, type: d.type };
     }
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
+    if (d.itemStatus != undefined) {
+      filter = { ...filter, processingStatus: d.itemStatus };
+    }
+    if (d.itemDate != undefined) {
+      const itemDateNumber = Number(d.itemDate);
+      const startOfDay = new Date(itemDateNumber);
+      startOfDay.setHours(0, 0, 0, 0);
+      const endOfDay = new Date(itemDateNumber);
+      endOfDay.setHours(23, 59, 59, 999);
+
+      filter = { ...filter, createdAt: { $gte: startOfDay, $lte: endOfDay } };
+    }
+    if (d.clipable) {
+      // its clippable if createdAt not older than 7 days and processingStatus is completed and type is livestream
+      const clipableDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      filter = {
+        ...filter,
+        createdAt: { $gte: clipableDate },
+        processingStatus: ProcessingStatus.completed,
+        type: SessionType.livestream,
+      };
+    }
     if (d.event != undefined) {
       let query = this.queryByIdOrSlug(d.event);
       let event = await Event.findOne(query);
       filter = { ...filter, eventId: event?._id };
     }
-    if (d.organization != undefined) {
-      let query = this.queryByIdOrSlug(d.organization);
-      let org = await Organization.findOne(query);
-      filter = { ...filter, organizationId: org?._id };
+    if (d.organizationId != undefined) {
+      filter = { ...filter, organizationId: d.organizationId };
     }
     if (d.onlyVideos) {
       filter = {
@@ -127,24 +154,27 @@ export default class SessionService {
       let stage = await Stage.findOne(query);
       filter = { ...filter, stageId: stage?._id };
     }
-    const pageSize = Number(d.size) || 0; //total documents to be fetched
+
+    const pageSize = Number(d.size) || 0;
     const pageNumber = Number(d.page) || 0;
     const skip = pageSize * pageNumber - pageSize;
-    const [sessions, totalDocuments] = await Promise.all([
-      await this.controller.store.findAllAndSort(
-        filter,
-        this.path,
-        skip,
-        pageSize,
-      ),
-      await this.controller.store.findAll(filter, {}, this.path, 0, 0),
-    ]);
+
+    const sessions = await this.controller.store.findAll(
+      filter,
+      {},
+      this.path,
+      skip,
+      pageSize,
+    );
+
+    const totalItems = await this.controller.store.countDocuments(filter);
     return {
       sessions: sessions,
-      totalDocuments: totalDocuments.length,
-      pageable: {
-        page: pageNumber,
-        size: pageSize,
+      pagination: {
+        totalItems: totalItems,
+        currentPage: pageNumber,
+        totalPages: Math.ceil(totalItems / pageSize),
+        limit: pageSize,
       },
     };
   }
@@ -205,21 +235,23 @@ export default class SessionService {
 
   async filterSessions(
     query: string,
-    organizationSlug?: string,
+    organizationId?: string,
   ): Promise<Array<ISession>> {
-    const options = {
-      keys: ['name', 'description', 'speakers.name'],
-    };
-    const sessions = await this.getAll({
-      organization: organizationSlug,
-      page: 0,
-      size: 0,
-      onlyVideos: true,
-    } as any);
-
-    const fuse = new Fuse(sessions.sessions, options);
-    const result: any = fuse.search(query);
-    return result;
+    console.time('filterSessionsExecutionTime');
+    console.log(query);
+    const sessions = await this.controller.store.findAll(
+      {
+        name: { $regex: query, $options: 'i' },
+        organizationId: organizationId ? organizationId : '',
+      },
+      {},
+      this.path,
+      0,
+      10,
+    );
+    console.log(sessions);
+    console.timeEnd('filterSessionsExecutionTime');
+    return sessions;
   }
 
   async createStreamRecordings(payload: RecordingSessionPayload) {

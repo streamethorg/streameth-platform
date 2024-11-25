@@ -72,8 +72,12 @@ export class SessionController extends Controller {
   @Get('search')
   async filterSession(
     @Query() search: string,
+    @Query() organizationId?: string,
   ): Promise<IStandardResponse<Array<ISession>>> {
-    const sessions = await this.sessionService.filterSessions(search);
+    const sessions = await this.sessionService.filterSessions(
+      search,
+      organizationId,
+    );
     return SendApiResponse('sessions fetched', sessions);
   }
 
@@ -138,7 +142,7 @@ export class SessionController extends Controller {
   @Get()
   async getAllSessions(
     @Query() event?: string,
-    @Query() organization?: string,
+    @Query() organizationId?: string,
     @Query() speaker?: string,
     @Query() stageId?: string,
     @Query() onlyVideos?: boolean,
@@ -148,16 +152,23 @@ export class SessionController extends Controller {
     @Query() assetId?: string,
     @Query() published?: string,
     @Query() type?: string,
+    @Query() itemStatus?: string,
+    @Query() itemDate?: string,
+    @Query() clipable?: boolean,
   ): Promise<
     IStandardResponse<{
       sessions: Array<ISession>;
-      totalDocuments: number;
-      pageable: { page: number; size: number };
+      pagination: {
+        currentPage: number;
+        totalPages: number;
+        totalItems: number;
+        limit: number;
+      };
     }>
   > {
     const queryParams = {
       event: event,
-      organization: organization,
+      organizationId: organizationId,
       speaker: speaker,
       stageId: stageId,
       onlyVideos: onlyVideos,
@@ -167,6 +178,9 @@ export class SessionController extends Controller {
       assetId: assetId,
       published: published,
       type: type,
+      itemStatus: itemStatus,
+      itemDate: itemDate,
+      clipable: clipable,
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);

@@ -43,7 +43,7 @@ const SessionTranscriptions = ({
       });
   };
   return (
-    <div>
+    <div className="flex flex-col space-y-2">
       <Label>Transcript</Label>
       {videoTranscription ? (
         <div>
@@ -66,7 +66,7 @@ const SessionTranscriptions = ({
           <p>Transcription failed. Please try again.</p>
           <Button
             variant="primary"
-            className="mt-2"
+            className="w-full"
             onClick={handleGenerateTranscription}
             loading={isGeneratingTranscript}
           >
@@ -76,7 +76,7 @@ const SessionTranscriptions = ({
       ) : (
         <Button
           variant="primary"
-          className="mt-2"
+          className="w-full"
           onClick={handleGenerateTranscription}
           loading={isGeneratingTranscript}
         >

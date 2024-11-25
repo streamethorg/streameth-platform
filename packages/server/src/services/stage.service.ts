@@ -81,7 +81,23 @@ export default class StageService {
 
   async findAllStagesForOrganization(
     organizationId: string,
+    fromDate?: string, // unix timestamp
+    untilDate?: string, // unix timestamp
   ): Promise<Array<IStage>> {
+    if (fromDate) {
+      return await this.controller.store.findAll({
+        organizationId: organizationId,
+        createdAt: { $gte: new Date(Number(fromDate)) },
+      });
+    }
+
+    if (untilDate) {
+      return await this.controller.store.findAll({
+        organizationId: organizationId,
+        createdAt: { $lt: new Date(Number(untilDate)) },
+      });
+    }
+
     return await this.controller.store.findAll({
       organizationId: organizationId,
     });

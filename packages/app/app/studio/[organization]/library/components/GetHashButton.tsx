@@ -27,10 +27,10 @@ const GetHashButton = ({ session }: { session: IExtendedSession }) => {
   return (
     <div className="flex w-full flex-col">
       {session.ipfsURI ? (
-        <>
+        <div className="flex flex-col space-y-2">
           <Label>IPFS hash</Label>
           <TextPlaceholder text={session.ipfsURI} />
-        </>
+        </div>
       ) : (
         <Button
           loading={isGettingHash}

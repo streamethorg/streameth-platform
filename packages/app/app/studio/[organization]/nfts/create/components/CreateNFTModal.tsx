@@ -18,7 +18,7 @@ const CreateNFTModal = async ({
   )?._id;
   const videos = (
     await fetchAllSessions({
-      organizationSlug: organization,
+      organizationId: organizationId,
       onlyVideos: true,
     })
   ).sessions;

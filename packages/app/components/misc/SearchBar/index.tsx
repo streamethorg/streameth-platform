@@ -22,11 +22,13 @@ interface ISessionSearchResult {
 }
 
 export default function SearchBar({
+  organizationId,
   organizationSlug,
   searchVisible = true,
   isMobile = false,
   isStudio = false,
 }: {
+  organizationId: string;
   organizationSlug: string;
   searchVisible?: boolean;
   isMobile?: boolean;
@@ -40,7 +42,6 @@ export default function SearchBar({
   );
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<IExtendedSession[]>([]);
-  const [eventResults, setEventResults] = useState<IEventSearchResult[]>([]);
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   const dropdownRef = useRef<HTMLDivElement>(null); // ref for the dropdown
@@ -50,14 +51,16 @@ export default function SearchBar({
   useEffect(() => {
     if (debouncedSearchQuery) {
       setIsLoading(true);
-      if (organizationSlug) {
+      if (organizationId) {
         fetch(
-          `${apiUrl()}/sessions/${organizationSlug}/search?search=${debouncedSearchQuery}&onlyVideos=true`
+          `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}&onlyVideos=true&organizationId=${organizationId}`
         )
-          .then((res) => res.json())
+          .then((res) => {
+            return res.json();
+          })
           .then((data) => {
-            const items = data.data.map((obj: any) => obj.item).slice(0, 10);
-
+            const items = data.data.slice(0, 10);
+            console.log(data.data);
             setSearchResults(items);
             setIsLoading(false);
           });

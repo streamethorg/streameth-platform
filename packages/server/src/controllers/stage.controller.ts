@@ -112,9 +112,14 @@ export class StageController extends Controller {
   @Get('/organization/{organizationId}')
   async getAllStagesForOrganization(
     organizationId: string,
+    @Query() fromDate?: string,
+    @Query() untilDate?: string,
   ): Promise<IStandardResponse<Array<IStage>>> {
-    const stages =
-      await this.stageService.findAllStagesForOrganization(organizationId);
+    const stages = await this.stageService.findAllStagesForOrganization(
+      organizationId,
+      fromDate,
+      untilDate,
+    );
     return SendApiResponse('stages fetched', stages);
   }
 

@@ -10,7 +10,6 @@ import {
   Videotape,
   Settings,
   Home,
-  CalendarDays,
   ScissorsLineDashed,
 } from 'lucide-react';
 import {
@@ -18,7 +17,6 @@ import {
   ArrowRightFromLine,
   Image as ImageIcon,
 } from 'lucide-react';
-import Image from 'next/image';
 import StreamethStudio from '@/lib/svg/StreamethStudio';
 import StreamethLogo from '@/lib/svg/StreamethLogo';
 
@@ -29,12 +27,6 @@ const navigationItems = [
     icon: <Home />,
     defaultCollapsed: false,
   },
-  // {
-  //   title: 'Events',
-  //   navigationPath: 'event',
-  //   icon: <CalendarDays />,
-  //   defaultCollapsed: false,
-  // },
   {
     title: 'Library',
     navigationPath: 'library',

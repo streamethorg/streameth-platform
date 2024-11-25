@@ -42,17 +42,21 @@ const Settings = async ({
   });
 
   return (
-    <div className="mx-auto my-12 flex h-[90%] w-full max-w-4xl">
-      <Card className="w-full rounded-r-xl border bg-white shadow-none">
-        <CardHeader>
-          <CardTitle>Team members</CardTitle>
-          <CardDescription className="mb-4 mt-2">
-            Invite your team members to collaborate.
-          </CardDescription>
+    <div className="p-4 flex h-full w-full max-w-4xl">
+      <Card className="w-full h-full rounded-r-xl border bg-white shadow-none md:p-0">
+        <CardHeader className="flex flex-row justify-between">
+          <div className="flex flex-col gap-2">
+            <CardTitle>Team members</CardTitle>
+            <CardDescription className="mb-4 mt-2">
+              Invite your team members to collaborate.
+            </CardDescription>
+          </div>
+          <div className="flex justify-end p-4">
+            <AddTeamMembers organizationId={organization._id} />
+          </div>
         </CardHeader>
-        <CardContent>
-          <AddTeamMembers organizationId={organization._id} />
-          <Table className="mt-4">
+        <CardContent className="p-0 md:p-0 lg:p-0">
+          <Table className="w-full">
             <TableHeader className="sticky top-0 z-10 border-separate bg-gray-100">
               <TableRow className="hover:bg-whiterounded-t-xl border-b">
                 <TableHead>Email</TableHead>
