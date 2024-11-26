@@ -1,0 +1,21 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install Python and other build dependencies
+RUN apk add --no-cache python3 make g++
+
+# Copy root workspace files
+COPY package.json yarn.lock ./
+COPY packages/server/package.json ./packages/server/
+# Copy env file
+COPY packages/server/.env ./packages/server/
+
+# Install dependencies (including devDependencies)
+RUN yarn install --frozen-lockfile
+
+# We'll mount the source code as a volume instead of copying it
+EXPOSE 3000
+
+# Use development command that watches for changes
+CMD ["yarn", "dev:server"]

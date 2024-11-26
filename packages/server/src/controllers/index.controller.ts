@@ -10,7 +10,6 @@ import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { updateEventVideoById } from '@utils/firebase';
 import { createAssetFromUrl, getAsset, getDownloadUrl } from '@utils/livepeer';
 import StorageService from '@utils/s3';
 import {
@@ -182,12 +181,6 @@ export class IndexController extends Controller {
       processingStatus: ProcessingStatus.completed,
     };
     await this.sessionService.update(session._id.toString(), sessionParams);
-    if (session.firebaseId && asset.playbackUrl) {
-      await updateEventVideoById(session.firebaseId, {
-        url: asset.playbackUrl,
-        mp4Url: await getDownloadUrl(asset.id),
-      });
-    }
     const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
       type: session.type,

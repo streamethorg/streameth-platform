@@ -1,0 +1,88 @@
+version: '3'
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: packages/server/Dockerfile.dev
+    ports:
+      - "3400:3400"
+    volumes:
+      - ./packages/server:/app/packages/server
+      - /app/packages/server/node_modules
+    environment:
+      # Base Configuration
+      - NODE_ENV=development
+      - BASE_URL=http://localhost:3400
+      - PLAYER_URL=http://localhost:3000
+      - APP_PORT=3400
+      - TEST_URL=http://localhost:3400
+
+      # Database
+      - MONGODB_URI=mongodb://mongodb:27017/streameth
+      - DB_HOST=mongodb://mongodb:27017/streameth
+
+      # Logging
+      - LOG_FORMAT=dev
+      - LOG_DIR=../logs
+
+
+      # Message Queue
+      - MQ_HOST=rabbitmq
+      - MQ_PORT=5672
+      - MQ_USERNAME=guest
+      - MQ_SECRET=guest
+
+      # Mail (using ethereal for development)
+      - MAIL_HOST=smtp.ethereal.email
+      - MAIL_PORT=587
+      - MAIL_USER=test
+      - MAIL_PASS=test
+
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+  app:
+    build:
+      context: .
+      dockerfile: packages/app/Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./packages/app:/app/packages/app
+      - /app/packages/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3400
+    depends_on:
+      - server
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    environment:
+      - MONGO_INITDB_DATABASE=streameth
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management UI port
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  mongodb_data:
+  rabbitmq_data: 

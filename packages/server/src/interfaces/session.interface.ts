@@ -67,7 +67,6 @@ export interface ISession {
   createdAt?: Date | string;
   nftCollections?: Types.ObjectId | string[];
   socials?: { name: string; date: number }[];
-  firebaseId?: string;
   talkType?: string;
   processingStatus?: ProcessingStatus;
   transcripts?: {

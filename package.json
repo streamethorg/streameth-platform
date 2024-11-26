@@ -11,17 +11,19 @@
 		]
 	},
 	"scripts": {
-		"build": "yarn workspace @streameth/streameth-app build",
-		"dev": "yarn workspace @streameth/streameth-app dev",
-		"start": "yarn workspace @streameth/streameth-app start",
+		"build:app": "yarn workspace @streameth/streameth-app build",
+		"dev:app": "yarn workspace @streameth/streameth-app dev",
+		"start:app": "yarn workspace @streameth/streameth-app start",
+		"dev:server": "yarn workspace @streameth/streameth-server dev",
+		"build:server": "yarn workspace @streameth/streameth-server build",
+		"start:server": "yarn workspace @streameth/streameth-server start",
 		"next:lint": "yarn workspace @streameth/streameth-app lint",
 		"next:check-types": "yarn workspace @streameth/streameth-app check-types",
-		"prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix && yarn workspace streameth-new-server prettier:fix",
-		"prettier:check": "yarn workspace @streameth/streameth-app prettier:check && yarn workspace streameth-new-server prettier:check",
+		"prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix && yarn workspace @streameth/streameth-server prettier:fix",
+		"prettier:check": "yarn workspace @streameth/streameth-app prettier:check && yarn workspace @streameth/streameth-server prettier:check",
 		"precommit": "lint-staged --verbose",
-		"install:all": "yarn --cwd @streameth/server/ && yarn",
-		"build:server": "yarn workspace streameth-new-server build",
-		"start:server": "yarn workspace streameth-new-server start",
+		"install:all": "yarn --cwd packages/server && yarn",
+
 		"prepare": "husky"
 	},
 	"devDependencies": {

@@ -65,7 +65,6 @@ const SessionSchema = new Schema<ISessionModel>(
         date: { type: Number, default: 0 },
       },
     ],
-    firebaseId: { type: String, default: '' },
     talkType: { type: String, default: '' },
     processingStatus: { type: String, enum: Object.keys(ProcessingStatus) },
     transcripts: {

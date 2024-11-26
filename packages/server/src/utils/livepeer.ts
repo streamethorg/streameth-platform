@@ -16,7 +16,6 @@ import { Livepeer } from 'livepeer';
 import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
 import youtubedl from 'youtube-dl-exec';
-import { createEventVideoById } from './firebase';
 import { AgendaJobs } from './job-worker';
 import { refreshAccessToken } from './oauth';
 import pulse from './pulse.cron';
@@ -607,26 +606,6 @@ export const createClip = async (data: IClip) => {
           timestamps: false, // Disable automatic timestamp handling
         },
       );
-      if (session.firebaseId) {
-        const speakerNames = session.speakers
-          .map((speaker) => speaker.name)
-          .join(', ');
-        const newData = {
-          fullTitle: `${speakerNames} :  ${session.name}`,
-          title: session.name,
-          speaker: speakerNames,
-          description: session.description,
-          date: new Date(),
-          type: session.talkType,
-          track: session.track.map((track) => track).join(', '),
-          url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/index.m3u8`,
-          mp4Url: `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${parsedClip.asset.playbackId}/1080p0.mp4`,
-          assetId: parsedClip.asset.id,
-          iframeUrl: `<iframe src="http://streameth.org/embed?session=${session._id}&vod=true&playerName=${session.name}" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`,
-        };
-        // Update Firebase
-        await createEventVideoById(session.firebaseId, newData);
-      }
       await createClipState(data.sessionId);
       return parsedClip;
     }

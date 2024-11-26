@@ -1911,9 +1911,6 @@
 						},
 						"type": "array"
 					},
-					"firebaseId": {
-						"type": "string"
-					},
 					"talkType": {
 						"type": "string"
 					},
@@ -2148,9 +2145,6 @@
 						},
 						"type": "array"
 					},
-					"firebaseId": {
-						"type": "string"
-					},
 					"talkType": {
 						"type": "string"
 					},
@@ -2344,9 +2338,6 @@
 							"type": "object"
 						},
 						"type": "array"
-					},
-					"firebaseId": {
-						"type": "string"
 					},
 					"talkType": {
 						"type": "string"
