@@ -5,18 +5,15 @@ import {
   IPagination,
 } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
-import { Livepeer } from 'livepeer';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
-import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components';
 import FuzzySearch from 'fuzzy-search';
-import { auth } from '@/auth';
 import { fetchClient } from './fetch-client';
 
 interface ApiParams {
   event?: string;
-  organization?: string;
+  organizationId?: string;
   stageId?: string;
   page?: number;
   size?: number;
@@ -40,7 +37,7 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
 
 export async function fetchAllSessions({
   event,
-  organizationSlug,
+  organizationId,
   stageId,
   speakerIds,
   onlyVideos,
@@ -51,7 +48,7 @@ export async function fetchAllSessions({
   type,
 }: {
   event?: string;
-  organizationSlug?: string;
+  organizationId?: string;
   stageId?: string;
   speakerIds?: string[];
   onlyVideos?: boolean;
@@ -67,7 +64,7 @@ export async function fetchAllSessions({
   const params: ApiParams = {
     event,
     stageId,
-    organization: organizationSlug,
+    organizationId,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
