@@ -2,7 +2,6 @@ import { config } from 'dotenv';
 import FormData from 'form-data';
 import fs from 'fs';
 import { MongoClient, ObjectId } from 'mongodb';
-import fetch from 'node-fetch';
 import { errorMessageToStatusCode } from './utils/errors';
 import { downloadM3U8ToMP3 } from './utils/ffmpeg';
 import { jsonToVtt, uploadFile } from './utils/helper';
@@ -89,7 +88,8 @@ const updateAudioState = async (sessionId: string, status: string) => {
 async function audioConverter() {
   try {
     const queue = 'audio';
-    const channel = await (await connection).createChannel();
+    const connectionCue = await connection.getConnection();
+    const channel = await connectionCue.createChannel();
     let data;
     
     channel.assertQueue(queue, {

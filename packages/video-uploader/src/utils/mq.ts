@@ -1,11 +1,15 @@
-import amqp from "amqplib";
+import amqp, { Connection } from "amqplib";
 import { config } from "dotenv";
 import { logger } from "./logger";
 config();
 
-async function createConnection() {
+let connection: Connection | null = null;
+
+export async function getConnection() {
+  if (connection) return connection;
+
   try {
-    const connection = await amqp.connect({
+    connection = await amqp.connect({
       protocol: "amqp",
       hostname: process.env.MQ_HOST,
       port: Number(process.env.MQ_PORT),
@@ -16,6 +20,12 @@ async function createConnection() {
 
     connection.on("error", (e) => {
       logger.error("RabbitMQ connection error:", e);
+      connection = null;  // Reset connection on error
+    });
+
+    connection.on("close", () => {
+      logger.info("RabbitMQ connection closed");
+      connection = null;  // Reset connection when closed
     });
 
     return connection;
@@ -25,5 +35,6 @@ async function createConnection() {
   }
 }
 
-const connection = createConnection();
-export default connection;
+export default {
+  getConnection
+};

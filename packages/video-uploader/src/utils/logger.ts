@@ -6,7 +6,7 @@ import winstonDaily from 'winston-daily-rotate-file';
 config();
 
 // logs dir
-const logDir: string = join(__dirname, process.env.DIR);
+const logDir = process.env.LOG_DIR || 'logs';
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);

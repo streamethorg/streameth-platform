@@ -91,6 +91,24 @@ services:
       timeout: 10s
       retries: 5
 
+  video-uploader:
+    build:
+      context: ./packages/video-uploader
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./packages/video-uploader:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - LOG_DIR=/usr/src/app/logs
+      - DB_HOST=mongodb://root:example@mongodb:27017/streameth?authSource=admin
+      - MQ_HOST=rabbitmq
+      - MQ_PORT=5672
+      - MQ_USERNAME=guest
+      - MQ_SECRET=guest
+    depends_on:
+      - rabbitmq
+
 volumes:
   mongodb_data:
   rabbitmq_data: 

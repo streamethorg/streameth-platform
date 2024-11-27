@@ -40,8 +40,8 @@ async function videoUploader() {
 	try {
 		let data;
 		const queue = "videos";
-		const channel = await (await connection).createChannel();
-
+		const connectionCue = await connection.getConnection();
+		const channel = await connectionCue.createChannel();
 		channel.assertQueue(queue, {
 			durable: true,
 		});
