@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { bool, cleanEnv, port, str } from 'envalid';
+import { bool, cleanEnv, port, str, num } from 'envalid';
 // config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
 config();
 
@@ -50,6 +50,37 @@ const validateEnv = () => {
     REMOTION_BASE_URL: str(),
     REMOTION_WEBHOOK_SECRET: str(),
     REMOTION_ID: str(),
+    AWS_ACCESS_KEY_ID: str({
+      desc: 'AWS Access Key ID for Remotion Lambda',
+      default: process.env.REMOTION_AWS_ACCESS_KEY_ID // Fall back to REMOTION_ prefixed version
+    }),
+    AWS_SECRET_ACCESS_KEY: str({
+      desc: 'AWS Secret Access Key for Remotion Lambda',
+      default: process.env.REMOTION_AWS_SECRET_ACCESS_KEY // Fall back to REMOTION_ prefixed version
+    }),
+    AWS_REGION: str({
+      desc: 'AWS Region for Remotion Lambda',
+      default: 'us-east-1'
+    }),
+    REMOTION_DISK_SIZE_MB: num({
+      desc: 'Disk size in MB for Remotion Lambda',
+      default: 2048
+    }),
+    REMOTION_MEMORY_SIZE_MB: num({
+      desc: 'Memory size in MB for Remotion Lambda',
+      default: 2048
+    }),
+    REMOTION_TIMEOUT_SECONDS: num({
+      desc: 'Timeout in seconds for Remotion Lambda',
+      default: 120
+    }),
+    REMOTION_SITE_NAME: str({
+      desc: 'Site name for Remotion renders',
+      example: 'https://your-site.com'
+    }),
+    REMOTION_WEBHOOK_URL: str({
+      desc: 'Webhook URL for Remotion render notifications'
+    }),
   });
 };
 

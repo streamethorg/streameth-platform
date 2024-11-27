@@ -76,5 +76,20 @@ export const config = {
     id: validatedEnv.REMOTION_ID,
     host: validatedEnv.REMOTION_BASE_URL,
     webhookSecretKey: validatedEnv.REMOTION_WEBHOOK_SECRET,
+    aws: {
+      accessKeyId: validatedEnv.AWS_ACCESS_KEY_ID,
+      secretAccessKey: validatedEnv.AWS_SECRET_ACCESS_KEY,
+      region: validatedEnv.AWS_REGION,
+    },
+    render: {
+      diskSizeInMb: validatedEnv.REMOTION_DISK_SIZE_MB,
+      memorySizeInMb: validatedEnv.REMOTION_MEMORY_SIZE_MB,
+      timeoutInSeconds: validatedEnv.REMOTION_TIMEOUT_SECONDS,
+      siteName: validatedEnv.REMOTION_SITE_NAME,
+    },
+    webhook: {
+      url: validatedEnv.REMOTION_WEBHOOK_URL,
+      secret: validatedEnv.REMOTION_WEBHOOK_SECRET,
+    }
   },
 };
