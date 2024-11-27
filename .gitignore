@@ -55,3 +55,7 @@ google_sa_secret.json
 .yarn/*
 .yarn
 .yarn/
+
+
+*.log
+*.mp4

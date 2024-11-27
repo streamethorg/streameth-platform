@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import FormData from 'form-data';
-import fs, { stat } from 'fs';
+import fs from 'fs';
 import { MongoClient, ObjectId } from 'mongodb';
 import fetch from 'node-fetch';
 import { errorMessageToStatusCode } from './utils/errors';
@@ -8,6 +8,9 @@ import { downloadM3U8ToMP3 } from './utils/ffmpeg';
 import { jsonToVtt, uploadFile } from './utils/helper';
 import { logger } from './utils/logger';
 import connection from './utils/mq';
+import { ChunkDataTypes, ChunkTypes } from './utils/helper';
+
+
 config();
 
 const client = new MongoClient(process.env.DB_HOST);
@@ -18,7 +21,7 @@ const states = db.collection('states');
 const convertAudioToText = async (
   sessionId: string,
   filepath: string
-): Promise<{ url: string; text: string; chunks: string[] }> => {
+): Promise<{ url: string; text: string; chunks: ChunkTypes[] }> => {
   try {
     logger.info('Converting audio to text');
     const form = new FormData();
@@ -49,7 +52,7 @@ const convertAudioToText = async (
       });
       throw new Error('service unavailable');
     }
-    const data = await response.json();
+    const data: ChunkDataTypes = await response.json() as ChunkDataTypes;
     const transcriptions = jsonToVtt(data);
     const url = await uploadFile(
       `transcriptions/${sessionId}.vtt`,
@@ -88,9 +91,13 @@ async function audioConverter() {
     const queue = 'audio';
     const channel = await (await connection).createChannel();
     let data;
+    
     channel.assertQueue(queue, {
       durable: true,
     });
+    
+    logger.info(`Audio consumer connected to queue: ${queue}`);
+    
     channel.consume(
       queue,
       async (msg) => {
@@ -141,7 +148,21 @@ async function audioConverter() {
     );
   } catch (e) {
     logger.error('error', e);
+    // Retry connection after delay
+    setTimeout(() => {
+      logger.info('Retrying audio converter connection...');
+      audioConverter();
+    }, 5000);
   }
 }
+
+// Modify the initialization to handle process errors
+process.on('uncaughtException', (error) => {
+  logger.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error('Unhandled Rejection:', reason);
+});
 
 audioConverter();

@@ -18,8 +18,8 @@ services:
       - TEST_URL=http://localhost:3400
 
       # Database
-      - MONGODB_URI=mongodb://mongodb:27017/streameth
-      - DB_HOST=mongodb://mongodb:27017/streameth
+      - MONGODB_URI=mongodb://root:example@mongodb:27017/streameth?authSource=admin
+      - DB_HOST=mongodb://root:example@mongodb:27017/streameth?authSource=admin
 
       # Logging
       - LOG_FORMAT=dev
@@ -42,20 +42,20 @@ services:
       - mongodb
       - rabbitmq
 
-  app:
-    build:
-      context: .
-      dockerfile: packages/app/Dockerfile.dev
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./packages/app:/app/packages/app
-      - /app/packages/app/node_modules
-    environment:
-      - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://localhost:3400
-    depends_on:
-      - server
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: packages/app/Dockerfile.dev
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./packages/app:/app/packages/app
+  #     - /app/packages/app/node_modules
+  #   environment:
+  #     - NODE_ENV=development
+  #     - NEXT_PUBLIC_API_URL=http://localhost:3400
+  #   depends_on:
+  #     - server
 
   mongodb:
     image: mongo:latest
@@ -66,6 +66,14 @@ services:
       - ./mongo-init:/docker-entrypoint-initdb.d
     environment:
       - MONGO_INITDB_DATABASE=streameth
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   rabbitmq:
     image: rabbitmq:3-management

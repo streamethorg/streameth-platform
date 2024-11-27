@@ -7,7 +7,7 @@ import { config } from "dotenv";
 import { logger } from "./logger";
 config();
 
-interface ChunkTypes {
+export interface ChunkTypes {
   text: string;
   timestamp: Array<number>;
 }

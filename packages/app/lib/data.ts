@@ -78,6 +78,7 @@ export async function fetchAllSessions({
     itemDate,
     clipable,
   };
+  console.log(constructApiUrl(`${apiUrl()}/sessions`, params));
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {

@@ -1,6 +1,6 @@
 import ffmpeg from "fluent-ffmpeg";
 import fs from "fs";
-import path, { resolve } from "path";
+import path from "path";
 import { logger } from "./logger";
 
 async function ensureDirectoryExists(directory: string): Promise<void> {

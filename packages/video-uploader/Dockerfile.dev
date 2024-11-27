@@ -1,0 +1,31 @@
+FROM node:18-slim
+
+# Install FFmpeg and other dependencies
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies using Yarn
+RUN yarn install
+
+# Install TypeScript globally
+RUN yarn global add typescript tsc-alias
+
+# Copy source code
+COPY . .
+
+# Create tmp directory for audio files
+RUN mkdir -p tmp
+
+# Build TypeScript code using Yarn
+RUN yarn build
+
+# Start the consumer using the yarn audio command instead of node dist/audio-queue.js
+CMD ["yarn", "audio"]
