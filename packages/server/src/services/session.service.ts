@@ -238,8 +238,8 @@ export default class SessionService {
     query: string,
     organizationId?: string,
   ): Promise<Array<ISession>> {
-    console.time('filterSessionsExecutionTime');
-    console.log(query);
+    // console.time('filterSessionsExecutionTime');
+    // console.log(query);
 
     // Start with base filter that excludes animations and editorClips
     let filter: any = {
@@ -259,8 +259,8 @@ export default class SessionService {
       0,
       10,
     );
-    console.log(sessions);
-    console.timeEnd('filterSessionsExecutionTime');
+    // console.log(sessions);
+    // console.timeEnd('filterSessionsExecutionTime');
     return sessions;
   }
 

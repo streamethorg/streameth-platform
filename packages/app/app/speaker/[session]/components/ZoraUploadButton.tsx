@@ -126,7 +126,7 @@ const ZoraUploadButton = ({
         mediaUrl: downloadUrl,
         thumbnailUrl: coverImageUri,
       });
-      console.log('coverImageUri', coverImageUri, 'thumbnailUrl', thumbnail);
+      // console.log('coverImageUri', coverImageUri, 'thumbnailUrl', thumbnail);
       const tokenMetadataUri = await uploadToIPFS(tokenMetadata);
 
       if (BASE_CHAIN_ID !== (await publicClient.getChainId())) {
@@ -159,7 +159,7 @@ const ZoraUploadButton = ({
       writeContract(parameters);
 
       setZoraContractAddress(contractAddress);
-      console.log('Upload successful. Contract address:', contractAddress);
+      // console.log('Upload successful. Contract address:', contractAddress);
     } catch (error) {
       console.error('Error uploading to Zora:', error);
       toast.error('Failed to upload video to Zora marketplace');
