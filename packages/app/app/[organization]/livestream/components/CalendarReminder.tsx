@@ -50,11 +50,11 @@ const CalendarReminder = ({
         onClick={handleAddToCalendar}
       >
         <CalendarPlus size={20} />
-        <span>Add to Google Calendar</span>
+        <span>Add to Calendar</span>
       </Button>
       <Button className="space-x-2 md:hidden" onClick={handleAddToCalendar}>
         <CalendarPlus size={20} />
-        <span>Add to Google Calendar</span>
+        <span>Add to Calendar</span>
       </Button>
     </>
   );

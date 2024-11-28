@@ -48,12 +48,11 @@ const LivestreamTable = async ({
   return (
     <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {streams?.map((stream) => (
-        <Link
-          key={stream._id}
-          href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
-          className="flex flex-col rounded-xl border"
-        >
-          <div className="relative w-full">
+        <div key={stream._id} className="flex flex-col rounded-xl border">
+          <Link
+            href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
+            className="relative w-full"
+          >
             {stream.streamSettings?.isActive &&
             stream.streamSettings?.playbackId ? (
               <PlayerWithControls
@@ -74,10 +73,14 @@ const LivestreamTable = async ({
             ) : (
               <Thumbnail imageUrl={stream.thumbnail} />
             )}
-          </div>
+          </Link>
           <div className="p-4 flex flex-row justify-between">
             <div className="flex flex-col">
-              <p className="line-clamp-3 font-medium">{stream?.name}</p>
+              <Link
+                href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
+              >
+                <p className="line-clamp-3 font-medium">{stream?.name}</p>
+              </Link>
               <p className="text-sm">
                 {stream?.streamDate
                   ? formatDate(new Date(stream?.streamDate), 'MMM D, YYYY')
@@ -99,7 +102,7 @@ const LivestreamTable = async ({
               </PopoverContent>
             </Popover>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );
