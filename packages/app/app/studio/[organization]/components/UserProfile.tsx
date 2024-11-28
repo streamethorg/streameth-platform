@@ -42,6 +42,13 @@ const UserProfile = async ({
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>
+          <Link href={`/studio/${organization}`}>
+            <Button className="hidden lg:block" variant={'link'}>
+              View studio
+            </Button>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
           <Link href={`/${organization}`}>
             <Button className="hidden lg:block" variant={'link'}>
               View channel page
