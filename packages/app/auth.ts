@@ -73,7 +73,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				});
 
 				if (!response.ok) {
-					console.log("Throwing");
 					throw new Error("AuthError");
 				}
 
