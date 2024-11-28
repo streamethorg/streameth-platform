@@ -202,7 +202,7 @@ export const ClipProvider = ({
   const hasSetEndTimeRef = useRef(false);
 
   useEffect(() => {
-    console.log(timeReference);
+    // console.log(timeReference);
     if (
       timeReference.currentTime !== 0 &&
       videoRef.current?.duration &&

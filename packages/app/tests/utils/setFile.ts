@@ -16,7 +16,7 @@ export const setFile = async (page: Page) => {
   await expect(
     page.getByText('Image uploaded successfully').first()
   ).toBeVisible({ timeout: 20000 });
-  console.log('Image upload successful');
+  // console.log('Image upload successful');
   await expect(
     page.getByText('Image uploaded successfully').first()
   ).toBeHidden({ timeout: 7000 });

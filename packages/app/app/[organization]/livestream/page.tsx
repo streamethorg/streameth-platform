@@ -63,6 +63,7 @@ export default async function Livestream({
             description={stage.description ?? ''}
             date={stage.streamDate as string}
             video={stage as IExtendedStage}
+            organizationSlug={params.organization}
           />
         </div>
         <div className="px-4 md:px-0">
