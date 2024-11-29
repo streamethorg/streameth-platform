@@ -25,7 +25,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/streameth/streameth-new-server:latest
-            ghcr.io/streameth/streameth-new-server:${{ github.sha }}
+            ghcr.io/streamethorg/streameth-platform/server:latest
+            ghcr.io/streamethorg/streameth-platform/server:${{ github.sha }}
           file: ./packages/server/Dockerfile
 
