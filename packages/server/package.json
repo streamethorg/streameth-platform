@@ -15,7 +15,6 @@
     "@aws-sdk/client-s3": "^3.509.0",
     "@privy-io/server-auth": "^1.7.3",
     "@pulsecron/pulse": "^1.6.3",
-    "@remotion/lambda": "^4.0.232",
     "@thirdweb-dev/storage": "^2.0.10",
     "@types/nodemailer": "^6.4.16",
     "amqplib": "^0.10.4",

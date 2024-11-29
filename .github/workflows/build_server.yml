@@ -2,27 +2,33 @@ name: Build server
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [develop, main]
+    branches: [docker]
+
 
 jobs:
-  build:
+
+  build-and-push-image:
     runs-on: ubuntu-latest
+    needs:
+      - run-tests
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20...
-        uses: actions/setup-node@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
         with:
-          node-version: "20"
+          registry: https://ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
 
-      - name: Install yarn...
-        run: npm install -g yarn
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/streameth/streameth-new-server:latest
+            ghcr.io/streameth/streameth-new-server:${{ github.sha }}
 
-      - name: Install dependencies...
-        run: yarn install:all
 
-      - name: Build server
-        run: yarn build:server
