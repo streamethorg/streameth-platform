@@ -25,14 +25,14 @@ services:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
   server:
-    image: ghcr.io/streamethorg/streameth-platform/server:latest
+    image: ghcr.io/streamethorg/streameth-platform/server:49e5e8daf3183a75ea04d8837917191f7ec20fd6
     depends_on:
       - mongodb
       - rabbitmq
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.web.loadbalancer.server.port=8080"
-      - "traefik.http.routers.web.rule=Host(`dev.api.streameth.org`)"
+      - "traefik.http.routers.web.rule=Host(`${NODE_ENV}.api.streameth.org`) || Host(`staging.api.streameth.org`, `prod.api.streameth.org`)"
       - "traefik.http.routers.web.entrypoints=websecure"
       - "traefik.http.routers.web.tls.certresolver=myresolver"
     secrets:
@@ -41,7 +41,7 @@ services:
       - "8080:8080"
     environment:
       # Base Configuration
-      - NODE_ENV=production
+      - NODE_ENV=staging
       - APP_PORT=8080
       - BASE_URL=https://${NODE_ENV}.api.streameth.org
       - PLAYER_URL=https://${NODE_ENV}.player.streameth.org
@@ -55,7 +55,7 @@ services:
       
       # CORS
       - CORS_ORIGIN=[]
-      - CORS_CREDENTIALS=TRUE
+      - CORS_CREDENTIALS=true
       - CORS_PROXY_URL=""
       
       # API Keys
@@ -110,6 +110,10 @@ services:
       - REMOTION_ID=pebs #composition id, need to chage
       - PIPEDREAM_AUTH_TOKEN=/run/secrets/pipedream-auth-token
       - DEVCON_UPLOAD_ENDPOINT=/run/secrets/devcon-upload-endpoint
+      - LOG_DIR=logs
+      - LOG_FORMAT=dev
+      - REMOTION_SITE_NAME=https://streameth.org
+      - REMOTION_WEBHOOK_URL=https://your-webhook-url.com/remotion-webhook
 
     restart: unless-stopped
     logging:
@@ -117,6 +121,12 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+        mode: "non-blocking"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
 
   mongodb:
     image: mongo:latest
