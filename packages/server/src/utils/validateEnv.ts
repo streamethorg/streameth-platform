@@ -6,6 +6,7 @@ config();
 const validateEnv = () => {
   return cleanEnv(process.env, {
     BASE_URL: str(),
+    PLAYER_URL: str(),
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),
