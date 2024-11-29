@@ -9,6 +9,9 @@ export const config = {
   wallets: validatedEnv.WALLET_ADDRESSES,
   db: {
     host: validatedEnv.DB_HOST,
+    user: validatedEnv.DB_USER,
+    name: validatedEnv.DB_NAME,
+    password: validatedEnv.DB_PASSWORD,
   },
   logger: {
     format: validatedEnv.LOG_FORMAT,
