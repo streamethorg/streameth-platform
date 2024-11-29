@@ -3,8 +3,6 @@ import validateEnv from '@utils/validateEnv';
 const validatedEnv = validateEnv();
 export const config = {
   baseUrl: validatedEnv.BASE_URL,
-  testUrl: validatedEnv.TEST_URL,
-  playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
   wallets: validatedEnv.WALLET_ADDRESSES,
@@ -62,7 +60,6 @@ export const config = {
     secret: validatedEnv.MQ_SECRET,
   },
   google: {
-    apiKey: validatedEnv.GOOGLE_API_KEY,
     privateKey: validatedEnv.SERVICE_ACCOUNT_PRIVATE_KEY,
     accountEmail: validatedEnv.SERVICE_ACCOUNT_EMAIL,
   },

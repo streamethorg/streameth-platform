@@ -6,7 +6,6 @@ config();
 const validateEnv = () => {
   return cleanEnv(process.env, {
     BASE_URL: str(),
-    PLAYER_URL: str(),
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),
@@ -28,9 +27,6 @@ const validateEnv = () => {
     LIVEPEER_WEBHOOK_SECRET: str(),
     TELEGRAM_API_KEY: str(),
     TELEGRAM_CHAT_ID: str(),
-    PRIVY_APP_ID: str(),
-    PRIVY_SECRET_KEY: str(),
-    TEST_URL: str(),
     GOOGLE_OAUTH_SECRET: str(),
     GOOGLE_CLIENT_ID: str(),
     TWITTER_OAUTH_SECRET: str(),
@@ -40,7 +36,6 @@ const validateEnv = () => {
     MQ_PORT: port(),
     MQ_USERNAME: str(),
     MQ_SECRET: str(),
-    GOOGLE_API_KEY: str(),
     SERVICE_ACCOUNT_PRIVATE_KEY: str(),
     SERVICE_ACCOUNT_EMAIL: str(),
     MAIL_HOST: str(),

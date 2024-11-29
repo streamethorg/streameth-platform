@@ -1,0 +1,205 @@
+version: '3'
+services:
+  traefik:
+    image: traefik:v3.1
+    command:
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=elliott@zenful.site"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+    ports:
+      - mode: host
+        protocol: tcp
+        published: 80
+        target: 80
+      - mode: host
+        protocol: tcp
+        published: 443
+        target: 443
+    volumes:
+      - letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+  server:
+    image: ghcr.io/streamethorg/streameth-platform/server:9e197fae37c058564c8fae7833738528f88ad614
+    depends_on:
+      - mongodb
+      - rabbitmq
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.web.loadbalancer.server.port=8080"
+      - "traefik.http.routers.web.rule=Host(`dev.api.streameth.org`)"
+      - "traefik.http.routers.web.entrypoints=websecure"
+      - "traefik.http.routers.web.tls.certresolver=myresolver"
+    secrets:
+      - db-password
+    ports:
+      - "8080:8080"
+    environment:
+      # Base Configuration
+      - NODE_ENV=production
+      - APP_PORT=8080
+      - BASE_URL=https://${NODE_ENV}.api.streameth.org
+      
+      # Database
+      - DB_PASSWORD=/run/secrets/db-password
+      - DB_HOST=mongodb://root:${DB_PASSWORD}@mongodb:27017/streameth-${NODE_ENV}?authSource=admin
+
+      # JWT
+      - JWT_SECRET=/run/secrets/jwt-secret
+      - JWT_EXPIRY='30 days'
+      
+      # CORS
+      - CORS_ORIGIN=[]
+      - CORS_CREDENTIALS=TRUE
+      - CORS_PROXY_URL=""
+      
+      # API Keys
+      - LIVEPEER_API_KEY=/run/secrets/livepeer-api-key
+      - THIRDWEB_SECRET_KEY=/run/secrets/thirdweb-secret-key
+      
+      # Storage
+      - SPACES_KEY=/run/secrets/spaces-key
+      - SPACES_SECRET=/run/secrets/spaces-secret
+      - BUCKET_NAME=streameth-${NODE_ENV}
+      - BUCKET_URL=https://streameth-${NODE_ENV}.ams3.digitaloceanspaces.com
+      
+      # Livepeer
+      - LIVEPEER_WEBHOOK_SECRET=/run/secrets/livepeer-webhook-secret
+      - LIVEPEER_BASE_URL=https://livepeer.studio
+      
+      # Social & OAuth
+      - TELEGRAM_API_KEY=/run/secrets/telegram-api-key
+      - TELEGRAM_CHAT_ID=/run/secrets/telegram-chat-id
+      - OAUTH_SECRET=/run/secrets/oauth-secret
+      - TWITTER_OAUTH_SECRET=/run/secrets/twitter-oauth-secret
+      - TWITTER_CLIENT_ID=/run/secrets/twitter-client-id
+      - GOOGLE_OAUTH_SECRET=/run/secrets/google-oauth-secret
+      - GOOGLE_CLIENT_ID=/run/secrets/google-client-id
+      
+      # Message Queue
+      - MQ_HOST=rabbitmq
+      - MQ_PORT=5672
+      - MQ_USERNAME=guest
+      - MQ_SECRET=/run/secrets/rabbitmq-secret
+      
+      # Google Service Account
+      - SERVICE_ACCOUNT_PRIVATE_KEY=/run/secrets/google-service-account-private-key
+      - SERVICE_ACCOUNT_EMAIL=/run/secrets/google-service-account-email
+      
+      # Mail
+      - MAIL_HOST=smtp.ethereal.email
+      - MAIL_PORT=587
+      - MAIL_USER=/run/secrets/mail-user
+      - MAIL_PASS=/run/secrets/mail-pass
+      
+      # Magic Link
+      - MAGIC_LINK_SECRET=/run/secrets/magic-link-secret
+      - MAGIC_LINK_EXPIRY='30 days'
+      
+      # Wallet & Privy
+      - WALLET_ADDRESSES=""
+      
+      # Remotion & Others
+      - REMOTION_BASE_URL=http://localhost:3000 # need to change
+      - REMOTION_WEBHOOK_SECRET=/run/secrets/remotion-webhook-secret
+      - REMOTION_ID=pebs #composition id, need to chage
+      - PIPEDREAM_AUTH_TOKEN=/run/secrets/pipedream-auth-token
+      - DEVCON_UPLOAD_ENDPOINT=/run/secrets/devcon-upload-endpoint
+
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=streameth-${NODE_ENV}
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    secrets:
+      - db-password
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=/run/secrets/rabbitmq-secret
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  mongodb_data:
+  rabbitmq_data:
+  letsencrypt:
+
+secrets:
+  db-password:
+    external: true 
+  rabbitmq-secret:
+    external: true
+  jwt-secret:
+    external: true
+  spaces-key:
+    external: true
+  spaces-secret:
+    external: true
+  livepeer-api-key:
+    external: true
+  livepeer-webhook-secret:
+    external: true
+  telegram-api-key:
+    external: true
+  telegram-chat-id:
+    external: true
+  oauth-secret:
+    external: true
+  twitter-oauth-secret:
+    external: true
+  twitter-client-id:
+    external: true
+  google-oauth-secret:
+    external: true
+  google-client-id:
+    external: true
+  magic-link-secret:
+    external: true
+  mail-user:
+    external: true
+  mail-pass:
+    external: true
+  google-service-account-private-key:
+    external: true
+  google-service-account-email:
+    external: true
+  remotion-webhook-secret:
+    external: true
+  pipedream-auth-token:
+    external: true
+  devcon-upload-endpoint:
+    external: true

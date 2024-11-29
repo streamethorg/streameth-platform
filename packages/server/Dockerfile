@@ -22,4 +22,4 @@ RUN yarn global add nodemon
 EXPOSE 8080
 
 # Use nodemon for hot reloading
-CMD ["yarn", "server:start"]
+CMD ["yarn", "start:server"]

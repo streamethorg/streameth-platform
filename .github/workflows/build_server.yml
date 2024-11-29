@@ -4,7 +4,6 @@ on:
   push:
     branches: [docker]
 
-
 jobs:
   build-and-push-server-image:
     runs-on: ubuntu-latest
