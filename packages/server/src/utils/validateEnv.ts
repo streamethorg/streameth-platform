@@ -1,6 +1,5 @@
 import { config } from 'dotenv';
 import { bool, cleanEnv, port, str, num } from 'envalid';
-// config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
 config();
 
 const validateEnv = () => {
@@ -12,73 +11,49 @@ const validateEnv = () => {
     DB_HOST: str(),
     DB_USER: str(),
     DB_NAME: str(),
-    DB_PASSWORD: str(),
+    DB_PASSWORD_FILE: str(),
     LOG_FORMAT: str(),
     LOG_DIR: str(),
     CORS_ORIGIN: str(),
     CORS_CREDENTIALS: bool(),
-    JWT_SECRET: str(),
+    JWT_SECRET_FILE: str(),
     JWT_EXPIRY: str(),
-    MAGIC_LINK_SECRET: str(),
+    MAGIC_LINK_SECRET_FILE: str(),
     MAGIC_LINK_EXPIRY: str(),
     LIVEPEER_BASE_URL: str(),
-    LIVEPEER_API_KEY: str(),
+    LIVEPEER_API_KEY_FILE: str(),
     WALLET_ADDRESSES: str(),
     BUCKET_NAME: str(),
     BUCKET_URL: str(),
-    SPACES_KEY: str(),
-    SPACES_SECRET: str(),
-    LIVEPEER_WEBHOOK_SECRET: str(),
-    TELEGRAM_API_KEY: str(),
-    TELEGRAM_CHAT_ID: str(),
-    GOOGLE_OAUTH_SECRET: str(),
-    GOOGLE_CLIENT_ID: str(),
-    TWITTER_OAUTH_SECRET: str(),
-    TWITTER_CLIENT_ID: str(),
-    THIRDWEB_SECRET_KEY: str(),
+    SPACES_KEY_FILE: str(),
+    SPACES_SECRET_FILE: str(),
+    LIVEPEER_WEBHOOK_SECRET_FILE: str(),
+    TELEGRAM_API_KEY_FILE: str(),
+    TELEGRAM_CHAT_ID_FILE: str(),
+    GOOGLE_OAUTH_SECRET_FILE: str(),
+    GOOGLE_CLIENT_ID_FILE: str(),
+    TWITTER_OAUTH_SECRET_FILE: str(),
+    TWITTER_CLIENT_ID_FILE: str(),
+    THIRDWEB_SECRET_KEY_FILE: str(),
     MQ_HOST: str(),
     MQ_PORT: port(),
     MQ_USERNAME: str(),
-    MQ_SECRET: str(),
-    SERVICE_ACCOUNT_PRIVATE_KEY: str(),
-    SERVICE_ACCOUNT_EMAIL: str(),
+    MQ_SECRET_FILE: str(),
+    SERVICE_ACCOUNT_PRIVATE_KEY_FILE: str(),
+    SERVICE_ACCOUNT_EMAIL_FILE: str(),
     MAIL_HOST: str(),
     MAIL_PORT: port(),
-    MAIL_USER: str(),
-    MAIL_PASS: str(),
+    MAIL_USER_FILE: str(),
+    MAIL_PASS_FILE: str(),
     REMOTION_BASE_URL: str(),
-    REMOTION_WEBHOOK_SECRET: str(),
+    REMOTION_WEBHOOK_SECRET_FILE: str(),
     REMOTION_ID: str(),
-    AWS_ACCESS_KEY_ID: str({
-      desc: 'AWS Access Key ID for Remotion Lambda',
-      default: process.env.REMOTION_AWS_ACCESS_KEY_ID // Fall back to REMOTION_ prefixed version
-    }),
-    AWS_SECRET_ACCESS_KEY: str({
-      desc: 'AWS Secret Access Key for Remotion Lambda',
-      default: process.env.REMOTION_AWS_SECRET_ACCESS_KEY // Fall back to REMOTION_ prefixed version
-    }),
-    AWS_REGION: str({
-      desc: 'AWS Region for Remotion Lambda',
-      default: 'us-east-1'
-    }),
-    REMOTION_DISK_SIZE_MB: num({
-      desc: 'Disk size in MB for Remotion Lambda',
-      default: 2048
-    }),
-    REMOTION_MEMORY_SIZE_MB: num({
-      desc: 'Memory size in MB for Remotion Lambda',
-      default: 2048
-    }),
-    REMOTION_TIMEOUT_SECONDS: num({
-      desc: 'Timeout in seconds for Remotion Lambda',
-      default: 120
-    }),
     REMOTION_SITE_NAME: str({
       desc: 'Site name for Remotion renders',
-      example: 'https://your-site.com'
+      example: 'https://your-site.com',
     }),
     REMOTION_WEBHOOK_URL: str({
-      desc: 'Webhook URL for Remotion render notifications'
+      desc: 'Webhook URL for Remotion render notifications',
     }),
   });
 };

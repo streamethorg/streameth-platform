@@ -64,7 +64,7 @@ class App {
     if (this.env !== 'production') {
       set('debug', true);
     }
-
+    console.log(dbConnection.url);
     await connect(dbConnection.url);
     logger.info('Db connected');
   }
