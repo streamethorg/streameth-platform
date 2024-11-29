@@ -3,24 +3,27 @@ services:
   traefik:
     image: traefik:v3.1
     command:
-      - "--providers.docker"
       - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
+      - "8080:8080"
     volumes:
-      - letsencrypt:/letsencrypt
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
   server:
-    image: server:log-error
+    image: ghcr.io/streamethorg/streameth-platform/server:latest
     depends_on:
       - mongodb
       - rabbitmq
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`staging.api.streameth.org`)"
-      - "traefik.http.services.web.loadbalancer.server.port=8080"
-      - "traefik.http.routers.web.service=web"
+      - "traefik.http.routers.api.rule=Host(`staging.api.streameth.org`)"
+      - "traefik.http.routers.api.entrypoints=web"
+      - "traefik.http.services.api.loadbalancer.server.port=8080"
+      - "traefik.http.routers.api.service=api"
     secrets:
       - db-password
     environment:
