@@ -40,9 +40,17 @@ export const validateToken = async (
       audience: config.oauth.google.clientId,
     });
     const payload = tokens.getPayload();
+    if (!payload) {
+      console.error('No payload in token');
+      throw new Error('Invalid token payload');
+    }
     const currentTime = Math.floor(Date.now() / 1000);
     if (payload.exp < currentTime) {
       throw new Error('Token expired');
+    }
+    if (!payload.email) {
+      console.error('No email in token payload:', payload);
+      throw new Error('No email in token');
     }
     return {
       isValid: true,
@@ -50,6 +58,7 @@ export const validateToken = async (
       email: payload['email'],
     };
   } catch (e) {
+    console.error('Error validating token:', e);
     if (e instanceof Error) {
       if (e.message.includes('Invalid token signature')) {
         throw new Error('Invalid or expired token');
@@ -58,5 +67,6 @@ export const validateToken = async (
         throw new Error('Token expired');
       }
     }
+    throw new Error('Token validation failed');
   }
 };

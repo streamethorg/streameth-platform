@@ -62,23 +62,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			}
 			if (account && account?.provider === "google") {
 				// Exchange the NextAuth token for backend JWT
-				const response = await fetch(`${apiUrl()}/auth/login`, {
-					method: "POST",
-					credentials: "include",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						token: account.id_token,
-						type: "google",
-					}),
-				});
+				try {
+					const response = await fetch(`${apiUrl()}/auth/login`, {
+						method: "POST",
+						credentials: "include",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							token: account.id_token,
+							type: "google",
+							email: token.email,
+						}),
+					});
 
-				if (!response.ok) {
-					console.log("Throwing");
+					if (!response.ok) {
+						console.error("Auth error response:", await response.text());
+						throw new Error("AuthError");
+					}
+
+					const data = await response.json();
+					token.access_token = data.data?.token;
+				} catch (error) {
+					console.error("Error in Google auth:", error);
 					throw new Error("AuthError");
 				}
-
-				const data = await response.json();
-				token.access_token = data.data?.token;
 			}
 			return token;
 		},
