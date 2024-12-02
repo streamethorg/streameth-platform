@@ -15,7 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-			authorization: { params: { access_type: "offline", prompt: "consent" } },
+			authorization: { params: { access_type: "offline", prompt: "consent", scope: "email profile" } },
 		}),
 		CredentialsProvider({
 			name: "Credentials",
@@ -55,14 +55,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		verifyRequest: "/auth/magic-link",
 	},
 	callbacks: {
-		async jwt({ token, account, user }) {
+		async signIn({ user, account, profile }) {
+			if (account?.provider === "google") {
+				console.log("Google sign in profile:", profile);
+				console.log("Google sign in user:", user);
+				return true;
+			}
+			return true;
+		},
+		async jwt({ token, account, profile, user }) {
+			console.log("JWT Callback - Token:", token);
+			console.log("JWT Callback - Account:", account);
+			console.log("JWT Callback - Profile:", profile);
+			console.log("JWT Callback - User:", user);
+
 			if (account?.provider === "credentials" && user) {
-				const userWithToken = user as { token: string }; // Type assertion
+				const userWithToken = user as { token: string };
 				token.access_token = userWithToken.token;
 			}
 			if (account && account?.provider === "google") {
-				// Exchange the NextAuth token for backend JWT
 				try {
+					// Ensure we have the email from the user object
+					if (!token.email && user?.email) {
+						token.email = user.email;
+					}
+
 					const response = await fetch(`${apiUrl()}/auth/login`, {
 						method: "POST",
 						credentials: "include",
@@ -70,16 +87,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 						body: JSON.stringify({
 							token: account.id_token,
 							type: "google",
-							email: token.email,
+							email: token.email || user?.email, // Use either token email or user email
 						}),
 					});
 
 					if (!response.ok) {
-						console.error("Auth error response:", await response.text());
+						const errorText = await response.text();
+						console.error("Auth error response:", errorText);
 						throw new Error("AuthError");
 					}
 
 					const data = await response.json();
+					console.log("Backend login response:", data);
 					token.access_token = data.data?.token;
 				} catch (error) {
 					console.error("Error in Google auth:", error);
@@ -89,7 +108,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return token;
 		},
 		async session({ session, token }) {
+			console.log("Session Callback - Session:", session);
+			console.log("Session Callback - Token:", token);
+
 			if (token) {
+				// Copy email from token to session if it exists
+				if (token.email && !session.user?.email) {
+					session.user = {
+						...session.user,
+						email: token.email,
+					};
+				}
+
 				// Extract expiration time from the access token
 				const expTime = getTokenExpiration(token.access_token as string);
 				const currentTime = Math.floor(Date.now() / 1000);
@@ -133,4 +163,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return baseUrl;
 		},
 	},
+	debug: true, // Enable debug mode
 });
