@@ -76,7 +76,13 @@ export class IndexController extends Controller {
     console.log('Livepeer Payload:', payload);
     switch (payload.event) {
       case LivepeerEvent.assetReady:
-        await this.assetReady(payload.payload.id ?? payload.payload.asset.id);
+        const assetId = payload.asset?.id;
+        console.log('Processing asset.ready with new format, asset ID:', assetId);
+        if (!assetId) {
+          console.log('No asset ID found in payload:', payload);
+          return SendApiResponse('No asset ID found in payload', null, '400');
+        }
+        await this.assetReady(assetId);
         break;
       case LivepeerEvent.assetFailed:
         await this.assetFailed(payload.payload.id);
@@ -86,9 +92,8 @@ export class IndexController extends Controller {
         await this.stageService.findStreamAndUpdate(payload.stream.id);
         break;
       case LivepeerEvent.recordingReady:
-        await this.sessionService.createStreamRecordings(
-          payload.payload.session,
-        );
+        console.log('Processing recording.ready for session:', payload.payload.session.id);
+        await this.sessionService.createStreamRecordings(payload.payload.session);
         break;
       default:
         return SendApiResponse('Event not recognizable', null, '400');
@@ -167,6 +172,7 @@ export class IndexController extends Controller {
     const asset = await getAsset(id);
     const session = await this.sessionService.findOne({ assetId: asset.id });
     if (!session) throw new HttpException(404, 'No session found');
+    
     let sessionParams = {
       name: session.name,
       start: session.start,
@@ -181,14 +187,48 @@ export class IndexController extends Controller {
       processingStatus: ProcessingStatus.completed,
     };
     await this.sessionService.update(session._id.toString(), sessionParams);
-    const state = await this.stateService.findOne({
+
+    // Map session type to state type
+    let stateType: StateType;
+    switch (session.type) {
+      case SessionType.video:
+        stateType = StateType.video;
+        break;
+      case SessionType.animation:
+        stateType = StateType.animation;
+        break;
+      case SessionType.clip:
+        stateType = StateType.clip;
+        break;
+      case SessionType.editorClip:
+        stateType = StateType.editorClip;
+        break;
+      case SessionType.livestream:
+      default:
+        stateType = StateType.video;
+        break;
+    }
+
+    // Find or create state record
+    let state = await this.stateService.findOne({
       sessionId: session._id.toString(),
-      type: session.type,
-    });
-    if (!state) throw new HttpException(404, 'No state found');
+      type: stateType,
+    }).catch(() => null);
+
+    if (!state) {
+      // Create new state if it doesn't exist
+      state = await this.stateService.create({
+        sessionId: session._id.toString(),
+        organizationId: session.organizationId,
+        type: stateType,
+        status: StateStatus.pending
+      });
+    }
+
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
     });
+
     if (
       state.type !== StateType.animation &&
       state.type !== StateType.editorClip
