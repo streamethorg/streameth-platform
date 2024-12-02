@@ -48,7 +48,7 @@ services:
 
       # JWT
       - JWT_SECRET_FILE=/run/secrets/jwt-secret
-      - JWT_EXPIRY='30 days'
+      - JWT_EXPIRY=30d
       
       # CORS
       - CORS_ORIGIN=[]
