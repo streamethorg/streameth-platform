@@ -76,7 +76,12 @@ export class IndexController extends Controller {
     console.log('Livepeer Payload:', payload);
     switch (payload.event) {
       case LivepeerEvent.assetReady:
-        await this.assetReady(payload.payload.id ?? payload.payload.asset.id);
+        const assetId = payload.payload.id ?? payload.payload.asset?.id;
+        if (!assetId) {
+          console.log('No asset ID found in payload:', payload);
+          return SendApiResponse('No asset ID found in payload', null, '400');
+        }
+        await this.assetReady(assetId);
         break;
       case LivepeerEvent.assetFailed:
         await this.assetFailed(payload.payload.id);
@@ -91,6 +96,7 @@ export class IndexController extends Controller {
         );
         break;
       default:
+        console.log('Unrecognized event:', payload.event);
         return SendApiResponse('Event not recognizable', null, '400');
     }
     return SendApiResponse('OK');
@@ -164,9 +170,19 @@ export class IndexController extends Controller {
   }
 
   private async assetReady(id: string) {
+    console.log('Processing asset ready for ID:', id);
     const asset = await getAsset(id);
+    if (!asset) {
+      console.log('Asset not found:', id);
+      throw new HttpException(404, 'Asset not found');
+    }
+    
     const session = await this.sessionService.findOne({ assetId: asset.id });
-    if (!session) throw new HttpException(404, 'No session found');
+    if (!session) {
+      console.log('No session found for asset:', asset.id);
+      throw new HttpException(404, 'No session found');
+    }
+    
     let sessionParams = {
       name: session.name,
       start: session.start,
@@ -180,15 +196,23 @@ export class IndexController extends Controller {
       'playback.duration': asset.videoSpec?.duration ?? 0,
       processingStatus: ProcessingStatus.completed,
     };
+    
+    console.log('Updating session with params:', sessionParams);
     await this.sessionService.update(session._id.toString(), sessionParams);
+    
     const state = await this.stateService.findOne({
       sessionId: session._id.toString(),
       type: session.type,
     });
-    if (!state) throw new HttpException(404, 'No state found');
+    if (!state) {
+      console.log('No state found for session:', session._id);
+      throw new HttpException(404, 'No state found');
+    }
+    
     await this.stateService.update(state._id.toString(), {
       status: StateStatus.completed,
     });
+    
     if (
       state.type !== StateType.animation &&
       state.type !== StateType.editorClip
@@ -198,12 +222,15 @@ export class IndexController extends Controller {
         sessionId: session._id.toString(),
       });
     }
+    
     const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
     if (clipEditor) {
       await clipEditor.updateOne({
         status: ClipEditorStatus.completed,
       });
     }
+    
+    console.log('Asset ready processing completed successfully');
   }
 
   private async assetFailed(id: string) {
