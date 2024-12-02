@@ -74,32 +74,59 @@ export class IndexController extends Controller {
       return SendApiResponse('Invalid signature or timestamp', null, '401');
     }
     console.log('Livepeer Payload:', payload);
-    switch (payload.event) {
-      case LivepeerEvent.assetReady:
-        const assetId = payload.payload.id ?? payload.payload.asset?.id;
-        if (!assetId) {
-          console.log('No asset ID found in payload:', payload);
-          return SendApiResponse('No asset ID found in payload', null, '400');
-        }
-        await this.assetReady(assetId);
-        break;
-      case LivepeerEvent.assetFailed:
-        await this.assetFailed(payload.payload.id);
-        break;
-      case LivepeerEvent.streamStarted:
-      case LivepeerEvent.streamIdle:
-        await this.stageService.findStreamAndUpdate(payload.stream.id);
-        break;
-      case LivepeerEvent.recordingReady:
-        await this.sessionService.createStreamRecordings(
-          payload.payload.session,
-        );
-        break;
-      default:
-        console.log('Unrecognized event:', payload.event);
-        return SendApiResponse('Event not recognizable', null, '400');
+
+    try {
+      switch (payload.event) {
+        case LivepeerEvent.assetReady:
+          let assetId;
+          if (payload.payload.asset) {
+            // New webhook format
+            assetId = payload.payload.asset.id;
+            console.log('Processing asset.ready with new format, asset ID:', assetId);
+          } else {
+            // Legacy webhook format
+            assetId = payload.payload.id;
+            console.log('Processing asset.ready with legacy format, asset ID:', assetId);
+          }
+          
+          if (!assetId) {
+            console.log('No asset ID found in payload:', payload);
+            return SendApiResponse('No asset ID found in payload', null, '400');
+          }
+          await this.assetReady(assetId);
+          break;
+
+        case LivepeerEvent.recordingReady:
+          if (!payload.payload?.session?.assetId) {
+            console.log('No session asset ID found in recording.ready payload:', payload);
+            return SendApiResponse('No session asset ID found', null, '400');
+          }
+          console.log('Processing recording.ready for session:', payload.payload.session.id);
+          await this.sessionService.createStreamRecordings(payload.payload.session);
+          // Also process the asset since it's ready
+          await this.assetReady(payload.payload.session.assetId);
+          break;
+
+        case LivepeerEvent.assetFailed:
+          console.log('Processing asset.failed for:', payload.payload.id);
+          await this.assetFailed(payload.payload.id);
+          break;
+
+        case LivepeerEvent.streamStarted:
+        case LivepeerEvent.streamIdle:
+          console.log('Processing stream event:', payload.event);
+          await this.stageService.findStreamAndUpdate(payload.stream.id);
+          break;
+
+        default:
+          console.log('Unrecognized event:', payload.event);
+          return SendApiResponse('Event not recognizable', null, '400');
+      }
+      return SendApiResponse('OK');
+    } catch (error) {
+      console.error('Error processing webhook:', error);
+      throw new HttpException(500, `Error processing webhook: ${error.message}`);
     }
-    return SendApiResponse('OK');
   }
 
   @Post('/webhook/remotion')
@@ -171,66 +198,77 @@ export class IndexController extends Controller {
 
   private async assetReady(id: string) {
     console.log('Processing asset ready for ID:', id);
-    const asset = await getAsset(id);
-    if (!asset) {
-      console.log('Asset not found:', id);
-      throw new HttpException(404, 'Asset not found');
-    }
-    
-    const session = await this.sessionService.findOne({ assetId: asset.id });
-    if (!session) {
-      console.log('No session found for asset:', asset.id);
-      throw new HttpException(404, 'No session found');
-    }
-    
-    let sessionParams = {
-      name: session.name,
-      start: session.start,
-      end: session.end,
-      organizationId: session.organizationId,
-      type: session.type,
-      videoUrl: asset.playbackUrl,
-      playbackId: asset.playbackId,
-      'playback.videoUrl': asset.playbackUrl,
-      'playback.format': asset.videoSpec?.format ?? '',
-      'playback.duration': asset.videoSpec?.duration ?? 0,
-      processingStatus: ProcessingStatus.completed,
-    };
-    
-    console.log('Updating session with params:', sessionParams);
-    await this.sessionService.update(session._id.toString(), sessionParams);
-    
-    const state = await this.stateService.findOne({
-      sessionId: session._id.toString(),
-      type: session.type,
-    });
-    if (!state) {
-      console.log('No state found for session:', session._id);
-      throw new HttpException(404, 'No state found');
-    }
-    
-    await this.stateService.update(state._id.toString(), {
-      status: StateStatus.completed,
-    });
-    
-    if (
-      state.type !== StateType.animation &&
-      state.type !== StateType.editorClip
-    ) {
-      await this.sessionService.sessionTranscriptions({
-        organizationId: session.organizationId.toString(),
+    try {
+      const asset = await getAsset(id);
+      if (!asset) {
+        console.log('Asset not found:', id);
+        throw new HttpException(404, 'Asset not found');
+      }
+      
+      const session = await this.sessionService.findOne({ assetId: asset.id });
+      if (!session) {
+        // Try finding by recording ID if session not found by asset ID
+        const recordingSession = await this.sessionService.findOne({ 
+          'recording.recordingId': asset.id 
+        });
+        if (!recordingSession) {
+          console.log('No session found for asset:', asset.id);
+          throw new HttpException(404, 'No session found');
+        }
+      }
+      
+      let sessionParams = {
+        name: session.name,
+        start: session.start,
+        end: session.end,
+        organizationId: session.organizationId,
+        type: session.type,
+        videoUrl: asset.playbackUrl,
+        playbackId: asset.playbackId,
+        'playback.videoUrl': asset.playbackUrl,
+        'playback.format': asset.videoSpec?.format ?? '',
+        'playback.duration': asset.videoSpec?.duration ?? 0,
+        processingStatus: ProcessingStatus.completed,
+      };
+      
+      console.log('Updating session with params:', sessionParams);
+      await this.sessionService.update(session._id.toString(), sessionParams);
+      
+      const state = await this.stateService.findOne({
         sessionId: session._id.toString(),
+        type: session.type,
       });
-    }
-    
-    const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
-    if (clipEditor) {
-      await clipEditor.updateOne({
-        status: ClipEditorStatus.completed,
+      if (!state) {
+        console.log('No state found for session:', session._id);
+        throw new HttpException(404, 'No state found');
+      }
+      
+      await this.stateService.update(state._id.toString(), {
+        status: StateStatus.completed,
       });
+      
+      if (
+        state.type !== StateType.animation &&
+        state.type !== StateType.editorClip
+      ) {
+        await this.sessionService.sessionTranscriptions({
+          organizationId: session.organizationId.toString(),
+          sessionId: session._id.toString(),
+        });
+      }
+      
+      const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
+      if (clipEditor) {
+        await clipEditor.updateOne({
+          status: ClipEditorStatus.completed,
+        });
+      }
+      
+      console.log('Asset ready processing completed successfully');
+    } catch (error) {
+      console.error('Error in assetReady:', error);
+      throw error;
     }
-    
-    console.log('Asset ready processing completed successfully');
   }
 
   private async assetFailed(id: string) {
