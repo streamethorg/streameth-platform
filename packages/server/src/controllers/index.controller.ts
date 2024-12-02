@@ -74,49 +74,26 @@ export class IndexController extends Controller {
       return SendApiResponse('Invalid signature or timestamp', null, '401');
     }
     console.log('Livepeer Payload:', payload);
-
-    try {
-      switch (payload.event) {
-        case LivepeerEvent.assetReady:
-          const assetId = payload.payload?.asset?.id;
-          if (!assetId) {
-            console.log('No asset ID found in payload:', payload);
-            return SendApiResponse('No asset ID found in payload', null, '400');
-          }
-          await this.assetReady(assetId);
-          break;
-
-        case LivepeerEvent.recordingReady:
-          if (!payload.payload?.session) {
-            console.log(
-              'No session found in recording.ready payload:',
-              payload,
-            );
-            return SendApiResponse('No session found in payload', null, '400');
-          }
-          await this.sessionService.createStreamRecordings(
-            payload.payload.session,
-          );
-          break;
-
-        case LivepeerEvent.assetFailed:
-          await this.assetFailed(payload.payload.id);
-          break;
-
-        case LivepeerEvent.streamStarted:
-        case LivepeerEvent.streamIdle:
-          await this.stageService.findStreamAndUpdate(payload.stream.id);
-          break;
-
-        default:
-          console.log('Unrecognized event:', payload.event);
-          return SendApiResponse('Event not recognizable', null, '400');
-      }
-      return SendApiResponse('OK');
-    } catch (error) {
-      console.error('Error processing webhook:', error);
-      return SendApiResponse('Internal server error', null, '500');
+    switch (payload.event) {
+      case LivepeerEvent.assetReady:
+        await this.assetReady(payload.payload.id ?? payload.payload.asset.id);
+        break;
+      case LivepeerEvent.assetFailed:
+        await this.assetFailed(payload.payload.id);
+        break;
+      case LivepeerEvent.streamStarted:
+      case LivepeerEvent.streamIdle:
+        await this.stageService.findStreamAndUpdate(payload.stream.id);
+        break;
+      case LivepeerEvent.recordingReady:
+        await this.sessionService.createStreamRecordings(
+          payload.payload.session,
+        );
+        break;
+      default:
+        return SendApiResponse('Event not recognizable', null, '400');
     }
+    return SendApiResponse('OK');
   }
 
   @Post('/webhook/remotion')
@@ -187,80 +164,45 @@ export class IndexController extends Controller {
   }
 
   private async assetReady(id: string) {
-    try {
-      const asset = await getAsset(id);
-      if (!asset) {
-        console.log('Asset not found:', id);
-        throw new HttpException(404, 'Asset not found');
-      }
-
-      const session = await this.sessionService.findOne({ assetId: id });
-      if (!session) {
-        console.log('No session found for asset:', id);
-        return; // Skip if no session found - it might be handled by recording.ready
-      }
-
-      const sessionParams = {
-        name: session.name,
-        start: session.start,
-        end: session.end,
-        organizationId: session.organizationId,
-        type: session.type,
-        videoUrl: asset.playbackUrl,
-        playbackId: asset.playbackId,
-        'playback.videoUrl': asset.playbackUrl,
-        'playback.format': asset.videoSpec?.format ?? '',
-        'playback.duration': asset.videoSpec?.duration ?? 0,
-        processingStatus: ProcessingStatus.completed,
-      };
-
-      await this.sessionService.update(session._id.toString(), sessionParams);
-
-      let state = await this.stateService
-        .findOne({
-          sessionId: session._id.toString(),
-          type: session.type,
-        })
-        .catch(() => null);
-
-      if (!state) {
-        state = await this.stateService.create({
-          sessionId: session._id.toString(),
-          sessionSlug: session.slug,
-          organizationId: session.organizationId.toString(),
-          type:
-            session.type === SessionType.clip
-              ? StateType.clip
-              : StateType.video,
-          status: StateStatus.pending,
-        });
-      }
-
-      await this.stateService.update(state._id.toString(), {
-        status: StateStatus.completed,
+    const asset = await getAsset(id);
+    const session = await this.sessionService.findOne({ assetId: asset.id });
+    if (!session) throw new HttpException(404, 'No session found');
+    let sessionParams = {
+      name: session.name,
+      start: session.start,
+      end: session.end,
+      organizationId: session.organizationId,
+      type: session.type,
+      videoUrl: asset.playbackUrl,
+      playbackId: asset.playbackId,
+      'playback.videoUrl': asset.playbackUrl,
+      'playback.format': asset.videoSpec?.format ?? '',
+      'playback.duration': asset.videoSpec?.duration ?? 0,
+      processingStatus: ProcessingStatus.completed,
+    };
+    await this.sessionService.update(session._id.toString(), sessionParams);
+    const state = await this.stateService.findOne({
+      sessionId: session._id.toString(),
+      type: session.type,
+    });
+    if (!state) throw new HttpException(404, 'No state found');
+    await this.stateService.update(state._id.toString(), {
+      status: StateStatus.completed,
+    });
+    if (
+      state.type !== StateType.animation &&
+      state.type !== StateType.editorClip
+    ) {
+      await this.sessionService.sessionTranscriptions({
+        organizationId: session.organizationId.toString(),
+        sessionId: session._id.toString(),
       });
-
-      if (
-        state.type !== StateType.animation &&
-        state.type !== StateType.editorClip
-      ) {
-        await this.sessionService.sessionTranscriptions({
-          organizationId: session.organizationId.toString(),
-          sessionId: session._id.toString(),
-        });
-      }
-
-      const clipEditor = await ClipEditor.findOne({
-        clipSessionId: session._id,
+    }
+    const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
+    if (clipEditor) {
+      await clipEditor.updateOne({
+        status: ClipEditorStatus.completed,
       });
-      if (clipEditor) {
-        await clipEditor.updateOne({
-          status: ClipEditorStatus.completed,
-        });
-      }
-    } catch (error) {
-      console.error('Error in assetReady:', error);
-      throw error;
     }
   }
 
