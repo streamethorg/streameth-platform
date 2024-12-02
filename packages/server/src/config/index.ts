@@ -90,6 +90,6 @@ export const config = {
     webhook: {
       url: validatedEnv.REMOTION_WEBHOOK_URL,
       secret: validatedEnv.REMOTION_WEBHOOK_SECRET_FILE,
-    }
+    },
   },
 };
