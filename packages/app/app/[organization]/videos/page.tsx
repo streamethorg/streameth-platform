@@ -13,7 +13,11 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import EventSelect from './components/eventSelect';
 import { fetchAllSessions } from '@/lib/data';
-import { generalMetadata, organizationMetadata } from '@/lib/utils/metadata';
+import {
+  generalMetadata,
+  livestreamMetadata,
+  organizationMetadata,
+} from '@/lib/utils/metadata';
 
 export default async function ArchivePage({
   params,
@@ -52,9 +56,9 @@ export default async function ArchivePage({
   const eventsWithVideos = results.filter((event) => event !== undefined);
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex h-full w-full flex-col">
       {organization.banner && (
-        <div className="hidden relative w-full h-full md:block aspect-video max-h-[200px]">
+        <div className="relative hidden aspect-video h-full max-h-[200px] w-full md:block">
           <Image
             src={organization.banner}
             alt="banner"
@@ -65,8 +69,8 @@ export default async function ArchivePage({
           />
         </div>
       )}
-      <div className="p-4 m-auto w-full max-w-7xl h-full">
-        <div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
+      <div className="m-auto h-full w-full max-w-7xl p-4">
+        <div className="mb-4 flex w-full flex-row items-center justify-between space-x-2">
           <div className="w-full text-lg font-bold">
             {searchParams.searchQuery ? 'Search results' : 'All videos'}
           </div>
@@ -76,7 +80,7 @@ export default async function ArchivePage({
         </div>
         <Suspense fallback={<ArchiveVideoSkeleton />}>
           <ArchiveVideos
-            organizationId={organization._id.toString()}
+            organizationSlug={params.organization}
             searchQuery={searchParams.searchQuery || ''}
             event={searchParams.event}
           />

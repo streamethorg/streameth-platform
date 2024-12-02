@@ -89,7 +89,7 @@ export default class SessionService {
     published: string;
     type: string;
     itemStatus: string;
-    itemDate: string;
+    itemDate: string; // unix timestamp
     clipable: boolean;
   }): Promise<{
     sessions: Array<ISession>;
@@ -107,7 +107,6 @@ export default class SessionService {
     if (d.type !== undefined) {
       filter = { ...filter, type: d.type };
     }
-
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
@@ -238,29 +237,20 @@ export default class SessionService {
     query: string,
     organizationId?: string,
   ): Promise<Array<ISession>> {
-    // console.time('filterSessionsExecutionTime');
-    // console.log(query);
-
-    // Start with base filter that excludes animations and editorClips
-    let filter: any = {
-      name: { $regex: query, $options: 'i' },
-      type: { $nin: [SessionType.animation, SessionType.editorClip] },
-    };
-
-    // Add organizationId filter if provided
-    if (organizationId) {
-      filter.organizationId = organizationId;
-    }
-
+    console.time('filterSessionsExecutionTime');
+    console.log(query);
     const sessions = await this.controller.store.findAll(
-      filter,
+      {
+        name: { $regex: query, $options: 'i' },
+        organizationId: organizationId ? organizationId : '',
+      },
       {},
       this.path,
       0,
       10,
     );
-    // console.log(sessions);
-    // console.timeEnd('filterSessionsExecutionTime');
+    console.log(sessions);
+    console.timeEnd('filterSessionsExecutionTime');
     return sessions;
   }
 

@@ -6,6 +6,7 @@ import SearchBar from '@/components/misc/SearchBar';
 import Link from 'next/link';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
 import { Menu, X } from 'lucide-react';
+import Navbar from './Navbar';
 import { Search } from 'lucide-react';
 import { Page } from '@/lib/types';
 import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
@@ -13,10 +14,10 @@ import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { useAccount } from 'wagmi';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import UserProfile from '@/app/studio/[organization]/components/UserProfile';
-
 const HomePageNavbar = ({
   logo,
   pages,
@@ -133,9 +134,9 @@ const MobileNavBar = ({
               <Image
                 src={'/logo_dark.png'}
                 alt="Logo"
-                height={360}
-                width={150}
-                className="h-full"
+                height={50}
+                width={230}
+                className="h-full aspect-square"
               />
             </Link>
           )
@@ -162,13 +163,13 @@ const MobileNavBar = ({
           )}
         </div>
         {menuVisible && (
-          <div className="absolute left-0 top-full p-4 w-full shadow-md bg-background">
+          <div className="absolute top-full left-0 w-full bg-background p-4 shadow-md">
             <nav className="flex flex-col space-y-2">
               {pages.map((page) => (
                 <Link key={page.href} href={page.href}>
                   <Button
                     variant="ghost"
-                    className="justify-start w-full text-left"
+                    className="w-full justify-start text-left"
                   >
                     {page.name}
                   </Button>
@@ -204,7 +205,7 @@ const PCNavBar = ({
     pathname.includes('clips') && searchParams.has('videoType');
 
   return (
-    <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white border-b md:hidden lg:flex h-18 z-[30]">
+    <NavigationMenu className="h-18 border-b w-full hidden sticky top-0 flex-row justify-between items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
           <Link href={`/${currentOrganization}`}>

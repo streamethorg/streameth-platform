@@ -1,18 +1,17 @@
 'use client';
-
 import Videos from '@/components/misc/Videos';
-import { FileQuestion } from 'lucide-react';
+import { FileQuestion, VideoOff } from 'lucide-react';
 import Pagination from './pagination';
 import { useEffect, useState } from 'react';
 import { IExtendedSession, IPagination } from '@/lib/types';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 
 const ArchiveVideos = ({
-  organizationId,
+  organizationSlug,
   event,
   searchQuery,
 }: {
-  organizationId?: string;
+  organizationSlug?: string;
   event?: string;
   searchQuery?: string;
 }) => {
@@ -21,7 +20,6 @@ const ArchiveVideos = ({
   const [pagination, setPagination] = useState<IPagination | null>(null);
   const [currentSearchQuery, setCurrentSearchQuery] = useState('');
   const [currentEvent, setCurrentEvent] = useState('');
-
   const fetchSessions = ({
     page = 1,
     reset,
@@ -31,7 +29,7 @@ const ArchiveVideos = ({
   }) => {
     setIsLoading(true);
     fetchAllSessions({
-      organizationId,
+      organizationSlug,
       event: event,
       limit: 12,
       onlyVideos: true,
@@ -45,7 +43,6 @@ const ArchiveVideos = ({
         } else {
           setVideos([...videos, ...data.sessions]);
         }
-
         setPagination(data.pagination);
       })
       .finally(() => {
@@ -58,7 +55,6 @@ const ArchiveVideos = ({
       page: 1,
       reset: searchQuery !== currentSearchQuery || event !== currentEvent,
     });
-
     if (searchQuery && searchQuery !== currentSearchQuery) {
       setCurrentSearchQuery(searchQuery);
     }
@@ -69,9 +65,9 @@ const ArchiveVideos = ({
 
   if (Videos.length === 0) {
     return (
-      <div className="flex flex-col justify-center items-center mt-10 w-full h-full">
+      <div className="mt-10 flex h-full w-full flex-col items-center justify-center">
         <FileQuestion size={65} />
-        <span className="mt-2 text-xl bolt">
+        <span className="bolt mt-2 text-xl">
           No videos have been uploaded yet
         </span>
       </div>
@@ -80,7 +76,7 @@ const ArchiveVideos = ({
 
   return (
     <>
-      <Videos videos={videos} />
+      <Videos OrganizationSlug={organizationSlug} videos={videos} />
       <Pagination
         fetch={fetchSessions}
         pagination={pagination}

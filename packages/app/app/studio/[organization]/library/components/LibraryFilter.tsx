@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { IExtendedStage } from '@/lib/types';
-import { Check } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -107,12 +106,9 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </Button>
 
           <div className="flex flex-col items-start gap-1">
-            <div className="flex items-center gap-2">
-              <label htmlFor="stage" className="text-sm font-medium">
-                Stage
-              </label>
-              {selectedStage && <Check className="w-4 h-4 text-green-500" />}
-            </div>
+            <label htmlFor="stage" className="text-sm font-medium">
+              Stage
+            </label>
             <Select
               value={selectedStage}
               onValueChange={(value) => {
@@ -136,12 +132,9 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </div>
 
           <div className="flex flex-col items-start gap-1">
-            <div className="flex items-center gap-2">
-              <label htmlFor="type" className="text-sm font-medium">
-                Type
-              </label>
-              {selectedType && <Check className="w-4 h-4 text-green-500" />}
-            </div>
+            <label htmlFor="type" className="text-sm font-medium">
+              Type
+            </label>
             <Select
               value={selectedType}
               onValueChange={(value) => {
@@ -165,14 +158,9 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </div>
 
           <div className="flex flex-col items-start gap-1">
-            <div className="flex items-center gap-2">
-              <label htmlFor="visibility" className="text-sm font-medium">
-                Visibility
-              </label>
-              {selectedVisibility && (
-                <Check className="w-4 h-4 text-green-500" />
-              )}
-            </div>
+            <label htmlFor="visibility" className="text-sm font-medium">
+              Visibility
+            </label>
             <Select
               value={selectedVisibility}
               onValueChange={(value) => {
@@ -185,20 +173,17 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="private">Private</SelectItem>
-                  <SelectItem value="public">Public</SelectItem>
+                  <SelectItem value="false">Private</SelectItem>
+                  <SelectItem value="true">Public</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
 
           <div className="flex flex-col items-start gap-1">
-            <div className="flex items-center gap-2">
-              <label htmlFor="itemDate" className="text-sm font-medium">
-                Date
-              </label>
-              {selectedDate && <Check className="w-4 h-4 text-green-500" />}
-            </div>
+            <label htmlFor="itemDate" className="text-sm font-medium">
+              Date
+            </label>
             <DatePicker
               allowPast
               value={new Date(Number(selectedDate))}
@@ -211,14 +196,9 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </div>
 
           <div className="flex flex-col items-start gap-1">
-            <div className="flex items-center gap-2">
-              <label htmlFor="itemStatus" className="text-sm font-medium">
-                Status
-              </label>
-              {selectedItemStatus && (
-                <Check className="w-4 h-4 text-green-500" />
-              )}
-            </div>
+            <label htmlFor="itemStatus" className="text-sm font-medium">
+              Status
+            </label>
             <Select
               value={selectedItemStatus}
               onValueChange={(value) => {
@@ -240,12 +220,9 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
           </div>
 
           <div className="flex flex-col items-start gap-1">
-            <div className="flex items-center gap-2">
-              <label htmlFor="clipable" className="text-sm font-medium">
-                Clipable
-              </label>
-              {selectedClipable && <Check className="w-4 h-4 text-green-500" />}
-            </div>
+            <label htmlFor="clipable" className="text-sm font-medium">
+              Clipable
+            </label>
             <Select
               value={selectedClipable}
               onValueChange={(value) => {

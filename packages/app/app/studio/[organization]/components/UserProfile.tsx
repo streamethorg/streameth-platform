@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import {
   DropdownMenu,
@@ -11,8 +10,6 @@ import Image from 'next/image';
 import { IExtendedOrganization } from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import Link from 'next/link';
-import { LayoutDashboard, Home, Users, LogOut } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 
 const UserProfile = async ({
   organization,
@@ -21,8 +18,6 @@ const UserProfile = async ({
   organization: string;
   organizations: IExtendedOrganization[];
 }) => {
-  const pathname = usePathname();
-  const isInStudio = pathname.includes('/studio');
   const data = await fetchOrganization({
     organizationSlug: organization,
   });
@@ -46,57 +41,24 @@ const UserProfile = async ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        {!isInStudio && (
-          <DropdownMenuItem>
-            <Link
-              href={`/studio/${data.slug}`}
-              className="flex items-center w-full"
-            >
-              <Button
-                className="hidden lg:flex items-center space-x-2"
-                variant={'link'}
-              >
-                <LayoutDashboard size={16} />
-                <span>View studio</span>
-              </Button>
-            </Link>
-          </DropdownMenuItem>
-        )}
-        {isInStudio && (
-          <DropdownMenuItem>
-            <Link
-              href={`/${organization}`}
-              className="flex items-center w-full"
-            >
-              <Button
-                className="hidden lg:flex items-center space-x-2"
-                variant={'link'}
-              >
-                <Home size={16} />
-                <span>View channel page</span>
-              </Button>
-            </Link>
-          </DropdownMenuItem>
-        )}
         <DropdownMenuItem>
-          <Link href={`/studio`} className="flex items-center w-full">
-            <Button
-              className="hidden lg:flex items-center space-x-2"
-              variant={'link'}
-            >
-              <Users size={16} />
-              <span>Switch Accounts</span>
+          <Link href={`/${organization}`}>
+            <Button className="hidden lg:block" variant={'link'}>
+              View channel page
             </Button>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href="/auth/logout" className="flex items-center w-full">
-            <Button
-              className="hidden lg:flex items-center space-x-2"
-              variant={'link'}
-            >
-              <LogOut size={16} />
-              <span>Logout</span>
+          <Link href={`/studio`}>
+            <Button className="hidden lg:block" variant={'link'}>
+              Switch Accounts
+            </Button>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/auth/logout" className="w-full">
+            <Button className="hidden lg:block" variant={'link'}>
+              Logout
             </Button>
           </Link>
         </DropdownMenuItem>

@@ -77,10 +77,7 @@ export class IndexController extends Controller {
     switch (payload.event) {
       case LivepeerEvent.assetReady:
         const assetId = payload.asset?.id;
-        console.log(
-          'Processing asset.ready with new format, asset ID:',
-          assetId,
-        );
+        console.log('Processing asset.ready with new format, asset ID:', assetId);
         if (!assetId) {
           console.log('No asset ID found in payload:', payload);
           return SendApiResponse('No asset ID found in payload', null, '400');
@@ -95,13 +92,8 @@ export class IndexController extends Controller {
         await this.stageService.findStreamAndUpdate(payload.stream.id);
         break;
       case LivepeerEvent.recordingReady:
-        console.log(
-          'Processing recording.ready for session:',
-          payload.payload.session.id,
-        );
-        await this.sessionService.createStreamRecordings(
-          payload.payload.session,
-        );
+        console.log('Processing recording.ready for session:', payload.payload.session.id);
+        await this.sessionService.createStreamRecordings(payload.payload.session);
         break;
       default:
         return SendApiResponse('Event not recognizable', null, '400');
@@ -180,7 +172,7 @@ export class IndexController extends Controller {
     const asset = await getAsset(id);
     const session = await this.sessionService.findOne({ assetId: asset.id });
     if (!session) throw new HttpException(404, 'No session found');
-
+    
     let sessionParams = {
       name: session.name,
       start: session.start,
@@ -218,12 +210,10 @@ export class IndexController extends Controller {
     }
 
     // Find or create state record
-    let state = await this.stateService
-      .findOne({
-        sessionId: session._id.toString(),
-        type: stateType,
-      })
-      .catch(() => null);
+    let state = await this.stateService.findOne({
+      sessionId: session._id.toString(),
+      type: stateType,
+    }).catch(() => null);
 
     if (!state) {
       // Create new state if it doesn't exist
@@ -231,7 +221,7 @@ export class IndexController extends Controller {
         sessionId: session._id.toString(),
         organizationId: session.organizationId,
         type: stateType,
-        status: StateStatus.pending,
+        status: StateStatus.pending
       });
     }
 

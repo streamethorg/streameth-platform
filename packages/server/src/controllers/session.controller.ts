@@ -182,8 +182,6 @@ export class SessionController extends Controller {
       itemDate: itemDate,
       clipable: clipable,
     };
-
-    console.log(queryParams);
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);
   }

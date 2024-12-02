@@ -81,15 +81,13 @@ export function PlayerWithControls(props: {
           title={props.name ?? 'video'}
           className={cn('h-full w-full transition')}
         >
-          {props.caption && (
-            <track
-              label="English"
-              kind="subtitles"
-              srcLang="en"
-              src={props.caption}
-              default
-            />
-          )}
+          <track
+            label="English"
+            kind="subtitles"
+            srcLang="en"
+            src={props.caption}
+            default
+          />
         </Player.Video>
 
         {/* <Player.PlayingIndicator asChild matcher={false}>
