@@ -88,10 +88,15 @@ export class IndexController extends Controller {
 
         case LivepeerEvent.recordingReady:
           if (!payload.payload?.session) {
-            console.log('No session found in recording.ready payload:', payload);
+            console.log(
+              'No session found in recording.ready payload:',
+              payload,
+            );
             return SendApiResponse('No session found in payload', null, '400');
           }
-          await this.sessionService.createStreamRecordings(payload.payload.session);
+          await this.sessionService.createStreamRecordings(
+            payload.payload.session,
+          );
           break;
 
         case LivepeerEvent.assetFailed:
@@ -188,13 +193,13 @@ export class IndexController extends Controller {
         console.log('Asset not found:', id);
         throw new HttpException(404, 'Asset not found');
       }
-      
+
       const session = await this.sessionService.findOne({ assetId: id });
       if (!session) {
         console.log('No session found for asset:', id);
         return; // Skip if no session found - it might be handled by recording.ready
       }
-      
+
       const sessionParams = {
         name: session.name,
         start: session.start,
@@ -208,31 +213,46 @@ export class IndexController extends Controller {
         'playback.duration': asset.videoSpec?.duration ?? 0,
         processingStatus: ProcessingStatus.completed,
       };
-      
+
       await this.sessionService.update(session._id.toString(), sessionParams);
-      
-      const state = await this.stateService.findOne({
-        sessionId: session._id.toString(),
-        type: session.type,
-      });
-      
-      if (state) {
-        await this.stateService.update(state._id.toString(), {
-          status: StateStatus.completed,
+
+      let state = await this.stateService
+        .findOne({
+          sessionId: session._id.toString(),
+          type: session.type,
+        })
+        .catch(() => null);
+
+      if (!state) {
+        state = await this.stateService.create({
+          sessionId: session._id.toString(),
+          sessionSlug: session.slug,
+          organizationId: session.organizationId.toString(),
+          type:
+            session.type === SessionType.clip
+              ? StateType.clip
+              : StateType.video,
+          status: StateStatus.pending,
         });
-        
-        if (
-          state.type !== StateType.animation &&
-          state.type !== StateType.editorClip
-        ) {
-          await this.sessionService.sessionTranscriptions({
-            organizationId: session.organizationId.toString(),
-            sessionId: session._id.toString(),
-          });
-        }
       }
-      
-      const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
+
+      await this.stateService.update(state._id.toString(), {
+        status: StateStatus.completed,
+      });
+
+      if (
+        state.type !== StateType.animation &&
+        state.type !== StateType.editorClip
+      ) {
+        await this.sessionService.sessionTranscriptions({
+          organizationId: session.organizationId.toString(),
+          sessionId: session._id.toString(),
+        });
+      }
+
+      const clipEditor = await ClipEditor.findOne({
+        clipSessionId: session._id,
+      });
       if (clipEditor) {
         await clipEditor.updateOne({
           status: ClipEditorStatus.completed,
