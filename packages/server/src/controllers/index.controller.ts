@@ -78,17 +78,7 @@ export class IndexController extends Controller {
     try {
       switch (payload.event) {
         case LivepeerEvent.assetReady:
-          let assetId;
-          if (payload.payload.asset) {
-            // New webhook format
-            assetId = payload.payload.asset.id;
-            console.log('Processing asset.ready with new format, asset ID:', assetId);
-          } else {
-            // Legacy webhook format
-            assetId = payload.payload.id;
-            console.log('Processing asset.ready with legacy format, asset ID:', assetId);
-          }
-          
+          const assetId = payload.payload?.asset?.id;
           if (!assetId) {
             console.log('No asset ID found in payload:', payload);
             return SendApiResponse('No asset ID found in payload', null, '400');
@@ -97,24 +87,19 @@ export class IndexController extends Controller {
           break;
 
         case LivepeerEvent.recordingReady:
-          if (!payload.payload?.session?.assetId) {
-            console.log('No session asset ID found in recording.ready payload:', payload);
-            return SendApiResponse('No session asset ID found', null, '400');
+          if (!payload.payload?.session) {
+            console.log('No session found in recording.ready payload:', payload);
+            return SendApiResponse('No session found in payload', null, '400');
           }
-          console.log('Processing recording.ready for session:', payload.payload.session.id);
           await this.sessionService.createStreamRecordings(payload.payload.session);
-          // Also process the asset since it's ready
-          await this.assetReady(payload.payload.session.assetId);
           break;
 
         case LivepeerEvent.assetFailed:
-          console.log('Processing asset.failed for:', payload.payload.id);
           await this.assetFailed(payload.payload.id);
           break;
 
         case LivepeerEvent.streamStarted:
         case LivepeerEvent.streamIdle:
-          console.log('Processing stream event:', payload.event);
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
 
@@ -125,7 +110,7 @@ export class IndexController extends Controller {
       return SendApiResponse('OK');
     } catch (error) {
       console.error('Error processing webhook:', error);
-      throw new HttpException(500, `Error processing webhook: ${error.message}`);
+      return SendApiResponse('Internal server error', null, '500');
     }
   }
 
@@ -197,7 +182,6 @@ export class IndexController extends Controller {
   }
 
   private async assetReady(id: string) {
-    console.log('Processing asset ready for ID:', id);
     try {
       const asset = await getAsset(id);
       if (!asset) {
@@ -205,19 +189,13 @@ export class IndexController extends Controller {
         throw new HttpException(404, 'Asset not found');
       }
       
-      const session = await this.sessionService.findOne({ assetId: asset.id });
+      const session = await this.sessionService.findOne({ assetId: id });
       if (!session) {
-        // Try finding by recording ID if session not found by asset ID
-        const recordingSession = await this.sessionService.findOne({ 
-          'recording.recordingId': asset.id 
-        });
-        if (!recordingSession) {
-          console.log('No session found for asset:', asset.id);
-          throw new HttpException(404, 'No session found');
-        }
+        console.log('No session found for asset:', id);
+        return; // Skip if no session found - it might be handled by recording.ready
       }
       
-      let sessionParams = {
+      const sessionParams = {
         name: session.name,
         start: session.start,
         end: session.end,
@@ -231,30 +209,27 @@ export class IndexController extends Controller {
         processingStatus: ProcessingStatus.completed,
       };
       
-      console.log('Updating session with params:', sessionParams);
       await this.sessionService.update(session._id.toString(), sessionParams);
       
       const state = await this.stateService.findOne({
         sessionId: session._id.toString(),
         type: session.type,
       });
-      if (!state) {
-        console.log('No state found for session:', session._id);
-        throw new HttpException(404, 'No state found');
-      }
       
-      await this.stateService.update(state._id.toString(), {
-        status: StateStatus.completed,
-      });
-      
-      if (
-        state.type !== StateType.animation &&
-        state.type !== StateType.editorClip
-      ) {
-        await this.sessionService.sessionTranscriptions({
-          organizationId: session.organizationId.toString(),
-          sessionId: session._id.toString(),
+      if (state) {
+        await this.stateService.update(state._id.toString(), {
+          status: StateStatus.completed,
         });
+        
+        if (
+          state.type !== StateType.animation &&
+          state.type !== StateType.editorClip
+        ) {
+          await this.sessionService.sessionTranscriptions({
+            organizationId: session.organizationId.toString(),
+            sessionId: session._id.toString(),
+          });
+        }
       }
       
       const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
@@ -263,8 +238,6 @@ export class IndexController extends Controller {
           status: ClipEditorStatus.completed,
         });
       }
-      
-      console.log('Asset ready processing completed successfully');
     } catch (error) {
       console.error('Error in assetReady:', error);
       throw error;
