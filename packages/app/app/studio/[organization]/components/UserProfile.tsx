@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   DropdownMenu,
@@ -11,6 +12,7 @@ import { IExtendedOrganization } from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import Link from 'next/link';
 import { LayoutDashboard, Home, Users, LogOut } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const UserProfile = async ({
   organization,
@@ -19,6 +21,8 @@ const UserProfile = async ({
   organization: string;
   organizations: IExtendedOrganization[];
 }) => {
+  const pathname = usePathname();
+  const isInStudio = pathname.includes('/studio');
   const data = await fetchOrganization({
     organizationSlug: organization,
   });
@@ -42,31 +46,38 @@ const UserProfile = async ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem>
-          <Link
-            href={`/studio/${organization}`}
-            className="flex items-center w-full"
-          >
-            <Button
-              className="hidden lg:flex items-center space-x-2"
-              variant={'link'}
+        {!isInStudio && (
+          <DropdownMenuItem>
+            <Link
+              href={`/studio/${data.slug}`}
+              className="flex items-center w-full"
             >
-              <LayoutDashboard size={16} />
-              <span>View studio</span>
-            </Button>
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href={`/${organization}`} className="flex items-center w-full">
-            <Button
-              className="hidden lg:flex items-center space-x-2"
-              variant={'link'}
+              <Button
+                className="hidden lg:flex items-center space-x-2"
+                variant={'link'}
+              >
+                <LayoutDashboard size={16} />
+                <span>View studio</span>
+              </Button>
+            </Link>
+          </DropdownMenuItem>
+        )}
+        {isInStudio && (
+          <DropdownMenuItem>
+            <Link
+              href={`/${organization}`}
+              className="flex items-center w-full"
             >
-              <Home size={16} />
-              <span>View channel page</span>
-            </Button>
-          </Link>
-        </DropdownMenuItem>
+              <Button
+                className="hidden lg:flex items-center space-x-2"
+                variant={'link'}
+              >
+                <Home size={16} />
+                <span>View channel page</span>
+              </Button>
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem>
           <Link href={`/studio`} className="flex items-center w-full">
             <Button
