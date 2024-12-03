@@ -256,6 +256,16 @@ export const createClip = async ({
   organizationId?: string;
 }): Promise<ISession> => {
   try {
+    console.log('Sending clip creation request with data:', {
+      start,
+      end,
+      playbackId,
+      recordingId,
+      sessionId,
+      isEditorEnabled,
+      organizationId,
+    });
+
     const response = await fetchClient(`${apiUrl()}/streams/clip`, {
       method: 'POST',
       headers: {
@@ -272,16 +282,44 @@ export const createClip = async ({
         organizationId,
       }),
     });
+
     const responseData = await response.json();
+    console.log('Server response:', {
+      status: response.status,
+      ok: response.ok,
+      data: responseData,
+    });
 
     if (!response.ok) {
-      throw 'Error creating clip';
+      const errorMessage =
+        responseData.message || responseData.error || 'Error creating clip';
+      console.error('Server returned error:', {
+        status: response.status,
+        message: errorMessage,
+        data: responseData,
+      });
+      throw new Error(errorMessage);
     }
+
     revalidatePath('/studio');
     return responseData.data;
   } catch (e) {
-    console.log('error in createClip', e);
-    throw e;
+    console.error('Error in createClip:', {
+      error: e,
+      message: e instanceof Error ? e.message : 'Unknown error',
+      data: {
+        playbackId,
+        sessionId,
+        recordingId,
+        start,
+        end,
+      },
+    });
+
+    if (e instanceof Error) {
+      throw new Error(`Failed to create clip: ${e.message}`);
+    }
+    throw new Error('Failed to create clip: Unknown error occurred');
   }
 };
 

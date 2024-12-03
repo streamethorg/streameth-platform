@@ -29,6 +29,10 @@ async function connectToRabbitMQ(retries = 0) {
       reconnectToRabbitMQ();
     });
 
+    connection.on('connect', () => {
+      logger.info('RabbitMQ connection established');
+    });
+
     return connection;
   } catch (e) {
     if (retries < MAX_RETRIES) {
