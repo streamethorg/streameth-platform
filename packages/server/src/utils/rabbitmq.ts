@@ -23,20 +23,26 @@ async function waitForRabbitMQ(): Promise<void> {
       return;
     } catch (e) {
       retries++;
-      logger.warn(`Waiting for RabbitMQ to be ready... (Attempt ${retries}/${MAX_RETRIES})`);
-      await new Promise(resolve => setTimeout(resolve, RETRY_INTERVAL));
+      logger.warn(
+        `Waiting for RabbitMQ to be ready... (Attempt ${retries}/${MAX_RETRIES})`,
+      );
+      await new Promise((resolve) => setTimeout(resolve, RETRY_INTERVAL));
     }
   }
   throw new Error('RabbitMQ service is not available');
 }
 
-async function connectToRabbitMQ(retries = 0): Promise<amqp.Connection | undefined> {
+async function connectToRabbitMQ(
+  retries = 0,
+): Promise<amqp.Connection | undefined> {
   try {
     // Wait for RabbitMQ to be ready before attempting to connect
     await waitForRabbitMQ();
-    
-    logger.info(`Attempting to connect to RabbitMQ at ${host}:${port} with username ${username}`);
-    
+
+    logger.info(
+      `Attempting to connect to RabbitMQ at ${host}:${port} with username ${username}`,
+    );
+
     const connection = await amqp.connect({
       protocol: 'amqp',
       hostname: host,
@@ -45,7 +51,7 @@ async function connectToRabbitMQ(retries = 0): Promise<amqp.Connection | undefin
       password: secret,
       vhost: '/',
     });
-    
+
     logger.info('RabbitMQ connected successfully');
 
     connection.on('error', (e) => {
@@ -77,7 +83,7 @@ async function connectToRabbitMQ(retries = 0): Promise<amqp.Connection | undefin
       host,
       port,
       username,
-      retryCount: retries
+      retryCount: retries,
     });
 
     if (retries < MAX_RETRIES) {
@@ -91,7 +97,9 @@ async function connectToRabbitMQ(retries = 0): Promise<amqp.Connection | undefin
         }, RETRY_INTERVAL);
       });
     } else {
-      logger.error(`Max retries (${MAX_RETRIES}) reached. Could not connect to RabbitMQ`);
+      logger.error(
+        `Max retries (${MAX_RETRIES}) reached. Could not connect to RabbitMQ`,
+      );
       return undefined;
     }
   }
