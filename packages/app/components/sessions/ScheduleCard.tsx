@@ -1,5 +1,5 @@
 'use client';
-import ScheduleCardModal from './ScheduleCardModal';
+
 import moment from 'moment-timezone';
 import { getEventTimezoneText } from '@/lib/utils/time';
 import { ClockIcon, WavesIcon } from 'lucide-react';
@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
 import { CredenzaTrigger, Credenza } from '@/components/ui/crezenda';
 import { IExtendedEvent, IExtendedSession } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -38,10 +37,10 @@ const ScheduleCard = ({
         <Card className="flex flex-col shadow-none hover:border-primary hover:bg-secondary">
           <CardHeader>
             <CardTitle className="text-lg">{session.name}</CardTitle>
-            <CardDescription className="flex flex-row items-center justify-start space-x-2">
+            <CardDescription className="flex flex-row justify-start items-center space-x-2">
               {showTime && (
                 <>
-                  <ClockIcon className="h-4 w-4" />
+                  <ClockIcon className="w-4 h-4" />
                   <p>
                     {moment(session.start)
                       .tz(event.timezone || 'UTC')
@@ -59,12 +58,12 @@ const ScheduleCard = ({
           </CardHeader>
           <CardFooter className="mt-auto">
             {isActive && (
-              <p className="text-bold ml-auto animate-pulse text-red-500">
+              <p className="ml-auto text-red-500 animate-pulse text-bold">
                 Live
               </p>
             )}
             <Button variant={'secondary'}>
-              <WavesIcon className="mr-2 h-4 w-4" /> Watch
+              <WavesIcon className="mr-2 w-4 h-4" /> Watch
             </Button>
           </CardFooter>
         </Card>

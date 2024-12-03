@@ -1,5 +1,5 @@
 import { ISpeaker } from 'streameth-new-server/src/interfaces/speaker.interface';
-import SpeakerIcon from '@/components/speakers/speakerIcon';
+import SpeakerIcon from '@/components/speakers/SpeakerIcon';
 import { useEffect, useState } from 'react';
 import { apiUrl, cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
@@ -46,14 +46,14 @@ const AddSpeakersInput = ({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between"
+            className="justify-between w-[200px]"
           >
             {value
               ? allSpeakers.find((speaker) => speaker._id === value)?.name
               : 'Select speaker...'}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
+        <PopoverContent className="p-0 w-[200px]">
           <Command>
             <CommandInput placeholder="Search speaker..." className="h-9" />
             <CommandEmpty>No speaker found.</CommandEmpty>

@@ -1,7 +1,8 @@
 'use client';
-import React, { useEffect } from 'react';
-import Scroll, { Element } from 'react-scroll';
-import ScheduleCard from '@/app/[organization]/[event]/schedule/components/ScheduleCard';
+
+import { useEffect } from 'react';
+import Scroll from 'react-scroll';
+import ScheduleCard from './ScheduleCard';
 import { IExtendedEvent, IExtendedSession } from '@/lib/types';
 interface Props {
   event: IExtendedEvent;
@@ -14,7 +15,7 @@ const scroll = Scroll.scroller;
 
 function NoSessionComponent() {
   return (
-    <div className="m-4 flex h-60 flex-col items-center justify-center p-4">
+    <div className="flex flex-col justify-center items-center p-4 m-4 h-60">
       <p className="text-gray-600">No sessions scheduled for this stage!</p>
     </div>
   );
