@@ -1,8 +1,8 @@
-import { IUser } from '@interfaces/user.interface';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IUser } from "@interfaces/user.interface";
+import { IsNotEmpty, IsString } from "class-validator";
 
-export class UserDto implements Pick<IUser, 'token'> {
-  @IsNotEmpty()
-  @IsString()
-  token!: string;
+export class UserDto implements Pick<IUser, "token"> {
+	@IsNotEmpty()
+	@IsString()
+	token!: string;
 }
