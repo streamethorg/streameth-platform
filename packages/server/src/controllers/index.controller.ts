@@ -32,13 +32,52 @@ import {
   Tags,
   UploadedFile,
 } from 'tsoa';
+import rabbitmqConnection from '@utils/rabbitmq';
+import { logger } from '@utils/logger';
+
 @Tags('Index')
 @Route('')
 export class IndexController extends Controller {
-  private stageService = new StageService();
   private sessionService = new SessionService();
+  private stageService = new StageService();
   private stateService = new StateService();
   private storageService = new StorageService();
+
+  private async acquireLock(
+    lockKey: string,
+    ttl: number = 60000,
+  ): Promise<boolean> {
+    try {
+      const connection = await rabbitmqConnection;
+      if (!connection) {
+        logger.error('No RabbitMQ connection available');
+        return false;
+      }
+
+      const channel = await connection.createChannel();
+      const queue = `lock:${lockKey}`;
+
+      // Try to declare an exclusive queue - if it succeeds, we got the lock
+      try {
+        await channel.assertQueue(queue, {
+          exclusive: true,
+          autoDelete: true,
+          arguments: {
+            'x-expires': ttl, // Queue will be deleted after TTL
+          },
+        });
+        await channel.close();
+        return true;
+      } catch (err) {
+        // Queue exists, meaning lock is taken
+        await channel.close();
+        return false;
+      }
+    } catch (err) {
+      logger.error('Error acquiring lock:', err);
+      return false;
+    }
+  }
 
   @Get()
   async index(): Promise<IStandardResponse<string>> {
@@ -63,6 +102,7 @@ export class IndexController extends Controller {
     );
     return SendApiResponse('image uploaded', image);
   }
+
   @Post('/webhook')
   async webhook(
     @Header('livepeer-signature') livepeerSignature: string,
@@ -73,40 +113,64 @@ export class IndexController extends Controller {
       console.log('Invalid signature or timestamp');
       return SendApiResponse('Invalid signature or timestamp', null, '401');
     }
-    console.log('Livepeer Payload:', payload);
-    switch (payload.event) {
-      case LivepeerEvent.assetReady:
-        const assetId = payload.asset?.id;
-        console.log(
-          'Processing asset.ready with new format, asset ID:',
-          assetId,
-        );
-        if (!assetId) {
-          console.log('No asset ID found in payload:', payload);
-          return SendApiResponse('No asset ID found in payload', null, '400');
-        }
-        await this.assetReady(assetId);
-        break;
-      case LivepeerEvent.assetFailed:
-        await this.assetFailed(payload.payload.id);
-        break;
-      case LivepeerEvent.streamStarted:
-      case LivepeerEvent.streamIdle:
-        await this.stageService.findStreamAndUpdate(payload.stream.id);
-        break;
-      case LivepeerEvent.recordingReady:
-        console.log(
-          'Processing recording.ready for session:',
-          payload.payload.session.id,
-        );
-        await this.sessionService.createStreamRecordings(
-          payload.payload.session,
-        );
-        break;
-      default:
-        return SendApiResponse('Event not recognizable', null, '400');
+
+    // Create a unique lock key based on the event and relevant ID
+    const lockKey = `livepeer:${payload.event}:${
+      payload.asset?.id ||
+      payload.stream?.id ||
+      payload.payload?.id ||
+      payload.payload?.session?.id ||
+      'unknown'
+    }`;
+
+    // Try to acquire the lock
+    const lockAcquired = await this.acquireLock(lockKey);
+    if (!lockAcquired) {
+      logger.info(`Skipping duplicate webhook processing for ${lockKey}`);
+      return SendApiResponse(
+        'Webhook already being processed by another instance',
+      );
     }
-    return SendApiResponse('OK');
+
+    console.log('Livepeer Payload:', payload);
+    try {
+      switch (payload.event) {
+        case LivepeerEvent.assetReady:
+          const assetId = payload.asset?.id;
+          console.log(
+            'Processing asset.ready with new format, asset ID:',
+            assetId,
+          );
+          if (!assetId) {
+            console.log('No asset ID found in payload:', payload);
+            return SendApiResponse('No asset ID found in payload', null, '400');
+          }
+          await this.assetReady(assetId);
+          break;
+        case LivepeerEvent.assetFailed:
+          await this.assetFailed(payload.payload.id);
+          break;
+        case LivepeerEvent.streamStarted:
+        case LivepeerEvent.streamIdle:
+          await this.stageService.findStreamAndUpdate(payload.stream.id);
+          break;
+        case LivepeerEvent.recordingReady:
+          console.log(
+            'Processing recording.ready for session:',
+            payload.payload.session.id,
+          );
+          await this.sessionService.createStreamRecordings(
+            payload.payload.session,
+          );
+          break;
+        default:
+          return SendApiResponse('Event not recognizable', null, '400');
+      }
+      return SendApiResponse('OK');
+    } catch (error) {
+      logger.error(`Error processing webhook ${lockKey}:`, error);
+      throw error;
+    }
   }
 
   @Post('/webhook/remotion')
