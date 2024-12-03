@@ -46,14 +46,32 @@ const CreateClipButton = ({
 
   const getSession = async () => {
     if (!sessionId) return;
-    const session = await fetchSession({ session: sessionId });
-    setSessionRecording(session);
+    try {
+      const session = await fetchSession({ session: sessionId });
+      if (!session) {
+        toast.error('Failed to fetch session');
+        return;
+      }
+      setSessionRecording(session);
+    } catch (error) {
+      console.error('Error fetching session:', error);
+      toast.error('Failed to fetch session data');
+    }
   };
 
   const getStage = async () => {
     if (!stageId) return;
-    const stage = await fetchStage({ stage: stageId });
-    setStage(stage);
+    try {
+      const stageData = await fetchStage({ stage: stageId });
+      if (!stageData) {
+        toast.error('Failed to fetch stage');
+        return;
+      }
+      setStage(stageData);
+    } catch (error) {
+      console.error('Error fetching stage:', error);
+      toast.error('Failed to fetch stage data');
+    }
   };
 
   useEffect(() => {
