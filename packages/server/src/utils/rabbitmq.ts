@@ -3,11 +3,38 @@ import amqp from 'amqplib';
 import { logger } from './logger';
 const { host, port, username, secret } = config.mq;
 
-const RETRY_INTERVAL = 5000; // 5 seconds
-const MAX_RETRIES = 5;
+const RETRY_INTERVAL = 10000; // 10 seconds
+const MAX_RETRIES = 10;
+
+async function waitForRabbitMQ(): Promise<void> {
+  let retries = 0;
+  while (retries < MAX_RETRIES) {
+    try {
+      const conn = await amqp.connect({
+        protocol: 'amqp',
+        hostname: host,
+        port: port,
+        username: username,
+        password: secret,
+        vhost: '/',
+      });
+      await conn.close();
+      logger.info('RabbitMQ is available');
+      return;
+    } catch (e) {
+      retries++;
+      logger.warn(`Waiting for RabbitMQ to be ready... (Attempt ${retries}/${MAX_RETRIES})`);
+      await new Promise(resolve => setTimeout(resolve, RETRY_INTERVAL));
+    }
+  }
+  throw new Error('RabbitMQ service is not available');
+}
 
 async function connectToRabbitMQ(retries = 0): Promise<amqp.Connection | undefined> {
   try {
+    // Wait for RabbitMQ to be ready before attempting to connect
+    await waitForRabbitMQ();
+    
     logger.info(`Attempting to connect to RabbitMQ at ${host}:${port} with username ${username}`);
     
     const connection = await amqp.connect({
@@ -77,10 +104,15 @@ function reconnectToRabbitMQ() {
   setTimeout(() => connectToRabbitMQ(), RETRY_INTERVAL);
 }
 
-// Initialize connection
-const connection = connectToRabbitMQ().catch(err => {
-  logger.error('Failed to initialize RabbitMQ connection:', err);
-  process.exit(1); // Exit if we can't establish initial connection
-});
+// Initialize connection with proper error handling
+const connection = (async () => {
+  try {
+    return await connectToRabbitMQ();
+  } catch (err) {
+    logger.error('Failed to initialize RabbitMQ connection:', err);
+    // Don't exit the process, but return undefined to allow the application to continue
+    return undefined;
+  }
+})();
 
 export default connection;
