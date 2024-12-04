@@ -159,6 +159,7 @@ services:
 
   stage-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:latest
+    command: ["node", "/app/packages/server/dist/workers/stage-transcriptions/index.js"]
     depends_on:
       - mongodb
       - redis
@@ -287,6 +288,7 @@ services:
 
   session-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
+    command: ["node", "/app/packages/server/dist/workers/session-transcriptions/index.js"]
     depends_on:
       - mongodb
       - redis
