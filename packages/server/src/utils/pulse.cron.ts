@@ -1,9 +1,9 @@
 import { config } from '@config';
 import Pulse from '@pulsecron/pulse';
 import { logger } from './logger';
-
+import { dbConnection } from '@databases/index';
 const pulse = new Pulse({
-  db: { address: config.db.host, collection: 'agendajobs' },
+  db: { address: dbConnection.url, collection: 'agendajobs' },
   defaultConcurrency: 20,
   maxConcurrency: 40,
   resumeOnRestart: true,

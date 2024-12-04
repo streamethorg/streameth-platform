@@ -54,6 +54,17 @@ export class IStage {
   nftCollections?: Types.ObjectId | string[];
   recordingIndex?: number;
   type?: StageType;
+  transcripts?: {
+    status: 'in-queue' | 'processing' | 'completed' | 'failed';
+    lastSegmentTimestamp: number;
+    subtitleUrl: string;
+    chunks: {
+      start: number;
+      end: number;
+      word: string;
+    }[];
+    text: string;
+  };
   source?: { url: string; m3u8Url: string; type: string };
 }
 

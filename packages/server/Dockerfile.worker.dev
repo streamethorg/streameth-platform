@@ -3,7 +3,8 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install Python and other build dependencies
-RUN apk add --no-cache python3 make g++ ffmpeg
+RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache ffmpeg
 
 # Copy root workspace files
 COPY package.json yarn.lock ./
@@ -11,11 +12,10 @@ COPY packages/server/package.json ./packages/server/
 
 # Install dependencies (including devDependencies)
 RUN yarn install --frozen-lockfile
-
-# Install nodemon globally
 RUN yarn global add nodemon
 
-EXPOSE 3400
+
+
 
 # Use nodemon for hot reloading
-CMD ["yarn", "dev:server"]
+CMD ["yarn", "dev:worker"]

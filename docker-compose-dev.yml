@@ -1,5 +1,97 @@
 version: '3'
 services:
+
+
+  worker:
+    build:
+      context: .
+      dockerfile: packages/server/Dockerfile.worker.dev
+    volumes:
+      - ./packages/server:/app/packages/server
+      - /app/packages/server/node_modules
+    environment:
+      # Base Configuration
+      - NODE_ENV=${NODE_ENV}
+      - APP_PORT=${APP_PORT}
+      - BASE_URL=${BASE_URL}
+      - PLAYER_URL=${PLAYER_URL}
+      
+      # Database
+      - DB_PASSWORD_FILE=${DB_PASSWORD_FILE}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+
+      # JWT
+      - JWT_SECRET_FILE=${JWT_SECRET_FILE}
+      - JWT_EXPIRY=${JWT_EXPIRY}
+      
+      # CORS
+      - CORS_ORIGIN=${CORS_ORIGIN}
+      - CORS_CREDENTIALS=${CORS_CREDENTIALS}
+      - CORS_PROXY_URL=${CORS_PROXY_URL}
+      
+      # API Keys
+      - LIVEPEER_API_KEY_FILE=${LIVEPEER_API_KEY_FILE}
+      - THIRDWEB_SECRET_KEY_FILE=${THIRDWEB_SECRET_KEY_FILE}
+      
+      # Storage
+      - SPACES_KEY_FILE=${SPACES_KEY_FILE}
+      - SPACES_SECRET_FILE=${SPACES_SECRET_FILE}
+      - BUCKET_NAME=${BUCKET_NAME}
+      - BUCKET_URL=${BUCKET_URL}
+      
+      # Livepeer
+      - LIVEPEER_WEBHOOK_SECRET_FILE=${LIVEPEER_WEBHOOK_SECRET_FILE}
+      - LIVEPEER_BASE_URL=${LIVEPEER_BASE_URL}
+      
+      # Social & OAuth
+      - TELEGRAM_API_KEY_FILE=${TELEGRAM_API_KEY_FILE}
+      - TELEGRAM_CHAT_ID_FILE=${TELEGRAM_CHAT_ID_FILE}
+      - OAUTH_SECRET_FILE=${OAUTH_SECRET_FILE}
+      - TWITTER_OAUTH_SECRET_FILE=${TWITTER_OAUTH_SECRET_FILE}
+      - TWITTER_CLIENT_ID_FILE=${TWITTER_CLIENT_ID_FILE}
+      - GOOGLE_OAUTH_SECRET_FILE=${GOOGLE_OAUTH_SECRET_FILE}
+      - GOOGLE_CLIENT_ID_FILE=${GOOGLE_CLIENT_ID_FILE}
+         
+      # Google Service Account
+      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE=${SERVICE_ACCOUNT_PRIVATE_KEY_FILE}
+      - SERVICE_ACCOUNT_EMAIL_FILE=${SERVICE_ACCOUNT_EMAIL_FILE}
+      
+      # Mail
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USER_FILE=${MAIL_USER_FILE}
+      - MAIL_PASS_FILE=${MAIL_PASS_FILE}
+      
+      # Magic Link
+      - MAGIC_LINK_SECRET_FILE=${MAGIC_LINK_SECRET_FILE}
+      - MAGIC_LINK_EXPIRY=${MAGIC_LINK_EXPIRY}
+      
+      # Wallet & Privy
+      - WALLET_ADDRESSES=${WALLET_ADDRESSES}
+        
+      # Remotion & Others
+      - REMOTION_BASE_URL=${REMOTION_BASE_URL}
+      - REMOTION_WEBHOOK_SECRET_FILE=${REMOTION_WEBHOOK_SECRET_FILE}
+      - REMOTION_ID=${REMOTION_ID}
+      - PIPEDREAM_AUTH_TOKEN_FILE=${PIPEDREAM_AUTH_TOKEN_FILE}
+      - DEVCON_UPLOAD_ENDPOINT_FILE=${DEVCON_UPLOAD_ENDPOINT_FILE}
+      - LOG_DIR=${LOG_DIR}
+      - LOG_FORMAT=${LOG_FORMAT}
+      - REMOTION_SITE_NAME=${REMOTION_SITE_NAME}
+      - REMOTION_WEBHOOK_URL=${REMOTION_WEBHOOK_URL}
+
+      # Redis
+      - REDIS_PASSWORD_FILE=${REDIS_PASSWORD_FILE}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+    depends_on:
+      - mongodb
+      - redis
+
   server:
     build: 
       context: .
@@ -11,51 +103,86 @@ services:
       - /app/packages/server/node_modules
     environment:
       # Base Configuration
-      - NODE_ENV=development
-      - BASE_URL=http://localhost:3400
-      - PLAYER_URL=http://localhost:3000
-      - APP_PORT=3400
-      - TEST_URL=http://localhost:3400
-
+      - NODE_ENV=${NODE_ENV}
+      - APP_PORT=${APP_PORT}
+      - BASE_URL=${BASE_URL}
+      - PLAYER_URL=${PLAYER_URL}
+      
       # Database
-      - MONGODB_URI=mongodb://root:example@mongodb:27017/streameth?authSource=admin
-      - DB_HOST=mongodb://root:example@mongodb:27017/streameth?authSource=admin
+      - DB_PASSWORD_FILE=${DB_PASSWORD_FILE}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
 
-      # Logging
-      - LOG_FORMAT=dev
-      - LOG_DIR=../logs
+      # JWT
+      - JWT_SECRET_FILE=${JWT_SECRET_FILE}
+      - JWT_EXPIRY=${JWT_EXPIRY}
+      
+      # CORS
+      - CORS_ORIGIN=${CORS_ORIGIN}
+      - CORS_CREDENTIALS=${CORS_CREDENTIALS}
+      - CORS_PROXY_URL=${CORS_PROXY_URL}
+      
+      # API Keys
+      - LIVEPEER_API_KEY_FILE=${LIVEPEER_API_KEY_FILE}
+      - THIRDWEB_SECRET_KEY_FILE=${THIRDWEB_SECRET_KEY_FILE}
+      
+      # Storage
+      - SPACES_KEY_FILE=${SPACES_KEY_FILE}
+      - SPACES_SECRET_FILE=${SPACES_SECRET_FILE}
+      - BUCKET_NAME=${BUCKET_NAME}
+      - BUCKET_URL=${BUCKET_URL}
+      
+      # Livepeer
+      - LIVEPEER_WEBHOOK_SECRET_FILE=${LIVEPEER_WEBHOOK_SECRET_FILE}
+      - LIVEPEER_BASE_URL=${LIVEPEER_BASE_URL}
+      
+      # Social & OAuth
+      - TELEGRAM_API_KEY_FILE=${TELEGRAM_API_KEY_FILE}
+      - TELEGRAM_CHAT_ID_FILE=${TELEGRAM_CHAT_ID_FILE}
+      - OAUTH_SECRET_FILE=${OAUTH_SECRET_FILE}
+      - TWITTER_OAUTH_SECRET_FILE=${TWITTER_OAUTH_SECRET_FILE}
+      - TWITTER_CLIENT_ID_FILE=${TWITTER_CLIENT_ID_FILE}
+      - GOOGLE_OAUTH_SECRET_FILE=${GOOGLE_OAUTH_SECRET_FILE}
+      - GOOGLE_CLIENT_ID_FILE=${GOOGLE_CLIENT_ID_FILE}
+         
+      # Google Service Account
+      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE=${SERVICE_ACCOUNT_PRIVATE_KEY_FILE}
+      - SERVICE_ACCOUNT_EMAIL_FILE=${SERVICE_ACCOUNT_EMAIL_FILE}
+      
+      # Mail
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USER_FILE=${MAIL_USER_FILE}
+      - MAIL_PASS_FILE=${MAIL_PASS_FILE}
+      
+      # Magic Link
+      - MAGIC_LINK_SECRET_FILE=${MAGIC_LINK_SECRET_FILE}
+      - MAGIC_LINK_EXPIRY=${MAGIC_LINK_EXPIRY}
+      
+      # Wallet & Privy
+      - WALLET_ADDRESSES=${WALLET_ADDRESSES}
+        
+      # Remotion & Others
+      - REMOTION_BASE_URL=${REMOTION_BASE_URL}
+      - REMOTION_WEBHOOK_SECRET_FILE=${REMOTION_WEBHOOK_SECRET_FILE}
+      - REMOTION_ID=${REMOTION_ID}
+      - PIPEDREAM_AUTH_TOKEN_FILE=${PIPEDREAM_AUTH_TOKEN_FILE}
+      - DEVCON_UPLOAD_ENDPOINT_FILE=${DEVCON_UPLOAD_ENDPOINT_FILE}
+      - LOG_DIR=${LOG_DIR}
+      - LOG_FORMAT=${LOG_FORMAT}
+      - REMOTION_SITE_NAME=${REMOTION_SITE_NAME}
+      - REMOTION_WEBHOOK_URL=${REMOTION_WEBHOOK_URL}
 
-
-      # Message Queue
-      - MQ_HOST=rabbitmq
-      - MQ_PORT=5672
-      - MQ_USERNAME=guest
-      - MQ_SECRET=guest
-
-      # Mail (using ethereal for development)
-      - MAIL_HOST=smtp.ethereal.email
-      - MAIL_PORT=587
-      - MAIL_USER=test
-      - MAIL_PASS=test
+      # Redis
+      - REDIS_PASSWORD_FILE=${REDIS_PASSWORD_FILE}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
 
     depends_on:
       - mongodb
-      - rabbitmq
-
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: packages/app/Dockerfile.dev
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./packages/app:/app/packages/app
-  #     - /app/packages/app/node_modules
-  #   environment:
-  #     - NODE_ENV=development
-  #     - NEXT_PUBLIC_API_URL=http://localhost:3400
-  #   depends_on:
-  #     - server
+      - redis
 
   mongodb:
     image: mongo:latest
@@ -67,48 +194,33 @@ services:
     environment:
       - MONGO_INITDB_DATABASE=streameth
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=example
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD_FILE}
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      test: echo 'db.runCommand("ping").ok' | mongosh redis:27017/test --quiet
       interval: 10s
       timeout: 10s
       retries: 5
       start_period: 40s
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"   # AMQP protocol port
-      - "15672:15672" # Management UI port
-    environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-    healthcheck:
-      test: ["CMD", "rabbitmqctl", "status"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+    command: >
+      --auth
+      --bind_ip_all
 
-  video-uploader:
-    build:
-      context: ./packages/video-uploader
-      dockerfile: Dockerfile.dev
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD_FILE}
     volumes:
-      - ./packages/video-uploader:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
-      - LOG_DIR=/usr/src/app/logs
-      - DB_HOST=mongodb://root:example@mongodb:27017/streameth?authSource=admin
-      - MQ_HOST=rabbitmq
-      - MQ_PORT=5672
-      - MQ_USERNAME=guest
-      - MQ_SECRET=guest
-    depends_on:
-      - rabbitmq
+      - redis_data:/data
+
+    healthcheck:
+      test: >
+        sh -c "redis-cli -a $$(cat ${REDIS_PASSWORD_FILE}) ping"
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   mongodb_data:
-  rabbitmq_data: 
+  redis_data:

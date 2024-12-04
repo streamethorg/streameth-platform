@@ -49,6 +49,7 @@ export const createStream = async (
       }),
     });
     const data = await response.json();
+    console.log('data', data);
     return {
       streamId: data.id,
       streamKey: data.streamKey,
@@ -669,3 +670,10 @@ export const getAssetByPlaybackId = async () => {
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export const buildPlaybackUrl = (playbackId: string, vod?: boolean): string => {
+  if (vod) {
+    return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${playbackId}/index.m3u8`;
+  }
+  return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`;
+};

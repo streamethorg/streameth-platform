@@ -12,11 +12,10 @@ import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 import { config } from './config';
 import { dbConnection } from './databases';
-import errorMiddleware from './middlewares/error.middleware';
 import { RegisterRoutes } from './routes/routes';
 import * as swaggerDocument from './swagger/swagger.json';
 import { logger } from './utils/logger';
-
+import ErrorMiddleware from './middlewares/error.middleware';
 class App {
   public app: express.Application;
   private env: string;
@@ -31,10 +30,10 @@ class App {
     this.initializeMiddlewares();
     this.initializeSwagger();
     this.initializeErrorHandling();
-    this.initializeJobs();
-
+    this.initializeErrorMiddleware();
     process.on('unhandledRejection', (reason, promise) => {
-      logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
+      logger.error('Unhandled Rejection at:', promise);
+      logger.error('Reason:', reason);
     });
   }
 
@@ -64,7 +63,7 @@ class App {
     if (this.env !== 'production') {
       set('debug', true);
     }
-    console.log(dbConnection.url);
+    console.log('Connecting to database...', dbConnection.url);
     await connect(dbConnection.url);
     logger.info('Db connected');
   }
@@ -90,15 +89,32 @@ class App {
     return jobs();
   }
 
+  private initializeErrorMiddleware() {
+    this.app.use(ErrorMiddleware);
+  }
+
   private initializeSwagger() {
     this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   }
 
   private initializeErrorHandling() {
     this.app.use((req, res, next) => {
-      next(createError(404));
+      const error = createError(404, `Not Found - ${req.originalUrl}`);
+      logger.error(error.message);
+      next(error);
     });
-    this.app.use(errorMiddleware);
+
+    this.app.use((err, req, res, next) => {
+      logger.error(`Error: ${err.message}`);
+      logger.error(err.stack);
+
+      res.status(err.status || 500);
+      res.json({
+        status: err.status || 500,
+        message: err.message,
+        stack: this.env === 'development' ? err.stack : {},
+      });
+    });
   }
 }
 

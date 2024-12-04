@@ -1019,6 +1019,61 @@
 					"type": {
 						"$ref": "#/components/schemas/StageType"
 					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"word": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"word",
+										"end",
+										"start"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							},
+							"lastSegmentTimestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"status": {
+								"type": "string",
+								"enum": [
+									"in-queue",
+									"processing",
+									"completed",
+									"failed"
+								]
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl",
+							"lastSegmentTimestamp",
+							"status"
+						],
+						"type": "object"
+					},
 					"source": {
 						"properties": {
 							"type": {
@@ -1147,6 +1202,61 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StageType"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"word": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"word",
+										"end",
+										"start"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							},
+							"lastSegmentTimestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"status": {
+								"type": "string",
+								"enum": [
+									"in-queue",
+									"processing",
+									"completed",
+									"failed"
+								]
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl",
+							"lastSegmentTimestamp",
+							"status"
+						],
+						"type": "object"
 					},
 					"source": {
 						"properties": {
@@ -1278,6 +1388,61 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StageType"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"word": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"word",
+										"end",
+										"start"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							},
+							"lastSegmentTimestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"status": {
+								"type": "string",
+								"enum": [
+									"in-queue",
+									"processing",
+									"completed",
+									"failed"
+								]
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl",
+							"lastSegmentTimestamp",
+							"status"
+						],
+						"type": "object"
 					},
 					"source": {
 						"properties": {
@@ -7315,16 +7480,7 @@
 					"Index"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "header",
-						"name": "livepeer-signature",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
+				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {

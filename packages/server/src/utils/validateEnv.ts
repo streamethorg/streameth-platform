@@ -4,6 +4,7 @@ config();
 
 const validateEnv = () => {
   return cleanEnv(process.env, {
+    OPENAI_API_KEY: str(),
     BASE_URL: str(),
     PLAYER_URL: str(),
     NODE_ENV: str(),
@@ -35,10 +36,9 @@ const validateEnv = () => {
     TWITTER_OAUTH_SECRET_FILE: str(),
     TWITTER_CLIENT_ID_FILE: str(),
     THIRDWEB_SECRET_KEY_FILE: str(),
-    MQ_HOST: str(),
-    MQ_PORT: port(),
-    MQ_USERNAME: str(),
-    MQ_SECRET_FILE: str(),
+    REDIS_HOST: str(),
+    REDIS_PORT: port(),
+    REDIS_PASSWORD_FILE: str(),
     SERVICE_ACCOUNT_PRIVATE_KEY_FILE: str(),
     SERVICE_ACCOUNT_EMAIL_FILE: str(),
     MAIL_HOST: str(),

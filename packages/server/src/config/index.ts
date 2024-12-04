@@ -2,6 +2,9 @@ import validateEnv from '@utils/validateEnv';
 import * as fs from 'fs';
 
 const readSecretFile = (path: string): string => {
+  if (process.env.NODE_ENV === 'development') {
+    return path;
+  }
   try {
     return fs.readFileSync(path, 'utf8').trim();
   } catch (error) {
@@ -12,6 +15,9 @@ const readSecretFile = (path: string): string => {
 
 const validatedEnv = validateEnv();
 export const config = {
+  openai: {
+    apiKey: validatedEnv.OPENAI_API_KEY,
+  },
   baseUrl: validatedEnv.BASE_URL,
   playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
@@ -67,12 +73,7 @@ export const config = {
       clientId: readSecretFile(validatedEnv.TWITTER_CLIENT_ID_FILE),
     },
   },
-  mq: {
-    host: validatedEnv.MQ_HOST,
-    port: validatedEnv.MQ_PORT,
-    username: validatedEnv.MQ_USERNAME,
-    secret: readSecretFile(validatedEnv.MQ_SECRET_FILE),
-  },
+
   google: {
     privateKey: readSecretFile(validatedEnv.SERVICE_ACCOUNT_PRIVATE_KEY_FILE),
     accountEmail: readSecretFile(validatedEnv.SERVICE_ACCOUNT_EMAIL_FILE),
@@ -91,5 +92,10 @@ export const config = {
       url: validatedEnv.REMOTION_WEBHOOK_URL,
       secret: validatedEnv.REMOTION_WEBHOOK_SECRET_FILE,
     },
+  },
+  redis: {
+    host: validatedEnv.REDIS_HOST,
+    port: validatedEnv.REDIS_PORT,
+    password: readSecretFile(validatedEnv.REDIS_PASSWORD_FILE),
   },
 };

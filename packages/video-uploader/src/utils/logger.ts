@@ -1,12 +1,10 @@
-import { config } from 'dotenv';
 import { existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-config();
+import { config } from '../config';
 
 // logs dir
-const logDir = process.env.LOG_DIR || 'logs';
+const logDir = config.logger.dir || 'logs';
 
 if (!existsSync(logDir)) {
   mkdirSync(logDir);

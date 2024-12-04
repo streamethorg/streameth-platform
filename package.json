@@ -11,6 +11,7 @@
 		]
 	},
 	"scripts": {
+		"dev:worker": "yarn workspace streameth-new-server dev:worker",
 		"build:app": "yarn workspace @streameth/streameth-app build",
 		"dev:app": "yarn workspace @streameth/streameth-app dev",
 		"start:app": "yarn workspace @streameth/streameth-app start",

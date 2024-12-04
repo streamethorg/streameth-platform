@@ -17,7 +17,7 @@ import Stage from '@models/stage.model';
 import State from '@models/state.model';
 import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
-import connection from '@utils/rabbitmq';
+import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
 
 export default class SessionService {
@@ -288,21 +288,14 @@ export default class SessionService {
     data: Pick<IUploadSession, 'organizationId' | 'sessionId'>,
   ) {
     const session = await this.get(data.sessionId.toString());
-    const queue = 'audio';
-    const channel = await (await connection).createChannel();
-    channel.assertQueue(queue, {
-      durable: true,
-    });
-    const payload = {
+    const queue = await sessionTranscriptionsQueue;
+    await queue.add({
       ...data,
       session: {
         videoUrl: session.videoUrl,
         slug: session.slug,
         name: session.name,
-      },
-    };
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
-      persistent: true,
+        },
     });
     const state = await State.findOne({
       sessionId: data.sessionId,
@@ -349,12 +342,8 @@ export default class SessionService {
       }
       data.token = { key: token.accessToken, secret: token.refreshToken };
     }
-    const queue = 'videos';
-    const channel = await (await connection).createChannel();
-    channel.assertQueue(queue, {
-      durable: true,
-    });
-    const payload = {
+    const queue = await videoUploadQueue;
+    await queue.add({
       ...data,
       session: {
         videoUrl: session.videoUrl,
@@ -362,11 +351,8 @@ export default class SessionService {
         name: session.name,
         description: session.description,
         coverImage: session.coverImage,
-        published: session.published,
-      },
-    };
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
-      persistent: true,
+          published: session.published,
+        },
     });
     const state = await State.findOne({
       sessionId: data.sessionId,

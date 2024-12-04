@@ -16,7 +16,7 @@ import { getSourceType } from '@utils/util';
 import { createYoutubeLiveStream } from '@utils/youtube';
 import { Types } from 'mongoose';
 import youtubedl from 'youtube-dl-exec';
-
+import { stageTranscriptionsQueue } from '@utils/redis';
 export default class StageService {
   private path: string;
   private controller: BaseController<IStage>;
@@ -31,6 +31,7 @@ export default class StageService {
         ? new Types.ObjectId().toString()
         : data.eventId;
     const stream = await createStream(data.name);
+    console.log('stream', stream);
     return this.controller.store.create(
       data.name,
       {
@@ -62,6 +63,7 @@ export default class StageService {
   }
 
   async update(stageId: string, stage: IStage): Promise<IStage> {
+    console.log('stage update', stage);
     return await this.controller.store.update(stageId, stage, stage.name);
   }
 
@@ -113,8 +115,14 @@ export default class StageService {
     const stream = await getStreamInfo(id);
     let stage = await Stage.findOne({ 'streamSettings.streamId': id });
     if (!stage) throw new HttpException(400, 'stage not found');
+    // send message to redis
+    const queue = await stageTranscriptionsQueue();
+    await queue.add({
+      stageId: stage._id,
+    });
     await stage.updateOne(
       {
+        'stageSettings.transcripts.status': 'in-queue',
         'streamSettings.isActive': stream.isActive,
         'streamSettings.isHealthy': stream.isHealthy ?? false,
       },

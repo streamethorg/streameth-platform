@@ -420,6 +420,7 @@ const models: TsoaRoute.Models = {
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "recordingIndex": {"dataType":"double"},
             "type": {"ref":"StageType"},
+            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"lastSegmentTimestamp":{"dataType":"double","required":true},"status":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["in-queue"]},{"dataType":"enum","enums":["processing"]},{"dataType":"enum","enums":["completed"]},{"dataType":"enum","enums":["failed"]}],"required":true}}},
             "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
         },
         "additionalProperties": false,
@@ -457,6 +458,7 @@ const models: TsoaRoute.Models = {
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "recordingIndex": {"dataType":"double"},
             "type": {"ref":"StageType"},
+            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"lastSegmentTimestamp":{"dataType":"double","required":true},"status":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["in-queue"]},{"dataType":"enum","enums":["processing"]},{"dataType":"enum","enums":["completed"]},{"dataType":"enum","enums":["failed"]}],"required":true}}},
             "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
         },
         "additionalProperties": false,
@@ -484,6 +486,7 @@ const models: TsoaRoute.Models = {
             "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
             "recordingIndex": {"dataType":"double"},
             "type": {"ref":"StageType"},
+            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"lastSegmentTimestamp":{"dataType":"double","required":true},"status":{"dataType":"union","subSchemas":[{"dataType":"enum","enums":["in-queue"]},{"dataType":"enum","enums":["processing"]},{"dataType":"enum","enums":["completed"]},{"dataType":"enum","enums":["failed"]}],"required":true}}},
             "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
             "url": {"dataType":"string","required":true},
         },
@@ -3601,7 +3604,6 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
             async function IndexController_webhook(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    livepeerSignature: {"in":"header","name":"livepeer-signature","required":true,"dataType":"string"},
                     payload: {"in":"body","name":"payload","required":true,"dataType":"any"},
             };
 
