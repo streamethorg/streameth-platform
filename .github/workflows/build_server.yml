@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.TOKEN }}
 
       - name: Build and push server
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: true
@@ -29,7 +29,7 @@ jobs:
           file: ./packages/server/src/Dockerfile
 
       - name: Build and push stage-transcriptions
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: true
@@ -39,7 +39,7 @@ jobs:
           file: ./packages/server/workers/stage-transcriptions/Dockerfile
 
       - name: Build and push session-transcriptions
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: true
@@ -47,4 +47,3 @@ jobs:
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ github.sha }}
           file: ./packages/server/workers/session-transcriptions/Dockerfile
-  

@@ -4,7 +4,7 @@ services:
   session-transcriptions:
     build:
       context: .
-      dockerfile: packages/server/workers/session-transcriptions/Dockerfile.dev
+      dockerfile: ./packages/server/workers/session-transcriptions/Dockerfile.dev
     volumes:
       - ./packages/server:/app/packages/server
       - /app/packages/server/node_modules
@@ -17,9 +17,9 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=${DB_PASSWORD_FILE}
-      - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
-      - DB_NAME=${DB_NAME}
+      - DB_HOST=mongodb
+      - DB_USER=root
+      - DB_NAME=streameth
 
       # JWT
       - JWT_SECRET_FILE=${JWT_SECRET_FILE}
@@ -85,7 +85,7 @@ services:
       - REDIS_PASSWORD_FILE=${REDIS_PASSWORD_FILE}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_KEY_FILE=${OPENAI_API_KEY_FILE}
 
     depends_on:
       - mongodb
@@ -107,9 +107,9 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=${DB_PASSWORD_FILE}
-      - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
-      - DB_NAME=${DB_NAME}
+      - DB_HOST=mongodb
+      - DB_USER=root
+      - DB_NAME=streameth
 
       # JWT
       - JWT_SECRET_FILE=${JWT_SECRET_FILE}
@@ -175,7 +175,7 @@ services:
       - REDIS_PASSWORD_FILE=${REDIS_PASSWORD_FILE}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_KEY_FILE=${OPENAI_API_KEY_FILE}
 
     depends_on:
       - mongodb
@@ -199,9 +199,9 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=${DB_PASSWORD_FILE}
-      - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
-      - DB_NAME=${DB_NAME}
+      - DB_HOST=mongodb
+      - DB_USER=root
+      - DB_NAME=streameth
 
       # JWT
       - JWT_SECRET_FILE=${JWT_SECRET_FILE}
@@ -267,7 +267,7 @@ services:
       - REDIS_PASSWORD_FILE=${REDIS_PASSWORD_FILE}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_KEY_FILE=${OPENAI_API_KEY_FILE}
 
     depends_on:
       - mongodb

@@ -21,8 +21,7 @@ services:
       - letsencrypt:/letsencrypt
 
   server:
-    #image: ghcr.io/streamethorg/streameth-platform/server:latest
-    image: server:1
+    image: ghcr.io/streamethorg/streameth-platform/server:latest
     depends_on:
       - mongodb
       - redis
@@ -48,7 +47,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb:27017
+      - DB_HOST=mongodb
       - DB_USER=root
       - DB_NAME=streameth-staging
 
@@ -161,8 +160,7 @@ services:
 
 
   stage-transcriptions:
-    #image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:latest
-    image: stage-transcriptions:1
+    image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:latest
     depends_on:
       - mongodb
       - redis
@@ -177,7 +175,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb:27017
+      - DB_HOST=mongodb
       - DB_USER=root
       - DB_NAME=streameth-staging
 
@@ -290,8 +288,7 @@ services:
 
 
   session-transcriptions:
-    #image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
-    image: session-transcriptions:1
+    image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
     depends_on:
       - mongodb
       - redis
@@ -306,7 +303,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb:27017
+      - DB_HOST=mongodb
       - DB_USER=root
       - DB_NAME=streameth-staging
 
