@@ -3609,6 +3609,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
             async function IndexController_webhook(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    livepeerSignature: {"in":"header","name":"livepeer-signature","required":true,"dataType":"string"},
                     payload: {"in":"body","name":"payload","required":true,"dataType":"any"},
             };
 

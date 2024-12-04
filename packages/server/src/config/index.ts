@@ -16,7 +16,7 @@ const readSecretFile = (path: string): string => {
 const validatedEnv = validateEnv();
 export const config = {
   openai: {
-    apiKey: validatedEnv.OPENAI_API_KEY,
+    apiKey: readSecretFile(validatedEnv.OPENAI_API_KEY_FILE),
   },
   baseUrl: validatedEnv.BASE_URL,
   playerUrl: validatedEnv.PLAYER_URL,

@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"sourceMap": false
 	},
+	"include": ["src/**/*", "workers"],
 	"exclude": [
 		"src/tests/*",
 		"spec",

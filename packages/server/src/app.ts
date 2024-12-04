@@ -84,10 +84,6 @@ class App {
     RegisterRoutes(this.app);
   }
 
-  private initializeJobs() {
-    return jobs();
-  }
-
   private initializeErrorMiddleware() {
     this.app.use(ErrorMiddleware);
   }

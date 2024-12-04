@@ -4,7 +4,7 @@ services:
   session-transcriptions:
     build:
       context: .
-      dockerfile: packages/server/dockerfiles/Dockerfile.sessionTranscribe.dev
+      dockerfile: packages/server/workers/session-transcriptions/Dockerfile.dev
     volumes:
       - ./packages/server:/app/packages/server
       - /app/packages/server/node_modules
@@ -94,7 +94,7 @@ services:
   stage-transcriptions:
     build:
       context: .
-      dockerfile: packages/server/dockerfiles/Dockerfile.stageTranscribe.dev
+      dockerfile: packages/server/workers/stage-transcriptions/Dockerfile.dev
     volumes:
       - ./packages/server:/app/packages/server
       - /app/packages/server/node_modules
@@ -184,7 +184,7 @@ services:
   server:
     build: 
       context: .
-      dockerfile: packages/server/dockerfiles/Dockerfile.dev
+      dockerfile: packages/server/src/Dockerfile.dev
     ports:
       - "3400:3400"
     volumes:

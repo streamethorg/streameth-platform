@@ -10,7 +10,7 @@
         "src/routes/*",
         "src/**/*.{spec,test}.ts"
     ],
-    "exec": "node -r esbuild-runner/register ./src/workers/stage-transcriptions.ts --env=development",
+    "exec": "node -r esbuild-runner/register ./workers/stage-transcriptions/index.ts --env=development",
     "env": {
         "NODE_ENV": "development"
     }

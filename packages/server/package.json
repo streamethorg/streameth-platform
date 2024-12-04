@@ -3,11 +3,15 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./dist/server.js",
-    "dev": "nodemon --config nodemon.json",
+    "start:server": "node ./dist/server.js",
+    "start:session-transcriptions": "node ./dist/workers/session-transcriptions.js",
+    "start:stage-transcriptions": "node ./dist/workers/stage-transcriptions.js",
+    "dev:server": "nodemon --config ./src/nodemon.json",
+    "dev:stage-transcriptions": "nodemon --config ./workers/stage-transcriptions/nodemon.json",
+    "dev:session-transcriptions": "nodemon --config ./workers/session-transcriptions/nodemon.json",
+   
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json && ncp templates dist/templates",
-    "dev:stage-transcriptions": "nodemon --config nodemon.worker.json",
-    "dev:session-transcriptions": "nodemon --config nodemon.session.json",
+   
     "test": "mocha",
     "prettier:fix": "prettier --write './src' './test'",
     "prettier:check": "prettier --check './src' './test'",
