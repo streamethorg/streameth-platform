@@ -21,5 +21,5 @@ RUN yarn global add nodemon
 
 EXPOSE 8080
 
-# Use nodemon for hot reloading
-CMD ["yarn", "start:server"]
+# Use nodemon for hot reloading with explicit workspace
+CMD ["yarn", "workspace", "streameth-new-server", "start:server"]
