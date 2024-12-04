@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start:server": "node ./dist/src/server.js",
-    "start:session-transcriptions": "node ./dist/workers/session-transcriptions.js",
-    "start:stage-transcriptions": "node ./dist/workers/stage-transcriptions.js",
+    "start:stage-transcriptions": "node ./dist/workers/stage-transcriptions/index.js",
+    "start:session-transcriptions": "node ./dist/workers/session-transcriptions/index.js",
     "dev:server": "nodemon --config ./src/nodemon.json",
     "dev:stage-transcriptions": "nodemon --config ./workers/stage-transcriptions/nodemon.json",
     "dev:session-transcriptions": "nodemon --config ./workers/session-transcriptions/nodemon.json",
