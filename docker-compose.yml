@@ -126,7 +126,7 @@ services:
         mode: "non-blocking"
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 1
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -156,8 +156,6 @@ services:
       - google-service-account-email
       - redis-password
       - openai-api-key
-
-
 
   stage-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:latest
@@ -412,7 +410,6 @@ services:
       - google-service-account-email
       - redis-password
       - openai-api-key
-
 
   mongodb:
     image: mongo:latest
