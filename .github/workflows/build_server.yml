@@ -36,7 +36,7 @@ jobs:
           tags: |
             ghcr.io/streamethorg/streameth-platform/stage-transcriptions:latest
             ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ github.sha }}
-          file: ./packages/server/dist/workers/stage-transcriptions/Dockerfile
+          file: ./packages/server/workers/stage-transcriptions/Dockerfile
 
       - name: Build and push session-transcriptions
         uses: docker/build-push-action@v3
@@ -46,7 +46,7 @@ jobs:
           tags: |
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ github.sha }}
-          file: ./packages/server/dist/workers/session-transcriptions/Dockerfile
+          file: ./packages/server/workers/session-transcriptions/Dockerfile
 
       # Setup SSH known hosts
       - name: Setup SSH known hosts
