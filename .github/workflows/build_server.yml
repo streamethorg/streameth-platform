@@ -48,12 +48,13 @@ jobs:
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ github.sha }}
           file: ./packages/server/workers/session-transcriptions/Dockerfile
 
-      # Setup SSH known hosts
-      - name: Setup SSH known hosts
+      # Setup SSH key
+      - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 145.223.118.217 >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
 
       # Setup Docker context from base64-encoded secret
       - name: Setup Docker context
