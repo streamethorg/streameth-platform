@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "start:server": "node ./dist/server.js",
+    "start:server": "node ./dist/src/server.js",
     "start:session-transcriptions": "node ./dist/workers/session-transcriptions.js",
     "start:stage-transcriptions": "node ./dist/workers/stage-transcriptions.js",
     "dev:server": "nodemon --config ./src/nodemon.json",
