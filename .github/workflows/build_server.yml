@@ -47,3 +47,16 @@ jobs:
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ github.sha }}
           file: ./packages/server/workers/session-transcriptions/Dockerfile
+
+      # Setup Docker context
+      - name: Setup Docker context
+        run: |
+          echo "${{ secrets.DOCKER_CONTEXT_B64 }}" | base64 -d > context.tar.gz
+          docker context import streameth-staging context.tar.gz
+
+      # Update services
+      - name: Update services
+        run: |
+          docker --context streameth-staging service update --force streameth-staging_server
+          docker --context streameth-staging service update --force streameth-staging_stage-transcriptions
+          docker --context streameth-staging service update --force streameth-staging_session-transcriptions
