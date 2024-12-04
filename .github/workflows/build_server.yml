@@ -55,15 +55,17 @@ jobs:
           ssh-keyscan -H 145.223.118.217 >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
-      # Setup Docker context
+      # Setup Docker context from base64-encoded secret
       - name: Setup Docker context
         run: |
-          echo "${{ secrets.DOCKER_CONTEXT_B64 }}" | base64 -d > context.tar.gz
-          docker context import streameth-staging context.tar.gz
+          mkdir -p ~/.docker/contexts
+          echo "${{ secrets.DOCKER_CONTEXT_B64 }}" | base64 -d > ~/.docker/contexts/streameth-staging.tar.gz
+          docker context import streameth-staging ~/.docker/contexts/streameth-staging.tar.gz
 
       # Update services
       - name: Update services
         run: |
-          docker --context streameth-staging service update --force streameth-staging_server
-          docker --context streameth-staging service update --force streameth-staging_stage-transcriptions
-          docker --context streameth-staging service update --force streameth-staging_session-transcriptions
+          docker context use streameth-staging
+          docker service update --force streameth-staging_server
+          docker service update --force streameth-staging_stage-transcriptions
+          docker service update --force streameth-staging_session-transcriptions
