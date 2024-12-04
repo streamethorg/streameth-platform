@@ -18,6 +18,13 @@ export enum StateStatus {
   failed = 'failed',
 }
 
+export enum TranscriptionStatus {
+  inQueue = 'in-queue',
+  processing = 'processing',
+  completed = 'completed',
+  failed = 'failed',
+}
+
 export enum StateType {
   nft = 'nft',
   event = 'event',

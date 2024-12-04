@@ -150,7 +150,4 @@ export class StageController extends Controller {
     const stream = await this.stageService.createLiveStream(body);
     return SendApiResponse('livestream created', stream);
   }
-
 }
-
-

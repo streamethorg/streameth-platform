@@ -11,7 +11,8 @@
 		]
 	},
 	"scripts": {
-		"dev:worker": "yarn workspace streameth-new-server dev:worker",
+		"dev:stage-transcriptions": "yarn workspace streameth-new-server dev:stage-transcriptions",
+		"dev:session-transcriptions": "yarn workspace streameth-new-server dev:session-transcriptions",
 		"build:app": "yarn workspace @streameth/streameth-app build",
 		"dev:app": "yarn workspace @streameth/streameth-app dev",
 		"start:app": "yarn workspace @streameth/streameth-app start",

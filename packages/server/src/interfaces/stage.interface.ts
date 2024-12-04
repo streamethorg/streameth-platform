@@ -1,5 +1,5 @@
 import { Document, Types } from 'mongoose';
-
+import { TranscriptionStatus } from './state.interface';
 export interface TargetOutput {
   _id?: string;
   id?: string;
@@ -55,7 +55,7 @@ export class IStage {
   recordingIndex?: number;
   type?: StageType;
   transcripts?: {
-    status: 'in-queue' | 'processing' | 'completed' | 'failed';
+    status: TranscriptionStatus;
     lastSegmentTimestamp: number;
     subtitleUrl: string;
     chunks: {

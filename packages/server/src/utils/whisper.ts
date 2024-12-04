@@ -1,7 +1,6 @@
 import OpenAI from 'openai';
 import { config } from '@config';
 import { promises as fs } from 'fs';
-import path from 'path';
 
 export class WhisperAPI {
   private openai: OpenAI;
@@ -26,7 +25,8 @@ export class WhisperAPI {
         response_format: 'verbose_json',
         timestamp_granularities: ['word'],
       });
-
+      console.log('Whisper transcription response:', response);
+      await fs.unlink(filePath);
       return response;
     } catch (error) {
       console.error('Whisper transcription error:', error);

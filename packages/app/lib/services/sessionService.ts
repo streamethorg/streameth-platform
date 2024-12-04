@@ -284,21 +284,8 @@ export const createClip = async ({
     });
 
     const responseData = await response.json();
-    console.log('Server response:', {
-      status: response.status,
-      ok: response.ok,
-      data: responseData,
-    });
-
     if (!response.ok) {
-      const errorMessage =
-        responseData.message || responseData.error || 'Error creating clip';
-      console.error('Server returned error:', {
-        status: response.status,
-        message: errorMessage,
-        data: responseData,
-      });
-      throw new Error(errorMessage);
+      throw responseData.message;
     }
 
     revalidatePath('/studio');

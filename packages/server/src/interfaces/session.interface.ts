@@ -1,5 +1,6 @@
 import type { Document, Types } from 'mongoose';
 import type { ISpeaker } from './speaker.interface';
+import { TranscriptionStatus } from './state.interface';
 
 export enum eVisibilty {
   public = 'public',
@@ -70,10 +71,12 @@ export interface ISession {
   talkType?: string;
   processingStatus?: ProcessingStatus;
   transcripts?: {
+    status: TranscriptionStatus;
     subtitleUrl: string;
     chunks: {
-      timestamp: number[];
-      text: string;
+      start: number;
+      end: number;
+      word: string;
     }[];
     text: string;
   };

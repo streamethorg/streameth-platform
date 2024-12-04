@@ -14,8 +14,8 @@ import {
 import * as Player from '@livepeer/react/player';
 import * as Popover from '@radix-ui/react-popover';
 import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react';
-import React, { useState } from 'react';
-import { useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRef } from 'react';
 // @ts-ignore
 import mux from 'mux-embed';
 import Image from 'next/image';
@@ -35,6 +35,22 @@ export function PlayerWithControls(props: {
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showSubtitles, setShowSubtitles] = useState<boolean>(false);
+  const [captionUrl, setCaptionUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (props.caption) {
+      // Create a Blob from the caption text
+      const blob = new Blob([props.caption], { type: 'text/vtt' });
+      // Create a URL for the Blob
+      const url = URL.createObjectURL(blob);
+      setCaptionUrl(url);
+
+      // Clean up the URL when component unmounts
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    }
+  }, [props.caption]);
 
   const toggleSubtitles = () => {
     const videoElement = videoRef.current;
@@ -81,13 +97,15 @@ export function PlayerWithControls(props: {
           title={props.name ?? 'video'}
           className={cn('h-full w-full transition')}
         >
-          <track
-            label="English"
-            kind="subtitles"
-            srcLang="en"
-            src={props.caption}
-            default
-          />
+          {captionUrl && (
+            <track
+              label="English"
+              kind="subtitles"
+              srcLang="en"
+              src={captionUrl}
+              default
+            />
+          )}
         </Player.Video>
 
         {/* <Player.PlayingIndicator asChild matcher={false}>

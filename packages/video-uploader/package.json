@@ -32,6 +32,8 @@
     "node-fetch": "2",
     "oauth-1.0a": "^2.2.6",
     "winston": "^3.10.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "winston-daily-rotate-file": "^5.0.0",
+    "streameth-new-server": "*"
+
   }
 }

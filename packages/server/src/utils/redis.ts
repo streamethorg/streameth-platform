@@ -61,7 +61,9 @@ async function connectToRedis(retries = 0): Promise<Redis> {
         stack: e instanceof Error ? e.stack : undefined,
         totalAttempts: MAX_RETRIES,
       });
-      throw new Error(`Failed to connect to Redis after ${MAX_RETRIES} retries: ${e instanceof Error ? e.message : String(e)}`);
+      throw new Error(
+        `Failed to connect to Redis after ${MAX_RETRIES} retries: ${e instanceof Error ? e.message : String(e)}`,
+      );
     }
   }
 }
@@ -73,7 +75,10 @@ async function reconnectToRedis() {
   });
 }
 
-export async function createQueue(name: string, options: Queue.QueueOptions = {}): Promise<Queue.Queue> {
+export async function createQueue(
+  name: string,
+  options: Queue.QueueOptions = {},
+): Promise<Queue.Queue> {
   const connection = await connectToRedis();
   if (!connection) {
     throw new Error('Failed to establish Redis connection');
@@ -89,12 +94,23 @@ export async function createQueue(name: string, options: Queue.QueueOptions = {}
   });
 }
 
-export const sessionTranscriptionsQueue = createQueue('session-transcriptions');
+export const sessionTranscriptionsQueue = async () => {
+  console.log('Creating session transcriptions queue...');
+  return await createQueue('session-transcriptions');
+};
+
 export const stageTranscriptionsQueue = async () => {
   console.log('Creating stage transcriptions queue...');
   return await createQueue('stage-transcriptions');
 };
-export const videoUploadQueue = createQueue('video-upload');
+export const videoUploadQueue = async () => {
+  console.log('Creating video upload queue...');
+  return await createQueue('video-upload');
+};
+export const clipsQueue = async () => {
+  console.log('Creating clip queue...');
+  return await createQueue('clips');
+};
 // Initialize the connection and export it
 const connection = connectToRedis();
 export default connection;

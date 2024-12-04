@@ -1,13 +1,12 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 import { generateTranscriptionActions } from '@/lib/actions/sessions';
-import { IExtendedState } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { LuLoader2, LuRefreshCcw } from 'react-icons/lu';
 import { toast } from 'sonner';
+import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
 
 const SessionTranscriptions = ({
   videoTranscription,
@@ -18,10 +17,13 @@ const SessionTranscriptions = ({
   videoTranscription?: string;
   sessionId: string;
   organizationId: string;
-  transcriptionState: IExtendedState[];
+  transcriptionState: TranscriptionStatus | null;
 }) => {
+  console.log('testtest', organizationId, sessionId);
+  console.log('videoTranscription', videoTranscription, transcriptionState);
   const router = useRouter();
   const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
+
   const handleGenerateTranscription = async () => {
     setIsGeneratingTranscript(true);
     await generateTranscriptionActions({
@@ -29,6 +31,7 @@ const SessionTranscriptions = ({
       sessionId,
     })
       .then((response) => {
+        console.log('response', response);
         if (response) {
           toast.success('Transcription request sent successfully');
         } else {
@@ -42,48 +45,55 @@ const SessionTranscriptions = ({
         setIsGeneratingTranscript(false);
       });
   };
-  return (
-    <div className="flex flex-col space-y-2">
-      <Label>Transcript</Label>
-      {videoTranscription ? (
-        <div>
-          <TextPlaceholder text={videoTranscription} />
-        </div>
-      ) : transcriptionState[0]?.status === 'pending' ? (
-        <div className="flex items-center">
-          <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
-          transcription...{' '}
-          <p
-            className="pl-2 cursor-pointer"
-            title="refresh"
-            onClick={() => router.refresh()}
-          >
-            <LuRefreshCcw />
-          </p>
-        </div>
-      ) : transcriptionState[0]?.status === 'failed' ? (
-        <div>
-          <p>Transcription failed. Please try again.</p>
-          <Button
-            variant="primary"
-            className="w-full"
-            onClick={handleGenerateTranscription}
-            loading={isGeneratingTranscript}
-          >
-            Try Again
-          </Button>
-        </div>
-      ) : (
+
+  if (transcriptionState === TranscriptionStatus.processing) {
+    return (
+      <div className="flex items-center">
+        <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
+        transcription...{' '}
+        <p
+          className="pl-2 cursor-pointer"
+          title="refresh"
+          onClick={() => router.refresh()}
+        >
+          <LuRefreshCcw />
+        </p>
+      </div>
+    );
+  }
+
+  if (
+    transcriptionState === TranscriptionStatus.completed &&
+    videoTranscription
+  ) {
+    return <TextPlaceholder text={videoTranscription} />;
+  }
+
+  if (transcriptionState === TranscriptionStatus.failed) {
+    return (
+      <div>
+        <p>Transcription failed. Please try again.</p>
         <Button
           variant="primary"
           className="w-full"
           onClick={handleGenerateTranscription}
           loading={isGeneratingTranscript}
         >
-          Generate Transcriptions
+          Try Again
         </Button>
-      )}
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <Button
+      variant="primary"
+      className="w-full"
+      onClick={handleGenerateTranscription}
+      loading={isGeneratingTranscript}
+    >
+      Generate Transcriptions
+    </Button>
   );
 };
 

@@ -18,11 +18,9 @@ import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import UploadTwitterButton from './components/UploadTwitterButton';
 import SessionTranscriptions from './components/SessionTranscriptions';
 import { Button } from '@/components/ui/button';
-import { StateType } from 'streameth-new-server/src/interfaces/state.interface';
-import { fetchAllStates } from '@/lib/services/stateService';
-import UploadToDevcon from './components/UploadToDevcon';
 import { Suspense } from 'react';
 import { IExtendedSession } from '@/lib/types';
+
 const EditSession = async ({ params, searchParams }: studioPageParams) => {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -31,6 +29,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
+  console.log('session pablo test', session);
   if (!session?.playbackId || !organization) return notFound();
 
   return (
@@ -86,10 +85,11 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                 </div>
               )}
               <Suspense fallback={<TranscriptSkeleton />}>
-                <Transcript
-                  sessionId={session._id}
-                  transcripts={session?.transcripts?.subtitleUrl || ''}
+                <SessionTranscriptions
+                  videoTranscription={session.transcripts?.text}
                   organizationId={organization._id}
+                  sessionId={session._id}
+                  transcriptionState={session.transcripts?.status ?? null}
                 />
               </Suspense>
               <GetHashButton session={session} />
@@ -138,30 +138,6 @@ const Player = async ({ session }: { session: IExtendedSession }) => {
           type: 'hls',
         },
       ]}
-    />
-  );
-};
-
-const Transcript = async ({
-  sessionId,
-  transcripts,
-  organizationId,
-}: {
-  sessionId: string;
-  transcripts: string;
-  organizationId: string;
-}) => {
-  const transcriptionState = await fetchAllStates({
-    sessionId: sessionId,
-    type: StateType.transcrpition,
-  });
-
-  return (
-    <SessionTranscriptions
-      videoTranscription={transcripts}
-      organizationId={organizationId}
-      sessionId={sessionId}
-      transcriptionState={transcriptionState}
     />
   );
 };

@@ -908,6 +908,15 @@
 				],
 				"type": "string"
 			},
+			"TranscriptionStatus": {
+				"enum": [
+					"in-queue",
+					"processing",
+					"completed",
+					"failed"
+				],
+				"type": "string"
+			},
 			"IStage": {
 				"properties": {
 					"_id": {
@@ -1056,13 +1065,7 @@
 								"format": "double"
 							},
 							"status": {
-								"type": "string",
-								"enum": [
-									"in-queue",
-									"processing",
-									"completed",
-									"failed"
-								]
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
@@ -1240,13 +1243,7 @@
 								"format": "double"
 							},
 							"status": {
-								"type": "string",
-								"enum": [
-									"in-queue",
-									"processing",
-									"completed",
-									"failed"
-								]
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
@@ -1426,13 +1423,7 @@
 								"format": "double"
 							},
 							"status": {
-								"type": "string",
-								"enum": [
-									"in-queue",
-									"processing",
-									"completed",
-									"failed"
-								]
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
@@ -2090,20 +2081,22 @@
 							"chunks": {
 								"items": {
 									"properties": {
-										"text": {
+										"word": {
 											"type": "string"
 										},
-										"timestamp": {
-											"items": {
-												"type": "number",
-												"format": "double"
-											},
-											"type": "array"
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"text",
-										"timestamp"
+										"word",
+										"end",
+										"start"
 									],
 									"type": "object"
 								},
@@ -2111,12 +2104,16 @@
 							},
 							"subtitleUrl": {
 								"type": "string"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
 							"text",
 							"chunks",
-							"subtitleUrl"
+							"subtitleUrl",
+							"status"
 						],
 						"type": "object"
 					},
@@ -2324,20 +2321,22 @@
 							"chunks": {
 								"items": {
 									"properties": {
-										"text": {
+										"word": {
 											"type": "string"
 										},
-										"timestamp": {
-											"items": {
-												"type": "number",
-												"format": "double"
-											},
-											"type": "array"
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"text",
-										"timestamp"
+										"word",
+										"end",
+										"start"
 									],
 									"type": "object"
 								},
@@ -2345,12 +2344,16 @@
 							},
 							"subtitleUrl": {
 								"type": "string"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
 							"text",
 							"chunks",
-							"subtitleUrl"
+							"subtitleUrl",
+							"status"
 						],
 						"type": "object"
 					},
@@ -2518,20 +2521,22 @@
 							"chunks": {
 								"items": {
 									"properties": {
-										"text": {
+										"word": {
 											"type": "string"
 										},
-										"timestamp": {
-											"items": {
-												"type": "number",
-												"format": "double"
-											},
-											"type": "array"
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"text",
-										"timestamp"
+										"word",
+										"end",
+										"start"
 									],
 									"type": "object"
 								},
@@ -2539,12 +2544,16 @@
 							},
 							"subtitleUrl": {
 								"type": "string"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
 							"text",
 							"chunks",
-							"subtitleUrl"
+							"subtitleUrl",
+							"status"
 						],
 						"type": "object"
 					},

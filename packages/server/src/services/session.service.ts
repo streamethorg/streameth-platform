@@ -8,7 +8,11 @@ import {
   ProcessingStatus,
   SessionType,
 } from '@interfaces/session.interface';
-import { StateStatus, StateType } from '@interfaces/state.interface';
+import {
+  StateStatus,
+  StateType,
+  TranscriptionStatus,
+} from '@interfaces/state.interface';
 import { IUploadSession } from '@interfaces/upload.session.interface';
 import Event from '@models/event.model';
 import Organization from '@models/organization.model';
@@ -288,29 +292,24 @@ export default class SessionService {
     data: Pick<IUploadSession, 'organizationId' | 'sessionId'>,
   ) {
     const session = await this.get(data.sessionId.toString());
-    const queue = await sessionTranscriptionsQueue;
+    const queue = await sessionTranscriptionsQueue();
     await queue.add({
       ...data,
       session: {
+        id: session._id,
         videoUrl: session.videoUrl,
         slug: session.slug,
         name: session.name,
-        },
+      },
     });
-    const state = await State.findOne({
-      sessionId: data.sessionId,
-      type: StateType.transcrpition,
+    await this.update(data.sessionId.toString(), {
+      //@ts-ignore
+      ...session.toObject(),
+      transcripts: {
+        ...(session.transcripts || {}),
+        status: TranscriptionStatus.processing,
+      },
     });
-    if (state) {
-      await state.updateOne({ status: StateStatus.pending });
-    } else {
-      await State.create({
-        organizationId: data.organizationId,
-        sessionId: data.sessionId,
-        status: StateStatus.pending,
-        type: StateType.transcrpition,
-      });
-    }
   }
 
   async uploadSessionToSocials(data: IUploadSession) {
@@ -342,7 +341,7 @@ export default class SessionService {
       }
       data.token = { key: token.accessToken, secret: token.refreshToken };
     }
-    const queue = await videoUploadQueue;
+    const queue = await videoUploadQueue();
     await queue.add({
       ...data,
       session: {
@@ -351,8 +350,8 @@ export default class SessionService {
         name: session.name,
         description: session.description,
         coverImage: session.coverImage,
-          published: session.published,
-        },
+        published: session.published,
+      },
     });
     const state = await State.findOne({
       sessionId: data.sessionId,

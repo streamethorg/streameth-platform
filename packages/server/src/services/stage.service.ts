@@ -17,6 +17,7 @@ import { createYoutubeLiveStream } from '@utils/youtube';
 import { Types } from 'mongoose';
 import youtubedl from 'youtube-dl-exec';
 import { stageTranscriptionsQueue } from '@utils/redis';
+
 export default class StageService {
   private path: string;
   private controller: BaseController<IStage>;
@@ -63,7 +64,6 @@ export default class StageService {
   }
 
   async update(stageId: string, stage: IStage): Promise<IStage> {
-    console.log('stage update', stage);
     return await this.controller.store.update(stageId, stage, stage.name);
   }
 
