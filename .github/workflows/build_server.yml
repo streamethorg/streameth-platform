@@ -91,11 +91,11 @@ jobs:
         run: |
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
             docker context use streameth-prod
+            docker stack deploy -c /home/streameth/streameth/docker-compose.prod.yml prod
           else
             docker context use streameth-staging
+            docker stack deploy -c /home/streameth/streameth/docker-compose.staging.yml streameth-staging
           fi
-          
-          docker stack deploy -c /home/streameth/streameth/${{ steps.set-tag.outputs.COMPOSE_FILE }} ${{ steps.set-tag.outputs.STACK_NAME }}
 
       # Deploy router if it doesn't exist (only needs to be done once)
       - name: Deploy router if needed
