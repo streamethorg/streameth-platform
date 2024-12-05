@@ -91,16 +91,14 @@ jobs:
         run: |
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
             docker context use streameth-prod
-            docker stack deploy -c docker-compose.prod.yml prod
-            docker service update --force prod_server
-            docker service update --force prod_stage-transcriptions
-            docker service update --force prod_session-transcriptions
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:prod-${{ github.sha }} prod_server
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:prod-${{ github.sha }} prod_stage-transcriptions
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:prod-${{ github.sha }} prod_session-transcriptions
           else
             docker context use streameth-staging
-            docker stack deploy -c docker-compose.staging.yml streameth-staging
-            docker service update --force streameth-staging_server
-            docker service update --force streameth-staging_stage-transcriptions
-            docker service update --force streameth-staging_session-transcriptions
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:staging-${{ github.sha }} streameth-staging_server
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging-${{ github.sha }} streameth-staging_stage-transcriptions
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging-${{ github.sha }} streameth-staging_session-transcriptions
           fi
 
       # Deploy router if it doesn't exist (only needs to be done once)
