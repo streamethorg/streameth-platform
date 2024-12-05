@@ -5,65 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invitation to Join StreamETH</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      .logo {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .logo img {
-        max-width: 200px;
-        height: auto;
-      }
-      h1 {
-        color: #2c3e50;
-        text-align: center;
-      }
-      p {
-        margin-bottom: 15px;
-      }
-      .btn {
-        display: block;
-        width: 200px;
-        margin: 20px auto;
-        padding: 10px 20px;
-        background-color: #3d22ba;
-        color: white !important;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-      }
-      .btn:hover {
-        background-color: rgba(41, 127, 185, 0.545);
-      }
-      .footer {
-        margin-top: 30px;
-        text-align: center;
-        font-size: 0.9em;
-        color: #7f8c8d;
-      }
-      .expiry-notice {
-        font-style: italic;
-        color: #e74c3c;
-        text-align: center;
-        margin-top: 15px;
-      }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 200px;
+      height: auto;
+    }
+    .welcome-header {
+      color: #2563eb;
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .main-text {
+      margin-bottom: 16px;
+    }
+    .cta-button {
+      text-align: center;
+      margin: 32px 0;
+    }
+    .button {
+      background-color: #2563eb;
+      color: #ffffff !important;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      display: inline-block;
+    }
+    .button:link,
+    .button:visited,
+    .button:hover,
+    .button:active {
+      color: #ffffff !important;
+      text-decoration: none !important;
+    }
+    .disclaimer {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .footer {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 24px;
+      margin-top: 24px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .footer a {
+      color: #2563eb;
+    }
     </style>
   </head>
   <body>
@@ -74,32 +83,23 @@
           alt="StreamETH Logo"
         />
       </div>
-      <h1>You're Invited to Join StreamETH!</h1>
-      <p>Hello</p>
-      <p>
-        We're excited to invite you to join StreamETH, the premier platform for
-        Ethereum streaming and collaboration. {{inviter_name}} has invited you
-        to be a part of our community.
+      <h1 class="welcome-header">Welcome to StreamETH! 🎉</h1>
+      <p class="main-text">
+        You've been invited to join <strong>{{organization_name}}</strong> on StreamETH's platform. We're excited to have you on board!
       </p>
-      <p>
-        To accept this invitation and create your account, please click the
-        button below:
-      </p>
-      <a href="{{invitation_link}}" class="btn">Accept Invitation</a>
-      <p class="expiry-notice">
-        This invitation link will expire in 7 days for security reasons.
-      </p>
-      <p>
-        If you didn't expect this invitation, please ignore this email or
-        contact our support team if you have any concerns.
+      <div class="cta-button">
+        <a href="streameth.org/studio" class="button">
+          Get Started →
+        </a>
+      </div>
+      <p class="disclaimer">
+        Didn't expect this invitation? No worries - you can safely ignore this email.
       </p>
       <div class="footer">
         <p>
-          If you have any questions, please don't hesitate to contact us at
-          <a href="mailto:support@streameth.com">support@streameth.com</a>.
+          Questions? We're here to help! Reach out to us at 
+          <a href="mailto:support@streameth.com">support@streameth.com</a>
         </p>
-        <p>We're looking forward to seeing you on StreamETH!</p>
-        <p>Best regards,<br />The StreamETH Team</p>
       </div>
     </div>
   </body>

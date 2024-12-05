@@ -13,12 +13,13 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { getFormSubmitStatus } from '@/lib/utils/utils';
+import { Loader2 } from 'lucide-react';
 
 const AddTeamMembers = ({ organizationId }: { organizationId: string }) => {
-  const [isAddingMember, setIsAddingMember] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof addOrganizationMemberSchema>>({
     resolver: zodResolver(addOrganizationMemberSchema),
@@ -26,8 +27,10 @@ const AddTeamMembers = ({ organizationId }: { organizationId: string }) => {
       memberAddress: '',
     },
   });
+
   function onSubmit(values: z.infer<typeof addOrganizationMemberSchema>) {
-    setIsAddingMember(true);
+    setIsLoading(true);
+
     addOrganizationMemberAction({
       memberAddress: values.memberAddress,
       organizationId,
@@ -40,47 +43,46 @@ const AddTeamMembers = ({ organizationId }: { organizationId: string }) => {
           toast.error('Error adding team member');
         }
       })
-      .catch(() => {
-        toast.error('Error adding team member');
+      .catch((error) => {
+        toast.error(error.message);
       })
       .finally(() => {
-        setIsAddingMember(false);
+        setIsLoading(false);
       });
   }
+
   return (
     <Form {...form}>
-      <form
-        onError={(errors) => {}}
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex gap-3">
-          {/* <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input placeholder="Enter Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <FormField
             control={form.control}
             name="memberAddress"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormControl>
-                  <Input placeholder="Enter email address" {...field} />
-                </FormControl>
-                <FormMessage />
+                <div className="relative">
+                  <FormControl>
+                    <Input placeholder="Enter email address" {...field} />
+                  </FormControl>
+                  <div className="absolute left-0 -bottom-6">
+                    <FormMessage />
+                  </div>
+                </div>
               </FormItem>
             )}
           />
-          <Button disabled={isAddingMember} variant="primary" type="submit">
-            Invite
+          <Button
+            disabled={isLoading || getFormSubmitStatus(form)}
+            variant="primary"
+            type="submit"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
+              </>
+            ) : (
+              <span>Invite</span>
+            )}
           </Button>
         </div>
       </form>

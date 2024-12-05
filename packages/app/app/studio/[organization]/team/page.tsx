@@ -42,12 +42,12 @@ const Settings = async ({
   });
 
   return (
-    <div className="p-4 flex h-full w-full max-w-4xl">
-      <Card className="w-full h-full rounded-r-xl border bg-white shadow-none md:p-0">
+    <div className="flex p-4 w-full max-w-4xl h-full">
+      <Card className="w-full h-full bg-white rounded-r-xl border shadow-none md:p-0">
         <CardHeader className="flex flex-row justify-between">
           <div className="flex flex-col gap-2">
             <CardTitle>Team members</CardTitle>
-            <CardDescription className="mb-4 mt-2">
+            <CardDescription className="mt-2 mb-4">
               Invite your team members to collaborate.
             </CardDescription>
           </div>
@@ -57,18 +57,16 @@ const Settings = async ({
         </CardHeader>
         <CardContent className="p-0 md:p-0 lg:p-0">
           <Table className="w-full">
-            <TableHeader className="sticky top-0 z-10 border-separate bg-gray-100">
-              <TableRow className="hover:bg-whiterounded-t-xl border-b">
+            <TableHeader className="sticky top-0 z-10 bg-gray-100 border-separate">
+              <TableRow className="border-b hover:bg-whiterounded-t-xl">
                 <TableHead>Email</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead className="w-32">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {members?.map(({ _id, email, role }) => (
+              {members?.map(({ _id, email }) => (
                 <TableRow key={_id}>
                   <TableCell>{email}</TableCell>
-                  <TableCell>{role}</TableCell>
 
                   <TableCell>
                     <DeleteTeamMember

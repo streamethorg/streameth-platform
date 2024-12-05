@@ -114,11 +114,13 @@ export async function addOrganizationMember({
       }
     );
 
-    if (response.ok) {
-      return (await response.json()).message;
-    } else {
-      throw await response.json();
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Failed to add organization member');
     }
+
+    return data.message;
   } catch (e) {
     console.error('Unexpected error:', e);
     throw e;

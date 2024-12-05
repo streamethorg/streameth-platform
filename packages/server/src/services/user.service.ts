@@ -19,6 +19,7 @@ export default class UserService {
     const findUser = await User.findOne({
       email: email,
     }).populate('organizations');
+
     if (!findUser) throw new HttpException(404, 'User not found');
     return findUser;
   }

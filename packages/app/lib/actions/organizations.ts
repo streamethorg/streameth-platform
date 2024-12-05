@@ -1,4 +1,5 @@
 'use server';
+
 import {
   addOrganizationMember,
   createOrganization,
@@ -7,9 +8,7 @@ import {
   updateOrganization,
 } from '@/lib/services/organizationService';
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
-import { redirect } from 'next/navigation';
 import { IExtendedOrganization } from '../types';
 
 export const createOrganizationAction = async ({
@@ -54,15 +53,12 @@ export const addOrganizationMemberAction = async ({
 }: {
   organizationId: string;
   memberAddress: string;
-}) => {
+}): Promise<IOrganization> => {
   const response = await addOrganizationMember({
     organizationId,
     memberAddress,
   });
 
-  if (!response) {
-    throw new Error('Error adding organization member');
-  }
   revalidatePath('/studio');
   return response;
 };
