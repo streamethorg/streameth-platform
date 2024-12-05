@@ -41,7 +41,7 @@ services:
       - "traefik.http.middlewares.staging-security.headers.stsSeconds=31536000"
       - "traefik.http.middlewares.staging-security.headers.stsIncludeSubdomains=true"
       - "traefik.http.middlewares.staging-security.headers.stsPreload=true"
-      # Apply middlewares
+      # Apply middleware
       - "traefik.http.routers.staging-web.middlewares=staging-cors@docker,staging-security@docker"
 
     environment:
