@@ -36,7 +36,7 @@ services:
       - "traefik.http.middlewares.prod-security.headers.stsSeconds=31536000"
       - "traefik.http.middlewares.prod-security.headers.stsIncludeSubdomains=true"
       - "traefik.http.middlewares.prod-security.headers.stsPreload=true"
-      # Apply middlewares
+      # Apply middleware
       - "traefik.http.routers.prod-web.middlewares=prod-cors@docker,prod-security@docker"
 
     environment:
