@@ -1,20 +1,20 @@
 version: '3'
 services:
-  traefik:
-    image: traefik:v3.1
-    command:
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-    networks:
-      - traefik-public
-      - default
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - letsencrypt:/letsencrypt
+  # traefik:
+  #   image: traefik:v3.1
+  #   command:
+  #     - "--providers.docker=true"
+  #     - "--providers.docker.exposedbydefault=false"
+  #   networks:
+  #     - traefik-public
+  #     - default
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "8080:8080"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - letsencrypt:/letsencrypt
 
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:staging
@@ -26,16 +26,23 @@ services:
       - default
     labels:
       - "traefik.enable=true"
+      # Basic routing
       - "traefik.http.services.staging-web.loadbalancer.server.port=8080"
       - "traefik.http.routers.staging-web.rule=Host(`staging.api.streameth.org`)"
-      - "traefik.http.routers.staging-web.entrypoints=websecure"
-      - "traefik.http.routers.staging-web.tls.certresolver=myresolver"
-      - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
-      - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*"
-      - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=http://localhost:3000"
-      - "traefik.http.middlewares.cors.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.cors.headers.addvaryheader=true"
-      - "traefik.http.routers.staging-web.middlewares=cors@docker"
+      # CORS configuration
+      - "traefik.http.middlewares.staging-cors.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
+      - "traefik.http.middlewares.staging-cors.headers.accesscontrolallowheaders=*"
+      - "traefik.http.middlewares.staging-cors.headers.accesscontrolalloworiginlist=https://staging.streameth.org,http://localhost:3000"
+      - "traefik.http.middlewares.staging-cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.staging-cors.headers.addvaryheader=true"
+      # Security headers
+      - "traefik.http.middlewares.staging-security.headers.sslRedirect=true"
+      - "traefik.http.middlewares.staging-security.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.staging-security.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.staging-security.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.staging-security.headers.stsPreload=true"
+      # Apply middlewares
+      - "traefik.http.routers.staging-web.middlewares=staging-cors@docker,staging-security@docker"
 
     environment:
       # Base Configuration

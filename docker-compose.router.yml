@@ -3,6 +3,7 @@ services:
   router:
     image: traefik:v3.1
     command:
+      - "--log.level=DEBUG"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.websecure.address=:443"
@@ -12,9 +13,25 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+
+    labels:
+      - "traefik.enable=true"
+      # Route to staging
+      - "traefik.http.routers.to-staging.rule=Host(`staging.api.streameth.org`)"
+      - "traefik.http.routers.to-staging.service=staging-service"
+      - "traefik.http.services.staging-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.to-staging.tls=true"
+      - "traefik.http.routers.to-staging.tls.certresolver=myresolver"
+      # Route to prod
+      - "traefik.http.routers.to-prod.rule=Host(`prod.api.streameth.org`)"
+      - "traefik.http.routers.to-prod.service=prod-service"
+      - "traefik.http.services.prod-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.to-prod.tls=true"
+      - "traefik.http.routers.to-prod.tls.certresolver=myresolver"
     ports:
       - "80:80"
       - "443:443"
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - letsencrypt:/letsencrypt

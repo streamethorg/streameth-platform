@@ -21,16 +21,23 @@ services:
       - default
     labels:
       - "traefik.enable=true"
+      # Basic routing
       - "traefik.http.services.prod-web.loadbalancer.server.port=8080"
       - "traefik.http.routers.prod-web.rule=Host(`prod.api.streameth.org`)"
-      - "traefik.http.routers.prod-web.entrypoints=websecure"
-      - "traefik.http.routers.prod-web.tls.certresolver=myresolver"
-      - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
-      - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*"
-      - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=http://localhost:3000"
-      - "traefik.http.middlewares.cors.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.cors.headers.addvaryheader=true"
-      - "traefik.http.routers.prod-web.middlewares=cors@docker"
+      # CORS configuration
+      - "traefik.http.middlewares.prod-cors.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
+      - "traefik.http.middlewares.prod-cors.headers.accesscontrolallowheaders=*"
+      - "traefik.http.middlewares.prod-cors.headers.accesscontrolalloworiginlist=https://streameth.org,https://prod.streameth.org"
+      - "traefik.http.middlewares.prod-cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.prod-cors.headers.addvaryheader=true"
+      # Security headers
+      - "traefik.http.middlewares.prod-security.headers.sslRedirect=true"
+      - "traefik.http.middlewares.prod-security.headers.forceSTSHeader=true"
+      - "traefik.http.middlewares.prod-security.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.prod-security.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.prod-security.headers.stsPreload=true"
+      # Apply middlewares
+      - "traefik.http.routers.prod-web.middlewares=prod-cors@docker,prod-security@docker"
 
     environment:
       # Base Configuration
