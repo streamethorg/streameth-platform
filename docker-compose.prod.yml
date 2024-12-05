@@ -1,16 +1,5 @@
 version: '3'
 services:
-  traefik:
-    image: traefik:v3.1
-    command:
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-    networks:
-      - traefik-public
-      - default
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:prod
     depends_on:
@@ -21,24 +10,9 @@ services:
       - default
     labels:
       - "traefik.enable=true"
-      # Basic routing
-      - "traefik.http.services.prod-web.loadbalancer.server.port=8080"
-      - "traefik.http.routers.prod-web.rule=Host(`prod.api.streameth.org`)"
-      # CORS configuration
-      - "traefik.http.middlewares.prod-cors.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
-      - "traefik.http.middlewares.prod-cors.headers.accesscontrolallowheaders=*"
-      - "traefik.http.middlewares.prod-cors.headers.accesscontrolalloworiginlist=https://streameth.org,https://prod.streameth.org"
-      - "traefik.http.middlewares.prod-cors.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.prod-cors.headers.addvaryheader=true"
-      # Security headers
-      - "traefik.http.middlewares.prod-security.headers.sslRedirect=true"
-      - "traefik.http.middlewares.prod-security.headers.forceSTSHeader=true"
-      - "traefik.http.middlewares.prod-security.headers.stsSeconds=31536000"
-      - "traefik.http.middlewares.prod-security.headers.stsIncludeSubdomains=true"
-      - "traefik.http.middlewares.prod-security.headers.stsPreload=true"
-      # Apply middlewares
-      - "traefik.http.routers.prod-web.middlewares=prod-cors@docker,prod-security@docker"
-
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.services.prod-server.loadbalancer.server.port=8080"
+      - "traefik.http.services.prod-server.loadbalancer.server.scheme=http"
     environment:
       # Base Configuration
       - NODE_ENV=prod
@@ -120,6 +94,11 @@ services:
       - REMOTION_WEBHOOK_URL=https://your-webhook-url.com/remotion-webhook
 
     deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        - "traefik.http.services.prod-server.loadbalancer.server.port=8080"
+        - "traefik.http.services.prod-server.loadbalancer.server.scheme=http"
       mode: replicated
       replicas: 3
       restart_policy:

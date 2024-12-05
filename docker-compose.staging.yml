@@ -1,21 +1,5 @@
 version: '3'
 services:
-  # traefik:
-  #   image: traefik:v3.1
-  #   command:
-  #     - "--providers.docker=true"
-  #     - "--providers.docker.exposedbydefault=false"
-  #   networks:
-  #     - traefik-public
-  #     - default
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #     - "8080:8080"
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - letsencrypt:/letsencrypt
-
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:staging
     depends_on:
@@ -26,23 +10,9 @@ services:
       - default
     labels:
       - "traefik.enable=true"
-      # Basic routing
-      - "traefik.http.services.staging-web.loadbalancer.server.port=8080"
-      - "traefik.http.routers.staging-web.rule=Host(`staging.api.streameth.org`)"
-      # CORS configuration
-      - "traefik.http.middlewares.staging-cors.headers.accesscontrolallowmethods=GET,POST,PUT,DELETE,OPTIONS"
-      - "traefik.http.middlewares.staging-cors.headers.accesscontrolallowheaders=*"
-      - "traefik.http.middlewares.staging-cors.headers.accesscontrolalloworiginlist=https://staging.streameth.org,http://localhost:3000"
-      - "traefik.http.middlewares.staging-cors.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.staging-cors.headers.addvaryheader=true"
-      # Security headers
-      - "traefik.http.middlewares.staging-security.headers.sslRedirect=true"
-      - "traefik.http.middlewares.staging-security.headers.forceSTSHeader=true"
-      - "traefik.http.middlewares.staging-security.headers.stsSeconds=31536000"
-      - "traefik.http.middlewares.staging-security.headers.stsIncludeSubdomains=true"
-      - "traefik.http.middlewares.staging-security.headers.stsPreload=true"
-      # Apply middleware
-      - "traefik.http.routers.staging-web.middlewares=staging-cors@docker,staging-security@docker"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.services.staging-server.loadbalancer.server.port=8080"
+      - "traefik.http.services.staging-server.loadbalancer.server.scheme=http"
 
     environment:
       # Base Configuration
@@ -131,6 +101,11 @@ services:
         max-file: "3"
         mode: "non-blocking"
     deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        - "traefik.http.services.staging-server.loadbalancer.server.port=8080"
+        - "traefik.http.services.staging-server.loadbalancer.server.scheme=http"
       mode: replicated
       replicas: 1
       restart_policy:
