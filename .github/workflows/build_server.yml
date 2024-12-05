@@ -73,7 +73,7 @@ jobs:
       - name: Setup Docker context
         run: |
           mkdir -p ~/.docker/contexts
-          if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
+          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
             echo "${{ secrets.DOCKER_CONTEXT_PROD_B64 }}" | base64 -d > ~/.docker/contexts/streameth-prod.tar.gz
             docker context import streameth-prod ~/.docker/contexts/streameth-prod.tar.gz
           else
