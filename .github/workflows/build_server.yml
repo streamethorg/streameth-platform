@@ -90,11 +90,21 @@ jobs:
       - name: Update services
         run: |
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
+            echo "Deploying production..."
             docker context use streameth-prod
-            docker stack deploy -c /home/streameth/streameth/docker-compose.prod.yml prod
+            echo "Context switched to production"
+            cd /home/streameth/streameth/
+            pwd
+            ls -la
+            docker stack deploy -c docker-compose.prod.yml prod
           else
+            echo "Deploying staging..."
             docker context use streameth-staging
-            docker stack deploy -c /home/streameth/streameth/docker-compose.staging.yml streameth-staging
+            echo "Context switched to staging"
+            cd /home/streameth/streameth/
+            pwd
+            ls -la
+            docker stack deploy -c docker-compose.staging.yml streameth-staging
           fi
 
       # Deploy router if it doesn't exist (only needs to be done once)
