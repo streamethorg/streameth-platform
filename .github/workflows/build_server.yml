@@ -84,7 +84,7 @@ jobs:
       # Copy compose files to server
       - name: Copy compose files
         run: |
-          scp docker-compose.*.yml root@145.223.118.217:/root/streameth/
+          scp docker-compose.*.yml streameth@145.223.118.217:/home/streameth/streameth/
 
       # Update services based on environment
       - name: Update services
@@ -95,13 +95,12 @@ jobs:
             docker context use streameth-staging
           fi
           
-          # Deploy or update the stack
-          docker stack deploy -c /root/streameth/${{ steps.set-tag.outputs.COMPOSE_FILE }} ${{ steps.set-tag.outputs.STACK_NAME }}
+          docker stack deploy -c /home/streameth/streameth/${{ steps.set-tag.outputs.COMPOSE_FILE }} ${{ steps.set-tag.outputs.STACK_NAME }}
 
       # Deploy router if it doesn't exist (only needs to be done once)
       - name: Deploy router if needed
         if: github.ref == 'refs/heads/docker-prod'  # Only check/deploy router on prod branch pushes
         run: |
           if ! docker stack ls | grep -q "router"; then
-            docker stack deploy -c /root/streameth/docker-compose.router.yml router
+            docker stack deploy -c /home/streameth/streameth/docker-compose.router.yml router
           fi
