@@ -2,7 +2,7 @@ name: Build server
 
 on:
   push:
-    branches: [docker]
+    branches: [docker, docker-prod]
 
 jobs:
   build-and-push-server-image:
@@ -18,14 +18,27 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
 
+      - name: Set environment tag
+        id: set-tag
+        run: |
+          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
+            echo "ENV_TAG=prod" >> $GITHUB_OUTPUT
+            echo "COMPOSE_FILE=docker-compose.prod.yml" >> $GITHUB_OUTPUT
+            echo "STACK_NAME=prod" >> $GITHUB_OUTPUT
+          else
+            echo "ENV_TAG=staging" >> $GITHUB_OUTPUT
+            echo "COMPOSE_FILE=docker-compose.staging.yml" >> $GITHUB_OUTPUT
+            echo "STACK_NAME=staging" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and push server
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/streamethorg/streameth-platform/server:latest
-            ghcr.io/streamethorg/streameth-platform/server:${{ github.sha }}
+            ghcr.io/streamethorg/streameth-platform/server:${{ steps.set-tag.outputs.ENV_TAG }}
+            ghcr.io/streamethorg/streameth-platform/server:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
           file: ./packages/server/src/Dockerfile
 
       - name: Build and push stage-transcriptions
@@ -34,8 +47,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:latest
-            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ github.sha }}
+            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}
+            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
           file: ./packages/server/workers/stage-transcriptions/Dockerfile
 
       - name: Build and push session-transcriptions
@@ -44,8 +57,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/streamethorg/streameth-platform/session-transcriptions:latest
-            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ github.sha }}
+            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}
+            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
           file: ./packages/server/workers/session-transcriptions/Dockerfile
 
       # Setup SSH key
@@ -60,13 +73,35 @@ jobs:
       - name: Setup Docker context
         run: |
           mkdir -p ~/.docker/contexts
-          echo "${{ secrets.DOCKER_CONTEXT_B64 }}" | base64 -d > ~/.docker/contexts/streameth-staging.tar.gz
-          docker context import streameth-staging ~/.docker/contexts/streameth-staging.tar.gz
+          if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
+            echo "${{ secrets.DOCKER_CONTEXT_PROD_B64 }}" | base64 -d > ~/.docker/contexts/streameth-prod.tar.gz
+            docker context import streameth-prod ~/.docker/contexts/streameth-prod.tar.gz
+          else
+            echo "${{ secrets.DOCKER_CONTEXT_STAGING_B64 }}" | base64 -d > ~/.docker/contexts/streameth-staging.tar.gz
+            docker context import streameth-staging ~/.docker/contexts/streameth-staging.tar.gz
+          fi
 
-      # Update services
+      # Copy compose files to server
+      - name: Copy compose files
+        run: |
+          scp docker-compose.*.yml root@145.223.118.217:/root/streameth/
+
+      # Update services based on environment
       - name: Update services
         run: |
-          docker context use streameth-staging
-          docker service update --force streameth-staging_server
-          docker service update --force streameth-staging_stage-transcriptions
-          docker service update --force streameth-staging_session-transcriptions
+          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
+            docker context use streameth-prod
+          else
+            docker context use streameth-staging
+          fi
+          
+          # Deploy or update the stack
+          docker stack deploy -c /root/streameth/${{ steps.set-tag.outputs.COMPOSE_FILE }} ${{ steps.set-tag.outputs.STACK_NAME }}
+
+      # Deploy router if it doesn't exist (only needs to be done once)
+      - name: Deploy router if needed
+        if: github.ref == 'refs/heads/docker-prod'  # Only check/deploy router on prod branch pushes
+        run: |
+          if ! docker stack ls | grep -q "router"; then
+            docker stack deploy -c /root/streameth/docker-compose.router.yml router
+          fi
