@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import MarkdownDisplay from '../misc/MarkdownDisplay';
 import { IExtendedSpeaker } from '@/lib/types';
-import SpeakerIcon from '../speakers/speakerIcon';
+import SpeakerIcon from '../speakers/SpeakerIcon';
 
 const InfoBoxDescription = ({
   description,
@@ -43,14 +43,14 @@ const InfoBoxDescription = ({
     <div className="relative py-4">
       <div
         ref={descriptionRef}
-        className="transition-max-height overflow-hidden duration-300 ease-in-out"
+        className="overflow-hidden duration-300 ease-in-out transition-max-height"
         style={{ maxHeight }}
       >
         {description && (
           <div className="space-y-2">
             <MarkdownDisplay content={description} />
             {speakers && (
-              <div className="flex flex-col items-start space-y-2 md:flex-row md:space-x-2 md:space-y-0">
+              <div className="flex flex-col items-start space-y-2 md:flex-row md:space-y-0 md:space-x-2">
                 {speakers.map((speaker) => (
                   <SpeakerIcon key={speaker._id} speaker={speaker} />
                 ))}
@@ -60,7 +60,7 @@ const InfoBoxDescription = ({
         )}
       </div>
       {isExpandable && !isOpened && (
-        <div className="pointer-events-none absolute bottom-4 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent"></div>
+        <div className="absolute right-0 left-0 bottom-4 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
       )}
       {isExpandable && (
         <button
@@ -72,7 +72,7 @@ const InfoBoxDescription = ({
               );
             }
           }}
-          className="absolute bottom-0 right-0 ml-auto text-sm pb-2 font-bold text-primary"
+          className="absolute right-0 bottom-0 pb-2 ml-auto text-sm font-bold text-primary"
         >
           {isOpened ? 'Show less' : 'Show more'}
         </button>
