@@ -17,7 +17,6 @@ services:
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
     labels:
-    labels:
       - "traefik.enable=true"
       # Staging route
       - "traefik.http.routers.to-staging.rule=Host(`staging.api.streameth.org`)"
