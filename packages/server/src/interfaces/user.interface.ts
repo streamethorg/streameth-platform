@@ -12,4 +12,5 @@ export interface IUser {
   did?: string;
   email?: string;
 }
+
 export interface IUserModel extends IUser, Document {}

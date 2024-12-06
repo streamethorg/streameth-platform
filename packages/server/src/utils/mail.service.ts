@@ -1,6 +1,8 @@
 import { config } from '@config';
 import nodemailer from 'nodemailer';
+
 const { host, port, user, pass } = config.mail;
+
 interface MailInfo {
   recipient: string;
   subject: string;
@@ -17,6 +19,7 @@ export default class EmailService {
       pass: pass,
     },
   });
+
   async simpleSend({ recipient, subject, text, from, html }: MailInfo) {
     const mailOptions = {
       from: from,

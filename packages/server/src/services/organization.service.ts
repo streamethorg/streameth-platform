@@ -5,13 +5,18 @@ import { IOrganization, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
-import { generateId } from '@utils/util';
+import { generateDID, generateId, replacePlaceHolders } from '@utils/util';
 import UserService from './user.service';
+import EmailService from '@utils/mail.service';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 export default class OrganizationService {
   private path: string;
   private controller: BaseController<IOrganization>;
   private userService = new UserService();
+  private mailService = new EmailService();
+
   constructor() {
     this.path = 'organizations';
     this.controller = new BaseController<IOrganization>('db', Organization);
@@ -96,11 +101,38 @@ export default class OrganizationService {
   }
 
   async addOrgMember(organizationId: string, email: string) {
-    await this.get(organizationId);
+    const organization = await this.get(organizationId);
+
+    // Find user, if it does not exist it creates a new one
+    try {
+      await this.userService.get(email);
+    } catch {
+      await this.userService.create({
+        email,
+        did: generateDID(),
+      });
+    }
+
     await User.findOneAndUpdate(
       { email },
       { $addToSet: { organizations: organizationId } },
     );
+
+    const emailTemplate = readFileSync(
+      path.join('./templates', 'invite.html'),
+      'utf8',
+    );
+
+    const htmlContent = replacePlaceHolders(emailTemplate, {
+      organization_name: organization.name,
+    });
+
+    await this.mailService.simpleSend({
+      from: 'noreply@streameth.org',
+      recipient: email,
+      subject: 'Invitation to StreamETH',
+      html: htmlContent,
+    });
   }
 
   async deleteOrgMember(organizationId: string, email: string) {
