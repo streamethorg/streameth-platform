@@ -37,7 +37,7 @@ services:
       - CORS_PROXY_URL=""
       
       # API Keys
-      - LIVEPEER_API_KEY_FILE=/run/secrets/livepeer-api-key
+      - LIVEPEER_API_KEY_FILE=/run/secrets/prod-livepeer-api-key
       - THIRDWEB_SECRET_KEY_FILE=/run/secrets/thirdweb-secret-key
       
       # Storage
@@ -47,7 +47,7 @@ services:
       - BUCKET_URL=https://streameth-prod.ams3.digitaloceanspaces.com
       
       # Livepeer
-      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/livepeer-webhook-secret
+      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/prod-livepeer-webhook-secret
       - LIVEPEER_BASE_URL=https://livepeer.studio
       
       # Social & OAuth
@@ -111,8 +111,8 @@ services:
       - jwt-secret
       - spaces-key
       - spaces-secret
-      - livepeer-api-key
-      - livepeer-webhook-secret
+      - prod-livepeer-api-key
+      - prod-livepeer-webhook-secret
       - telegram-api-key
       - telegram-chat-id
       - oauth-secret
@@ -164,7 +164,7 @@ services:
       - CORS_PROXY_URL=""
       
       # API Keys
-      - LIVEPEER_API_KEY_FILE=/run/secrets/livepeer-api-key
+      - LIVEPEER_API_KEY_FILE=/run/secrets/prod-livepeer-api-key
       - THIRDWEB_SECRET_KEY_FILE=/run/secrets/thirdweb-secret-key
       
       # Storage
@@ -174,7 +174,7 @@ services:
       - BUCKET_URL=https://streameth-prod.ams3.digitaloceanspaces.com
       
       # Livepeer
-      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/livepeer-webhook-secret
+      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/prod-livepeer-webhook-secret
       - LIVEPEER_BASE_URL=https://livepeer.studio
       
       # Social & OAuth
@@ -239,8 +239,8 @@ services:
       - jwt-secret
       - spaces-key
       - spaces-secret
-      - livepeer-api-key
-      - livepeer-webhook-secret
+      - prod-livepeer-api-key
+      - prod-livepeer-webhook-secret
       - telegram-api-key
       - telegram-chat-id
       - oauth-secret
@@ -292,7 +292,7 @@ services:
       - CORS_PROXY_URL=""
       
       # API Keys
-      - LIVEPEER_API_KEY_FILE=/run/secrets/livepeer-api-key
+      - LIVEPEER_API_KEY_FILE=/run/secrets/prod-livepeer-api-key
       - THIRDWEB_SECRET_KEY_FILE=/run/secrets/thirdweb-secret-key
       
       # Storage
@@ -302,7 +302,7 @@ services:
       - BUCKET_URL=https://streameth-prod.ams3.digitaloceanspaces.com
       
       # Livepeer
-      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/livepeer-webhook-secret
+      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/prod-livepeer-webhook-secret
       - LIVEPEER_BASE_URL=https://livepeer.studio
       
       # Social & OAuth
@@ -367,8 +367,8 @@ services:
       - jwt-secret
       - spaces-key
       - spaces-secret
-      - livepeer-api-key
-      - livepeer-webhook-secret
+      - prod-livepeer-api-key
+      - prod-livepeer-webhook-secret
       - telegram-api-key
       - telegram-chat-id
       - oauth-secret
@@ -445,9 +445,9 @@ secrets:
     external: true
   spaces-secret:
     external: true
-  livepeer-api-key:
+  prod-livepeer-api-key:
     external: true
-  livepeer-webhook-secret:
+  prod-livepeer-webhook-secret:
     external: true
   telegram-api-key:
     external: true
