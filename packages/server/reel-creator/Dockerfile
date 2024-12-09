@@ -4,8 +4,8 @@ RUN corepack enable && corepack prepare yarn@stable --activate
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY package.json .yarnrc.yml yarn.lock ./
+RUN yarn install --immutable
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
@@ -17,8 +17,6 @@ COPY . .
 # Install FFmpeg
 RUN apk add --no-cache ffmpeg
 
-# ENV NEXT_TELEMETRY_DISABLED 1
-
 RUN yarn build
 
 # Production image, copy all the files and run next
@@ -27,7 +25,7 @@ RUN corepack enable && corepack prepare yarn@stable --activate
 WORKDIR /app
 
 ENV NODE_ENV production
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -36,7 +34,9 @@ RUN adduser --system --uid 1001 nextjs
 RUN apk add --no-cache ffmpeg
 
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/.yarnrc.yml ./.yarnrc.yml
 COPY --from=builder /app/yarn.lock ./yarn.lock
+COPY --from=builder /app/.yarn ./.yarn
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
