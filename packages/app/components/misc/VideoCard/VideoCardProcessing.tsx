@@ -5,7 +5,7 @@ import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical, Loader2 } from 'lucide-react';
 import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
-import DeleteAsset from '@/app/studio/[organization]/library/components/DeleteAsset';
+import DeleteAsset from '@/app/studio/[organization]/(root)/library/components/DeleteAsset';
 import { Button } from '@/components/ui/button';
 import { LuTrash2 } from 'react-icons/lu';
 

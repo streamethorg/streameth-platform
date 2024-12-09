@@ -17,7 +17,7 @@ import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
-import UserProfile from '@/app/studio/[organization]/components/UserProfile';
+import UserProfile from '@/components/misc/UserProfile';
 const HomePageNavbar = ({
   logo,
   pages,

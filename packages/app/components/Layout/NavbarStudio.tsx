@@ -4,9 +4,9 @@ import SearchBar from '@/components/misc/SearchBar';
 import Link from 'next/link';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
 import { IExtendedOrganization } from '@/lib/types';
-import UserProfile from '@/app/studio/[organization]/components/UserProfile';
+import UserProfile from '@/components/misc/UserProfile';
 import CreateLivestreamModal from '@/app/studio/[organization]/livestreams/components/CreateLivestreamModal';
-import UploadVideoDialog from '@/app/studio/[organization]/library/components/UploadVideoDialog';
+import UploadVideoDialog from '@/app/studio/[organization]/(root)/library/components/UploadVideoDialog';
 import LogoDark from '@/public/logo_dark.png';
 const NavbarStudio = ({
   logo,

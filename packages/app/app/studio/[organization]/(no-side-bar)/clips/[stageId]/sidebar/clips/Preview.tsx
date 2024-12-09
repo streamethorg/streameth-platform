@@ -15,7 +15,7 @@ import { Asset } from 'livepeer/models/components';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
-import UploadToDevcon from '@/app/studio/[organization]/library/[session]/components/UploadToDevcon';
+import UploadToDevcon from '@/app/studio/[organization]/(root)/library/[session]/components/UploadToDevcon';
 
 const Preview = ({
   isOpen,

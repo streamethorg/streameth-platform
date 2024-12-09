@@ -2,10 +2,10 @@
 
 import TableSkeleton from '@/components/misc/Table/TableSkeleton';
 import { LivestreamPageParams, eSort } from '@/lib/types';
-import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal';
+import CreateLivestreamModal from '../livestreams/components/CreateLivestreamModal';
 import { Suspense } from 'react';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import LivestreamTable from './livestreams/components/LivestreamTable';
+import LivestreamTable from '../livestreams/components/LivestreamTable';
 import { notFound } from 'next/navigation';
 import UploadVideoDialog from './library/components/UploadVideoDialog';
 import { Button } from '@/components/ui/button';

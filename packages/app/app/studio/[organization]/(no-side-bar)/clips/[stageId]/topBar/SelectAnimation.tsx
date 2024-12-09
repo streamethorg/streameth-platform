@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { IExtendedSession } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { Uploads } from '../../../library/components/UploadVideoDialog';
-import Dropzone from '../../../library/components/upload/Dropzone';
+import Dropzone from '@/app/studio/[organization]/(root)/library/components/upload/Dropzone';
+import { Uploads } from '@/app/studio/[organization]/(root)/library/components/UploadVideoDialog';
 import {
   Form,
   FormControl,

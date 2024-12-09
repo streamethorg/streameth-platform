@@ -15,8 +15,6 @@ import Dropzone from './upload/Dropzone';
 import UploadVideoForm from './upload/UploadVideoForm';
 import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
-import { updateSessionAction } from '@/lib/actions/sessions';
-import { IExtendedSession } from '@/lib/types';
 
 type UploadStatus = {
   progress: number;
