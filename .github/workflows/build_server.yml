@@ -43,6 +43,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -51,6 +54,7 @@ jobs:
           password: ${{ secrets.TOKEN }}
 
       - name: Build and push ${{ matrix.image }}
+        id: docker_build
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -59,6 +63,20 @@ jobs:
             ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}
             ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}-${{ github.sha }}
           file: ${{ matrix.dockerfile }}
+
+      - name: Verify image
+        run: |
+          # Wait for image to be available
+          for i in {1..5}; do
+            if docker pull ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}-${{ github.sha }}; then
+              echo "Image verified successfully"
+              exit 0
+            fi
+            echo "Waiting for image to be available (attempt $i/5)..."
+            sleep 10
+          done
+          echo "Failed to verify image"
+          exit 1
 
   deploy:
     needs: [prepare-env, build-and-push-images]
@@ -82,9 +100,11 @@ jobs:
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
             echo "${{ secrets.DOCKER_CONTEXT_PROD_B64 }}" | base64 -d > ~/.docker/contexts/streameth-prod.tar.gz
             docker context import streameth-prod ~/.docker/contexts/streameth-prod.tar.gz
+            docker context use streameth-prod
           else
             echo "${{ secrets.DOCKER_CONTEXT_STAGING_B64 }}" | base64 -d > ~/.docker/contexts/streameth-staging.tar.gz
             docker context import streameth-staging ~/.docker/contexts/streameth-staging.tar.gz
+            docker context use streameth-staging
           fi
 
       # Copy compose files to server
@@ -92,22 +112,37 @@ jobs:
         run: |
           scp docker-compose.*.yml streameth@145.223.118.217:/home/streameth/streameth/
 
+      # Log in to registry on deployment server
+      - name: Log in to registry on deployment server
+        run: |
+          echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      # Pre-pull images
+      - name: Pre-pull images
+        run: |
+          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
+          SHA="${{ github.sha }}"
+          ENV_TAG="${{ needs.prepare-env.outputs.env_tag }}"
+          
+          for service in server stage-transcriptions session-transcriptions reel-creator; do
+            echo "Pulling image for $service..."
+            docker pull ghcr.io/streamethorg/streameth-platform/$service:$ENV_TAG-$SHA || exit 1
+          done
+
       # Update services based on environment
       - name: Update services
         run: |
-          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
-            docker context use streameth-prod
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:prod-${{ github.sha }} prod_server
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:prod-${{ github.sha }} prod_stage-transcriptions
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:prod-${{ github.sha }} prod_session-transcriptions
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/reel-creator:prod-${{ github.sha }} prod_reel-creator
-          else
-            docker context use streameth-staging
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:staging-${{ github.sha }} streameth-staging_server
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging-${{ github.sha }} streameth-staging_stage-transcriptions
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging-${{ github.sha }} streameth-staging_session-transcriptions
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/reel-creator:staging-${{ github.sha }} streameth-staging_reel-creator
-          fi
+          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
+          SHA="${{ github.sha }}"
+          
+          for service in server stage-transcriptions session-transcriptions reel-creator; do
+            echo "Updating service ${STACK_NAME}_${service}..."
+            docker service update \
+              --with-registry-auth \
+              --image ghcr.io/streamethorg/streameth-platform/$service:${{ needs.prepare-env.outputs.env_tag }}-$SHA \
+              ${STACK_NAME}_${service} || exit 1
+            echo "Service ${STACK_NAME}_${service} updated successfully"
+          done
 
       # Deploy router if it doesn't exist (only needs to be done once)
       - name: Deploy router if needed
