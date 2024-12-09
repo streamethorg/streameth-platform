@@ -54,6 +54,7 @@
     "react-dom": "^18.2.0",
     "react-range": "^1.10.0",
     "remotion": "4.0.227",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^2.2.2",
     "zod": "3.22.3"
   },
