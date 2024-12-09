@@ -15,25 +15,19 @@ COPY . .
 # Install FFmpeg
 RUN apk add --no-cache ffmpeg
 
-# Create necessary directories
-RUN mkdir -p public
-
 RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
 WORKDIR /app/packages/server/reel-creator
 
-ENV NODE_ENV=prod
+ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Install FFmpeg in the final stage
 RUN apk add --no-cache ffmpeg
-
-# Create necessary directories
-RUN mkdir -p public
 
 COPY --from=builder /app/packages/server/reel-creator/package.json ./package.json
 COPY --from=builder /app/packages/server/reel-creator/node_modules ./node_modules
