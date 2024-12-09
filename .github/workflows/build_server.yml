@@ -69,7 +69,7 @@ jobs:
           tags: |
             ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}
             ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/reel-creator/Dockerfile
+          file: ./packages/server/reel-creator/Dockerfile
 
       # Setup SSH key
       - name: Setup SSH key
