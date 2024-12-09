@@ -1,15 +1,15 @@
 FROM node:18-alpine AS deps
 RUN apk add --no-cache libc6-compat
 
-WORKDIR /app
+WORKDIR /app/packages/server/reel-creator
 
 COPY package.json ./
 RUN npm install --legacy-peer-deps
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+WORKDIR /app/packages/server/reel-creator
+COPY --from=deps /app/packages/server/reel-creator/node_modules ./node_modules
 COPY . .
 
 # Install FFmpeg
@@ -19,7 +19,7 @@ RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
-WORKDIR /app
+WORKDIR /app/packages/server/reel-creator
 
 ENV NODE_ENV production
 
@@ -29,10 +29,10 @@ RUN adduser --system --uid 1001 nextjs
 # Install FFmpeg in the final stage
 RUN apk add --no-cache ffmpeg
 
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/packages/server/reel-creator/package.json ./package.json
+COPY --from=builder /app/packages/server/reel-creator/node_modules ./node_modules
+COPY --from=builder /app/packages/server/reel-creator/public ./public
+COPY --from=builder /app/packages/server/reel-creator/.next ./.next
 
 USER nextjs
 
