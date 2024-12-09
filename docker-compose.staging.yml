@@ -23,7 +23,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
+      - DB_HOST=streameth-staging_mongodb
       - DB_USER=root
       - DB_NAME=streameth-staging
 
@@ -155,7 +155,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
+      - DB_HOST=streameth-staging_mongodb
       - DB_USER=root
       - DB_NAME=streameth-staging
 
@@ -282,7 +282,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
+      - DB_HOST=streameth-staging_mongodb
       - DB_USER=root
       - DB_NAME=streameth-staging
 
@@ -391,6 +391,26 @@ services:
       - google-service-account-email
       - redis-password
       - openai-api-key
+
+  reel-creator:
+    image: ghcr.io/streamethorg/streameth-platform/reel-creator:staging
+    environment:
+      - NODE_ENV=development
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        - "traefik.http.routers.reel-creator-staging.rule=Host(`staging.remotion.streameth.org`)"
+        - "traefik.http.routers.reel-creator-staging.service=reel-creator-staging"
+        - "traefik.http.routers.reel-creator-staging.tls=true"
+        - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
+        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
+    networks:
+      - traefik-public
+      - default
 
   mongodb:
     image: mongo:latest

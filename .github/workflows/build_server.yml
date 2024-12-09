@@ -61,6 +61,16 @@ jobs:
             ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
           file: ./packages/server/workers/session-transcriptions/Dockerfile
 
+      - name: Build and push reel-creator
+        uses: docker/build-push-action@v3
+        with:
+          context: ./packages/reel-creator
+          push: true
+          tags: |
+            ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}
+            ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
+          file: ./packages/reel-creator/Dockerfile
+
       # Setup SSH key
       - name: Setup SSH key
         run: |
@@ -94,11 +104,13 @@ jobs:
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:prod-${{ github.sha }} prod_server
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:prod-${{ github.sha }} prod_stage-transcriptions
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:prod-${{ github.sha }} prod_session-transcriptions
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/reel-creator:prod-${{ github.sha }} prod_reel-creator
           else
             docker context use streameth-staging
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:staging-${{ github.sha }} streameth-staging_server
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging-${{ github.sha }} streameth-staging_stage-transcriptions
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging-${{ github.sha }} streameth-staging_session-transcriptions
+            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/reel-creator:staging-${{ github.sha }} streameth-staging_reel-creator
           fi
 
       # Deploy router if it doesn't exist (only needs to be done once)

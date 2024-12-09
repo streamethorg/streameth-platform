@@ -22,7 +22,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
+      - DB_HOST=prod_mongodb
       - DB_USER=root
       - DB_PORT=27017
       - DB_NAME=streameth-prod
@@ -149,7 +149,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
+      - DB_HOST=prod_mongodb
       - DB_USER=root
       - DB_PORT=27017
       - DB_NAME=streameth-prod
@@ -277,7 +277,7 @@ services:
       
       # Database
       - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
+      - DB_HOST=prod_mongodb
       - DB_USER=root
       - DB_PORT=27017
       - DB_NAME=streameth-prod
@@ -425,6 +425,26 @@ services:
       retries: 5
     secrets:
       - redis-password
+
+  reel-creator:
+    image: ghcr.io/streamethorg/streameth-platform/reel-creator:latest
+    environment:
+      - NODE_ENV=production
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        - "traefik.http.routers.reel-creator-prod.rule=Host(`prod.remotion.streameth.org`)"
+        - "traefik.http.routers.reel-creator-prod.service=reel-creator-prod"
+        - "traefik.http.routers.reel-creator-prod.tls=true"
+        - "traefik.http.routers.reel-creator-prod.tls.certresolver=myresolver"
+        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=3000"
+    networks:
+      - traefik-public
+      - default
 
 networks:
   default:
