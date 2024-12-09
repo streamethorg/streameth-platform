@@ -64,7 +64,7 @@ jobs:
       - name: Build and push reel-creator
         uses: docker/build-push-action@v3
         with:
-          context: ./packages/reel-creator
+          context: .
           push: true
           tags: |
             ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}
