@@ -396,6 +396,15 @@ services:
     image: ghcr.io/streamethorg/streameth-platform/reel-creator:staging
     environment:
       - NODE_ENV=development
+      - REMOTION_BASE_URL=http://localhost:3000
+      - REMOTION_WEBHOOK_SECRET_FILE=/run/secrets/remotion-webhook-secret
+      - REMOTION_ID=pebs
+      - PIPEDREAM_AUTH_TOKEN_FILE=/run/secrets/pipedream-auth-token
+      - DEVCON_UPLOAD_ENDPOINT_FILE=/run/secrets/devcon-upload-endpoint
+      - LOG_DIR=logs
+      - LOG_FORMAT=dev
+      - REMOTION_SITE_NAME=https://streameth.org
+      - REMOTION_WEBHOOK_URL=https://staging.api.streameth.org/remotion-webhook
     deploy:
       replicas: 1
       restart_policy:
@@ -411,6 +420,10 @@ services:
     networks:
       - traefik-public
       - default
+    secrets:
+      - remotion-webhook-secret
+      - pipedream-auth-token
+      - devcon-upload-endpoint
 
   mongodb:
     image: mongo:latest
