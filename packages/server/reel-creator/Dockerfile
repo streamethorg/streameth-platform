@@ -1,15 +1,13 @@
 FROM node:18-alpine AS deps
 RUN apk add --no-cache libc6-compat
-RUN corepack enable && corepack prepare yarn@stable --activate
 
 WORKDIR /app
 
-COPY package.json .yarnrc.yml yarn.lock ./
-RUN yarn install --immutable
+COPY package.json package-lock.json* ./
+RUN npm ci
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
-RUN corepack enable && corepack prepare yarn@stable --activate
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -17,11 +15,12 @@ COPY . .
 # Install FFmpeg
 RUN apk add --no-cache ffmpeg
 
-RUN yarn build
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
-RUN corepack enable && corepack prepare yarn@stable --activate
 WORKDIR /app
 
 ENV NODE_ENV production
@@ -34,9 +33,6 @@ RUN adduser --system --uid 1001 nextjs
 RUN apk add --no-cache ffmpeg
 
 COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/.yarnrc.yml ./.yarnrc.yml
-COPY --from=builder /app/yarn.lock ./yarn.lock
-COPY --from=builder /app/.yarn ./.yarn
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
@@ -48,4 +44,4 @@ EXPOSE 3000
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
