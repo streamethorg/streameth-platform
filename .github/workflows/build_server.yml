@@ -127,14 +127,42 @@ jobs:
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           SHA="${{ github.sha }}"
           
-          for service in server stage-transcriptions session-transcriptions reel-creator; do
-            echo "Updating service ${STACK_NAME}_${service}..."
-            docker service update \
+          # Function to update a service and capture its exit status
+          update_service() {
+            local service=$1
+            local temp_file=$(mktemp)
+            if docker service update \
               --with-registry-auth \
               --image ghcr.io/streamethorg/streameth-platform/$service:${{ needs.prepare-env.outputs.env_tag }}-$SHA \
-              ${STACK_NAME}_${service} || exit 1
-            echo "Service ${STACK_NAME}_${service} updated successfully"
+              ${STACK_NAME}_${service} > $temp_file 2>&1; then
+              echo "✅ Service ${STACK_NAME}_${service} updated successfully"
+              rm $temp_file
+              return 0
+            else
+              echo "❌ Failed to update ${STACK_NAME}_${service}"
+              cat $temp_file
+              rm $temp_file
+              return 1
+            fi
+          }
+          
+          # Start all updates in parallel and capture PIDs
+          pids=()
+          for service in server stage-transcriptions session-transcriptions reel-creator; do
+            update_service $service &
+            pids+=($!)
           done
+          
+          # Wait for all updates and check for failures
+          failed=0
+          for pid in ${pids[@]}; do
+            if ! wait $pid; then
+              failed=1
+            fi
+          done
+          
+          # Exit with failure if any update failed
+          exit $failed
 
       # Deploy router if it doesn't exist (only needs to be done once)
       - name: Deploy router if needed
