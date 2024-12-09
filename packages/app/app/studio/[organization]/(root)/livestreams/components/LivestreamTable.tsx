@@ -14,6 +14,7 @@ import { fetchOrganizationStages } from '@/lib/services/stageService';
 import PlayerWithControls from '@/components/ui/Player';
 import { buildPlaybackUrl } from '@/lib/utils/utils';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
+import { Button } from '@/components/ui/button';
 
 const LivestreamTable = async ({
   organizationId,
@@ -48,10 +49,9 @@ const LivestreamTable = async ({
   return (
     <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {streams?.map((stream) => (
-        <Link
+        <div
           key={stream._id}
-          href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
-          className="flex flex-col rounded-xl border"
+          className="flex flex-col rounded-2xl border bg-white"
         >
           <div className="relative w-full">
             {stream.streamSettings?.isActive &&
@@ -77,7 +77,16 @@ const LivestreamTable = async ({
           </div>
           <div className="p-4 flex flex-row justify-between">
             <div className="flex flex-col">
-              <p className="line-clamp-3 font-medium">{stream?.name}</p>
+              <Link
+                href={`/studio/${organizationSlug}/livestreams/${stream._id}`}
+                className="w-full"
+              >
+                <Button variant="link" className="md:p-0">
+                  <p className="line-clamp-3 font-medium text-lg">
+                    {stream?.name}
+                  </p>
+                </Button>
+              </Link>
               <p className="text-sm">
                 {stream?.streamDate
                   ? formatDate(new Date(stream?.streamDate), 'MMM D, YYYY')
@@ -99,7 +108,7 @@ const LivestreamTable = async ({
               </PopoverContent>
             </Popover>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

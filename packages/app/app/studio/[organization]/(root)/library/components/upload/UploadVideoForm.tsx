@@ -162,7 +162,9 @@ const UploadVideoForm = ({
         <div className="flex justify-end space-x-2">
           <DialogClose>
             <span
-              className={` ${buttonVariants({ variant: 'secondary' })} 'text-black border-2`}
+              className={` ${buttonVariants({
+                variant: 'secondary',
+              })} 'text-black border-2`}
             >
               Close
             </span>

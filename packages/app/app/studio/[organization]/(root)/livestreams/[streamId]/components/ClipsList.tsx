@@ -4,10 +4,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { IExtendedSession } from '@/lib/types';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { Clapperboard } from 'lucide-react';
 import { useState } from 'react';
-import Preview from '../../../clips/[stageId]/sidebar/clips/Preview';
+import Preview from '../../../../(no-side-bar)/clips/[stageId]/sidebar/clips/Preview';
 import { Card, CardContent } from '@/components/ui/card';
 import { LuScissorsLineDashed } from 'react-icons/lu';
 
@@ -60,8 +59,6 @@ const ClipItem = ({
   organizationSlug: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const imageUrl = useGenerateThumbnail({ session });
-  //const imageUrl = session.coverImage;
   return (
     <>
       <Card className="overflow-hidden m-2 py-2 px-2  cursor-pointer">
@@ -71,7 +68,7 @@ const ClipItem = ({
             className="flex w-full items-center gap-2"
           >
             <div className="flex-shrink-0 w-1/3">
-              <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
+              <Thumbnail imageUrl={session.coverImage} />
             </div>
             <div className="flex flex-col">
               <h3 className="text-sm font-medium line-clamp-2">

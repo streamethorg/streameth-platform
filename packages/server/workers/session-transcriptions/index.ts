@@ -9,6 +9,7 @@ import { join } from 'path';
 import { ISession } from '@interfaces/session.interface';
 import { TranscriptionStatus } from '@interfaces/state.interface';
 import SessionService from '@services/session.service';
+import Session from '@models/session.model';
 
 interface SessionTranscriptionsJob {
   session: {
@@ -23,7 +24,11 @@ const consumer = async () => {
   const queue = await sessionTranscriptionsQueue();
   queue.process(async (job) => {
     const { session } = job.data as SessionTranscriptionsJob;
-    return processSessionTranscription(session);
+    try {
+      return processSessionTranscription(session);
+    } catch (error) {
+      console.error('Error processing session transcription:', error);
+    }
   });
 };
 
@@ -108,14 +113,13 @@ const updateTranscriptionStatus = async (
   });
 };
 
-async function transcribeAudio(
+export async function transcribeAudio(
   streamUrl: string,
   session: ISession,
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     const tempDir = tmpdir();
     const outputPath = join(tempDir, `${session._id.toString()}.mp3`);
-    const sessionService = new SessionService();
 
     const ffmpegProcess = ffmpeg(streamUrl)
       .inputOptions([
@@ -146,9 +150,7 @@ async function transcribeAudio(
         try {
           const transcript = await WhisperAPI.transcribe(outputPath);
           const sessionObject = {
-            ...session,
             transcripts: {
-              ...session.transcripts,
               status: TranscriptionStatus.completed,
               text: transcript.text,
               lastSegmentTimestamp: 0,
@@ -156,12 +158,7 @@ async function transcribeAudio(
               chunks: transcript.words,
             },
           };
-          console.log('sessionObject', sessionObject.transcripts?.status);
-          const updatedSession = await sessionService.update(
-            session._id.toString(),
-            sessionObject,
-          );
-          console.log('Updated session:', updatedSession.transcripts?.status);
+          await Session.findByIdAndUpdate(session._id, sessionObject);
           resolve();
         } catch (err) {
           console.error('Transcription error:', err);

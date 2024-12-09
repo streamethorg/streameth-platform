@@ -1,2 +1,3 @@
 src/routes/*
 src/swagger/*
+node_modules

@@ -254,7 +254,9 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     const { code, message } = fileRejections[0].errors[0];
     if (code === 'file-too-large') {
       setError(
-        `File is too large. Max size is ${props.maxSize ? props.maxSize / 1024 / 1024 + 'MB.' : '8GB.'}`
+        `File is too large. Max size is ${
+          props.maxSize ? props.maxSize / 1024 / 1024 + 'MB.' : '8GB.'
+        }`
       );
     } else {
       setError(message);
@@ -289,7 +291,11 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
       <div
         ref={ref}
         {...getRootProps()}
-        className={`flex flex-col justify-center items-center space-y-2 w-full h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer ${Object.keys(uploads).length >= (props.maxFiles ?? 5) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
+        className={`flex flex-col justify-center items-center space-y-2 w-full h-40 text-sm bg-white rounded-md border-2 border-gray-300 border-dashed transition-colors cursor-pointer ${
+          Object.keys(uploads).length >= (props.maxFiles ?? 5)
+            ? 'opacity-50 cursor-not-allowed'
+            : 'hover:bg-gray-200'
+        }`}
       >
         {Object.keys(uploads).length > 0 ? (
           <div>
@@ -346,7 +352,9 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
               {/* <p>Drag and drop videos to upload... Or just click here!</p> */}
               <p>
                 Maximum video file size is{' '}
-                {`${props?.maxSize ? props?.maxSize / 1024 / 1024 + 'MB' : '8GB'}`}
+                {`${
+                  props?.maxSize ? props?.maxSize / 1024 / 1024 + 'MB' : '8GB'
+                }`}
                 . Best resolution is 1920 x 1080.
               </p>
             </div>

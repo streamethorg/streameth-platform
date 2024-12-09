@@ -124,7 +124,8 @@ export const createAssetFromUrl = async (
         url: url,
       }),
     });
-    if (response.status !== 201 && response.status !== 200) return '';
+    if (response.status !== 201 && response.status !== 200)
+      throw new Error('Error creating asset');
     const data = await response.json();
     return data.asset.id;
   } catch (e) {

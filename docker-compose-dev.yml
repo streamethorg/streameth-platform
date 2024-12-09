@@ -91,6 +91,96 @@ services:
       - mongodb
       - redis
 
+  clips:
+    build:
+      context: .
+      dockerfile: packages/server/workers/clips/Dockerfile.dev
+    volumes:
+      - ./packages/server:/app/packages/server
+      - /app/packages/server/node_modules
+    environment:
+      # Base Configuration
+      - NODE_ENV=${NODE_ENV}
+      - APP_PORT=${APP_PORT}
+      - BASE_URL=${BASE_URL}
+      - PLAYER_URL=${PLAYER_URL}
+      
+      # Database
+      - DB_PASSWORD_FILE=${DB_PASSWORD_FILE}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+
+      # JWT
+      - JWT_SECRET_FILE=${JWT_SECRET_FILE}
+      - JWT_EXPIRY=${JWT_EXPIRY}
+      
+      # CORS
+      - CORS_ORIGIN=${CORS_ORIGIN}
+      - CORS_CREDENTIALS=${CORS_CREDENTIALS}
+      - CORS_PROXY_URL=${CORS_PROXY_URL}
+      
+      # API Keys
+      - LIVEPEER_API_KEY_FILE=${LIVEPEER_API_KEY_FILE}
+      - THIRDWEB_SECRET_KEY_FILE=${THIRDWEB_SECRET_KEY_FILE}
+      
+      # Storage
+      - SPACES_KEY_FILE=${SPACES_KEY_FILE}
+      - SPACES_SECRET_FILE=${SPACES_SECRET_FILE}
+      - BUCKET_NAME=${BUCKET_NAME}
+      - BUCKET_URL=${BUCKET_URL}
+      
+      # Livepeer
+      - LIVEPEER_WEBHOOK_SECRET_FILE=${LIVEPEER_WEBHOOK_SECRET_FILE}
+      - LIVEPEER_BASE_URL=${LIVEPEER_BASE_URL}
+      
+      # Social & OAuth
+      - TELEGRAM_API_KEY_FILE=${TELEGRAM_API_KEY_FILE}
+      - TELEGRAM_CHAT_ID_FILE=${TELEGRAM_CHAT_ID_FILE}
+      - OAUTH_SECRET_FILE=${OAUTH_SECRET_FILE}
+      - TWITTER_OAUTH_SECRET_FILE=${TWITTER_OAUTH_SECRET_FILE}
+      - TWITTER_CLIENT_ID_FILE=${TWITTER_CLIENT_ID_FILE}
+      - GOOGLE_OAUTH_SECRET_FILE=${GOOGLE_OAUTH_SECRET_FILE}
+      - GOOGLE_CLIENT_ID_FILE=${GOOGLE_CLIENT_ID_FILE}
+         
+      # Google Service Account
+      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE=${SERVICE_ACCOUNT_PRIVATE_KEY_FILE}
+      - SERVICE_ACCOUNT_EMAIL_FILE=${SERVICE_ACCOUNT_EMAIL_FILE}
+      
+      # Mail
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USER_FILE=${MAIL_USER_FILE}
+      - MAIL_PASS_FILE=${MAIL_PASS_FILE}
+      
+      # Magic Link
+      - MAGIC_LINK_SECRET_FILE=${MAGIC_LINK_SECRET_FILE}
+      - MAGIC_LINK_EXPIRY=${MAGIC_LINK_EXPIRY}
+      
+      # Wallet & Privy
+      - WALLET_ADDRESSES=${WALLET_ADDRESSES}
+        
+      # Remotion & Others
+      - REMOTION_BASE_URL=${REMOTION_BASE_URL}
+      - REMOTION_WEBHOOK_SECRET_FILE=${REMOTION_WEBHOOK_SECRET_FILE}
+      - REMOTION_ID=${REMOTION_ID}
+      - PIPEDREAM_AUTH_TOKEN_FILE=${PIPEDREAM_AUTH_TOKEN_FILE}
+      - DEVCON_UPLOAD_ENDPOINT_FILE=${DEVCON_UPLOAD_ENDPOINT_FILE}
+      - LOG_DIR=${LOG_DIR}
+      - LOG_FORMAT=${LOG_FORMAT}
+      - REMOTION_SITE_NAME=${REMOTION_SITE_NAME}
+      - REMOTION_WEBHOOK_URL=${REMOTION_WEBHOOK_URL}
+
+      # Redis
+      - REDIS_PASSWORD_FILE=${REDIS_PASSWORD_FILE}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OPENAI_API_KEY_FILE=${OPENAI_API_KEY_FILE}
+
+    depends_on:
+      - mongodb
+      - redis
+
   stage-transcriptions:
     build:
       context: .

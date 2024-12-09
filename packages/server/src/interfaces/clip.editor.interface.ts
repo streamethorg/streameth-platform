@@ -9,6 +9,7 @@ export enum ClipEditorStatus {
   completed = 'completed',
 }
 export interface IClipEditor {
+  _id?: Types.ObjectId;
   renderId: string;
   organizationId: Types.ObjectId;
   stageId: Types.ObjectId;

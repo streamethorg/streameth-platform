@@ -9,7 +9,7 @@ import { Menu, X } from 'lucide-react';
 import Navbar from './Navbar';
 import { Search } from 'lucide-react';
 import { Page } from '@/lib/types';
-import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
+import SwitchOrganization from './SwitchOrganization';
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';

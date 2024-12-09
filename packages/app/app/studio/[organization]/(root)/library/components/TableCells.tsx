@@ -25,8 +25,6 @@ const TableCells = async ({
   item: IExtendedSession;
   organization: string;
 }) => {
-  const imageUrl = await generateThumbnailAction(item);
-
   const isPending = item.processingStatus === ProcessingStatus.pending;
   const isFailed = item.processingStatus === ProcessingStatus.failed;
 
@@ -71,7 +69,7 @@ const TableCells = async ({
       >
         <div className="flex flex-row items-center space-x-4 w-full h-full max-w-[500px]">
           <div className="min-w-[100px]">
-            <Thumbnail imageUrl={item.coverImage} fallBack={imageUrl} />
+            <Thumbnail imageUrl={item.coverImage} />
           </div>
           <div className="flex flex-col">
             {!isDisabled ? (

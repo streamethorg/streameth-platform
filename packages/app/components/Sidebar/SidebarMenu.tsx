@@ -10,8 +10,6 @@ import {
   LuBookOpen,
 } from 'react-icons/lu';
 import Image from 'next/image';
-import { IExtendedOrganization } from '@/lib/types';
-import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { fetchOrganization } from '@/lib/services/organizationService';

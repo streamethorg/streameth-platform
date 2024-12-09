@@ -46,7 +46,9 @@ const DropdownActions = ({
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Link
-              href={`/${organizationSlug}/watch?session=${session._id as string}`}
+              href={`/${organizationSlug}/watch?session=${
+                session._id as string
+              }`}
             >
               <Button
                 variant={'ghost'}

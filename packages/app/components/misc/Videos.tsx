@@ -52,7 +52,9 @@ export default function VideoGrid({
               >
                 <VideoCardWithMenu
                   session={video}
-                  link={`/${OrganizationSlug || video.organizationId}/watch?session=${video._id.toString()}`}
+                  link={`/${
+                    OrganizationSlug || video.organizationId
+                  }/watch?session=${video._id.toString()}`}
                 />
               </Suspense>
             </div>

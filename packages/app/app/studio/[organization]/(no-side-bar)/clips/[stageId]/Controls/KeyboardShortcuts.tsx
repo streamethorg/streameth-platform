@@ -120,13 +120,13 @@ const KeyboardShortcuts = ({
         setCurrentTime(newTime);
         videoRef.current.currentTime = newTime;
       } else if (event.key === 'ArrowLeft' && videoRef.current) {
-        // Decrease current time by 1 second
-        const newTime = Math.max(currentTime - 1, 0);
+        // Decrease current time by 1 frame if 60fps
+        const newTime = Math.max(currentTime - 1 / 20, 0);
         setCurrentTime(newTime);
         videoRef.current.currentTime = newTime;
       } else if (event.key === 'ArrowRight' && videoRef.current) {
         // Increase current time by 1 second
-        const newTime = Math.min(currentTime + 1, maxLength);
+        const newTime = Math.min(currentTime + 1 / 20, maxLength);
         setCurrentTime(newTime);
         videoRef.current.currentTime = newTime;
       }

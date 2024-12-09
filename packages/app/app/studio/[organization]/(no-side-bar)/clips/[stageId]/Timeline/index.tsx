@@ -106,8 +106,13 @@ const Timeline = () => {
                   border: `2px solid ${
                     selectedMarkerId === marker._id ? '#066FF9' : marker.color
                   }`,
-                  left: `${(marker.startClipTime / maxLength) * timelineWidth}px`,
-                  width: `${((marker.endClipTime - marker.startClipTime) / maxLength) * timelineWidth}px`,
+                  left: `${
+                    (marker.startClipTime / maxLength) * timelineWidth
+                  }px`,
+                  width: `${
+                    ((marker.endClipTime - marker.startClipTime) / maxLength) *
+                    timelineWidth
+                  }px`,
                 }}
               >
                 <p className="text-[10px] text-white truncate">

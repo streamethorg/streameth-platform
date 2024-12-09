@@ -163,8 +163,12 @@ export class StreamController extends Controller {
   async createClip(
     @Body() body: CreateClipDto,
   ): Promise<IStandardResponse<any>> {
-    const clip = await ClipEditorService.createClip(body);
-    return SendApiResponse('clipped', clip);
+    try {
+      await ClipEditorService.createClip(body);
+      return SendApiResponse('clipped success');
+    } catch (e) {
+      return SendApiResponse('clipped failed', e);
+    }
   }
 
   /**

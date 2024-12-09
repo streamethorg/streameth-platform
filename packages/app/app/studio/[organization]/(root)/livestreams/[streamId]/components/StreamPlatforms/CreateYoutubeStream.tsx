@@ -70,7 +70,9 @@ const CreateYoutubeStream = ({
             <div
               onClick={() => setSocialId(socialId ? '' : _id!)}
               key={_id}
-              className={`relative w-[110px] flex cursor-pointer flex-col items-center  ${checkIsTarget(_id) ? 'pointer-events-none opacity-50' : ''}`}
+              className={`relative w-[110px] flex cursor-pointer flex-col items-center  ${
+                checkIsTarget(_id) ? 'pointer-events-none opacity-50' : ''
+              }`}
             >
               <div
                 className={`h-12 w-12 cursor-pointer rounded-full bg-cover bg-center ${
@@ -83,7 +85,9 @@ const CreateYoutubeStream = ({
                 }}
               ></div>
               <p
-                className={`text-center p-2 text-sm ${socialId == _id ? 'text-semibold' : ''}`}
+                className={`text-center p-2 text-sm ${
+                  socialId == _id ? 'text-semibold' : ''
+                }`}
               >
                 {checkIsTarget(_id) ? `Streamed to ${name}` : name}
               </p>

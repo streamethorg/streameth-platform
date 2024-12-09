@@ -5,13 +5,10 @@ import {
   IPagination,
 } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
-import { Livepeer } from 'livepeer';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
-import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components';
 import FuzzySearch from 'fuzzy-search';
-import { auth } from '@/auth';
 import { fetchClient } from './fetch-client';
 
 interface ApiParams {
@@ -137,6 +134,7 @@ export const createSession = async ({
       body: JSON.stringify(session),
     });
 
+    console.log('response', response);
     if (!response.ok) {
       throw 'Error creating session';
     }
@@ -256,16 +254,6 @@ export const createClip = async ({
   organizationId?: string;
 }): Promise<ISession> => {
   try {
-    console.log('Sending clip creation request with data:', {
-      start,
-      end,
-      playbackId,
-      recordingId,
-      sessionId,
-      isEditorEnabled,
-      organizationId,
-    });
-
     const response = await fetchClient(`${apiUrl()}/streams/clip`, {
       method: 'POST',
       headers: {
@@ -289,7 +277,7 @@ export const createClip = async ({
     }
 
     revalidatePath('/studio');
-    return responseData.data;
+    return responseData;
   } catch (e) {
     console.error('Error in createClip:', {
       error: e,

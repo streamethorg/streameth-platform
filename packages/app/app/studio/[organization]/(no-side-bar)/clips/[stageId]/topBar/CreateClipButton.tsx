@@ -191,7 +191,7 @@ const CreateClipButton = ({
 
     try {
       const session = await createSessionAction({
-        session: { ...mainClipSession, type: sessionType },
+        session: { ...mainClipSession, type: SessionType.clip },
       });
 
       if (!session || !session._id) {
@@ -200,15 +200,12 @@ const CreateClipButton = ({
 
       const mainClipData = {
         playbackId: stage?.streamSettings?.playbackId,
-        start: startTime.unix,
-        end: endTime.unix,
+        start: startTime.displayTime,
+        end: endTime.displayTime,
         sessionId: session._id,
         recordingId: sessionRecording?.assetId ?? liveRecordingId ?? '',
         organizationId,
       };
-
-      // Call to create and process the clip
-      await createClipAction({ ...mainClipData, isEditorEnabled: false });
 
       if (hasEditorOptions) {
         const clipCreationOptions = {
@@ -240,6 +237,8 @@ const CreateClipButton = ({
         };
         // Call createClipAction with the prepared editor options
         await createClipAction(clipCreationOptions);
+      } else {
+        await createClipAction({ ...mainClipData, isEditorEnabled: false });
       }
 
       toast.success('Clip created');

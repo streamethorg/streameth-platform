@@ -22,8 +22,8 @@ const TranscriptionModal = ({ video }: { video: IExtendedSession }) => {
         <div className="space-y-4">
           {video?.transcripts?.chunks.map((chunk, index) => (
             <div key={index}>
-              <p>[{formatTimestamp(chunk.timestamp[0])}]</p>
-              <p>{chunk.text}</p>
+              <p>[{formatTimestamp(chunk.start)}]</p>
+              <p>{chunk.word}</p>
             </div>
           ))}
         </div>

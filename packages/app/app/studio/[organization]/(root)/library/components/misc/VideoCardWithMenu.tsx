@@ -12,7 +12,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const VideoCardWithMenu = ({
   session,
@@ -25,12 +24,10 @@ const VideoCardWithMenu = ({
   DropdownMenuItems?: ReactNode;
   link: string;
 }) => {
-  const thumbnail = useGenerateThumbnail({ session });
-
   return (
     <div className="flex min-h-full w-full flex-col rounded-xl uppercase">
       <Link className="h-full w-full" href={link}>
-        <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
+        <Thumbnail imageUrl={session.coverImage} />
       </Link>
       <div className="flex items-start justify-between">
         <CardHeader

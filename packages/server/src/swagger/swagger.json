@@ -1903,6 +1903,7 @@
 					"pending",
 					"rendering",
 					"failed",
+					"clipCreated",
 					"completed"
 				],
 				"type": "string"

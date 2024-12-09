@@ -90,7 +90,9 @@ const StageControls = ({
           />
 
           <Link
-            href={`/${organization.slug as string}/livestream?stage=${stream._id}`}
+            href={`/${organization.slug as string}/livestream?stage=${
+              stream._id
+            }`}
             target="_blank"
           >
             <Button variant="outline">
@@ -103,7 +105,9 @@ const StageControls = ({
 
           {isLive && (
             <Link
-              href={`/studio/${organization.slug as string}/clips/${stream._id}?videoType=livestream`}
+              href={`/studio/${organization.slug as string}/clips/${
+                stream._id
+              }?videoType=livestream`}
             >
               <Button variant="primary" className="flex gap-1 items-center">
                 Clip Live

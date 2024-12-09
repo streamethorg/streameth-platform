@@ -36,7 +36,8 @@
       "@aitools/*": ["../tools/ai-tools/src/*"],
       "@avtools/*": ["../tools/av-tools/utils/src/*"],
       "@app/*": ["../app/*"],
-      "@server/*": ["./src/*"]
+      "@server/*": ["./src/*"],
+      "@workers/*": ["./workers/*"]
     }
   },
   "include": ["src/**/*", "workers"],

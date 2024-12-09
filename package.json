@@ -13,6 +13,7 @@
 	"scripts": {
 		"dev:stage-transcriptions": "yarn workspace streameth-new-server dev:stage-transcriptions",
 		"dev:session-transcriptions": "yarn workspace streameth-new-server dev:session-transcriptions",
+		"dev:clips": "yarn workspace streameth-new-server dev:clips",
 		"build:app": "yarn workspace @streameth/streameth-app build",
 		"dev:app": "yarn workspace @streameth/streameth-app dev",
 		"start:app": "yarn workspace @streameth/streameth-app start",
@@ -21,13 +22,13 @@
 		"start:server": "yarn workspace streameth-new-server start:server",
 		"start:stage-transcriptions": "yarn workspace streameth-new-server start:stage-transcriptions",
 		"start:session-transcriptions": "yarn workspace streameth-new-server start:session-transcriptions",
+		"start:clips": "yarn workspace streameth-new-server start:clips",
 		"next:lint": "yarn workspace @streameth/streameth-app lint",
 		"next:check-types": "yarn workspace @streameth/streameth-app check-types",
 		"prettier:fix": "yarn workspace @streameth/streameth-app prettier:fix && yarn workspace streameth-new-server prettier:fix",
 		"prettier:check": "yarn workspace @streameth/streameth-app prettier:check && yarn workspace streameth-new-server prettier:check",
 		"precommit": "lint-staged --verbose",
 		"install:all": "yarn --cwd packages/server && yarn",
-
 		"prepare": "husky"
 	},
 	"devDependencies": {

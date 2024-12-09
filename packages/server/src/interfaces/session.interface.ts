@@ -34,6 +34,7 @@ export enum ProcessingStatus {
   pending = 'pending',
   rendering = 'rendering',
   failed = 'failed',
+  clipCreated = 'clipCreated',
   completed = 'completed',
 }
 

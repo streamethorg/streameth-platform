@@ -29,6 +29,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   let videoSrc = null;
   let type = null;
   let liveRecording = null;
+  let name = null;
 
   if (videoType === 'livestream' && stageId) {
     // Fetch live recording for the selected stage
@@ -48,6 +49,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       recordingId: liveRecording?.id,
     });
     type = 'livepeer';
+    name = liveRecording?.name;
   }
 
   if (videoType === 'recording' && sessionId) {
@@ -67,6 +69,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       recordingId: session?.assetId,
     });
     type = 'livepeer';
+    name = session.name;
   }
 
   if (videoType === 'customUrl' && stageId) {
@@ -76,9 +79,10 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     if (!stage || !stage?.source?.m3u8Url) return <div>No stage found</div>;
     videoSrc = stage?.source?.m3u8Url;
     type = stage?.source?.type;
+    name = stage?.name;
   }
 
-  if (!videoSrc || !type) return <div>Video source not found</div>;
+  if (!videoSrc || !type || !name) return <div>Video source not found</div>;
 
   const stageSessions = (
     await fetchAllSessions({
@@ -100,7 +104,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     <ClipProvider organizationId={organizationId} stageId={stageId}>
       <div className="flex flex-row w-full h-full border-t border-gray-200">
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
-          <TopBar />
+          <TopBar title={name} organization={organization} />
           <ReactHlsPlayer src={videoSrc} type={type} />
           <Controls />
           <div className="w-full p-2 bg-white">

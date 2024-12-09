@@ -9,9 +9,8 @@
     "dev:server": "nodemon --config ./src/nodemon.json",
     "dev:stage-transcriptions": "nodemon --config ./workers/stage-transcriptions/nodemon.json",
     "dev:session-transcriptions": "nodemon --config ./workers/session-transcriptions/nodemon.json",
-   
+    "dev:clips": "nodemon --config ./workers/clips/nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json && ncp templates dist/templates",
-   
     "test": "mocha",
     "prettier:fix": "prettier --write './src' './test'",
     "prettier:check": "prettier --check './src' './test'",
@@ -48,6 +47,7 @@
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "livepeer": "3.0.2",
+    "m3u8-parser": "^7.2.0",
     "mongoose": "7.6.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",

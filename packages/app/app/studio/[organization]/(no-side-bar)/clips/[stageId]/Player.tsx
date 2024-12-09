@@ -14,9 +14,9 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     setIsLoading,
     isLoading,
     videoRef,
-    endTime,
-    startTime,
     setHls,
+    startTime,
+    endTime,
     setTimeReference,
   } = useClipContext();
 
@@ -50,6 +50,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
 
       hls.loadSource(type === 'youtube' ? proxiedSrc : src);
       hls.attachMedia(videoRef.current);
+
+      videoRef.current.getVideoPlaybackQuality();
 
       hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
         if (videoRef.current) {

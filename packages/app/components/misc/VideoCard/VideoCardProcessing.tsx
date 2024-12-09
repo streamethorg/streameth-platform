@@ -3,7 +3,6 @@ import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { EllipsisVertical, Loader2 } from 'lucide-react';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import DeleteAsset from '@/app/studio/[organization]/(root)/library/components/DeleteAsset';
 import { Button } from '@/components/ui/button';
@@ -14,14 +13,15 @@ const VideoCardProcessing = async ({
 }: {
   session: IExtendedSession;
 }) => {
-  const thumbnail = useGenerateThumbnail({ session });
   const isPending = session.processingStatus === ProcessingStatus.pending;
 
   return (
     <div
-      className={`min-h-full w-full rounded-xl uppercase ${isPending ? 'animate-pulse' : ''}`}
+      className={`min-h-full w-full rounded-xl uppercase ${
+        isPending ? 'animate-pulse' : ''
+      }`}
     >
-      <Thumbnail imageUrl={session.coverImage} fallBack={thumbnail} />
+      <Thumbnail imageUrl={session.coverImage} />
       <div className="flex items-start justify-between">
         <CardHeader
           className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none`}

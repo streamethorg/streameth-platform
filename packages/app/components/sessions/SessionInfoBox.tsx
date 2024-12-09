@@ -10,7 +10,6 @@ import {
 import ShareButton from '../misc/interact/ShareButton';
 import CollectVideButton from './CollectVideButton';
 import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
-import { formatDate } from '@/lib/utils/time';
 import ViewCounts from '@/app/[organization]/components/ViewCounts';
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder';
 import { IExtendedSpeaker } from '@/lib/types';
@@ -56,7 +55,7 @@ const DesktopButtons = ({
           end={date}
         />
       )}
-      {video?.transcripts?.chunks[0]?.text && (
+      {video?.transcripts?.chunks?.length && (
         <TranscriptionModal video={video as IExtendedSession} />
       )}
     </>

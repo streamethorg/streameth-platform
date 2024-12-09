@@ -91,8 +91,9 @@ export const createClipAction = async ({
     recordingId,
     organizationId,
   });
+  console.log('response', response);
   if (!response) {
-    throw new Error('Error creating session');
+    throw new Error('Error creating clip');
   }
   revalidatePath('/studio');
   return response;

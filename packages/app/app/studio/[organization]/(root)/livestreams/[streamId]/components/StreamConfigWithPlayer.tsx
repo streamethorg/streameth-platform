@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import CopyText from '../../../../../../components/misc/CopyText';
+import CopyText from '../../../../../../../components/misc/CopyText';
 import { IExtendedStage } from '@/lib/types';
 import dynamic from 'next/dynamic';
 

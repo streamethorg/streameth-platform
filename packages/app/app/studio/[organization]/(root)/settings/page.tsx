@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateOrganizationForm from '../../(home)/components/CreateOrganizationForm';
+import CreateOrganizationForm from '@/app/studio/(home)/components/CreateOrganizationForm';
 import { IExtendedUser, studioPageParams } from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import {

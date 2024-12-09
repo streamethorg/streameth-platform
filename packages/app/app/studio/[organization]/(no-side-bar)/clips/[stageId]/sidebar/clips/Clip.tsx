@@ -1,7 +1,6 @@
 'use client';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { Card, CardContent } from '@/components/ui/card';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 import { fetchAsset } from '@/lib/services/sessionService';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
@@ -15,7 +14,6 @@ export default function Clip({ session }: { session: IExtendedSession }) {
   const { name, coverImage, assetId } = session;
   const [asset, setAsset] = useState<Asset | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const thumbnail = useGenerateThumbnail({ session });
   const router = useRouter();
   const getAsset = async () => {
     if (assetId) {
@@ -31,20 +29,20 @@ export default function Clip({ session }: { session: IExtendedSession }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assetId]);
 
-  useEffect(() => {
-    if (asset?.status?.phase === 'processing') {
-      const interval = setInterval(() => {
-        getAsset();
-      }, 10000);
-      return () => clearInterval(interval);
-    } else if (session.processingStatus === ProcessingStatus.pending) {
-      const interval = setInterval(() => {
-        router.refresh();
-      }, 10000);
-      return () => clearInterval(interval);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asset?.status?.phase]);
+  // useEffect(() => {
+  //   if (asset?.status?.phase === 'processing') {
+  //     const interval = setInterval(() => {
+  //       getAsset();
+  //     }, 10000);
+  //     return () => clearInterval(interval);
+  //   } else if (session.processingStatus === ProcessingStatus.pending) {
+  //     const interval = setInterval(() => {
+  //       router.refresh();
+  //     }, 10000);
+  //     return () => clearInterval(interval);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [asset?.status?.phase]);
   // if (!assetId) return null;
 
   return (
@@ -55,7 +53,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
           <Card className="w-full cursor-not-allowed animate-pulse max-w-2xl overflow-hidden px-2 py-1 shadow-none bg-muted">
             <div className="flex justify-center items-center">
               <div className="flex-shrink-0 w-1/3">
-                <Thumbnail imageUrl={coverImage} fallBack={thumbnail} />
+                <Thumbnail imageUrl={coverImage} />
               </div>
               <CardContent className="lg:p-2 p-2 flex-grow">
                 <h2 className="text-lg font-semibold line-clamp-1">{name}</h2>
@@ -84,7 +82,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
             <Card className="w-full cursor-not-allowed border border-destructive max-w-2xl overflow-hidden px-2 py-1 shadow-none bg-muted">
               <div className="flex justify-center items-center">
                 <div className="flex-shrink-0 w-1/3">
-                  <Thumbnail imageUrl={coverImage} fallBack={thumbnail} />
+                  <Thumbnail imageUrl={coverImage} />
                 </div>
                 <CardContent className="lg:p-2 p-2 flex-grow">
                   <h2 className="text-lg font-semibold line-clamp-1">{name}</h2>
@@ -110,7 +108,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
           >
             <div className="flex justify-center items-center">
               <div className="flex-shrink-0 w-1/3">
-                <Thumbnail imageUrl={coverImage} fallBack={thumbnail} />
+                <Thumbnail imageUrl={coverImage} />
               </div>
               <CardContent className="lg:p-2 p-2 flex-grow">
                 <h2 className="text-lg font-semibold line-clamp-1">{name}</h2>
