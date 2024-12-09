@@ -5,8 +5,40 @@ on:
     branches: [docker, docker-prod]
 
 jobs:
-  build-and-push-server-image:
+  prepare-env:
     runs-on: ubuntu-latest
+    outputs:
+      env_tag: ${{ steps.set-tag.outputs.ENV_TAG }}
+      compose_file: ${{ steps.set-tag.outputs.COMPOSE_FILE }}
+      stack_name: ${{ steps.set-tag.outputs.STACK_NAME }}
+    steps:
+      - name: Set environment tag
+        id: set-tag
+        run: |
+          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
+            echo "ENV_TAG=prod" >> $GITHUB_OUTPUT
+            echo "COMPOSE_FILE=docker-compose.prod.yml" >> $GITHUB_OUTPUT
+            echo "STACK_NAME=prod" >> $GITHUB_OUTPUT
+          else
+            echo "ENV_TAG=staging" >> $GITHUB_OUTPUT
+            echo "COMPOSE_FILE=docker-compose.staging.yml" >> $GITHUB_OUTPUT
+            echo "STACK_NAME=streameth-staging" >> $GITHUB_OUTPUT
+          fi
+
+  build-and-push-images:
+    needs: prepare-env
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: server
+            dockerfile: ./packages/server/src/Dockerfile
+          - image: stage-transcriptions
+            dockerfile: ./packages/server/workers/stage-transcriptions/Dockerfile
+          - image: session-transcriptions
+            dockerfile: ./packages/server/workers/session-transcriptions/Dockerfile
+          - image: reel-creator
+            dockerfile: ./packages/server/reel-creator/Dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,58 +50,22 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
 
-      - name: Set environment tag
-        id: set-tag
-        run: |
-          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
-            echo "ENV_TAG=prod" >> $GITHUB_OUTPUT
-            echo "COMPOSE_FILE=docker-compose.prod.yml" >> $GITHUB_OUTPUT
-            echo "STACK_NAME=prod" >> $GITHUB_OUTPUT
-          else
-            echo "ENV_TAG=staging" >> $GITHUB_OUTPUT
-            echo "COMPOSE_FILE=docker-compose.staging.yml" >> $GITHUB_OUTPUT
-            echo "STACK_NAME=staging" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build and push server
+      - name: Build and push ${{ matrix.image }}
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/streamethorg/streameth-platform/server:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/server:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/src/Dockerfile
+            ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}
+            ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}-${{ github.sha }}
+          file: ${{ matrix.dockerfile }}
 
-      - name: Build and push stage-transcriptions
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/workers/stage-transcriptions/Dockerfile
-
-      - name: Build and push session-transcriptions
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/workers/session-transcriptions/Dockerfile
-
-      - name: Build and push reel-creator
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/reel-creator:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/reel-creator/Dockerfile
+  deploy:
+    needs: [prepare-env, build-and-push-images]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       # Setup SSH key
       - name: Setup SSH key
