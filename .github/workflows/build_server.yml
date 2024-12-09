@@ -46,6 +46,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # Add caching for Docker layers
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.image }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.image }}-
+            ${{ runner.os }}-buildx-
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -63,20 +73,14 @@ jobs:
             ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}
             ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}-${{ github.sha }}
           file: ${{ matrix.dockerfile }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
-      - name: Verify image
+      # Temp fix for cache handling
+      - name: Move cache
         run: |
-          # Wait for image to be available
-          for i in {1..5}; do
-            if docker pull ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}-${{ github.sha }}; then
-              echo "Image verified successfully"
-              exit 0
-            fi
-            echo "Waiting for image to be available (attempt $i/5)..."
-            sleep 10
-          done
-          echo "Failed to verify image"
-          exit 1
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
   deploy:
     needs: [prepare-env, build-and-push-images]
@@ -116,18 +120,6 @@ jobs:
       - name: Log in to registry on deployment server
         run: |
           echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      # Pre-pull images
-      - name: Pre-pull images
-        run: |
-          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
-          SHA="${{ github.sha }}"
-          ENV_TAG="${{ needs.prepare-env.outputs.env_tag }}"
-          
-          for service in server stage-transcriptions session-transcriptions reel-creator; do
-            echo "Pulling image for $service..."
-            docker pull ghcr.io/streamethorg/streameth-platform/$service:$ENV_TAG-$SHA || exit 1
-          done
 
       # Update services based on environment
       - name: Update services
