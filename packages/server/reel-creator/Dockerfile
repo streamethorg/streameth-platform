@@ -29,4 +29,4 @@ RUN npx next build
 RUN yarn install --frozen-lockfile --production
 
 # Start the application
-CMD ["yarn", "start"]
+CMD ["node", ".next/standalone/server.js"]
