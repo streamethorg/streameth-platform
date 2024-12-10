@@ -85,6 +85,7 @@ type ClipContextType = {
     timeRef: { currentTime: number; unixTime: number },
     seconds: number
   ) => number;
+  clipUrl: string;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -95,10 +96,12 @@ export const ClipProvider = ({
   children,
   stageId,
   organizationId,
+  clipUrl,
 }: {
   children: React.ReactNode;
   stageId: string;
   organizationId: string;
+  clipUrl: string;
 }) => {
   const { handleTermChange, searchParams } = useSearchParams();
 
@@ -446,6 +449,7 @@ export const ClipProvider = ({
         timelineContainerWidth,
         setTimelineContainerWidth,
         convertSecondsToUnix,
+        clipUrl,
       }}
     >
       {children}

@@ -35,6 +35,7 @@ const CreateClipButton = ({
     selectedMarkerId,
     setSelectedMarkerId,
     videoRef,
+    clipUrl,
   } = useClipContext();
   const [isCreateClip, setIsCreateClip] = useState(false);
   const [sessionRecording, setSessionRecording] =
@@ -199,12 +200,11 @@ const CreateClipButton = ({
       }
 
       const mainClipData = {
-        playbackId: stage?.streamSettings?.playbackId,
         start: startTime.displayTime,
         end: endTime.displayTime,
         sessionId: session._id,
-        recordingId: sessionRecording?.assetId ?? liveRecordingId ?? '',
         organizationId,
+        clipUrl: clipUrl,
       };
 
       if (hasEditorOptions) {

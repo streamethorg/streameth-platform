@@ -3,10 +3,10 @@ import {
   fetchAllSessions,
   fetchAsset,
   fetchSession,
+  sessionImport,
 } from '@/lib/services/sessionService';
 import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
 import { ClipsPageParams } from '@/lib/types';
-import { getLiveStageSrcValue } from '@/lib/utils/utils';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
@@ -16,6 +16,62 @@ import ReactHlsPlayer from './Player';
 import Timeline from './Timeline';
 import Sidebar from './sidebar';
 import TopBar from './topBar';
+import { getVideoUrlAction } from '@/lib/actions/livepeer';
+
+const fetchVideoDetails = async (
+  videoType: string,
+  stageId: string,
+  sessionId?: string
+) => {
+  switch (videoType) {
+    case 'livestream': {
+      const liveStage = await fetchStage({ stage: stageId });
+      const streamId = liveStage?.streamSettings?.streamId;
+      if (!streamId) return null;
+
+      const stageRecordings = await fetchStageRecordings({ streamId });
+      if (!stageRecordings?.recordings[0]) return null;
+
+      return {
+        videoSrc: stageRecordings.recordings[0].recordingUrl,
+        type: 'livepeer',
+        name: liveStage.name,
+        words: liveStage.transcripts?.text,
+        liveRecording: stageRecordings.recordings[0],
+      };
+    }
+
+    case 'recording': {
+      const session = await fetchSession({ session: sessionId! });
+      if (!session?.playbackId || !session?.assetId) return null;
+
+      const stage = await fetchStage({ stage: session.stageId as string });
+      if (!stage?.streamSettings?.playbackId) return null;
+
+      const videoSrc = await getVideoUrlAction(session);
+      return {
+        videoSrc,
+        type: 'livepeer',
+        name: session.name,
+        words: session.transcripts?.subtitleUrl,
+      };
+    }
+
+    case 'customUrl': {
+      const stage = await fetchStage({ stage: stageId });
+      if (!stage?.source?.m3u8Url) return null;
+
+      return {
+        videoSrc: stage.source.m3u8Url,
+        type: stage.source.type,
+        name: stage.name,
+      };
+    }
+
+    default:
+      return null;
+  }
+};
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { organization, stageId } = params;
@@ -26,86 +82,43 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   )?._id;
   if (!organizationId) return notFound();
 
-  let videoSrc = null;
-  let type = null;
-  let liveRecording = null;
-  let name = null;
-
-  if (videoType === 'livestream' && stageId) {
-    // Fetch live recording for the selected stage
-    const liveStage = await fetchStage({
-      stage: stageId,
-    });
-    const streamId = liveStage?.streamSettings?.streamId;
-
-    if (!streamId) return <div>live stage not found</div>;
-
-    const stageRecordings = await fetchStageRecordings({ streamId });
-    liveRecording = stageRecordings?.recordings[0] ?? null;
-
-    if (!stageRecordings) return <div>stage recordings not found</div>;
-    videoSrc = getLiveStageSrcValue({
-      playbackId: liveRecording?.playbackId,
-      recordingId: liveRecording?.id,
-    });
-    type = 'livepeer';
-    name = liveRecording?.name;
+  const videoDetails = await fetchVideoDetails(videoType, stageId, sessionId);
+  if (!videoDetails?.videoSrc || !videoDetails?.type || !videoDetails?.name) {
+    return <div>Video source not found</div>;
   }
 
-  if (videoType === 'recording' && sessionId) {
-    const session = await fetchSession({
-      session: sessionId,
-    });
-    if (!session || !session.playbackId || !session.assetId)
-      return <div>No session found</div>;
-    const stage = await fetchStage({
-      stage: session.stageId as string,
-    });
-    if (!stage || !stage?.streamSettings?.playbackId)
-      return <div>No stage found</div>;
-
-    videoSrc = getLiveStageSrcValue({
-      playbackId: stage?.streamSettings?.playbackId,
-      recordingId: session?.assetId,
-    });
-    type = 'livepeer';
-    name = session.name;
-  }
-
-  if (videoType === 'customUrl' && stageId) {
-    const stage = await fetchStage({
-      stage: stageId,
-    });
-    if (!stage || !stage?.source?.m3u8Url) return <div>No stage found</div>;
-    videoSrc = stage?.source?.m3u8Url;
-    type = stage?.source?.type;
-    name = stage?.name;
-  }
-
-  if (!videoSrc || !type || !name) return <div>Video source not found</div>;
-
-  const stageSessions = (
-    await fetchAllSessions({
+  const [stageSessions, animations] = await Promise.all([
+    fetchAllSessions({
       stageId,
-      // onlyVideos: true,
       type: SessionType.clip,
-    })
-  ).sessions;
-
-  const animations = (
-    await fetchAllSessions({
+    }),
+    fetchAllSessions({
       organizationSlug: organization,
       onlyVideos: true,
       type: SessionType.animation,
-    })
-  ).sessions;
+    }),
+  ]);
 
   return (
-    <ClipProvider organizationId={organizationId} stageId={stageId}>
+    <ClipProvider
+      organizationId={organizationId}
+      stageId={stageId}
+      clipUrl={videoDetails.videoSrc}
+    >
       <div className="flex flex-row w-full h-full border-t border-gray-200">
+        {/* <div className="flex flex-col w-[400px] h-full overflow-y-auto">
+          {words?.split('\n').map((word) => (
+            <div className="flex flex-col text-sm text-gray-500" key={word}>
+              {word}
+            </div>
+          ))}
+        </div> */}
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
-          <TopBar title={name} organization={organization} />
-          <ReactHlsPlayer src={videoSrc} type={type} />
+          <TopBar title={videoDetails.name} organization={organization} />
+          <ReactHlsPlayer
+            src={videoDetails.videoSrc}
+            type={videoDetails.type}
+          />
           <Controls />
           <div className="w-full p-2 bg-white">
             <Timeline />
@@ -113,10 +126,10 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
         </div>
         <div className="flex w-[400px] h-full overflow-y-auto">
           <Sidebar
-            liveRecordingId={liveRecording?.id}
-            stageSessions={stageSessions}
+            liveRecordingId={videoDetails.liveRecording?.id}
+            stageSessions={stageSessions.sessions}
             organizationId={organizationId}
-            animations={animations}
+            animations={animations.sessions}
           />
         </div>
       </div>

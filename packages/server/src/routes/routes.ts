@@ -243,9 +243,8 @@ const models: TsoaRoute.Models = {
     "CreateClipDto": {
         "dataType": "refObject",
         "properties": {
-            "playbackId": {"dataType":"string","required":true},
+            "clipUrl": {"dataType":"string","required":true},
             "sessionId": {"dataType":"string","required":true},
-            "recordingId": {"dataType":"string","required":true},
             "start": {"dataType":"double","required":true},
             "end": {"dataType":"double","required":true},
             "organizationId": {"dataType":"string","required":true},

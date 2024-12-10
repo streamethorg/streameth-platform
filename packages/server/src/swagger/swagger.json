@@ -441,13 +441,10 @@
 			},
 			"CreateClipDto": {
 				"properties": {
-					"playbackId": {
+					"clipUrl": {
 						"type": "string"
 					},
 					"sessionId": {
-						"type": "string"
-					},
-					"recordingId": {
 						"type": "string"
 					},
 					"start": {
@@ -531,9 +528,8 @@
 					}
 				},
 				"required": [
-					"playbackId",
+					"clipUrl",
 					"sessionId",
-					"recordingId",
 					"start",
 					"end",
 					"organizationId"

@@ -106,19 +106,18 @@ const TableCells = async ({
       </TableCell>
       <TableCell className={rowBackgroundClass}>
         <div className="flex justify-end items-center space-x-2 max-w-[100px]">
-          {!isDisabled &&
-            item.type === 'livestream' &&
-            item.createdAt &&
-            new Date(item.createdAt).getTime() >
-              Date.now() - 7 * 24 * 60 * 60 * 1000 && (
-              <Link
-                href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
-              >
-                <Button variant="primary" size="icon" className="mr-2">
-                  <LuScissorsLineDashed className="w-5 h-5 cursor-pointer" />
-                </Button>
-              </Link>
-            )}
+          {!isDisabled && item.type === 'livestream' && (
+            // item.createdAt &&
+            // new Date(item.createdAt).getTime() >
+            //   Date.now() - 7 * 24 * 60 * 60 * 1000 && (
+            <Link
+              href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
+            >
+              <Button variant="primary" size="icon" className="mr-2">
+                <LuScissorsLineDashed className="w-5 h-5 cursor-pointer" />
+              </Button>
+            </Link>
+          )}
           {!isDisabled && (
             <Link href={`/studio/${organization}/library/${item._id}`}>
               <Button variant="outline" size="icon" className="mr-2">

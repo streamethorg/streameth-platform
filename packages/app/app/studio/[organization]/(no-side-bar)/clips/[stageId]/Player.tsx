@@ -15,102 +15,89 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     isLoading,
     videoRef,
     setHls,
-    startTime,
-    endTime,
     setTimeReference,
   } = useClipContext();
 
-  const playbackRef = useRef<{ progress: number; offset: number }>({
-    progress: 0,
-    offset: 0,
-  });
-
+  const playbackRef = useRef({ progress: 0, offset: 0 });
   const [error, setError] = useState<string | null>(null);
 
+  // Constants
   const corsProxyUrl = process.env.NEXT_PUBLIC_CORS_PROXY_URL || '';
   const proxyBaseUrl = `${corsProxyUrl}/raw?url=`;
   const proxiedSrc = `${proxyBaseUrl}${encodeURIComponent(src)}`;
 
-  useEffect(() => {
-    if (Hls.isSupported() && videoRef.current) {
-      const hls = new Hls({
-        debug: false, // Enable debug logs
-        xhrSetup: function (xhr, url) {
-          //  if (url.endsWith(".ts")){
-          //     url = url.replace(corsProxyUrl, "https://prod-ec-us-east-1.video.pscp.tv/Transcoding/v1/hls/aisgdiMou1VmMGXXA31KjMbfAgOwTNmOcnCTEm1h7TxuQGEmKencuaceIKTuC_8oBTmp3HXozs_9mxKF6QJ5cg/transcode/us-east-1/periscope-replay-direct-prod-us-east-1-public/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsInZlcnNpb24iOiIyIn0.eyJFbmNvZGVyU2V0dGluZyI6ImVuY29kZXJfc2V0dGluZ183MjBwMzBfMTAiLCJIZWlnaHQiOjcyMCwiS2JwcyI6Mjc1MCwiV2lkdGgiOjEyODB9.ldktM4fCFRfkP4ZEBfZPKtlAUNAcTPkoz994YJAzWpE")
-          //     console.log(url)
-          //   }
-          if (type === 'youtube') {
-            const proxiedUrl = `${proxyBaseUrl}${encodeURIComponent(url)}`;
-            xhr.open('GET', proxiedUrl, true);
-          }
-        },
-      });
-      setHls(hls);
+  // Helper functions
+  const handleFragmentChange = (event: any, data: any) => {
+    if (!videoRef.current) return;
 
-      hls.loadSource(type === 'youtube' ? proxiedSrc : src);
-      hls.attachMedia(videoRef.current);
+    const progress = videoRef.current.currentTime;
+    const fragmentTime = data.frag.rawProgramDateTime;
+    const offset =
+      Date.now() -
+      (fragmentTime ? new Date(fragmentTime).getTime() : Date.now());
 
-      videoRef.current.getVideoPlaybackQuality();
+    const newPlaybackStatus = { progress, offset };
+    playbackRef.current = newPlaybackStatus;
+    setPlaybackStatus(newPlaybackStatus);
 
-      hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
-        if (videoRef.current) {
-          const progress = videoRef.current.currentTime;
-          const offset =
-            Date.now() -
-            (data.frag.rawProgramDateTime
-              ? new Date(data.frag.rawProgramDateTime).getTime()
-              : Date.now());
-          playbackRef.current = { progress, offset };
-          setPlaybackStatus(playbackRef.current);
+    setTimeReference({
+      unixTime: new Date(fragmentTime as string).getTime(),
+      currentTime: progress,
+    });
+  };
 
-          setTimeReference({
-            unixTime: new Date(
-              data.frag.rawProgramDateTime as string
-            ).getTime(),
-            currentTime: progress,
-          });
+  const setupHlsInstance = () => {
+    if (!Hls.isSupported() || !videoRef.current) return null;
+
+    const hlsConfig = {
+      debug: false,
+      xhrSetup: (xhr: XMLHttpRequest, url: string) => {
+        if (type === 'youtube') {
+          const proxiedUrl = `${proxyBaseUrl}${encodeURIComponent(url)}`;
+          xhr.open('GET', proxiedUrl, true);
         }
-      });
+      },
+    };
 
-      videoRef.current.onseeking = () => {
-        setIsLoading(true);
-      };
+    const hls = new Hls(hlsConfig);
+    setHls(hls);
 
-      videoRef.current.onseeked = () => {
-        setIsLoading(false);
-      };
+    hls.loadSource(type === 'youtube' ? proxiedSrc : src);
+    hls.attachMedia(videoRef.current);
 
-      hls.on(Hls.Events.ERROR, (event, data) => {
-        setError(data.details);
-      });
+    // Event listeners
+    hls.on(Hls.Events.FRAG_CHANGED, handleFragmentChange);
+    hls.on(Hls.Events.ERROR, (event, data) => setError(data.details));
 
-      return () => {
-        hls.destroy();
-      };
+    return hls;
+  };
+
+  useEffect(() => {
+    const hls = setupHlsInstance();
+
+    if (videoRef.current) {
+      videoRef.current.onseeking = () => setIsLoading(true);
+      videoRef.current.onseeked = () => setIsLoading(false);
     }
+
+    return () => {
+      hls?.destroy();
+    };
   }, [proxiedSrc, setPlaybackStatus, videoRef, setIsLoading, src]);
 
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
-      {/* <div className="absolute top-0 bg-white z-[99999] p-4 border ">
-        <p>{'start: ' + startTime.unix.toFixed(0)}</p>
-        <p>{'start time: ' + startTime.displayTime}</p>
-        <p>{'end: ' + endTime.unix.toFixed(0)}</p>
-        <p>{'end time: ' + endTime.displayTime}</p>
-        <p>{'diff ' + ((endTime.unix - startTime.unix) / 60000).toFixed(2) + ' minutes'}</p>
-      </div> */}
       <video
         ref={videoRef}
         autoPlay={false}
         controls={false}
         className="sticky top-0 w-full rounded-lg z-30"
-      ></video>
-      <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
-        {isLoading && (
+      />
+      {isLoading && (
+        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
           <div className="h-20 w-20 animate-spin rounded-full border-b-2 border-t-2 border-primary" />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

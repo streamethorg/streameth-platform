@@ -40,18 +40,39 @@ const consumer = async () => {
 
 const processClip = async (data: IClip) => {
   console.log('Starting processClip with data:', data);
-  const { sessionId, playbackId, recordingId, start, end } = data;
-  const manifestUrl = `https://recordings-cdn-s.lp-playback.studio/hls/${playbackId}/${recordingId}/output.m3u8`;
+  const { sessionId, clipUrl, start, end } = data;
 
   try {
+    const masterResponse = await fetch(clipUrl);
+    if (!masterResponse.ok) {
+      throw new Error(`Failed to fetch master playlist: ${masterResponse.statusText}`);
+    }
+    const masterContent = await masterResponse.text();
+
+    // 2. Find the 1080p variant
+    const linesMaster = masterContent.split('\n');
+    let variantUrl = '';
+    
+    for (let i = 0; i < linesMaster.length; i++) {
+      if (linesMaster[i].includes('1080p0')) {
+        variantUrl = linesMaster[i + 1].trim();
+        break;
+      }
+    }
+    variantUrl = clipUrl.replace('index.m3u8', variantUrl);
+
+    if (!variantUrl) {
+      throw new Error('1080p variant not found in master playlist');
+    }
+
     const duration = end - start;
     console.log('relativeStartSeconds', start, end, duration);
     const tempDir = tmpdir();
     const concatPath = join(tempDir, `${sessionId}-concat.mp4`);
-    const outputPath = join(tempDir, `${sessionId}-${playbackId}.mp4`);
+    const outputPath = join(tempDir, `${sessionId}.mp4`);
 
     // 1. Fetch and parse manifest
-    const manifestResponse = await fetch(manifestUrl);
+    const manifestResponse = await fetch(variantUrl);
     if (!manifestResponse.ok) {
       throw new Error(`Failed to fetch manifest: ${manifestResponse.statusText}`);
     }
@@ -72,7 +93,7 @@ const processClip = async (data: IClip) => {
         if (!url.startsWith('#') && cumulativeTime <= (end + duration) && (cumulativeTime + duration) >= start) {
           segments.push({
             duration,
-            url: url.startsWith('http') ? url : new URL(url, manifestUrl).toString(),
+            url: url.startsWith('http') ? url : new URL(url, variantUrl).toString(),
             startTime: cumulativeTime
           });
         }

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useClipContext } from '../[stageId]/ClipContext';
+import { useClipContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipContext';
 import { Badge } from '@/components/ui/badge';
 
 type TimeSetterProps = {

@@ -228,16 +228,14 @@ export const deleteSession = async ({
 export const createClip = async ({
   start,
   end,
-  playbackId,
-  recordingId,
+  clipUrl,
   sessionId,
   isEditorEnabled,
   editorOptions,
   organizationId,
 }: {
   sessionId: string;
-  playbackId: string;
-  recordingId: string;
+  clipUrl: string;
   start: number;
   end: number;
   isEditorEnabled: boolean;
@@ -261,14 +259,22 @@ export const createClip = async ({
       },
       body: JSON.stringify({
         end,
-        playbackId,
+        clipUrl,
         sessionId,
         start,
-        recordingId,
         isEditorEnabled,
         editorOptions,
         organizationId,
       }),
+    });
+    console.log('response', {
+      end,
+      clipUrl,
+      sessionId,
+      start,
+      isEditorEnabled,
+      editorOptions,
+      organizationId,
     });
 
     const responseData = await response.json();
@@ -283,9 +289,8 @@ export const createClip = async ({
       error: e,
       message: e instanceof Error ? e.message : 'Unknown error',
       data: {
-        playbackId,
+        clipUrl,
         sessionId,
-        recordingId,
         start,
         end,
       },
