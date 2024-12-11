@@ -105,7 +105,7 @@ const ShareButton = ({
 
   return (
     <Credenza>
-      <CredenzaTrigger className="w-full">
+      <CredenzaTrigger>
         <span className={buttonClassNames}>
           <Share2 className="mr-2 w-5 h-5" />
           {title}

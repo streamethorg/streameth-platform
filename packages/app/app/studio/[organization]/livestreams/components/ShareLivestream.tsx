@@ -23,7 +23,6 @@ const ShareLivestream = ({
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <ShareButton
-        className="w-full"
         variant={variant}
         url={`${url}/${organization}/livestream?stage=${streamId}`}
         shareFor="livestream"

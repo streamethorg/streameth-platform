@@ -41,7 +41,7 @@ const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
     <div onClick={(e) => e.stopPropagation()}>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="w-full" variant={'ghost'}>
+          <Button className="justify-start w-full" variant={'ghost'}>
             <Trash2 className="mr-2 w-5 h-5 text-destructive" /> Delete
           </Button>
         </DialogTrigger>

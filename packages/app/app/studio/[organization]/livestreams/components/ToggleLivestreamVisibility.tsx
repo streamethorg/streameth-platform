@@ -35,7 +35,7 @@ const LivestreamVisibility = ({ stream }: { stream: IExtendedStage }) => {
         variant="ghost"
         onClick={handleToggleVisibility}
         disabled={isLoading}
-        className="flex gap-2 items-center w-full hover:bg-gray-100"
+        className="flex gap-2 justify-start items-center w-full hover:bg-gray-100"
       >
         {!stream.published ? (
           <>
