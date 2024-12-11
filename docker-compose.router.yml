@@ -1,10 +1,15 @@
 version: '3'
+
+x-common-deploy: &common-deploy
+  placement:
+    constraints:
+      - node.role == manager
+
 services:
   router:
     image: traefik:v3.1
     command:
       - "--api.dashboard=true"
-      # - "--api.insecure=true"
       - "--log.level=DEBUG"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -38,10 +43,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - letsencrypt:/letsencrypt
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
+    deploy: *common-deploy
 
 networks:
   default:
