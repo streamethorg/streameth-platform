@@ -8,18 +8,18 @@ RUN apk add --no-cache ffmpeg
 COPY package.json yarn.lock ./
 
 # Ensure the directory structure exists
-RUN mkdir -p packages/server/reel-creator
+RUN mkdir -p packages/reel-creator
 
 # Copy the reel-creator package files
-COPY packages/server/reel-creator/package.json ./packages/server/reel-creator/
+COPY packages/reel-creator/package.json ./packages/reel-creator/
 
 # Install all dependencies at the workspace root
 RUN yarn install --frozen-lockfile
 
 # Copy the source code
-COPY packages/server/reel-creator ./packages/server/reel-creator
+COPY packages/reel-creator ./packages/reel-creator
 
-WORKDIR /app/packages/server/reel-creator
+WORKDIR /app/packages/reel-creator
 
 # Build using npx to ensure next is found
 ENV NODE_ENV=production
