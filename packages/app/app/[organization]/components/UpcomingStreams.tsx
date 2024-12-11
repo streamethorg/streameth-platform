@@ -25,6 +25,16 @@ const UpcomingStreams = async ({
   livestreams = livestreams.filter((livestream) => {
     return livestream.published;
   });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set to start of today
+
+  livestreams = livestreams.filter((livestream) => {
+    const streamDay = new Date(livestream.streamDate!);
+    streamDay.setHours(0, 0, 0, 0); // Set to start of stream day
+    return streamDay >= today;
+  });
+
   const org = organizationSlug === 'livepeertv' ? 'tv' : organizationSlug;
 
   return (
@@ -45,7 +55,7 @@ const UpcomingStreams = async ({
         ))}
       </div>
       {livestreams.length === 0 && (
-        <div className="flex flex-row items-center justify-center space-x-4 rounded-xl bg-secondary p-4">
+        <div className="flex flex-row justify-center items-center p-4 space-x-4 rounded-xl bg-secondary">
           <Podcast size={20} />
           <p>No scheduled livestreams</p>
         </div>
@@ -58,8 +68,8 @@ export default UpcomingStreams;
 
 export const UpcomingStreamsLoading = () => (
   <>
-    <div className="h-6 w-1/4 rounded bg-gray-300 md:hidden"></div>
-    <div className="m-5 grid grid-rows-3 gap-4 md:m-0 md:hidden md:grid-cols-3">
+    <div className="w-1/4 h-6 bg-gray-300 rounded md:hidden"></div>
+    <div className="grid grid-rows-3 gap-4 m-5 md:hidden md:grid-cols-3 md:m-0">
       {Array.from({ length: 3 }).map((_, index) => (
         <div key={index} className="block md:hidden">
           <VideoCardSkeletonMobile />

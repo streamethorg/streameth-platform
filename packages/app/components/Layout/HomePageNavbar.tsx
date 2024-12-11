@@ -12,7 +12,7 @@ import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrg
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
-import { usePathname } from 'next/navigation';
+import { notFound, usePathname } from 'next/navigation';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import UserProfile from '@/app/studio/[organization]/components/UserProfile';
@@ -36,6 +36,14 @@ const HomePageNavbar = ({
     logo = undefined;
   }
 
+  const organization = organizations?.filter(
+    (org) => org.slug === currentOrganization
+  )[0];
+
+  if (!organization) {
+    return notFound();
+  }
+
   return (
     <Suspense fallback={null}>
       <MobileNavBar
@@ -51,8 +59,7 @@ const HomePageNavbar = ({
         logo={logo}
         pages={pages}
         showSearchBar={showSearchBar}
-        organizations={organizations}
-        currentOrganization={currentOrganization || ''}
+        organization={organization}
       />
     </Suspense>
   );
@@ -187,15 +194,13 @@ const PCNavBar = ({
   pages,
   showSearchBar,
   showLogo,
-  organizations,
-  currentOrganization,
+  organization,
 }: {
   logo?: string;
   pages: Page[];
   showLogo: boolean;
   showSearchBar: boolean;
-  organizations: IExtendedOrganization[] | null;
-  currentOrganization: string;
+  organization: IExtendedOrganization;
 }) => {
   const pathname = usePathname();
   const { searchParams } = useSearchParams();
@@ -207,7 +212,7 @@ const PCNavBar = ({
     <NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white border-b md:hidden lg:flex h-18 z-[30]">
       <div className="flex flex-1 justify-start items-center">
         {showLogo && (
-          <Link href={`/${currentOrganization}`}>
+          <Link href={`/${organization.slug}`}>
             <Image
               src={'/logo_dark.png'}
               alt="Logo"
@@ -221,13 +226,13 @@ const PCNavBar = ({
       <div className="flex justify-center items-center mx-auto w-full max-w-md">
         <SearchBar
           searchVisible={showSearchBar}
-          organizationSlug={currentOrganization}
-          organizationId={currentOrganization}
+          organizationSlug={organization.slug!}
+          organizationId={organization._id.toString()}
         />
       </div>
       <div className="flex flex-1 justify-end items-center">
-        {organizations ? (
-          <UserProfile organization={currentOrganization} />
+        {organization ? (
+          <UserProfile organization={organization} />
         ) : (
           <Button variant="primary">
             <Link href={`/studio/login`}>Login</Link>
