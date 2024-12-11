@@ -213,3 +213,57 @@ networks:
 volumes:
   mongodb_data:
   redis_data:
+
+secrets:
+  db-password:
+    external: true
+  jwt-secret:
+    external: true
+  spaces-key:
+    external: true
+  spaces-secret:
+    external: true
+  prod-livepeer-api-key:
+    external: true
+  prod-livepeer-webhook-secret:
+    external: true
+  telegram-api-key:
+    external: true
+  telegram-chat-id:
+    external: true
+  oauth-secret:
+    external: true
+  twitter-oauth-secret:
+    external: true
+  twitter-client-id:
+    external: true
+  google-oauth-secret:
+    external: true
+  google-client-id:
+    external: true
+  magic-link-secret:
+    external: true
+  mail-pass:
+    external: true
+  mail-user:
+    external: true
+  remotion-webhook-secret:
+    external: true
+  pipedream-auth-token:
+    external: true
+  devcon-upload-endpoint:
+    external: true
+  thirdweb-secret-key:
+    external: true
+  google-service-account-private-key:
+    external: true
+  google-service-account-email:
+    external: true
+  redis-password:
+    external: true
+  openai-api-key:
+    external: true
+  aws-access-key:
+    external: true
+  aws-secret-key:
+    external: true
