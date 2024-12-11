@@ -48,13 +48,6 @@ const validateEnv = () => {
     REMOTION_BASE_URL: str(),
     REMOTION_WEBHOOK_SECRET_FILE: str(),
     REMOTION_ID: str(),
-    REMOTION_SITE_NAME: str({
-      desc: 'Site name for Remotion renders',
-      example: 'https://your-site.com',
-    }),
-    REMOTION_WEBHOOK_URL: str({
-      desc: 'Webhook URL for Remotion render notifications',
-    }),
   });
 };
 

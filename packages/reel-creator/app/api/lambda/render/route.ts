@@ -14,6 +14,8 @@ import {
   TIMEOUT,
   WEBHOOK_SECRET,
   WEBHOOK_URL,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
 } from "../../../../config.mjs";
 import { executeApi } from "../../../../helpers/api-response";
 import { RenderRequest } from "../../../../types/schema";
@@ -22,21 +24,21 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 	RenderRequest,
 	async (req, body) => {
 		if (
-			!process.env.AWS_ACCESS_KEY_ID &&
-			!process.env.REMOTION_AWS_ACCESS_KEY_ID
+			!AWS_ACCESS_KEY_ID ||
+			!AWS_SECRET_ACCESS_KEY ||
+			!WEBHOOK_URL ||
+			!WEBHOOK_SECRET ||
+			!SITE_NAME
 		) {
 			throw new TypeError(
 				"Set up Remotion Lambda to render videos. See the README.md for how to do so.",
 			);
 		}
-		if (
-			!process.env.AWS_SECRET_ACCESS_KEY &&
-			!process.env.REMOTION_AWS_SECRET_ACCESS_KEY
-		) {
-			throw new TypeError(
-				"The environment variable REMOTION_AWS_SECRET_ACCESS_KEY is missing. Add it to your .env file.",
-			);
-		}
+
+    // set REMOTION_AWS_SECRET_ACCESS_KEY env
+    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
+    // set REMOTION_AWS_ACCESS_KEY_ID env
+    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
 
 		// Add webhook configuration
 		const webhook = {

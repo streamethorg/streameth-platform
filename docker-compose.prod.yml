@@ -134,7 +134,6 @@ services:
 
   stage-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:prod
-    command: ["node", "/app/packages/server/dist/workers/stage-transcriptions/index.js"]
     depends_on:
       - mongodb
       - redis

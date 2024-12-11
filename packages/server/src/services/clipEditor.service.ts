@@ -8,9 +8,8 @@ import { Livepeer } from 'livepeer';
 import SessionService from './session.service';
 import { config } from '@config';
 import StateService from './state.service';
-import { IClipEditor } from '@interfaces/clip.editor.interface';
+import { ClipEditorStatus, IClipEditor } from '@interfaces/clip.editor.interface';
 import { clipsQueue } from '@utils/redis';
-import { RemotionPayload } from '@interfaces/remotion.webhook.interface';
 export class ClipEditorService extends SessionService {
   constructor(
     private readonly livepeer: Livepeer,
@@ -36,7 +35,6 @@ export class ClipEditorService extends SessionService {
   }
 
   async createEditorClip(data: IClip) {
-    console.log('data', data);
     data.editorOptions.events.map((e) => {
       console.log('e', e);
     });
@@ -66,20 +64,17 @@ export class ClipEditorService extends SessionService {
   }
 
   async launchRemotionRender(clipEditor: IClipEditor) {
-    console.log('clipEditor', clipEditor);
     // get all event session data based on event session ids
     const eventSessions = await Session.find({
       _id: { $in: clipEditor.events.map((e) => e.sessionId) },
     });
 
-    console.log('eventSessions', eventSessions);
     // check if all event sessions are completed
     const allEventSessionsCompleted = eventSessions.every(
       (e) =>
         e.processingStatus === ProcessingStatus.completed ||
         e.processingStatus === ProcessingStatus.clipCreated,
     );
-    console.log('allEventSessionsCompleted', allEventSessionsCompleted);
     if (!allEventSessionsCompleted) return;
 
     const payload = {
@@ -100,8 +95,12 @@ export class ClipEditorService extends SessionService {
             id: e.label,
             label: e.label,
             type: 'media',
-            url: session?.source?.streamUrl, // Provide empty string as fallback
-            transcript: session?.transcripts
+            url: session?.source?.streamUrl // Provide empty string as fallback
+            // transcript: {
+            //   language: 'en',
+            //   words: session?.transcripts.chunks,
+            //   text: session?.transcripts.text,
+            // },
           };
         }),
         captionLinesPerPage: clipEditor.captionLinesPerPage.toString(),
@@ -114,8 +113,8 @@ export class ClipEditorService extends SessionService {
       },
     };
 
-    console.log('payload', JSON.stringify(payload, null, 2)); // Better logging of the full payload
-
+    console.log('payload', payload);
+    console.log('events', payload.inputProps.events);
     const response = await fetch(`${config.remotion.host}/api/lambda/render`, {
       method: 'POST',
       headers: {
@@ -131,11 +130,17 @@ export class ClipEditorService extends SessionService {
     }
 
     const data = await response.json();
-    console.log('data', data);
 
-    ClipEditor.updateOne(
-      { _id: clipEditor._id },
-      { $set: { remotionId: data.data.renderId } },
+
+    await ClipEditor.findByIdAndUpdate(
+      clipEditor._id,
+      {
+        $set: {
+          renderId: data.data.renderId,
+          status: ClipEditorStatus.rendering,
+        },  
+      },
+      { runValidators: false, new: true, lean: true },
     );
     return data;
   }
