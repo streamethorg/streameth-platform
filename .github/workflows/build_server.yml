@@ -40,7 +40,7 @@ jobs:
           - image: clips
             dockerfile: ./packages/server/workers/clips/Dockerfile
           - image: reel-creator
-            dockerfile: ./packages/server/reel-creator/Dockerfile
+            dockerfile: ./packages/reel-creator/Dockerfile
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
