@@ -1,78 +1,57 @@
 'use client';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+
 import { updateStageAction } from '@/lib/actions/stages';
 import { IExtendedStage } from '@/lib/types';
-import { ChevronDown, Earth, Loader2, Lock } from 'lucide-react';
-import React, { useState } from 'react';
+import { Earth, Loader2, Lock } from 'lucide-react';
+import { useState } from 'react';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
-const ToggleLivestreamVisibility = ({ item }: { item: IExtendedStage }) => {
+const LivestreamVisibility = ({ stream }: { stream: IExtendedStage }) => {
   const [isLoading, setIsLoading] = useState(false);
+
   const handleToggleVisibility = async () => {
     setIsLoading(true);
-    updateStageAction({
-      stage: { ...item, published: !item.published },
-    })
-      .then((response) => {
-        if (response) {
-          setIsLoading(false);
-          toast.success('Stream updated');
-        } else {
-          toast.error('Error updating stream');
-        }
-      })
-      .catch(() => {
-        toast.error('Error updating stream');
-        setIsLoading(false);
+    try {
+      const response = await updateStageAction({
+        stage: { ...stream, published: !stream.published },
       });
+
+      if (response) {
+        toast.success('Stream visibility updated');
+      } else {
+        toast.error('Failed to update stream visibility');
+      }
+    } catch (error) {
+      toast.error('Failed to update stream visibility');
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
-    <div className="flex items-center justify-start space-x-2">
-      {isLoading ? (
-        <Loader2 className="animate-spin" />
-      ) : item.published ? (
-        <>
-          <Earth size={16} />
-          <p>Public</p>
-        </>
-      ) : (
-        <>
-          <Lock size={16} />
-          <p>Private</p>
-        </>
-      )}
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          {isLoading ? null : <ChevronDown size={20} />}
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            className={`cursor-pointer space-x-2 ${
-              isLoading ? 'pointer-events-none' : ''
-            }`}
-            onClick={handleToggleVisibility}
-          >
-            {!item.published ? (
-              <>
-                <Earth size={16} />
-                <p>Make Public</p>
-              </>
-            ) : (
-              <>
-                <Lock size={16} />
-                <p>Make Private</p>
-              </>
-            )}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+    <div className="flex gap-4 items-center">
+      <Button
+        variant="ghost"
+        onClick={handleToggleVisibility}
+        disabled={isLoading}
+        className="flex gap-2 items-center w-full hover:bg-gray-100"
+      >
+        {!stream.published ? (
+          <>
+            <Earth className="w-4 h-4" />
+            <span className="text-sm">Make Public</span>
+          </>
+        ) : (
+          <>
+            <Lock className="w-4 h-4" />
+            <span className="text-sm">Make Private</span>
+          </>
+        )}
+        {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+      </Button>
     </div>
   );
 };
 
-export default ToggleLivestreamVisibility;
+export default LivestreamVisibility;

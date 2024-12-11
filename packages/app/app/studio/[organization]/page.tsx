@@ -1,7 +1,7 @@
 'use server';
 
 import TableSkeleton from '@/components/misc/Table/TableSkeleton';
-import { LivestreamPageParams, eSort } from '@/lib/types';
+import { LivestreamPageParams } from '@/lib/types';
 import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal';
 import { Suspense } from 'react';
 import { fetchOrganization } from '@/lib/services/organizationService';
@@ -23,9 +23,10 @@ const OrganizationPage = async ({
 
   if (!organization) return notFound();
 
-  // Calculate the start of the current day
-  const startOfDay = new Date();
-  startOfDay.setHours(0, 0, 0, 0);
+  // Calculate the current timestamp
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const currentTimestamp = now.getTime().toString();
 
   return (
     <div className="flex overflow-auto flex-col p-4 w-full h-full">
@@ -52,7 +53,6 @@ const OrganizationPage = async ({
           </Link>
         </div>
       </div>
-
       <Tabs defaultValue="current">
         <TabsList>
           <TabsTrigger value="current">
@@ -62,14 +62,14 @@ const OrganizationPage = async ({
             <p className="text-lg font-bold">Past livestreams</p>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="current" className="py-4">
+        <TabsContent value="current">
           <LivestreamTable
-            fromDate={startOfDay.getTime().toString()}
+            fromDate={currentTimestamp}
             organizationId={organization._id}
             organizationSlug={params?.organization}
           />
         </TabsContent>
-        <TabsContent value="past" className="p-4">
+        <TabsContent value="past">
           <Suspense
             key={searchParams.toString()}
             fallback={
@@ -79,7 +79,7 @@ const OrganizationPage = async ({
             }
           >
             <LivestreamTable
-              untilDate={startOfDay.getTime().toString()}
+              untilDate={currentTimestamp}
               organizationId={organization._id}
               organizationSlug={params?.organization}
             />

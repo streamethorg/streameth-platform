@@ -13,8 +13,6 @@ import LivestreamActions from './LivestreamActions';
 import { CardDescription, CardTitle } from '@/components/ui/card';
 import EmptyFolder from '@/lib/svg/EmptyFolder';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
-import PlayerWithControls from '@/components/ui/Player';
-import { buildPlaybackUrl } from '@/lib/utils/utils';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 
 const LivestreamTable = async ({
@@ -55,42 +53,23 @@ const LivestreamTable = async ({
             href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
             className="relative w-full"
           >
-            {stream.streamSettings?.isActive &&
-            stream.streamSettings?.playbackId ? (
-              <PlayerWithControls
-                thumbnail={stream.thumbnail}
-                name={stream.name}
-                src={[
-                  {
-                    src: buildPlaybackUrl(
-                      stream.streamSettings?.playbackId
-                    ) as `${string} m3u8`,
-                    width: 1920,
-                    height: 1080,
-                    mime: 'application/vnd.apple.mpegurl',
-                    type: 'hls',
-                  },
-                ]}
-              />
-            ) : (
-              <Thumbnail imageUrl={stream.thumbnail} />
-            )}
+            <Thumbnail imageUrl={stream.thumbnail} />
           </Link>
           <div className="flex flex-row justify-between p-4">
             <div className="flex flex-col">
               <Link
                 href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
               >
-                <p className="font-medium line-clamp-3">{stream?.name}</p>
+                <p className="font-medium line-clamp-2">{stream?.name}</p>
+                <p className="text-sm">
+                  {stream?.streamDate
+                    ? formatDate(new Date(stream?.streamDate), 'MMM D, YYYY')
+                    : formatDate(
+                        new Date(stream?.createdAt as string),
+                        'MMM D, YYYY'
+                      )}
+                </p>
               </Link>
-              <p className="text-sm">
-                {stream?.streamDate
-                  ? formatDate(new Date(stream?.streamDate), 'MMM D, YYYY')
-                  : formatDate(
-                      new Date(stream?.createdAt as string),
-                      'MMM D, YYYY'
-                    )}
-              </p>
             </div>
             <Popover>
               <PopoverTrigger className="flex z-10 items-center">
