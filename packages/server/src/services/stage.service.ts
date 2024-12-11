@@ -87,14 +87,14 @@ export default class StageService {
     if (fromDate) {
       return await this.controller.store.findAll({
         organizationId: organizationId,
-        createdAt: { $gte: new Date(Number(fromDate)) },
+        streamDate: { $gte: new Date(Number(fromDate)) },
       });
     }
 
     if (untilDate) {
       return await this.controller.store.findAll({
         organizationId: organizationId,
-        createdAt: { $lt: new Date(Number(untilDate)) },
+        streamDate: { $lt: new Date(Number(untilDate)) },
       });
     }
 

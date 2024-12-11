@@ -1,13 +1,14 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import SearchBar from '@/components/misc/SearchBar';
-import Link from 'next/link';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
 import { IExtendedOrganization } from '@/lib/types';
 import UserProfile from '@/app/studio/[organization]/components/UserProfile';
 import CreateLivestreamModal from '@/app/studio/[organization]/livestreams/components/CreateLivestreamModal';
 import UploadVideoDialog from '@/app/studio/[organization]/library/components/UploadVideoDialog';
-import LogoDark from '@/public/logo_dark.png';
+
 const NavbarStudio = ({
   logo,
   showLogo = true,
@@ -30,7 +31,7 @@ const NavbarStudio = ({
   }
 
   return (
-    <NavigationMenu className="h-18 w-full hidden sticky top-0 flex items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
+    <NavigationMenu className="flex sticky top-0 items-center p-2 px-4 w-full bg-white md:hidden lg:flex h-18 z-[30]">
       <Image
         src={'/logo_dark.png'}
         alt="Logo"
@@ -46,15 +47,10 @@ const NavbarStudio = ({
           isStudio={true}
         />
       </div>
-      <div className="flex items-center justify-end space-x-2">
+      <div className="flex justify-end items-center space-x-2">
         <CreateLivestreamModal organization={organization} />
         <UploadVideoDialog organizationId={organization._id.toString()} />
-        {organizations && (
-          <UserProfile
-            organization={organization._id}
-            organizations={organizations}
-          />
-        )}
+        {organizations && <UserProfile organization={organization} />}
       </div>
     </NavigationMenu>
   );
