@@ -20,15 +20,17 @@
 		"build:server": "yarn workspace streameth-new-server build",
 		"start:server": "yarn workspace streameth-new-server start:server",
 
+		"dev:reel-creator": "yarn workspace streameth-reel-creator dev",
+		"build:reel-creator": "yarn workspace streameth-reel-creator build",
+		"start:reel-creator": "yarn workspace streameth-reel-creator start",
+
 		"dev:stage-transcriptions": "yarn workspace streameth-new-server dev:stage-transcriptions",
 		"dev:session-transcriptions": "yarn workspace streameth-new-server dev:session-transcriptions",
+		"dev:clips": "yarn workspace streameth-new-server dev:clips",
+
 		"start:stage-transcriptions": "yarn workspace streameth-new-server start:stage-transcriptions",
 		"start:session-transcriptions": "yarn workspace streameth-new-server start:session-transcriptions",
-
-		"dev:clips": "yarn workspace streameth-new-server dev:clips",
 		"start:clips": "yarn workspace streameth-new-server start:clips",
-		"dev:reel-creator": "yarn workspace streameth-reel-creator dev",
-		"start:reel-creator": "yarn workspace streameth-reel-creator start",
 
 		"next:lint": "yarn workspace @streameth/streameth-app lint",
 		"next:check-types": "yarn workspace @streameth/streameth-app check-types",

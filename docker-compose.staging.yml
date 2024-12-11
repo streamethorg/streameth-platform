@@ -111,6 +111,9 @@ services:
 
   stage-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging
+    networks:
+      - traefik-public
+      - default
     depends_on:
       - mongodb
       - redis
@@ -130,6 +133,9 @@ services:
 
   session-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging
+    networks:
+      - traefik-public
+      - default
     depends_on:
       - mongodb
       - redis
@@ -193,19 +199,22 @@ services:
 
   redis:
     image: redis:alpine
-    command: redis-server --requirepass "$$(cat /run/secrets/redis-password)"
+    command: >
+      sh -c '
+      password=$$(cat /run/secrets/redis-password);
+      redis-server --requirepass "$$password"'
     volumes:
       - redis_data:/data
-    healthcheck:
-      test: sh -c "redis-cli -a $$(cat /run/secrets/redis-password) ping"
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    networks:
+      - default
     secrets:
       - redis-password
 
   clips:
     image: ghcr.io/streamethorg/streameth-platform/clips:staging
+    networks:
+      - traefik-public
+      - default
     depends_on:
       - mongodb
       - redis
