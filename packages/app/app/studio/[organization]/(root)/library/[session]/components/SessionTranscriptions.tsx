@@ -19,8 +19,6 @@ const SessionTranscriptions = ({
   organizationId: string;
   transcriptionState: TranscriptionStatus | null;
 }) => {
-  console.log('testtest', organizationId, sessionId);
-  console.log('videoTranscription', videoTranscription, transcriptionState);
   const router = useRouter();
   const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
 

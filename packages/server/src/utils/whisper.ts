@@ -25,7 +25,6 @@ export class WhisperAPI {
         response_format: 'verbose_json',
         timestamp_granularities: ['word'],
       });
-      console.log('Whisper transcription response:', response);
       // await fs.unlink(filePath);
       return response;
     } catch (error) {

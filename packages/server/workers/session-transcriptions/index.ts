@@ -149,16 +149,19 @@ export async function transcribeAudio(
         console.log('FFmpeg processing completed');
         try {
           const transcript = await WhisperAPI.transcribe(outputPath);
-          const sessionObject = {
-            transcripts: {
-              status: TranscriptionStatus.completed,
-              text: transcript.text,
-              lastSegmentTimestamp: 0,
-              subtitleUrl: await generateVtt(transcript.words),
-              chunks: transcript.words,
+          await Session.findByIdAndUpdate(
+            session._id,
+            {
+              $set: {
+                'transcripts.status': TranscriptionStatus.completed,
+                'transcripts.text': transcript.text,
+                'transcripts.lastSegmentTimestamp': 0,
+                'transcripts.chunks': transcript.words,
+                'transcripts.subtitleUrl': await generateVtt(transcript.words),
+              }
             },
-          };
-          await Session.findByIdAndUpdate(session._id, sessionObject);
+            { runValidators: false }
+          );
           resolve();
         } catch (err) {
           console.error('Transcription error:', err);

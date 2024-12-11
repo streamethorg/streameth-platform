@@ -101,6 +101,7 @@ export class ClipEditorService extends SessionService {
             label: e.label,
             type: 'media',
             url: session?.source?.streamUrl, // Provide empty string as fallback
+            transcript: session?.transcripts
           };
         }),
         captionLinesPerPage: clipEditor.captionLinesPerPage.toString(),

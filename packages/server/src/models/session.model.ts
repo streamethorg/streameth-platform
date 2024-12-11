@@ -73,8 +73,9 @@ const SessionSchema = new Schema<ISessionModel>(
       subtitleUrl: { type: String, default: '' },
       chunks: [
         {
-          text: { type: String, default: '' },
-          tiimestamp: [{ type: Number }],
+          word: { type: String, default: '' },
+          start: { type: Number, default: 0 },
+          end: { type: Number, default: 0 },
         },
       ],
       text: { type: String, default: '' },
