@@ -1,3 +1,5 @@
+'use server';
+
 import { formatDate } from '@/lib/utils/time';
 import Link from 'next/link';
 import React from 'react';
@@ -34,7 +36,7 @@ const LivestreamTable = async ({
 
   if (streams.length === 0) {
     return (
-      <div className="flex h-96 w-full flex-col items-center justify-center gap-4 rounded-xl border bg-white">
+      <div className="flex flex-col gap-4 justify-center items-center w-full h-96 bg-white rounded-xl border">
         <EmptyFolder />
         <CardTitle className="text-2xl font-semibold">
           No livestreams found
@@ -46,7 +48,7 @@ const LivestreamTable = async ({
     );
   }
   return (
-    <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-1 gap-4 w-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {streams?.map((stream) => (
         <div key={stream._id} className="flex flex-col rounded-xl border">
           <Link
@@ -74,12 +76,12 @@ const LivestreamTable = async ({
               <Thumbnail imageUrl={stream.thumbnail} />
             )}
           </Link>
-          <div className="p-4 flex flex-row justify-between">
+          <div className="flex flex-row justify-between p-4">
             <div className="flex flex-col">
               <Link
                 href={`/studio/${organizationSlug}/livestreams/${stream?._id}`}
               >
-                <p className="line-clamp-3 font-medium">{stream?.name}</p>
+                <p className="font-medium line-clamp-3">{stream?.name}</p>
               </Link>
               <p className="text-sm">
                 {stream?.streamDate
@@ -91,7 +93,7 @@ const LivestreamTable = async ({
               </p>
             </div>
             <Popover>
-              <PopoverTrigger className="z-10 flex items-center">
+              <PopoverTrigger className="flex z-10 items-center">
                 <EllipsisVertical />
               </PopoverTrigger>
               <PopoverContent className="w-fit">

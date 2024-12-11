@@ -227,10 +227,7 @@ const PCNavBar = ({
       </div>
       <div className="flex flex-1 justify-end items-center">
         {organizations ? (
-          <UserProfile
-            organization={currentOrganization}
-            organizations={organizations}
-          />
+          <UserProfile organization={currentOrganization} />
         ) : (
           <Button variant="primary">
             <Link href={`/studio/login`}>Login</Link>
