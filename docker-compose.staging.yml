@@ -12,14 +12,14 @@ x-common-environment: &common-environment
   DB_NAME: streameth-staging
   JWT_SECRET_FILE: /run/secrets/jwt-secret
   JWT_EXPIRY: 30d
-  CORS_ORIGIN: "[]"
+  CORS_ORIGIN: "*"
   CORS_CREDENTIALS: "true"
   CORS_PROXY_URL: ""
   LIVEPEER_API_KEY_FILE: /run/secrets/livepeer-api-key
   THIRDWEB_SECRET_KEY_FILE: /run/secrets/thirdweb-secret-key
   SPACES_KEY_FILE: /run/secrets/spaces-key
   SPACES_SECRET_FILE: /run/secrets/spaces-secret
-  BUCKET_NAME: streameth-staging
+  BUCKET_NAME: remotionlambda-useast2-w6uye0gtql
   BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
   LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/livepeer-webhook-secret
   LIVEPEER_BASE_URL: https://livepeer.studio
@@ -91,6 +91,11 @@ x-common-secrets: &common-secrets
 services:
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:staging
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.services.staging-server.loadbalancer.server.port=8080"
+      - "traefik.http.services.staging-server.loadbalancer.server.scheme=http"
     depends_on:
       - mongodb
       - redis

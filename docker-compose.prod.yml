@@ -19,7 +19,7 @@ x-common-environment: &common-environment
   THIRDWEB_SECRET_KEY_FILE: /run/secrets/thirdweb-secret-key
   SPACES_KEY_FILE: /run/secrets/spaces-key
   SPACES_SECRET_FILE: /run/secrets/spaces-secret
-  BUCKET_NAME: streameth-prod
+  BUCKET_NAME: remotionlambda-useast2-w6uye0gtql
   BUCKET_URL: https://streameth-prod.ams3.digitaloceanspaces.com
   LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/prod-livepeer-webhook-secret
   LIVEPEER_BASE_URL: https://livepeer.studio
@@ -90,6 +90,11 @@ x-common-secrets: &common-secrets
 services:
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:prod
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.services.prod-server.loadbalancer.server.port=8080"
+      - "traefik.http.services.prod-server.loadbalancer.server.scheme=http"
     depends_on:
       - mongodb
       - redis
