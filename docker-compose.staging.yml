@@ -111,11 +111,28 @@ services:
 
   stage-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging
-    command: ["node", "/app/packages/server/dist/workers/stage-transcriptions/index.js"]
     depends_on:
       - mongodb
       - redis
       - server
+    environment: *common-environment
+    deploy:
+      <<: *common-deploy
+      mode: replicated
+      replicas: 1
+    secrets: *common-secrets
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        mode: "non-blocking"
+
+  session-transcriptions:
+    image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging
+    depends_on:
+      - mongodb
+      - redis
     environment: *common-environment
     deploy:
       <<: *common-deploy

@@ -127,6 +127,24 @@ services:
         max-file: "3"
         mode: "non-blocking"
 
+  session-transcriptions:
+    image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:prod
+    depends_on:
+      - mongodb
+      - redis
+    environment: *common-environment
+    deploy:
+      <<: *common-deploy
+      mode: replicated
+      replicas: 1
+    secrets: *common-secrets
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        mode: "non-blocking"
+
   mongodb:
     image: mongo:latest
     volumes:
