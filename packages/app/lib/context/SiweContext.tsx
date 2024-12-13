@@ -15,11 +15,11 @@ const config = createConfig(
       // RPC URL for each chain
       [mainnet.id]: http(),
       [base.id]: http(),
-      [baseSepolia.id]: http(process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL || ''),
     },
     ssr: true,
     // Required API Keys
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+    walletConnectProjectId:
+      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
 
     // Required App Info
     appName: 'StreamETH',
