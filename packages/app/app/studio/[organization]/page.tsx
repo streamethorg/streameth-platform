@@ -1,7 +1,7 @@
 'use server';
 
 import TableSkeleton from '@/components/misc/Table/TableSkeleton';
-import { LivestreamPageParams, eSort } from '@/lib/types';
+import { LivestreamPageParams } from '@/lib/types';
 import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal';
 import { Suspense } from 'react';
 import { fetchOrganization } from '@/lib/services/organizationService';
@@ -23,15 +23,16 @@ const OrganizationPage = async ({
 
   if (!organization) return notFound();
 
-  // Calculate the start of the current day
-  const startOfDay = new Date();
-  startOfDay.setHours(0, 0, 0, 0);
+  // Calculate the current timestamp
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const currentTimestamp = now.getTime().toString();
 
   return (
-    <div className="flex h-full w-full flex-col p-4 overflow-auto">
-      <div className="flex  w-full flex-col p-2">
-        <h2 className="text-lg font-bold">Create</h2>
-        <div className="md flex max-w-5xl items-center gap-4 p-4">
+    <div className="flex overflow-auto flex-col p-4 w-full h-full">
+      <div className="flex flex-col w-full">
+        <h2 className="text-3xl font-bold">Create</h2>
+        <div className="flex gap-4 items-center py-4 max-w-5xl md">
           <CreateLivestreamModal
             show={searchParams?.show}
             organization={organization}
@@ -42,9 +43,9 @@ const OrganizationPage = async ({
           >
             <Button
               variant={'outline'}
-              className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
+              className="flex flex-row justify-start items-center p-2 pr-4 space-x-4 h-auto bg-white rounded-xl border w-fit"
             >
-              <div className="rounded-xl  text-primary">
+              <div>
                 <ScissorsLineDashed size={20} />
               </div>
               <span className="text-sm">Clip Content</span>
@@ -52,7 +53,6 @@ const OrganizationPage = async ({
           </Link>
         </div>
       </div>
-
       <Tabs defaultValue="current">
         <TabsList>
           <TabsTrigger value="current">
@@ -62,14 +62,14 @@ const OrganizationPage = async ({
             <p className="text-lg font-bold">Past livestreams</p>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="current" className="p-4">
+        <TabsContent value="current">
           <LivestreamTable
-            fromDate={startOfDay.getTime().toString()}
+            fromDate={currentTimestamp}
             organizationId={organization._id}
             organizationSlug={params?.organization}
           />
         </TabsContent>
-        <TabsContent value="past" className="p-4">
+        <TabsContent value="past">
           <Suspense
             key={searchParams.toString()}
             fallback={
@@ -79,7 +79,7 @@ const OrganizationPage = async ({
             }
           >
             <LivestreamTable
-              untilDate={startOfDay.getTime().toString()}
+              untilDate={currentTimestamp}
               organizationId={organization._id}
               organizationSlug={params?.organization}
             />

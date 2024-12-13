@@ -60,7 +60,7 @@ export const ShareModalContent = ({
         <div className="pb-4">
           <CopyText label="Url" text={currentUrl} />
         </div>
-        <div className="flex flex-row items-center justify-center space-x-4 px-4 pb-4">
+        <div className="flex flex-row justify-center items-center px-4 pb-4 space-x-4">
           <FacebookShareButton url={currentUrl} title={text}>
             <FacebookIcon size={42} round />
           </FacebookShareButton>
@@ -107,7 +107,7 @@ const ShareButton = ({
     <Credenza>
       <CredenzaTrigger>
         <span className={buttonClassNames}>
-          <Share2 className="mr-2 h-5 w-5" />
+          <Share2 className="mr-2 w-5 h-5" />
           {title}
         </span>
       </CredenzaTrigger>

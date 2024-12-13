@@ -104,14 +104,21 @@ export async function fetchEventStages({
   }
 }
 
+/*
+ * Fetches stages/livestreams for an organization with optional date filtering
+ * @param organizationId - The ID of the organization
+ * @param fromDate - Optional Unix timestamp in seconds (e.g. 1703894400) to filter stages that start after this date
+ * @param untilDate - Optional Unix timestamp in seconds (e.g. 1703894400) to filter stages that start before this date
+ * @returns Promise<IExtendedStage[]> - Array of stage objects with extended properties
+ */
 export async function fetchOrganizationStages({
   organizationId,
   fromDate,
   untilDate,
 }: {
   organizationId?: string;
-  fromDate?: string;
-  untilDate?: string;
+  fromDate?: string; // Unix timestamp in seconds
+  untilDate?: string; // Unix timestamp in seconds
 }): Promise<IExtendedStage[]> {
   try {
     const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
@@ -119,7 +126,6 @@ export async function fetchOrganizationStages({
     const response = await fetch(
       `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`
     );
-
     const data = (await response.json()).data;
     return data.map((stage: IStage) => stage);
   } catch (e) {

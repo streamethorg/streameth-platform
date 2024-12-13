@@ -41,18 +41,18 @@ const DeleteLivestream = ({ stream }: { stream: IExtendedStage }) => {
     <div onClick={(e) => e.stopPropagation()}>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="justify-start" variant={'ghost'}>
-            <Trash2 className="h-5 w-5 mr-2 text-destructive" /> Delete
+          <Button className="justify-start w-full" variant={'ghost'}>
+            <Trash2 className="mr-2 w-5 h-5 text-destructive" /> Delete
           </Button>
         </DialogTrigger>
-        <DialogContent className="flex flex-col items-center justify-center gap-5">
-          <div className="rounded-full bg-destructive p-3">
-            <Trash2 className="h-5 w-5 text-white" />
+        <DialogContent className="flex flex-col gap-5 justify-center items-center">
+          <div className="p-3 rounded-full bg-destructive">
+            <Trash2 className="w-5 h-5 text-white" />
           </div>
           <p className="text-xl">
             Are you sure you want to delete this livestream?
           </p>
-          <DialogFooter className="flex items-center gap-4">
+          <DialogFooter className="flex gap-4 items-center">
             <DialogClose>
               <Button variant="ghost">Cancel</Button>
             </DialogClose>

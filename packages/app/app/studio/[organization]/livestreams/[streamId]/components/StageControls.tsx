@@ -58,7 +58,7 @@ const StageControls = ({
   return (
     <div>
       <StreamConfigWithPlayer stream={stream} isLive={isLive} />
-      <div className="flex flex-row md:justify-between gap-2 items-center py-2 w-full md:flex-row md:flex-wrap">
+      <div className="flex flex-row gap-2 items-center py-2 w-full md:flex-row md:flex-wrap md:justify-between">
         <div className="flex justify-start items-center space-x-2">
           <span className="pr-4 text-xl font-bold">{stream.name}</span>
           <StreamHealth isLive={isLive} stream={stream} />

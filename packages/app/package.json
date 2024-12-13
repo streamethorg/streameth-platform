@@ -14,10 +14,6 @@
     "prettier:check": "prettier --check './app' './components' './lib' ./tests/"
   },
   "dependencies": {
-    "livekit-client": "^1.15.11",
-    "@livekit/components-react": "^1.5.3",
-    "@livekit/components-styles": "^1.0.9",
-    "livekit-server-sdk": "^1.2.7",
     "mux-embed": "^5.3.3",
     "@hookform/resolvers": "^3.3.4",
     "@livepeer/react": "^4.2.7",

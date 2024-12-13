@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import {
   DropdownMenu,
@@ -8,52 +9,42 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { IExtendedOrganization } from '@/lib/types';
-import { fetchOrganization } from '@/lib/services/organizationService';
 import Link from 'next/link';
 import { LayoutDashboard, Home, Users, LogOut } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { IExtendedOrganization } from '@/lib/types';
 
-const UserProfile = async ({
+const UserProfile = ({
   organization,
-  organizations,
 }: {
-  organization: string;
-  organizations: IExtendedOrganization[];
+  organization: IExtendedOrganization;
 }) => {
   const pathname = usePathname();
   const isInStudio = pathname.includes('/studio');
-  const data = await fetchOrganization({
-    organizationSlug: organization,
-  });
-
-  if (!data) {
-    return null;
-  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="flex items-center space-x-2">
           <Image
-            src={data?.logo}
+            src={organization.logo}
             alt="Organization Logo"
             width={24}
             height={24}
             className="rounded-full"
           />
-          <span className="text-sm font-medium">{data.name}</span>
+          <span className="text-sm font-medium">{organization.name}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         {!isInStudio && (
           <DropdownMenuItem>
             <Link
-              href={`/studio/${data.slug}`}
+              href={`/studio/${organization.slug}`}
               className="flex items-center w-full"
             >
               <Button
-                className="hidden lg:flex items-center space-x-2"
+                className="hidden items-center space-x-2 lg:flex"
                 variant={'link'}
               >
                 <LayoutDashboard size={16} />
@@ -65,11 +56,11 @@ const UserProfile = async ({
         {isInStudio && (
           <DropdownMenuItem>
             <Link
-              href={`/${organization}`}
+              href={`/${organization.slug}`}
               className="flex items-center w-full"
             >
               <Button
-                className="hidden lg:flex items-center space-x-2"
+                className="hidden items-center space-x-2 lg:flex"
                 variant={'link'}
               >
                 <Home size={16} />
@@ -81,7 +72,7 @@ const UserProfile = async ({
         <DropdownMenuItem>
           <Link href={`/studio`} className="flex items-center w-full">
             <Button
-              className="hidden lg:flex items-center space-x-2"
+              className="hidden items-center space-x-2 lg:flex"
               variant={'link'}
             >
               <Users size={16} />
@@ -92,7 +83,7 @@ const UserProfile = async ({
         <DropdownMenuItem>
           <Link href="/auth/logout" className="flex items-center w-full">
             <Button
-              className="hidden lg:flex items-center space-x-2"
+              className="hidden items-center space-x-2 lg:flex"
               variant={'link'}
             >
               <LogOut size={16} />
