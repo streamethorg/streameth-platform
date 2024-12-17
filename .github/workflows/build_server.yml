@@ -159,7 +159,7 @@ jobs:
           
           # Process the compose file and convert depends_on to list format
           echo "🔄 Processing compose file..."
-          docker-compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml
+          docker compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml
           
           echo "📊 Processed file details:"
           ls -l processed-compose.yml
