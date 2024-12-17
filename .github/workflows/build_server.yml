@@ -110,7 +110,7 @@ jobs:
       - name: Install Python dependencies
         run: pip install PyYAML
 
-            - name: Process and deploy compose file
+      - name: Process and deploy compose file
         run: |
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
