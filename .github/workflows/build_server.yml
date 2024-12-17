@@ -154,28 +154,56 @@ jobs:
           echo "📄 First few lines of processed file:"
           head -n 10 processed-compose.yml
           
-          # Function to verify image exists
           verify_image() {
             local image=$1
-            echo "🔍 Verifying image: $image"
-            if docker pull $image >/dev/null 2>&1; then
-              echo "✅ Image exists: $image"
-              return 0
-            else
-              echo "❌ Image not found: $image"
-              return 1
-            fi
+            local max_attempts=5
+            local attempt=1
+            local delay=15
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔍 Verifying image (attempt $attempt/$max_attempts): $image"
+              if docker pull $image >/dev/null 2>&1; then
+                echo "✅ Image exists: $image"
+                return 0
+              else
+                echo "⏳ Image not found, waiting $delay seconds before retry..."
+                sleep $delay
+                attempt=$((attempt + 1))
+              fi
+            done
+            
+            echo "❌ Image not found after $max_attempts attempts: $image"
+            return 1
           }
           
           # Verify all images exist before proceeding
           echo "🔍 Verifying all images exist..."
+          echo "⏳ Waiting initial 15 seconds for images to be available..."
+          sleep 15
+          
+          failed_verifications=0
           for service in server stage-transcriptions session-transcriptions clips reel-creator; do
-            image="ghcr.io/streamethorg/streameth-platform/${service}:${ENV_TAG}-${SHA}"
-            if ! verify_image $image; then
-              echo "❌ Deployment aborted: Missing image $image"
-              exit 1
+            # Verify both tags
+            base_image="ghcr.io/streamethorg/streameth-platform/${service}"
+            echo "🔍 Verifying images for ${service}..."
+            
+            # Verify base tag
+            if ! verify_image "${base_image}:${ENV_TAG}"; then
+              echo "❌ Failed to verify base image: ${base_image}:${ENV_TAG}"
+              failed_verifications=$((failed_verifications + 1))
+            fi
+            
+            # Verify SHA tag
+            if ! verify_image "${base_image}:${ENV_TAG}-${SHA}"; then
+              echo "❌ Failed to verify SHA image: ${base_image}:${ENV_TAG}-${SHA}"
+              failed_verifications=$((failed_verifications + 1))
             fi
           done
+          
+          if [ $failed_verifications -gt 0 ]; then
+            echo "❌ Deployment aborted: $failed_verifications image tags failed verification"
+            exit 1
+          fi
           
           # Deploy function with retry mechanism
           deploy_stack() {
