@@ -1,5 +1,5 @@
 {
-  "name": "@streameth/server",
+  "name": "streameth-new-server",
   "version": "3.0.0",
   "private": true,
   "scripts": {
