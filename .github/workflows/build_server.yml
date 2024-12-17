@@ -126,14 +126,24 @@ jobs:
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
           
+          # Debug: Print current directory and list files
+          pwd
+          ls -la
+          
           # Process the compose file with environment variables
           docker-compose -f $COMPOSE_FILE config > processed-compose.yml
+          
+          # Verify processed file exists
+          ls -la processed-compose.yml
+          
+          # Create directory on server if it doesn't exist
+          ssh streameth@145.223.118.217 "mkdir -p /home/streameth/streameth"
           
           # Copy the processed file to the server
           scp processed-compose.yml streameth@145.223.118.217:/home/streameth/streameth/
           
-          # Log in to registry on deployment server
-          echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          # List directory contents to verify file exists
+          ssh streameth@145.223.118.217 "ls -la /home/streameth/streameth/"
           
           # Deploy using the processed file
           docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
