@@ -109,11 +109,6 @@ jobs:
             docker context use streameth-staging
           fi
 
-      # - name: Install docker-compose
-      #   run: |
-      #     sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-      #     sudo chmod +x /usr/local/bin/docker-compose
-
       - name: Create .env file
         run: |
           cat << EOF > .env
@@ -133,47 +128,56 @@ jobs:
           echo "🔍 Debug: Using stack name: $STACK_NAME"
           echo "🔍 Debug: Using compose file: $COMPOSE_FILE"
           
-          # Install standalone docker-compose
-          echo "📥 Installing docker-compose..."
-          sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-          
           # Install Python dependencies
           pip install PyYAML
           
           # Create Python script to process the YAML
           echo "📝 Creating Python script..."
-          cat << 'EOF' > process_compose.py
+          cat << EOF > process_compose.py
           import sys
           import yaml
+          import os
+          
+          # Get the SHA from environment variable
+          sha = "${{ github.sha }}"
+          env_tag = "${{ needs.prepare-env.outputs.env_tag }}"
           
           data = yaml.safe_load(sys.stdin)
           # Remove name property if it exists
           if 'name' in data:
               del data['name']
           
-          # Convert depends_on to lists
+          # Convert depends_on to lists and update image tags
           for service in data["services"].values():
               if "depends_on" in service:
                   service["depends_on"] = list(service["depends_on"].keys())
+              # Update image tags to use the current SHA
+              if "image" in service:
+                  if ":staging" in service["image"] or ":prod" in service["image"]:
+                      base_image = service["image"].split(":")[0]
+                      service["image"] = f"{base_image}:{env_tag}-{sha}"
           
           yaml.dump(data, sys.stdout, default_flow_style=False)
           EOF
           
           # Process the compose file and convert depends_on to list format
           echo "🔄 Processing compose file..."
-          docker-compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml
+          docker compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml
           
           echo "📊 Processed file details:"
           ls -l processed-compose.yml
           echo "📄 First few lines of processed file:"
           head -n 10 processed-compose.yml
+          echo "🔍 Checking image tags in processed file:"
+          grep "image:" processed-compose.yml
           
           echo "🚀 Attempting to copy and deploy..."
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
             echo "🔵 Using production configuration"
             cat processed-compose.yml | ssh streameth@145.223.118.217 "echo '📝 Writing compose file...' && \
               cat > /home/streameth/streameth/processed-compose.yml && \
+              echo '🔑 Logging into GitHub Container Registry...' && \
+              echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
               echo '✅ File written, verifying...' && \
               ls -l /home/streameth/streameth/processed-compose.yml && \
               echo '🚀 Deploying stack...' && \
@@ -183,6 +187,8 @@ jobs:
             echo "🔵 Using staging configuration"
             cat processed-compose.yml | ssh streameth@145.223.118.217 "echo '📝 Writing compose file...' && \
               cat > /home/streameth/streameth/processed-compose.yml && \
+              echo '🔑 Logging into GitHub Container Registry...' && \
+              echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
               echo '✅ File written, verifying...' && \
               ls -l /home/streameth/streameth/processed-compose.yml && \
               echo '🚀 Deploying stack...' && \
