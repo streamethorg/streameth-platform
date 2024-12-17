@@ -48,7 +48,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Add caching for Docker layers
       - name: Cache Docker layers
         uses: actions/cache@v3
         with:
@@ -78,7 +77,6 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
-      # Temp fix for cache handling
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
@@ -91,7 +89,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Setup SSH key
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
@@ -99,7 +96,6 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 145.223.118.217 >> ~/.ssh/known_hosts
 
-      # Setup Docker context from base64-encoded secret
       - name: Setup Docker context
         run: |
           mkdir -p ~/.docker/contexts
@@ -113,17 +109,35 @@ jobs:
             docker context use streameth-staging
           fi
 
-      # Copy compose files to server
-      - name: Copy compose files
+      - name: Install docker-compose
         run: |
-          scp docker-compose.*.yml streameth@145.223.118.217:/home/streameth/streameth/
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
 
-      # Log in to registry on deployment server
-      - name: Log in to registry on deployment server
+      - name: Create .env file
         run: |
+          cat << EOF > .env
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EOF
+
+      - name: Process and deploy compose file
+        run: |
+          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
+          COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
+          
+          # Process the compose file with environment variables
+          docker-compose -f $COMPOSE_FILE config > processed-compose.yml
+          
+          # Copy the processed file to the server
+          scp processed-compose.yml streameth@145.223.118.217:/home/streameth/streameth/
+          
+          # Log in to registry on deployment server
           echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          
+          # Deploy using the processed file
+          docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
 
-      # Update services based on environment
       - name: Update services
         run: |
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
@@ -166,10 +180,14 @@ jobs:
           # Exit with failure if any update failed
           exit $failed
 
-      # Deploy router if it doesn't exist (only needs to be done once)
       - name: Deploy router if needed
-        if: github.ref == 'refs/heads/docker-prod'  # Only check/deploy router on prod branch pushes
+        if: github.ref == 'refs/heads/docker-prod'
         run: |
           if ! docker stack ls | grep -q "router"; then
             docker stack deploy -c /home/streameth/streameth/docker-compose.router.yml router
           fi
+
+      - name: Cleanup processed compose file
+        if: always()
+        run: |
+          ssh streameth@145.223.118.217 "rm -f /home/streameth/streameth/processed-compose.yml"
