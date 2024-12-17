@@ -122,6 +122,15 @@ jobs:
           echo "🔍 Debug: Environment tag: $ENV_TAG"
           echo "🔍 Debug: Commit SHA: $SHA"
           
+          # First, verify we can pull images on the VPS
+          echo "🔍 Verifying images on VPS..."
+          ssh streameth@145.223.118.217 "
+            echo '🔑 Logging into GitHub Container Registry...' && \
+            echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
+            echo '🔍 Attempting to pull server image...' && \
+            docker pull ghcr.io/streamethorg/streameth-platform/server:${ENV_TAG}-${SHA}
+          "
+
           # Create Python script to process the YAML
           echo "📝 Creating Python script..."
           cat << EOF > process_compose.py
