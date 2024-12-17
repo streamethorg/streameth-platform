@@ -138,6 +138,9 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           
+          # Install Python dependencies
+          pip install PyYAML
+          
           # Create Python script to process the YAML
           echo "📝 Creating Python script..."
           cat << 'EOF' > process_compose.py
@@ -145,9 +148,15 @@ jobs:
           import yaml
           
           data = yaml.safe_load(sys.stdin)
+          # Remove name property if it exists
+          if 'name' in data:
+              del data['name']
+          
+          # Convert depends_on to lists
           for service in data["services"].values():
               if "depends_on" in service:
                   service["depends_on"] = list(service["depends_on"].keys())
+          
           yaml.dump(data, sys.stdout, default_flow_style=False)
           EOF
           
@@ -182,9 +191,6 @@ jobs:
           fi
           
           echo "📋 Deployment process completed"
-
-
-
 
       - name: Update services
         run: |
