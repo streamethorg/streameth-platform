@@ -134,10 +134,13 @@ jobs:
           if 'name' in data:
               del data['name']
           
-          # Convert depends_on to lists
+          # Convert depends_on to lists while preserving network configurations
           for service in data["services"].values():
               if "depends_on" in service:
                   service["depends_on"] = list(service["depends_on"].keys())
+              # Ensure network configurations are preserved
+              if "networks" not in service:
+                  service["networks"] = ["default"]
           
           yaml.dump(data, sys.stdout, default_flow_style=False)
           EOF
@@ -175,7 +178,7 @@ jobs:
           "
           
           echo "⏳ Waiting for stack to stabilize..."
-          sleep 45
+          sleep 15
           
           # Update services
           echo "🔄 Updating services..."
