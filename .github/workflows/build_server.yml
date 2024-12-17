@@ -131,7 +131,7 @@ jobs:
           
           # Process the compose file with environment variables
           echo "🔄 Processing compose file..."
-          docker-compose -f $COMPOSE_FILE config > processed-compose.yml
+          docker compose -f $COMPOSE_FILE config > processed-compose.yml
           
           echo "📊 Processed file details:"
           ls -l processed-compose.yml
