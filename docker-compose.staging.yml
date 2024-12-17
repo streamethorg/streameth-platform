@@ -206,6 +206,9 @@ services:
       retries: 5
       start_period: 40s
     command: --auth
+    networks:
+      - traefik-public
+      - default
     secrets:
       - db-password
 
