@@ -123,29 +123,22 @@ jobs:
         run: |
           echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Create .env file on server
+      - name: Update services
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          ssh streameth@145.223.118.217 "cat > /home/streameth/streameth/.env << 'EOL'
-          AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-          AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-          EOL"
-
-      - name: Update services
-        run: |
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           SHA="${{ github.sha }}"
           
-          # Function to update a service and capture its exit status
           update_service() {
             local service=$1
             local temp_file=$(mktemp)
             if docker service update \
               --with-registry-auth \
-              --env-file /home/streameth/streameth/.env \
               --image ghcr.io/streamethorg/streameth-platform/$service:${{ needs.prepare-env.outputs.env_tag }}-$SHA \
+              --env-add "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
+              --env-add "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
               ${STACK_NAME}_${service} > $temp_file 2>&1; then
               echo "✅ Service ${STACK_NAME}_${service} updated successfully"
               rm $temp_file
@@ -158,14 +151,12 @@ jobs:
             fi
           }
           
-          # Start all updates in parallel and capture PIDs
           pids=()
           for service in server stage-transcriptions session-transcriptions clips reel-creator; do
             update_service $service &
             pids+=($!)
           done
           
-          # Wait for all updates and check for failures
           failed=0
           for pid in ${pids[@]}; do
             if ! wait $pid; then
@@ -173,7 +164,6 @@ jobs:
             fi
           done
           
-          # Exit with failure if any update failed
           exit $failed
 
       # Deploy router if it doesn't exist (only needs to be done once)
