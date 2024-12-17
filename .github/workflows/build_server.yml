@@ -126,14 +126,27 @@ jobs:
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
           
-          # Process the compose file with environment variables
-          docker-compose -f $COMPOSE_FILE config > processed-compose.yml
+          # Create .env file with AWS credentials
+          cat << EOF > .env
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EOF
           
-          # Copy the processed file content through SSH and deploy in one command
+          # Process the compose file with docker compose config
+          docker compose -f $COMPOSE_FILE config > processed-compose.yml
+          
+          # Debug: Check if file was processed
+          echo "Checking processed file size:"
+          ls -l processed-compose.yml
+          
+          # Copy the processed file to the server in the correct location
+          scp processed-compose.yml streameth@145.223.118.217:/home/streameth/streameth/processed-compose.yml
+          
+          # Deploy using the Docker context with the correct path
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
-            cat processed-compose.yml | ssh streameth@145.223.118.217 "cat > /home/streameth/streameth/processed-compose.yml && docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME"
+            docker --context streameth-prod stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
           else
-            cat processed-compose.yml | ssh streameth@145.223.118.217 "cat > /home/streameth/streameth/processed-compose.yml && docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME"
+            docker --context streameth-staging stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
           fi
 
       - name: Update services
