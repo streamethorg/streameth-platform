@@ -121,6 +121,13 @@ jobs:
           echo "🔍 Debug: Using compose file: $COMPOSE_FILE"
           echo "🔍 Debug: Environment tag: $ENV_TAG"
           echo "🔍 Debug: Commit SHA: $SHA"
+
+          echo "📝 Creating .env file..."
+          cat << EOF > .env
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EOF
+
           
           # Create Python script to process the YAML
           echo "📝 Creating Python script..."
@@ -147,7 +154,7 @@ jobs:
           
           # Process the compose file
           echo "🔄 Processing compose file..."
-          if ! docker compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml; then
+          if ! docker compose --env-file .env -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml; then
             echo "❌ Failed to process compose file"
             exit 1
           fi
