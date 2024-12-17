@@ -299,7 +299,7 @@ secrets:
     external: true
   openai-api-key:
     external: true
-  aws-access-key:
-    external: true
-  aws-secret-key:
-    external: true
+  # aws-access-key:
+  #   external: true
+  # aws-secret-key:
+  #   external: true

@@ -123,6 +123,23 @@ jobs:
         run: |
           echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
+      - name: Deploy stack
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
+          COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
+          
+          # Deploy or update the stack with environment variables
+          docker stack deploy \
+            --with-registry-auth \
+            --compose-file $COMPOSE_FILE \
+            --with-registry-auth \
+            -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+            -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+            $STACK_NAME
+
       - name: Update services
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
