@@ -69,6 +69,8 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 			webhook,
 		});
 
+		console.log("secrets", AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, WEBHOOK_SECRET, WEBHOOK_URL, SITE_NAME);
+
 		return result;
 	},
 );
