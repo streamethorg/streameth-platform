@@ -53,8 +53,8 @@ x-common-environment: &common-environment
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   # AWS Configuration
-  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
-  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  # AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+  # AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -163,8 +163,8 @@ services:
       NODE_ENV: staging
       SERVER_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
-      AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
-      AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       BUCKET_NAME: streameth-develop
       BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
@@ -184,12 +184,7 @@ services:
         - "traefik.http.routers.reel-creator-staging.tls=true"
         - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
         - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
-    secrets:
-      - aws-access-key
-      - aws-secret-key
-      - remotion-webhook-secret
-      - spaces-key
-      - spaces-secret
+    secrets: *common-secrets
 
   mongodb:
     image: mongo:latest
@@ -232,7 +227,8 @@ services:
       - redis
     environment: 
       <<: *common-environment
-      REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     deploy:
       <<: *common-deploy
       mode: replicated

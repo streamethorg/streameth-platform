@@ -13,9 +13,17 @@ import {
   TIMEOUT,
   WEBHOOK_SECRET,
   WEBHOOK_URL,
-  AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY,
 } from "../../../../config.mjs";
+import * as fs from 'fs';
+
+// Read AWS credentials from secret files
+const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID_FILE ? 
+  fs.readFileSync(process.env.AWS_ACCESS_KEY_ID_FILE, 'utf8').trim() : 
+  process.env.AWS_ACCESS_KEY_ID;
+
+const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY_FILE ? 
+  fs.readFileSync(process.env.AWS_SECRET_ACCESS_KEY_FILE, 'utf8').trim() : 
+  process.env.AWS_SECRET_ACCESS_KEY;
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
