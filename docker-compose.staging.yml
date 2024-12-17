@@ -19,7 +19,7 @@ x-common-environment: &common-environment
   THIRDWEB_SECRET_KEY_FILE: /run/secrets/thirdweb-secret-key
   SPACES_KEY_FILE: /run/secrets/spaces-key
   SPACES_SECRET_FILE: /run/secrets/spaces-secret
-  BUCKET_NAME: remotionlambda-useast2-w6uye0gtql
+  BUCKET_NAME: streameth-develop
   BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
   LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/livepeer-webhook-secret
   LIVEPEER_BASE_URL: https://livepeer.studio
@@ -39,10 +39,10 @@ x-common-environment: &common-environment
   MAGIC_LINK_SECRET_FILE: /run/secrets/magic-link-secret
   MAGIC_LINK_EXPIRY: "30 days"
   WALLET_ADDRESSES: ""
-  REMOTION_BASE_URL: http://reel-creator:4000
+  REMOTION_BASE_URL: http://reel-creator:3000
   REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
   REMOTION_ID: pebs
-  REMOTION_SITE_NAME: https://staging.streameth.org
+  REMOTION_SITE_NAME: rendering-engine
   REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
   PIPEDREAM_AUTH_TOKEN_FILE: /run/secrets/pipedream-auth-token
   DEVCON_UPLOAD_ENDPOINT_FILE: /run/secrets/devcon-upload-endpoint
@@ -165,7 +165,12 @@ services:
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
-      SITE_NAME: staging
+      BUCKET_NAME: streameth-develop
+      BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+      SPACES_KEY_FILE: /run/secrets/spaces-key
+      SPACES_SECRET_FILE: /run/secrets/spaces-secret
+      SITE_NAME: rendering-engine
+      PORT: 3000
     networks:
       - traefik-public
       - default
@@ -178,11 +183,13 @@ services:
         - "traefik.http.routers.reel-creator-staging.service=reel-creator-staging"
         - "traefik.http.routers.reel-creator-staging.tls=true"
         - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
-        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=4000"
+        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
     secrets:
       - aws-access-key
       - aws-secret-key
       - remotion-webhook-secret
+      - spaces-key
+      - spaces-secret
 
   mongodb:
     image: mongo:latest
