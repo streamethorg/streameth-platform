@@ -136,18 +136,20 @@ jobs:
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
           
-          # Create a temporary compose file with AWS credentials on the server
-          ssh streameth@145.223.118.217 "export AWS_ACCESS_KEY_ID='${AWS_ACCESS_KEY_ID}' AWS_SECRET_ACCESS_KEY='${AWS_SECRET_ACCESS_KEY}' && \
-            envsubst < /home/streameth/streameth/${COMPOSE_FILE} > /home/streameth/streameth/temp-compose.yml"
+          # First, create and process the compose file on the server
+          ssh streameth@145.223.118.217 "cd /home/streameth/streameth && \
+            export AWS_ACCESS_KEY_ID='${AWS_ACCESS_KEY_ID}' AWS_SECRET_ACCESS_KEY='${AWS_SECRET_ACCESS_KEY}' && \
+            envsubst < ${COMPOSE_FILE} > temp-compose.yml"
           
-          # Deploy using the temporary file
-          docker stack deploy \
-            --with-registry-auth \
-            --compose-file /home/streameth/streameth/temp-compose.yml \
-            $STACK_NAME
+          # Then deploy using the server path
+          ssh streameth@145.223.118.217 "cd /home/streameth/streameth && \
+            docker stack deploy \
+              --with-registry-auth \
+              -c temp-compose.yml \
+              ${STACK_NAME}"
           
           # Clean up
-          ssh streameth@145.223.118.217 "rm /home/streameth/streameth/temp-compose.yml"
+          ssh streameth@145.223.118.217 "cd /home/streameth/streameth && rm temp-compose.yml"
 
       - name: Update services
         env:
