@@ -109,10 +109,10 @@ jobs:
             docker context use streameth-staging
           fi
 
-      - name: Install docker-compose
-        run: |
-          sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
+      # - name: Install docker-compose
+      #   run: |
+      #     sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      #     sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Create .env file
         run: |
@@ -129,14 +129,25 @@ jobs:
           echo "🔍 Debug: Using stack name: $STACK_NAME"
           echo "🔍 Debug: Using compose file: $COMPOSE_FILE"
           
-          # Process the compose file with environment variables
+          # Install standalone docker-compose
+          echo "📥 Installing docker-compose..."
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          
+          # Process the compose file with environment variables using docker-compose
           echo "🔄 Processing compose file..."
-          docker compose -f $COMPOSE_FILE config > processed-compose.yml
+          docker-compose -f $COMPOSE_FILE config > processed-compose.yml
           
           echo "📊 Processed file details:"
           ls -l processed-compose.yml
-          echo "📄 First few lines of processed file:"
+          echo "📄 First few lines of processed file (docker-compose):"
           head -n 5 processed-compose.yml
+          
+          # Also try with docker compose for comparison
+          echo "🔄 Processing with docker compose..."
+          docker compose -f $COMPOSE_FILE config > processed-compose-alt.yml
+          echo "📄 First few lines (docker compose):"
+          head -n 5 processed-compose-alt.yml
           
           echo "🚀 Attempting to copy and deploy..."
           # Copy the processed file content through SSH and deploy in one command
