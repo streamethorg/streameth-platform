@@ -110,7 +110,7 @@ jobs:
       - name: Install Python dependencies
         run: pip install PyYAML
 
-      - name: Process and deploy compose file
+            - name: Process and deploy compose file
         run: |
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
@@ -122,15 +122,6 @@ jobs:
           echo "🔍 Debug: Environment tag: $ENV_TAG"
           echo "🔍 Debug: Commit SHA: $SHA"
           
-          # First, verify we can pull images on the VPS
-          echo "🔍 Verifying images on VPS..."
-          ssh streameth@145.223.118.217 "
-            echo '🔑 Logging into GitHub Container Registry...' && \
-            echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
-            echo '🔍 Attempting to pull server image...' && \
-            docker pull ghcr.io/streamethorg/streameth-platform/server:${ENV_TAG}-${SHA}
-          "
-
           # Create Python script to process the YAML
           echo "📝 Creating Python script..."
           cat << EOF > process_compose.py
@@ -163,149 +154,41 @@ jobs:
           echo "📄 First few lines of processed file:"
           head -n 10 processed-compose.yml
           
-          verify_image() {
-            local image=$1
-            local max_attempts=5
-            local attempt=1
-            local delay=15
+          # Verify images on VPS and deploy
+          echo "🚀 Deploying to VPS..."
+          cat processed-compose.yml | ssh streameth@145.223.118.217 "
+            set -e
+            echo '📝 Writing compose file...' && \
+            cat > /home/streameth/streameth/processed-compose.yml && \
+            echo '🔑 Logging into GitHub Container Registry...' && \
+            echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
             
-            while [ $attempt -le $max_attempts ]; do
-              echo "🔍 Verifying image (attempt $attempt/$max_attempts): $image"
-              if docker pull $image >/dev/null 2>&1; then
-                echo "✅ Image exists: $image"
-                return 0
-              else
-                echo "⏳ Image not found, waiting $delay seconds before retry..."
-                sleep $delay
-                attempt=$((attempt + 1))
-              fi
-            done
+            # Verify images
+            echo '🔍 Verifying images...' && \
+            for service in server stage-transcriptions session-transcriptions clips reel-creator; do
+              echo \"Pulling \${service}...\" && \
+              docker pull ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA}
+            done && \
             
-            echo "❌ Image not found after $max_attempts attempts: $image"
-            return 1
-          }
+            echo '🚀 Deploying stack...' && \
+            docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
+          "
           
-          # Verify all images exist before proceeding
-          echo "🔍 Verifying all images exist..."
-          echo "⏳ Waiting initial 15 seconds for images to be available..."
-          sleep 15
-          
-          failed_verifications=0
-          for service in server stage-transcriptions session-transcriptions clips reel-creator; do
-            # Verify both tags
-            base_image="ghcr.io/streamethorg/streameth-platform/${service}"
-            echo "🔍 Verifying images for ${service}..."
-            
-            # Verify base tag
-            if ! verify_image "${base_image}:${ENV_TAG}"; then
-              echo "❌ Failed to verify base image: ${base_image}:${ENV_TAG}"
-              failed_verifications=$((failed_verifications + 1))
-            fi
-            
-            # Verify SHA tag
-            if ! verify_image "${base_image}:${ENV_TAG}-${SHA}"; then
-              echo "❌ Failed to verify SHA image: ${base_image}:${ENV_TAG}-${SHA}"
-              failed_verifications=$((failed_verifications + 1))
-            fi
-          done
-          
-          if [ $failed_verifications -gt 0 ]; then
-            echo "❌ Deployment aborted: $failed_verifications image tags failed verification"
-            exit 1
-          fi
-          
-          # Deploy function with retry mechanism
-          deploy_stack() {
-            local attempt=1
-            local max_attempts=3
-            
-            while [ $attempt -le $max_attempts ]; do
-              echo "🚀 Deploying stack (attempt $attempt/$max_attempts)..."
-              
-              if cat processed-compose.yml | ssh streameth@145.223.118.217 "
-                set -e
-                echo '📝 Writing compose file...' && \
-                cat > /home/streameth/streameth/processed-compose.yml && \
-                echo '🔑 Logging into GitHub Container Registry...' && \
-                echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
-                echo '🚀 Deploying stack...' && \
-                docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
-              "; then
-                echo "✅ Stack deployed successfully"
-                return 0
-              else
-                echo "⚠️ Deployment attempt $attempt failed"
-                if [ $attempt -eq $max_attempts ]; then
-                  echo "❌ All deployment attempts failed"
-                  return 1
-                fi
-                echo "⏳ Waiting before retry..."
-                sleep 16
-              fi
-              attempt=$((attempt + 1))
-            done
-          }
-          
-          # Update service function with retry mechanism
-          update_service() {
-            local service=$1
-            local attempt=1
-            local max_attempts=3
-            
-            while [ $attempt -le $max_attempts ]; do
-              echo "🔄 Updating $service (attempt $attempt/$max_attempts)..."
-              
-              if ssh streameth@145.223.118.217 "
-                docker service update \
-                  --with-registry-auth \
-                  --image ghcr.io/streamethorg/streameth-platform/${service}:${ENV_TAG}-${SHA} \
-                  ${STACK_NAME}_${service}
-              "; then
-                echo "✅ Successfully updated $service"
-                return 0
-              else
-                echo "⚠️ Update attempt $attempt for $service failed"
-                if [ $attempt -eq $max_attempts ]; then
-                  echo "❌ All update attempts for $service failed"
-                  return 1
-                fi
-                echo "⏳ Waiting before retry..."
-                sleep 16
-              fi
-              attempt=$((attempt + 1))
-            done
-          }
-          
-          # Main deployment process
-          echo "🚀 Starting deployment process..."
-          
-          # First deploy the stack
-          if ! deploy_stack; then
-            echo "❌ Stack deployment failed"
-            exit 1
-          fi
-          
-          # Wait for stack to stabilize
           echo "⏳ Waiting for stack to stabilize..."
-          sleep 20
+          sleep 45
           
-          # Update each service
-          failed_services=()
-          for service in server stage-transcriptions session-transcriptions clips reel-creator; do
-            if ! update_service $service; then
-              failed_services+=($service)
-            fi
-            sleep 15
-          done
-          
-          # Report results
-          if [ ${#failed_services[@]} -eq 0 ]; then
-            echo "✅ All services updated successfully"
-          else
-            echo "⚠️ The following services failed to update:"
-            printf '%s\n' "${failed_services[@]}"
-            exit 1
-          fi
+          # Update services
+          echo "🔄 Updating services..."
+          ssh streameth@145.223.118.217 "
+            for service in server stage-transcriptions session-transcriptions clips reel-creator; do
+              echo \"Updating \${service}...\" && \
+              docker service update \
+                --with-registry-auth \
+                --image ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA} \
+                ${STACK_NAME}_\${service}
+              sleep 15
+            done
+          "
           
           echo "📋 Deployment process completed"
 
