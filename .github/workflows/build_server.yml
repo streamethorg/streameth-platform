@@ -129,21 +129,11 @@ jobs:
           # Process the compose file with environment variables
           docker-compose -f $COMPOSE_FILE config > processed-compose.yml
           
-          # Create directory on server if it doesn't exist
-          ssh streameth@145.223.118.217 "mkdir -p /home/streameth/streameth"
-          
-          # Copy the processed file to the server
-          scp processed-compose.yml streameth@145.223.118.217:/home/streameth/streameth/
-          
-          # Debug: Show Docker context and info
-          docker context ls
-          docker info
-          
-          # Try deployment with absolute path
+          # Copy the processed file content through SSH and deploy in one command
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
-            docker --context streameth-prod stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
+            cat processed-compose.yml | ssh streameth@145.223.118.217 "cat > /home/streameth/streameth/processed-compose.yml && docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME"
           else
-            docker --context streameth-staging stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
+            cat processed-compose.yml | ssh streameth@145.223.118.217 "cat > /home/streameth/streameth/processed-compose.yml && docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME"
           fi
 
       - name: Update services
