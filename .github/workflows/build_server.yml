@@ -121,6 +121,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
           EOF
 
+      - name: Install Python dependencies
+        run: |
+          pip install PyYAML
+
       - name: Process and deploy compose file
         run: |
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
