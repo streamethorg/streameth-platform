@@ -128,9 +128,6 @@ jobs:
           echo "🔍 Debug: Using stack name: $STACK_NAME"
           echo "🔍 Debug: Using compose file: $COMPOSE_FILE"
           
-          # Install Python dependencies
-          pip install PyYAML
-          
           # Create Python script to process the YAML
           echo "📝 Creating Python script..."
           cat << EOF > process_compose.py
@@ -151,18 +148,18 @@ jobs:
           for service in data["services"].values():
               if "depends_on" in service:
                   service["depends_on"] = list(service["depends_on"].keys())
-              # Update image tags to use the current SHA
+              # Update image tags to use just the staging/prod tag without SHA
               if "image" in service:
                   if ":staging" in service["image"] or ":prod" in service["image"]:
                       base_image = service["image"].split(":")[0]
-                      service["image"] = f"{base_image}:{env_tag}-{sha}"
+                      service["image"] = f"{base_image}:{env_tag}"
           
           yaml.dump(data, sys.stdout, default_flow_style=False)
           EOF
           
           # Process the compose file and convert depends_on to list format
           echo "🔄 Processing compose file..."
-          docker compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml
+          docker-compose -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml
           
           echo "📊 Processed file details:"
           ls -l processed-compose.yml
