@@ -118,6 +118,11 @@ jobs:
         run: |
           scp docker-compose.*.yml streameth@145.223.118.217:/home/streameth/streameth/
 
+      # Install envsubst if not present
+      - name: Install envsubst
+        run: |
+          ssh streameth@145.223.118.217 "if ! command -v envsubst &> /dev/null; then sudo apt-get update && sudo apt-get install -y gettext-base; fi"
+
       # Log in to registry on deployment server
       - name: Log in to registry on deployment server
         run: |
@@ -131,14 +136,19 @@ jobs:
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
           
-          # Deploy or update the stack with environment variables
+          # Create a temporary compose file with AWS credentials
+          ssh streameth@145.223.118.217 "cat > /home/streameth/streameth/temp-compose.yml << 'EOL'
+          $(AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} envsubst < ${COMPOSE_FILE})
+          EOL"
+          
+          # Deploy using the temporary file
           docker stack deploy \
             --with-registry-auth \
-            --compose-file $COMPOSE_FILE \
-            --with-registry-auth \
-            -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
-            -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+            --compose-file /home/streameth/streameth/temp-compose.yml \
             $STACK_NAME
+          
+          # Clean up
+          ssh streameth@145.223.118.217 "rm /home/streameth/streameth/temp-compose.yml"
 
       - name: Update services
         env:
