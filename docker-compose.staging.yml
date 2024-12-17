@@ -53,8 +53,8 @@ x-common-environment: &common-environment
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   # AWS Configuration
-  # AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
-  # AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -163,8 +163,8 @@ services:
       NODE_ENV: staging
       SERVER_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+      AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
       BUCKET_NAME: streameth-develop
       BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
@@ -184,7 +184,12 @@ services:
         - "traefik.http.routers.reel-creator-staging.tls=true"
         - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
         - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
-    secrets: *common-secrets
+    secrets:
+      - aws-access-key
+      - aws-secret-key
+      - remotion-webhook-secret
+      - spaces-key
+      - spaces-secret
 
   mongodb:
     image: mongo:latest
@@ -206,7 +211,10 @@ services:
 
   redis:
     image: redis:alpine
-    command: sh -c 'password=$$(cat /run/secrets/redis-password); redis-server --requirepass "$$password"'
+    command: >
+      sh -c '
+      password=$$(cat /run/secrets/redis-password);
+      redis-server --requirepass "$$password"'
     volumes:
       - redis_data:/data
     networks:
@@ -224,8 +232,7 @@ services:
       - redis
     environment: 
       <<: *common-environment
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
     deploy:
       <<: *common-deploy
       mode: replicated
@@ -296,7 +303,7 @@ secrets:
     external: true
   openai-api-key:
     external: true
-  # aws-access-key:
-  #   external: true
-  # aws-secret-key:
-  #   external: true
+  aws-access-key:
+    external: true
+  aws-secret-key:
+    external: true
