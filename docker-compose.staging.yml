@@ -206,10 +206,7 @@ services:
 
   redis:
     image: redis:alpine
-    command: >
-      sh -c '
-      password=$$(cat /run/secrets/redis-password);
-      redis-server --requirepass "$$password"'
+    command: sh -c 'password=$$(cat /run/secrets/redis-password); redis-server --requirepass "$$password"'
     volumes:
       - redis_data:/data
     networks:

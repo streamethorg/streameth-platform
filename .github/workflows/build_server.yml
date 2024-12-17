@@ -136,10 +136,10 @@ jobs:
           STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
           COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
           
-          # First, create and process the compose file on the server
+          # First, create and process the compose file on the server, only replacing AWS variables
           ssh streameth@145.223.118.217 "cd /home/streameth/streameth && \
             export AWS_ACCESS_KEY_ID='${AWS_ACCESS_KEY_ID}' AWS_SECRET_ACCESS_KEY='${AWS_SECRET_ACCESS_KEY}' && \
-            envsubst < ${COMPOSE_FILE} > temp-compose.yml"
+            envsubst '\$AWS_ACCESS_KEY_ID \$AWS_SECRET_ACCESS_KEY' < ${COMPOSE_FILE} > temp-compose.yml"
           
           # Then deploy using the server path
           ssh streameth@145.223.118.217 "cd /home/streameth/streameth && \
