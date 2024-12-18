@@ -1,106 +1,110 @@
 version: '3'
+
+# Define common configurations that can be reused
+x-common-environment: &common-environment
+  NODE_ENV: staging
+  APP_PORT: 8080
+  BASE_URL: https://staging.api.streameth.org
+  PLAYER_URL: https://staging.player.streameth.org
+  DB_PASSWORD_FILE: /run/secrets/db-password
+  DB_HOST: streameth-staging_mongodb
+  DB_USER: root
+  DB_NAME: streameth-staging
+  JWT_SECRET_FILE: /run/secrets/jwt-secret
+  JWT_EXPIRY: 30d
+  CORS_ORIGIN: "*"
+  CORS_CREDENTIALS: "true"
+  CORS_PROXY_URL: ""
+  LIVEPEER_API_KEY_FILE: /run/secrets/livepeer-api-key
+  THIRDWEB_SECRET_KEY_FILE: /run/secrets/thirdweb-secret-key
+  SPACES_KEY_FILE: /run/secrets/spaces-key
+  SPACES_SECRET_FILE: /run/secrets/spaces-secret
+  BUCKET_NAME: streameth-develop
+  BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+  LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/livepeer-webhook-secret
+  LIVEPEER_BASE_URL: https://livepeer.studio
+  TELEGRAM_API_KEY_FILE: /run/secrets/telegram-api-key
+  TELEGRAM_CHAT_ID_FILE: /run/secrets/telegram-chat-id
+  OAUTH_SECRET_FILE: /run/secrets/oauth-secret
+  TWITTER_OAUTH_SECRET_FILE: /run/secrets/twitter-oauth-secret
+  TWITTER_CLIENT_ID_FILE: /run/secrets/twitter-client-id
+  GOOGLE_OAUTH_SECRET_FILE: /run/secrets/google-oauth-secret
+  GOOGLE_CLIENT_ID_FILE: /run/secrets/google-client-id
+  SERVICE_ACCOUNT_PRIVATE_KEY_FILE: /run/secrets/google-service-account-private-key
+  SERVICE_ACCOUNT_EMAIL_FILE: /run/secrets/google-service-account-email
+  MAIL_HOST: smtp.ethereal.email
+  MAIL_PORT: 587
+  MAIL_USER_FILE: /run/secrets/mail-user
+  MAIL_PASS_FILE: /run/secrets/mail-pass
+  MAGIC_LINK_SECRET_FILE: /run/secrets/magic-link-secret
+  MAGIC_LINK_EXPIRY: "30 days"
+  WALLET_ADDRESSES: ""
+  REMOTION_BASE_URL: http://reel-creator:3000
+  REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
+  REMOTION_ID: pebs
+  REMOTION_SITE_NAME: rendering-engine
+  REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
+  PIPEDREAM_AUTH_TOKEN_FILE: /run/secrets/pipedream-auth-token
+  DEVCON_UPLOAD_ENDPOINT_FILE: /run/secrets/devcon-upload-endpoint
+  LOG_DIR: logs
+  LOG_FORMAT: dev
+  REDIS_PASSWORD_FILE: /run/secrets/redis-password
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
+  # AWS Configuration read from GitHub Actions secrets
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+
+x-common-deploy: &common-deploy
+  restart_policy:
+    condition: on-failure
+    delay: 5s
+    max_attempts: 3
+
+x-common-secrets: &common-secrets
+  - db-password
+  - jwt-secret
+  - spaces-key
+  - spaces-secret
+  - livepeer-api-key
+  - livepeer-webhook-secret
+  - telegram-api-key
+  - telegram-chat-id
+  - oauth-secret
+  - twitter-oauth-secret
+  - twitter-client-id
+  - google-oauth-secret
+  - google-client-id
+  - magic-link-secret
+  - mail-pass
+  - mail-user
+  - remotion-webhook-secret
+  - pipedream-auth-token
+  - devcon-upload-endpoint
+  - thirdweb-secret-key
+  - google-service-account-private-key
+  - google-service-account-email
+  - redis-password
+  - openai-api-key
+
 services:
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:staging
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.services.staging-server.loadbalancer.server.port=8080"
+      - "traefik.http.services.staging-server.loadbalancer.server.scheme=http"
     depends_on:
       - mongodb
       - redis
     networks:
       - traefik-public
       - default
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik-public"
-      - "traefik.http.services.staging-server.loadbalancer.server.port=8080"
-      - "traefik.http.services.staging-server.loadbalancer.server.scheme=http"
-
-    environment:
-      # Base Configuration
-      - NODE_ENV=staging
-      - APP_PORT=8080
-      - BASE_URL=https://staging.api.streameth.org
-      - PLAYER_URL=https://staging.player.streameth.org
-      
-      # Database
-      - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
-      - DB_USER=root
-      - DB_NAME=streameth-staging
-
-      # JWT
-      - JWT_SECRET_FILE=/run/secrets/jwt-secret
-      - JWT_EXPIRY=30d
-      
-      # CORS
-      - CORS_ORIGIN=[]
-      - CORS_CREDENTIALS=true
-      - CORS_PROXY_URL=""
-      
-      # API Keys
-      - LIVEPEER_API_KEY_FILE=/run/secrets/livepeer-api-key
-      - THIRDWEB_SECRET_KEY_FILE=/run/secrets/thirdweb-secret-key
-      
-      # Storage
-      - SPACES_KEY_FILE=/run/secrets/spaces-key
-      - SPACES_SECRET_FILE=/run/secrets/spaces-secret
-      - BUCKET_NAME=streameth-staging
-      - BUCKET_URL=https://streameth-staging.ams3.digitaloceanspaces.com
-      
-      # Livepeer
-      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/livepeer-webhook-secret
-      - LIVEPEER_BASE_URL=https://livepeer.studio
-      
-      # Social & OAuth
-      - TELEGRAM_API_KEY_FILE=/run/secrets/telegram-api-key
-      - TELEGRAM_CHAT_ID_FILE=/run/secrets/telegram-chat-id
-      - OAUTH_SECRET_FILE=/run/secrets/oauth-secret
-      - TWITTER_OAUTH_SECRET_FILE=/run/secrets/twitter-oauth-secret
-      - TWITTER_CLIENT_ID_FILE=/run/secrets/twitter-client-id
-      - GOOGLE_OAUTH_SECRET_FILE=/run/secrets/google-oauth-secret
-      - GOOGLE_CLIENT_ID_FILE=/run/secrets/google-client-id
-      
-      # Redis
-      - REDIS_PASSWORD_FILE=/run/secrets/redis-password
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - OPENAI_API_KEY_FILE=/run/secrets/openai-api-key
-      
-      # Google Service Account
-      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE=/run/secrets/google-service-account-private-key
-      - SERVICE_ACCOUNT_EMAIL_FILE=/run/secrets/google-service-account-email
-      
-      # Mail
-      - MAIL_HOST=smtp.ethereal.email
-      - MAIL_PORT=587
-      - MAIL_USER_FILE=/run/secrets/mail-user
-      - MAIL_PASS_FILE=/run/secrets/mail-pass
-      
-      # Magic Link
-      - MAGIC_LINK_SECRET_FILE=/run/secrets/magic-link-secret
-      - MAGIC_LINK_EXPIRY='30 days'
-      
-      # Wallet & Privy
-      - WALLET_ADDRESSES=""
-        
-      # Remotion & Others
-      - REMOTION_BASE_URL=http://localhost:3000
-      - REMOTION_WEBHOOK_SECRET_FILE=/run/secrets/remotion-webhook-secret
-      - REMOTION_ID=pebs
-      - PIPEDREAM_AUTH_TOKEN_FILE=/run/secrets/pipedream-auth-token
-      - DEVCON_UPLOAD_ENDPOINT_FILE=/run/secrets/devcon-upload-endpoint
-      - LOG_DIR=logs
-      - LOG_FORMAT=dev
-      - REMOTION_SITE_NAME=https://streameth.org
-      - REMOTION_WEBHOOK_URL=https://your-webhook-url.com/remotion-webhook
-
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        mode: "non-blocking"
+    environment: *common-environment
     deploy:
+      <<: *common-deploy
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik-public"
@@ -108,327 +112,145 @@ services:
         - "traefik.http.services.staging-server.loadbalancer.server.scheme=http"
       mode: replicated
       replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-    secrets:
-      - db-password
-      - jwt-secret
-      - spaces-key
-      - spaces-secret
-      - livepeer-api-key
-      - livepeer-webhook-secret
-      - telegram-api-key
-      - telegram-chat-id
-      - oauth-secret
-      - twitter-oauth-secret
-      - twitter-client-id
-      - google-oauth-secret
-      - google-client-id
-      - magic-link-secret
-      - mail-pass
-      - mail-user
-      - remotion-webhook-secret
-      - pipedream-auth-token
-      - devcon-upload-endpoint
-      - thirdweb-secret-key
-      - google-service-account-private-key
-      - google-service-account-email
-      - redis-password
-      - openai-api-key
+    secrets: *common-secrets
 
   stage-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging
-    command: ["node", "/app/packages/server/dist/workers/stage-transcriptions/index.js"]
+    networks:
+      - traefik-public
+      - default
     depends_on:
       - mongodb
       - redis
       - server
-
-    environment:
-      # Base Configuration
-      - NODE_ENV=staging
-      - APP_PORT=8080
-      - BASE_URL=https://staging.api.streameth.org
-      - PLAYER_URL=https://staging.player.streameth.org
-      
-      # Database
-      - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
-      - DB_USER=root
-      - DB_NAME=streameth-staging
-
-      # JWT
-      - JWT_SECRET_FILE=/run/secrets/jwt-secret
-      - JWT_EXPIRY=30d
-      
-      # CORS
-      - CORS_ORIGIN=[]
-      - CORS_CREDENTIALS=true
-      - CORS_PROXY_URL=""
-      
-      # API Keys
-      - LIVEPEER_API_KEY_FILE=/run/secrets/livepeer-api-key
-      - THIRDWEB_SECRET_KEY_FILE=/run/secrets/thirdweb-secret-key
-      
-      # Storage
-      - SPACES_KEY_FILE=/run/secrets/spaces-key
-      - SPACES_SECRET_FILE=/run/secrets/spaces-secret
-      - BUCKET_NAME=streameth-staging
-      - BUCKET_URL=https://streameth-staging.ams3.digitaloceanspaces.com
-      
-      # Livepeer
-      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/livepeer-webhook-secret
-      - LIVEPEER_BASE_URL=https://livepeer.studio
-      
-      # Social & OAuth
-      - TELEGRAM_API_KEY_FILE=/run/secrets/telegram-api-key
-      - TELEGRAM_CHAT_ID_FILE=/run/secrets/telegram-chat-id
-      - OAUTH_SECRET_FILE=/run/secrets/oauth-secret
-      - TWITTER_OAUTH_SECRET_FILE=/run/secrets/twitter-oauth-secret
-      - TWITTER_CLIENT_ID_FILE=/run/secrets/twitter-client-id
-      - GOOGLE_OAUTH_SECRET_FILE=/run/secrets/google-oauth-secret
-      - GOOGLE_CLIENT_ID_FILE=/run/secrets/google-client-id
-      
-      # Redis
-      - REDIS_PASSWORD_FILE=/run/secrets/redis-password
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - OPENAI_API_KEY_FILE=/run/secrets/openai-api-key
-      
-      # Google Service Account
-      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE=/run/secrets/google-service-account-private-key
-      - SERVICE_ACCOUNT_EMAIL_FILE=/run/secrets/google-service-account-email
-      
-      # Mail
-      - MAIL_HOST=smtp.ethereal.email
-      - MAIL_PORT=587
-      - MAIL_USER_FILE=/run/secrets/mail-user
-      - MAIL_PASS_FILE=/run/secrets/mail-pass
-      
-      # Magic Link
-      - MAGIC_LINK_SECRET_FILE=/run/secrets/magic-link-secret
-      - MAGIC_LINK_EXPIRY='30 days'
-      
-      # Wallet & Privy
-      - WALLET_ADDRESSES=""
-        
-      # Remotion & Others
-      - REMOTION_BASE_URL=http://localhost:3000
-      - REMOTION_WEBHOOK_SECRET_FILE=/run/secrets/remotion-webhook-secret
-      - REMOTION_ID=pebs
-      - PIPEDREAM_AUTH_TOKEN_FILE=/run/secrets/pipedream-auth-token
-      - DEVCON_UPLOAD_ENDPOINT_FILE=/run/secrets/devcon-upload-endpoint
-      - LOG_DIR=logs
-      - LOG_FORMAT=dev
-      - REMOTION_SITE_NAME=https://streameth.org
-      - REMOTION_WEBHOOK_URL=https://your-webhook-url.com/remotion-webhook
-
-    restart: unless-stopped
+    environment: *common-environment
+    deploy:
+      <<: *common-deploy
+      mode: replicated
+      replicas: 1
+    secrets: *common-secrets
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
         mode: "non-blocking"
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-    secrets:
-      - db-password
-      - jwt-secret
-      - spaces-key
-      - spaces-secret
-      - livepeer-api-key
-      - livepeer-webhook-secret
-      - telegram-api-key
-      - telegram-chat-id
-      - oauth-secret
-      - twitter-oauth-secret
-      - twitter-client-id
-      - google-oauth-secret
-      - google-client-id
-      - magic-link-secret
-      - mail-pass
-      - mail-user
-      - remotion-webhook-secret
-      - pipedream-auth-token
-      - devcon-upload-endpoint
-      - thirdweb-secret-key
-      - google-service-account-private-key
-      - google-service-account-email
-      - redis-password
-      - openai-api-key
 
   session-transcriptions:
     image: ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging
-    command: ["node", "/app/packages/server/dist/workers/session-transcriptions/index.js"]
+    networks:
+      - traefik-public
+      - default
     depends_on:
       - mongodb
       - redis
-      - server
-
-    environment:
-      # Base Configuration
-      - NODE_ENV=staging
-      - APP_PORT=8080
-      - BASE_URL=https://staging.api.streameth.org
-      - PLAYER_URL=https://staging.player.streameth.org
-      
-      # Database
-      - DB_PASSWORD_FILE=/run/secrets/db-password
-      - DB_HOST=mongodb
-      - DB_USER=root
-      - DB_NAME=streameth-staging
-
-      # JWT
-      - JWT_SECRET_FILE=/run/secrets/jwt-secret
-      - JWT_EXPIRY=30d
-      
-      # CORS
-      - CORS_ORIGIN=[]
-      - CORS_CREDENTIALS=true
-      - CORS_PROXY_URL=""
-      
-      # API Keys
-      - LIVEPEER_API_KEY_FILE=/run/secrets/livepeer-api-key
-      - THIRDWEB_SECRET_KEY_FILE=/run/secrets/thirdweb-secret-key
-      
-      # Storage
-      - SPACES_KEY_FILE=/run/secrets/spaces-key
-      - SPACES_SECRET_FILE=/run/secrets/spaces-secret
-      - BUCKET_NAME=streameth-staging
-      - BUCKET_URL=https://streameth-staging.ams3.digitaloceanspaces.com
-      
-      # Livepeer
-      - LIVEPEER_WEBHOOK_SECRET_FILE=/run/secrets/livepeer-webhook-secret
-      - LIVEPEER_BASE_URL=https://livepeer.studio
-      
-      # Social & OAuth
-      - TELEGRAM_API_KEY_FILE=/run/secrets/telegram-api-key
-      - TELEGRAM_CHAT_ID_FILE=/run/secrets/telegram-chat-id
-      - OAUTH_SECRET_FILE=/run/secrets/oauth-secret
-      - TWITTER_OAUTH_SECRET_FILE=/run/secrets/twitter-oauth-secret
-      - TWITTER_CLIENT_ID_FILE=/run/secrets/twitter-client-id
-      - GOOGLE_OAUTH_SECRET_FILE=/run/secrets/google-oauth-secret
-      - GOOGLE_CLIENT_ID_FILE=/run/secrets/google-client-id
-      
-      # Redis
-      - REDIS_PASSWORD_FILE=/run/secrets/redis-password
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - OPENAI_API_KEY_FILE=/run/secrets/openai-api-key
-      
-      # Google Service Account
-      - SERVICE_ACCOUNT_PRIVATE_KEY_FILE=/run/secrets/google-service-account-private-key
-      - SERVICE_ACCOUNT_EMAIL_FILE=/run/secrets/google-service-account-email
-      
-      # Mail
-      - MAIL_HOST=smtp.ethereal.email
-      - MAIL_PORT=587
-      - MAIL_USER_FILE=/run/secrets/mail-user
-      - MAIL_PASS_FILE=/run/secrets/mail-pass
-      
-      # Magic Link
-      - MAGIC_LINK_SECRET_FILE=/run/secrets/magic-link-secret
-      - MAGIC_LINK_EXPIRY='30 days'
-      
-      # Wallet & Privy
-      - WALLET_ADDRESSES=""
-        
-      # Remotion & Others
-      - REMOTION_BASE_URL=http://localhost:3000
-      - REMOTION_WEBHOOK_SECRET_FILE=/run/secrets/remotion-webhook-secret
-      - REMOTION_ID=pebs
-      - PIPEDREAM_AUTH_TOKEN_FILE=/run/secrets/pipedream-auth-token
-      - DEVCON_UPLOAD_ENDPOINT_FILE=/run/secrets/devcon-upload-endpoint
-      - LOG_DIR=logs
-      - LOG_FORMAT=dev
-      - REMOTION_SITE_NAME=https://streameth.org
-      - REMOTION_WEBHOOK_URL=https://staging.api.streameth.org/remotion-webhook
-
-    restart: unless-stopped
+    environment: *common-environment
+    deploy:
+      <<: *common-deploy
+      mode: replicated
+      replicas: 1
+    secrets: *common-secrets
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
         mode: "non-blocking"
+
+  reel-creator:
+    image: ghcr.io/streamethorg/streameth-platform/reel-creator:staging
+    environment:
+      NODE_ENV: staging
+      SERVER_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
+      SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      BUCKET_NAME: streameth-develop
+      BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+      SPACES_KEY_FILE: /run/secrets/spaces-key
+      SPACES_SECRET_FILE: /run/secrets/spaces-secret
+      SITE_NAME: rendering-engine
+      PORT: 3000
+    networks:
+      - traefik-public
+      - default
     deploy:
-      mode: replicated
-      replicas: 1
+      <<: *common-deploy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        - "traefik.http.routers.reel-creator-staging.rule=Host(`staging.remotion.streameth.org`)"
+        - "traefik.http.routers.reel-creator-staging.service=reel-creator-staging"
+        - "traefik.http.routers.reel-creator-staging.tls=true"
+        - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
+        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
+    secrets:
+      - remotion-webhook-secret
+      - spaces-key
+      - spaces-secret
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: streameth-staging
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: --auth --bind_ip_all
+    networks:
+      - traefik-public
+      - default
+    deploy:
       restart_policy:
         condition: on-failure
         delay: 5s
         max_attempts: 3
-    secrets:
-      - db-password
-      - jwt-secret
-      - spaces-key
-      - spaces-secret
-      - livepeer-api-key
-      - livepeer-webhook-secret
-      - telegram-api-key
-      - telegram-chat-id
-      - oauth-secret
-      - twitter-oauth-secret
-      - twitter-client-id
-      - google-oauth-secret
-      - google-client-id
-      - magic-link-secret
-      - mail-pass
-      - mail-user
-      - remotion-webhook-secret
-      - pipedream-auth-token
-      - devcon-upload-endpoint
-      - thirdweb-secret-key
-      - google-service-account-private-key
-      - google-service-account-email
-      - redis-password
-      - openai-api-key
-
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=streameth-staging
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/db-password
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/streameth-staging --quiet
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
+        window: 120s
     secrets:
       - db-password
 
   redis:
     image: redis:alpine
-    ports:
-      - "6379:6379"
     command: >
       sh -c '
-      redis-server --requirepass "$$(cat /run/secrets/redis-password)"
-      '
+      password=$$(cat /run/secrets/redis-password);
+      redis-server --requirepass "$$password"'
     volumes:
       - redis_data:/data
-    healthcheck:
-      test: >
-        sh -c "redis-cli -a $$(cat /run/secrets/redis-password) ping"
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    networks:
+      - default
     secrets:
       - redis-password
+
+  clips:
+    image: ghcr.io/streamethorg/streameth-platform/clips:staging
+    networks:
+      - traefik-public
+      - default
+    depends_on:
+      - mongodb
+      - redis
+    environment: 
+      <<: *common-environment
+      REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
+    deploy:
+      <<: *common-deploy
+      mode: replicated
+      replicas: 1
+    secrets: *common-secrets
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        mode: "non-blocking"
 
 networks:
   default:
@@ -438,11 +260,10 @@ networks:
 volumes:
   mongodb_data:
   redis_data:
-  letsencrypt:
 
 secrets:
   db-password:
-    external: true 
+    external: true
   jwt-secret:
     external: true
   spaces-key:
@@ -469,13 +290,9 @@ secrets:
     external: true
   magic-link-secret:
     external: true
-  mail-user:
-    external: true
   mail-pass:
     external: true
-  google-service-account-private-key:
-    external: true
-  google-service-account-email:
+  mail-user:
     external: true
   remotion-webhook-secret:
     external: true
@@ -484,6 +301,10 @@ secrets:
   devcon-upload-endpoint:
     external: true
   thirdweb-secret-key:
+    external: true
+  google-service-account-private-key:
+    external: true
+  google-service-account-email:
     external: true
   redis-password:
     external: true

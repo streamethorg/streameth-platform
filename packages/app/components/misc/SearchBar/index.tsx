@@ -91,7 +91,9 @@ export default function SearchBar({
     router.push(
       isStudio
         ? `/studio/${organizationSlug}/library/${session._id.toString()}`
-        : `/${organizationSlug || session.organizationId}/watch?session=${session._id.toString()}`
+        : `/${
+            organizationSlug || session.organizationId
+          }/watch?session=${session._id.toString()}`
     );
     return;
   };

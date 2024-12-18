@@ -9,7 +9,7 @@ import { Menu, X } from 'lucide-react';
 import Navbar from './Navbar';
 import { Search } from 'lucide-react';
 import { Page } from '@/lib/types';
-import SwitchOrganization from '@/app/studio/[organization]/components/SwitchOrganization';
+import SwitchOrganization from './SwitchOrganization';
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
@@ -17,7 +17,7 @@ import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
-import UserProfile from '@/app/studio/[organization]/components/UserProfile';
+import UserProfile from '@/components/misc/UserProfile';
 const HomePageNavbar = ({
   logo,
   pages,

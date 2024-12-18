@@ -58,11 +58,17 @@ export const SidebarItem = ({
   return (
     <li
       onClick={handleClick}
-      className={`group relative flex cursor-pointer items-center rounded-md py-2 font-medium transition-colors hover:rounded-xl hover:border hover:border-primary ${active && !isExternal ? 'rounded-xl border border-primary' : 'border border-white'} ${expanded ? 'px-2' : 'justify-center'} `}
+      className={`group relative flex cursor-pointer items-center rounded-md py-2 font-medium transition-colors hover:rounded-xl hover:border hover:border-primary ${
+        active && !isExternal
+          ? 'rounded-xl border border-primary'
+          : 'border border-white'
+      } ${expanded ? 'px-2' : 'justify-center'} `}
     >
       {icon}
       <span
-        className={`overflow-hidden text-sm transition-all ${expanded ? 'ml-3' : 'hidden'}`}
+        className={`overflow-hidden text-sm transition-all ${
+          expanded ? 'ml-3' : 'hidden'
+        }`}
       >
         {text}
       </span>

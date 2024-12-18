@@ -5,19 +5,13 @@ on:
     branches: [docker, docker-prod]
 
 jobs:
-  build-and-push-server-image:
+  prepare-env:
     runs-on: ubuntu-latest
+    outputs:
+      env_tag: ${{ steps.set-tag.outputs.ENV_TAG }}
+      compose_file: ${{ steps.set-tag.outputs.COMPOSE_FILE }}
+      stack_name: ${{ steps.set-tag.outputs.STACK_NAME }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
-        with:
-          registry: https://ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
-
       - name: Set environment tag
         id: set-tag
         run: |
@@ -28,40 +22,71 @@ jobs:
           else
             echo "ENV_TAG=staging" >> $GITHUB_OUTPUT
             echo "COMPOSE_FILE=docker-compose.staging.yml" >> $GITHUB_OUTPUT
-            echo "STACK_NAME=staging" >> $GITHUB_OUTPUT
+            echo "STACK_NAME=streameth-staging" >> $GITHUB_OUTPUT
           fi
+  build-and-push-images:
+    needs: prepare-env
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: server
+            dockerfile: ./packages/server/src/Dockerfile
+          - image: stage-transcriptions
+            dockerfile: ./packages/server/workers/stage-transcriptions/Dockerfile
+          - image: session-transcriptions
+            dockerfile: ./packages/server/workers/session-transcriptions/Dockerfile
+          - image: clips
+            dockerfile: ./packages/server/workers/clips/Dockerfile
+          - image: reel-creator
+            dockerfile: ./packages/reel-creator/Dockerfile
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Build and push server
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.image }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.image }}-
+            ${{ runner.os }}-buildx-
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
+
+      - name: Build and push ${{ matrix.image }}
+        id: docker_build
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/streamethorg/streameth-platform/server:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/server:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/src/Dockerfile
+            ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}
+            ghcr.io/streamethorg/streameth-platform/${{ matrix.image }}:${{ needs.prepare-env.outputs.env_tag }}-${{ github.sha }}
+          file: ${{ matrix.dockerfile }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
-      - name: Build and push stage-transcriptions
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/stage-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/workers/stage-transcriptions/Dockerfile
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - name: Build and push session-transcriptions
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}
-            ghcr.io/streamethorg/streameth-platform/session-transcriptions:${{ steps.set-tag.outputs.ENV_TAG }}-${{ github.sha }}
-          file: ./packages/server/workers/session-transcriptions/Dockerfile
+  deploy:
+    needs: [prepare-env, build-and-push-images]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Setup SSH key
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
@@ -69,42 +94,125 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 145.223.118.217 >> ~/.ssh/known_hosts
 
-      # Setup Docker context from base64-encoded secret
       - name: Setup Docker context
         run: |
           mkdir -p ~/.docker/contexts
           if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
             echo "${{ secrets.DOCKER_CONTEXT_PROD_B64 }}" | base64 -d > ~/.docker/contexts/streameth-prod.tar.gz
             docker context import streameth-prod ~/.docker/contexts/streameth-prod.tar.gz
+            docker context use streameth-prod
           else
             echo "${{ secrets.DOCKER_CONTEXT_STAGING_B64 }}" | base64 -d > ~/.docker/contexts/streameth-staging.tar.gz
             docker context import streameth-staging ~/.docker/contexts/streameth-staging.tar.gz
-          fi
-
-      # Copy compose files to server
-      - name: Copy compose files
-        run: |
-          scp docker-compose.*.yml streameth@145.223.118.217:/home/streameth/streameth/
-
-      # Update services based on environment
-      - name: Update services
-        run: |
-          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
-            docker context use streameth-prod
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:prod-${{ github.sha }} prod_server
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:prod-${{ github.sha }} prod_stage-transcriptions
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:prod-${{ github.sha }} prod_session-transcriptions
-          else
             docker context use streameth-staging
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:staging-${{ github.sha }} streameth-staging_server
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging-${{ github.sha }} streameth-staging_stage-transcriptions
             docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging-${{ github.sha }} streameth-staging_session-transcriptions
           fi
 
-      # Deploy router if it doesn't exist (only needs to be done once)
+      - name: Install Python dependencies
+        run: pip install PyYAML
+
+      - name: Process and deploy compose file
+        run: |
+          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
+          COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
+          ENV_TAG="${{ needs.prepare-env.outputs.env_tag }}"
+          SHA="${{ github.sha }}"
+          
+          echo "🔍 Debug: Using stack name: $STACK_NAME"
+          echo "🔍 Debug: Using compose file: $COMPOSE_FILE"
+          echo "🔍 Debug: Environment tag: $ENV_TAG"
+          echo "🔍 Debug: Commit SHA: $SHA"
+
+          echo "📝 Creating .env file..."
+          cat << EOF > .env
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EOF
+
+          
+          # Create Python script to process the YAML
+          echo "📝 Creating Python script..."
+          cat << EOF > process_compose.py
+          import sys
+          import yaml
+          import os
+          
+          data = yaml.safe_load(sys.stdin)
+          # Remove name property if it exists
+          if 'name' in data:
+              del data['name']
+          
+          # Convert depends_on to lists while preserving network configurations
+          for service in data["services"].values():
+              if "depends_on" in service:
+                  service["depends_on"] = list(service["depends_on"].keys())
+              # Ensure network configurations are preserved
+              if "networks" not in service:
+                  service["networks"] = ["default"]
+          
+          yaml.dump(data, sys.stdout, default_flow_style=False)
+          EOF
+          
+          # Process the compose file
+          echo "🔄 Processing compose file..."
+          if ! docker compose --env-file .env -f $COMPOSE_FILE config | python3 process_compose.py > processed-compose.yml; then
+            echo "❌ Failed to process compose file"
+            exit 1
+          fi
+          
+          echo "📊 Processed file details:"
+          ls -l processed-compose.yml
+          echo "📄 First few lines of processed file:"
+          head -n 10 processed-compose.yml
+          
+          # Verify images on VPS and deploy
+          echo "🚀 Deploying to VPS..."
+          cat processed-compose.yml | ssh streameth@145.223.118.217 "
+            set -e
+            echo '📝 Writing compose file...' && \
+            cat > /home/streameth/streameth/processed-compose.yml && \
+            echo '🔑 Logging into GitHub Container Registry...' && \
+            echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
+            
+            # Verify images
+            echo '🔍 Verifying images...' && \
+            for service in server stage-transcriptions session-transcriptions clips reel-creator; do
+              echo \"Pulling \${service}...\" && \
+              docker pull ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA}
+            done && \
+            
+            echo '🚀 Deploying stack...' && \
+            docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
+          "
+          
+          echo "⏳ Waiting for stack to stabilize..."
+          sleep 15
+          
+          # Update services
+          echo "🔄 Updating services..."
+          ssh streameth@145.223.118.217 "
+            for service in server stage-transcriptions session-transcriptions clips reel-creator; do
+              echo \"Updating \${service}...\" && \
+              docker service update \
+                --with-registry-auth \
+                --image ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA} \
+                ${STACK_NAME}_\${service}
+              sleep 15
+            done
+          "
+          
+          echo "📋 Deployment process completed"
+
       - name: Deploy router if needed
-        if: github.ref == 'refs/heads/docker-prod'  # Only check/deploy router on prod branch pushes
+        if: github.ref == 'refs/heads/docker-prod'
         run: |
           if ! docker stack ls | grep -q "router"; then
             docker stack deploy -c /home/streameth/streameth/docker-compose.router.yml router
           fi
+
+      - name: Cleanup processed compose file
+        if: always()
+        run: |
+          ssh streameth@145.223.118.217 "rm -f /home/streameth/streameth/processed-compose.yml"

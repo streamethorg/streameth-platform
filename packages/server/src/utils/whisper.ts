@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import { config } from '@config';
-import { promises as fs } from 'fs';
+import { promises as fs, createReadStream } from 'fs';
 
 export class WhisperAPI {
   private openai: OpenAI;
@@ -14,7 +14,7 @@ export class WhisperAPI {
   async transcribe(
     filePath: string,
   ): Promise<OpenAI.Audio.TranscriptionVerbose> {
-    const fileStream = require('fs').createReadStream(filePath);
+    const fileStream = createReadStream(filePath);
     console.log('Transcribing file:', filePath);
     console.log('File size:', (await fs.stat(filePath)).size);
     try {
@@ -25,8 +25,7 @@ export class WhisperAPI {
         response_format: 'verbose_json',
         timestamp_granularities: ['word'],
       });
-      console.log('Whisper transcription response:', response);
-      await fs.unlink(filePath);
+      // await fs.unlink(filePath);
       return response;
     } catch (error) {
       console.error('Whisper transcription error:', error);

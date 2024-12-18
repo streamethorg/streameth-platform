@@ -1,7 +1,6 @@
 export interface IClip {
-  playbackId: string;
+  clipUrl: string;
   sessionId: string;
-  recordingId: string;
   start: number;
   end: number;
   organizationId?: string;

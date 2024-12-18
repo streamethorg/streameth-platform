@@ -54,20 +54,18 @@ export const createSessionAction = async ({
 };
 
 export const createClipAction = async ({
-  playbackId,
+  clipUrl,
   sessionId,
   start,
   end,
-  recordingId,
   isEditorEnabled,
   editorOptions,
   organizationId,
 }: {
-  playbackId: string;
+  clipUrl: string;
   sessionId: string;
   start: number;
   end: number;
-  recordingId: string;
   isEditorEnabled: boolean;
   editorOptions?: {
     frameRate: number;
@@ -83,16 +81,15 @@ export const createClipAction = async ({
 }) => {
   const response = await createClip({
     end,
-    playbackId,
+    clipUrl,
     sessionId,
     start,
     isEditorEnabled,
     editorOptions,
-    recordingId,
     organizationId,
   });
   if (!response) {
-    throw new Error('Error creating session');
+    throw new Error('Error creating clip');
   }
   revalidatePath('/studio');
   return response;

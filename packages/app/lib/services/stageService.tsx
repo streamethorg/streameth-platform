@@ -263,7 +263,9 @@ export async function createSocialLivestreamStage({
 
     if (!response.ok) {
       const error = await response.json();
-      const errorMessage = `Error ${response.status}: ${error.message || 'Unknown error occurred'}`;
+      const errorMessage = `Error ${response.status}: ${
+        error.message || 'Unknown error occurred'
+      }`;
       throw new Error(errorMessage);
     }
     return (await response.json()).data;
@@ -293,7 +295,9 @@ export async function getHlsUrl({
 
     if (!response.ok) {
       const error = await response.json();
-      const errorMessage = `Error ${response.status}: ${error.message || 'Error getting HLS URL'}`;
+      const errorMessage = `Error ${response.status}: ${
+        error.message || 'Error getting HLS URL'
+      }`;
       throw new Error(errorMessage);
     }
     return (await response.json()).data;

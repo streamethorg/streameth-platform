@@ -243,9 +243,8 @@ const models: TsoaRoute.Models = {
     "CreateClipDto": {
         "dataType": "refObject",
         "properties": {
-            "playbackId": {"dataType":"string","required":true},
+            "clipUrl": {"dataType":"string","required":true},
             "sessionId": {"dataType":"string","required":true},
-            "recordingId": {"dataType":"string","required":true},
             "start": {"dataType":"double","required":true},
             "end": {"dataType":"double","required":true},
             "organizationId": {"dataType":"string","required":true},
@@ -661,7 +660,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ProcessingStatus": {
         "dataType": "refEnum",
-        "enums": ["pending","rendering","failed","completed"],
+        "enums": ["pending","rendering","failed","clipCreated","completed"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ISession": {

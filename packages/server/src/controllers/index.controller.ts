@@ -10,7 +10,11 @@ import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { createAssetFromUrl, getAsset, getDownloadUrl } from '@utils/livepeer';
+import {
+  createAssetFromUrl,
+  getAsset,
+  generateThumbnail,
+} from '@utils/livepeer';
 import StorageService from '@utils/s3';
 import {
   validateRemotionWebhook,
@@ -32,7 +36,6 @@ import {
   Tags,
   UploadedFile,
 } from 'tsoa';
-import { logger } from '@utils/logger';
 
 @Tags('Index')
 @Route('')
@@ -81,7 +84,8 @@ export class IndexController extends Controller {
     try {
       switch (payload.event) {
         case LivepeerEvent.assetReady:
-          const assetId = payload.asset?.id;
+          const { asset } = payload.payload;
+          const assetId = asset?.id;
           console.log(
             'Processing asset.ready with new format, asset ID:',
             assetId,
@@ -90,10 +94,10 @@ export class IndexController extends Controller {
             console.log('No asset ID found in payload:', payload);
             return SendApiResponse('No asset ID found in payload', null, '400');
           }
-          await this.assetReady(assetId);
+          await this.assetReady(assetId, asset.snapshot);
           break;
         case LivepeerEvent.assetFailed:
-          await this.assetFailed(payload.payload.id);
+          await this.assetFailed(payload.id);
           break;
         case LivepeerEvent.streamStarted:
         case LivepeerEvent.streamIdle:
@@ -184,11 +188,16 @@ export class IndexController extends Controller {
     return SendApiResponse('Webhook processed successfully');
   }
 
-  private async assetReady(id: string) {
-    const asset = await getAsset(id);
-    const session = await this.sessionService.findOne({ assetId: asset.id });
+  private async assetReady(id: string, asset: any) {
+    console.log('asset', asset);
+    const session = await this.sessionService.findOne({ assetId: id });
+
     if (!session) throw new HttpException(404, 'No session found');
 
+    const thumbnail = await generateThumbnail({
+      assetId: session.assetId,
+      playbackId: session.playbackId,
+    });
     let sessionParams = {
       name: session.name,
       start: session.start,
@@ -201,65 +210,17 @@ export class IndexController extends Controller {
       'playback.format': asset.videoSpec?.format ?? '',
       'playback.duration': asset.videoSpec?.duration ?? 0,
       processingStatus: ProcessingStatus.completed,
+      coverImage: session.coverImage ? session.coverImage : thumbnail,
     };
     await this.sessionService.update(session._id.toString(), sessionParams);
 
-    // Map session type to state type
-    let stateType: StateType;
-    switch (session.type) {
-      case SessionType.video:
-        stateType = StateType.video;
-        break;
-      case SessionType.animation:
-        stateType = StateType.animation;
-        break;
-      case SessionType.clip:
-        stateType = StateType.clip;
-        break;
-      case SessionType.editorClip:
-        stateType = StateType.editorClip;
-        break;
-      case SessionType.livestream:
-      default:
-        stateType = StateType.video;
-        break;
-    }
-
-    // Find or create state record
-    let state = await this.stateService
-      .findOne({
-        sessionId: session._id.toString(),
-        type: stateType,
-      })
-      .catch(() => null);
-
-    if (!state) {
-      // Create new state if it doesn't exist
-      state = await this.stateService.create({
-        sessionId: session._id.toString(),
-        organizationId: session.organizationId,
-        type: stateType,
-        status: StateStatus.pending,
-      });
-    }
-
-    await this.stateService.update(state._id.toString(), {
-      status: StateStatus.completed,
-    });
-
     if (
-      state.type !== StateType.animation &&
-      state.type !== StateType.editorClip
+      session.type !== SessionType.animation &&
+      session.type !== SessionType.editorClip
     ) {
       await this.sessionService.sessionTranscriptions({
         organizationId: session.organizationId.toString(),
         sessionId: session._id.toString(),
-      });
-    }
-    const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
-    if (clipEditor) {
-      await clipEditor.updateOne({
-        status: ClipEditorStatus.completed,
       });
     }
   }

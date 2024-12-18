@@ -88,10 +88,6 @@ export const config = {
     id: validatedEnv.REMOTION_ID,
     host: validatedEnv.REMOTION_BASE_URL,
     webhookSecretKey: validatedEnv.REMOTION_WEBHOOK_SECRET_FILE,
-    webhook: {
-      url: validatedEnv.REMOTION_WEBHOOK_URL,
-      secret: validatedEnv.REMOTION_WEBHOOK_SECRET_FILE,
-    },
   },
   redis: {
     host: validatedEnv.REDIS_HOST,

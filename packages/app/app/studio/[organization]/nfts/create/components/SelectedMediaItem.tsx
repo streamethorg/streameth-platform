@@ -6,7 +6,6 @@ import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { XCircle } from 'lucide-react';
 import React from 'react';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const SelectedMediaItem = ({
   video,
@@ -15,8 +14,6 @@ const SelectedMediaItem = ({
   handleRemoveSelected: (video: IExtendedSession) => void;
   video: IExtendedSession;
 }) => {
-  const generatedThumbnail = useGenerateThumbnail({ session: video });
-
   return (
     <div className="relative mt-4">
       <div
@@ -27,11 +24,7 @@ const SelectedMediaItem = ({
       </div>
 
       <div className="overflow-hidden">
-        {video.coverImage ? (
-          <Thumbnail imageUrl={video.coverImage} />
-        ) : (
-          <Thumbnail imageUrl={generatedThumbnail} />
-        )}
+        <Thumbnail imageUrl={video.coverImage} />
       </div>
       <div className="flex items-start justify-between">
         <CardHeader

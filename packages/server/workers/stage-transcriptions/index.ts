@@ -20,6 +20,7 @@ const consumer = async () => {
   queue.process(async (job) => {
     const { stageId } = job.data as StageTranscriptionsJob;
     console.log('Processing job', stageId);
+    
     return processStageTranscription(stageId);
   });
 };
@@ -32,6 +33,11 @@ const processStageTranscription = async (stageId: string) => {
   if (!stage?.streamSettings.playbackId) {
     throw new Error('Stage not found or no playbackId');
   }
+
+  if (!stage.streamSettings.isActive) {
+    throw new Error('Stage is not active');
+  }
+
   try {
     await transcribeAudio(
       buildPlaybackUrl(stage.streamSettings.playbackId),
@@ -137,6 +143,10 @@ async function transcribeAudio(
         .on('error', (error) => {
           console.error('FFmpeg error, attempting restart:', error);
           // Wait a bit before restarting
+          if (!stage.streamSettings.isActive) {
+            console.log('Stage is not active, skipping restart');
+            return;
+          }
           setTimeout(() => {
             if (lastSegmentTimestamp > 0) {
               startFFmpeg(lastSegmentTimestamp);

@@ -1,6 +1,5 @@
 import Player from '@/components/ui/Player';
 import SessionInfoBox from '@/components/sessions/SessionInfoBox';
-import Chat from '@/components/plugins/Chat';
 import { EventPageProps } from '@/lib/types';
 import { fetchAllSessions } from '@/lib/data';
 import { fetchEvent } from '@/lib/services/eventService';
@@ -72,7 +71,6 @@ export default async function Stage({ params }: EventPageProps) {
       </div>
       <div className="top-[54px] z-40 flex w-full flex-col gap-2 md:h-full lg:w-2/5">
         <UpcomingSession event={event} currentSession={currentSession} />
-        <Chat prevChatMessages={prevChatMessages} stageId={stage?._id} />
       </div>
     </div>
   );
