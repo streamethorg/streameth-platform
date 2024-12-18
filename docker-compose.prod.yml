@@ -19,8 +19,8 @@ x-common-environment: &common-environment
   THIRDWEB_SECRET_KEY_FILE: /run/secrets/thirdweb-secret-key
   SPACES_KEY_FILE: /run/secrets/spaces-key
   SPACES_SECRET_FILE: /run/secrets/spaces-secret
-  BUCKET_NAME: remotionlambda-useast2-w6uye0gtql
-  BUCKET_URL: https://streameth-prod.ams3.digitaloceanspaces.com
+  BUCKET_NAME: streameth-develop
+  BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
   LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/prod-livepeer-webhook-secret
   LIVEPEER_BASE_URL: https://livepeer.studio
   TELEGRAM_API_KEY_FILE: /run/secrets/telegram-api-key
@@ -42,6 +42,8 @@ x-common-environment: &common-environment
   REMOTION_BASE_URL: http://reel-creator:4000
   REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
   REMOTION_ID: pebs
+  REMOTION_SITE_NAME: https://streameth.org
+  REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
   PIPEDREAM_AUTH_TOKEN_FILE: /run/secrets/pipedream-auth-token
   DEVCON_UPLOAD_ENDPOINT_FILE: /run/secrets/devcon-upload-endpoint
   LOG_DIR: logs
@@ -50,10 +52,8 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
-  REMOTION_SITE_NAME: https://streameth.org
-  REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
-  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
-  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -110,7 +110,7 @@ services:
         - "traefik.http.services.prod-server.loadbalancer.server.port=8080"
         - "traefik.http.services.prod-server.loadbalancer.server.scheme=http"
       mode: replicated
-      replicas: 3
+      replicas: 1
     secrets: *common-secrets
 
   stage-transcriptions:
