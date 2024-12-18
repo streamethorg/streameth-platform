@@ -7,7 +7,7 @@ x-common-environment: &common-environment
   BASE_URL: https://prod.api.streameth.org
   PLAYER_URL: https://prod.player.streameth.org
   DB_PASSWORD_FILE: /run/secrets/db-password
-  DB_HOST: mongodb
+  DB_HOST: prod_mongodb
   DB_USER: root
   DB_NAME: streameth-prod
   JWT_SECRET_FILE: /run/secrets/jwt-secret
@@ -165,7 +165,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/streameth-prod --quiet
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       interval: 10s
       timeout: 10s
       retries: 5
