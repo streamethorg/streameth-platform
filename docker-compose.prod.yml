@@ -170,7 +170,7 @@ services:
       timeout: 10s
       retries: 5
       start_period: 40s
-    command: --auth --bind_ip_all
+    command: mongod --auth --bind_ip_all
     networks:
       - traefik-public
       - default
@@ -180,6 +180,9 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
+      placement:
+        constraints:
+          - node.role == manager
     secrets:
       - db-password
 
@@ -300,8 +303,4 @@ secrets:
   redis-password:
     external: true
   openai-api-key:
-    external: true
-  aws-access-key:
-    external: true
-  aws-secret-key:
     external: true
