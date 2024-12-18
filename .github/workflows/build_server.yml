@@ -168,7 +168,8 @@ jobs:
           echo "🚀 Deploying to VPS..."
           cat processed-compose.yml | ssh streameth@145.223.118.217 "
             set -e
-            echo '📝 Writing compose file...' && \
+            echo '📝 Creating directory and writing compose file...' && \
+            mkdir -p /home/streameth/streameth && \
             cat > /home/streameth/streameth/processed-compose.yml && \
             echo '🔑 Logging into GitHub Container Registry...' && \
             echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
@@ -206,7 +207,16 @@ jobs:
         if: github.ref == 'refs/heads/docker-prod'
         run: |
           if ! docker stack ls | grep -q "router"; then
-            docker stack deploy -c /home/streameth/streameth/docker-compose.router.yml router
+            echo "Creating router stack..."
+            ssh streameth@145.223.118.217 "
+              mkdir -p /home/streameth/streameth
+              if [ -f /home/streameth/streameth/docker-compose.router.yml ]; then
+                docker stack deploy -c /home/streameth/streameth/docker-compose.router.yml router
+              else
+                echo 'Warning: Router compose file not found'
+                exit 1
+              fi
+            "
           fi
 
       - name: Cleanup processed compose file
