@@ -149,6 +149,11 @@ jobs:
               if "networks" not in service:
                   service["networks"] = ["default"]
           
+          # Remove default network name to prevent conflicts
+          if "networks" in data and "default" in data["networks"]:
+              if "name" in data["networks"]["default"]:
+                  del data["networks"]["default"]["name"]
+          
           yaml.dump(data, sys.stdout, default_flow_style=False)
           EOF
           
@@ -168,20 +173,34 @@ jobs:
           echo "🚀 Deploying to VPS..."
           cat processed-compose.yml | ssh streameth@145.223.118.217 "
             set -e
-            echo '📝 Creating directory and writing compose file...' && \
-            mkdir -p /home/streameth/streameth && \
-            cat > /home/streameth/streameth/processed-compose.yml && \
-            echo '🔑 Logging into GitHub Container Registry...' && \
-            echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin && \
+            
+            # Setup directory if it doesn't exist
+            if [ ! -d /home/streameth/streameth ]; then
+              echo '📁 Creating directory structure...'
+              mkdir -p /home/streameth/streameth
+            fi
+            
+            echo '📝 Writing compose file...'
+            cat > /home/streameth/streameth/processed-compose.yml
+            
+            echo '🔑 Logging into GitHub Container Registry...'
+            echo '${{ secrets.TOKEN }}' | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             
             # Verify images
-            echo '🔍 Verifying images...' && \
+            echo '🔍 Verifying images...'
             for service in server stage-transcriptions session-transcriptions clips reel-creator; do
-              echo \"Pulling \${service}...\" && \
+              echo \"Pulling \${service}...\"
               docker pull ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA}
-            done && \
+            done
             
-            echo '🚀 Deploying stack...' && \
+            # Check if stack exists
+            if docker stack ls | grep -q \"${STACK_NAME}\"; then
+              echo '🔄 Updating existing stack...'
+            else
+              echo '🆕 Creating new stack...'
+            fi
+            
+            echo '🚀 Deploying stack...'
             docker stack deploy -c /home/streameth/streameth/processed-compose.yml --with-registry-auth $STACK_NAME
           "
           
@@ -192,12 +211,16 @@ jobs:
           echo "🔄 Updating services..."
           ssh streameth@145.223.118.217 "
             for service in server stage-transcriptions session-transcriptions clips reel-creator; do
-              echo \"Updating \${service}...\" && \
-              docker service update \
-                --with-registry-auth \
-                --image ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA} \
-                ${STACK_NAME}_\${service}
-              sleep 15
+              if docker service ls | grep -q \"${STACK_NAME}_\${service}\"; then
+                echo \"Updating \${service}...\"
+                docker service update \
+                  --with-registry-auth \
+                  --image ghcr.io/streamethorg/streameth-platform/\${service}:${ENV_TAG}-${SHA} \
+                  ${STACK_NAME}_\${service}
+                sleep 15
+              else
+                echo \"⚠️ Service \${service} not found in stack\"
+              fi
             done
           "
           
@@ -206,18 +229,20 @@ jobs:
       - name: Deploy router if needed
         if: github.ref == 'refs/heads/docker-prod'
         run: |
-          if ! docker stack ls | grep -q "router"; then
-            echo "Creating router stack..."
-            ssh streameth@145.223.118.217 "
-              mkdir -p /home/streameth/streameth
+          ssh streameth@145.223.118.217 "
+            if ! docker stack ls | grep -q \"router\"; then
+              echo \"🔄 Setting up router stack...\"
               if [ -f /home/streameth/streameth/docker-compose.router.yml ]; then
                 docker stack deploy -c /home/streameth/streameth/docker-compose.router.yml router
+                echo \"✅ Router stack deployed\"
               else
-                echo 'Warning: Router compose file not found'
+                echo \"⚠️ Warning: Router compose file not found at /home/streameth/streameth/docker-compose.router.yml\"
                 exit 1
               fi
-            "
-          fi
+            else
+              echo \"ℹ️ Router stack already exists\"
+            fi
+          "
 
       - name: Cleanup processed compose file
         if: always()
