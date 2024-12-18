@@ -105,9 +105,6 @@ jobs:
             echo "${{ secrets.DOCKER_CONTEXT_STAGING_B64 }}" | base64 -d > ~/.docker/contexts/streameth-staging.tar.gz
             docker context import streameth-staging ~/.docker/contexts/streameth-staging.tar.gz
             docker context use streameth-staging
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/server:staging-${{ github.sha }} streameth-staging_server
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/stage-transcriptions:staging-${{ github.sha }} streameth-staging_stage-transcriptions
-            docker service update --with-registry-auth --image ghcr.io/streamethorg/streameth-platform/session-transcriptions:staging-${{ github.sha }} streameth-staging_session-transcriptions
           fi
 
       - name: Install Python dependencies
