@@ -39,10 +39,10 @@ x-common-environment: &common-environment
   MAGIC_LINK_SECRET_FILE: /run/secrets/magic-link-secret
   MAGIC_LINK_EXPIRY: "30 days"
   WALLET_ADDRESSES: ""
-  REMOTION_BASE_URL: http://reel-creator:3000
+  REMOTION_BASE_URL: http://reel-creator:4000
   REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
   REMOTION_ID: pebs
-  REMOTION_SITE_NAME: rendering-engine
+  REMOTION_SITE_NAME: https://streameth.org
   REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
   PIPEDREAM_AUTH_TOKEN_FILE: /run/secrets/pipedream-auth-token
   DEVCON_UPLOAD_ENDPOINT_FILE: /run/secrets/devcon-upload-endpoint
@@ -52,8 +52,8 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
-  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
-  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
+  AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -163,6 +163,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
+      NODE_ENV: prod
       MONGO_INITDB_DATABASE: streameth-prod
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
@@ -172,19 +173,7 @@ services:
       timeout: 10s
       retries: 5
       start_period: 40s
-    command: mongod --auth --bind_ip_all
-    networks:
-      - traefik-public
-      - default
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-      placement:
-        constraints:
-          - node.role == manager
+    command: --auth
     secrets:
       - db-password
 
@@ -210,7 +199,7 @@ services:
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
       BUCKET_NAME: streameth-develop
-      BUCKET_URL: https://streameth-develop.ams3.cdn.digitaloceanspaces.com
+      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
       SPACES_SECRET_FILE: /run/secrets/spaces-secret
       SITE_NAME: rendering-engine
@@ -227,31 +216,22 @@ services:
         - "traefik.http.routers.reel-creator-prod.service=reel-creator-prod"
         - "traefik.http.routers.reel-creator-prod.tls=true"
         - "traefik.http.routers.reel-creator-prod.tls.certresolver=myresolver"
-        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=3000"
+        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=4000"
     secrets:
+      - aws-access-key
+      - aws-secret-key
       - remotion-webhook-secret
       - spaces-key
       - spaces-secret
-      - aws-access-key
-      - aws-secret-key
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-        mode: "non-blocking"
 
   clips:
     image: ghcr.io/streamethorg/streameth-platform/clips:prod
-    networks:
-      - traefik-public
-      - default
     depends_on:
       - mongodb
       - redis
-      - server
     environment: 
       <<: *common-environment
+      REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
     deploy:
       <<: *common-deploy
       mode: replicated
