@@ -1,8 +1,5 @@
 name: cleanup caches
 on:
-  pull_request:
-    types:
-      - closed
   workflow_dispatch:  # Adding manual trigger option
 
 jobs:
@@ -31,5 +28,5 @@ jobs:
           done
           echo "Done"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOKEN }}
           GH_REPO: ${{ github.repository }}
