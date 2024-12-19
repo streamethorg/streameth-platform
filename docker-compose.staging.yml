@@ -2,7 +2,7 @@ version: '3'
 
 # Define common configurations that can be reused
 x-common-environment: &common-environment
-  NODE_ENV: staging
+  NODE_ENV: development
   APP_PORT: 8080
   BASE_URL: https://staging.api.streameth.org
   PLAYER_URL: https://staging.player.streameth.org
@@ -87,8 +87,6 @@ x-common-secrets: &common-secrets
   - google-service-account-email
   - redis-password
   - openai-api-key
-  - aws-access-key
-  - aws-secret-key
 
 services:
   server:
@@ -168,7 +166,7 @@ services:
       AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
       BUCKET_NAME: streameth-develop
-      BUCKET_URL: https://streameth-develop.ams3.cdn.digitaloceanspaces.com
+      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
       SPACES_SECRET_FILE: /run/secrets/spaces-secret
       SITE_NAME: rendering-engine
@@ -190,6 +188,8 @@ services:
       - remotion-webhook-secret
       - spaces-key
       - spaces-secret
+      - aws-access-key
+      - aws-secret-key
 
   mongodb:
     image: mongo:latest
@@ -241,6 +241,7 @@ services:
       - redis
     environment: 
       <<: *common-environment
+      REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
     deploy:
       <<: *common-deploy
       mode: replicated
