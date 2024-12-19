@@ -103,7 +103,9 @@ services:
     networks:
       - traefik-public
       - default
-    environment: *common-environment
+    environment: 
+      NODE_ENV: staging
+      <<: *common-environment
     deploy:
       <<: *common-deploy
       labels:
@@ -196,6 +198,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
+      NODE_ENV: staging
       MONGO_INITDB_DATABASE: streameth-staging
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
