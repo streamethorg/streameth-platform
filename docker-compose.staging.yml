@@ -197,10 +197,9 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
-      DB_HOST: streameth-staging_mongodb
-      DB_USER: root
-      DB_NAME: streameth-staging
-      DB_PASSWORD_FILE: /run/secrets/db-password
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_DATABASE: streameth-staging
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       interval: 30s
