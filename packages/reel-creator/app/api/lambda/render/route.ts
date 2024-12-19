@@ -12,10 +12,10 @@ import {
   REGION,
   SITE_NAME,
   TIMEOUT,
-  WEBHOOK_SECRET,
-  WEBHOOK_URL,
-  AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY,
+  SERVER_WEBHOOK_SECRET_FILE,
+  SERVER_WEBHOOK_URL,
+  AWS_ACCESS_KEY_ID_FILE,
+  AWS_SECRET_ACCESS_KEY_FILE,
 } from "../../../../config.mjs";
 import { executeApi } from "../../../../helpers/api-response";
 import { RenderRequest } from "../../../../types/schema";
@@ -23,18 +23,11 @@ import { RenderRequest } from "../../../../types/schema";
 export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 	RenderRequest,
 	async (req, body) => {
-		// console.log('Debug environment variables:');
-		// console.log('AWS_ACCESS_KEY_ID:', AWS_ACCESS_KEY_ID ? 'defined' : 'undefined');
-		// console.log('AWS_SECRET_ACCESS_KEY:', AWS_SECRET_ACCESS_KEY ? 'defined' : 'undefined');
-		// console.log('WEBHOOK_URL:', WEBHOOK_URL);
-		// console.log('WEBHOOK_SECRET:', WEBHOOK_SECRET ? 'defined' : 'undefined');
-		// console.log('SITE_NAME:', SITE_NAME);
-
 		if (
-			!AWS_ACCESS_KEY_ID ||
-			!AWS_SECRET_ACCESS_KEY ||
-			!WEBHOOK_URL ||
-			!WEBHOOK_SECRET ||
+			!AWS_ACCESS_KEY_ID_FILE ||
+			!AWS_SECRET_ACCESS_KEY_FILE ||
+			!SERVER_WEBHOOK_URL ||
+			!SERVER_WEBHOOK_SECRET_FILE ||
 			!SITE_NAME
 		) {
 			throw new TypeError(
@@ -43,14 +36,14 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 		}
 
     // set REMOTION_AWS_SECRET_ACCESS_KEY env
-    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
+    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY_FILE;
     // set REMOTION_AWS_ACCESS_KEY_ID env
-    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
+    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID_FILE;
 
 		// Add webhook configuration
 		const webhook = {
-			url: WEBHOOK_URL,
-			secret: WEBHOOK_SECRET,
+			url: SERVER_WEBHOOK_URL,
+			secret: SERVER_WEBHOOK_SECRET_FILE,
 			customData: {
 				compositionId: body.id, // Add custom data here.
 			},
@@ -76,7 +69,7 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 			webhook,
 		});
 
-		console.log("secrets", AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, WEBHOOK_SECRET, WEBHOOK_URL, SITE_NAME);
+		console.log("secrets", AWS_ACCESS_KEY_ID_FILE, AWS_SECRET_ACCESS_KEY_FILE, SERVER_WEBHOOK_SECRET_FILE, SERVER_WEBHOOK_URL, SITE_NAME);
 
 		return result;
 	},

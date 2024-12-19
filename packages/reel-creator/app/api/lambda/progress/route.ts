@@ -11,28 +11,20 @@ import {
   REGION,
   SITE_NAME,
   TIMEOUT,
-  WEBHOOK_SECRET,
-  WEBHOOK_URL,
+  SERVER_WEBHOOK_SECRET_FILE,
+  SERVER_WEBHOOK_URL,
+  AWS_ACCESS_KEY_ID_FILE,
+  AWS_SECRET_ACCESS_KEY_FILE,
 } from "../../../../config.mjs";
-import * as fs from 'fs';
-
-// Read AWS credentials from secret files
-const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID_FILE ? 
-  fs.readFileSync(process.env.AWS_ACCESS_KEY_ID_FILE, 'utf8').trim() : 
-  process.env.AWS_ACCESS_KEY_ID;
-
-const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY_FILE ? 
-  fs.readFileSync(process.env.AWS_SECRET_ACCESS_KEY_FILE, 'utf8').trim() : 
-  process.env.AWS_SECRET_ACCESS_KEY;
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
   async (req, body) => {
     if (
-      !AWS_ACCESS_KEY_ID ||
-      !AWS_SECRET_ACCESS_KEY ||
-      !WEBHOOK_URL ||
-      !WEBHOOK_SECRET ||
+      !AWS_ACCESS_KEY_ID_FILE ||
+      !AWS_SECRET_ACCESS_KEY_FILE ||
+      !SERVER_WEBHOOK_URL ||
+      !SERVER_WEBHOOK_SECRET_FILE ||
       !SITE_NAME
     ) {
       throw new TypeError(
@@ -41,9 +33,9 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
     }
 
     // set REMOTION_AWS_SECRET_ACCESS_KEY env
-    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
+    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY_FILE;
     // set REMOTION_AWS_ACCESS_KEY_ID env
-    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
+    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID_FILE;
 
     const renderProgress = await getRenderProgress({
       bucketName: body.bucketName,

@@ -1,11 +1,5 @@
 import { VERSION } from "remotion/version";
 
-console.log('Raw environment variables in config.mjs:');
-console.log('SERVER_WEBHOOK_URL:', process.env.SERVER_WEBHOOK_URL);
-console.log('SERVER_WEBHOOK_SECRET_FILE:', process.env.SERVER_WEBHOOK_SECRET_FILE);
-console.log('AWS_ACCESS_KEY_ID:', process.env.AWS_ACCESS_KEY_ID);
-console.log('AWS_SECRET_ACCESS_KEY:', process.env.AWS_SECRET_ACCESS_KEY);
-
 /**
  * Use autocomplete to get a list of available regions.
  * @type {import('@remotion/lambda').AwsRegion}
