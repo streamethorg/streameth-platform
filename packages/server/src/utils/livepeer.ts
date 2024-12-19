@@ -13,7 +13,6 @@ import State from '@models/state.model';
 import SessionService from '@services/session.service';
 import StateService from '@services/state.service';
 import { Livepeer } from 'livepeer';
-import { Session, Stream } from 'livepeer/dist/models/components';
 import fetch from 'node-fetch';
 import youtubedl from 'youtube-dl-exec';
 import { createEventVideoById } from './firebase';
@@ -22,6 +21,8 @@ import { refreshAccessToken } from './oauth';
 import pulse from './pulse.cron';
 import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
+import { Stream, Session } from 'livepeer/models/components';
+
 const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
   apiKey: secretKey,
@@ -276,28 +277,41 @@ export const getStreamRecordings = async (streamId: string): Promise<any> => {
 
 export const createMultiStream = async (data: IMultiStream): Promise<void> => {
   try {
-    const response = await livepeer.stream.createMultistreamTarget(
-      data.streamId,
+    const response = await fetch(
+      `https://livepeer.studio/api/stream/${data.streamId}/create-multistream-target`,
       {
-        spec: {
-          name: data.name,
-          url: data.targetURL + '/' + data.targetStreamKey,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.LIVEPEER_API_KEY}`,
+          'Content-Type': 'application/json',
         },
-        profile: 'source',
+        body: JSON.stringify({
+          profile: 'source',
+          spec: {
+            name: data.name,
+            url: data.targetURL + '/' + data.targetStreamKey,
+          },
+        }),
       },
     );
-    const multistream = JSON.parse(response.rawResponse.data.toString());
+
+    if (!response.ok) {
+      throw new HttpException(response.status, 'Error creating multistream');
+    }
+
+    const multistream = await response.json();
+
+    console.log(multistream);
+
     const stage = await Stage.findOne({
       'streamSettings.streamId': data.streamId,
     });
+
     await stage.updateOne({
       $push: {
         'streamSettings.targets': {
           id: multistream.id,
           name: multistream.name,
-          socialId: data.socialId ?? '',
-          socialType: data.socialType ?? '',
-          broadcastId: data.broadcastId ?? '',
         },
       },
     });
@@ -379,8 +393,8 @@ export const getSessionMetrics = async (
   playbackId: string,
 ): Promise<{ viewCount: number; playTimeMins: number }> => {
   try {
-    const metrics = await livepeer.metrics.getPublicTotalViews(playbackId);
-    if (!metrics.object) {
+    const metrics = await livepeer.metrics.getPublicViewership(playbackId);
+    if (!metrics.rawResponse.ok) {
       return {
         viewCount: 0,
         playTimeMins: 0,

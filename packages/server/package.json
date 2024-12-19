@@ -40,7 +40,7 @@
     "http-proxy-middleware": "^3.0.3",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
-    "livepeer": "3.0.2",
+    "livepeer": "3.5.0",
     "mongoose": "7.6.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",

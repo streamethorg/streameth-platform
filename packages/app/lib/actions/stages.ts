@@ -69,7 +69,6 @@ export const createMultistreamAction = async (
       name,
       targetURL: url,
       targetStreamKey: streamKey,
-
       organizationId,
     });
     revalidatePath('/studio');
