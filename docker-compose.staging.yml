@@ -20,7 +20,7 @@ x-common-environment: &common-environment
   SPACES_KEY_FILE: /run/secrets/spaces-key
   SPACES_SECRET_FILE: /run/secrets/spaces-secret
   BUCKET_NAME: streameth-develop
-  BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+  BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
   LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/livepeer-webhook-secret
   LIVEPEER_BASE_URL: https://livepeer.studio
   TELEGRAM_API_KEY_FILE: /run/secrets/telegram-api-key
@@ -53,8 +53,8 @@ x-common-environment: &common-environment
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   # AWS Configuration read from GitHub Actions secrets
-  AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
-  AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
+  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -165,10 +165,10 @@ services:
       NODE_ENV: development
       SERVER_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
-      AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
-      AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
+      AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+      AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
       BUCKET_NAME: streameth-develop
-      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
+      BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
       SPACES_SECRET_FILE: /run/secrets/spaces-secret
       SITE_NAME: rendering-engine
@@ -187,11 +187,11 @@ services:
         - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
         - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
     secrets:
+      - aws-access-key
+      - aws-secret-key
       - remotion-webhook-secret
       - spaces-key
       - spaces-secret
-      - aws-access-key
-      - aws-secret-key
 
   mongodb:
     image: mongo:latest
