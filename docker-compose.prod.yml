@@ -198,7 +198,6 @@ services:
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
-      SITE_NAME: prod
       BUCKET_NAME: streameth-develop
       BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
