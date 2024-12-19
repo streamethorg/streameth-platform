@@ -47,8 +47,6 @@ COPY --from=builder /app/package.json /app/yarn.lock ./
 COPY --from=builder /app/packages/server/package.json ./packages/server/
 COPY --from=builder /app/packages/server/dist ./packages/server/dist
 
-ENV NODE_ENV=production
-
 # Install only production dependencies
 RUN yarn install --frozen-lockfile --production
 

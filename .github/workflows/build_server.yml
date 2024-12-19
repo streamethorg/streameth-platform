@@ -22,7 +22,7 @@ jobs:
           else
             echo "ENV_TAG=staging" >> $GITHUB_OUTPUT
             echo "COMPOSE_FILE=docker-compose.staging.yml" >> $GITHUB_OUTPUT
-            echo "STACK_NAME=streameth-staging" >> $GITHUB_OUTPUT
+            echo "STACK_NAME=staging" >> $GITHUB_OUTPUT
           fi
   build-and-push-images:
     needs: prepare-env
