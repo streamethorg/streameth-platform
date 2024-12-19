@@ -198,7 +198,6 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
-      NODE_ENV: development
       DB_HOST: streameth-staging_mongodb
       DB_USER: root
       DB_NAME: streameth-staging
