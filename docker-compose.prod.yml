@@ -52,8 +52,8 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
-  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
+  AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -86,6 +86,8 @@ x-common-secrets: &common-secrets
   - google-service-account-email
   - redis-password
   - openai-api-key
+  - aws-access-key
+  - aws-secret-key
 
 services:
   server:
@@ -161,6 +163,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
+      NODE_ENV: prod
       MONGO_INITDB_DATABASE: streameth-prod
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
@@ -196,6 +199,12 @@ services:
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
       SITE_NAME: prod
+      BUCKET_NAME: streameth-develop
+      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
+      SPACES_KEY_FILE: /run/secrets/spaces-key
+      SPACES_SECRET_FILE: /run/secrets/spaces-secret
+      SITE_NAME: rendering-engine
+      PORT: 3000
     networks:
       - traefik-public
       - default
@@ -213,6 +222,8 @@ services:
       - aws-access-key
       - aws-secret-key
       - remotion-webhook-secret
+      - spaces-key
+      - spaces-secret
 
   clips:
     image: ghcr.io/streamethorg/streameth-platform/clips:prod

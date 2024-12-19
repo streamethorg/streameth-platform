@@ -87,6 +87,8 @@ x-common-secrets: &common-secrets
   - google-service-account-email
   - redis-password
   - openai-api-key
+  - aws-access-key
+  - aws-secret-key
 
 services:
   server:
@@ -196,6 +198,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
+      NODE_ENV: development
       MONGO_INITDB_DATABASE: streameth-staging
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
