@@ -52,8 +52,8 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
-  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -86,6 +86,8 @@ x-common-secrets: &common-secrets
   - google-service-account-email
   - redis-password
   - openai-api-key
+  - aws-access-key
+  - aws-secret-key
 
 services:
   server:
@@ -207,7 +209,12 @@ services:
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
-      SITE_NAME: prod
+      BUCKET_NAME: streameth-develop
+      BUCKET_URL: https://streameth-develop.ams3.cdn.digitaloceanspaces.com
+      SPACES_KEY_FILE: /run/secrets/spaces-key
+      SPACES_SECRET_FILE: /run/secrets/spaces-secret
+      SITE_NAME: rendering-engine
+      PORT: 3000
     networks:
       - traefik-public
       - default
@@ -220,20 +227,31 @@ services:
         - "traefik.http.routers.reel-creator-prod.service=reel-creator-prod"
         - "traefik.http.routers.reel-creator-prod.tls=true"
         - "traefik.http.routers.reel-creator-prod.tls.certresolver=myresolver"
-        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=4000"
+        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=3000"
     secrets:
+      - remotion-webhook-secret
+      - spaces-key
+      - spaces-secret
       - aws-access-key
       - aws-secret-key
-      - remotion-webhook-secret
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        mode: "non-blocking"
 
   clips:
     image: ghcr.io/streamethorg/streameth-platform/clips:prod
+    networks:
+      - traefik-public
+      - default
     depends_on:
       - mongodb
       - redis
+      - server
     environment: 
       <<: *common-environment
-      REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
     deploy:
       <<: *common-deploy
       mode: replicated
@@ -303,4 +321,8 @@ secrets:
   redis-password:
     external: true
   openai-api-key:
+    external: true
+  aws-access-key:
+    external: true
+  aws-secret-key:
     external: true
