@@ -8,7 +8,7 @@ console.log('Database:', name);
 console.log('Password length:', password?.length);
 
 export const dbConnection = {
-  url: `mongodb://${user}:${encodeURIComponent(password)}@${host}/${name}?authSource=admin&retryWrites=true&w=majority`,
+  url: `mongodb://${user}:${password}@${host}/${name}?authSource=admin&retryWrites=true&w=majority`,
   // For local development use this url
   // url: `mongodb+srv://${user}:${password}@${host}/${name}?authSource=admin`,
   options: {
