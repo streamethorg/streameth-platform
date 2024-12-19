@@ -2,7 +2,7 @@ version: '3'
 
 # Define common configurations that can be reused
 x-common-environment: &common-environment
-  NODE_ENV: development
+  NODE_ENV: staging
   APP_PORT: 8080
   BASE_URL: https://staging.api.streameth.org
   PLAYER_URL: https://staging.player.streameth.org
@@ -162,7 +162,6 @@ services:
   reel-creator:
     image: ghcr.io/streamethorg/streameth-platform/reel-creator:staging
     environment:
-      NODE_ENV: development
       SERVER_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
