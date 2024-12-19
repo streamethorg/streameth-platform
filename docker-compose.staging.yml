@@ -7,7 +7,7 @@ x-common-environment: &common-environment
   BASE_URL: https://staging.api.streameth.org
   PLAYER_URL: https://staging.player.streameth.org
   DB_PASSWORD_FILE: /run/secrets/db-password
-  DB_HOST: streameth-staging_mongodb
+  DB_HOST: staging_mongodb
   DB_USER: root
   DB_NAME: streameth-staging
   JWT_SECRET_FILE: /run/secrets/jwt-secret
