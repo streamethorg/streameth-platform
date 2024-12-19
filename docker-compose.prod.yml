@@ -19,8 +19,8 @@ x-common-environment: &common-environment
   THIRDWEB_SECRET_KEY_FILE: /run/secrets/thirdweb-secret-key
   SPACES_KEY_FILE: /run/secrets/spaces-key
   SPACES_SECRET_FILE: /run/secrets/spaces-secret
-  BUCKET_NAME: streameth-develop
-  BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+  BUCKET_NAME: streameth-production
+  BUCKET_URL: https://streameth-production.ams3.digitaloceanspaces.com
   LIVEPEER_WEBHOOK_SECRET_FILE: /run/secrets/prod-livepeer-webhook-secret
   LIVEPEER_BASE_URL: https://livepeer.studio
   TELEGRAM_API_KEY_FILE: /run/secrets/telegram-api-key
