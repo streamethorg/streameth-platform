@@ -27,8 +27,15 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
       !WEBHOOK_SECRET ||
       !SITE_NAME
     ) {
+      console.error('Missing required environment variables:', {
+        hasAwsKeyId: !!AWS_ACCESS_KEY_ID,
+        hasAwsSecretKey: !!AWS_SECRET_ACCESS_KEY,
+        hasWebhookUrl: !!WEBHOOK_URL,
+        hasWebhookSecret: !!WEBHOOK_SECRET,
+        hasSiteName: !!SITE_NAME
+      });
       throw new TypeError(
-        "Set up Remotion Lambda to render videos. See the README.md for how to do so."
+        "Missing required environment variables for Remotion Lambda. Check the logs for details."
       );
     }
 

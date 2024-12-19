@@ -8,14 +8,23 @@ import * as fs from 'fs';
 
 
 const readSecretFile = (path) => {
+  // Add debug logging
+  console.log('Attempting to read secret file, path:', path);
+  
+  if (!path) {
+    console.warn('No path provided for secret file');
+    return undefined;
+  }
+
   if (process.env.NODE_ENV === 'development') {
     return path;
   }
+
   try {
     return fs.readFileSync(path, 'utf8').trim();
   } catch (error) {
     console.error(`Error reading secret file ${path}:`, error);
-    throw error;
+    return undefined;
   }
 };
 
