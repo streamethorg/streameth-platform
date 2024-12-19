@@ -22,7 +22,7 @@ class App {
 
   constructor() {
     this.app = express();
-    this.env = config.appEnv || 'development';
+    this.env = config.appEnv;
     this.port = config.port || 3400;
 
     this.connectToDatabase();
