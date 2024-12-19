@@ -168,7 +168,7 @@ services:
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
       BUCKET_NAME: streameth-develop
-      BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
       SPACES_SECRET_FILE: /run/secrets/spaces-secret
       SITE_NAME: rendering-engine
