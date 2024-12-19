@@ -11,20 +11,20 @@ import {
   REGION,
   SITE_NAME,
   TIMEOUT,
-  SERVER_WEBHOOK_SECRET_FILE,
-  SERVER_WEBHOOK_URL,
-  AWS_ACCESS_KEY_ID_FILE,
-  AWS_SECRET_ACCESS_KEY_FILE,
+  WEBHOOK_SECRET,
+  WEBHOOK_URL,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
 } from "../../../../config.mjs";
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
   async (req, body) => {
     if (
-      !AWS_ACCESS_KEY_ID_FILE ||
-      !AWS_SECRET_ACCESS_KEY_FILE ||
-      !SERVER_WEBHOOK_URL ||
-      !SERVER_WEBHOOK_SECRET_FILE ||
+      !AWS_ACCESS_KEY_ID ||
+      !AWS_SECRET_ACCESS_KEY ||
+      !WEBHOOK_URL ||
+      !WEBHOOK_SECRET ||
       !SITE_NAME
     ) {
       throw new TypeError(
@@ -33,9 +33,9 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
     }
 
     // set REMOTION_AWS_SECRET_ACCESS_KEY env
-    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY_FILE;
+    process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
     // set REMOTION_AWS_ACCESS_KEY_ID env
-    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID_FILE;
+    process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
 
     const renderProgress = await getRenderProgress({
       bucketName: body.bucketName,
