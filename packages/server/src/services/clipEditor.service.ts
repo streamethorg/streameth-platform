@@ -131,7 +131,6 @@ export class ClipEditorService extends SessionService {
 
     const data = await response.json();
 
-
     await ClipEditor.findByIdAndUpdate(
       clipEditor._id,
       {
