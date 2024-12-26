@@ -181,11 +181,11 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik-public"
-        - "traefik.http.routers.reel-creator-staging.rule=Host(`staging.remotion.streameth.org`)"
+        - "traefik.http.routers.reel-creator-staging.rule=Host(`staging.api.streameth.org`)"
+        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
         - "traefik.http.routers.reel-creator-staging.service=reel-creator-staging"
         - "traefik.http.routers.reel-creator-staging.tls=true"
         - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
-        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
     secrets:
       - aws-access-key
       - aws-secret-key
