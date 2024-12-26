@@ -23,13 +23,6 @@ import { RenderRequest } from "../../../../types/schema";
 export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 	RenderRequest,
 	async (req, body) => {
-		// console.log('Debug environment variables:');
-		// console.log('AWS_ACCESS_KEY_ID:', AWS_ACCESS_KEY_ID ? 'defined' : 'undefined');
-		// console.log('AWS_SECRET_ACCESS_KEY:', AWS_SECRET_ACCESS_KEY ? 'defined' : 'undefined');
-		// console.log('WEBHOOK_URL:', WEBHOOK_URL);
-		// console.log('WEBHOOK_SECRET:', WEBHOOK_SECRET ? 'defined' : 'undefined');
-		// console.log('SITE_NAME:', SITE_NAME);
-
 		if (
 			!AWS_ACCESS_KEY_ID ||
 			!AWS_SECRET_ACCESS_KEY ||

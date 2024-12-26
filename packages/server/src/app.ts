@@ -15,6 +15,7 @@ import { RegisterRoutes } from './routes/routes';
 import * as swaggerDocument from './swagger/swagger.json';
 import { logger } from './utils/logger';
 import ErrorMiddleware from './middlewares/error.middleware';
+
 class App {
   public app: express.Application;
   private env: string;
@@ -22,7 +23,7 @@ class App {
 
   constructor() {
     this.app = express();
-    this.env = config.appEnv || 'development';
+    this.env = config.appEnv;
     this.port = config.port || 3400;
 
     this.connectToDatabase();
@@ -39,7 +40,7 @@ class App {
   listen() {
     this.app.listen(this.port, () => {
       logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
+      logger.info(`======= ENV: ${this.env} ========`);
       logger.info(`🚀 App listening on the port ${this.port}`);
       logger.info(`=================================`);
     });
@@ -57,7 +58,7 @@ class App {
   getServer() {
     return this.app;
   }
-
+  
   private async connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);

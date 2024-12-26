@@ -12,7 +12,7 @@ x-common-environment: &common-environment
   DB_NAME: streameth-prod
   JWT_SECRET_FILE: /run/secrets/jwt-secret
   JWT_EXPIRY: 30d
-  CORS_ORIGIN: "[]"
+  CORS_ORIGIN: "*"
   CORS_CREDENTIALS: "true"
   CORS_PROXY_URL: ""
   LIVEPEER_API_KEY_FILE: /run/secrets/prod-livepeer-api-key
@@ -43,7 +43,7 @@ x-common-environment: &common-environment
   REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
   REMOTION_ID: pebs
   REMOTION_SITE_NAME: https://streameth.org
-  REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
+  REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/webhook/remotion
   PIPEDREAM_AUTH_TOKEN_FILE: /run/secrets/pipedream-auth-token
   DEVCON_UPLOAD_ENDPOINT_FILE: /run/secrets/devcon-upload-endpoint
   LOG_DIR: logs
@@ -212,11 +212,11 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik-public"
-        - "traefik.http.routers.reel-creator-prod.rule=Host(`prod.remotion.streameth.org`)"
+        - "traefik.http.routers.reel-creator-prod.rule=Host(`prod.api.streameth.org`)"
         - "traefik.http.routers.reel-creator-prod.service=reel-creator-prod"
         - "traefik.http.routers.reel-creator-prod.tls=true"
         - "traefik.http.routers.reel-creator-prod.tls.certresolver=myresolver"
-        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=4000"
+        - "traefik.http.services.reel-creator-prod.loadbalancer.server.port=3000"
     secrets:
       - aws-access-key
       - aws-secret-key
@@ -231,7 +231,6 @@ services:
       - redis
     environment: 
       <<: *common-environment
-      REMOTION_WEBHOOK_URL: https://prod.api.streameth.org/remotion-webhook
     deploy:
       <<: *common-deploy
       mode: replicated

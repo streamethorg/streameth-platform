@@ -13,17 +13,9 @@ import {
   TIMEOUT,
   WEBHOOK_SECRET,
   WEBHOOK_URL,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
 } from "../../../../config.mjs";
-import * as fs from 'fs';
-
-// Read AWS credentials from secret files
-const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID_FILE ? 
-  fs.readFileSync(process.env.AWS_ACCESS_KEY_ID_FILE, 'utf8').trim() : 
-  process.env.AWS_ACCESS_KEY_ID;
-
-const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY_FILE ? 
-  fs.readFileSync(process.env.AWS_SECRET_ACCESS_KEY_FILE, 'utf8').trim() : 
-  process.env.AWS_SECRET_ACCESS_KEY;
 
 export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
   ProgressRequest,
@@ -35,8 +27,15 @@ export const POST = executeApi<ProgressResponse, typeof ProgressRequest>(
       !WEBHOOK_SECRET ||
       !SITE_NAME
     ) {
+      console.error('Missing required environment variables:', {
+        hasAwsKeyId: !!AWS_ACCESS_KEY_ID,
+        hasAwsSecretKey: !!AWS_SECRET_ACCESS_KEY,
+        hasWebhookUrl: !!WEBHOOK_URL,
+        hasWebhookSecret: !!WEBHOOK_SECRET,
+        hasSiteName: !!SITE_NAME
+      });
       throw new TypeError(
-        "Set up Remotion Lambda to render videos. See the README.md for how to do so."
+        "Missing required environment variables for Remotion Lambda. Check the logs for details."
       );
     }
 

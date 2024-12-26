@@ -7,7 +7,7 @@ x-common-environment: &common-environment
   BASE_URL: https://staging.api.streameth.org
   PLAYER_URL: https://staging.player.streameth.org
   DB_PASSWORD_FILE: /run/secrets/db-password
-  DB_HOST: streameth-staging_mongodb
+  DB_HOST: staging_mongodb
   DB_USER: root
   DB_NAME: streameth-staging
   JWT_SECRET_FILE: /run/secrets/jwt-secret
@@ -43,7 +43,7 @@ x-common-environment: &common-environment
   REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
   REMOTION_ID: pebs
   REMOTION_SITE_NAME: rendering-engine
-  REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
+  REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
   PIPEDREAM_AUTH_TOKEN_FILE: /run/secrets/pipedream-auth-token
   DEVCON_UPLOAD_ENDPOINT_FILE: /run/secrets/devcon-upload-endpoint
   LOG_DIR: logs
@@ -53,8 +53,8 @@ x-common-environment: &common-environment
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   # AWS Configuration read from GitHub Actions secrets
-  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
-  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -104,7 +104,9 @@ services:
     networks:
       - traefik-public
       - default
-    environment: *common-environment
+    environment: 
+      NODE_ENV: staging
+      <<: *common-environment
     deploy:
       <<: *common-deploy
       labels:
@@ -162,13 +164,13 @@ services:
   reel-creator:
     image: ghcr.io/streamethorg/streameth-platform/reel-creator:staging
     environment:
-      NODE_ENV: development
+      NODE_ENV: staging
       SERVER_WEBHOOK_URL: https://staging.api.streameth.org/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
       BUCKET_NAME: streameth-develop
-      BUCKET_URL: https://streameth-staging.ams3.digitaloceanspaces.com
+      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
       SPACES_SECRET_FILE: /run/secrets/spaces-secret
       SITE_NAME: rendering-engine
@@ -181,11 +183,11 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik-public"
-        - "traefik.http.routers.reel-creator-staging.rule=Host(`staging.remotion.streameth.org`)"
+        - "traefik.http.routers.reel-creator-staging.rule=Host(`staging.api.streameth.org`)"
+        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
         - "traefik.http.routers.reel-creator-staging.service=reel-creator-staging"
         - "traefik.http.routers.reel-creator-staging.tls=true"
         - "traefik.http.routers.reel-creator-staging.tls.certresolver=myresolver"
-        - "traefik.http.services.reel-creator-staging.loadbalancer.server.port=3000"
     secrets:
       - aws-access-key
       - aws-secret-key
@@ -198,7 +200,6 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
-      NODE_ENV: development
       MONGO_INITDB_DATABASE: streameth-staging
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
@@ -244,7 +245,6 @@ services:
       - redis
     environment: 
       <<: *common-environment
-      REMOTION_WEBHOOK_URL: https://staging.api.streameth.org/remotion-webhook
     deploy:
       <<: *common-deploy
       mode: replicated
