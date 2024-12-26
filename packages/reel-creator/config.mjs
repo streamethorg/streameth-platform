@@ -36,6 +36,6 @@ export const DISK = 10240;
 export const TIMEOUT = 900;
 
 export const WEBHOOK_URL = process.env.SERVER_WEBHOOK_URL;
-export const WEBHOOK_SECRET = process.env.SERVER_WEBHOOK_SECRET_FILE;
-export const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
-export const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;
+export const WEBHOOK_SECRET = readSecretFile(process.env.SERVER_WEBHOOK_SECRET_FILE);
+export const AWS_ACCESS_KEY_ID = readSecretFile(process.env.AWS_ACCESS_KEY_ID_FILE);
+export const AWS_SECRET_ACCESS_KEY = readSecretFile(process.env.AWS_SECRET_ACCESS_KEY_FILE);
