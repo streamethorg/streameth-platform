@@ -42,6 +42,7 @@ class App {
       logger.info(`======= ENV: ${this.env} ========`);
       logger.info(`🚀 App listening on the port ${this.port}`);
       logger.info(`=================================`);
+      this.logRemotionWebhookSecret();
     });
   }
 
@@ -57,6 +58,11 @@ class App {
   getServer() {
     return this.app;
   }
+
+  private logRemotionWebhookSecret() {
+    logger.info(`Remotion webhook secret: ${process.env.SERVER_WEBHOOK_SECRET_FILE}`);
+  }
+  
 
   private async connectToDatabase() {
     if (this.env !== 'production') {
