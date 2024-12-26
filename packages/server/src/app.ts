@@ -15,7 +15,6 @@ import { RegisterRoutes } from './routes/routes';
 import * as swaggerDocument from './swagger/swagger.json';
 import { logger } from './utils/logger';
 import ErrorMiddleware from './middlewares/error.middleware';
-import * as fs from 'fs';
 
 class App {
   public app: express.Application;
@@ -44,7 +43,6 @@ class App {
       logger.info(`======= ENV: ${this.env} ========`);
       logger.info(`🚀 App listening on the port ${this.port}`);
       logger.info(`=================================`);
-      this.logRemotionWebhookSecret();
     });
   }
 
@@ -60,32 +58,7 @@ class App {
   getServer() {
     return this.app;
   }
-  private readSecretFile = (path) => {
-    // Add debug logging
-    console.log('Attempting to read secret file, path:', path);
-    
-    if (!path) {
-      console.warn('No path provided for secret file');
-      return undefined;
-    }
   
-    if (process.env.NODE_ENV === 'development') {
-      return path;
-    }
-  
-    try {
-      return fs.readFileSync(path, 'utf8').trim();
-    } catch (error) {
-      console.error(`Error reading secret file ${path}:`, error);
-      return undefined;
-    }
-  };
-
-  private logRemotionWebhookSecret() {
-    logger.info(`Remotion webhook secret: ${this.readSecretFile(process.env.SERVER_WEBHOOK_SECRET_FILE)}`);
-  }
-  
-
   private async connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);
