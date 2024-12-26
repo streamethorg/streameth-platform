@@ -36,9 +36,16 @@ export default class StorageService {
       ACL: 'public-read',
     };
     try {
-      const command = new PutObjectCommand(params);
-      await this.s3Client.send(command);
-      return `https://streameth-develop.ams3.digitaloceanspaces.com/${filename}`;
+      if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'staging') {
+        const command = new PutObjectCommand(params);
+        await this.s3Client.send(command);
+        return `https://streameth-develop.ams3.digitaloceanspaces.com/${filename}`;
+      }
+      else {
+        const command = new PutObjectCommand(params);
+        await this.s3Client.send(command);
+        return `https://streameth-production.ams3.digitaloceanspaces.com/${filename}`;
+      }
     } catch (error) {
       console.log('Error uploading file to S3:', error);
       throw error;

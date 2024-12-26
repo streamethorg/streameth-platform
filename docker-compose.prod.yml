@@ -39,7 +39,7 @@ x-common-environment: &common-environment
   MAGIC_LINK_SECRET_FILE: /run/secrets/magic-link-secret
   MAGIC_LINK_EXPIRY: "30 days"
   WALLET_ADDRESSES: ""
-  REMOTION_BASE_URL: http://reel-creator:4000
+  REMOTION_BASE_URL: http://reel-creator:3000
   REMOTION_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
   REMOTION_ID: pebs
   REMOTION_SITE_NAME: https://streameth.org
@@ -198,8 +198,8 @@ services:
       SERVER_WEBHOOK_SECRET_FILE: /run/secrets/remotion-webhook-secret
       AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
       AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
-      BUCKET_NAME: streameth-develop
-      BUCKET_URL: https://streameth-develop.ams3.digitaloceanspaces.com
+      BUCKET_NAME: streameth-production
+      BUCKET_URL: https://streameth-production.ams3.digitaloceanspaces.com
       SPACES_KEY_FILE: /run/secrets/spaces-key
       SPACES_SECRET_FILE: /run/secrets/spaces-secret
       SITE_NAME: rendering-engine
