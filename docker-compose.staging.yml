@@ -243,8 +243,7 @@ services:
     depends_on:
       - mongodb
       - redis
-    environment: 
-      <<: *common-environment
+    environment: *common-environment
     deploy:
       <<: *common-deploy
       mode: replicated
