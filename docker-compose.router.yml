@@ -31,7 +31,7 @@ services:
       # CORS middleware for staging
       - "traefik.http.routers.to-staging.middlewares=to-staging-cors"
       - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolalloworiginlist=*"
-      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolalloworiginlist=http://localhost:3000,http://localhost,https://staging.api.streameth.org"
+      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolalloworiginlist=http://localhost:3000,http://localhost,https://staging.api.streameth.org,https://streameth-test.vercel.app"
       - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolallowheaders=*"
       - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
       - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolmaxage=100"
