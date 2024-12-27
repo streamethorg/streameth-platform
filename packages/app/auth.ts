@@ -15,13 +15,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-			authorization: { params: { access_type: "offline", prompt: "consent" } },
+			authorization: { 
+				params: { 
+					access_type: "offline", 
+					prompt: "consent", 
+					scope: "email profile",
+					response_type: "code",
+					include_granted_scopes: true
+				} 
+			},
 		}),
 		CredentialsProvider({
 			name: "Credentials",
 			credentials: {
 				email: { label: "Email", type: "email" },
-				token: { label: "Token", type: "text" },
+					token: { label: "Token", type: "text" },
 			},
 			async authorize(credentials) {
 				const response = await fetch(`${apiUrl()}/auth/login`, {
@@ -55,42 +63,70 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		verifyRequest: "/auth/magic-link",
 	},
 	callbacks: {
-		async jwt({ token, account, user }) {
-			if (account?.provider === "credentials" && user) {
-				const userWithToken = user as { token: string }; // Type assertion
-				token.access_token = userWithToken.token;
+		async signIn({ user, account, profile }) {
+			if (account?.provider === "google" && profile?.email) {
+				// Store email for later use in jwt callback
+				user.email = profile.email;
+				return true;
 			}
-			if (account && account?.provider === "google") {
-				// Exchange the NextAuth token for backend JWT
-				const response = await fetch(`${apiUrl()}/auth/login`, {
-					method: "POST",
-					credentials: "include",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						token: account.id_token,
-						type: "google",
-					}),
-				});
+			return true;
+		},
+		async jwt({ token, account, profile, user }) {
+			if (account?.provider === "google") {
+				try {
+					const email = (account.email || user?.email || token.email) as string;
 
-				if (!response.ok) {
+					console.log("Attempting to call:", `${apiUrl()}/auth/login`);
+					
+					const response = await fetch(`${apiUrl()}/auth/login`, {
+						method: "POST",
+						credentials: "include",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							token: account.id_token,
+							type: "google",
+							email: email,
+						}),
+					});
+
+					if (!response.ok) {
+						const errorText = await response.text();
+						console.error("Auth error response:", response.status, errorText);
+						console.error("Request details:", {
+							url: `${apiUrl()}/auth/login`,
+							method: "POST",
+							email: email,
+							tokenType: "google"
+						});
+						throw new Error(`AuthError: ${response.status} ${errorText}`);
+					}
+
+					const data = await response.json();
+					token.access_token = data.data?.token;
+					if (email) {
+						token.email = email as string | null;
+					}
+				} catch (error) {
+					console.error("Error in Google auth:", error);
 					throw new Error("AuthError");
 				}
-
-				const data = await response.json();
-				token.access_token = data.data?.token;
 			}
 			return token;
 		},
 		async session({ session, token }) {
 			if (token) {
-				// Extract expiration time from the access token
+				// Ensure email is copied from token to session
+				if (token.email) {
+					session.user = session.user || {};
+					session.user.email = token.email;
+				}
+				
+				// Handle access token
 				const expTime = getTokenExpiration(token.access_token as string);
 				const currentTime = Math.floor(Date.now() / 1000);
 				if (expTime && currentTime < expTime) {
-					// Token is still valid, set the accessToken in the session
 					session.accessToken = token.access_token as string;
 				} else {
-					// Token has expired or expiration time couldn't be extracted, verify with the server
 					try {
 						const response = await fetch(`${apiUrl()}/auth/verify-token`, {
 							method: "POST",
@@ -104,18 +140,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 							await signOut({ redirect: false });
 							return session;
 						}
-
-						// Token is valid, set the accessToken in the session
 						session.accessToken = token.access_token as string;
 					} catch (error) {
 						console.error("Error verifying session token:", error);
-						// In case of an error, log out the user as a precaution
 						await signOut({ redirect: false });
 						return session;
 					}
 				}
 			}
-
 			return session;
 		},
 		async redirect({ url, baseUrl }) {
@@ -126,4 +158,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return baseUrl;
 		},
 	},
+	debug: true, // Enable debug mode
 });

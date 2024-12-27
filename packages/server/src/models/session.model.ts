@@ -4,6 +4,7 @@ import {
   eVisibilty,
   type ISessionModel,
 } from '@interfaces/session.interface';
+import { TranscriptionStatus } from '@interfaces/state.interface';
 import { Schema, model } from 'mongoose';
 
 const SessionSchema = new Schema<ISessionModel>(
@@ -65,15 +66,16 @@ const SessionSchema = new Schema<ISessionModel>(
         date: { type: Number, default: 0 },
       },
     ],
-    firebaseId: { type: String, default: '' },
     talkType: { type: String, default: '' },
     processingStatus: { type: String, enum: Object.keys(ProcessingStatus) },
     transcripts: {
+      status: { type: String, enum: Object.keys(TranscriptionStatus) },
       subtitleUrl: { type: String, default: '' },
       chunks: [
         {
-          text: { type: String, default: '' },
-          tiimestamp: [{ type: Number }],
+          word: { type: String, default: '' },
+          start: { type: Number, default: 0 },
+          end: { type: Number, default: 0 },
         },
       ],
       text: { type: String, default: '' },

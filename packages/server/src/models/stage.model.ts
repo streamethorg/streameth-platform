@@ -49,6 +49,22 @@ export const StageSchema = new Schema<IStageModel>(
       enum: Object.keys(StageType),
       default: StageType.livepeer,
     },
+    transcripts: {
+      status: {
+        type: String,
+        enum: ['pending', 'completed', 'failed'],
+        default: 'pending',
+      },
+      chunks: [
+        {
+          start: { type: Number },
+          end: { type: Number },
+          word: { type: String },
+        },
+      ],
+      text: { type: String },
+      lastSegmentTimestamp: { type: Number },
+    },
   },
   {
     timestamps: true,

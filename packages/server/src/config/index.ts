@@ -1,15 +1,33 @@
 import validateEnv from '@utils/validateEnv';
+import * as fs from 'fs';
+
+const readSecretFile = (path: string): string => {
+  if (process.env.NODE_ENV === 'development') {
+    return path;
+  }
+  try {
+    return fs.readFileSync(path, 'utf8').trim();
+  } catch (error) {
+    console.error(`Error reading secret file ${path}:`, error);
+    throw error;
+  }
+};
 
 const validatedEnv = validateEnv();
 export const config = {
+  openai: {
+    apiKey: readSecretFile(validatedEnv.OPENAI_API_KEY_FILE),
+  },
   baseUrl: validatedEnv.BASE_URL,
-  testUrl: validatedEnv.TEST_URL,
   playerUrl: validatedEnv.PLAYER_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
   wallets: validatedEnv.WALLET_ADDRESSES,
   db: {
     host: validatedEnv.DB_HOST,
+    user: validatedEnv.DB_USER,
+    name: validatedEnv.DB_NAME,
+    password: readSecretFile(validatedEnv.DB_PASSWORD_FILE),
   },
   logger: {
     format: validatedEnv.LOG_FORMAT,
@@ -20,78 +38,60 @@ export const config = {
     credentials: validatedEnv.CORS_CREDENTIALS,
   },
   jwt: {
-    secret: validatedEnv.JWT_SECRET,
+    secret: readSecretFile(validatedEnv.JWT_SECRET_FILE),
     expiry: validatedEnv.JWT_EXPIRY,
     magicLink: {
-      secret: validatedEnv.MAGIC_LINK_SECRET,
+      secret: readSecretFile(validatedEnv.MAGIC_LINK_SECRET_FILE),
       expiry: validatedEnv.MAGIC_LINK_EXPIRY,
     },
   },
   telegram: {
-    apiKey: validatedEnv.TELEGRAM_API_KEY,
-    chatId: validatedEnv.TELEGRAM_CHAT_ID,
+    apiKey: readSecretFile(validatedEnv.TELEGRAM_API_KEY_FILE),
+    chatId: readSecretFile(validatedEnv.TELEGRAM_CHAT_ID_FILE),
   },
   storage: {
     s3: {
       name: validatedEnv.BUCKET_NAME,
       host: validatedEnv.BUCKET_URL,
-      secretKey: validatedEnv.SPACES_SECRET,
-      apiKey: validatedEnv.SPACES_KEY,
+      secretKey: readSecretFile(validatedEnv.SPACES_SECRET_FILE),
+      apiKey: readSecretFile(validatedEnv.SPACES_KEY_FILE),
     },
-    thirdWebSecretKey: validatedEnv.THIRDWEB_SECRET_KEY,
+    thirdWebSecretKey: readSecretFile(validatedEnv.THIRDWEB_SECRET_KEY_FILE),
   },
   livepeer: {
     host: validatedEnv.LIVEPEER_BASE_URL,
-    secretKey: validatedEnv.LIVEPEER_API_KEY,
-    webhookSecretKey: validatedEnv.LIVEPEER_WEBHOOK_SECRET,
-  },
-  privy: {
-    appId: validatedEnv.PRIVY_APP_ID,
-    appSecret: validatedEnv.PRIVY_SECRET_KEY,
+    secretKey: readSecretFile(validatedEnv.LIVEPEER_API_KEY_FILE),
+    webhookSecretKey: readSecretFile(validatedEnv.LIVEPEER_WEBHOOK_SECRET_FILE),
   },
   oauth: {
     google: {
-      secretKey: validatedEnv.GOOGLE_OAUTH_SECRET,
-      clientId: validatedEnv.GOOGLE_CLIENT_ID,
+      secretKey: readSecretFile(validatedEnv.GOOGLE_OAUTH_SECRET_FILE),
+      clientId: readSecretFile(validatedEnv.GOOGLE_CLIENT_ID_FILE),
     },
     twitter: {
-      secretKey: validatedEnv.TWITTER_OAUTH_SECRET,
-      clientId: validatedEnv.TWITTER_CLIENT_ID,
+      secretKey: readSecretFile(validatedEnv.TWITTER_OAUTH_SECRET_FILE),
+      clientId: readSecretFile(validatedEnv.TWITTER_CLIENT_ID_FILE),
     },
   },
-  mq: {
-    host: validatedEnv.MQ_HOST,
-    port: validatedEnv.MQ_PORT,
-    username: validatedEnv.MQ_USERNAME,
-    secret: validatedEnv.MQ_SECRET,
-  },
-  firebase: {
-    type: validatedEnv.FIREBASE_SERVICE_TYPE,
-    projectId: validatedEnv.FIREBASE_PROJECT_ID,
-    privateKeyId: validatedEnv.FIREBASE_PRIVATEKEY_ID,
-    privateKey: validatedEnv.FIREBASE_PRIVATEKEY,
-    clientEmail: validatedEnv.FIREBASE_CLIENT_EMAIL,
-    clientId: validatedEnv.FIREBASE_CLIENT_ID,
-    authUri: validatedEnv.FIREBASE_AUTH_URI,
-    tokenUri: validatedEnv.FIREBASE_TOKEN_URI,
-    authProviderCert: validatedEnv.FIREBASE_PROVIDER_CERT,
-    clientCert: validatedEnv.FIREBASE_CLIENT_CERT,
-    domain: validatedEnv.FIREBASE_DOMAIN,
-  },
+
   google: {
-    apiKey: validatedEnv.GOOGLE_API_KEY,
-    privateKey: validatedEnv.SERVICE_ACCOUNT_PRIVATE_KEY,
-    accountEmail: validatedEnv.SERVICE_ACCOUNT_EMAIL,
+    privateKey: readSecretFile(validatedEnv.SERVICE_ACCOUNT_PRIVATE_KEY_FILE),
+    accountEmail: readSecretFile(validatedEnv.SERVICE_ACCOUNT_EMAIL_FILE),
   },
   mail: {
     host: validatedEnv.MAIL_HOST,
     port: validatedEnv.MAIL_PORT,
-    user: validatedEnv.MAIL_USER,
-    pass: validatedEnv.MAIL_PASS,
+    user: readSecretFile(validatedEnv.MAIL_USER_FILE),
+    pass: readSecretFile(validatedEnv.MAIL_PASS_FILE),
   },
   remotion: {
     id: validatedEnv.REMOTION_ID,
     host: validatedEnv.REMOTION_BASE_URL,
-    webhookSecretKey: validatedEnv.REMOTION_WEBHOOK_SECRET,
+    webhookSecretKey: readSecretFile(validatedEnv.REMOTION_WEBHOOK_SECRET_FILE),
+  },
+  redis: {
+    host: validatedEnv.REDIS_HOST,
+    port: validatedEnv.REDIS_PORT,
+    password: readSecretFile(validatedEnv.REDIS_PASSWORD_FILE),
   },
 };

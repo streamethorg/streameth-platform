@@ -1,0 +1,32 @@
+name: cleanup caches
+on:
+  workflow_dispatch:  # Adding manual trigger option
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup all caches
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # For pull request events, clean specific PR branch caches
+            BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
+            echo "Cleaning caches for PR branch: $BRANCH"
+            cacheKeysForPR=$(gh cache list --ref $BRANCH --limit 100 --json id --jq '.[].id')
+          else
+            # For manual dispatch, clean all caches
+            echo "Cleaning all repository caches"
+            cacheKeysForPR=$(gh cache list --limit 100 --json id --jq '.[].id')
+          fi
+
+          ## Setting this to not fail the workflow while deleting cache keys.
+          set +e
+          echo "Deleting caches..."
+          for cacheKey in $cacheKeysForPR
+          do
+              gh cache delete $cacheKey --confirm
+          done
+          echo "Done"
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
+          GH_REPO: ${{ github.repository }}

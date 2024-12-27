@@ -1,0 +1,25 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache ffmpeg
+
+# Copy package files first for better caching
+COPY package.json yarn.lock ./
+COPY packages/reel-creator/package.json ./packages/reel-creator/
+
+# Install all dependencies (including dev dependencies)
+RUN yarn install --frozen-lockfile
+
+# Copy source code
+COPY packages/reel-creator ./packages/reel-creator
+
+WORKDIR /app/packages/reel-creator
+
+# Remove production-specific commands
+# RUN npx next build
+# RUN yarn install --frozen-lockfile --production
+
+# Start in dev mode with environment variables
+ENV NODE_ENV=development
+CMD ["yarn", "dev"]

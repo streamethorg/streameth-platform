@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+undefined/*
+undefined
 # dependencies
 node_modules
 /.pnp
@@ -55,3 +57,7 @@ google_sa_secret.json
 .yarn/*
 .yarn
 .yarn/
+
+
+*.log
+*.mp4

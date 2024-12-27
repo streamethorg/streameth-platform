@@ -16,6 +16,6 @@ export const removeStage = async (
       organizationId: organization._id?.toString() || '',
     });
 
-    // console.log('Removed stage');
+    console.log('Removed stage');
   });
 };

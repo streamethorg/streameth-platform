@@ -10,8 +10,11 @@ import SessionService from '@services/session.service';
 import StageService from '@services/stage.service';
 import StateService from '@services/state.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
-import { updateEventVideoById } from '@utils/firebase';
-import { createAssetFromUrl, getAsset, getDownloadUrl } from '@utils/livepeer';
+import {
+  createAssetFromUrl,
+  getAsset,
+  generateThumbnail,
+} from '@utils/livepeer';
 import StorageService from '@utils/s3';
 import {
   validateRemotionWebhook,
@@ -33,11 +36,12 @@ import {
   Tags,
   UploadedFile,
 } from 'tsoa';
+
 @Tags('Index')
 @Route('')
 export class IndexController extends Controller {
-  private stageService = new StageService();
   private sessionService = new SessionService();
+  private stageService = new StageService();
   private stateService = new StateService();
   private storageService = new StorageService();
 
@@ -64,6 +68,7 @@ export class IndexController extends Controller {
     );
     return SendApiResponse('image uploaded', image);
   }
+
   @Post('/webhook')
   async webhook(
     @Header('livepeer-signature') livepeerSignature: string,
@@ -74,27 +79,46 @@ export class IndexController extends Controller {
       console.log('Invalid signature or timestamp');
       return SendApiResponse('Invalid signature or timestamp', null, '401');
     }
+
     console.log('Livepeer Payload:', payload);
-    switch (payload.event) {
-      case LivepeerEvent.assetReady:
-        await this.assetReady(payload.payload.id ?? payload.payload.asset.id);
-        break;
-      case LivepeerEvent.assetFailed:
-        await this.assetFailed(payload.payload.id);
-        break;
-      case LivepeerEvent.streamStarted:
-      case LivepeerEvent.streamIdle:
-        await this.stageService.findStreamAndUpdate(payload.stream.id);
-        break;
-      case LivepeerEvent.recordingReady:
-        await this.sessionService.createStreamRecordings(
-          payload.payload.session,
-        );
-        break;
-      default:
-        return SendApiResponse('Event not recognizable', null, '400');
+    try {
+      switch (payload.event) {
+        case LivepeerEvent.assetReady:
+          const { asset } = payload.payload;
+          const assetId = asset?.id;
+          console.log(
+            'Processing asset.ready with new format, asset ID:',
+            assetId,
+          );
+          if (!assetId) {
+            console.log('No asset ID found in payload:', payload);
+            return SendApiResponse('No asset ID found in payload', null, '400');
+          }
+          await this.assetReady(assetId, asset.snapshot);
+          break;
+        case LivepeerEvent.assetFailed:
+          await this.assetFailed(payload.id);
+          break;
+        case LivepeerEvent.streamStarted:
+        case LivepeerEvent.streamIdle:
+          await this.stageService.findStreamAndUpdate(payload.stream.id);
+          break;
+        case LivepeerEvent.recordingReady:
+          console.log(
+            'Processing recording.ready for session:',
+            payload.payload.session.id,
+          );
+          await this.sessionService.createStreamRecordings(
+            payload.payload.session,
+          );
+          break;
+        default:
+          return SendApiResponse('Event not recognizable', null, '400');
+      }
+      return SendApiResponse('OK');
+    } catch (error) {
+      throw error;
     }
-    return SendApiResponse('OK');
   }
 
   @Post('/webhook/remotion')
@@ -164,10 +188,16 @@ export class IndexController extends Controller {
     return SendApiResponse('Webhook processed successfully');
   }
 
-  private async assetReady(id: string) {
-    const asset = await getAsset(id);
-    const session = await this.sessionService.findOne({ assetId: asset.id });
+  private async assetReady(id: string, asset: any) {
+    console.log('asset', asset);
+    const session = await this.sessionService.findOne({ assetId: id });
+
     if (!session) throw new HttpException(404, 'No session found');
+
+    const thumbnail = await generateThumbnail({
+      assetId: session.assetId,
+      playbackId: session.playbackId,
+    });
     let sessionParams = {
       name: session.name,
       start: session.start,
@@ -180,35 +210,17 @@ export class IndexController extends Controller {
       'playback.format': asset.videoSpec?.format ?? '',
       'playback.duration': asset.videoSpec?.duration ?? 0,
       processingStatus: ProcessingStatus.completed,
+      coverImage: session.coverImage ? session.coverImage : thumbnail,
     };
     await this.sessionService.update(session._id.toString(), sessionParams);
-    if (session.firebaseId && asset.playbackUrl) {
-      await updateEventVideoById(session.firebaseId, {
-        url: asset.playbackUrl,
-        mp4Url: await getDownloadUrl(asset.id),
-      });
-    }
-    const state = await this.stateService.findOne({
-      sessionId: session._id.toString(),
-      type: session.type,
-    });
-    if (!state) throw new HttpException(404, 'No state found');
-    await this.stateService.update(state._id.toString(), {
-      status: StateStatus.completed,
-    });
+
     if (
-      state.type !== StateType.animation &&
-      state.type !== StateType.editorClip
+      session.type !== SessionType.animation &&
+      session.type !== SessionType.editorClip
     ) {
       await this.sessionService.sessionTranscriptions({
         organizationId: session.organizationId.toString(),
         sessionId: session._id.toString(),
-      });
-    }
-    const clipEditor = await ClipEditor.findOne({ clipSessionId: session._id });
-    if (clipEditor) {
-      await clipEditor.updateOne({
-        status: ClipEditorStatus.completed,
       });
     }
   }

@@ -17,7 +17,9 @@ const generateGoogleCalendar = ({
   const startDate = formatDate(start, 'YYYYMMDDTHHmmss', userTimezone);
   const endDate = formatDate(end, 'YYYYMMDDTHHmmss', userTimezone);
 
-  return `${BASE_URL}?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}`;
+  return `${BASE_URL}?action=TEMPLATE&text=${encodeURIComponent(
+    eventName
+  )}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}`;
 };
 
 export default generateGoogleCalendar;

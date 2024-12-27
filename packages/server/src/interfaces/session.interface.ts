@@ -1,5 +1,6 @@
 import type { Document, Types } from 'mongoose';
 import type { ISpeaker } from './speaker.interface';
+import { TranscriptionStatus } from './state.interface';
 
 export enum eVisibilty {
   public = 'public',
@@ -33,6 +34,7 @@ export enum ProcessingStatus {
   pending = 'pending',
   rendering = 'rendering',
   failed = 'failed',
+  clipCreated = 'clipCreated',
   completed = 'completed',
 }
 
@@ -67,14 +69,15 @@ export interface ISession {
   createdAt?: Date | string;
   nftCollections?: Types.ObjectId | string[];
   socials?: { name: string; date: number }[];
-  firebaseId?: string;
   talkType?: string;
   processingStatus?: ProcessingStatus;
   transcripts?: {
+    status: TranscriptionStatus;
     subtitleUrl: string;
     chunks: {
-      timestamp: number[];
-      text: string;
+      start: number;
+      end: number;
+      word: string;
     }[];
     text: string;
   };

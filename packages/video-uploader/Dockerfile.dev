@@ -1,0 +1,38 @@
+FROM node:18-slim
+
+# Install FFmpeg and other dependencies
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies using Yarn
+RUN yarn install
+
+# Install TypeScript and ts-node globally
+RUN yarn global add typescript tsc-alias ts-node
+
+# Copy source code
+COPY . .
+
+# Create tmp directory for audio files
+RUN mkdir -p tmp
+
+# Create logs directory
+RUN mkdir -p /usr/src/app/logs
+
+# Build TypeScript code using Yarn
+RUN yarn build
+
+# Use an entrypoint script to ensure environment variables are available
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["yarn", "audio"]

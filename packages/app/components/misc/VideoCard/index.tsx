@@ -4,7 +4,6 @@ import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Thumbnail from './thumbnail';
 import Image from 'next/image';
 import { IExtendedSession, IExtendedEvent } from '@/lib/types';
-import useGenerateThumbnail from '@/lib/hooks/useGenerateThumbnail';
 
 const VideoCard = ({
   session,
@@ -17,11 +16,10 @@ const VideoCard = ({
 }) => {
   const headerClass = invertedColors ? ' ' : '';
   const descriptionClass = invertedColors ? '' : '';
-  const imageUrl = useGenerateThumbnail({ session });
 
   return (
     <div className="min-h-full w-full rounded-xl uppercase">
-      <Thumbnail imageUrl={session.coverImage} fallBack={imageUrl} />
+      <Thumbnail imageUrl={session.coverImage} />
       <CardHeader
         className={`mt-1 rounded p-1 shadow-none lg:p-2 lg:shadow-none ${headerClass}`}
       >

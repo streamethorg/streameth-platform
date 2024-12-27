@@ -1,0 +1,28 @@
+# Use Node.js LTS (Long Term Support) as base image
+FROM node:18-alpine
+
+# Add Python and build dependencies
+RUN apk add --no-cache python3 python3-dev py3-pip make g++ gcc
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first
+COPY package.json yarn.lock ./
+COPY packages/*/package.json ./packages/*/
+
+# Install dependencies
+RUN yarn install --frozen-lockfile
+
+# Copy the rest of the source code
+COPY . .
+
+# Expose the default Next.js port
+EXPOSE 3000
+
+# Set environment variables
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Start the development server
+CMD ["yarn", "dev:app"]

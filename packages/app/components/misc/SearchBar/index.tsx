@@ -60,7 +60,7 @@ export default function SearchBar({
           })
           .then((data) => {
             const items = data.data.slice(0, 10);
-            // console.log(data.data);
+            console.log(data.data);
             setSearchResults(items);
             setIsLoading(false);
           });
@@ -91,7 +91,9 @@ export default function SearchBar({
     router.push(
       isStudio
         ? `/studio/${organizationSlug}/library/${session._id.toString()}`
-        : `/${organizationSlug || session.organizationId}/watch?session=${session._id.toString()}`
+        : `/${
+            organizationSlug || session.organizationId
+          }/watch?session=${session._id.toString()}`
     );
     return;
   };

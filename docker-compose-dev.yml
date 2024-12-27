@@ -1,0 +1,148 @@
+version: '3'
+
+# Define common configurations that can be reused
+x-common-environment: &common-environment
+  NODE_ENV: ${NODE_ENV}
+  APP_PORT: ${APP_PORT}
+  BASE_URL: ${BASE_URL}
+  PLAYER_URL: ${PLAYER_URL}
+  DB_PASSWORD_FILE: ${DB_PASSWORD_FILE}
+  DB_HOST: ${DB_HOST}
+  DB_USER: ${DB_USER}
+  DB_NAME: ${DB_NAME}
+  JWT_SECRET_FILE: ${JWT_SECRET_FILE}
+  JWT_EXPIRY: ${JWT_EXPIRY}
+  CORS_ORIGIN: ${CORS_ORIGIN}
+  CORS_CREDENTIALS: ${CORS_CREDENTIALS}
+  CORS_PROXY_URL: ${CORS_PROXY_URL}
+  LIVEPEER_API_KEY_FILE: ${LIVEPEER_API_KEY_FILE}
+  THIRDWEB_SECRET_KEY_FILE: ${THIRDWEB_SECRET_KEY_FILE}
+  SPACES_KEY_FILE: ${SPACES_KEY_FILE}
+  SPACES_SECRET_FILE: ${SPACES_SECRET_FILE}
+  BUCKET_NAME: ${BUCKET_NAME}
+  BUCKET_URL: ${BUCKET_URL}
+  LIVEPEER_WEBHOOK_SECRET_FILE: ${LIVEPEER_WEBHOOK_SECRET_FILE}
+  LIVEPEER_BASE_URL: ${LIVEPEER_BASE_URL}
+  TELEGRAM_API_KEY_FILE: ${TELEGRAM_API_KEY_FILE}
+  TELEGRAM_CHAT_ID_FILE: ${TELEGRAM_CHAT_ID_FILE}
+  OAUTH_SECRET_FILE: ${OAUTH_SECRET_FILE}
+  TWITTER_OAUTH_SECRET_FILE: ${TWITTER_OAUTH_SECRET_FILE}
+  TWITTER_CLIENT_ID_FILE: ${TWITTER_CLIENT_ID_FILE}
+  GOOGLE_OAUTH_SECRET_FILE: ${GOOGLE_OAUTH_SECRET_FILE}
+  GOOGLE_CLIENT_ID_FILE: ${GOOGLE_CLIENT_ID_FILE}
+  SERVICE_ACCOUNT_PRIVATE_KEY_FILE: ${SERVICE_ACCOUNT_PRIVATE_KEY_FILE}
+  SERVICE_ACCOUNT_EMAIL_FILE: ${SERVICE_ACCOUNT_EMAIL_FILE}
+  MAIL_HOST: ${MAIL_HOST}
+  MAIL_PORT: ${MAIL_PORT}
+  MAIL_USER_FILE: ${MAIL_USER_FILE}
+  MAIL_PASS_FILE: ${MAIL_PASS_FILE}
+  MAGIC_LINK_SECRET_FILE: ${MAGIC_LINK_SECRET_FILE}
+  MAGIC_LINK_EXPIRY: ${MAGIC_LINK_EXPIRY}
+  WALLET_ADDRESSES: ${WALLET_ADDRESSES}
+  REMOTION_BASE_URL: http://reel-creator:4000
+  REMOTION_WEBHOOK_SECRET_FILE: ${LIVEPEER_WEBHOOK_SECRET_FILE}
+  REMOTION_ID: pebs
+  PIPEDREAM_AUTH_TOKEN_FILE: ${PIPEDREAM_AUTH_TOKEN_FILE}
+  DEVCON_UPLOAD_ENDPOINT_FILE: ${DEVCON_UPLOAD_ENDPOINT_FILE}
+  LOG_DIR: ${LOG_DIR}
+  LOG_FORMAT: ${LOG_FORMAT}
+  REDIS_PASSWORD_FILE: ${REDIS_PASSWORD_FILE}
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  OPENAI_API_KEY_FILE: ${OPENAI_API_KEY_FILE}
+
+x-common-worker: &common-worker
+  volumes:
+    - ./packages/server:/app/packages/server
+    - /app/packages/server/node_modules
+  depends_on:
+    - mongodb
+    - redis
+
+services:
+  session-transcriptions:
+    <<: *common-worker
+    build:
+      context: .
+      dockerfile: ./packages/server/workers/session-transcriptions/Dockerfile.dev
+    environment: *common-environment
+
+  clips:
+    <<: *common-worker
+    build:
+      context: .
+      dockerfile: packages/server/workers/clips/Dockerfile.dev
+    environment: 
+      <<: *common-environment
+      REMOTION_WEBHOOK_URL: ${REMOTION_WEBHOOK_URL}
+
+  reel-creator:
+    build:
+      context: .
+      dockerfile: packages/reel-creator/Dockerfile.dev
+    volumes:
+      - ./packages/reel-creator:/app/packages/reel-creator
+      - /app/packages/reel-creator/node_modules
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      SERVER_WEBHOOK_URL: https://kodiak-feasible-distinctly.ngrok-free.app/webhook/remotion
+      SERVER_WEBHOOK_SECRET_FILE: ${LIVEPEER_WEBHOOK_SECRET_FILE}
+      AWS_ACCESS_KEY_ID_FILE: ${AWS_ACCESS_KEY_ID_FILE}
+      AWS_SECRET_ACCESS_KEY_FILE: ${AWS_SECRET_ACCESS_KEY_FILE}
+      SITE_NAME: local-dev
+    ports:
+      - "4000:4000"
+
+  stage-transcriptions:
+    <<: *common-worker
+    build:
+      context: .
+      dockerfile: packages/server/workers/stage-transcriptions/Dockerfile.dev
+    environment:
+      <<: *common-environment
+
+  server:
+    <<: *common-worker
+    build: 
+      context: .
+      dockerfile: packages/server/src/Dockerfile.dev
+    ports:
+      - "3400:3400"
+    environment:
+      <<: *common-environment
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    environment:
+      MONGO_INITDB_DATABASE: streameth
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD_FILE}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh redis:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    command: --auth --bind_ip_all
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD_FILE}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: sh -c "redis-cli -a $$(cat ${REDIS_PASSWORD_FILE}) ping"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongodb_data:
+  redis_data:

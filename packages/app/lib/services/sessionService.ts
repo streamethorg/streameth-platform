@@ -13,7 +13,7 @@ import { fetchClient } from './fetch-client';
 
 interface ApiParams {
   event?: string;
-  organizationId?: string;
+  organization?: string;
   stageId?: string;
   page?: number;
   size?: number;
@@ -37,7 +37,7 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
 
 export async function fetchAllSessions({
   event,
-  organizationId,
+  organizationSlug,
   stageId,
   speakerIds,
   onlyVideos,
@@ -48,7 +48,7 @@ export async function fetchAllSessions({
   type,
 }: {
   event?: string;
-  organizationId?: string;
+  organizationSlug?: string;
   stageId?: string;
   speakerIds?: string[];
   onlyVideos?: boolean;
@@ -64,7 +64,7 @@ export async function fetchAllSessions({
   const params: ApiParams = {
     event,
     stageId,
-    organizationId,
+    organization: organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
@@ -134,6 +134,7 @@ export const createSession = async ({
       body: JSON.stringify(session),
     });
 
+    console.log('response', response);
     if (!response.ok) {
       throw 'Error creating session';
     }
@@ -227,16 +228,14 @@ export const deleteSession = async ({
 export const createClip = async ({
   start,
   end,
-  playbackId,
-  recordingId,
+  clipUrl,
   sessionId,
   isEditorEnabled,
   editorOptions,
   organizationId,
 }: {
   sessionId: string;
-  playbackId: string;
-  recordingId: string;
+  clipUrl: string;
   start: number;
   end: number;
   isEditorEnabled: boolean;
@@ -260,25 +259,47 @@ export const createClip = async ({
       },
       body: JSON.stringify({
         end,
-        playbackId,
+        clipUrl,
         sessionId,
         start,
-        recordingId,
         isEditorEnabled,
         editorOptions,
         organizationId,
       }),
     });
-    const responseData = await response.json();
+    console.log('response', {
+      end,
+      clipUrl,
+      sessionId,
+      start,
+      isEditorEnabled,
+      editorOptions,
+      organizationId,
+    });
 
+    const responseData = await response.json();
     if (!response.ok) {
-      throw 'Error creating clip';
+      throw responseData.message;
     }
+
     revalidatePath('/studio');
-    return responseData.data;
+    return responseData;
   } catch (e) {
-    console.log('error in createClip', e);
-    throw e;
+    console.error('Error in createClip:', {
+      error: e,
+      message: e instanceof Error ? e.message : 'Unknown error',
+      data: {
+        clipUrl,
+        sessionId,
+        start,
+        end,
+      },
+    });
+
+    if (e instanceof Error) {
+      throw new Error(`Failed to create clip: ${e.message}`);
+    }
+    throw new Error('Failed to create clip: Unknown error occurred');
   }
 };
 

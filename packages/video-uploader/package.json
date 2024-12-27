@@ -1,27 +1,39 @@
 {
   "name": "@streameth/video-uploader",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "dev": "node -r esbuild-runner/register ./src/video-queue.ts",
-    "audio": "node -r esbuild-runner/register ./src/audio-queue.ts",
+    "video": "ts-node --esm ./src/video-consumer.ts",
+    "audio": "ts-node ./src/audio-consumer.ts",
     "build": "tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "start": "node ./dist/video-queue.js"
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "license": "MIT",
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
     "@types/amqplib": "^0.10.5",
     "@types/node": "^20.14.6",
     "esbuild": "^0.21.5",
     "esbuild-runner": "^2.2.2",
-    "prettier": "^3.3.2"
+    "prettier": "^3.3.2",
+    "tsc-alias": "^1.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
+    "@types/node-fetch": "^2.6.12",
     "amqplib": "^0.10.4",
+    "dotenv": "^16.4.5",
+    "fluent-ffmpeg": "^2.1.2",
+    "form-data": "^4.0.1",
     "google-auth-library": "^9.11.0",
     "googleapis": "^140.0.0",
     "mongodb": "^6.7.0",
-    "oauth-1.0a": "^2.2.6"
+    "node-fetch": "2",
+    "oauth-1.0a": "^2.2.6",
+    "winston": "^3.10.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "streameth-new-server": "*"
+
   }
 }

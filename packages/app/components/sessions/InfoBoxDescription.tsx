@@ -21,21 +21,18 @@ const InfoBoxDescription = ({
     const handleResize = () => {
       if (descriptionRef.current) {
         const descriptionHeight = descriptionRef.current.scrollHeight;
-        // Lower the threshold to ensure longer descriptions trigger the expand button
-        setIsExpandable(descriptionHeight > 50);
+        setIsExpandable(descriptionHeight > 100); // Adjust height threshold as needed
         setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px');
       }
     };
 
-    // Call handleResize after a short delay to ensure content is properly rendered
-    const timeoutId = setTimeout(handleResize, 100);
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      clearTimeout(timeoutId);
     };
-  }, [isOpened, description]); // Add description as dependency to recalculate on content change
+  }, [isOpened]);
 
   if (!description) return null;
 
@@ -43,8 +40,8 @@ const InfoBoxDescription = ({
     <div className="relative py-4">
       <div
         ref={descriptionRef}
-        className="overflow-hidden duration-300 ease-in-out transition-max-height"
-        style={{ maxHeight }}
+        className="transition-max-height overflow-hidden duration-300 ease-in-out"
+        style={{ maxHeight: maxHeight }}
       >
         {description && (
           <div className="space-y-2">
@@ -68,13 +65,13 @@ const InfoBoxDescription = ({
             setIsOpened(!isOpened);
             if (descriptionRef.current) {
               setMaxHeight(
-                !isOpened ? `${descriptionRef.current.scrollHeight}px` : '50px'
+                !isOpened ? `${descriptionRef.current.scrollHeight}px` : '100px'
               );
             }
           }}
-          className="absolute right-0 bottom-0 pb-2 ml-auto text-sm font-bold text-primary"
+          className="absolute bottom-0 right-0 ml-auto mr-5 pb-2 font-bold text-primary"
         >
-          {isOpened ? 'Show less' : 'Show more'}
+          {isOpened ? 'less' : 'more'}
         </button>
       )}
     </div>

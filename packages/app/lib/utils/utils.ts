@@ -16,7 +16,6 @@ import { IEventModel } from 'streameth-new-server/src/interfaces/event.interface
 import { UseFormProps, UseFormReturn } from 'react-hook-form';
 import { getDateInUTC } from './time';
 import { toast } from 'sonner';
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -367,7 +366,10 @@ const convertToVttTimestamp = (seconds: number): string => {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const secs = (seconds % 60).toFixed(3);
-  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(6, '0')}`;
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+    2,
+    '0'
+  )}:${String(secs).padStart(6, '0')}`;
 };
 
 export function formatTimestamp(seconds: number) {

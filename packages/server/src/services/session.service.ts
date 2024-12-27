@@ -8,7 +8,11 @@ import {
   ProcessingStatus,
   SessionType,
 } from '@interfaces/session.interface';
-import { StateStatus, StateType } from '@interfaces/state.interface';
+import {
+  StateStatus,
+  StateType,
+  TranscriptionStatus,
+} from '@interfaces/state.interface';
 import { IUploadSession } from '@interfaces/upload.session.interface';
 import Event from '@models/event.model';
 import Organization from '@models/organization.model';
@@ -17,7 +21,7 @@ import Stage from '@models/stage.model';
 import State from '@models/state.model';
 import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
-import connection from '@utils/rabbitmq';
+import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
 
 export default class SessionService {
@@ -89,7 +93,7 @@ export default class SessionService {
     published: string;
     type: string;
     itemStatus: string;
-    itemDate: string;
+    itemDate: string; // unix timestamp
     clipable: boolean;
   }): Promise<{
     sessions: Array<ISession>;
@@ -107,7 +111,6 @@ export default class SessionService {
     if (d.type !== undefined) {
       filter = { ...filter, type: d.type };
     }
-
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
@@ -238,29 +241,20 @@ export default class SessionService {
     query: string,
     organizationId?: string,
   ): Promise<Array<ISession>> {
-    // console.time('filterSessionsExecutionTime');
-    // console.log(query);
-
-    // Start with base filter that excludes animations and editorClips
-    let filter: any = {
-      name: { $regex: query, $options: 'i' },
-      type: { $nin: [SessionType.animation, SessionType.editorClip] },
-    };
-
-    // Add organizationId filter if provided
-    if (organizationId) {
-      filter.organizationId = organizationId;
-    }
-
+    console.time('filterSessionsExecutionTime');
+    console.log(query);
     const sessions = await this.controller.store.findAll(
-      filter,
+      {
+        name: { $regex: query, $options: 'i' },
+        organizationId: organizationId ? organizationId : '',
+      },
       {},
       this.path,
       0,
       10,
     );
-    // console.log(sessions);
-    // console.timeEnd('filterSessionsExecutionTime');
+    console.log(sessions);
+    console.timeEnd('filterSessionsExecutionTime');
     return sessions;
   }
 
@@ -298,36 +292,24 @@ export default class SessionService {
     data: Pick<IUploadSession, 'organizationId' | 'sessionId'>,
   ) {
     const session = await this.get(data.sessionId.toString());
-    const queue = 'audio';
-    const channel = await (await connection).createChannel();
-    channel.assertQueue(queue, {
-      durable: true,
-    });
-    const payload = {
+    const queue = await sessionTranscriptionsQueue();
+    await queue.add({
       ...data,
       session: {
+        id: session._id,
         videoUrl: session.videoUrl,
         slug: session.slug,
         name: session.name,
       },
-    };
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
-      persistent: true,
     });
-    const state = await State.findOne({
-      sessionId: data.sessionId,
-      type: StateType.transcrpition,
+    await this.update(data.sessionId.toString(), {
+      //@ts-ignore
+      ...session.toObject(),
+      transcripts: {
+        ...(session.transcripts || {}),
+        status: TranscriptionStatus.processing,
+      },
     });
-    if (state) {
-      await state.updateOne({ status: StateStatus.pending });
-    } else {
-      await State.create({
-        organizationId: data.organizationId,
-        sessionId: data.sessionId,
-        status: StateStatus.pending,
-        type: StateType.transcrpition,
-      });
-    }
   }
 
   async uploadSessionToSocials(data: IUploadSession) {
@@ -359,12 +341,8 @@ export default class SessionService {
       }
       data.token = { key: token.accessToken, secret: token.refreshToken };
     }
-    const queue = 'videos';
-    const channel = await (await connection).createChannel();
-    channel.assertQueue(queue, {
-      durable: true,
-    });
-    const payload = {
+    const queue = await videoUploadQueue();
+    await queue.add({
       ...data,
       session: {
         videoUrl: session.videoUrl,
@@ -374,9 +352,6 @@ export default class SessionService {
         coverImage: session.coverImage,
         published: session.published,
       },
-    };
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), {
-      persistent: true,
     });
     const state = await State.findOne({
       sessionId: data.sessionId,

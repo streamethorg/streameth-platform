@@ -6,6 +6,7 @@ import { UpdateStageDto } from '@dtos/stage/update-stage.dto';
 import { IStage } from '@interfaces/stage.interface';
 import StageService from '@services/stage.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
+import connection from '@utils/redis';
 import {
   Body,
   Controller,

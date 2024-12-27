@@ -441,13 +441,10 @@
 			},
 			"CreateClipDto": {
 				"properties": {
-					"playbackId": {
+					"clipUrl": {
 						"type": "string"
 					},
 					"sessionId": {
-						"type": "string"
-					},
-					"recordingId": {
 						"type": "string"
 					},
 					"start": {
@@ -531,9 +528,8 @@
 					}
 				},
 				"required": [
-					"playbackId",
+					"clipUrl",
 					"sessionId",
-					"recordingId",
 					"start",
 					"end",
 					"organizationId"
@@ -908,6 +904,15 @@
 				],
 				"type": "string"
 			},
+			"TranscriptionStatus": {
+				"enum": [
+					"in-queue",
+					"processing",
+					"completed",
+					"failed"
+				],
+				"type": "string"
+			},
 			"IStage": {
 				"properties": {
 					"_id": {
@@ -1018,6 +1023,55 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StageType"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"word": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"word",
+										"end",
+										"start"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							},
+							"lastSegmentTimestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl",
+							"lastSegmentTimestamp",
+							"status"
+						],
+						"type": "object"
 					},
 					"source": {
 						"properties": {
@@ -1147,6 +1201,55 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StageType"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"word": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"word",
+										"end",
+										"start"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							},
+							"lastSegmentTimestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl",
+							"lastSegmentTimestamp",
+							"status"
+						],
+						"type": "object"
 					},
 					"source": {
 						"properties": {
@@ -1278,6 +1381,55 @@
 					},
 					"type": {
 						"$ref": "#/components/schemas/StageType"
+					},
+					"transcripts": {
+						"properties": {
+							"text": {
+								"type": "string"
+							},
+							"chunks": {
+								"items": {
+									"properties": {
+										"word": {
+											"type": "string"
+										},
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"word",
+										"end",
+										"start"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"subtitleUrl": {
+								"type": "string"
+							},
+							"lastSegmentTimestamp": {
+								"type": "number",
+								"format": "double"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
+							}
+						},
+						"required": [
+							"text",
+							"chunks",
+							"subtitleUrl",
+							"lastSegmentTimestamp",
+							"status"
+						],
+						"type": "object"
 					},
 					"source": {
 						"properties": {
@@ -1747,6 +1899,7 @@
 					"pending",
 					"rendering",
 					"failed",
+					"clipCreated",
 					"completed"
 				],
 				"type": "string"
@@ -1911,9 +2064,6 @@
 						},
 						"type": "array"
 					},
-					"firebaseId": {
-						"type": "string"
-					},
 					"talkType": {
 						"type": "string"
 					},
@@ -1928,20 +2078,22 @@
 							"chunks": {
 								"items": {
 									"properties": {
-										"text": {
+										"word": {
 											"type": "string"
 										},
-										"timestamp": {
-											"items": {
-												"type": "number",
-												"format": "double"
-											},
-											"type": "array"
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"text",
-										"timestamp"
+										"word",
+										"end",
+										"start"
 									],
 									"type": "object"
 								},
@@ -1949,12 +2101,16 @@
 							},
 							"subtitleUrl": {
 								"type": "string"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
 							"text",
 							"chunks",
-							"subtitleUrl"
+							"subtitleUrl",
+							"status"
 						],
 						"type": "object"
 					},
@@ -2148,9 +2304,6 @@
 						},
 						"type": "array"
 					},
-					"firebaseId": {
-						"type": "string"
-					},
 					"talkType": {
 						"type": "string"
 					},
@@ -2165,20 +2318,22 @@
 							"chunks": {
 								"items": {
 									"properties": {
-										"text": {
+										"word": {
 											"type": "string"
 										},
-										"timestamp": {
-											"items": {
-												"type": "number",
-												"format": "double"
-											},
-											"type": "array"
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"text",
-										"timestamp"
+										"word",
+										"end",
+										"start"
 									],
 									"type": "object"
 								},
@@ -2186,12 +2341,16 @@
 							},
 							"subtitleUrl": {
 								"type": "string"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
 							"text",
 							"chunks",
-							"subtitleUrl"
+							"subtitleUrl",
+							"status"
 						],
 						"type": "object"
 					},
@@ -2345,9 +2504,6 @@
 						},
 						"type": "array"
 					},
-					"firebaseId": {
-						"type": "string"
-					},
 					"talkType": {
 						"type": "string"
 					},
@@ -2362,20 +2518,22 @@
 							"chunks": {
 								"items": {
 									"properties": {
-										"text": {
+										"word": {
 											"type": "string"
 										},
-										"timestamp": {
-											"items": {
-												"type": "number",
-												"format": "double"
-											},
-											"type": "array"
+										"end": {
+											"type": "number",
+											"format": "double"
+										},
+										"start": {
+											"type": "number",
+											"format": "double"
 										}
 									},
 									"required": [
-										"text",
-										"timestamp"
+										"word",
+										"end",
+										"start"
 									],
 									"type": "object"
 								},
@@ -2383,12 +2541,16 @@
 							},
 							"subtitleUrl": {
 								"type": "string"
+							},
+							"status": {
+								"$ref": "#/components/schemas/TranscriptionStatus"
 							}
 						},
 						"required": [
 							"text",
 							"chunks",
-							"subtitleUrl"
+							"subtitleUrl",
+							"status"
 						],
 						"type": "object"
 					},

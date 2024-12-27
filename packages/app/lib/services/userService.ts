@@ -6,6 +6,7 @@ export async function fetchUser(): Promise<IExtendedUser | null> {
   try {
     const data = await fetchClient(`${apiUrl()}/auth/token`, {
       method: 'GET',
+      cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -23,7 +24,7 @@ export async function fetchUserData(): Promise<IExtendedUser | null> {
   try {
     const user = await fetchUser();
     const data = await fetchClient(`${apiUrl()}/users/${user?.email}`, {
-      cache: 'force-cache',
+      cache: 'no-cache',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

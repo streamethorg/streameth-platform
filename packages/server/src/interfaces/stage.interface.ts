@@ -1,5 +1,5 @@
 import { Document, Types } from 'mongoose';
-
+import { TranscriptionStatus } from './state.interface';
 export interface TargetOutput {
   _id?: string;
   id?: string;
@@ -54,6 +54,17 @@ export class IStage {
   nftCollections?: Types.ObjectId | string[];
   recordingIndex?: number;
   type?: StageType;
+  transcripts?: {
+    status: TranscriptionStatus;
+    lastSegmentTimestamp: number;
+    subtitleUrl: string;
+    chunks: {
+      start: number;
+      end: number;
+      word: string;
+    }[];
+    text: string;
+  };
   source?: { url: string; m3u8Url: string; type: string };
 }
 

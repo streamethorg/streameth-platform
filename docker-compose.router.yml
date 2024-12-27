@@ -1,0 +1,70 @@
+version: '3'
+
+x-common-deploy: &common-deploy
+  placement:
+    constraints:
+      - node.role == manager
+
+services:
+  router:
+    image: traefik:v3.1
+    command:
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik-public"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=pablo@streameth.org"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+    labels:
+      - "traefik.enable=true"
+      # Staging route
+      - "traefik.http.routers.to-staging.rule=Host(`staging.api.streameth.org`)"
+      - "traefik.http.routers.to-staging.service=staging-server"
+      - "traefik.http.routers.to-staging.tls=true"
+      - "traefik.http.routers.to-staging.tls.certresolver=myresolver"
+      # CORS middleware for staging
+      - "traefik.http.routers.to-staging.middlewares=to-staging-cors"
+      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolalloworiginlist=*"
+      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolalloworiginlist=http://localhost:3000,http://localhost,https://staging.api.streameth.org"
+      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolallowheaders=*"
+      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
+      - "traefik.http.middlewares.to-staging-cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.to-staging-cors.headers.addvaryheader=true"
+      # Production route
+      - "traefik.http.routers.to-prod.rule=Host(`prod.api.streameth.org`)"
+      - "traefik.http.routers.to-prod.service=prod-server"
+      - "traefik.http.routers.to-prod.tls=true"
+      - "traefik.http.routers.to-prod.tls.certresolver=myresolver"
+      # CORS middleware for production
+      - "traefik.http.routers.to-prod.middlewares=to-prod-cors"
+      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolalloworiginlist=*"
+      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolalloworiginlist=http://localhost:3000,http://localhost,https://prod.api.streameth.org"
+      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolallowheaders=*"
+      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
+      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.to-prod-cors.headers.addvaryheader=true"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    networks:
+      - traefik-public
+      - default
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - letsencrypt:/letsencrypt
+    deploy: *common-deploy
+
+networks:
+  default:
+  traefik-public:
+    external: true
+
+volumes:
+  letsencrypt:

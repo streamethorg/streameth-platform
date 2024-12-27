@@ -10,15 +10,11 @@ import {
 export class CreateClipDto implements IClip {
   @IsNotEmpty()
   @IsString()
-  playbackId!: string;
+  clipUrl!: string;
 
   @IsNotEmpty()
   @IsString()
   sessionId!: string;
-
-  @IsNotEmpty()
-  @IsString()
-  recordingId!: string;
 
   @IsNotEmpty()
   @IsNumber()
