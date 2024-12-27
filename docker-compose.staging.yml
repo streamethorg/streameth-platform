@@ -52,9 +52,8 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
-  # AWS Configuration read from GitHub Actions secrets
-  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
+  AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -200,6 +199,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     environment:
+      NODE_ENV: staging
       MONGO_INITDB_DATABASE: streameth-staging
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/db-password
