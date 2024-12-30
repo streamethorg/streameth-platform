@@ -47,7 +47,7 @@
     "ioredis": "^5.4.1",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
-    "livepeer": "3.0.2",
+    "livepeer": "3.5.0",
     "m3u8-parser": "^7.2.0",
     "mongoose": "7.6.2",
     "morgan": "^1.10.0",

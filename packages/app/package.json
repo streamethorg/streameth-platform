@@ -60,7 +60,7 @@
 		"googleapis": "^133.0.0",
 		"js-base64": "^3.7.5",
 		"jwt-decode": "^4.0.0",
-		"livepeer": "^3.4.0",
+		"livepeer": "3.5.0",
 		"lodash": "^4.17.21",
 		"lokijs": "^1.5.12",
 		"lucide-react": "^0.453.0",

@@ -10,6 +10,7 @@ import youtubedl from 'youtube-dl-exec';
 import { refreshAccessToken } from './oauth';
 import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
+import { IStreamSettings } from '@interfaces/stage.interface';
 
 // Define the youtube-dl output type since this is specific to the youtube-dl library
 interface YoutubeDLOutput {
