@@ -2,7 +2,7 @@ name: Build server
 
 on:
   push:
-    branches: [docker, docker-prod, develop]
+    branches: [develop, main]
 
 jobs:
   prepare-env:
