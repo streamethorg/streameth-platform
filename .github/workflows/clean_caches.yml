@@ -3,7 +3,7 @@ name: Cleanup Caches
 on:
   workflow_dispatch:  # Keep manual trigger
   workflow_run:
-    workflows: ['Build server', 'Playwright Tests', 'Prettier']  # Add workflows that generate caches
+    workflows: ['Build server', 'Playwright Tests', 'Prettier']
     types:
       - completed
 
@@ -12,33 +12,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cleanup old caches
+        shell: bash
         run: |
-          # Get the list of cache keys sorted by creation date
           function cleanup_caches() {
             local pattern=$1
             echo "Cleaning up caches matching pattern: $pattern"
             
+            # Create a temporary file to store cache information
+            temp_file=$(mktemp)
+            
             # Get all cache keys for the pattern, sorted by date (newest first)
-            cacheKeys=$(gh cache list --limit 100 --json key,createdAt --jq '.[] | select(.key | contains("'$pattern'")) | [.key, .createdAt] | @tsv' | sort -k2,2r)
+            gh cache list --limit 100 --json key,createdAt \
+              --jq '.[] | select(.key | contains("'$pattern'")) | [.key, .createdAt] | @tsv' \
+              | sort -k2,2r > "$temp_file"
             
-            # Keep track of how many we've seen for each type
-            declare -A seen_count
-            
-            while IFS=$'\t' read -r key date; do
+            # Process each cache type separately
+            while read -r key date; do
               # Extract the base pattern (everything before the hash)
               base_pattern=$(echo "$key" | sed -E 's/-[a-f0-9]{40}$//')
               
-              # Increment the count for this pattern
-              seen_count[$base_pattern]=$((${seen_count[$base_pattern]:-0} + 1))
+              # Count how many we've seen of this type
+              count=$(grep -c "^${base_pattern}" "$temp_file")
               
               # If we've seen more than 2 caches of this type, delete it
-              if [ "${seen_count[$base_pattern]}" -gt 2 ]; then
+              if [ "$count" -gt 2 ]; then
                 echo "Deleting old cache: $key"
                 gh cache delete "$key"
               else
                 echo "Keeping recent cache: $key"
               fi
-            done <<< "$cacheKeys"
+            done < "$temp_file"
+            
+            # Cleanup
+            rm -f "$temp_file"
           }
           
           # Clean up different types of caches
