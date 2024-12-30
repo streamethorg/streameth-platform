@@ -58,7 +58,7 @@ class App {
   getServer() {
     return this.app;
   }
-  
+
   private async connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);

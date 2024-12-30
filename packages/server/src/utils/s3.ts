@@ -36,12 +36,14 @@ export default class StorageService {
       ACL: 'public-read',
     };
     try {
-      if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'staging') {
+      if (
+        process.env.NODE_ENV === 'development' ||
+        process.env.NODE_ENV === 'staging'
+      ) {
         const command = new PutObjectCommand(params);
         await this.s3Client.send(command);
         return `https://streameth-develop.ams3.digitaloceanspaces.com/${filename}`;
-      }
-      else {
+      } else {
         const command = new PutObjectCommand(params);
         await this.s3Client.send(command);
         return `https://streameth-production.ams3.digitaloceanspaces.com/${filename}`;

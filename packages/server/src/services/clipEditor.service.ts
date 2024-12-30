@@ -8,7 +8,10 @@ import { Livepeer } from 'livepeer';
 import SessionService from './session.service';
 import { config } from '@config';
 import StateService from './state.service';
-import { ClipEditorStatus, IClipEditor } from '@interfaces/clip.editor.interface';
+import {
+  ClipEditorStatus,
+  IClipEditor,
+} from '@interfaces/clip.editor.interface';
 import { clipsQueue } from '@utils/redis';
 export class ClipEditorService extends SessionService {
   constructor(
@@ -95,7 +98,7 @@ export class ClipEditorService extends SessionService {
             id: e.label,
             label: e.label,
             type: 'media',
-            url: session?.source?.streamUrl // Provide empty string as fallback
+            url: session?.source?.streamUrl, // Provide empty string as fallback
             // transcript: {
             //   language: 'en',
             //   words: session?.transcripts.chunks,
@@ -137,7 +140,7 @@ export class ClipEditorService extends SessionService {
         $set: {
           renderId: data.data.renderId,
           status: ClipEditorStatus.rendering,
-        },  
+        },
       },
       { runValidators: false, new: true, lean: true },
     );
