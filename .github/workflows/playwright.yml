@@ -1,10 +1,10 @@
 name: Playwright Tests
 
-on:
-  push:
-    branches: [develop, main]
-  pull_request:
-    branches: [develop, main]
+# on:
+#   push:
+#     branches: [develop, main]
+#   pull_request:
+#     branches: [develop, main]
 
 # Prevent multiple runs of the same workflow on the same ref
 concurrency:
@@ -40,7 +40,7 @@ jobs:
         run: yarn playwright install --with-deps
 
       - name: Build application
-        run: yarn build
+        run: yarn build:app
         env:
           NEXT_PUBLIC_SPACE_STORAGE_URL: ${{ secrets.NEXT_PUBLIC_SPACE_STORAGE_URL }}
           NEXT_PUBLIC_STUDIO_API_KEY: ${{ secrets.NEXT_PUBLIC_STUDIO_API_KEY }}

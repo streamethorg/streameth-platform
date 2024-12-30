@@ -1,32 +1,50 @@
-name: cleanup caches
+name: Cleanup Caches
+
 on:
-  workflow_dispatch:  # Adding manual trigger option
+  workflow_dispatch:  # Keep manual trigger
+  workflow_run:
+    workflows: ['Build server', 'Playwright Tests', 'Prettier']  # Add workflows that generate caches
+    types:
+      - completed
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Cleanup all caches
+      - name: Cleanup old caches
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            # For pull request events, clean specific PR branch caches
-            BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
-            echo "Cleaning caches for PR branch: $BRANCH"
-            cacheKeysForPR=$(gh cache list --ref $BRANCH --limit 100 --json id --jq '.[].id')
-          else
-            # For manual dispatch, clean all caches
-            echo "Cleaning all repository caches"
-            cacheKeysForPR=$(gh cache list --limit 100 --json id --jq '.[].id')
-          fi
-
-          ## Setting this to not fail the workflow while deleting cache keys.
-          set +e
-          echo "Deleting caches..."
-          for cacheKey in $cacheKeysForPR
-          do
-              gh cache delete $cacheKey --confirm
-          done
-          echo "Done"
+          # Get the list of cache keys sorted by creation date
+          function cleanup_caches() {
+            local pattern=$1
+            echo "Cleaning up caches matching pattern: $pattern"
+            
+            # Get all cache keys for the pattern, sorted by date (newest first)
+            cacheKeys=$(gh cache list --limit 100 --json key,createdAt --jq '.[] | select(.key | contains("'$pattern'")) | [.key, .createdAt] | @tsv' | sort -k2,2r)
+            
+            # Keep track of how many we've seen for each type
+            declare -A seen_count
+            
+            while IFS=$'\t' read -r key date; do
+              # Extract the base pattern (everything before the hash)
+              base_pattern=$(echo "$key" | sed -E 's/-[a-f0-9]{40}$//')
+              
+              # Increment the count for this pattern
+              seen_count[$base_pattern]=$((${seen_count[$base_pattern]:-0} + 1))
+              
+              # If we've seen more than 2 caches of this type, delete it
+              if [ "${seen_count[$base_pattern]}" -gt 2 ]; then
+                echo "Deleting old cache: $key"
+                gh cache delete "$key" --confirm
+              else
+                echo "Keeping recent cache: $key"
+              fi
+            done <<< "$cacheKeys"
+          }
+          
+          # Clean up different types of caches
+          cleanup_caches "Linux-buildx"
+          cleanup_caches "playwright"
+          cleanup_caches "yarn"
         env:
           GH_TOKEN: ${{ secrets.TOKEN }}
           GH_REPO: ${{ github.repository }}
