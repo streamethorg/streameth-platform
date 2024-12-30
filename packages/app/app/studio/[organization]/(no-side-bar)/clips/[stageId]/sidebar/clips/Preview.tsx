@@ -11,7 +11,6 @@ import {
 import ShareButton from '@/components/misc/interact/ShareButton';
 import { deleteSessionAction } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
-import { Asset } from 'livepeer/models/components';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';

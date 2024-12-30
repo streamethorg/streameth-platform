@@ -26,11 +26,14 @@ const livepeer = new Livepeer({
 });
 
 export const updateAssetAction = async (session: IExtendedSession) => {
-  const asset = await livepeer.asset.update(session.assetId as string, {
-    storage: {
-      ipfs: true,
+  const asset = await livepeer.asset.update(
+    {
+      storage: {
+        ipfs: true,
+      },
     },
-  });
+    session.assetId as string,
+  );
   await updateSessionAction({
     session: {
       ...session,

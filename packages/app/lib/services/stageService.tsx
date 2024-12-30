@@ -1,7 +1,7 @@
 import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedStage } from '../types';
-import { Session, Stream } from 'livepeer/dist/models/components';
+import type { Session, Stream } from 'livepeer/models/components';
 import { fetchClient } from './fetch-client';
 
 export async function fetchStage({
