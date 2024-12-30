@@ -14,43 +14,68 @@ jobs:
       - name: Cleanup old caches
         shell: bash
         run: |
-          function cleanup_caches() {
-            local pattern=$1
-            echo "Cleaning up caches matching pattern: $pattern"
+          # Define services array
+          services=("server" "stage-transcriptions" "session-transcriptions" "clips" "reel-creator")
+          
+          function cleanup_buildx_cache() {
+            local service=$1
+            echo "🔍 Scanning buildx cache for service: $service"
             
-            # Create a temporary file to store cache information
-            temp_file=$(mktemp)
+            # Get all cache keys for this specific service's buildx cache
+            cacheKeys=$(gh cache list --limit 100 --json key,createdAt \
+              --jq '.[] | select(.key | contains("Linux-buildx-'$service'")) | [.key, .createdAt] | @tsv' \
+              | sort -k2,2r)
             
-            # Get all cache keys for the pattern, sorted by date (newest first)
-            gh cache list --limit 100 --json key,createdAt \
-              --jq '.[] | select(.key | contains("'$pattern'")) | [.key, .createdAt] | @tsv' \
-              | sort -k2,2r > "$temp_file"
-            
-            # Process each cache type separately
-            while read -r key date; do
-              # Extract the base pattern (everything before the hash)
-              base_pattern=$(echo "$key" | sed -E 's/-[a-f0-9]{40}$//')
+            # Keep count of caches for this service
+            count=0
+            while IFS=$'\t' read -r key date; do
+              ((count++))
               
-              # Count how many we've seen of this type
-              count=$(grep -c "^${base_pattern}" "$temp_file")
-              
-              # If we've seen more than 2 caches of this type, delete it
-              if [ "$count" -gt 2 ]; then
-                echo "Deleting old cache: $key"
+              # Keep only the most recent cache for each service
+              if [ "$count" -gt 1 ]; then
+                echo "🗑️  Deleting old cache for $service: $key"
                 gh cache delete "$key"
               else
-                echo "Keeping recent cache: $key"
+                echo "💾 Keeping most recent cache for $service: $key"
               fi
-            done < "$temp_file"
-            
-            # Cleanup
-            rm -f "$temp_file"
+            done <<< "$cacheKeys"
+            echo "✅ Finished cleaning $service caches"
           }
           
-          # Clean up different types of caches
-          cleanup_caches "Linux-buildx"
-          cleanup_caches "playwright"
-          cleanup_caches "yarn"
+          # Clean up buildx caches for each service
+          echo "🚀 Starting cache cleanup process..."
+          for service in "${services[@]}"; do
+            cleanup_buildx_cache "$service"
+          done
+          
+          # Clean up other types of caches (playwright, yarn)
+          function cleanup_other_caches() {
+            local pattern=$1
+            local keep=$2
+            echo "🔍 Scanning caches matching pattern: $pattern"
+            
+            cacheKeys=$(gh cache list --limit 100 --json key,createdAt \
+              --jq '.[] | select(.key | contains("'$pattern'")) | [.key, .createdAt] | @tsv' \
+              | sort -k2,2r)
+            
+            count=0
+            while IFS=$'\t' read -r key date; do
+              ((count++))
+              
+              if [ "$count" -gt "$keep" ]; then
+                echo "🗑️  Deleting old cache: $key"
+                gh cache delete "$key"
+              else
+                echo "💾 Keeping recent cache: $key"
+              fi
+            done <<< "$cacheKeys"
+            echo "✅ Finished cleaning $pattern caches"
+          }
+          
+          # Clean up other cache types
+          cleanup_other_caches "playwright" 2
+          cleanup_other_caches "yarn" 2
+          echo "🎉 Cache cleanup completed successfully!"
         env:
-          GH_TOKEN: ${{ secrets.TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
