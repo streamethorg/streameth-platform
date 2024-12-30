@@ -21,3 +21,28 @@ export interface ILivepeer {
   event: LivepeerEvent;
   payload: LivepeerPayload;
 }
+
+export interface LivepeerRecording {
+  id?: string;
+  playbackId?: string;
+  recordingUrl?: string;
+  mp4Url?: string;
+  name?: string;
+  createdAt?: number;
+  lastSeen?: number;
+}
+		
+export interface MultistreamTarget {
+  id: string;
+  name: string;
+  userId: string;
+  disabled: boolean;
+  createdAt: number;
+}
+export interface LivepeerSDKResponse {
+  contentType: string;
+  statusCode: number;
+  rawResponse: Response;
+  multistreamTarget?: MultistreamTarget;
+  error?: Record<string, unknown>;
+}

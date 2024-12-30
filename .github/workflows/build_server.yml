@@ -15,7 +15,7 @@ jobs:
       - name: Set environment tag
         id: set-tag
         run: |
-          if [[ ${{ github.ref }} == 'refs/heads/docker-prod' ]]; then
+          if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
             echo "ENV_TAG=prod" >> $GITHUB_OUTPUT
             echo "COMPOSE_FILE=docker-compose.prod.yml" >> $GITHUB_OUTPUT
             echo "STACK_NAME=prod" >> $GITHUB_OUTPUT

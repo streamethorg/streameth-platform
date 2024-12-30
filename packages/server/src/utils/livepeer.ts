@@ -4,13 +4,22 @@ import type { IMultiStream } from '@interfaces/stream.interface';
 import Organization from '@models/organization.model';
 import Stage from '@models/stage.model';
 import { Livepeer } from 'livepeer';
-import { Session, Stream } from 'livepeer/dist/models/components';
+import { LivepeerSDKResponse, LivepeerRecording } from '@interfaces/livepeer.interface';
 import fetch from 'node-fetch';
 import youtubedl from 'youtube-dl-exec';
 import { refreshAccessToken } from './oauth';
 import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 
+// Define the youtube-dl output type since this is specific to the youtube-dl library
+interface YoutubeDLOutput {
+  formats: Array<{
+    protocol: string;
+    ext: string;
+    resolution: string;
+    manifest_url: string;
+  }>;
+}
 const { host, secretKey } = config.livepeer;
 const livepeer = new Livepeer({
   apiKey: secretKey,
@@ -63,7 +72,7 @@ export const deleteStream = async (streamId: string): Promise<void> => {
   }
 };
 
-export const getStreamInfo = async (streamId: string): Promise<Stream> => {
+export const getStreamInfo = async (streamId: string): Promise<IStreamSettings> => {
   try {
     const response = await fetch(`${host}/api/stream/${streamId}`, {
       method: 'get',
@@ -242,48 +251,74 @@ export const getVideoPhaseAction = async (
   }
 };
 
-export const getStreamRecordings = async (streamId: string): Promise<any> => {
+export const getStreamRecordings = async (streamId: string): Promise<LivepeerRecording[]> => {
   try {
     const parentStream = await getStreamInfo(streamId);
-    const recordings = (
-      await livepeer.session.getRecorded(parentStream?.id ?? '')
-    ).classes;
+    const response = await livepeer.session.getRecorded(parentStream?.streamId ?? '');
+    const recordings = response.data;
     if (!recordings) {
-      return {
-        parentStream,
-        recordings: [],
-      };
+      return [];
     }
-    return {
-      parentStream,
-      recordings: JSON.parse(JSON.stringify(recordings)) as Session[],
-    };
+    return recordings;
   } catch (e) {
-    throw new HttpException(400, 'Error fetching stream recordings');
+    console.error(`Error fetching recordings:`, e);
+    return [];
   }
 };
 
 export const createMultiStream = async (data: IMultiStream): Promise<void> => {
   try {
-    const response = await livepeer.stream.createMultistreamTarget(
-      data.streamId,
-      {
-        spec: {
-          name: data.name,
-          url: data.targetURL + '/' + data.targetStreamKey,
-        },
-        profile: 'source',
-      },
-    );
-    const multistream = JSON.parse(response.rawResponse.data.toString());
+    // Ensure URL starts with rtmp:// or rtmps://
+    const targetUrl = data.targetURL.startsWith('rtmp://') || data.targetURL.startsWith('rtmps://') || data.targetURL.startsWith('srt://')
+      ? `${data.targetURL}/${data.targetStreamKey}`
+      : `rtmp://${data.targetURL}/${data.targetStreamKey}`;
+
+    console.log('Creating multistream target with data:', {
+      url: targetUrl,
+      name: data.name,
+    });
+
+    const targetResult = await livepeer.multistream.create({
+      url: targetUrl,
+      name: data.name,
+    }) as unknown as LivepeerSDKResponse;
+
+    // Log the full response structure
+    console.log('Full target result:', JSON.stringify(targetResult, null, 2));
+
+    if (!targetResult.multistreamTarget) {
+      throw new Error('Failed to create multistream target');
+    }
+
+    // Then add the target to the stream using the SDK method
+    console.log('Adding target to stream with data:', {
+      profile: 'source',
+      videoOnly: false,
+      id: targetResult.multistreamTarget.id,
+      streamId: data.streamId,
+    });
+
+    const addResult = await livepeer.stream.addMultistreamTarget({
+      profile: 'source',
+      videoOnly: false,
+      id: targetResult.multistreamTarget.id,
+    }, data.streamId) as unknown as LivepeerSDKResponse;
+
+    // Log the full add result structure
+    console.log('Full add result:', JSON.stringify(addResult, null, 2));
+
+    if (addResult.error && Object.keys(addResult.error).length > 0) {
+      throw new Error('Failed to add multistream target to stream');
+    }
+
     const stage = await Stage.findOne({
       'streamSettings.streamId': data.streamId,
     });
     await stage.updateOne({
       $push: {
         'streamSettings.targets': {
-          id: multistream.id,
-          name: multistream.name,
+          id: targetResult.multistreamTarget.id,
+          name: data.name,
           socialId: data.socialId ?? '',
           socialType: data.socialType ?? '',
           broadcastId: data.broadcastId ?? '',
@@ -291,6 +326,13 @@ export const createMultiStream = async (data: IMultiStream): Promise<void> => {
       },
     });
   } catch (e) {
+    console.error('Error creating multistream:', e);
+    if (e.body) {
+      console.error('Error body:', e.body);
+    }
+    if (e.rawResponse) {
+      console.error('Raw response:', e.rawResponse);
+    }
     throw new HttpException(400, 'Error creating multistream');
   }
 };
@@ -300,16 +342,23 @@ export const deleteMultiStream = async (data: {
   targetId: string;
 }): Promise<void> => {
   try {
-    await fetch(`${host}/api/multistream/target/${data.targetId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${secretKey}`,
-      },
-      body: JSON.stringify({
-        disabled: true,
-      }),
+    console.log('Removing multistream target from stream:', {
+      streamId: data.streamId,
+      targetId: data.targetId,
     });
+
+    // First remove the target from the stream
+    const removeResult = await livepeer.stream.removeMultistreamTarget(
+      data.streamId,
+      data.targetId,
+    );
+    console.log('Remove result:', removeResult);
+
+    // Then delete the target itself
+    console.log('Deleting multistream target:', data.targetId);
+    const deleteResult = await livepeer.multistream.delete(data.targetId);
+    console.log('Delete result:', deleteResult);
+
     const stage = await Stage.findOne({
       'streamSettings.streamId': data.streamId,
     });
@@ -331,7 +380,13 @@ export const deleteMultiStream = async (data: {
       $pull: { 'streamSettings.targets': { id: data.targetId } },
     });
   } catch (e) {
-    console.log('error', e);
+    console.error('Error deleting multistream:', e);
+    if (e.body) {
+      console.error('Error body:', e.body);
+    }
+    if (e.rawResponse) {
+      console.error('Raw response:', e.rawResponse);
+    }
     throw new HttpException(400, 'Error deleting multistream');
   }
 };
@@ -368,16 +423,16 @@ export const getSessionMetrics = async (
   playbackId: string,
 ): Promise<{ viewCount: number; playTimeMins: number }> => {
   try {
-    const metrics = await livepeer.metrics.getPublicTotalViews(playbackId);
-    if (!metrics.object) {
+    const metrics = await livepeer.metrics.getPublicViewership(playbackId);
+    if (!metrics?.data) {
       return {
         viewCount: 0,
         playTimeMins: 0,
       };
     }
     return {
-      viewCount: metrics.object?.viewCount,
-      playTimeMins: metrics.object?.playtimeMins,
+      viewCount: metrics.data.viewCount ?? 0,
+      playTimeMins: metrics.data.playtimeMins ?? 0,
     };
   } catch (e) {
     throw new HttpException(400, 'Error getting metrics');
@@ -387,33 +442,29 @@ export const getSessionMetrics = async (
 export const getHlsUrl = async (
   url: string,
 ): Promise<{ type: string; url: string }> => {
-  try {
-    let hlsUrl = '';
-    const source = getSourceType(url);
-    if (source.type === 'youtube' || source.type === 'twitter') {
-      const output = await youtubedl(url, {
-        dumpSingleJson: true,
-        noWarnings: true,
-        preferFreeFormats: true,
-        addHeader: source.header,
-      });
-      const hlsFormat = output.formats.find(
-        (format) =>
-          format.protocol === 'm3u8_native' &&
-          format.ext === 'mp4' &&
-          source.resolutions?.includes(format.resolution),
-      );
-      hlsUrl = hlsFormat.manifest_url;
-    } else {
-      hlsUrl = url;
-    }
+  const source = getSourceType(url);
+  if (source.type === 'youtube' || source.type === 'twitter') {
+    let output = await youtubedl(url, {
+      dumpSingleJson: true,
+      noWarnings: true,
+      preferFreeFormats: true,
+      addHeader: source.header,
+    }) as YoutubeDLOutput;
+    const hlsFormat = output.formats.find(
+      (format) =>
+        format.protocol === 'm3u8_native' &&
+        format.ext === 'mp4' &&
+        source.resolutions?.includes(format.resolution),
+    );
     return {
       type: source.type,
-      url: hlsUrl,
+      url: hlsFormat?.manifest_url || url,
     };
-  } catch (e) {
-    throw new HttpException(400, 'Error getting HLS URL');
   }
+  return {
+    type: source.type,
+    url,
+  };
 };
 
 function sleep(ms: number) {

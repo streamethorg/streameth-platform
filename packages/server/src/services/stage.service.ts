@@ -144,7 +144,14 @@ export default class StageService {
           noWarnings: true,
           preferFreeFormats: true,
           addHeader: source.header,
-        });
+        }) as {
+          formats: Array<{
+            protocol: string;
+            ext: string;
+            resolution: string;
+            manifest_url: string;
+          }>;
+        };
         const hlsFormat = output.formats.find(
           (format) =>
             format.protocol === 'm3u8_native' &&
