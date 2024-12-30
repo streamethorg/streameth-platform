@@ -34,7 +34,7 @@ jobs:
               # If we've seen more than 2 caches of this type, delete it
               if [ "${seen_count[$base_pattern]}" -gt 2 ]; then
                 echo "Deleting old cache: $key"
-                gh cache delete "$key" --confirm
+                gh cache delete "$key"
               else
                 echo "Keeping recent cache: $key"
               fi
