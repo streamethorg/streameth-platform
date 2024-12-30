@@ -14,6 +14,16 @@ jobs:
       - name: Cleanup old caches
         shell: bash
         run: |
+          # Enable debug mode and error handling
+          set -x
+          
+          # Test GitHub CLI authentication
+          echo "🔑 Testing GitHub CLI authentication..."
+          gh auth status || {
+            echo "❌ GitHub CLI authentication failed"
+            exit 1
+          }
+          
           # Define services array
           services=("server" "stage-transcriptions" "session-transcriptions" "clips" "reel-creator")
           
@@ -22,9 +32,18 @@ jobs:
             echo "🔍 Scanning buildx cache for service: $service"
             
             # Get all cache keys for this specific service's buildx cache
+            echo "📋 Fetching cache list..."
             cacheKeys=$(gh cache list --limit 100 --json key,createdAt \
               --jq '.[] | select(.key | contains("Linux-buildx-'$service'")) | [.key, .createdAt] | @tsv' \
-              | sort -k2,2r)
+              | sort -k2,2r) || {
+              echo "❌ Failed to fetch cache list for $service"
+              return 1
+            }
+            
+            if [ -z "$cacheKeys" ]; then
+              echo "ℹ️ No caches found for service: $service"
+              return 0
+            fi
             
             # Keep count of caches for this service
             count=0
@@ -34,7 +53,7 @@ jobs:
               # Keep only the most recent cache for each service
               if [ "$count" -gt 1 ]; then
                 echo "🗑️  Deleting old cache for $service: $key"
-                gh cache delete "$key"
+                gh cache delete "$key" || echo "⚠️  Failed to delete cache: $key"
               else
                 echo "💾 Keeping most recent cache for $service: $key"
               fi
@@ -44,8 +63,11 @@ jobs:
           
           # Clean up buildx caches for each service
           echo "🚀 Starting cache cleanup process..."
+          failed_services=()
           for service in "${services[@]}"; do
-            cleanup_buildx_cache "$service"
+            if ! cleanup_buildx_cache "$service"; then
+              failed_services+=("$service")
+            fi
           done
           
           # Clean up other types of caches (playwright, yarn)
@@ -56,7 +78,15 @@ jobs:
             
             cacheKeys=$(gh cache list --limit 100 --json key,createdAt \
               --jq '.[] | select(.key | contains("'$pattern'")) | [.key, .createdAt] | @tsv' \
-              | sort -k2,2r)
+              | sort -k2,2r) || {
+              echo "❌ Failed to fetch cache list for $pattern"
+              return 1
+            }
+            
+            if [ -z "$cacheKeys" ]; then
+              echo "ℹ️ No caches found for pattern: $pattern"
+              return 0
+            fi
             
             count=0
             while IFS=$'\t' read -r key date; do
@@ -64,7 +94,7 @@ jobs:
               
               if [ "$count" -gt "$keep" ]; then
                 echo "🗑️  Deleting old cache: $key"
-                gh cache delete "$key"
+                gh cache delete "$key" || echo "⚠️  Failed to delete cache: $key"
               else
                 echo "💾 Keeping recent cache: $key"
               fi
@@ -73,9 +103,24 @@ jobs:
           }
           
           # Clean up other cache types
-          cleanup_other_caches "playwright" 2
-          cleanup_other_caches "yarn" 2
-          echo "🎉 Cache cleanup completed successfully!"
+          failed_patterns=()
+          for pattern in "playwright" "yarn"; do
+            if ! cleanup_other_caches "$pattern" 2; then
+              failed_patterns+=("$pattern")
+            fi
+          done
+          
+          # Report results
+          echo "📊 Cleanup Summary:"
+          if [ ${#failed_services[@]} -eq 0 ] && [ ${#failed_patterns[@]} -eq 0 ]; then
+            echo "🎉 Cache cleanup completed successfully!"
+            exit 0
+          else
+            echo "⚠️  Cache cleanup completed with some issues:"
+            [ ${#failed_services[@]} -gt 0 ] && echo "❌ Failed services: ${failed_services[*]}"
+            [ ${#failed_patterns[@]} -gt 0 ] && echo "❌ Failed patterns: ${failed_patterns[*]}"
+            exit 1
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
