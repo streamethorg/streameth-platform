@@ -1,14 +1,20 @@
-name: Playwright Tests with Dependency and Artifact Caching
+name: Playwright Tests
 
 on:
-  # push:
-  #   branches: [develop, main]
-  # pull_request:
-  #   branches: [develop, main]
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+# Prevent multiple runs of the same workflow on the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   install:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,11 +23,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: 'yarn'
 
-      - name: Install yarn and dependencies
-        run: |
-          npm install -g yarn
-          yarn install
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
       - name: Install Playwright browsers
         run: yarn playwright install --with-deps

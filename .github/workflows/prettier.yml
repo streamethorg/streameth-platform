@@ -1,16 +1,20 @@
 name: Prettier
 
-
 on:
   pull_request:
     branches: [main, develop]
   push:
     branches: [main, develop]
 
+# Prevent multiple runs of the same workflow on the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  check-prettier:
+  format:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
@@ -18,7 +22,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          cache: 'yarn'
       - name: Install dependencies
-        run: yarn
-      - name: Check code formatting
-        run: yarn prettier:check
+        run: yarn install --frozen-lockfile
+      - name: Format code with Prettier
+        run: yarn prettier:fix
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: format code with prettier"
+          branch: ${{ github.head_ref }}
