@@ -19,6 +19,7 @@ import { z } from 'zod';
 import { clipSchema } from '@/lib/schema';
 import { Button } from '@/components/ui/button';
 import Combobox from '@/components/ui/combo-box';
+import VideoUpload from '@/components/misc/form/videoUpload';
 
 const SelectAnimation = ({
   animations,
@@ -93,16 +94,14 @@ const SelectAnimation = ({
                     </Button>
                   </div>
                 ) : (
-                  <Dropzone
-                    uploads={upload}
-                    setUploads={setUpload}
-                    organizationId={organizationId}
-                    stageId={stageId}
-                    onChange={field.onChange}
-                    type={SessionType.animation}
-                    maxFiles={1}
-                    maxSize={50 * 1024 * 1024}
-                  />
+                  <VideoUpload
+                  path={`organizations/${organizationId}/animations`}
+                  options={{
+                    placeholder: 'Upload animation video (max 15MB)',
+                    maxSize: 15 * 1024 * 1024, // 15MB
+                  }}
+                  {...field}
+                />
                 )}
               </div>
             </FormControl>
