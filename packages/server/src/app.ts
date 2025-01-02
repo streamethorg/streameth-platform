@@ -15,6 +15,7 @@ import { RegisterRoutes } from './routes/routes';
 import * as swaggerDocument from './swagger/swagger.json';
 import { logger } from './utils/logger';
 import ErrorMiddleware from './middlewares/error.middleware';
+import { multerConfig } from './middlewares/multer.middleware';
 
 class App {
   public app: express.Application;
@@ -82,7 +83,7 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
-    RegisterRoutes(this.app);
+    RegisterRoutes(this.app, { multer: multerConfig });
   }
 
   private initializeErrorMiddleware() {
