@@ -7420,7 +7420,7 @@
 		},
 		"/upload": {
 			"post": {
-				"operationId": "UploadImges",
+				"operationId": "UploadFile",
 				"responses": {
 					"200": {
 						"description": "Ok",
