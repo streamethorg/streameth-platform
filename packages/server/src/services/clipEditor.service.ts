@@ -41,7 +41,7 @@ export class ClipEditorService extends SessionService {
     data.editorOptions.events.map((e) => {
       console.log('e', e);
     });
-    const events = data.editorOptions.events.filter((e) => e.sessionId !== '');
+    const events = data.editorOptions.events;
     data.editorOptions.events = events;
     await ClipEditor.create({
       ...data.editorOptions,
@@ -67,10 +67,24 @@ export class ClipEditorService extends SessionService {
   }
 
   async launchRemotionRender(clipEditor: IClipEditor) {
+    console.log('👍 clipEditor', clipEditor);
     // get all event session data based on event session ids
+    const sessionIds = clipEditor.events
+      .filter(e => e.sessionId)
+      .map(e => e.sessionId);
+    console.log('👍 sessionIds', sessionIds);
+    
+    // Get all sessions in one query
     const eventSessions = await Session.find({
-      _id: { $in: clipEditor.events.map((e) => e.sessionId) },
-    });
+      _id: { $in: sessionIds },
+    }).lean();
+    console.log('👍 eventSessions', eventSessions);
+
+    // Create a map for quick session lookup
+    const sessionsMap = eventSessions.reduce((acc, session) => {
+      acc[session._id.toString()] = session;
+      return acc;
+    }, {});
 
     // check if all event sessions are completed
     const allEventSessionsCompleted = eventSessions.every(
@@ -84,9 +98,19 @@ export class ClipEditorService extends SessionService {
       id: config.remotion.id,
       inputProps: {
         events: clipEditor.events.map((e) => {
-          const session = eventSessions.find(
-            (s) => s._id.toString() === e.sessionId.toString(), // Convert both to strings for comparison
-          );
+          // If event has a direct videoUrl, use that
+          if (e.videoUrl) {
+            return {
+              id: e.label,
+              label: e.label,
+              type: 'media',
+              url: e.videoUrl,
+            };
+          }
+
+          // Otherwise, look up the session from our map
+          const session = e.sessionId ? sessionsMap[e.sessionId.toString()] : null;
+          console.log('👍 session', session);
 
           if (!session?.source?.streamUrl) {
             console.log(
@@ -98,12 +122,7 @@ export class ClipEditorService extends SessionService {
             id: e.label,
             label: e.label,
             type: 'media',
-            url: session?.source?.streamUrl, // Provide empty string as fallback
-            // transcript: {
-            //   language: 'en',
-            //   words: session?.transcripts.chunks,
-            //   text: session?.transcripts.text,
-            // },
+            url: session?.source?.streamUrl || '', // Always provide empty string as fallback
           };
         }),
         captionLinesPerPage: clipEditor.captionLinesPerPage.toString(),

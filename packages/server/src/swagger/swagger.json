@@ -488,6 +488,9 @@
 							"events": {
 								"items": {
 									"properties": {
+										"videoUrl": {
+											"type": "string"
+										},
 										"sessionId": {
 											"type": "string"
 										},
@@ -496,7 +499,6 @@
 										}
 									},
 									"required": [
-										"sessionId",
 										"label"
 									],
 									"type": "object"

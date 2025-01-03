@@ -36,7 +36,11 @@ export class CreateClipDto implements IClip {
   @IsObject()
   editorOptions?: {
     frameRate: number;
-    events: Array<{ label: string; sessionId: string }>;
+    events: Array<{
+      label: string;
+      sessionId?: string;
+      videoUrl?: string;
+    }>;
     selectedAspectRatio: string;
     captionEnabled: boolean;
     captionPosition: string;

@@ -10,7 +10,8 @@ export interface IClip {
     frameRate: number;
     events: Array<{
       label: string;
-      sessionId: string;
+      sessionId?: string;
+      videoUrl?: string;
     }>;
     selectedAspectRatio: string;
     captionEnabled: boolean;

@@ -77,6 +77,7 @@ export async function fetchAllSessions({
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {
       cache: 'no-store',
+      next: { revalidate: 0 }
     }
   );
   const a = await response.json();
@@ -241,7 +242,11 @@ export const createClip = async ({
   isEditorEnabled: boolean;
   editorOptions?: {
     frameRate: number;
-    events: Array<{ label: string; sessionId: string }>;
+    events: Array<{
+      label: string;
+      sessionId?: string;
+      videoUrl?: string;
+    }>;
     selectedAspectRatio: string;
     captionEnabled: boolean;
     captionPosition: string;

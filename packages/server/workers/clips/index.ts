@@ -22,12 +22,15 @@ interface Segment {
 }
 
 const consumer = async () => {
+  console.log('🎬 Starting clips worker consumer');
   const queue = await clipsQueue();
   queue.process(async (job) => {
     const data = job.data as IClip;
+    console.log(`📋 Processing clip job ${job.id} for session ${data.sessionId}`);
     try {
       return await processClip(data);
     } catch (error) {
+      console.error(`❌ Clip processing failed for session ${data.sessionId}:`, error);
       await Session.findByIdAndUpdate(data.sessionId, {
         $set: {
           processingStatus: ProcessingStatus.failed,
@@ -39,19 +42,31 @@ const consumer = async () => {
 };
 
 const processClip = async (data: IClip) => {
-  console.log('Starting processClip with data:', data);
+  console.log('🎥 Starting clip processing:', {
+    sessionId: data.sessionId,
+    start: data.start,
+    end: data.end,
+    hasEditorOptions: !!data.editorOptions,
+  });
   const { sessionId, clipUrl, start, end } = data;
 
   try {
+    console.log('📥 Fetching master playlist from:', clipUrl);
     const masterResponse = await fetch(clipUrl);
     if (!masterResponse.ok) {
+      console.error('❌ Failed to fetch master playlist:', {
+        status: masterResponse.status,
+        statusText: masterResponse.statusText,
+      });
       throw new Error(
         `Failed to fetch master playlist: ${masterResponse.statusText}`,
       );
     }
     const masterContent = await masterResponse.text();
+    console.log('✅ Successfully fetched master playlist');
 
     // 2. Find the 1080p variant
+    console.log('🔍 Searching for 1080p variant in master playlist');
     const linesMaster = masterContent.split('\n');
     let variantUrl = '';
 
@@ -64,25 +79,43 @@ const processClip = async (data: IClip) => {
     variantUrl = clipUrl.replace('index.m3u8', variantUrl);
 
     if (!variantUrl) {
+      console.error('❌ 1080p variant not found in master playlist');
       throw new Error('1080p variant not found in master playlist');
     }
+    console.log('✅ Found 1080p variant URL:', variantUrl);
 
     const duration = end - start;
-    console.log('relativeStartSeconds', start, end, duration);
+    console.log('⏱️ Clip duration details:', {
+      start,
+      end,
+      duration,
+    });
+
     const tempDir = tmpdir();
     const concatPath = join(tempDir, `${sessionId}-concat.mp4`);
     const outputPath = join(tempDir, `${sessionId}.mp4`);
+    console.log('📁 Temporary file paths:', {
+      concatPath,
+      outputPath,
+    });
 
     // 1. Fetch and parse manifest
+    console.log('📥 Fetching variant manifest');
     const manifestResponse = await fetch(variantUrl);
     if (!manifestResponse.ok) {
+      console.error('❌ Failed to fetch variant manifest:', {
+        status: manifestResponse.status,
+        statusText: manifestResponse.statusText,
+      });
       throw new Error(
         `Failed to fetch manifest: ${manifestResponse.statusText}`,
       );
     }
     const manifestContent = await manifestResponse.text();
+    console.log('✅ Successfully fetched variant manifest');
 
     // 2. Parse segments and their durations
+    console.log('🔍 Parsing segments from manifest');
     const segments: Segment[] = [];
     let cumulativeTime = 0;
     const lines = manifestContent.split('\n');
@@ -112,17 +145,16 @@ const processClip = async (data: IClip) => {
     }
 
     if (segments.length === 0) {
+      console.error('❌ No segments found for specified time range:', { start, end });
       throw new Error(`No segments found for time range ${start}-${end}`);
     }
 
-    console.log(
-      `Found ${segments.length} segments for clip from ${start}s to ${end}s`,
-    );
-    console.log('First segment starts at:', segments[0].startTime);
-    console.log(
-      'Last segment starts at:',
-      segments[segments.length - 1].startTime,
-    );
+    console.log('📊 Segment analysis:', {
+      totalSegments: segments.length,
+      clipDuration: duration,
+      firstSegmentStart: segments[0].startTime,
+      lastSegmentStart: segments[segments.length - 1].startTime,
+    });
 
     // 3. Download segments in parallel with progress tracking
     const CONCURRENT_DOWNLOADS = 5;
@@ -139,16 +171,29 @@ const processClip = async (data: IClip) => {
       const downloadedMB = downloadedBytes / (1024 * 1024);
       const totalMB = totalBytes / (1024 * 1024);
 
-      console.log(
-        `Download Progress: ${completedDownloads}/${segments.length} segments ` +
-          `(${percentComplete.toFixed(1)}%) - ${downloadedMB.toFixed(1)}MB/${totalMB.toFixed(1)}MB`,
-      );
+      console.log('📥 Download progress:', {
+        completedSegments: completedDownloads,
+        totalSegments: segments.length,
+        percentComplete: `${percentComplete.toFixed(1)}%`,
+        downloadedSize: `${downloadedMB.toFixed(1)}MB`,
+        totalSize: `${totalMB.toFixed(1)}MB`,
+      });
     };
 
     const downloadSegment = async (segment: Segment, index: number) => {
       const segmentPath = join(tempDir, `segment_${index}.ts`);
+      console.log(`📥 Downloading segment ${index}:`, {
+        startTime: segment.startTime,
+        duration: segment.duration,
+      });
+      
       const response = await fetch(segment.url);
       if (!response.ok) {
+        console.error(`❌ Failed to download segment ${index}:`, {
+          startTime: segment.startTime,
+          status: response.status,
+          statusText: response.statusText,
+        });
         throw new Error(
           `Failed to download segment at ${segment.startTime}s: ${response.statusText}`,
         );
@@ -193,9 +238,10 @@ const processClip = async (data: IClip) => {
     };
 
     try {
-      console.log(
-        `Starting download of ${segments.length} segments with ${CONCURRENT_DOWNLOADS} concurrent downloads`,
-      );
+      console.log('🚀 Starting parallel segment downloads:', {
+        totalSegments: segments.length,
+        concurrentDownloads: CONCURRENT_DOWNLOADS,
+      });
       const startTime = Date.now();
 
       segmentPaths.splice(
@@ -210,11 +256,13 @@ const processClip = async (data: IClip) => {
 
       const duration = (Date.now() - startTime) / 1000;
       const speed = downloadedBytes / (1024 * 1024) / duration; // MB/s
-      console.log(
-        `Downloads completed in ${duration.toFixed(1)}s ` +
-          `(${speed.toFixed(1)} MB/s average)`,
-      );
+      console.log('✅ Segment downloads completed:', {
+        duration: `${duration.toFixed(1)}s`,
+        averageSpeed: `${speed.toFixed(1)} MB/s`,
+        totalSize: `${(downloadedBytes / (1024 * 1024)).toFixed(1)}MB`,
+      });
     } catch (error) {
+      console.error('❌ Error during segment downloads:', error);
       // Clean up any partially downloaded segments
       await Promise.all(
         segmentPaths
@@ -225,28 +273,41 @@ const processClip = async (data: IClip) => {
     }
 
     // 4. Create concat file
+    console.log('📝 Creating concat file');
     const concatFilePath = join(tempDir, `${sessionId}-concat.txt`);
     const concatContent = segmentPaths
       .map((path) => `file '${path}'`)
       .join('\n');
 
     await fs.promises.writeFile(concatFilePath, concatContent);
+    console.log('✅ Concat file created:', concatFilePath);
 
     // 5. Calculate precise offset from first segment
     const offsetInFirstSegment = start - segments[0].startTime;
+    console.log('⚡ Calculated clip parameters:', {
+      offsetInFirstSegment,
+      totalDuration: duration,
+    });
 
     return new Promise((resolve, reject) => {
+      console.log('🎬 Starting FFmpeg concatenation');
       // First concatenate required segments
       ffmpeg()
         .input(concatFilePath)
         .inputOptions(['-f', 'concat', '-safe', '0'])
         .outputOptions(['-c', 'copy'])
         .output(concatPath)
+        .on('start', (command) => {
+          console.log('🎥 FFmpeg concat command:', command);
+        })
         .on('end', () => {
+          console.log('✅ FFmpeg concatenation completed');
           // Clean up concat file and segment files
           fs.unlinkSync(concatFilePath);
           segmentPaths.forEach((path) => fs.unlinkSync(path));
+          console.log('🧹 Cleaned up temporary segment files');
 
+          console.log('🎬 Starting FFmpeg trim operation');
           // Then trim the exact portion we need
           ffmpeg()
             .input(concatPath)
@@ -254,23 +315,27 @@ const processClip = async (data: IClip) => {
             .outputOptions(['-c copy', '-f mp4', '-movflags +faststart'])
             .duration(duration)
             .output(outputPath)
+            .on('start', (command) => {
+              console.log('🎥 FFmpeg trim command:', command);
+            })
             .on('end', async () => {
               try {
                 fs.unlinkSync(concatPath);
+                console.log('🧹 Cleaned up concatenated file');
 
-                console.log('Clip creation finished');
+                console.log('✅ Clip creation finished');
                 const storageService = new StorageService();
                 const fileBuffer = await fs.promises.readFile(outputPath);
-                console.log('uploading file to s3');
+                console.log('📤 Uploading clip to S3');
                 const url = await storageService.uploadFile(
                   'clips/' + sessionId,
                   fileBuffer,
                   'video/mp4',
                 );
-                console.log('Clip uploaded to:', url);
+                console.log('✅ Clip uploaded to S3:', url);
 
                 if (data.editorOptions) {
-                  console.log('editorOptions', data.editorOptions);
+                  console.log('🎨 Processing editor options:', data.editorOptions);
                   // Make sure we're passing a plain object for the update
                   const updateData = {
                     source: {
@@ -281,6 +346,7 @@ const processClip = async (data: IClip) => {
                     processingStatus: ProcessingStatus.clipCreated,
                   };
 
+                  console.log('💾 Updating session with clip data');
                   const session = await Session.findByIdAndUpdate(
                     sessionId,
                     { $set: updateData },
@@ -288,43 +354,55 @@ const processClip = async (data: IClip) => {
                   );
 
                   if (!session) {
+                    console.error('❌ Session not found:', sessionId);
                     throw new Error(`Session not found: ${sessionId}`);
                   }
+
+                  console.log('🗿 data.editorOptions', data.editorOptions);
                   if (data.editorOptions.captionEnabled) {
+                    console.log('🎯 Starting audio transcription');
                     await transcribeAudioSession(url, session);
+                    console.log('✅ Audio transcription completed');
                   }
 
+                  console.log('🗿 sessionId', sessionId);
+                  console.log('🎨 Finding clip editor configuration');
                   const clipEditor = await ClipEditor.findOne({
                     clipSessionId: sessionId,
                   });
-                  console.log('clipEditor', clipEditor);
+                  console.log('🗿 clipEditor', clipEditor);
+                  console.log('🎬 Launching Remotion render');
                   await clipEditorService.launchRemotionRender(clipEditor);
-                  fs.unlinkSync(outputPath);
-                  resolve(true);
+                  console.log('✅ Remotion render launched');
                 } else {
-                  console.log('creating asset from url');
+                  console.log('📤 Creating Livepeer asset');
                   const assetId = await createAssetFromUrl(sessionId, url);
-                  console.log('assetId', assetId);
+                  console.log('✅ Livepeer asset created:', assetId);
 
-                  // Make sure we're passing a plain object for the update
+                  console.log('💾 Updating session with asset ID');
                   await Session.findByIdAndUpdate(sessionId, {
                     $set: {
                       assetId,
+                      processingStatus: ProcessingStatus.completed,
                     },
                   });
-                  fs.unlinkSync(outputPath);
-                  resolve(true);
+                  console.log('✅ Session updated with asset ID');
                 }
+
+                fs.unlinkSync(outputPath);
+                console.log('🧹 Cleaned up output file');
+                console.log('✅ Clip processing completed successfully');
+                resolve(true);
               } catch (error) {
-                console.error('Error creating clip:', error);
+                console.error('❌ Error in final processing steps:', error);
                 reject(error);
               }
             })
             .on('progress', (progress) => {
-              console.log('trimming progress', progress);
+              console.log('🎥 FFmpeg trim progress:', progress);
             })
             .on('error', async (err) => {
-              console.error('Error trimming clip:', err);
+              console.error('❌ Error during FFmpeg trim:', err);
               fs.unlinkSync(concatPath);
               await Session.findByIdAndUpdate(sessionId, {
                 $set: {
@@ -336,10 +414,10 @@ const processClip = async (data: IClip) => {
             .run();
         })
         .on('progress', (progress) => {
-          console.log('download progress', progress);
+          console.log('🎥 FFmpeg concat progress:', progress);
         })
         .on('error', async (err) => {
-          console.error('Error downloading segments:', err);
+          console.error('❌ Error during FFmpeg concat:', err);
           await Session.findByIdAndUpdate(sessionId, {
             $set: {
               processingStatus: ProcessingStatus.failed,
@@ -350,7 +428,7 @@ const processClip = async (data: IClip) => {
         .run();
     });
   } catch (error) {
-    console.error('Error processing clip:', error);
+    console.error('❌ Fatal error in clip processing:', error);
     await Session.findByIdAndUpdate(sessionId, {
       $set: {
         processingStatus: ProcessingStatus.failed,
@@ -362,14 +440,16 @@ const processClip = async (data: IClip) => {
 
 const init = async () => {
   try {
+    console.log('🚀 Initializing clips worker');
     await connect(dbConnection.url, {
       serverSelectionTimeoutMS: 5000,
     });
+    console.log('✅ Connected to database');
 
     await consumer();
+    console.log('✅ Clips worker initialized successfully');
   } catch (err) {
-    console.error('Worker initialization failed with error:', err);
-    console.error('Error details:', {
+    console.error('❌ Worker initialization failed:', {
       name: err.name,
       message: err.message,
       stack: err.stack,
@@ -380,17 +460,17 @@ const init = async () => {
 
 // Add more detailed error handlers
 process.on('unhandledRejection', (error) => {
-  console.error('Unhandled rejection:', error);
+  console.error('❌ Unhandled rejection in clips worker:', error);
   process.exit(1);
 });
 
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught exception:', error);
+  console.error('❌ Uncaught exception in clips worker:', error);
   process.exit(1);
 });
 
 init().catch((error) => {
-  console.error('Fatal error during initialization:', {
+  console.error('❌ Fatal error during clips worker initialization:', {
     name: error.name,
     message: error.message,
     stack: error.stack,

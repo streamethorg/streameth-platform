@@ -19,6 +19,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { videoUploadAction } from '@/lib/actions/videoUpload';
+import { createSessionAction } from '@/lib/actions/sessions';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { SessionType, eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 
 function getVideoData(file: File) {
   const dataTransfer = new DataTransfer();
@@ -116,6 +119,34 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
 
           console.log('✅ Animation upload successful! URL:', videoUrl);
           setPreview(videoUrl);
+
+          // Create session for animation if path includes 'animations'
+          const organizationId = path.split('/')[1]; // Extract org ID from path
+          try {
+             await createSessionAction({
+              session: {
+                  name: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
+                  description: 'Animation video',
+                  type: SessionType.animation,
+                  organizationId,
+                  videoUrl: videoUrl,
+                  start: Date.now(),
+                  end: Date.now(),
+                  speakers: [],
+                  track: [],
+                  published: eVisibilty.private,
+                  assetId: '',
+                  processingStatus: ProcessingStatus.completed,
+                },
+              });
+              console.log('✅ Animation session created with videoUrl:', videoUrl);
+              toast.success('Animation uploaded');
+            } catch (error) {
+              console.error('❌ Failed to create animation session:', error);
+              toast.error('Failed to create animation session');
+              // Continue even if session creation fails, as we still have the video URL
+            }
+          
           return videoUrl;
         } catch (e) {
           console.error('❌ Animation upload failed:', e);
@@ -149,33 +180,22 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
           const { displayUrl } = getVideoData(file);
 
           setPreview(displayUrl);
-          toast.promise(
-            onSubmit(file).then((uploadedPath) => {
-              onChange?.({
-                target: { name: props.name, value: uploadedPath },
-              } as React.ChangeEvent<HTMLInputElement>);
-              setIsUploading(true);
-              return 'Animation uploaded successfully';
-            }),
-            {
-              loading: 'Uploading animation',
-              success: (message) => {
-                setIsUploading(false);
-                return message;
-              },
-              error: (error: Error) => {
-                onChange?.({
-                  target: { name: props.name, value: '' },
-                } as React.ChangeEvent<HTMLInputElement>);
-                setPreview('');
-                setIsUploading(false);
-                return error.message || 'Unknown error';
-              },
-            }
-          );
+          setIsUploading(true);
+          try {
+            const uploadedPath = await onSubmit(file);
+            onChange?.({
+              target: { name: props.name, value: uploadedPath },
+            } as React.ChangeEvent<HTMLInputElement>);
+          } catch (error) {
+            onChange?.({
+              target: { name: props.name, value: '' },
+            } as React.ChangeEvent<HTMLInputElement>);
+            setPreview('');
+            toast.error(error instanceof Error ? error.message : 'Upload failed');
+          }
         }
       },
-      [onSubmit, props.name]
+      [onSubmit, props.name, onChange]
     );
 
     const { getRootProps, getInputProps, inputRef } = useDropzone({
