@@ -44,27 +44,41 @@ const SessionTranscriptions = ({
       });
   };
 
-  if (transcriptionState === TranscriptionStatus.processing) {
-    return (
-      <div className="flex items-center">
-        <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
-        transcription...{' '}
-        <p
-          className="pl-2 cursor-pointer"
-          title="refresh"
-          onClick={() => router.refresh()}
-        >
-          <LuRefreshCcw />
-        </p>
-      </div>
-    );
-  }
+  // if (transcriptionState === TranscriptionStatus.processing) {
+  //   return (
+  //     <div className="flex items-center">
+  //       <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
+  //       transcription...{' '}
+  //       <p
+  //         className="pl-2 cursor-pointer"
+  //         title="refresh"
+  //         onClick={() => router.refresh()}
+  //       >
+  //         <LuRefreshCcw />
+  //       </p>
+  //     </div>
+  //   );
+  // }
 
   if (
     transcriptionState === TranscriptionStatus.completed &&
     videoTranscription
   ) {
-    return <TextPlaceholder text={videoTranscription} />;
+    return (
+      <div className="space-y-4">
+        <TextPlaceholder text={videoTranscription} />
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleGenerateTranscription}
+          loading={isGeneratingTranscript}
+          className="flex items-center gap-2"
+        >
+          <LuRefreshCcw className="w-4 h-4" />
+          Regenerate Transcription
+        </Button>
+      </div>
+    );
   }
 
   if (transcriptionState === TranscriptionStatus.failed) {

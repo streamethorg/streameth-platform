@@ -1,9 +1,7 @@
 import { fetchOrganization } from '@/lib/services/organizationService';
 import {
   fetchAllSessions,
-  fetchAsset,
-  fetchSession,
-  sessionImport,
+  fetchSession
 } from '@/lib/services/sessionService';
 import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
 import { ClipsPageParams } from '@/lib/types';
@@ -31,12 +29,11 @@ const fetchVideoDetails = async (
 
       const stageRecordings = await fetchStageRecordings({ streamId });
       if (!stageRecordings?.recordings[0]) return null;
-
       return {
-        videoSrc: stageRecordings.recordings[0].recordingUrl,
+        videoSrc: `https://livepeercdn.studio/hls/${liveStage.streamSettings?.playbackId}/index.m3u8`,
         type: 'livepeer',
         name: liveStage.name,
-        words: liveStage.transcripts?.text,
+        words: liveStage.transcripts?.chunks,
         liveRecording: stageRecordings.recordings[0],
       };
     }
@@ -47,13 +44,13 @@ const fetchVideoDetails = async (
 
       const stage = await fetchStage({ stage: session.stageId as string });
       if (!stage?.streamSettings?.playbackId) return null;
-
+      console.log('session', session.transcripts?.chunks);
       const videoSrc = await getVideoUrlAction(session);
       return {
         videoSrc,
         type: 'livepeer',
         name: session.name,
-        words: session.transcripts?.subtitleUrl,
+        words: session.transcripts?.chunks,
       };
     }
 
@@ -65,6 +62,7 @@ const fetchVideoDetails = async (
         videoSrc: stage.source.m3u8Url,
         type: stage.source.type,
         name: stage.name,
+        words: stage.transcripts?.chunks,
       };
     }
 
@@ -106,13 +104,6 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       clipUrl={videoDetails.videoSrc}
     >
       <div className="flex flex-row w-full h-full border-t border-gray-200">
-        {/* <div className="flex flex-col w-[400px] h-full overflow-y-auto">
-          {words?.split('\n').map((word) => (
-            <div className="flex flex-col text-sm text-gray-500" key={word}>
-              {word}
-            </div>
-          ))}
-        </div> */}
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
           <TopBar title={videoDetails.name} organization={organization} />
           <ReactHlsPlayer
@@ -130,6 +121,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             stageSessions={stageSessions.sessions}
             organizationId={organizationId}
             animations={animations.sessions}
+            words={videoDetails.words}
           />
         </div>
       </div>

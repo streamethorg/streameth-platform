@@ -103,10 +103,8 @@ export const ClipProvider = ({
   organizationId: string;
   clipUrl: string;
 }) => {
-  const { handleTermChange, searchParams } = useSearchParams();
+  const { searchParams } = useSearchParams();
 
-  const start = searchParams?.get('start');
-  const end = searchParams?.get('end');
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );

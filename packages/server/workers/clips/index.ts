@@ -50,21 +50,31 @@ const processClip = async (data: IClip) => {
       );
     }
     const masterContent = await masterResponse.text();
-
+    console.log('masterContent', masterContent);
     // 2. Find the 1080p variant
     const linesMaster = masterContent.split('\n');
     let variantUrl = '';
+    let maxBandwidth = -1;
 
     for (let i = 0; i < linesMaster.length; i++) {
-      if (linesMaster[i].includes('1080p0')) {
-        variantUrl = linesMaster[i + 1].trim();
-        break;
+      if (linesMaster[i].startsWith('#EXT-X-STREAM-INF')) {
+        // Parse bandwidth from the stream info
+        const bandwidthMatch = linesMaster[i].match(/BANDWIDTH=(\d+)/);
+        if (bandwidthMatch) {
+          const bandwidth = parseInt(bandwidthMatch[1]);
+          if (bandwidth > maxBandwidth) {
+            maxBandwidth = bandwidth;
+            variantUrl = linesMaster[i + 1].trim();
+          }
+        }
       }
     }
-    variantUrl = clipUrl.replace('index.m3u8', variantUrl);
 
+    console.log('Selected variant URL:', variantUrl);
+    variantUrl = clipUrl.replace('index.m3u8', variantUrl);
+    console.log('Full variant URL:', variantUrl);
     if (!variantUrl) {
-      throw new Error('1080p variant not found in master playlist');
+      throw new Error('No valid variant found in master playlist');
     }
 
     const duration = end - start;
@@ -77,7 +87,7 @@ const processClip = async (data: IClip) => {
     const manifestResponse = await fetch(variantUrl);
     if (!manifestResponse.ok) {
       throw new Error(
-        `Failed to fetch manifest: ${manifestResponse.statusText}`,
+        `Failed to fetch manifest ${variantUrl}: ${manifestResponse.statusText}`,
       );
     }
     const manifestContent = await manifestResponse.text();

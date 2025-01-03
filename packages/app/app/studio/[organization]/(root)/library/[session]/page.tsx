@@ -29,7 +29,6 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
     session: params.session,
   });
 
-  console.log(session?.transcripts?.chunks[0]);
   if (!session?.playbackId || !organization) return notFound();
 
   return (
