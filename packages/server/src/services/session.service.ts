@@ -104,13 +104,20 @@ export default class SessionService {
       limit: number;
     };
   }> {
-    let filter: {} = {
-      type: { $nin: [SessionType.animation, SessionType.editorClip] },
-    };
+    console.log('getAll called with type:', d.type);
+    let filter: {} = {};
 
-    if (d.type !== undefined) {
-      filter = { ...filter, type: d.type };
+    // Only exclude animations and editor clips if no specific type is requested
+    if (d.type === undefined) {
+      console.log('No type specified, excluding animations and editor clips');
+      filter = { type: { $nin: [SessionType.animation, SessionType.editorClip] } };
+    } else {
+      console.log('Type specified:', d.type);
+      filter = { type: d.type };
     }
+
+    console.log('Initial filter:', JSON.stringify(filter, null, 2));
+
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
@@ -147,7 +154,11 @@ export default class SessionService {
     if (d.onlyVideos) {
       filter = {
         ...filter,
-        $or: [{ playbackId: { $ne: '' } }, { assetId: { $ne: '' } }],
+        $or: [
+          { playbackId: { $ne: '' } }, 
+          { assetId: { $ne: '' } },
+          { type: SessionType.animation }
+        ],
       };
     }
     if (d.assetId != undefined) {
@@ -158,6 +169,8 @@ export default class SessionService {
       let stage = await Stage.findOne(query);
       filter = { ...filter, stageId: stage?._id };
     }
+
+    console.log('Final filter:', JSON.stringify(filter, null, 2));
 
     const pageSize = Number(d.size) || 0;
     const pageNumber = Number(d.page) || 0;
@@ -170,6 +183,9 @@ export default class SessionService {
       skip,
       pageSize,
     );
+
+    console.log('Found sessions count:', sessions.length);
+    console.log('Session types:', sessions.map(s => s.type));
 
     const totalItems = await this.controller.store.countDocuments(filter);
     return {
