@@ -67,18 +67,15 @@ export class ClipEditorService extends SessionService {
   }
 
   async launchRemotionRender(clipEditor: IClipEditor) {
-    console.log('👍 clipEditor', clipEditor);
     // get all event session data based on event session ids
     const sessionIds = clipEditor.events
       .filter(e => e.sessionId)
       .map(e => e.sessionId);
-    console.log('👍 sessionIds', sessionIds);
     
     // Get all sessions in one query
     const eventSessions = await Session.find({
       _id: { $in: sessionIds },
     }).lean();
-    console.log('👍 eventSessions', eventSessions);
 
     // Create a map for quick session lookup
     const sessionsMap = eventSessions.reduce((acc, session) => {
@@ -110,7 +107,6 @@ export class ClipEditorService extends SessionService {
 
           // Otherwise, look up the session from our map
           const session = e.sessionId ? sessionsMap[e.sessionId.toString()] : null;
-          console.log('👍 session', session);
 
           if (!session?.source?.streamUrl) {
             console.log(
