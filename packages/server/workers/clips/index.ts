@@ -374,6 +374,12 @@ const processClip = async (data: IClip) => {
                   console.log('🎬 Launching Remotion render');
                   await clipEditorService.launchRemotionRender(clipEditor);
                   console.log('✅ Remotion render launched');
+                  
+                  // Update to rendering state
+                  await Session.findByIdAndUpdate(sessionId, 
+                    { $set: { processingStatus: ProcessingStatus.rendering } },
+                    { new: true }
+                  );
                 } else {
                   console.log('📤 Creating Livepeer asset');
                   const assetId = await createAssetFromUrl(sessionId, url);

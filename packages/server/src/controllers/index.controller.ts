@@ -249,6 +249,7 @@ export class IndexController extends Controller {
         end: session.end,
         organizationId: session.organizationId,
         type: session.type,
+        processingStatus: ProcessingStatus.completed,
       }),
       clipEditor.updateOne({
         status: ClipEditorStatus.uploading,
