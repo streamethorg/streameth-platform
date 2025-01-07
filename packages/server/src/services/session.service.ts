@@ -104,7 +104,6 @@ export default class SessionService {
       limit: number;
     };
   }> {
-    console.log('getAll called with type:', d.type);
     let filter: {} = {};
 
     // Only exclude animations and editor clips if no specific type is requested
@@ -115,8 +114,6 @@ export default class SessionService {
       console.log('Type specified:', d.type);
       filter = { type: d.type };
     }
-
-    console.log('Initial filter:', JSON.stringify(filter, null, 2));
 
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
@@ -170,8 +167,6 @@ export default class SessionService {
       filter = { ...filter, stageId: stage?._id };
     }
 
-    console.log('Final filter:', JSON.stringify(filter, null, 2));
-
     const pageSize = Number(d.size) || 0;
     const pageNumber = Number(d.page) || 0;
     const skip = pageSize * pageNumber - pageSize;
@@ -183,9 +178,6 @@ export default class SessionService {
       skip,
       pageSize,
     );
-
-    console.log('Found sessions count:', sessions.length);
-    console.log('Session types:', sessions.map(s => s.type));
 
     const totalItems = await this.controller.store.countDocuments(filter);
     return {
