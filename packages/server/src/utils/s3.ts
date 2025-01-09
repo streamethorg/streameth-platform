@@ -28,6 +28,12 @@ export default class StorageService {
     file: Buffer | Readable,
     contentType: string,
   ): Promise<string> {
+    console.log('🔧 Configuring S3 upload:', {
+      bucket: name,
+      filename,
+      contentType,
+    });
+
     const params: PutObjectCommandInput = {
       Bucket: name,
       Key: filename,
@@ -40,16 +46,22 @@ export default class StorageService {
         process.env.NODE_ENV === 'development' ||
         process.env.NODE_ENV === 'staging'
       ) {
+        console.log('🚀 Uploading to development bucket...');
         const command = new PutObjectCommand(params);
         await this.s3Client.send(command);
-        return `https://streameth-develop.ams3.digitaloceanspaces.com/${filename}`;
+        const url = `https://streameth-develop.ams3.digitaloceanspaces.com/${filename}`;
+        console.log('✅ Upload successful to development:', url);
+        return url;
       } else {
+        console.log('🚀 Uploading to production bucket...');
         const command = new PutObjectCommand(params);
         await this.s3Client.send(command);
-        return `https://streameth-production.ams3.digitaloceanspaces.com/${filename}`;
+        const url = `https://streameth-production.ams3.digitaloceanspaces.com/${filename}`;
+        console.log('✅ Upload successful to production:', url);
+        return url;
       }
     } catch (error) {
-      console.log('Error uploading file to S3:', error);
+      console.error('❌ S3 upload failed:', error);
       throw error;
     }
   }

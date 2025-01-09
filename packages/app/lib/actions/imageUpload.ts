@@ -11,7 +11,7 @@ export const imageUploadAction = async ({ data }: { data: FormData }) => {
 
     return res;
   } catch (e) {
-    console.error('Error uploading image acton');
+    console.error('Error uploading image action');
     return '';
   }
 };

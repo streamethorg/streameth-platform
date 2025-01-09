@@ -250,7 +250,7 @@ const models: TsoaRoute.Models = {
             "organizationId": {"dataType":"string","required":true},
             "stageId": {"dataType":"string"},
             "isEditorEnabled": {"dataType":"boolean"},
-            "editorOptions": {"dataType":"nestedObjectLiteral","nestedProperties":{"captionColor":{"dataType":"string","required":true},"captionFont":{"dataType":"string","required":true},"captionLinesPerPage":{"dataType":"double","required":true},"captionPosition":{"dataType":"string","required":true},"captionEnabled":{"dataType":"boolean","required":true},"selectedAspectRatio":{"dataType":"string","required":true},"events":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"sessionId":{"dataType":"string","required":true},"label":{"dataType":"string","required":true}}},"required":true},"frameRate":{"dataType":"double","required":true}}},
+            "editorOptions": {"dataType":"nestedObjectLiteral","nestedProperties":{"captionColor":{"dataType":"string","required":true},"captionFont":{"dataType":"string","required":true},"captionLinesPerPage":{"dataType":"double","required":true},"captionPosition":{"dataType":"string","required":true},"captionEnabled":{"dataType":"boolean","required":true},"selectedAspectRatio":{"dataType":"string","required":true},"events":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"videoUrl":{"dataType":"string"},"sessionId":{"dataType":"string"},"label":{"dataType":"string","required":true}}},"required":true},"frameRate":{"dataType":"double","required":true}}},
             "clipSessionId": {"dataType":"string"},
             "clipEditorId": {"dataType":"string"},
         },
@@ -3573,9 +3573,9 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             authenticateMiddleware([{"jwt":[]}]),
             upload.fields([{"name":"file","maxCount":1,"multiple":false}]),
             ...(fetchMiddlewares<RequestHandler>(IndexController)),
-            ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.uploadImges)),
+            ...(fetchMiddlewares<RequestHandler>(IndexController.prototype.uploadFile)),
 
-            async function IndexController_uploadImges(request: ExRequest, response: ExResponse, next: any) {
+            async function IndexController_uploadFile(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     file: {"in":"formData","name":"file","required":true,"dataType":"file"},
                     directory: {"in":"formData","name":"directory","required":true,"dataType":"string"},
@@ -3590,7 +3590,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                 const controller = new IndexController();
 
               await templateService.apiHandler({
-                methodName: 'uploadImges',
+                methodName: 'uploadFile',
                 controller,
                 response,
                 next,
