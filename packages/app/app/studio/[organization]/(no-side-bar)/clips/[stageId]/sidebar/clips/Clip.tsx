@@ -34,21 +34,25 @@ export default function Clip({ session }: { session: IExtendedSession }) {
   //       getAsset();
   //     }, 10000);
   //     return () => clearInterval(interval);
-  //   } else if (session.processingStatus === ProcessingStatus.pending) {
+  //   } else if (
+  //     session.processingStatus === ProcessingStatus.pending ||
+  //     session.processingStatus === ProcessingStatus.rendering
+  //   ) {
   //     const interval = setInterval(() => {
   //       router.refresh();
   //     }, 10000);
   //     return () => clearInterval(interval);
   //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [asset?.status?.phase]);
+  // }, [asset?.status?.phase, session.processingStatus]);
   // if (!assetId) return null;
 
   return (
     <>
       <div>
         {asset?.status?.phase === 'processing' ||
-        session.processingStatus === ProcessingStatus.pending ? (
+        session.processingStatus === ProcessingStatus.pending ||
+        session.processingStatus === ProcessingStatus.rendering ? (
           <Card className="w-full cursor-not-allowed animate-pulse max-w-2xl overflow-hidden px-2 py-1 shadow-none bg-muted">
             <div className="flex justify-center items-center">
               <div className="flex-shrink-0 w-1/3">
@@ -57,7 +61,9 @@ export default function Clip({ session }: { session: IExtendedSession }) {
               <CardContent className="lg:p-2 p-2 flex-grow">
                 <h2 className="text-lg font-semibold line-clamp-1">{name}</h2>
                 <p className="text-sm text-gray-500 mt-1">
-                  Video is processing...
+                  {session.processingStatus === ProcessingStatus.rendering
+                    ? 'Video is rendering...'
+                    : 'Video is processing...'}
                 </p>
                 <div className="flex items-center justify-between gap-2">
                   {asset?.status?.phase === 'processing' && (

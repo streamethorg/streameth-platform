@@ -14,7 +14,11 @@ export interface IClipEditor {
   organizationId: Types.ObjectId;
   stageId: Types.ObjectId;
   frameRate: number;
-  events: Array<{ label: string; sessionId: string }>;
+  events: Array<{
+    label: string;
+    sessionId?: string;
+    videoUrl?: string;
+  }>;
   selectedAspectRatio: string;
   captionEnabled: boolean;
   captionPosition: string;

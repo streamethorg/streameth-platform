@@ -105,13 +105,17 @@ export default class SessionService {
       limit: number;
     };
   }> {
-    let filter: {} = {
-      type: { $nin: [SessionType.animation, SessionType.editorClip] },
-    };
+    let filter: {} = {};
 
-    if (d.type !== undefined) {
-      filter = { ...filter, type: d.type };
+    // Only exclude animations and editor clips if no specific type is requested
+    if (d.type === undefined) {
+      console.log('No type specified, excluding animations and editor clips');
+      filter = { type: { $nin: [SessionType.animation, SessionType.editorClip] } };
+    } else {
+      console.log('Type specified:', d.type);
+      filter = { type: d.type };
     }
+
     if (d.published != undefined) {
       filter = { ...filter, published: d.published };
     }
@@ -148,7 +152,11 @@ export default class SessionService {
     if (d.onlyVideos) {
       filter = {
         ...filter,
-        $or: [{ playbackId: { $ne: '' } }, { assetId: { $ne: '' } }],
+        $or: [
+          { playbackId: { $ne: '' } }, 
+          { assetId: { $ne: '' } },
+          { type: SessionType.animation }
+        ],
       };
     }
     if (d.assetId != undefined) {

@@ -13,7 +13,8 @@ const ClipEditorSchema = new Schema<IClipEditor>(
     events: [
       {
         label: { type: String, default: '' },
-        sessionId: { type: Schema.Types.ObjectId, ref: 'Session' },
+        sessionId: { type: Schema.Types.ObjectId, ref: 'Session', required: false },
+        videoUrl: { type: String, required: false },
       },
     ],
     selectedAspectRatio: { type: String, default: '16:9' },

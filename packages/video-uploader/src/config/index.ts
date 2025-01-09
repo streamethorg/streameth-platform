@@ -41,10 +41,10 @@ export const config = {
   remotion: {
     id: process.env.REMOTION_ID,
     host: process.env.REMOTION_BASE_URL,
-    webhookSecretKey: process.env.REMOTION_WEBHOOK_SECRET_FILE,
+    webhookSecretKey: readSecretFile(process.env.REMOTION_WEBHOOK_SECRET_FILE),
     webhook: {
       url: process.env.REMOTION_WEBHOOK_URL,
-      secret: process.env.REMOTION_WEBHOOK_SECRET_FILE,
+      secret: readSecretFile(process.env.REMOTION_WEBHOOK_SECRET_FILE),
     }
   },
   redis: {

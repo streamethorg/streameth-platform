@@ -51,11 +51,13 @@ const CreateClipButton = ({
       const session = await fetchSession({ session: sessionId });
       if (!session) {
         toast.error('Failed to fetch session');
+        console.error('🚨 Session fetch failed');
         return;
       }
       setSessionRecording(session);
+      console.log('🔄 Session fetched successfully');
     } catch (error) {
-      console.error('Error fetching session:', error);
+      console.error('🚨 Error fetching session:', error);
       toast.error('Failed to fetch session data');
     }
   };
@@ -66,11 +68,13 @@ const CreateClipButton = ({
       const stageData = await fetchStage({ stage: stageId });
       if (!stageData) {
         toast.error('Failed to fetch stage');
+        console.error('🚨 Stage fetch failed');
         return;
       }
       setStage(stageData);
+      console.log('🔄 Stage fetched successfully');
     } catch (error) {
-      console.error('Error fetching stage:', error);
+      console.error('🚨 Error fetching stage:', error);
       toast.error('Failed to fetch stage data');
     }
   };
@@ -85,6 +89,7 @@ const CreateClipButton = ({
     if (videoRef.current) {
       videoRef.current.currentTime = startTime.displayTime;
       videoRef.current.play();
+      console.log('🔄 Preview started');
     }
   };
 
@@ -133,6 +138,7 @@ const CreateClipButton = ({
       stageId: stageId,
       speakers: [],
     });
+    console.log('🔄 Marker cleared');
   };
 
   useEffect(() => {
@@ -154,6 +160,7 @@ const CreateClipButton = ({
           })) ?? [],
         pretalxSessionCode: selectedMarker.pretalxSessionCode,
       });
+      console.log('🔄 Marker data reset');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedMarker]);
@@ -165,11 +172,13 @@ const CreateClipButton = ({
       (!sessionRecording?.assetId && !liveRecordingId)
     ) {
       setIsCreateClip(false);
+      console.error('🚨 Missing required data for clip creation');
       return toast.error('Missing required data for clip creation');
     }
 
     if (endTime.unix < startTime.unix) {
       setIsCreateClip(false);
+      console.error('🚨 End time must be greater than start time');
       return toast.error('End time must be greater than start time');
     }
 
@@ -208,24 +217,26 @@ const CreateClipButton = ({
       };
 
       if (hasEditorOptions) {
+        const events = [
+          ...(values.outroAnimation ? [{
+            videoUrl: values.outroAnimation,
+            label: 'outro',
+          }] : []),
+          ...(values.introAnimation ? [{
+            videoUrl: values.introAnimation,
+            label: 'intro',
+          }] : []),
+          {
+            sessionId: session._id as string,
+            label: 'main',
+          },
+        ];
+
         const clipCreationOptions = {
           ...mainClipData,
           isEditorEnabled: true,
           editorOptions: {
-            events: [
-              {
-                sessionId: values.outroAnimation as string,
-                label: 'outro',
-              },
-              {
-                sessionId: values.introAnimation as string,
-                label: 'intro',
-              },
-              {
-                sessionId: session._id as string,
-                label: 'main',
-              },
-            ],
+            events,
             captionEnabled: values.captionEnabled,
             selectedAspectRatio: values.selectedAspectRatio as string,
             frameRate: 30,
@@ -235,16 +246,20 @@ const CreateClipButton = ({
             captionFont: 'Arial',
           },
         };
+        console.log('Creating clip with options:', JSON.stringify(clipCreationOptions, null, 2));
         // Call createClipAction with the prepared editor options
         await createClipAction(clipCreationOptions);
+        console.log('🔄 Clip created with editor options');
       } else {
+        console.log('Creating clip without editor options:', JSON.stringify(mainClipData, null, 2));
         await createClipAction({ ...mainClipData, isEditorEnabled: false });
+        console.log('🔄 Clip created without editor options');
       }
 
       toast.success('Clip created');
       setIsCreatingClip(false);
     } catch (error) {
-      console.error('Error creating clip:', error);
+      console.error('🚨 Error creating clip:', error);
       toast.error(
         error instanceof Error ? error.message : 'Error creating clip'
       );
