@@ -6357,6 +6357,38 @@
 				}
 			}
 		},
+		"/sessions/{sessionId}/highlights": {
+			"post": {
+				"operationId": "ExtractHighlights",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Extract highlights from session",
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/schedule/import": {
 			"post": {
 				"operationId": "ImportSchdeule",

@@ -7,7 +7,7 @@ import {
 import { apiUrl } from '@/lib/utils/utils';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
 import { revalidatePath } from 'next/cache';
-import { Asset } from 'livepeer/models/components';
+import { Asset } from 'livepeer/models/components/asset';
 import FuzzySearch from 'fuzzy-search';
 import { fetchClient } from './fetch-client';
 
@@ -555,6 +555,21 @@ export const generateTranscriptions = async ({
     return (await response.json()).message;
   } catch (e) {
     console.log('error in sessionImport', e);
+    throw e;
+  }
+};
+
+export const extractHighlights = async ({
+  sessionId,
+}: {
+  sessionId: string;
+}) => {
+  try {
+    const response = await fetchClient(`${apiUrl()}/sessions/${sessionId}/highlights`, {
+      method: 'POST',
+    });
+  } catch (e) {
+    console.log('error in extractHighlights', e);
     throw e;
   }
 };

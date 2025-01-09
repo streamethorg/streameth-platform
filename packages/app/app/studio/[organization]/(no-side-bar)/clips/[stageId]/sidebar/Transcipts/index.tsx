@@ -1,6 +1,6 @@
 "use client"
 import { useClipContext } from '../../ClipContext';
-
+import { Button } from '@/components/ui/button'; 
 const Transcripts = ({
   words,
 }: {
@@ -19,6 +19,7 @@ const Transcripts = ({
 
   return (
     <div className="whitespace-pre-wrap">
+      <Button>Extract Highlights</Button>
       {words?.map((word, index) => (
         <span
           key={`${word.word}-${index}`}

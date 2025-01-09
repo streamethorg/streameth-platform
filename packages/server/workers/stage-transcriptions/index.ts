@@ -2,7 +2,7 @@ import { stageTranscriptionsQueue } from '@utils/redis';
 import ffmpeg from 'fluent-ffmpeg';
 import StageService from '@services/stage.service';
 import { buildPlaybackUrl } from '@utils/livepeer';
-import WhisperAPI from '@utils/whisper';
+import WhisperAPI from '@utils/ai.transcribes';
 import { IStage } from '@interfaces/stage.interface';
 import { dbConnection } from '@databases/index';
 import { connect } from 'mongoose';

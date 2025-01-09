@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { sessionTranscriptionsQueue } from '@utils/redis';
 import ffmpeg from 'fluent-ffmpeg';
-import WhisperAPI from '@utils/whisper';
+import WhisperAPI from '@utils/ai.transcribes';
 import { dbConnection } from '@databases/index';
 import { connect } from 'mongoose';
 import { tmpdir } from 'os';
