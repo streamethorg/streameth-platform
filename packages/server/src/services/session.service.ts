@@ -19,6 +19,7 @@ import Organization from '@models/organization.model';
 import Session from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
+import { ChatAPI } from '@utils/ai.chat';
 import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
@@ -400,5 +401,53 @@ export default class SessionService {
     const isObjectId = /[0-9a-f]{24}/i.test(id);
     const query = isObjectId ? { _id: id } : { slug: id };
     return query;
+  }
+
+  async extractHighlights(sessionId: string) {
+    const session = await this.get(sessionId);
+
+    if (!session.transcripts) {
+      throw new HttpException(400, 'Session has no transcripts');
+    }
+
+    const chunks = session.transcripts.chunks;
+    const chunkSlices = [
+      chunks.slice(0, Math.floor(chunks.length / 3)),
+      chunks.slice(
+        Math.floor(chunks.length / 3),
+        Math.floor(chunks.length / 3) * 2,
+      ),
+      chunks.slice(Math.floor(chunks.length / 3) * 2, chunks.length),
+    ];
+
+    for (let i = 0; i < 1; i++) {
+      const chat = new ChatAPI();
+      const highlights = await chat.chat([
+        {
+          role: 'system',
+          content: `
+          You are an expert video editor specializing in creating highlights optimized for social media platforms like TikTok, X, and Instagram.
+          Task: Extract segments from the transcript that are 30 to 120 seconds long and are the most engaging and impactful moments of the event that are related to ethereum technology.
+          Input: You will receive an array of words with timestamps from the English transcript.
+          Output: Return a JSON array of objects with the following structure:
+          {
+            "start": number,    // Timestamp when highlight begins
+            "end": number,      // Timestamp when highlight ends
+            "full_transcript": string  // Complete transcript of the highlighted segment
+          }
+start-ends should be 60 to 120 seconds long
+          Guidelines:
+          - Select engaging, impactful moments that will resonate on social media
+          - Each highlight should be 60-120 seconds long
+          - Focus on key technical insights, announcements, or memorable quotes
+          - Ensure the selected segments are self-contained and make sense standalone`,
+        },
+        {
+          role: 'user',
+          content: `Here is the transcript: ${chunkSlices[i]}`,
+        },
+      ]);
+      console.log(highlights);
+    }
   }
 }

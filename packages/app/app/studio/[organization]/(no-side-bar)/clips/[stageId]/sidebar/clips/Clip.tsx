@@ -4,12 +4,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { fetchAsset } from '@/lib/services/sessionService';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
-import { Asset } from 'livepeer/models/components';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import Preview from './Preview';
-
+import { Asset } from 'livepeer/models/components/asset';
 export default function Clip({ session }: { session: IExtendedSession }) {
   const { name, coverImage, assetId } = session;
   const [asset, setAsset] = useState<Asset | null>(null);

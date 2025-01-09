@@ -199,4 +199,18 @@ export class SessionController extends Controller {
     await this.sessionService.deleteOne(sessionId);
     return SendApiResponse('deleted');
   }
+
+  /**
+ * @summary Extract highlights from session
+   */
+  @SuccessResponse('200')
+  @Post('{sessionId}/highlights')
+  async extractHighlights(
+    @Path() sessionId: string,
+  ): Promise<IStandardResponse<void>> {
+    const highlights = await this.sessionService.extractHighlights(sessionId);
+    return SendApiResponse(highlights.content);
+  }
 }
+
+

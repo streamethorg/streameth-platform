@@ -14,6 +14,7 @@ import {
   saveSessionImport,
   generateTranscriptions,
   uploadSessionToSocialsRequest,
+  extractHighlights,
 } from '../services/sessionService';
 import {
   ISession,
@@ -279,4 +280,14 @@ export const generateTranscriptionActions = async ({
     console.error('Error importing session acton');
     return null;
   }
+};
+
+
+export const extractHighlightsAction = async ({
+  sessionId,
+}: {
+  sessionId: string;
+}) => {
+  const res = await extractHighlights({ sessionId });
+  return res;
 };

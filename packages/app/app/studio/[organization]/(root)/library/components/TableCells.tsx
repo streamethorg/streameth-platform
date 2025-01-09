@@ -106,7 +106,7 @@ const TableCells = async ({
       </TableCell>
       <TableCell className={rowBackgroundClass}>
         <div className="flex justify-end items-center space-x-2 max-w-[100px]">
-          {!isDisabled && item.type === 'livestream' && (
+          {!isDisabled && (
             // item.createdAt &&
             // new Date(item.createdAt).getTime() >
             //   Date.now() - 7 * 24 * 60 * 60 * 1000 && (

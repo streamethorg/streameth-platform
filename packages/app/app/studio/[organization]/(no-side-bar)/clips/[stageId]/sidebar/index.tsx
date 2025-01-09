@@ -7,17 +7,24 @@ import CreateClipButton from '../topBar/CreateClipButton';
 import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
 import { IExtendedSession } from '@/lib/types';
 import ImportMarkersForm from './markers/ImportMarkersForm';
+import Transcripts from './Transcipts';
 
 export default function Sidebar({
   organizationId,
   stageSessions,
   liveRecordingId,
   animations,
+  words,
 }: {
   organizationId: string;
   stageSessions: IExtendedSession[];
   liveRecordingId?: string;
   animations: IExtendedSession[];
+  words?: {
+    word: string;
+    start: number;
+    end: number;
+  }[];
 }) {
   const { isCreatingClip, isAddingOrEditingMarker, isImportingMarkers } =
     useClipContext();
@@ -57,9 +64,10 @@ export default function Sidebar({
           )
       )}
       <Tabs defaultValue="clips" className="flex flex-col h-full">
-        <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
+        <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
           <TabsTrigger value="markers">Markers</TabsTrigger>
           <TabsTrigger value="clips">Clips</TabsTrigger>
+          {words && <TabsTrigger value="words">Words</TabsTrigger>}
         </TabsList>
         <TabsContent value="markers" className="flex-grow overflow-hidden">
           {<Markers organizationId={organizationId} />}
@@ -67,6 +75,11 @@ export default function Sidebar({
         <TabsContent value="clips" className="flex-grow overflow-hidden">
           <SessionSidebar sessions={stageSessions} />
         </TabsContent>
+        {words && (
+          <TabsContent value="words" className="flex-grow overflow-auto p-4">
+            <Transcripts words={words} />
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );

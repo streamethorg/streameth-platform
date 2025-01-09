@@ -22,6 +22,9 @@ export const getVideoUrlAction = async (
   session: IExtendedSession
 ): Promise<string | null> => {
   try {
+    if (session.playback?.videoUrl) {
+      return session.playback.videoUrl;
+    }
     if (session.assetId) {
       const asset = await fetchAsset({ assetId: session.assetId });
       if (asset?.playbackUrl) {
