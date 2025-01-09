@@ -448,6 +448,7 @@ start-ends should be 60 to 120 seconds long
         },
       ]);
       console.log(highlights);
+      return highlights;
     }
   }
 }
