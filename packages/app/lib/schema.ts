@@ -266,6 +266,7 @@ export const clipSchema = z.object({
   outroAnimation: z.string().optional(),
   introAnimation: z.string().optional(),
   captionEnabled: z.boolean(),
+  captionColor: z.string().optional(),
   selectedAspectRatio: z.string().optional(),
   pretalxSessionCode: z.string().optional(),
 });
