@@ -19,8 +19,6 @@ import { SessionController } from './../controllers/session.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ScheduleImporterController } from './../controllers/schedule-import.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { PipedreamController } from './../controllers/pipedream.controller';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { OrganizationController } from './../controllers/organization.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { NftCollectionRouter } from './../controllers/nft.controller';
@@ -888,42 +886,6 @@ const models: TsoaRoute.Models = {
     "Pick_IScheduleImporterDto.url-or-type-or-organizationId-or-stageId_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"stageId":{"dataType":"string","required":true},"type":{"ref":"ImportType","required":true},"url":{"dataType":"string","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IPipedreamResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "devconUpload": {"dataType":"nestedObjectLiteral","nestedProperties":{"result":{"dataType":"any","required":true}},"required":true},
-            "video": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"string","required":true}},"required":true},
-            "thumbnail": {"dataType":"nestedObjectLiteral","nestedProperties":{"status":{"dataType":"double","required":true}},"required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_IPipedreamResponse_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"ref":"IPipedreamResponse"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "PipedreamUploadDto": {
-        "dataType": "refObject",
-        "properties": {
-            "title": {"dataType":"string","required":true},
-            "description": {"dataType":"string","required":true},
-            "devcon_asset_id": {"dataType":"string","required":true},
-            "video": {"dataType":"string","required":true},
-            "duration": {"dataType":"double","required":true},
-            "sources_ipfsHash": {"dataType":"string","required":true},
-            "sources_streamethId": {"dataType":"string","required":true},
-            "transcript_vtt": {"dataType":"string","required":true},
-            "transcript_text": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_IOrganization_": {
@@ -2846,36 +2808,6 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'save',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/pipedream/upload',
-            ...(fetchMiddlewares<RequestHandler>(PipedreamController)),
-            ...(fetchMiddlewares<RequestHandler>(PipedreamController.prototype.uploadToDevcon)),
-
-            async function PipedreamController_uploadToDevcon(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"ref":"PipedreamUploadDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new PipedreamController();
-
-              await templateService.apiHandler({
-                methodName: 'uploadToDevcon',
                 controller,
                 response,
                 next,
