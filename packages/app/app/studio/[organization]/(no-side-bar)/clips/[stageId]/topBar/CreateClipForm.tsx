@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -19,8 +19,10 @@ import {
   LuSmartphone,
   LuSubtitles,
   LuEye,
+  LuPalette,
 } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
@@ -57,6 +59,32 @@ const CreateClipForm = ({
     selectedMarkerId,
     setSelectedMarkerId,
   } = useClipContext();
+
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const colorPickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (colorPickerRef.current && !colorPickerRef.current.contains(event.target as Node)) {
+        setShowColorPicker(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const colorPresets = [
+    '#6C757D',
+    '#FFA07A',
+    '#20C997',
+    '#FFC107',
+    '#0D6EFD',
+    '#DC3545',
+    '#198754',
+    '#0DCAF0',
+    '#6F42C1',
+  ];
 
   return (
     <Form {...form}>
@@ -155,33 +183,75 @@ const CreateClipForm = ({
 
           {/* Controls */}
           <div className="flex flex-row w-full items-center space-x-4">
-            <FormField
-              control={form.control}
-              name="captionEnabled"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex flex-col gap-2">
-                    <FormControl>
-                      <div className="flex flex-col items-center space-x-1">
-                        <button
-                          type="button"
-                          onClick={() => field.onChange(!field.value)}
-                          className={`p-2 rounded hover:bg-gray-100 transition-colors ${
-                            field.value ? 'text-gray-900' : 'text-gray-400'
-                          }`}
-                        >
-                          <LuSubtitles size={20} />
-                        </button>
-                        <Label htmlFor="captionEnabled" className="text-xs">
-                          Captions
-                        </Label>
+            <div className="space-y-4">
+              <FormField
+                control={form.control}
+                name="captionEnabled"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex flex-col gap-2">
+                      <FormControl>
+                        <div className="flex flex-col items-center">
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                field.onChange(!field.value);
+                                if (!field.value) {
+                                  setShowColorPicker(true);
+                                }
+                              }}
+                              onDoubleClick={() => {
+                                if (field.value) {
+                                  setShowColorPicker(!showColorPicker);
+                                }
+                              }}
+                              className={`p-2 rounded hover:bg-gray-100 transition-colors ${
+                                field.value ? 'text-gray-900' : 'text-gray-400'
+                              }`}
+                            >
+                              <LuSubtitles size={20} />
+                            </button>
+                            {field.value && form.watch('captionColor') && (
+                              <div 
+                                className="w-4 h-4 rounded-md border border-gray-200"
+                                style={{ backgroundColor: form.watch('captionColor') }}
+                              />
+                            )}
+                          </div>
+                          <Label className="text-xs">Captions</Label>
+                        </div>
+                      </FormControl>
+                    </div>
+                    {field.value && showColorPicker && (
+                      <div 
+                        ref={colorPickerRef}
+                        className="absolute mt-2 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-10"
+                      >
+                        <Label className="text-sm mb-2">Text Color</Label>
+                        <div className="grid grid-cols-5 gap-2">
+                          {colorPresets.map((color) => (
+                            <Button
+                              key={color}
+                              variant="outline"
+                              className="w-8 h-8 p-0"
+                              style={{ backgroundColor: color }}
+                              onClick={() => {
+                                form.setValue('captionColor', color);
+                                setShowColorPicker(false);
+                              }}
+                              type="button"
+                            />
+                          ))}
+                        </div>
                       </div>
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <FormField
               control={form.control}
               name="selectedAspectRatio"

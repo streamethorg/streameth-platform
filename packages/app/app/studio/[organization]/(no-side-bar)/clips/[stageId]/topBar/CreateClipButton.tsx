@@ -242,7 +242,7 @@ const CreateClipButton = ({
             frameRate: 30,
             captionPosition: 'bottom',
             captionLinesPerPage: 2,
-            captionColor: '#000',
+            captionColor: values.captionColor || '#000000',
             captionFont: 'Arial',
           },
         };
