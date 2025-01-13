@@ -37,13 +37,18 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
+import { cn } from '@/lib/utils/utils';
 
 const CreateLivestreamModal = ({
   organization,
   show,
+  variant = 'outline',
+  className,
 }: {
   show?: boolean;
   organization: IExtendedOrganization;
+  variant?: 'outline' | 'ghost' | 'primary' | 'default';
+  className?: string;
 }) => {
   const [open, setOpen] = useState(show ?? false);
   const [isMultiDate, setIsMultiDate] = useState(false);
@@ -52,6 +57,18 @@ const CreateLivestreamModal = ({
     'instant' | 'schedule' | undefined
   >();
   const router = useRouter();
+
+  const handleSubscriptionCheck = () => {
+    // For now, we'll mock this with a hardcoded value
+    const hasPaidPlan = false; // This should come from your organization data
+    
+    if (!hasPaidPlan) {
+      router.push(`/studio/${organization.slug}/payments`);
+      return;
+    }
+    
+    setOpen(true);
+  };
 
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
@@ -133,8 +150,15 @@ const CreateLivestreamModal = ({
     >
       <DialogTrigger asChild>
         <Button
-          variant={'outline'}
-          className="flex flex-row justify-start items-center p-2 bg-white rounded-xl border w-fit"
+          onClick={(e) => {
+            e.preventDefault();
+            handleSubscriptionCheck();
+          }}
+          variant={variant}
+          className={cn(
+            "flex flex-row justify-start items-center p-2 bg-white rounded-xl border w-fit",
+            className
+          )}
         >
           <div className="p-2 text-white rounded-xl">
             <LuRadio size={20} className="text-primary" />

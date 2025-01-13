@@ -11,6 +11,7 @@ import {
   Settings,
   Home,
   ScissorsLineDashed,
+  DollarSign,
 } from 'lucide-react';
 import {
   ArrowLeftToLine,
@@ -49,6 +50,12 @@ const navigationItems = [
     title: 'Mint NFT',
     navigationPath: 'nfts',
     icon: <ImageIcon />,
+    defaultCollapsed: false,
+  },
+  {
+    title: 'Subscription',
+    navigationPath: 'payments',
+    icon: <DollarSign />,
     defaultCollapsed: false,
   },
   {

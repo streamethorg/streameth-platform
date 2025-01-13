@@ -8,6 +8,7 @@ import {
   LuShare2,
   LuLock,
   LuBookOpen,
+  LuDollarSign,
 } from 'react-icons/lu';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -50,11 +51,11 @@ const SidebarMenu = async ({
       url: `/studio/${organizationSlug}/team`,
       icon: <LuUsers size={25} />,
     },
-    // {
-    //   text: 'Settings',
-    //   url: `/studio/${organizationSlug}/settings`,
-    //   icon: <LuSettings size={25} />,
-    // },
+    {
+      text: 'Subscription',
+      url: `/studio/${organizationSlug}/payments`,
+      icon: <LuDollarSign size={25} />,
+    },
     {
       text: 'Docs',
       url: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
