@@ -207,10 +207,12 @@ export class SessionController extends Controller {
   @Post('{sessionId}/highlights')
   async extractHighlights(
     @Path() sessionId: string,
+    @Body() body: { prompt: string },
   ): Promise<IStandardResponse<void>> {
-    const highlights = await this.sessionService.extractHighlights(sessionId);
-    return SendApiResponse(highlights.content);
+    const highlights = await this.sessionService.extractHighlights(sessionId, body.prompt);
+    console.log(highlights);
+    return SendApiResponse(highlights);
   }
-}
+  }
 
 

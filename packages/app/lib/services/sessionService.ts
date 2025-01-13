@@ -3,6 +3,7 @@ import {
   IExtendedScheduleImporter,
   IExtendedSession,
   IPagination,
+  IHighlight,
 } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
@@ -10,7 +11,6 @@ import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components/asset';
 import FuzzySearch from 'fuzzy-search';
 import { fetchClient } from './fetch-client';
-
 interface ApiParams {
   event?: string;
   organization?: string;
@@ -566,13 +566,30 @@ export const generateTranscriptions = async ({
 
 export const extractHighlights = async ({
   sessionId,
+  prompt,
 }: {
   sessionId: string;
-}) => {
+  prompt: string;
+}): Promise<IHighlight[]> => {
   try {
-    const response = await fetchClient(`${apiUrl()}/sessions/${sessionId}/highlights`, {
-      method: 'POST',
-    });
+    const response = await fetchClient(
+      `${apiUrl()}/sessions/${sessionId}/highlights`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      }
+    );
+    if (!response.ok) {
+      throw 'Error extracting highlights';
+    }
+    const data = (await response.json()).message;
+    console.log('data', data);
+    return data;
   } catch (e) {
     console.log('error in extractHighlights', e);
     throw e;

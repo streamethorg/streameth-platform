@@ -262,7 +262,6 @@ export default class SessionService {
       0,
       10,
     );
-    console.log(sessions);
     console.timeEnd('filterSessionsExecutionTime');
     return sessions;
   }
@@ -403,7 +402,7 @@ export default class SessionService {
     return query;
   }
 
-  async extractHighlights(sessionId: string) {
+  async extractHighlights(sessionId: string, prompt: string) {
     const session = await this.get(sessionId);
 
     if (!session.transcripts) {
@@ -411,43 +410,72 @@ export default class SessionService {
     }
 
     const chunks = session.transcripts.chunks;
-    const chunkSlices = [
-      chunks.slice(0, Math.floor(chunks.length / 3)),
-      chunks.slice(
-        Math.floor(chunks.length / 3),
-        Math.floor(chunks.length / 3) * 2,
-      ),
-      chunks.slice(Math.floor(chunks.length / 3) * 2, chunks.length),
-    ];
-
-    for (let i = 0; i < 1; i++) {
-      const chat = new ChatAPI();
-      const highlights = await chat.chat([
-        {
-          role: 'system',
-          content: `
-          You are an expert video editor specializing in creating highlights optimized for social media platforms like TikTok, X, and Instagram.
-          Task: Extract segments from the transcript that are 30 to 120 seconds long and are the most engaging and impactful moments of the event that are related to ethereum technology.
-          Input: You will receive an array of words with timestamps from the English transcript.
-          Output: Return a JSON array of objects with the following structure:
-          {
-            "start": number,    // Timestamp when highlight begins
-            "end": number,      // Timestamp when highlight ends
-            "full_transcript": string  // Complete transcript of the highlighted segment
-          }
-start-ends should be 60 to 120 seconds long
-          Guidelines:
-          - Select engaging, impactful moments that will resonate on social media
-          - Each highlight should be 60-120 seconds long
-          - Focus on key technical insights, announcements, or memorable quotes
-          - Ensure the selected segments are self-contained and make sense standalone`,
-        },
-        {
-          role: 'user',
-          content: `Here is the transcript: ${chunkSlices[i]}`,
-        },
-      ]);
-      console.log(highlights);
-    }
+    console.log(prompt);
+    const chat = new ChatAPI();
+    const highlights = await chat.chat([
+      {
+        role: 'system',
+        content: `
+          You are an expert video editor specializing in extracting and structuring full keynotes and panels from livestreams. Your task is to identify and extract all keynotes and panels within a livestream based on the provided transcript and timestamps.
+      
+          Task:
+          - Use the input transcript, which includes words and corresponding timestamps, to identify keynotes and panels.
+          - Look for markers such as:
+            - Introductions (e.g., "Welcome to...", "Next up, we have...", "So please give it up for...", "Let's get started with...", "We're excited to welcome...", "We're honored to present...").
+            - Transitions, speaker changes, or language that indicates the start or end of a keynote or panel (e.g., "discussion on...", "presentation about...").
+          - Ensure every identified segment is complete, representing the full keynote or panel.
+          - Process the entire transcript, as the livestream likely contains back-to-back keynotes and panels.
+          - If the transcript is unclear or ambiguous, return an empty array.
+          - You can make reasonable assumptions based on the context, but you must ensure the entire transcript is used to identify keynotes and panels.
+      
+          Input:
+          - An array of words with timestamps from the English transcript.
+          - Optional user-provided hints or keywords to help identify keynotes and panels.
+      
+          Output:
+          - Return a JSON array of objects where each object represents a keynote or panel. Use the following structure:
+            {
+              "start": number,    // Timestamp in seconds where the keynote or panel begins
+              "end": number,      // Timestamp in seconds where the keynote or panel ends
+              "title": string     // A concise, descriptive title for the keynote or panel, based on its content
+            }
+      
+          Additional Notes:
+          - Titles should summarize the topic or theme of each keynote or panel clearly and concisely.
+          - Timestamps must align precisely with the transcript to avoid cutting off content mid-sentence.
+          - If user-provided hints or keywords are given, prioritize those for segment identification.
+          - If no clear keynotes or panels can be identified, explain why (e.g., ambiguity in the transcript or missing information).
+      
+          Example Input:
+          [
+            { "word": "Welcome", "timestamp": 5 },
+            { "word": "to", "timestamp": 6 },
+            { "word": "our", "timestamp": 7 },
+            ...
+          ]
+      
+          Example Output:
+          [
+            {
+              "start": 5,
+              "end": 360,
+              "title": "Introduction and Opening Keynote"
+            },
+            {
+              "start": 361,
+              "end": 720,
+              "title": "Panel Discussion: The Future of AI"
+            }
+          ]
+        `,
+      },
+      {
+        role: 'user',
+        content: `Here is the transcript: ${chunks}
+        Here is the prompt provided by the user: ${prompt}`,
+      },
+    ]);
+    console.log(highlights);
+    return JSON.parse(highlights);
   }
 }

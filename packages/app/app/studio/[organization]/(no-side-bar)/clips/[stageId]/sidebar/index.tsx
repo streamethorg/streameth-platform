@@ -11,12 +11,16 @@ import Transcripts from './Transcipts';
 
 export default function Sidebar({
   organizationId,
+  stageId,
   stageSessions,
   liveRecordingId,
   animations,
   words,
+  sessionId,
 }: {
+  sessionId: string;
   organizationId: string;
+  stageId: string;
   stageSessions: IExtendedSession[];
   liveRecordingId?: string;
   animations: IExtendedSession[];
@@ -76,8 +80,13 @@ export default function Sidebar({
           <SessionSidebar sessions={stageSessions} />
         </TabsContent>
         {words && (
-          <TabsContent value="words" className="flex-grow overflow-auto p-4">
-            <Transcripts words={words} />
+          <TabsContent value="words" className="flex-grow overflow-hidden h-full p-4">
+            <Transcripts
+              words={words}
+              sessionId={sessionId}
+              organizationId={organizationId}
+              stageId={stageId}
+            />
           </TabsContent>
         )}
       </Tabs>

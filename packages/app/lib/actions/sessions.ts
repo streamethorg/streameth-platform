@@ -249,7 +249,6 @@ export const saveSessionImportAction = async ({
   try {
     const res = await saveSessionImport({
       scheduleId,
-
       organizationId,
     });
     revalidatePath('/studio');
@@ -285,9 +284,11 @@ export const generateTranscriptionActions = async ({
 
 export const extractHighlightsAction = async ({
   sessionId,
+  prompt,
 }: {
   sessionId: string;
+  prompt: string;
 }) => {
-  const res = await extractHighlights({ sessionId });
+  const res = await extractHighlights({ sessionId, prompt });
   return res;
 };

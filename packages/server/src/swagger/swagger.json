@@ -6388,7 +6388,25 @@
 							"type": "string"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"prompt": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"prompt"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/schedule/import": {

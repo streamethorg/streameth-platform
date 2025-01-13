@@ -17,6 +17,12 @@ export interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
+export interface IHighlight {
+  start: number;
+  end: number;
+  title: string;
+}
+
 export enum eSort {
   asc_alpha = 'asc_alpha',
   desc_alpha = 'desc_alpha',

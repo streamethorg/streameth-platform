@@ -44,7 +44,6 @@ const fetchVideoDetails = async (
 
       const stage = await fetchStage({ stage: session.stageId as string });
       if (!stage?.streamSettings?.playbackId) return null;
-      console.log('session', session.transcripts?.chunks);
       const videoSrc = await getVideoUrlAction(session);
       return {
         videoSrc,
@@ -103,7 +102,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       stageId={stageId}
       clipUrl={videoDetails.videoSrc}
     >
-      <div className="flex flex-row w-full h-full border-t border-gray-200">
+      <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
         <div className="flex h-full w-[calc(100%-400px)] flex-col">
           <TopBar title={videoDetails.name} organization={organization} />
           <ReactHlsPlayer
@@ -115,13 +114,15 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             <Timeline />
           </div>
         </div>
-        <div className="flex w-[400px] h-full overflow-y-auto">
+        <div className="flex w-[400px] h-full">
           <Sidebar
+            sessionId={sessionId}
             liveRecordingId={videoDetails.liveRecording?.id}
             stageSessions={stageSessions.sessions}
             organizationId={organizationId}
             animations={animations.sessions}
             words={videoDetails.words}
+            stageId={stageId}
           />
         </div>
       </div>
