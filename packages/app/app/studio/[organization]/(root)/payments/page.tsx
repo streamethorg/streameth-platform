@@ -116,17 +116,7 @@ export default function PaymentsPage() {
     if (daysLeft <= 0) {
       return (
         <div className="container mx-auto px-4 py-8">
-          <div className="mb-8 max-w-2xl mx-auto">
-            <Card className="p-6 bg-amber-50">
-              <div className="flex items-center gap-2 text-amber-600">
-                <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                <div>
-                  <p className="font-medium">Your subscription has expired</p>
-                  <p className="text-sm">Purchase a new subscription to continue streaming.</p>
-                </div>
-              </div>
-            </Card>
-          </div>
+
           {/* Purchase options */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
@@ -221,6 +211,18 @@ export default function PaymentsPage() {
                 </Button>
               </div>
             ))}
+            
+          </div>
+          <div className="mt-8 max-w-2xl mx-auto">
+            <Card className="p-6 bg-amber-50">
+              <div className="flex items-center gap-2 text-amber-600">
+                <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                <div>
+                  <p className="font-medium">Your subscription has expired</p>
+                  <p className="text-sm">Purchase a new subscription to continue streaming.</p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       );
