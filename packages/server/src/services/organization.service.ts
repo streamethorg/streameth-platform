@@ -1,7 +1,7 @@
 import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization, ISocials } from '@interfaces/organization.interface';
+import { IOrganization, IOrganizationUpdate, ISocials } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
@@ -36,12 +36,24 @@ export default class OrganizationService {
   }
   async update(
     organizationId: string,
-    organization: IOrganization,
+    organizationUpdate: IOrganizationUpdate,
   ): Promise<IOrganization> {
+    // Get current organization to preserve required fields
+    const currentOrg = await this.get(organizationId);
+    if (!currentOrg) {
+      throw new HttpException(404, 'Organization not found');
+    }
+
+    // Merge current org with updates
+    const updatedOrg: IOrganization = {
+      ...currentOrg,
+      ...organizationUpdate,
+    };
+
     return await this.controller.store.update(
       organizationId,
-      organization,
-      organization.name,
+      updatedOrg,
+      updatedOrg.name,
     );
   }
 

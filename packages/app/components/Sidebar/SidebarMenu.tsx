@@ -81,6 +81,7 @@ const SidebarMenu = async ({
             </div>
           )}
           <p className="text-lg font-bold">{organization?.name}</p>
+
           <div className="flex flex-row items-center space-x-2">
             <Button variant={'secondary'} size={'sm'}>
               <Link href={`/studio/${organizationSlug}/settings`}>
@@ -99,6 +100,11 @@ const SidebarMenu = async ({
             url={item.url}
             text={item.text}
             icon={item.icon}
+            badge={
+              item.text === 'Subscription' && organization?.paymentStatus === 'active'
+                ? { text: 'Active', variant: 'success' }
+                : undefined
+            }
           />
         ))}
       </SidebarUI>

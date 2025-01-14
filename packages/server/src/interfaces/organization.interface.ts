@@ -10,6 +10,9 @@ export interface ISocials {
   thumbnail?: string;
   channelId?: string;
 }
+
+export type PaymentStatus = 'none' | 'pending' | 'processing' | 'active' | 'failed';
+
 export interface IOrganization {
   _id?: Types.ObjectId;
   name: string;
@@ -24,7 +27,21 @@ export interface IOrganization {
   banner?: string;
   address?: string;
   socials?: ISocials[];
+  // Payment related fields
+  paymentStatus?: PaymentStatus;
+  customerId?: string;
+  streamingDays?: number;
+  numberOfStages?: number;
+  lastPaymentAmount?: number;
+  lastPaymentDate?: Date;
+  lastPaymentError?: string;
+  lastPaymentIntentId?: string;
+  lastCheckoutSessionId?: string;
+  expirationDate?: Date; // When the streaming access expires
 }
+
+export type IOrganizationUpdate = Partial<IOrganization>;
+
 export interface IOrganizationModel
   extends Omit<IOrganization, '_id'>,
     Document {}
