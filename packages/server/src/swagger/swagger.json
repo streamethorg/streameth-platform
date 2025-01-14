@@ -4788,6 +4788,36 @@
 				}
 			}
 		},
+		"/stripe/webhook": {
+			"post": {
+				"operationId": "WebhookStripe",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stripe"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			}
+		},
 		"/streams/multistream": {
 			"post": {
 				"operationId": "CreateMultiStream",
