@@ -48,7 +48,7 @@ const validateEnv = () => {
     REMOTION_BASE_URL: str(),
     REMOTION_WEBHOOK_SECRET_FILE: str(),
     REMOTION_ID: str(),
-    STRIPE_API_KEY_FILE: str(),
+    STRIPE_SECRET_KEY_FILE: str(),
     STRIPE_PUBLISHABLE_KEY_FILE: str(),
   });
 };

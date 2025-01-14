@@ -251,6 +251,33 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"CreateCheckoutSessionDto": {
+				"properties": {
+					"organizationId": {
+						"type": "string"
+					},
+					"totalPrice": {
+						"type": "number",
+						"format": "double"
+					},
+					"streamingDays": {
+						"type": "number",
+						"format": "double"
+					},
+					"numberOfStages": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"organizationId",
+					"totalPrice",
+					"streamingDays",
+					"numberOfStages"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CreateMultiStreamDto": {
 				"properties": {
 					"name": {
@@ -4727,6 +4754,38 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/stripe/create-checkout-session": {
+			"post": {
+				"operationId": "CreateCheckoutSession",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stripe"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateCheckoutSessionDto"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/streams/multistream": {
