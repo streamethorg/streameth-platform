@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import FeatureButton from '@/components/ui/feature-button';
 
 const OrganizationPage = async ({
   params,
@@ -29,9 +30,9 @@ const OrganizationPage = async ({
 
   return (
     <div className="flex h-full w-full flex-col p-4 overflow-auto">
-      <div className="flex  w-full flex-col p-2">
+      <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
-        <div className="md flex max-w-5xl items-center gap-4 p-4">
+        <div className="flex items-center gap-4 p-4">
           <CreateLivestreamModal
             show={searchParams?.show}
             organization={organization}
@@ -40,15 +41,14 @@ const OrganizationPage = async ({
           <Link
             href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
           >
-            <Button
-              variant={'outline'}
-              className="flex h-auto w-fit flex-row items-center justify-start space-x-4 rounded-xl border bg-white p-2 pr-4"
+            <FeatureButton
+              organizationId={organization._id.toString()}
+              variant="ghost"
+              className="flex items-center gap-2 h-10"
             >
-              <div className="rounded-xl  text-primary">
-                <ScissorsLineDashed size={20} />
-              </div>
-              <span className="text-sm">Clip Content</span>
-            </Button>
+              <ScissorsLineDashed className="w-5 h-5" />
+              <span>Clip Content</span>
+            </FeatureButton>
           </Link>
         </div>
       </div>

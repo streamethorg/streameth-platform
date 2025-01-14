@@ -38,6 +38,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
 import { cn } from '@/lib/utils/utils';
+import FeatureButton from '@/components/ui/feature-button';
 
 const CreateLivestreamModal = ({
   organization,
@@ -149,22 +150,14 @@ const CreateLivestreamModal = ({
       }}
     >
       <DialogTrigger asChild>
-        <Button
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubscriptionCheck();
-          }}
-          variant={variant}
-          className={cn(
-            "flex flex-row justify-start items-center p-2 bg-white rounded-xl border w-fit",
-            className
-          )}
+        <FeatureButton 
+          organizationId={organization._id.toString()}
+          variant="primary"
+          className="flex items-center gap-2"
         >
-          <div className="p-2 text-white rounded-xl">
-            <LuRadio size={20} className="text-primary" />
-          </div>
-          <span className="text-sm">Create Livestream</span>
-        </Button>
+          <LuRadio className="w-5 h-5" />
+          Create Livestream
+        </FeatureButton>
       </DialogTrigger>
       {!streamType ? (
         <CreateLivestreamOptions setStreamType={setStreamType} />

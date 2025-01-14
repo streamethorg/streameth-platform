@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { fetchOrganization } from '@/lib/services/organizationService';
 
@@ -10,7 +12,7 @@ interface Organization {
   expirationDate?: Date;
 }
 
-export function useOrganization(organizationId: string) {
+export const useOrganization = (organizationId: string) => {
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

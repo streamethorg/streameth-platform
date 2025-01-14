@@ -1,3 +1,5 @@
+'use client';
+
 import { useOrganization } from './useOrganization';
 
 interface SubscriptionStatus {
@@ -9,7 +11,7 @@ interface SubscriptionStatus {
   isFailed: boolean;
 }
 
-export function useSubscription(organizationId: string) {
+export const useSubscription = (organizationId: string) => {
   const { organization, loading, error } = useOrganization(organizationId);
 
   if (loading || error || !organization) {

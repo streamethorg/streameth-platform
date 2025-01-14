@@ -40,12 +40,6 @@ const SidebarMenu = async ({
       url: `/studio/${organizationSlug}/destinations`,
       icon: <LuShare2 size={25} />,
     },
-    // WARNING: This is the NFT page only access, commenting this will make user unable to access it
-    // {
-    //   text: 'NFTs',
-    //   url: `/studio/${organizationSlug}/nfts`,
-    //   icon: <LuLock size={25} />,
-    // },
     {
       text: 'Team',
       url: `/studio/${organizationSlug}/team`,
@@ -62,6 +56,14 @@ const SidebarMenu = async ({
       icon: <LuBookOpen size={25} />,
     },
   ];
+
+  // Calculate days left until expiration
+  let daysLeft: number | undefined;
+  if (organization?.expirationDate) {
+    const expiryDate = new Date(organization.expirationDate);
+    const now = new Date();
+    daysLeft = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24));
+  }
 
   return (
     <div className="relative w-[1/4] h-full border-t">
@@ -101,8 +103,11 @@ const SidebarMenu = async ({
             text={item.text}
             icon={item.icon}
             badge={
-              item.text === 'Subscription' && organization?.paymentStatus === 'active'
-                ? { text: 'Active', variant: 'success' }
+              item.text === 'Subscription' && organization?.paymentStatus === 'active' && daysLeft && daysLeft > 0
+                ? { 
+                    text: daysLeft === 1 ? '1 day left' : 'Active', 
+                    variant: daysLeft === 1 ? 'warning' : 'success' 
+                  }
                 : undefined
             }
           />

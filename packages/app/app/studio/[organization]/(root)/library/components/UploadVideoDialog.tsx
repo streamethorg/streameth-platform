@@ -15,6 +15,7 @@ import Dropzone from './upload/Dropzone';
 import UploadVideoForm from './upload/UploadVideoForm';
 import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
+import FeatureButton from '@/components/ui/feature-button';
 
 type UploadStatus = {
   progress: number;
@@ -41,6 +42,7 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     },
     []
   );
+
   useEffect(() => {
     if (pendingUpdate) {
       const { uploadId, updatedSession } = pendingUpdate;
@@ -103,11 +105,15 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="flex flex-row items-center pr-2 bg-white rounded-xl border w-fit hover:bg-secondary">
-        <div className="p-2 text-white rounded-xl">
-          <LuFileUp size={20} className="text-primary" />
-        </div>
-        <span className="text-sm">Upload Video</span>
+      <DialogTrigger asChild>
+        <FeatureButton
+          organizationId={organizationId}
+          variant="ghost"
+          className="flex items-center gap-2 h-10"
+        >
+          <LuFileUp className="w-5 h-5" />
+          <span>Upload Video</span>
+        </FeatureButton>
       </DialogTrigger>
       {dialogContent}
     </Dialog>
