@@ -90,6 +90,8 @@ x-common-secrets: &common-secrets
   - openai-api-key
   - aws-access-key
   - aws-secret-key
+  - prod-stripe-secret-key
+  - prod-stripe-publishable-key
 
 services:
   server:
@@ -306,4 +308,8 @@ secrets:
   aws-access-key:
     external: true
   aws-secret-key:
+    external: true
+  prod-stripe-secret-key:
+    external: true
+  prod-stripe-publishable-key:
     external: true
