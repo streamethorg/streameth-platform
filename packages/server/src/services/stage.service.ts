@@ -27,12 +27,27 @@ export default class StageService {
   }
 
   async create(data: IStage): Promise<IStage> {
+    // Check if organization has reached their stage limit
+    const organization = await Organization.findById(data.organizationId);
+    if (!organization) throw new HttpException(404, 'Organization not found');
+    
+    if (organization.currentStages >= organization.paidStages) {
+      throw new HttpException(403, 'Stage limit reached. Please upgrade your subscription to create more stages.');
+    }
+
     const eventId =
       !data.eventId || data.eventId.toString().length === 0
         ? new Types.ObjectId().toString()
         : data.eventId;
     const stream = await createStream(data.name);
     console.log('stream', stream);
+
+    // Increment currentStages for the organization
+    await Organization.findByIdAndUpdate(
+      data.organizationId,
+      { $inc: { currentStages: 1 } }
+    );
+
     return this.controller.store.create(
       data.name,
       {
@@ -106,8 +121,15 @@ export default class StageService {
   }
 
   async deleteOne(stageId: string): Promise<void> {
-    const stream = await this.get(stageId);
-    await deleteStream(stream.streamSettings.streamId);
+    const stage = await this.get(stageId);
+    await deleteStream(stage.streamSettings.streamId);
+
+    // Decrement currentStages for the organization
+    await Organization.findByIdAndUpdate(
+      stage.organizationId,
+      { $inc: { currentStages: -1 } }
+    );
+
     return await this.controller.store.delete(stageId);
   }
 

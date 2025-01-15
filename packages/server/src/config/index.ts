@@ -94,4 +94,8 @@ export const config = {
     port: validatedEnv.REDIS_PORT,
     password: readSecretFile(validatedEnv.REDIS_PASSWORD_FILE),
   },
+  stripe: {
+    apiKey: readSecretFile(validatedEnv.STRIPE_SECRET_KEY_FILE),
+    publishableKey: readSecretFile(validatedEnv.STRIPE_PUBLISHABLE_KEY_FILE),
+  },
 };

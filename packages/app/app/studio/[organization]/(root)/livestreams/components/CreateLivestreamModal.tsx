@@ -37,21 +37,37 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
+import { cn } from '@/lib/utils/utils';
+import FeatureButton from '@/components/ui/feature-button';
+import { useSubscription } from '@/lib/hooks/useSubscription';
 
 const CreateLivestreamModal = ({
   organization,
   show,
+  variant = 'outline',
+  className,
 }: {
   show?: boolean;
   organization: IExtendedOrganization;
+  variant?: 'outline' | 'ghost' | 'primary' | 'default';
+  className?: string;
 }) => {
   const [open, setOpen] = useState(show ?? false);
   const [isMultiDate, setIsMultiDate] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [streamType, setStreamType] = useState<
-    'instant' | 'schedule' | undefined
-  >();
+  const [streamType, setStreamType] = useState<'instant' | 'schedule' | undefined>();
   const router = useRouter();
+  const { canUseFeatures, organizationSlug } = useSubscription(organization._id.toString());
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (!canUseFeatures) {
+      e.preventDefault();
+      e.stopPropagation();
+      router.push(`/studio/${organizationSlug}/payments`);
+      return;
+    }
+    setOpen(true);
+  };
 
   const form = useForm<z.infer<typeof StageSchema>>({
     resolver: zodResolver(StageSchema),
@@ -113,8 +129,8 @@ const CreateLivestreamModal = ({
 
         router.push(`/studio/${organization?.slug}/livestreams/${streamId}`);
       })
-      .catch(() => {
-        toast.error('Error creating stream');
+      .catch((error) => {
+        toast.error(error.message);
         setIsLoading(false);
       })
       .finally(() => {
@@ -132,14 +148,13 @@ const CreateLivestreamModal = ({
       }}
     >
       <DialogTrigger asChild>
-        <Button
-          variant={'outline'}
-          className="flex flex-row justify-start items-center p-2 bg-white rounded-xl border w-fit"
+        <Button 
+          variant="primary"
+          className="flex items-center gap-2"
+          onClick={handleClick}
         >
-          <div className="p-2 text-white rounded-xl">
-            <LuRadio size={20} className="text-primary" />
-          </div>
-          <span className="text-sm">Create Livestream</span>
+          <LuRadio className="w-5 h-5" />
+          Create Livestream
         </Button>
       </DialogTrigger>
       {!streamType ? (

@@ -19,7 +19,7 @@ export async function fetchOrganization({
       `${apiUrl()}/organizations/${
         organizationId ? organizationId : organizationSlug
       }`,
-      { cache: 'force-cache' }
+      { cache: 'no-store' }
     );
     const data = (await response.json()).data;
 

@@ -6,6 +6,7 @@ import Logo from '@/public/logo.png';
 import LogoDark from '@/public/logo_dark.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { cn } from '@/lib/utils/utils';
 
 const SidebarContext = createContext<{ expanded: boolean } | undefined>(
   undefined
@@ -33,10 +34,12 @@ export const SidebarItem = ({
   icon,
   text,
   url,
+  badge,
 }: {
   icon: ReactNode;
   text: string;
   url: string;
+  badge?: { text: string; variant: 'success' | 'warning' | 'error' };
 }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -72,6 +75,16 @@ export const SidebarItem = ({
       >
         {text}
       </span>
+      {badge && expanded && (
+        <div className={cn(
+          'ml-auto px-2 py-0.5 rounded-full text-xs font-medium',
+          badge.variant === 'success' && 'bg-green-100 text-green-700',
+          badge.variant === 'warning' && 'bg-amber-100 text-amber-700',
+          badge.variant === 'error' && 'bg-red-100 text-red-700'
+        )}>
+          {badge.text}
+        </div>
+      )}
 
       {!expanded && (
         <div

@@ -7,6 +7,8 @@ import { UserController } from './../controllers/user.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { SupportController } from './../controllers/support.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { StripeController } from './../controllers/stripe.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StreamController } from './../controllers/stream.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StateController } from './../controllers/state.controller';
@@ -64,6 +66,11 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "PaymentStatus": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["none"]},{"dataType":"enum","enums":["pending"]},{"dataType":"enum","enums":["processing"]},{"dataType":"enum","enums":["active"]},{"dataType":"enum","enums":["failed"]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IOrganization": {
         "dataType": "refObject",
         "properties": {
@@ -80,6 +87,17 @@ const models: TsoaRoute.Models = {
             "banner": {"dataType":"string"},
             "address": {"dataType":"string"},
             "socials": {"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},
+            "paymentStatus": {"ref":"PaymentStatus"},
+            "customerId": {"dataType":"string"},
+            "streamingDays": {"dataType":"double"},
+            "paidStages": {"dataType":"double"},
+            "currentStages": {"dataType":"double"},
+            "lastPaymentAmount": {"dataType":"double"},
+            "lastPaymentDate": {"dataType":"datetime"},
+            "lastPaymentError": {"dataType":"string"},
+            "lastPaymentIntentId": {"dataType":"string"},
+            "lastCheckoutSessionId": {"dataType":"string"},
+            "expirationDate": {"dataType":"datetime"},
         },
         "additionalProperties": false,
     },
@@ -159,6 +177,17 @@ const models: TsoaRoute.Models = {
             "status": {"dataType":"string","required":true},
             "message": {"dataType":"string","required":true},
             "data": {"dataType":"any"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreateCheckoutSessionDto": {
+        "dataType": "refObject",
+        "properties": {
+            "organizationId": {"dataType":"string","required":true},
+            "totalPrice": {"dataType":"double","required":true},
+            "streamingDays": {"dataType":"double","required":true},
+            "numberOfStages": {"dataType":"double","required":true},
         },
         "additionalProperties": false,
     },
@@ -900,7 +929,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -918,6 +947,17 @@ const models: TsoaRoute.Models = {
             "accentColor": {"dataType":"string"},
             "banner": {"dataType":"string"},
             "address": {"dataType":"string","required":true},
+            "paymentStatus": {"ref":"PaymentStatus"},
+            "customerId": {"dataType":"string"},
+            "streamingDays": {"dataType":"double"},
+            "paidStages": {"dataType":"double"},
+            "currentStages": {"dataType":"double"},
+            "lastPaymentAmount": {"dataType":"double"},
+            "lastPaymentDate": {"dataType":"datetime"},
+            "lastPaymentError": {"dataType":"string"},
+            "lastPaymentIntentId": {"dataType":"string"},
+            "lastCheckoutSessionId": {"dataType":"string"},
+            "expirationDate": {"dataType":"datetime"},
         },
         "additionalProperties": false,
     },
@@ -1509,6 +1549,66 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                 next,
                 validatedArgs,
                 successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/stripe/create-checkout-session',
+            ...(fetchMiddlewares<RequestHandler>(StripeController)),
+            ...(fetchMiddlewares<RequestHandler>(StripeController.prototype.createCheckoutSession)),
+
+            async function StripeController_createCheckoutSession(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreateCheckoutSessionDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StripeController();
+
+              await templateService.apiHandler({
+                methodName: 'createCheckoutSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/stripe/webhook',
+            ...(fetchMiddlewares<RequestHandler>(StripeController)),
+            ...(fetchMiddlewares<RequestHandler>(StripeController.prototype.webhookStripe)),
+
+            async function StripeController_webhookStripe(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"any"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StripeController();
+
+              await templateService.apiHandler({
+                methodName: 'webhookStripe',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
               });
             } catch (err) {
                 return next(err);

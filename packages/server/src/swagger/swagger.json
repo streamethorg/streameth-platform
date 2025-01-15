@@ -48,6 +48,16 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"PaymentStatus": {
+				"type": "string",
+				"enum": [
+					"none",
+					"pending",
+					"processing",
+					"active",
+					"failed"
+				]
+			},
 			"IOrganization": {
 				"properties": {
 					"_id": {
@@ -91,6 +101,45 @@
 							"$ref": "#/components/schemas/ISocials"
 						},
 						"type": "array"
+					},
+					"paymentStatus": {
+						"$ref": "#/components/schemas/PaymentStatus"
+					},
+					"customerId": {
+						"type": "string"
+					},
+					"streamingDays": {
+						"type": "number",
+						"format": "double"
+					},
+					"paidStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastPaymentAmount": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastPaymentDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"lastPaymentError": {
+						"type": "string"
+					},
+					"lastPaymentIntentId": {
+						"type": "string"
+					},
+					"lastCheckoutSessionId": {
+						"type": "string"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
@@ -247,6 +296,33 @@
 				"required": [
 					"status",
 					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateCheckoutSessionDto": {
+				"properties": {
+					"organizationId": {
+						"type": "string"
+					},
+					"totalPrice": {
+						"type": "number",
+						"format": "double"
+					},
+					"streamingDays": {
+						"type": "number",
+						"format": "double"
+					},
+					"numberOfStages": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"organizationId",
+					"totalPrice",
+					"streamingDays",
+					"numberOfStages"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -3081,6 +3157,45 @@
 					},
 					"address": {
 						"type": "string"
+					},
+					"paymentStatus": {
+						"$ref": "#/components/schemas/PaymentStatus"
+					},
+					"customerId": {
+						"type": "string"
+					},
+					"streamingDays": {
+						"type": "number",
+						"format": "double"
+					},
+					"paidStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastPaymentAmount": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastPaymentDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"lastPaymentError": {
+						"type": "string"
+					},
+					"lastPaymentIntentId": {
+						"type": "string"
+					},
+					"lastCheckoutSessionId": {
+						"type": "string"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
@@ -3131,6 +3246,45 @@
 					},
 					"address": {
 						"type": "string"
+					},
+					"paymentStatus": {
+						"$ref": "#/components/schemas/PaymentStatus"
+					},
+					"customerId": {
+						"type": "string"
+					},
+					"streamingDays": {
+						"type": "number",
+						"format": "double"
+					},
+					"paidStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastPaymentAmount": {
+						"type": "number",
+						"format": "double"
+					},
+					"lastPaymentDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"lastPaymentError": {
+						"type": "string"
+					},
+					"lastPaymentIntentId": {
+						"type": "string"
+					},
+					"lastCheckoutSessionId": {
+						"type": "string"
+					},
+					"expirationDate": {
+						"type": "string",
+						"format": "date-time"
 					}
 				},
 				"required": [
@@ -4727,6 +4881,68 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/stripe/create-checkout-session": {
+			"post": {
+				"operationId": "CreateCheckoutSession",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stripe"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateCheckoutSessionDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/stripe/webhook": {
+			"post": {
+				"operationId": "WebhookStripe",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stripe"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
 			}
 		},
 		"/streams/multistream": {
