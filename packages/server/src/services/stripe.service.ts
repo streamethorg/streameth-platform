@@ -2,18 +2,20 @@ import { CreateCheckoutSessionDto } from "@dtos/stripe/create-checkout-session.d
 import { HttpException } from "@exceptions/HttpException";
 import OrganizationService from "./organization.service";
 import Organization from "@models/organization.model";
+import { config } from "@config";
+
+const { apiKey } = config.stripe;
 
 export default class StripeService {
     private stripe: any;
     private organizationService: OrganizationService;
 
     constructor() {
-        const stripeKey = process.env.STRIPE_SECRET_KEY_FILE;
-        if (!stripeKey) {
+        if (!apiKey) {
             console.error('❌ STRIPE_SECRET_KEY is not configured in environment variables');
             throw new HttpException(500, 'Stripe secret key is not configured');
         }
-        this.stripe = require('stripe')(stripeKey);
+        this.stripe = require('stripe')(apiKey);
         this.organizationService = new OrganizationService();
     }
 
