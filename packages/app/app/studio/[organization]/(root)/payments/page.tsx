@@ -257,10 +257,10 @@ export default function PaymentsPage() {
                 </span>
               </div>
 
-              {daysLeft <= 5 && (
+              {daysLeft <= 2 && (
                 <div className="flex items-center gap-2 text-amber-600 mt-4 p-3 bg-amber-50 rounded-lg">
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                  <span className="text-sm">Your subscription will expire soon. Consider renewing.</span>
+                  <span className="text-sm">Your subscription will expire soon.</span>
                 </div>
               )}
             </div>

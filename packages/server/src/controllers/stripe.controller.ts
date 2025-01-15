@@ -42,17 +42,6 @@ export class StripeController extends Controller {
       }
 
       switch (body.type) {
-        case 'payment_intent.created': {
-          const paymentIntent = body.data.object;
-          console.log('💰 Payment intent created:', {
-            id: paymentIntent.id,
-            amount: paymentIntent.amount,
-            metadata: paymentIntent.metadata
-          });
-          await this.stripeService.handlePaymentIntentCreated(paymentIntent);
-          break;
-        }
-
         case 'checkout.session.completed': {
           const session = body.data.object;
           console.log('✅ Checkout completed:', {
@@ -64,49 +53,33 @@ export class StripeController extends Controller {
           break;
         }
 
-        case 'payment_intent.succeeded': {
-          const paymentIntent = body.data.object;
-          console.log('🌟 Payment succeeded:', {
-            paymentId: paymentIntent.id,
-            amount: paymentIntent.amount,
-            metadata: paymentIntent.metadata
-          });
-          await this.stripeService.handlePaymentSucceeded(paymentIntent);
-          break;
-        }
-
-        case 'payment_intent.payment_failed': {
-          const paymentIntent = body.data.object;
-          const error = paymentIntent.last_payment_error;
-          console.error('❌ Payment failed:', {
-            paymentId: paymentIntent.id,
-            error: error?.message,
-            code: error?.code,
-            metadata: paymentIntent.metadata
-          });
-          await this.stripeService.handlePaymentFailed(paymentIntent);
-          break;
-        }
-
-        case 'charge.succeeded': {
+        case 'charge.updated': {
           const charge = body.data.object;
-          console.log('💫 Charge succeeded:', {
+          console.log('💫 Charge updated:', {
             chargeId: charge.id,
             amount: charge.amount,
-            metadata: charge.metadata
+            metadata: charge.metadata,
+            status: charge.status,
+            paid: charge.paid,
+            paymentIntent: charge.payment_intent
           });
+          
+          // Only process if charge is succeeded and paid
+          if (charge.status === 'succeeded' && charge.paid) {
+            await this.stripeService.handleChargeSucceeded(charge);
+          }
           break;
         }
 
         default: {
-          console.log('ℹ️ Unhandled event type:', body.type);
+          console.log('ℹ️ Skipping unhandled event type:', body.type);
         }
       }
 
       return SendApiResponse('Webhook processed successfully');
     } catch (error) {
       console.error('💥 Webhook processing failed:', error);
-      // Important: Return 200 even for errors to prevent Stripe from retrying
+      // Return 200 to acknowledge receipt
       return SendApiResponse('Webhook processing failed, but acknowledged', null, '200');
     }
   }

@@ -97,10 +97,16 @@ export default class StripeService {
             const organization = await this.getOrganizationFromMetadata(paymentIntent.metadata);
             if (!organization) return;
 
-            // Only update if not in a final state
-            if (organization.paymentStatus !== 'active' && organization.paymentStatus !== 'failed') {
+            // Only update if in initial state or failed state
+            if (organization.paymentStatus === 'none' || organization.paymentStatus === 'failed') {
                 await Organization.updateOne(
-                    { _id: organization._id },
+                    { 
+                      _id: organization._id,
+                      $or: [
+                        { paymentStatus: 'none' },
+                        { paymentStatus: 'failed' }
+                      ]
+                    },
                     {
                         $set: {
                             paymentStatus: 'pending',
@@ -110,6 +116,8 @@ export default class StripeService {
                 );
 
                 console.log('✅ Organization payment status updated to pending');
+            } else {
+                console.log('⚠️ Skipping payment intent update - organization in state:', organization.paymentStatus);
             }
         } catch (error) {
             console.error('❌ Failed to handle payment intent created', error);
@@ -122,23 +130,79 @@ export default class StripeService {
             const organization = await this.getOrganizationFromMetadata(session.metadata);
             if (!organization) return;
 
-            // Only update if not in a final state
-            if (organization.paymentStatus !== 'active' && organization.paymentStatus !== 'failed') {
-                await Organization.updateOne(
-                    { _id: organization._id },
-                    {
-                        $set: {
-                            paymentStatus: 'processing',
-                            customerId: session.customer,
-                            lastCheckoutSessionId: session.id,
-                        }
-                    }
-                );
+            console.log('📝 Setting organization to processing state:', {
+                organizationId: organization._id,
+                sessionId: session.id
+            });
 
-                console.log('✅ Organization updated with checkout session data');
-            }
+            await Organization.updateOne(
+                { _id: organization._id },
+                {
+                    $set: {
+                        paymentStatus: 'processing',
+                        customerId: session.customer,
+                        lastCheckoutSessionId: session.id,
+                    }
+                }
+            );
+
+            console.log('✅ Organization updated to processing state');
         } catch (error) {
             console.error('❌ Failed to handle checkout completion', error);
+            throw error;
+        }
+    }
+
+    async handleChargeSucceeded(charge: any): Promise<void> {
+        try {
+            const organization = await this.getOrganizationFromMetadata(charge.metadata);
+            if (!organization) return;
+
+            const { streamingDays, numberOfStages } = charge.metadata;
+            const streamingDaysNum = parseInt(streamingDays);
+            const numberOfStagesNum = parseInt(numberOfStages);
+
+            // Calculate expiry date: current date + streaming days
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
+
+            console.log('📅 Processing successful charge:', {
+                organizationId: organization._id,
+                chargeId: charge.id,
+                streamingDays: streamingDaysNum,
+                numberOfStages: numberOfStagesNum,
+                expiryDate
+            });
+
+            const result = await Organization.updateOne(
+                { _id: organization._id },
+                {
+                    $set: {
+                        paymentStatus: 'active',
+                        streamingDays: streamingDaysNum,
+                        paidStages: numberOfStagesNum,
+                        lastPaymentAmount: charge.amount,
+                        lastPaymentDate: new Date(),
+                        expirationDate: expiryDate,
+                    }
+                }
+            );
+
+            if (result.modifiedCount === 0) {
+                console.log('⚠️ No update performed for organization:', organization._id);
+            } else {
+                console.log('✅ Organization activated:', {
+                    organizationId: organization._id,
+                    chargeId: charge.id,
+                    expiryDate
+                });
+            }
+        } catch (error) {
+            console.error('❌ Failed to handle charge success:', {
+                error,
+                chargeId: charge.id,
+                organizationId: charge.metadata?.organizationId
+            });
             throw error;
         }
     }
@@ -161,9 +225,15 @@ export default class StripeService {
                 expiryDate,
             });
 
-            // This is a final state, always update
-            await Organization.updateOne(
-                { _id: organization._id },
+            // Only update if in processing or pending state (to handle race conditions)
+            const result = await Organization.updateOne(
+                { 
+                  _id: organization._id,
+                  $or: [
+                    { paymentStatus: 'processing' },
+                    { paymentStatus: 'pending' }
+                  ]
+                },
                 {
                     $set: {
                         paymentStatus: 'active',
@@ -176,7 +246,11 @@ export default class StripeService {
                 }
             );
 
-            console.log('✅ Organization activated with streaming capabilities until', expiryDate);
+            if (result.modifiedCount === 0) {
+                console.log('⚠️ No update performed - organization not in expected state:', organization.paymentStatus);
+            } else {
+                console.log('✅ Organization activated with streaming capabilities until', expiryDate);
+            }
         } catch (error) {
             console.error('❌ Failed to handle payment success', error);
             throw error;
@@ -188,9 +262,12 @@ export default class StripeService {
             const organization = await this.getOrganizationFromMetadata(paymentIntent.metadata);
             if (!organization) return;
 
-            // This is a final state, always update
-            await Organization.updateOne(
-                { _id: organization._id },
+            // Update to failed state if not already active
+            const result = await Organization.updateOne(
+                { 
+                  _id: organization._id,
+                  paymentStatus: { $ne: 'active' }
+                },
                 {
                     $set: {
                         paymentStatus: 'failed',
@@ -199,7 +276,11 @@ export default class StripeService {
                 }
             );
 
-            console.log('✅ Organization updated with payment failure');
+            if (result.modifiedCount === 0) {
+                console.log('⚠️ No update performed - organization already in final state');
+            } else {
+                console.log('✅ Organization updated with payment failure');
+            }
         } catch (error) {
             console.error('❌ Failed to handle payment failure', error);
             throw error;
