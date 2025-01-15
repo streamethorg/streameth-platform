@@ -8,6 +8,8 @@ import UserProfile from '@/components/misc/UserProfile';
 import CreateLivestreamModal from '@/app/studio/[organization]/(root)/livestreams/components/CreateLivestreamModal';
 import UploadVideoDialog from '@/app/studio/[organization]/(root)/library/components/UploadVideoDialog';
 import LogoDark from '@/public/logo_dark.png';
+import FeatureButton from '../ui/feature-button';
+import { Radio, FileUp } from 'lucide-react';
 const NavbarStudio = ({
   logo,
   showLogo = true,
@@ -47,8 +49,24 @@ const NavbarStudio = ({
         />
       </div>
       <div className="flex items-center justify-end space-x-2">
-        <CreateLivestreamModal organization={organization} />
-        <UploadVideoDialog organizationId={organization._id.toString()} />
+        {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
+          <CreateLivestreamModal
+            organization={organization}
+          />
+        ): (
+          <FeatureButton organizationId={organization._id.toString()} variant="primary" className="flex items-center gap-2">
+            <Radio className="w-5 h-5" />
+            Create Livestream
+          </FeatureButton>
+        )}
+        {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
+          <UploadVideoDialog organizationId={organization._id.toString()} />
+        ): (
+          <FeatureButton organizationId={organization._id.toString()} variant="ghost" className="flex items-center gap-2">
+            <FileUp className="w-5 h-5" />
+            Upload Video
+          </FeatureButton>
+        )}
         {organizations && (
           <UserProfile
             organization={organization._id}
