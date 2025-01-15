@@ -83,7 +83,8 @@ export async function createStage({
   });
 
   if (!response.ok) {
-    throw 'Error creating stage';
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Error creating stage');
   }
   return (await response.json()).data;
 }

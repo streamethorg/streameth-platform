@@ -38,19 +38,30 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <UploadVideoDialog organizationId={organization._id.toString()} />
-          <FeatureButton
-            organizationId={organization._id.toString()}
-            variant="ghost"
-            className="p-0"
-          >
+          {/* Very hacky way of handling the clip content button due to the Link component */}
+          {organization.expirationDate &&
+          new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
-              className="flex items-center gap-2 px-4 py-2"
+            >
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2 h-10"
+              >
+                <ScissorsLineDashed className="w-5 h-5" />
+                <span>Clip Content</span>
+              </Button>
+            </Link>
+          ) : (
+            <FeatureButton
+              organizationId={organization._id.toString()}
+              variant="ghost"
+              className="flex items-center gap-2 h-10"
             >
               <ScissorsLineDashed className="w-5 h-5" />
               <span>Clip Content</span>
-            </Link>
-          </FeatureButton>
+            </FeatureButton>
+          )}
         </div>
       </div>
 

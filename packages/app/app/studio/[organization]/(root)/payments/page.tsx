@@ -242,7 +242,7 @@ export default function PaymentsPage() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Stages</span>
-                <span className="font-medium">{organization.numberOfStages} stages</span>
+                <span className="font-medium">{organization.paidStages} stages</span>
               </div>
               
               <div className="flex justify-between items-center">

@@ -20,15 +20,17 @@ export const createStageAction = async ({
 }: {
   stage: IExtendedStage;
 }) => {
-  const response = await createStage({
-    stage: stage,
-  });
+  try {
+    const response = await createStage({
+      stage: stage,
+    });
 
-  if (!response) {
-    throw new Error('Error creating stage');
+    revalidatePath('/studio');
+    return response;
+  } catch (error: any) {
+    // The error message is now directly available from the service
+    throw new Error(error.message || 'Error creating stage');
   }
-  revalidatePath('/studio');
-  return response;
 };
 
 export const deleteStageAction = async ({
