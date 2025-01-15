@@ -112,21 +112,10 @@ jobs:
       - name: Copy compose files
         run: |
           scp docker-compose.*.yml streameth@145.223.118.217:/home/streameth/streameth/
-
       # Log in to registry on deployment server
       - name: Log in to registry on deployment server
         run: |
           echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      # Deploy or update stack
-      - name: Deploy/Update Stack
-        run: |
-          STACK_NAME="${{ needs.prepare-env.outputs.stack_name }}"
-          COMPOSE_FILE="${{ needs.prepare-env.outputs.compose_file }}"
-          
-          # Deploy or update the stack
-          docker stack deploy -c /home/streameth/streameth/${COMPOSE_FILE} ${STACK_NAME} --with-registry-auth
-
       # Update services based on environment
       - name: Update services
         run: |
