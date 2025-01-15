@@ -48,7 +48,7 @@ export const useSubscription = (organizationId: string) => {
   }
 
   // Can use features if subscription is active and not expired
-  const canUseFeatures = !status.hasExpired;
+  const canUseFeatures = status.isActive && !status.hasExpired;
 
   return {
     canUseFeatures,

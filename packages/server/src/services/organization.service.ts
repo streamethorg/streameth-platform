@@ -1,17 +1,15 @@
 import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization, IOrganizationUpdate, ISocials } from '@interfaces/organization.interface';
+import { IOrganization, IOrganizationUpdate, ISocials, PaymentStatus } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
 import { generateId } from '@utils/util';
-import UserService from './user.service';
 
 export default class OrganizationService {
   private path: string;
   private controller: BaseController<IOrganization>;
-  private userService = new UserService();
   constructor() {
     this.path = 'organizations';
     this.controller = new BaseController<IOrganization>('db', Organization);
@@ -22,11 +20,23 @@ export default class OrganizationService {
       this.path,
     );
     if (findOrg) throw new HttpException(409, 'Organization already exists');
+
+    // Set default payment status and expiration date for new organizations
+    const orgData = {
+      ...data,
+      paymentStatus: 'none' as PaymentStatus,
+      expirationDate: new Date(0), // Set to Unix epoch to ensure features are locked
+      paidStages: 0,
+      currentStages: 0,
+      streamingDays: 0
+    };
+
     const createOrg = await this.controller.store.create(
-      data.name,
-      data,
+      orgData.name,
+      orgData,
       this.path,
     );
+
     const emails = [...config.wallets.trim().split(','), data.address];
     await User.updateMany(
       { email: { $in: emails } },

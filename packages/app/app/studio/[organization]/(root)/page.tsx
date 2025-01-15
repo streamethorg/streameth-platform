@@ -9,11 +9,11 @@ import LivestreamTable from './livestreams/components/LivestreamTable';
 import { notFound } from 'next/navigation';
 import UploadVideoDialog from './library/components/UploadVideoDialog';
 import { Button } from '@/components/ui/button';
-import { ScissorsLineDashed } from 'lucide-react';
+import { FileUp, ScissorsLineDashed } from 'lucide-react';
 import Link from 'next/link';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import FeatureButton from '@/components/ui/feature-button';
-
+import { Radio } from 'lucide-react';
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -33,14 +33,28 @@ const OrganizationPage = async ({
       <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center gap-4 p-4">
+        {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
           <CreateLivestreamModal
             show={searchParams?.show}
             organization={organization}
           />
+        ): (
+          <FeatureButton organizationId={organization._id.toString()} variant="primary" className="flex items-center gap-2">
+            <Radio className="w-5 h-5" />
+            Create Livestream
+          </FeatureButton>
+        )}
+
+
+{organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? ( 
           <UploadVideoDialog organizationId={organization._id.toString()} />
-          {/* Very hacky way of handling the clip content button due to the Link component */}
-          {organization.expirationDate &&
-          new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
+        ): (
+          <FeatureButton organizationId={organization._id.toString()} variant="ghost" className="flex items-center gap-2">
+            <FileUp className="w-5 h-5" />
+            Upload Video
+          </FeatureButton>
+        )}
+          {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >
