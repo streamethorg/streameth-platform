@@ -130,7 +130,8 @@ const CreateLivestreamModal = ({
         router.push(`/studio/${organization?.slug}/livestreams/${streamId}`);
       })
       .catch((error) => {
-        toast.error(error.message);
+        const errorMessage = error.message || 'Failed to create livestream';
+        toast.error(errorMessage);
         setIsLoading(false);
       })
       .finally(() => {

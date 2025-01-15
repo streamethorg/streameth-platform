@@ -28,7 +28,11 @@ export const createStageAction = async ({
     revalidatePath('/studio');
     return response;
   } catch (error: any) {
-    // The error message is now directly available from the service
+    // If the error is from our API, it will have a message property
+    // If not, use a generic error message
+    if (error instanceof Error) {
+      throw error;
+    }
     throw new Error(error.message || 'Error creating stage');
   }
 };

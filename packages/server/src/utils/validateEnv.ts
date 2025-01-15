@@ -7,6 +7,7 @@ const validateEnv = () => {
     OPENAI_API_KEY_FILE: str(),
     BASE_URL: str(),
     PLAYER_URL: str(),
+    FRONTEND_URL: str(),
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),

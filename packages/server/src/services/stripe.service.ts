@@ -45,8 +45,8 @@ export default class StripeService {
                         quantity: 1,
                     }
                 ],
-                success_url: `${process.env.BASE_URL}/studio/${data.organizationId}/payments?success=true`,
-                cancel_url: `${process.env.BASE_URL}/studio/${data.organizationId}/payments?canceled=true`,
+                success_url: `${config.frontendUrl}/studio/${data.organizationId}/payments?success=true`,
+                cancel_url: `${config.frontendUrl}/studio/${data.organizationId}/payments?canceled=true`,
                 metadata: {
                     organizationId: organization._id.toString(), // Use _id instead of slug
                     organizationSlug: data.organizationId,  // Keep slug for URLs

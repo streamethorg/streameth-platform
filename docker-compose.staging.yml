@@ -6,6 +6,7 @@ x-common-environment: &common-environment
   APP_PORT: 8080
   BASE_URL: https://staging.api.streameth.org
   PLAYER_URL: https://staging.player.streameth.org
+  FRONTEND_URL: https://streameth-test.vercel.app
   DB_PASSWORD_FILE: /run/secrets/db-password
   DB_HOST: staging_mongodb
   DB_USER: root

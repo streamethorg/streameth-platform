@@ -20,6 +20,7 @@ export const config = {
   },
   baseUrl: validatedEnv.BASE_URL,
   playerUrl: validatedEnv.PLAYER_URL,
+  frontendUrl: validatedEnv.FRONTEND_URL,
   appEnv: validatedEnv.NODE_ENV,
   port: validatedEnv.APP_PORT,
   wallets: validatedEnv.WALLET_ADDRESSES,
