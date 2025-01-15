@@ -38,18 +38,19 @@ const OrganizationPage = async ({
             organization={organization}
           />
           <UploadVideoDialog organizationId={organization._id.toString()} />
-          <Link
-            href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
+          <FeatureButton
+            organizationId={organization._id.toString()}
+            variant="ghost"
+            className="p-0"
           >
-            <FeatureButton
-              organizationId={organization._id.toString()}
-              variant="ghost"
-              className="flex items-center gap-2 h-10"
+            <Link
+              href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
+              className="flex items-center gap-2 px-4 py-2"
             >
               <ScissorsLineDashed className="w-5 h-5" />
               <span>Clip Content</span>
-            </FeatureButton>
-          </Link>
+            </Link>
+          </FeatureButton>
         </div>
       </div>
 

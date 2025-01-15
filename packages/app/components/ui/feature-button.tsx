@@ -5,6 +5,7 @@ import { useSubscription } from '@/lib/hooks/useSubscription';
 import { Lock } from 'lucide-react';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils/utils';
+import { useRouter } from 'next/navigation';
 
 interface FeatureButtonProps {
   children: ReactNode;
@@ -29,16 +30,23 @@ const FeatureButton = ({
   loading,
   type = 'button',
 }: FeatureButtonProps) => {
-  const { canUseFeatures, isLoading } = useSubscription(organizationId);
+  const router = useRouter();
+  const { canUseFeatures, isLoading, organizationSlug } = useSubscription(organizationId);
 
-  const isDisabled = disabled || !canUseFeatures || isLoading;
+  const handleClick = () => {
+    if (!canUseFeatures) {
+      router.push(`/studio/${organizationSlug}/payments`);
+      return;
+    }
+    onClick?.();
+  };
 
   return (
     <Button
       variant={variant}
       className={cn(className, 'relative', !canUseFeatures && 'opacity-60')}
-      onClick={onClick}
-      disabled={isDisabled}
+      onClick={handleClick}
+      disabled={disabled || isLoading}
       size={size}
       type={type}
       loading={loading}
