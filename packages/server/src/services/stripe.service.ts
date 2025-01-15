@@ -168,7 +168,7 @@ export default class StripeService {
                     $set: {
                         paymentStatus: 'active',
                         streamingDays: streamingDaysNum,
-                        numberOfStages: numberOfStagesNum,
+                        paidStages: numberOfStagesNum,
                         lastPaymentAmount: paymentIntent.amount,
                         lastPaymentDate: new Date(),
                         expirationDate: expiryDate,

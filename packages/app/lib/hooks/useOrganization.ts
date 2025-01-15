@@ -9,7 +9,8 @@ interface Organization {
   slug: string;
   paymentStatus?: 'none' | 'pending' | 'processing' | 'active' | 'failed';
   streamingDays?: number;
-  numberOfStages?: number;
+  currentStages?: number;
+  paidStages?: number;
   expirationDate?: Date;
 }
 

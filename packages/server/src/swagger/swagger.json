@@ -112,7 +112,11 @@
 						"type": "number",
 						"format": "double"
 					},
-					"numberOfStages": {
+					"paidStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentStages": {
 						"type": "number",
 						"format": "double"
 					},
@@ -3164,7 +3168,11 @@
 						"type": "number",
 						"format": "double"
 					},
-					"numberOfStages": {
+					"paidStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentStages": {
 						"type": "number",
 						"format": "double"
 					},
@@ -3249,7 +3257,11 @@
 						"type": "number",
 						"format": "double"
 					},
-					"numberOfStages": {
+					"paidStages": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentStages": {
 						"type": "number",
 						"format": "double"
 					},

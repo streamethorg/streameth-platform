@@ -31,7 +31,8 @@ export interface IOrganization {
   paymentStatus?: PaymentStatus;
   customerId?: string;
   streamingDays?: number;
-  numberOfStages?: number;
+  paidStages?: number;
+  currentStages?: number;
   lastPaymentAmount?: number;
   lastPaymentDate?: Date;
   lastPaymentError?: string;

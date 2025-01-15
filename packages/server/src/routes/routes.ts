@@ -90,7 +90,8 @@ const models: TsoaRoute.Models = {
             "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
             "streamingDays": {"dataType":"double"},
-            "numberOfStages": {"dataType":"double"},
+            "paidStages": {"dataType":"double"},
+            "currentStages": {"dataType":"double"},
             "lastPaymentAmount": {"dataType":"double"},
             "lastPaymentDate": {"dataType":"datetime"},
             "lastPaymentError": {"dataType":"string"},
@@ -928,7 +929,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"numberOfStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -949,7 +950,8 @@ const models: TsoaRoute.Models = {
             "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
             "streamingDays": {"dataType":"double"},
-            "numberOfStages": {"dataType":"double"},
+            "paidStages": {"dataType":"double"},
+            "currentStages": {"dataType":"double"},
             "lastPaymentAmount": {"dataType":"double"},
             "lastPaymentDate": {"dataType":"datetime"},
             "lastPaymentError": {"dataType":"string"},
