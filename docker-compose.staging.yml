@@ -90,6 +90,8 @@ x-common-secrets: &common-secrets
   - openai-api-key
   - aws-access-key
   - aws-secret-key
+  - stripe-secret-key
+  - stripe-publishable-key
 
 services:
   server:
@@ -319,4 +321,8 @@ secrets:
   aws-access-key:
     external: true
   aws-secret-key:
+    external: true
+  stripe-secret-key:
+    external: true
+  stripe-publishable-key:
     external: true
