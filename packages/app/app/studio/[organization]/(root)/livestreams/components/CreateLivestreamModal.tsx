@@ -39,6 +39,7 @@ import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
 import { cn } from '@/lib/utils/utils';
 import FeatureButton from '@/components/ui/feature-button';
+import { useSubscription } from '@/lib/hooks/useSubscription';
 
 const CreateLivestreamModal = ({
   organization,
@@ -54,20 +55,17 @@ const CreateLivestreamModal = ({
   const [open, setOpen] = useState(show ?? false);
   const [isMultiDate, setIsMultiDate] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [streamType, setStreamType] = useState<
-    'instant' | 'schedule' | undefined
-  >();
+  const [streamType, setStreamType] = useState<'instant' | 'schedule' | undefined>();
   const router = useRouter();
+  const { canUseFeatures, organizationSlug } = useSubscription(organization._id.toString());
 
-  const handleSubscriptionCheck = () => {
-    // For now, we'll mock this with a hardcoded value
-    const hasPaidPlan = false; // This should come from your organization data
-    
-    if (!hasPaidPlan) {
-      router.push(`/studio/${organization.slug}/payments`);
+  const handleClick = (e: React.MouseEvent) => {
+    if (!canUseFeatures) {
+      e.preventDefault();
+      e.stopPropagation();
+      router.push(`/studio/${organizationSlug}/payments`);
       return;
     }
-    
     setOpen(true);
   };
 
@@ -131,8 +129,8 @@ const CreateLivestreamModal = ({
 
         router.push(`/studio/${organization?.slug}/livestreams/${streamId}`);
       })
-      .catch(() => {
-        toast.error('Error creating stream');
+      .catch((error) => {
+        toast.error(error.message);
         setIsLoading(false);
       })
       .finally(() => {
@@ -150,14 +148,14 @@ const CreateLivestreamModal = ({
       }}
     >
       <DialogTrigger asChild>
-        <FeatureButton 
-          organizationId={organization._id.toString()}
+        <Button 
           variant="primary"
           className="flex items-center gap-2"
+          onClick={handleClick}
         >
           <LuRadio className="w-5 h-5" />
           Create Livestream
-        </FeatureButton>
+        </Button>
       </DialogTrigger>
       {!streamType ? (
         <CreateLivestreamOptions setStreamType={setStreamType} />

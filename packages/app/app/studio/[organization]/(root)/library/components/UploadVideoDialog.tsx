@@ -16,6 +16,9 @@ import UploadVideoForm from './upload/UploadVideoForm';
 import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
 import FeatureButton from '@/components/ui/feature-button';
+import { useSubscription } from '@/lib/hooks/useSubscription';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 type UploadStatus = {
   progress: number;
@@ -35,6 +38,19 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     uploadId: string;
     updatedSession: z.infer<typeof sessionSchema>;
   } | null>(null);
+
+  const { canUseFeatures, organizationSlug } = useSubscription(organizationId);
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (!canUseFeatures) {
+      e.preventDefault();
+      e.stopPropagation();
+      router.push(`/studio/${organizationSlug}/payments`);
+      return;
+    }
+    setOpen(true);
+  };
 
   const handleSessionUpdate = useCallback(
     (uploadId: string, updatedSession: z.infer<typeof sessionSchema>) => {
@@ -106,14 +122,14 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <FeatureButton
-          organizationId={organizationId}
+        <Button
           variant="ghost"
           className="flex items-center gap-2 h-10"
+          onClick={handleClick}
         >
           <LuFileUp className="w-5 h-5" />
           <span>Upload Video</span>
-        </FeatureButton>
+        </Button>
       </DialogTrigger>
       {dialogContent}
     </Dialog>

@@ -33,8 +33,10 @@ const FeatureButton = ({
   const router = useRouter();
   const { canUseFeatures, isLoading, organizationSlug } = useSubscription(organizationId);
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!canUseFeatures) {
+      event.preventDefault();
+      event.stopPropagation();
       router.push(`/studio/${organizationSlug}/payments`);
       return;
     }
