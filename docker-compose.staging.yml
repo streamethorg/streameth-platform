@@ -54,6 +54,8 @@ x-common-environment: &common-environment
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
   AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  STRIPE_SECRET_KEY_FILE: /run/secrets/stripe-secret-key
+  STRIPE_PUBLISHABLE_KEY_FILE: /run/secrets/stripe-publishable-key
 
 x-common-deploy: &common-deploy
   restart_policy:
