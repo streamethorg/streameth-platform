@@ -106,8 +106,8 @@ export default function PaymentsPage() {
     );
   }
 
-  // Show active subscription details if exists and not expired
-  if (organization?.paymentStatus === 'active' && organization?.expirationDate) {
+  // Show active subscription details if not expired
+  if (organization?.expirationDate) {
     const expiryDate = new Date(organization.expirationDate);
     const now = new Date();
     const daysLeft = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24));

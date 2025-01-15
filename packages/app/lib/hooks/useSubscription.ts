@@ -19,6 +19,7 @@ export const useSubscription = (organizationId: string) => {
       canUseFeatures: false,
       isLoading: loading,
       error,
+      organizationSlug: '',
       status: {
         isActive: false,
         daysLeft: 0,
@@ -47,12 +48,13 @@ export const useSubscription = (organizationId: string) => {
   }
 
   // Can use features if subscription is active and not expired
-  const canUseFeatures = status.isActive && !status.hasExpired;
+  const canUseFeatures = !status.hasExpired;
 
   return {
     canUseFeatures,
     isLoading: loading,
     error,
+    organizationSlug: organization.slug || '',
     status
   };
 } 

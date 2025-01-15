@@ -6,6 +6,7 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 interface Organization {
   _id: string;
   name: string;
+  slug: string;
   paymentStatus?: 'none' | 'pending' | 'processing' | 'active' | 'failed';
   streamingDays?: number;
   numberOfStages?: number;
