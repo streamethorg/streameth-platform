@@ -2,6 +2,7 @@ import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
 import { UploadSessionDto } from '@dtos/session/upload-session.dto';
+import { IMarker } from '@interfaces/marker.interface';
 import { ISession } from '@interfaces/session.interface';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
@@ -201,18 +202,19 @@ export class SessionController extends Controller {
   }
 
   /**
- * @summary Extract highlights from session
+   * @summary Extract highlights from session
    */
   @SuccessResponse('200')
   @Post('{sessionId}/highlights')
   async extractHighlights(
     @Path() sessionId: string,
-    @Body() body: { prompt: string },
-  ): Promise<IStandardResponse<void>> {
-    const highlights = await this.sessionService.extractHighlights(sessionId, body.prompt);
-    console.log(highlights);
-    return SendApiResponse(highlights);
+    @Body() body: { prompt?: string; stageId: string },
+  ): Promise<IStandardResponse<IMarker[]>> {
+    const highlights = await this.sessionService.extractHighlights(
+      body.stageId,
+      sessionId,
+      body.prompt,
+    );
+    return SendApiResponse('highlights extracted', highlights);
   }
-  }
-
-
+}

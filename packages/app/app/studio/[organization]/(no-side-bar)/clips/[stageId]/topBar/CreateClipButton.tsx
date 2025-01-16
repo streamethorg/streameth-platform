@@ -1,7 +1,7 @@
 'use client';
 
 import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import React, { useState, useEffect } from 'react';
 import { useClipContext } from '../ClipContext';
 import { clipSchema } from '@/lib/schema';
@@ -15,28 +15,25 @@ import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { fetchStage } from '@/lib/services/stageService';
 import CreateClipForm from './CreateClipForm';
+import { useMarkersContext } from '../sidebar/markers/markersContext';
 
 const CreateClipButton = ({
-  organizationId,
   liveRecordingId,
-  animations,
 }: {
-  organizationId: string;
   liveRecordingId?: string;
-  animations: IExtendedSession[];
 }) => {
   const {
-    isLoading,
-    markers,
     stageId,
     setIsCreatingClip,
     startTime,
     endTime,
-    selectedMarkerId,
-    setSelectedMarkerId,
     videoRef,
     clipUrl,
   } = useClipContext();
+
+  const { markers, selectedMarkerId, setSelectedMarkerId, organizationId } =
+    useMarkersContext();
+
   const [isCreateClip, setIsCreateClip] = useState(false);
   const [sessionRecording, setSessionRecording] =
     useState<IExtendedSession | null>(null);
@@ -218,14 +215,22 @@ const CreateClipButton = ({
 
       if (hasEditorOptions) {
         const events = [
-          ...(values.outroAnimation ? [{
-            videoUrl: values.outroAnimation,
-            label: 'outro',
-          }] : []),
-          ...(values.introAnimation ? [{
-            videoUrl: values.introAnimation,
-            label: 'intro',
-          }] : []),
+          ...(values.outroAnimation
+            ? [
+                {
+                  videoUrl: values.outroAnimation,
+                  label: 'outro',
+                },
+              ]
+            : []),
+          ...(values.introAnimation
+            ? [
+                {
+                  videoUrl: values.introAnimation,
+                  label: 'intro',
+                },
+              ]
+            : []),
           {
             sessionId: session._id as string,
             label: 'main',
@@ -246,12 +251,18 @@ const CreateClipButton = ({
             captionFont: 'Arial',
           },
         };
-        console.log('Creating clip with options:', JSON.stringify(clipCreationOptions, null, 2));
+        console.log(
+          'Creating clip with options:',
+          JSON.stringify(clipCreationOptions, null, 2)
+        );
         // Call createClipAction with the prepared editor options
         await createClipAction(clipCreationOptions);
         console.log('🔄 Clip created with editor options');
       } else {
-        console.log('Creating clip without editor options:', JSON.stringify(mainClipData, null, 2));
+        console.log(
+          'Creating clip without editor options:',
+          JSON.stringify(mainClipData, null, 2)
+        );
         await createClipAction({ ...mainClipData, isEditorEnabled: false });
         console.log('🔄 Clip created without editor options');
       }
@@ -277,7 +288,6 @@ const CreateClipButton = ({
         organizationId={organizationId}
         isCreateClip={isCreateClip}
         handlePreview={handlePreview}
-        animations={animations}
       />
     </Card>
   );

@@ -19,31 +19,28 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { createMarkerAction, updateMarkersAction } from '@/lib/actions/marker';
 import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
 import { LuArrowLeftToLine, LuArrowRightToLine, LuPlus } from 'react-icons/lu';
+import { useMarkersContext } from './markersContext';
 
-const AddOrEditMarkerForm = ({
-  organizationId,
-}: {
-  organizationId: string;
-}) => {
+const AddOrEditMarkerForm = () => {
+  const { stageId, videoRef } = useClipContext();
+
   const {
-    selectedMarkerId,
     markers,
-    stageId,
-    videoRef,
     setIsAddingOrEditingMarker,
+    selectedMarkerId,
     setSelectedMarkerId,
     fetchAndSetMarkers,
     setMarkers,
     setFilteredMarkers,
-  } = useClipContext();
+    organizationId,
+  } = useMarkersContext();
+
   const [loading, setLoading] = useState(false);
   const selectedMarker = markers.find(
     (marker) => marker._id === selectedMarkerId
@@ -88,17 +85,16 @@ const AddOrEditMarkerForm = ({
     try {
       if (selectedMarker) {
         // Update existing marker
-        const updatedMarker = {
+        const updatedMarker: IExtendedMarker = {
           ...values,
           _id: selectedMarker._id,
           speakers: selectedMarker.speakers,
         };
         await updateMarkersAction({ markers: updatedMarker });
         // Update the markers array in the context
-        const updateMarkerInArray = (prevMarkers: IExtendedMarker[]) =>
-          prevMarkers.map((marker) =>
-            marker._id === selectedMarker._id ? updatedMarker : marker
-          );
+        const updateMarkerInArray = markers.map((marker) =>
+          marker._id === selectedMarker._id ? updatedMarker : marker
+        );
         setMarkers(updateMarkerInArray);
         setFilteredMarkers(updateMarkerInArray);
 

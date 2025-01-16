@@ -14,8 +14,6 @@ const Timeline: React.FC = () => {
         maxLength,
         movingEvent,
         initialMousePos,
-        initialEventStart,
-        initialEventEnd,
         trimmingEvent,
         trimmingHandle,
     } = useTimeline();

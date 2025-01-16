@@ -2877,6 +2877,111 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IMarker": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"startClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"endClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"stageId",
+					"start",
+					"end",
+					"date",
+					"color",
+					"startClipTime",
+					"endClipTime"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IMarker-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"ImportType": {
 				"enum": [
 					"gsheet",
@@ -3626,89 +3731,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"IMarker": {
-				"properties": {
-					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-					},
-					"name": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					},
-					"organizationId": {
-						"anyOf": [
-							{
-								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-							},
-							{
-								"type": "string"
-							}
-						]
-					},
-					"stageId": {
-						"anyOf": [
-							{
-								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-							},
-							{
-								"type": "string"
-							}
-						]
-					},
-					"start": {
-						"type": "number",
-						"format": "double"
-					},
-					"end": {
-						"type": "number",
-						"format": "double"
-					},
-					"date": {
-						"type": "string"
-					},
-					"color": {
-						"type": "string"
-					},
-					"speakers": {
-						"items": {
-							"$ref": "#/components/schemas/ISpeaker"
-						},
-						"type": "array"
-					},
-					"slug": {
-						"type": "string"
-					},
-					"startClipTime": {
-						"type": "number",
-						"format": "double"
-					},
-					"endClipTime": {
-						"type": "number",
-						"format": "double"
-					},
-					"pretalxSessionCode": {
-						"type": "string"
-					},
-					"talkType": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"name",
-					"organizationId",
-					"stageId",
-					"start",
-					"end",
-					"date",
-					"color",
-					"startClipTime",
-					"endClipTime"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"IStandardResponse_IMarker_": {
 				"properties": {
 					"status": {
@@ -3793,28 +3815,6 @@
 					"color",
 					"startClipTime",
 					"endClipTime"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_IMarker-Array_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"items": {
-							"$ref": "#/components/schemas/IMarker"
-						},
-						"type": "array"
-					}
-				},
-				"required": [
-					"status",
-					"message"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -6368,7 +6368,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_void_"
+									"$ref": "#/components/schemas/IStandardResponse_IMarker-Array_"
 								}
 							}
 						}
@@ -6395,12 +6395,15 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"stageId": {
+										"type": "string"
+									},
 									"prompt": {
 										"type": "string"
 									}
 								},
 								"required": [
-									"prompt"
+									"stageId"
 								],
 								"type": "object"
 							}

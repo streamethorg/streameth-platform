@@ -5,40 +5,31 @@ import SessionSidebar from './clips';
 import { useClipContext } from '../ClipContext';
 import CreateClipButton from '../topBar/CreateClipButton';
 import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
-import { IExtendedSession } from '@/lib/types';
 import ImportMarkersForm from './markers/ImportMarkersForm';
 import Transcripts from './Transcipts';
+import { useMarkersContext } from './markers/markersContext';
 
 export default function Sidebar({
-  organizationId,
-  stageId,
-  stageSessions,
   liveRecordingId,
-  animations,
   words,
   sessionId,
 }: {
-  sessionId: string;
-  organizationId: string;
-  stageId: string;
-  stageSessions: IExtendedSession[];
   liveRecordingId?: string;
-  animations: IExtendedSession[];
   words?: {
-    word: string;
     start: number;
     end: number;
+    word: string;
   }[];
+  sessionId?: string;
 }) {
-  const { isCreatingClip, isAddingOrEditingMarker, isImportingMarkers } =
-    useClipContext();
+  const { isCreatingClip } = useClipContext();
+  const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
 
   const overlayComponents = [
     {
       condition: isCreatingClip,
       Component: CreateClipButton,
       usesLiveRecordingId: true,
-      animations: animations,
     },
     {
       condition: isAddingOrEditingMarker,
@@ -60,9 +51,7 @@ export default function Sidebar({
               className="absolute inset-0 z-50 bg-white"
             >
               <Component
-                organizationId={organizationId}
                 {...(usesLiveRecordingId ? { liveRecordingId } : {})}
-                animations={animations}
               />
             </div>
           )
@@ -74,19 +63,17 @@ export default function Sidebar({
           {words && <TabsTrigger value="words">Words</TabsTrigger>}
         </TabsList>
         <TabsContent value="markers" className="flex-grow overflow-hidden">
-          {<Markers organizationId={organizationId} />}
+          <Markers sessionId={sessionId || ''} />
         </TabsContent>
         <TabsContent value="clips" className="flex-grow overflow-hidden">
-          <SessionSidebar sessions={stageSessions} />
+          <SessionSidebar  />
         </TabsContent>
         {words && (
-          <TabsContent value="words" className="flex-grow overflow-hidden h-full p-4">
-            <Transcripts
-              words={words}
-              sessionId={sessionId}
-              organizationId={organizationId}
-              stageId={stageId}
-            />
+          <TabsContent
+            value="words"
+            className="flex-grow overflow-hidden h-full p-4"
+          >
+            <Transcripts words={words} sessionId={sessionId || ''} />
           </TabsContent>
         )}
       </Tabs>

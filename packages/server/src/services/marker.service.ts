@@ -61,7 +61,7 @@ export default class MarkerService {
   async getAll(d: {
     organization: string;
     stageId: string;
-    date: string;
+    date?: string;
   }): Promise<Array<IMarker>> {
     let filter = {};
     if (d.date !== undefined) {

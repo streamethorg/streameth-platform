@@ -8,7 +8,7 @@ export class ChatAPI {
 
   constructor(maxTokens: number = 12800) {
     this.openai = new OpenAI({
-      apiKey: config.openai.apiKey,
+      apiKey: config.gemini.apiKey,
       baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
     });
     this.maxTokens = maxTokens;
@@ -20,6 +20,7 @@ export class ChatAPI {
 
 
     const completion = await this.openai.chat.completions.create({
+      temperature: 1,
       model: 'gemini-1.5-flash-latest',
       messages,
       response_format: { type: 'json_object' },

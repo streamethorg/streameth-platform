@@ -5,6 +5,7 @@ config();
 const validateEnv = () => {
   return cleanEnv(process.env, {
     OPENAI_API_KEY_FILE: str(),
+    GEMINI_API_KEY_FILE: str(),
     BASE_URL: str(),
     PLAYER_URL: str(),
     NODE_ENV: str(),

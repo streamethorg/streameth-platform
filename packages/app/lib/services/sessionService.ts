@@ -565,9 +565,11 @@ export const generateTranscriptions = async ({
 };
 
 export const extractHighlights = async ({
+  stageId,
   sessionId,
   prompt,
 }: {
+  stageId: string;
   sessionId: string;
   prompt: string;
 }): Promise<IHighlight[]> => {
@@ -580,7 +582,7 @@ export const extractHighlights = async ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt,
+          stageId,
         }),
       }
     );
@@ -588,7 +590,6 @@ export const extractHighlights = async ({
       throw 'Error extracting highlights';
     }
     const data = (await response.json()).message;
-    console.log('data', data);
     return data;
   } catch (e) {
     console.log('error in extractHighlights', e);

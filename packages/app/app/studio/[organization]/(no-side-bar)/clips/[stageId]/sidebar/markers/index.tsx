@@ -10,13 +10,25 @@ import {
 } from '@/components/ui/select';
 import { CardTitle } from '@/components/ui/card';
 import Marker from './Marker';
-import { useClipContext } from '../../ClipContext';
 import { IExtendedMarker } from '@/lib/types';
 import PushMarkersButton from './PushMarkersButton';
+import { useMarkersContext } from './markersContext';
+import { extractHighlightsAction } from '@/lib/actions/sessions';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useClipContext } from '../../ClipContext';
+import { toast } from 'sonner';
 
-const Markers = ({ organizationId }: { organizationId: string }) => {
-  const { isLoadingMarkers, markers, setFilteredMarkers, filteredMarkers } =
-    useClipContext();
+const Markers = ({ sessionId }: { sessionId: string }) => {
+  const {
+    isLoadingMarkers,
+    markers,
+    setFilteredMarkers,
+    filteredMarkers,
+    organizationId,
+  } = useMarkersContext();
+
+  const { stageId } = useClipContext();
 
   // Find unique dates among markers
   const uniqueDates = useMemo(() => {
@@ -33,6 +45,8 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
   }, [markers]);
 
   const [selectedDate, setSelectedDate] = useState(uniqueDates[0]);
+  const [prompt, setPrompt] = useState('');
+  const [isExtracting, setIsExtracting] = useState(false);
 
   // Update filtered markers when date is changed
   const handleDateChange = (value: string) => {
@@ -44,6 +58,22 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
             (marker) => new Date(marker.date).toDateString() === value
           )
     );
+  };
+
+  const handleExtractHighlights = async () => {
+    setIsExtracting(true);
+    extractHighlightsAction({
+      sessionId: sessionId,
+      stageId: stageId,
+      prompt: prompt,
+    }).then((res) => {
+        console.log(res);
+        setIsExtracting(false);
+      })
+      .catch((err) => {
+        toast.error('Failed to extract highlights');
+        setIsExtracting(false);
+      });
   };
 
   if (isLoadingMarkers) {
@@ -83,6 +113,22 @@ const Markers = ({ organizationId }: { organizationId: string }) => {
             </SelectContent>
           </Select>
         </div>
+        <Input
+          placeholder="Prompt for highlights"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
+        {isExtracting ? (
+          <Button disabled>Extracting...</Button>
+        ) : (
+          <Button
+            onClick={() => {
+              handleExtractHighlights();
+            }}
+          >
+            Extract Highlights
+          </Button>
+        )}
       </CardTitle>
       {filteredMarkers.length > 0 && (
         <PushMarkersButton organizationId={organizationId} />

@@ -24,6 +24,14 @@ import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
+import MarkerService from './marker.service';
+import { IMarker } from '@interfaces/marker.interface';
+
+interface AIHighlight {
+  start: number;
+  end: number;
+  title: string;
+}
 
 export default class SessionService {
   private path: string;
@@ -110,7 +118,9 @@ export default class SessionService {
     // Only exclude animations and editor clips if no specific type is requested
     if (d.type === undefined) {
       console.log('No type specified, excluding animations and editor clips');
-      filter = { type: { $nin: [SessionType.animation, SessionType.editorClip] } };
+      filter = {
+        type: { $nin: [SessionType.animation, SessionType.editorClip] },
+      };
     } else {
       console.log('Type specified:', d.type);
       filter = { type: d.type };
@@ -153,9 +163,9 @@ export default class SessionService {
       filter = {
         ...filter,
         $or: [
-          { playbackId: { $ne: '' } }, 
+          { playbackId: { $ne: '' } },
           { assetId: { $ne: '' } },
-          { type: SessionType.animation }
+          { type: SessionType.animation },
         ],
       };
     }
@@ -402,80 +412,112 @@ export default class SessionService {
     return query;
   }
 
-  async extractHighlights(sessionId: string, prompt: string) {
-    const session = await this.get(sessionId);
+  async extractHighlights(
+    stageId: string,
+    sessionId: string,
+    prompt?: string,
+  ): Promise<IMarker[]> {
 
+    const session = await this.get(sessionId);
     if (!session.transcripts) {
+      console.log('Session has no transcripts');
       throw new HttpException(400, 'Session has no transcripts');
     }
 
+    const markerService = new MarkerService();
+    const markers = await markerService.getAll({
+      organization: session.organizationId.toString(),
+      stageId: stageId,
+    });
     const chunks = session.transcripts.chunks;
-    console.log(prompt);
+    const transcript = session.transcripts.text;
     const chat = new ChatAPI();
     const highlights = await chat.chat([
       {
         role: 'system',
         content: `
-          You are an expert video editor specializing in extracting and structuring full keynotes and panels from livestreams. Your task is to identify and extract all keynotes and panels within a livestream based on the provided transcript and timestamps.
-      
+
           Task:
-          - Use the input transcript, which includes words and corresponding timestamps, to identify keynotes and panels.
-          - Look for markers such as:
-            - Introductions (e.g., "Welcome to...", "Next up, we have...", "So please give it up for...", "Let's get started with...", "We're excited to welcome...", "We're honored to present...").
-            - Transitions, speaker changes, or language that indicates the start or end of a keynote or panel (e.g., "discussion on...", "presentation about...").
-          - Ensure every identified segment is complete, representing the full keynote or panel.
-          - Process the entire transcript, as the livestream likely contains back-to-back keynotes and panels.
-          - If the transcript is unclear or ambiguous, return an empty array.
-          - You can make reasonable assumptions based on the context, but you must ensure the entire transcript is used to identify keynotes and panels.
+            - You are an expert video editor specializing in extracting and structuring full speaker presentations and panels from livestreams. 
+            - Your task is to precisely indentify the start and end points of speaker presentations and panels from start to end, include the full speaker presentation or panel.
+            - Usually speaker presentation and pannel are between 10 to 30 minutes long, dont extract 1 minute segemnts or similar, look for full speaker presentations and panels.
+             - Identify segments using markers such as:
+              - Introductions: e.g.,\"Thank you so much ....\", \"Welcome to...\", \"Next up, we have...\", \"Please give it up for...\", \"Let's get started with...\", \"We're excited to welcome...\", \"We're honored to present...\"
+              - Transitions or cues indicating the start or end of a keynote/panel: e.g., \"discussion on...\", \"presentation about...\", \"closing remarks on...\"
+        
+            Output:
+            - Return a JSON array of objects where each object represents a speaker presentation or panel. Use the following structure:
+              {
+                "start": number,    // Timestamp in seconds where the speaker presentation or panel begins
+                "end": number,      // Timestamp in seconds where the speaker presentation or panel ends
+                "title": string     // A concise, descriptive title for the speaker presentation or panel, based on its content
+              }
       
-          Input:
-          - An array of words with timestamps from the English transcript.
-          - Optional user-provided hints or keywords to help identify keynotes and panels.
-      
-          Output:
-          - Return a JSON array of objects where each object represents a keynote or panel. Use the following structure:
-            {
-              "start": number,    // Timestamp in seconds where the keynote or panel begins
-              "end": number,      // Timestamp in seconds where the keynote or panel ends
-              "title": string     // A concise, descriptive title for the keynote or panel, based on its content
-            }
-      
-          Additional Notes:
-          - Titles should summarize the topic or theme of each keynote or panel clearly and concisely.
+          Strict Rules:
+          - Titles should summarize the topic or theme of each speaker presentation or panel clearly and concisely.
           - Timestamps must align precisely with the transcript to avoid cutting off content mid-sentence.
-          - If user-provided hints or keywords are given, prioritize those for segment identification.
-          - If no clear keynotes or panels can be identified, explain why (e.g., ambiguity in the transcript or missing information).
-      
-          Example Input:
-          [
-            { "word": "Welcome", "timestamp": 5 },
-            { "word": "to", "timestamp": 6 },
-            { "word": "our", "timestamp": 7 },
-            ...
-          ]
-      
-          Example Output:
-          [
-            {
-              "start": 5,
-              "end": 360,
-              "title": "Introduction and Opening Keynote"
-            },
-            {
-              "start": 361,
-              "end": 720,
-              "title": "Panel Discussion: The Future of AI"
-            }
-          ]
+          - Follow the output format exactly, just return an array of objects.
+          - NEVER RETURN ANYTHING OTHER THAN AN ARRAY OF OBJECTS, ITS FORBIDDEN TO RETURN ANYTHING ELSE.
+          - NEVER RETURN ANTYHNING WITH A TITLE THAT IS ALREADY PRESENTED AS A MARKER.
+          - RETURNED CLIPS SHOULD NOT OVERLAP WITH EACH OTHER.
+          - RETURNED CLIPS SHOULD NOT BE SHORTER THAN 10 MINUTES.
+          - DONT CLIPS THAT ARE ALREADY PRESENTED AS A MARKER.
         `,
       },
       {
         role: 'user',
-        content: `Here is the transcript: ${chunks}
-        Here is the prompt provided by the user: ${prompt}`,
+        content: `Here is the transcript: ${transcript}, and here is the word-level transcript: ${chunks}
+       ${prompt ? `Here is the prompt provided by the user: ${prompt}` : ''}
+       ${markers.length > 0 ? `I have already identified the following speaker presentations and panels: ${JSON.stringify(markers)}, please identify the next speaker presentations and panels that are not already identified.` : ''}
+      `,
       },
     ]);
-    console.log(highlights);
-    return JSON.parse(highlights);
+
+    const parsedHighlights: unknown = JSON.parse(highlights);
+
+    // Type guard function to validate the structure
+    const isValidHighlight = (item: unknown): item is AIHighlight => {
+      return (
+        typeof item === 'object' &&
+        item !== null &&
+        'start' in item &&
+        'end' in item &&
+        'title' in item &&
+        typeof (item as AIHighlight).start === 'number' &&
+        typeof (item as AIHighlight).end === 'number' &&
+        typeof (item as AIHighlight).title === 'string'
+      );
+    };
+
+    // Validate array and its contents
+    if (
+      !Array.isArray(parsedHighlights) ||
+      !parsedHighlights.every(isValidHighlight)
+    ) {
+      throw new HttpException(500, 'AI returned invalid highlight format');
+    }
+
+    if (parsedHighlights.length === 0) {
+      return [];
+    }
+
+    const markerPromises = await Promise.all(
+      parsedHighlights.map(
+        async (highlight) =>
+          await markerService.create({
+            name: highlight.title,
+            start: highlight.start,
+            end: highlight.end,
+            stageId: stageId,
+            organizationId: session.organizationId.toString(),
+            date: session.createdAt.toString(),
+            color: '#000000',
+            startClipTime: highlight.start,
+            endClipTime: highlight.end,
+          }),
+      ),
+    );
+
+    return markerPromises;
   }
 }

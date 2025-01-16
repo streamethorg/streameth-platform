@@ -50,7 +50,7 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: ${OPENAI_API_KEY_FILE}
-
+  GEMINI_API_KEY_FILE: ${GEMINI_API_KEY_FILE}
 x-common-worker: &common-worker
   volumes:
     - ./packages/server:/app/packages/server

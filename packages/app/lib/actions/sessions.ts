@@ -283,12 +283,14 @@ export const generateTranscriptionActions = async ({
 
 
 export const extractHighlightsAction = async ({
+  stageId,
   sessionId,
   prompt,
 }: {
+  stageId: string;
   sessionId: string;
   prompt: string;
 }) => {
-  const res = await extractHighlights({ sessionId, prompt });
+  const res = await extractHighlights({ stageId, sessionId, prompt });
   return res;
 };
