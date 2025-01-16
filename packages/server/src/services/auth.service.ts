@@ -32,9 +32,9 @@ export default class AuthService {
       });
     }
 
-    if (user.organizations.length === 0) {
-      throw new HttpException(403, 'User is not whitelisted');
-    }
+    // if (user.organizations.length === 0) {
+    //   throw new HttpException(403, 'User is not whitelisted');
+    // }
 
     let token = jwt.sign({ id: user.did }, config.jwt.secret, {
       expiresIn: config.jwt.expiry,
@@ -126,13 +126,19 @@ export default class AuthService {
         expiresIn: config.jwt.magicLink.expiry,
       },
     );
-    const htmlContent = replacePlaceHolders(emailTemplate, {
-      link: `${config.baseUrl}/auth/magic-link?token=${token}&email=${email}`,
-    });
+    
+    // Check if user exists to determine redirect
     const user = await this.userService.findOne({ email });
+    const redirect = user ? '/studio' : '/studio/create';
+    
+    const htmlContent = replacePlaceHolders(emailTemplate, {
+      link: `${config.baseUrl}/auth/magic-link?token=${token}&email=${email}&redirect=${redirect}`,
+    });
+    
     if (!user) {
       await this.userService.create({ email, did: generateDID() });
     }
+    
     await this.mailService.simpleSend({
       from: 'noreply@streameth.org',
       recipient: email,
