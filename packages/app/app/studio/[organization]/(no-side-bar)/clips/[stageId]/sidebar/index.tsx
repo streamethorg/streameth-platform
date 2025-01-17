@@ -68,7 +68,7 @@ export default function Sidebar({
             value="words"
             className="flex-grow overflow-hidden h-full p-4"
           >
-            <Transcripts words={words} sessionId={sessionId || ''} />
+            <Transcripts words={words} />
           </TabsContent>
         )}
       </Tabs>
