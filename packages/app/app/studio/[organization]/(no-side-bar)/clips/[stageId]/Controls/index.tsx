@@ -24,15 +24,11 @@ import {
 } from 'react-icons/lu';
 import { Badge } from '@/components/ui/badge';
 import KeyboardShortcuts from './KeyboardShortcuts';
+import { useMarkersContext } from '../sidebar/markers/markersContext';
 
 const Controls = () => {
   const {
     videoRef,
-    isAddingOrEditingMarker,
-    setIsAddingOrEditingMarker,
-    isImportingMarkers,
-    setIsImportingMarkers,
-    setSelectedMarkerId,
     isCreatingClip,
     setIsCreatingClip,
     pixelsPerSecond,
@@ -40,6 +36,15 @@ const Controls = () => {
     currentTime,
     timelineContainerWidth,
   } = useClipContext();
+
+  const {
+    isAddingOrEditingMarker,
+    isImportingMarkers,
+    setIsAddingOrEditingMarker,
+    setIsImportingMarkers,
+    setSelectedMarkerId,
+  } = useMarkersContext();
+
   const [playbackRate, setPlaybackRate] = useState(1);
   const currentPlaybackRateIndexRef = useRef(1);
 

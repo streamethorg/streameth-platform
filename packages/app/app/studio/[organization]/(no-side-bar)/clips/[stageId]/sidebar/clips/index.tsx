@@ -12,12 +12,25 @@ import {
 import { CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Clip from './Clip';
+import { fetchAllSessions } from '@/lib/services/sessionService';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { useClipContext } from '../../ClipContext';
 
-const SessionSidebar = ({
-  sessions = [],
-}: {
-  sessions: IExtendedSession[];
-}) => {
+const SessionSidebar = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [sessions, setSessions] = useState<IExtendedSession[]>([]);
+  const { stageId } = useClipContext();
+  useEffect(() => {
+    const fetchSessions = async () => {
+      const sessions = await fetchAllSessions({
+        stageId,
+        type: SessionType.clip,
+      });
+      setSessions(sessions.sessions);
+      setIsLoading(false);
+    };
+    fetchSessions();
+  }, []);
   const [filteredSessions, setFilteredSessions] =
     useState<IExtendedSession[]>(sessions);
   const [searchTerm, setSearchTerm] = useState('');
@@ -48,6 +61,8 @@ const SessionSidebar = ({
     });
     setFilteredSessions(filtered);
   }, [sessions, selectedDate, searchTerm]);
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="h-full w-full flex flex-col">
@@ -90,7 +105,7 @@ const SessionSidebar = ({
           ))
         ) : (
           <div className="flex h-full justify-center mt-10 text-gray-500">
-            No clip found
+            No clips created
           </div>
         )}
       </div>

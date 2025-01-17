@@ -57,10 +57,12 @@ const SelectAnimation = ({
                 <div className="max-w-[200px]">
                   <Combobox
                     items={[
-                      ...animations.map((animation) => ({
-                        label: animation.name,
-                        value: animation.videoUrl || '',
-                      })).filter(item => item.value),
+                      ...animations
+                        .map((animation) => ({
+                          label: animation.name,
+                          value: animation.videoUrl || '',
+                        }))
+                        .filter((item) => item.value),
                     ]}
                     variant="outline"
                     value={field.value || ''}
@@ -76,9 +78,7 @@ const SelectAnimation = ({
 
                 {field.value ? ( // Check if an animation is selected
                   <div className="flex flex-col items-center justify-center gap-1 border-2 p-2 h-40 border-dashed rounded-md">
-                    <span>
-                      Selected video
-                    </span>
+                    <span>Selected video</span>
                     <Button
                       variant={'destructive'}
                       size={'sm'}

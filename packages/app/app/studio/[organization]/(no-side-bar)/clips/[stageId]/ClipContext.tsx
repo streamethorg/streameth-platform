@@ -7,9 +7,6 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import useSearchParams from '@/lib/hooks/useSearchParams';
-import { IExtendedMarker } from '@/lib/types';
-import { fetchMarkers } from '@/lib/services/markerSevice';
 import Hls from 'hls.js';
 import { convertSecondsToUnix } from '@/lib/utils/utils';
 
@@ -40,25 +37,13 @@ type ClipContextType = {
   selectedTooltip: string | null;
   setSelectedTooltip: React.Dispatch<React.SetStateAction<string | null>>;
   updateClipBounds: (start: number, end: number) => void;
-  markers: IExtendedMarker[];
-  setMarkers: React.Dispatch<React.SetStateAction<IExtendedMarker[]>>;
   stageId: string;
   isCreatingClip: boolean;
   setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
   handleMouseDown: (marker: string, event: React.MouseEvent) => void;
   handleMouseMove: (event: MouseEvent) => void;
   handleMouseUp: () => void;
-  handleMarkerClick: (marker: IExtendedMarker) => void;
   goToClickTime: (event: React.MouseEvent) => void;
-  isAddingOrEditingMarker: boolean;
-  setIsAddingOrEditingMarker: React.Dispatch<React.SetStateAction<boolean>>;
-  fetchAndSetMarkers: () => void;
-  filteredMarkers: IExtendedMarker[];
-  setFilteredMarkers: React.Dispatch<React.SetStateAction<IExtendedMarker[]>>;
-  selectedMarkerId: string;
-  setSelectedMarkerId: React.Dispatch<React.SetStateAction<string>>;
-  isImportingMarkers: boolean;
-  setIsImportingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
   hls: Hls | null;
   setHls: React.Dispatch<React.SetStateAction<Hls | null>>;
   timeReference: {
@@ -77,8 +62,6 @@ type ClipContextType = {
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>;
   playheadPosition: number;
   setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
-  isLoadingMarkers: boolean;
-  setIsLoadingMarkers: React.Dispatch<React.SetStateAction<boolean>>;
   timelineContainerWidth: number;
   setTimelineContainerWidth: React.Dispatch<React.SetStateAction<number>>;
   convertSecondsToUnix: (
@@ -86,6 +69,7 @@ type ClipContextType = {
     seconds: number
   ) => number;
   clipUrl: string;
+  organizationId: string;
 };
 
 const ClipContext = createContext<ClipContextType | null>(null);
@@ -103,25 +87,17 @@ export const ClipProvider = ({
   organizationId: string;
   clipUrl: string;
 }) => {
-  const { searchParams } = useSearchParams();
-
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [dragging, setDragging] = useState<string | null>(null);
   const [selectedTooltip, setSelectedTooltip] = useState<string | null>(null);
-  const [markers, setMarkers] = useState<IExtendedMarker[]>([]);
-  const [filteredMarkers, setFilteredMarkers] = useState<IExtendedMarker[]>([]);
+
   const [isCreatingClip, setIsCreatingClip] = useState<boolean>(false);
   const [initialMousePos, setInitialMousePos] = useState<number>(0);
   const [initialMarkerPos, setInitialMarkerPos] = useState<number>(0);
-  const [isAddingOrEditingMarker, setIsAddingOrEditingMarker] =
-    useState<boolean>(false);
-  const [selectedMarkerId, setSelectedMarkerId] = useState<string>('');
-  const [isImportingMarkers, setIsImportingMarkers] = useState<boolean>(false);
   const maxLength = videoRef.current?.duration || 0;
   const [pixelsPerSecond, setPixelsPerSecond] = useState(3);
   const timelineWidth = maxLength * pixelsPerSecond;
@@ -144,7 +120,6 @@ export const ClipProvider = ({
     unix: convertSecondsToUnix(timeReference, 60),
     displayTime: 60,
   });
-  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
   const [timelineContainerWidth, setTimelineContainerWidth] =
     useState<number>(0);
 
@@ -173,37 +148,10 @@ export const ClipProvider = ({
     };
   }, [animate]);
 
-  const fetchAndSetMarkers = async () => {
-    if (stageId) {
-      setIsLoadingMarkers(true);
-      try {
-        const markers = await fetchMarkers({
-          organizationId,
-          stageId,
-        });
-        const sortedMarkers = markers.sort(
-          (a, b) => a.startClipTime - b.startClipTime
-        );
-        setMarkers(sortedMarkers);
-        setFilteredMarkers(sortedMarkers);
-      } catch (error) {
-        console.error('Error fetching markers:', error);
-      } finally {
-        setIsLoadingMarkers(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchAndSetMarkers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stageId]);
-
   // Track if the effect has set end time
   const hasSetEndTimeRef = useRef(false);
 
   useEffect(() => {
-    console.log(timeReference);
     if (
       timeReference.currentTime !== 0 &&
       videoRef.current?.duration &&
@@ -349,25 +297,6 @@ export const ClipProvider = ({
     }
   }, [currentTime]);
 
-  const handleMarkerClick = (marker: IExtendedMarker) => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = marker.startClipTime;
-      setStartTime({
-        displayTime: marker.startClipTime,
-        unix: convertSecondsToUnix(timeReference, marker.startClipTime),
-      });
-
-      setEndTime({
-        displayTime: marker.endClipTime,
-        unix: convertSecondsToUnix(timeReference, marker.endClipTime),
-      });
-
-      setSelectedMarkerId(marker._id);
-
-      videoRef.current.play();
-    }
-  };
-
   const goToClickTime = (event: React.MouseEvent) => {
     if (videoRef.current && playbackStatus) {
       const timelineElement = event.currentTarget as HTMLElement;
@@ -413,25 +342,13 @@ export const ClipProvider = ({
         selectedTooltip,
         setSelectedTooltip,
         updateClipBounds,
-        markers,
-        setMarkers,
         stageId,
         isCreatingClip,
         setIsCreatingClip,
         handleMouseDown,
         handleMouseMove,
         handleMouseUp,
-        handleMarkerClick,
         goToClickTime,
-        isAddingOrEditingMarker,
-        setIsAddingOrEditingMarker,
-        fetchAndSetMarkers,
-        filteredMarkers,
-        setFilteredMarkers,
-        selectedMarkerId,
-        setSelectedMarkerId,
-        isImportingMarkers,
-        setIsImportingMarkers,
         hls,
         setHls,
         timeReference,
@@ -442,12 +359,11 @@ export const ClipProvider = ({
         setCurrentTime,
         playheadPosition,
         setPlayheadPosition,
-        isLoadingMarkers,
-        setIsLoadingMarkers,
         timelineContainerWidth,
         setTimelineContainerWidth,
         convertSecondsToUnix,
         clipUrl,
+        organizationId,
       }}
     >
       {children}

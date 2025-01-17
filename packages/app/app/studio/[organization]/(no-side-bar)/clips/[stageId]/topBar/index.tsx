@@ -1,27 +1,30 @@
-'use client';
-import { Button } from '@/components/ui/button';
-import { useClipContext } from '../ClipContext';
-import { IExtendedSession } from '@/lib/types';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-
-const TopBar = ({
-  title,
+import { fetchAllSessions } from '@/lib/services/sessionService';
+import { fetchStage } from '@/lib/services/stageService';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import SessionSelector from './SessionSelector';
+const TopBar = async ({
+  stageId,
   organization,
+  currentSessionId,
 }: {
-  title: string;
+  stageId: string;
   organization: string;
+  currentSessionId: string;
 }) => {
+  const stage = await fetchStage({ stage: stageId });
+  if (!stage) return null;
+  const allRecordings = await fetchAllSessions({
+    stageId,
+    type: SessionType.livestream,
+  });
+  const recordings = allRecordings.sessions;
   return (
-    <div className="p-2 flex  w-full bg-white flex-row justify-between items-center">
-      <h1 className="text-2xl font-bold my-auto">{title}</h1>
-      <Link href={`/studio/${organization}/library?clipable=true`}>
-        <Button variant="ghost" className="mb-2 px-2">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to library
-        </Button>
-      </Link>
-    </div>
+    <SessionSelector
+      recordings={recordings}
+      currentSessionId={currentSessionId}
+      stageName={stage?.name}
+      organization={organization}
+    />
   );
 };
 

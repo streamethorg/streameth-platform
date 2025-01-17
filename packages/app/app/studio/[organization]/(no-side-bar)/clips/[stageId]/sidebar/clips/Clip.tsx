@@ -28,24 +28,21 @@ export default function Clip({ session }: { session: IExtendedSession }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assetId]);
 
-  // useEffect(() => {
-  //   if (asset?.status?.phase === 'processing') {
-  //     const interval = setInterval(() => {
-  //       getAsset();
-  //     }, 10000);
-  //     return () => clearInterval(interval);
-  //   } else if (
-  //     session.processingStatus === ProcessingStatus.pending ||
-  //     session.processingStatus === ProcessingStatus.rendering
-  //   ) {
-  //     const interval = setInterval(() => {
-  //       router.refresh();
-  //     }, 10000);
-  //     return () => clearInterval(interval);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [asset?.status?.phase, session.processingStatus]);
-  // if (!assetId) return null;
+  useEffect(() => {
+    if (asset?.status?.phase === 'processing') {
+      const interval = setInterval(() => {
+        getAsset();
+      }, 10000);
+      return () => clearInterval(interval);
+    } else if (session.processingStatus === ProcessingStatus.pending) {
+      const interval = setInterval(() => {
+        router.refresh();
+      }, 10000);
+      return () => clearInterval(interval);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asset?.status?.phase]);
+  if (!assetId) return null;
 
   return (
     <>

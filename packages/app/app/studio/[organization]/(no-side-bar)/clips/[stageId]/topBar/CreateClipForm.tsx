@@ -32,6 +32,9 @@ import { useClipContext } from '../ClipContext';
 import { IExtendedSession } from '@/lib/types';
 import SelectAnimation from './SelectAnimation';
 import Combobox from '@/components/ui/combo-box';
+import { useMarkersContext } from '../sidebar/markers/markersContext';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 
 const CreateClipForm = ({
   form,
@@ -40,7 +43,6 @@ const CreateClipForm = ({
   organizationId,
   isCreateClip,
   handlePreview,
-  animations,
 }: {
   form: UseFormReturn<z.infer<typeof clipSchema>>;
   handleCreateClip: (values: z.infer<typeof clipSchema>) => void;
@@ -48,17 +50,25 @@ const CreateClipForm = ({
   organizationId: string;
   isCreateClip: boolean;
   handlePreview: () => void;
-  animations: IExtendedSession[];
 }) => {
-  const {
-    isLoading,
-    markers,
-    setIsCreatingClip,
-    startTime,
-    endTime,
-    selectedMarkerId,
-    setSelectedMarkerId,
-  } = useClipContext();
+  const { isLoading, setIsCreatingClip, startTime, endTime, stageId } =
+    useClipContext();
+
+  const { markers, selectedMarkerId, setSelectedMarkerId } =
+    useMarkersContext();
+
+  const [animations, setAnimations] = useState<IExtendedSession[]>([]);
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animations = await fetchAllSessions({
+        stageId,
+        type: SessionType.animation,
+      });
+      setAnimations(animations.sessions);
+    };
+    fetchAnimations();
+  }, [stageId]);
 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const colorPickerRef = useRef<HTMLDivElement>(null);

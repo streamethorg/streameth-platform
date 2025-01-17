@@ -1,13 +1,9 @@
 import { fetchOrganization } from '@/lib/services/organizationService';
-import {
-  fetchAllSessions,
-  fetchSession
-} from '@/lib/services/sessionService';
-import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
+import { fetchSession } from '@/lib/services/sessionService';
+import { fetchStage } from '@/lib/services/stageService';
 import { ClipsPageParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
-import React from 'react';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import React, { Suspense } from 'react';
 import { ClipProvider } from './ClipContext';
 import Controls from './Controls';
 import ReactHlsPlayer from './Player';
@@ -15,6 +11,7 @@ import Timeline from './Timeline';
 import Sidebar from './sidebar';
 import TopBar from './topBar';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
+import { MarkersProvider } from './sidebar/markers/markersContext';
 
 const fetchVideoDetails = async (
   videoType: string,
@@ -27,14 +24,11 @@ const fetchVideoDetails = async (
       const streamId = liveStage?.streamSettings?.streamId;
       if (!streamId) return null;
 
-      const stageRecordings = await fetchStageRecordings({ streamId });
-      if (!stageRecordings?.recordings[0]) return null;
       return {
         videoSrc: `https://livepeercdn.studio/hls/${liveStage.streamSettings?.playbackId}/index.m3u8`,
         type: 'livepeer',
         name: liveStage.name,
         words: liveStage.transcripts?.chunks,
-        liveRecording: stageRecordings.recordings[0],
       };
     }
 
@@ -42,9 +36,8 @@ const fetchVideoDetails = async (
       const session = await fetchSession({ session: sessionId! });
       if (!session?.playbackId || !session?.assetId) return null;
 
-      const stage = await fetchStage({ stage: session.stageId as string });
-      if (!stage?.streamSettings?.playbackId) return null;
-      console.log('session', session.transcripts?.chunks);
+      // const stage = await fetchStage({ stage: session.stageId as string });
+      // if (!stage?.streamSettings?.playbackId) return null;
       const videoSrc = await getVideoUrlAction(session);
       return {
         videoSrc,
@@ -85,46 +78,45 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     return <div>Video source not found</div>;
   }
 
-  const [stageSessions, animations] = await Promise.all([
-    fetchAllSessions({
-      stageId,
-      type: SessionType.clip,
-    }),
-    fetchAllSessions({
-      organizationSlug: organization,
-      onlyVideos: true,
-      type: SessionType.animation,
-    }),
-  ]);
-
   return (
     <ClipProvider
       organizationId={organizationId}
       stageId={stageId}
       clipUrl={videoDetails.videoSrc}
     >
-      <div className="flex flex-row w-full h-full border-t border-gray-200">
-        <div className="flex h-full w-[calc(100%-400px)] flex-col">
-          <TopBar title={videoDetails.name} organization={organization} />
-          <ReactHlsPlayer
-            src={videoDetails.videoSrc}
-            type={videoDetails.type}
-          />
-          <Controls />
-          <div className="w-full p-2 bg-white">
-            <Timeline />
+      <MarkersProvider organizationId={organizationId} stageId={stageId}>
+        <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
+          <div className="flex h-full w-[calc(100%-400px)] flex-col">
+            <Suspense
+              fallback={
+                <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
+                  Loading...
+                </div>
+              }
+            >
+              <TopBar
+                stageId={stageId}
+                organization={organization}
+                currentSessionId={sessionId}
+              />
+            </Suspense>
+            <ReactHlsPlayer
+              src={videoDetails.videoSrc}
+              type={videoDetails.type}
+            />
+            <Controls />
+            <div className="w-full p-2 bg-white">
+              <Timeline />
+            </div>
+          </div>
+          <div className="flex w-[400px] h-full">
+            <Sidebar
+              words={videoDetails.words}
+              sessionId={sessionId}
+            />
           </div>
         </div>
-        <div className="flex w-[400px] h-full overflow-y-auto">
-          <Sidebar
-            liveRecordingId={videoDetails.liveRecording?.id}
-            stageSessions={stageSessions.sessions}
-            organizationId={organizationId}
-            animations={animations.sessions}
-            words={videoDetails.words}
-          />
-        </div>
-      </div>
+      </MarkersProvider>
     </ClipProvider>
   );
 };

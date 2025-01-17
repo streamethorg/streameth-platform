@@ -5,7 +5,7 @@ import { deleteMarkerAction } from '@/lib/actions/marker';
 import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { useClipContext } from '../../ClipContext';
+import { useMarkersContext } from './markersContext';
 
 const DeleteMarkerButton = ({
   markerId,
@@ -15,7 +15,7 @@ const DeleteMarkerButton = ({
   organizationId: string;
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  const { setMarkers, markers, setFilteredMarkers } = useClipContext();
+  const { setMarkers, markers, setFilteredMarkers } = useMarkersContext();
 
   const handleDeleteMarker = async () => {
     setIsDeleting(true);

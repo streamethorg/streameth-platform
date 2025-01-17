@@ -18,6 +18,9 @@ export const config = {
   openai: {
     apiKey: readSecretFile(validatedEnv.OPENAI_API_KEY_FILE),
   },
+  gemini: {
+    apiKey: readSecretFile(validatedEnv.GEMINI_API_KEY_FILE),
+  },
   baseUrl: validatedEnv.BASE_URL,
   playerUrl: validatedEnv.PLAYER_URL,
   frontendUrl: validatedEnv.FRONTEND_URL,

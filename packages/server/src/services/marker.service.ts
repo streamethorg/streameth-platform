@@ -4,9 +4,7 @@ import { IMarker } from '@interfaces/marker.interface';
 import Markers from '@models/markers.model';
 import Stage from '@models/stage.model';
 import GoogleSheetService from '@utils/google-sheet';
-import { formatDate, generateId, getStartAndEndTime } from '@utils/util';
-import e from 'express';
-import fs from 'fs';
+import { generateId, getStartAndEndTime } from '@utils/util';
 
 export default class MarkerService {
   private path: string;
@@ -61,7 +59,7 @@ export default class MarkerService {
   async getAll(d: {
     organization: string;
     stageId: string;
-    date: string;
+    date?: string;
   }): Promise<Array<IMarker>> {
     let filter = {};
     if (d.date !== undefined) {

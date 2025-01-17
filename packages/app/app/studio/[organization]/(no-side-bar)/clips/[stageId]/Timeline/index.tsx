@@ -5,22 +5,29 @@ import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
 import { useEffect, useRef } from 'react';
-import { calculateTimelineScale } from '@/lib/utils/utils';
-
+import {
+  calculateTimelineScale,
+  convertSecondsToUnix,
+} from '@/lib/utils/utils';
+import { useMarkersContext } from '../sidebar/markers/markersContext';
+import { IExtendedMarker } from '@/lib/types';
 const Timeline = () => {
   const {
     videoRef,
     dragging,
     isLoading,
-    filteredMarkers,
     handleMouseDown,
-    handleMarkerClick,
-    selectedMarkerId,
     pixelsPerSecond,
     setPixelsPerSecond,
     setTimelineContainerWidth,
     setCurrentTime,
+    setStartTime,
+    setEndTime,
+    timeReference,
   } = useClipContext();
+
+  const { filteredMarkers, selectedMarkerId, setSelectedMarkerId } =
+    useMarkersContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);
 
@@ -72,6 +79,28 @@ const Timeline = () => {
     }
   };
 
+  const handleMarkerClick = (
+    videoRef: React.RefObject<HTMLVideoElement>,
+    marker: IExtendedMarker
+  ) => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = marker.startClipTime;
+      setStartTime({
+        displayTime: marker.startClipTime,
+        unix: convertSecondsToUnix(timeReference, marker.startClipTime),
+      });
+
+      setEndTime({
+        displayTime: marker.endClipTime,
+        unix: convertSecondsToUnix(timeReference, marker.endClipTime),
+      });
+
+      setSelectedMarkerId(marker._id);
+
+      videoRef.current.play();
+    }
+  };
+
   if (!maxLength || !timelineWidth || !videoRef.current)
     return (
       // loading state
@@ -100,7 +129,7 @@ const Timeline = () => {
               <div
                 key={marker._id}
                 className={`absolute h-[20px] border bg-opacity-20 rounded z-[21]`}
-                onClick={() => handleMarkerClick(marker)}
+                onClick={() => handleMarkerClick(videoRef, marker)}
                 style={{
                   backgroundColor: marker.color,
                   border: `2px solid ${

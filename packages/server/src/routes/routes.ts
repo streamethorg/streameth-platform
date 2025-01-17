@@ -865,6 +865,38 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IMarker": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
+            "start": {"dataType":"double","required":true},
+            "end": {"dataType":"double","required":true},
+            "date": {"dataType":"string","required":true},
+            "color": {"dataType":"string","required":true},
+            "speakers": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"}},
+            "slug": {"dataType":"string"},
+            "startClipTime": {"dataType":"double","required":true},
+            "endClipTime": {"dataType":"double","required":true},
+            "pretalxSessionCode": {"dataType":"string"},
+            "talkType": {"dataType":"string"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_IMarker-Array_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IMarker"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ImportType": {
         "dataType": "refEnum",
         "enums": ["gsheet","pretalx"],
@@ -1084,28 +1116,6 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IMarker": {
-        "dataType": "refObject",
-        "properties": {
-            "_id": {"ref":"mongoose.Types.ObjectId"},
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string"},
-            "organizationId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "stageId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}],"required":true},
-            "start": {"dataType":"double","required":true},
-            "end": {"dataType":"double","required":true},
-            "date": {"dataType":"string","required":true},
-            "color": {"dataType":"string","required":true},
-            "speakers": {"dataType":"array","array":{"dataType":"refObject","ref":"ISpeaker"}},
-            "slug": {"dataType":"string"},
-            "startClipTime": {"dataType":"double","required":true},
-            "endClipTime": {"dataType":"double","required":true},
-            "pretalxSessionCode": {"dataType":"string"},
-            "talkType": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_IMarker_": {
         "dataType": "refObject",
         "properties": {
@@ -1134,16 +1144,6 @@ const models: TsoaRoute.Models = {
             "endClipTime": {"dataType":"double","required":true},
             "pretalxSessionCode": {"dataType":"string"},
             "talkType": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse_IMarker-Array_": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IMarker"}},
         },
         "additionalProperties": false,
     },
@@ -2803,6 +2803,7 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             async function SessionController_extractHighlights(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     sessionId: {"in":"path","name":"sessionId","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"stageId":{"dataType":"string","required":true},"prompt":{"dataType":"string"}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

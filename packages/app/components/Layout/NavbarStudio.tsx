@@ -32,7 +32,7 @@ const NavbarStudio = ({
   }
 
   return (
-    <NavigationMenu className="h-18 w-full hidden sticky top-0 flex items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
+    <NavigationMenu className="h-[72px] w-full  sticky top-0 flex items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
       <Image
         src={'/logo_dark.png'}
         alt="Logo"

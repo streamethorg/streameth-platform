@@ -37,8 +37,8 @@ const TableCells = ({
   const rowBackgroundClass = isFailed
     ? 'bg-gray-100'
     : isPending
-      ? 'bg-gray-100 animate-pulse'
-      : '';
+    ? 'bg-gray-100 animate-pulse'
+    : '';
 
   const duration = item.playback?.duration
     ? formatDuration(item.playback.duration * 1000) // Convert seconds to milliseconds

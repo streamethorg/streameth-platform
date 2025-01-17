@@ -6,7 +6,7 @@ import { IExtendedMarker } from '@/lib/types';
 import { formatTime } from '@/lib/utils/time';
 import { Card } from '@/components/ui/card';
 import DeleteMarkerButton from './DeleteMarkerButton';
-import { useClipContext } from '../../ClipContext';
+import { useMarkersContext } from './markersContext';
 
 const Marker = ({
   marker,
@@ -20,7 +20,7 @@ const Marker = ({
     isAddingOrEditingMarker,
     setSelectedMarkerId,
     selectedMarkerId,
-  } = useClipContext();
+  } = useMarkersContext();
 
   return (
     <Card

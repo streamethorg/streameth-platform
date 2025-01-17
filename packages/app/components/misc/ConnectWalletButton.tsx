@@ -16,7 +16,7 @@ export const ConnectWalletButton = ({
         return (
           <Button variant={'primary'} onClick={show} className={className}>
             <span className="px-2 md:px-0">
-              {isConnected ? (ensName ?? truncatedAddress) : btnText}
+              {isConnected ? ensName ?? truncatedAddress : btnText}
             </span>
           </Button>
         );

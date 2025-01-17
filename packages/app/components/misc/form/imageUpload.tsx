@@ -264,8 +264,8 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
     const imageClasses = isProfileImage
       ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'
       : coverImage
-        ? 'w-full h-full object-cover'
-        : 'w-full h-full object-contain';
+      ? 'w-full h-full object-cover'
+      : 'w-full h-full object-contain';
 
     const placeholderClasses = isProfileImage
       ? 'flex cursor-pointer flex-col items-center justify-center w-full h-full rounded-full border border-dotted bg-secondary'
