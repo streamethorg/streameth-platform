@@ -105,10 +105,6 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                     organizationSlug={params.organization}
                     sessionId={session._id}
                   />
-                  {/* <UploadToDevcon
-                    sessionId={session._id}
-                    organizationSlug={params.organization}
-                  /> */}
                 </div>
               </div>
             </div>

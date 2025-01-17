@@ -6,6 +6,7 @@ x-common-environment: &common-environment
   APP_PORT: 8080
   BASE_URL: https://staging.api.streameth.org
   PLAYER_URL: https://staging.player.streameth.org
+  FRONTEND_URL: https://streameth-test.vercel.app
   DB_PASSWORD_FILE: /run/secrets/db-password
   DB_HOST: staging_mongodb
   DB_USER: root
@@ -54,6 +55,8 @@ x-common-environment: &common-environment
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   AWS_ACCESS_KEY_ID_FILE: /run/secrets/aws-access-key
   AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
+  STRIPE_SECRET_KEY_FILE: /run/secrets/stripe-secret-key
+  STRIPE_PUBLISHABLE_KEY_FILE: /run/secrets/stripe-publishable-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -88,6 +91,8 @@ x-common-secrets: &common-secrets
   - openai-api-key
   - aws-access-key
   - aws-secret-key
+  - stripe-secret-key
+  - stripe-publishable-key
 
 services:
   server:
@@ -317,4 +322,8 @@ secrets:
   aws-access-key:
     external: true
   aws-secret-key:
+    external: true
+  stripe-secret-key:
+    external: true
+  stripe-publishable-key:
     external: true

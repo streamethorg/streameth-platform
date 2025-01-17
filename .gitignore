@@ -61,3 +61,6 @@ google_sa_secret.json
 
 *.log
 *.mp4
+
+# To avoid pushing the local db connection string
+packages/server/src/databases/index.ts

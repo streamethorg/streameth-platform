@@ -8,6 +8,7 @@ import {
   LuShare2,
   LuLock,
   LuBookOpen,
+  LuDollarSign,
 } from 'react-icons/lu';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -39,28 +40,30 @@ const SidebarMenu = async ({
       url: `/studio/${organizationSlug}/destinations`,
       icon: <LuShare2 size={25} />,
     },
-    // WARNING: This is the NFT page only access, commenting this will make user unable to access it
-    // {
-    //   text: 'NFTs',
-    //   url: `/studio/${organizationSlug}/nfts`,
-    //   icon: <LuLock size={25} />,
-    // },
     {
       text: 'Team',
       url: `/studio/${organizationSlug}/team`,
       icon: <LuUsers size={25} />,
     },
-    // {
-    //   text: 'Settings',
-    //   url: `/studio/${organizationSlug}/settings`,
-    //   icon: <LuSettings size={25} />,
-    // },
+    {
+      text: 'Subscription',
+      url: `/studio/${organizationSlug}/payments`,
+      icon: <LuDollarSign size={25} />,
+    },
     {
       text: 'Docs',
       url: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
       icon: <LuBookOpen size={25} />,
     },
   ];
+
+  // Calculate days left until expiration
+  let daysLeft: number | undefined;
+  if (organization?.expirationDate) {
+    const expiryDate = new Date(organization.expirationDate);
+    const now = new Date();
+    daysLeft = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24));
+  }
 
   return (
     <div className="relative w-[1/4] h-full border-t">
@@ -80,6 +83,7 @@ const SidebarMenu = async ({
             </div>
           )}
           <p className="text-lg font-bold">{organization?.name}</p>
+
           <div className="flex flex-row items-center space-x-2">
             <Button variant={'secondary'} size={'sm'}>
               <Link href={`/studio/${organizationSlug}/settings`}>
@@ -98,6 +102,14 @@ const SidebarMenu = async ({
             url={item.url}
             text={item.text}
             icon={item.icon}
+            badge={
+              item.text === 'Subscription' && organization?.paymentStatus === 'active' && daysLeft && daysLeft > 0
+                ? { 
+                    text: daysLeft === 1 ? '1 day left' : 'Active', 
+                    variant: daysLeft === 1 ? 'warning' : 'success' 
+                  }
+                : undefined
+            }
           />
         ))}
       </SidebarUI>

@@ -41,7 +41,7 @@ const MediaEventComponent: React.FC<{
         {isVertical ? (
           <OffthreadVideo
             src={event.url}
-            className="my-auto"
+            className="my-auto z-10"
             startFrom={0}
             endAt={event.duration * fps}
           />
@@ -53,15 +53,17 @@ const MediaEventComponent: React.FC<{
             endAt={event.duration * fps}
           />
         )}
-        {event.transcript && (
+      </AbsoluteFill>
+      {event.transcript && (
+        <AbsoluteFill className="z-20">
           <CaptionsEventComponent
             start={event.start ? event.start : 0}
             end={event.end ? event.end : event.transcript.duration}
             transcript={event.transcript}
             editorProps={editorProps}
           />
-        )}
-      </AbsoluteFill>
+        </AbsoluteFill>
+      )}
     </Sequence>
   );
 };

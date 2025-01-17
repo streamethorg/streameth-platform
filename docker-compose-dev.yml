@@ -51,6 +51,9 @@ x-common-environment: &common-environment
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: ${OPENAI_API_KEY_FILE}
   GEMINI_API_KEY_FILE: ${GEMINI_API_KEY_FILE}
+  STRIPE_API_KEY_FILE: ${STRIPE_API_KEY_FILE}
+  STRIPE_PUBLISHABLE_KEY_FILE: ${STRIPE_PUBLISHABLE_KEY_FILE}
+
 x-common-worker: &common-worker
   volumes:
     - ./packages/server:/app/packages/server
@@ -85,7 +88,7 @@ services:
       - /app/packages/reel-creator/node_modules
     environment:
       NODE_ENV: ${NODE_ENV}
-      SERVER_WEBHOOK_URL: https://kodiak-feasible-distinctly.ngrok-free.app/webhook/remotion
+      SERVER_WEBHOOK_URL: https://6c5a-83-38-191-227.ngrok-free.app/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: ${LIVEPEER_WEBHOOK_SECRET_FILE}
       AWS_ACCESS_KEY_ID_FILE: ${AWS_ACCESS_KEY_ID_FILE}
       AWS_SECRET_ACCESS_KEY_FILE: ${AWS_SECRET_ACCESS_KEY_FILE}

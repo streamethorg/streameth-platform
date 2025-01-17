@@ -1,12 +1,10 @@
 import { TableCell } from '@/components/ui/table';
-import { IExtendedSession, eLayout } from '@/lib/types';
+import { IExtendedSession } from '@/lib/types';
 import { Users, FilePenLine, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDuration } from '@/lib/utils/time';
-import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
-import { Button } from '@/components/ui/button';
 import { getTypeLabel } from '@/lib/utils/utils';
 import {
   LuClapperboard,
@@ -17,8 +15,9 @@ import {
   LuVideo,
 } from 'react-icons/lu';
 import DropdownActions from './DropdownActions';
+import FeatureButton from '@/components/ui/feature-button';
 
-const TableCells = async ({
+const TableCells = ({
   item,
   organization,
 }: {
@@ -104,25 +103,34 @@ const TableCells = async ({
           {isPending && <Loader2 className="animate-spin w-4 h-4" />}
         </div>
       </TableCell>
-      <TableCell className={rowBackgroundClass}>
-        <div className="flex justify-end items-center space-x-2 max-w-[100px]">
+      <TableCell className={`${rowBackgroundClass} w-[220px]`}>
+        <div className="flex justify-end items-center gap-2">
           {!isDisabled && (
-            // item.createdAt &&
-            // new Date(item.createdAt).getTime() >
-            //   Date.now() - 7 * 24 * 60 * 60 * 1000 && (
             <Link
               href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
             >
-              <Button variant="primary" size="icon" className="mr-2">
-                <LuScissorsLineDashed className="w-5 h-5 cursor-pointer" />
-              </Button>
+              <FeatureButton
+                organizationId={organization}
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2 h-8"
+              >
+                <LuScissorsLineDashed className="w-4 h-4" />
+                <span>Clip</span>
+              </FeatureButton>
             </Link>
           )}
           {!isDisabled && (
             <Link href={`/studio/${organization}/library/${item._id}`}>
-              <Button variant="outline" size="icon" className="mr-2">
-                <FilePenLine className="w-5 h-5 cursor-pointer" />
-              </Button>
+              <FeatureButton
+                organizationId={organization}
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2 h-8"
+              >
+                <FilePenLine className="w-4 h-4" />
+                <span>Edit</span>
+              </FeatureButton>
             </Link>
           )}
           {!isDisabled && (

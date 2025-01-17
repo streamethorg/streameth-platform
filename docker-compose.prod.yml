@@ -5,6 +5,7 @@ x-common-environment: &common-environment
   NODE_ENV: prod
   APP_PORT: 8080
   BASE_URL: https://prod.api.streameth.org
+  FRONTEND_URL: https://streameth.org
   PLAYER_URL: https://prod.player.streameth.org
   DB_PASSWORD_FILE: /run/secrets/db-password
   DB_HOST: prod_mongodb
@@ -54,6 +55,8 @@ x-common-environment: &common-environment
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
   AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
   AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
+  STRIPE_SECRET_KEY_FILE: /run/secrets/prod-stripe-secret-key
+  STRIPE_PUBLISHABLE_KEY_FILE: /run/secrets/prod-stripe-publishable-key
 
 x-common-deploy: &common-deploy
   restart_policy:
@@ -88,6 +91,8 @@ x-common-secrets: &common-secrets
   - openai-api-key
   - aws-access-key
   - aws-secret-key
+  - prod-stripe-secret-key
+  - prod-stripe-publishable-key
 
 services:
   server:
@@ -304,4 +309,8 @@ secrets:
   aws-access-key:
     external: true
   aws-secret-key:
+    external: true
+  prod-stripe-secret-key:
+    external: true
+  prod-stripe-publishable-key:
     external: true

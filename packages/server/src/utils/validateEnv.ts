@@ -8,6 +8,7 @@ const validateEnv = () => {
     GEMINI_API_KEY_FILE: str(),
     BASE_URL: str(),
     PLAYER_URL: str(),
+    FRONTEND_URL: str(),
     NODE_ENV: str(),
     APP_PORT: port(),
     DB_HOST: str(),
@@ -49,6 +50,8 @@ const validateEnv = () => {
     REMOTION_BASE_URL: str(),
     REMOTION_WEBHOOK_SECRET_FILE: str(),
     REMOTION_ID: str(),
+    STRIPE_SECRET_KEY_FILE: str(),
+    STRIPE_PUBLISHABLE_KEY_FILE: str(),
   });
 };
 

@@ -15,6 +15,10 @@ import Dropzone from './upload/Dropzone';
 import UploadVideoForm from './upload/UploadVideoForm';
 import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
+import FeatureButton from '@/components/ui/feature-button';
+import { useSubscription } from '@/lib/hooks/useSubscription';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 type UploadStatus = {
   progress: number;
@@ -35,12 +39,26 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     updatedSession: z.infer<typeof sessionSchema>;
   } | null>(null);
 
+  const { canUseFeatures, organizationSlug } = useSubscription(organizationId);
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (!canUseFeatures) {
+      e.preventDefault();
+      e.stopPropagation();
+      router.push(`/studio/${organizationSlug}/payments`);
+      return;
+    }
+    setOpen(true);
+  };
+
   const handleSessionUpdate = useCallback(
     (uploadId: string, updatedSession: z.infer<typeof sessionSchema>) => {
       setPendingUpdate({ uploadId, updatedSession });
     },
     []
   );
+
   useEffect(() => {
     if (pendingUpdate) {
       const { uploadId, updatedSession } = pendingUpdate;
@@ -103,11 +121,15 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="flex flex-row items-center pr-2 bg-white rounded-xl border w-fit hover:bg-secondary">
-        <div className="p-2 text-white rounded-xl">
-          <LuFileUp size={20} className="text-primary" />
-        </div>
-        <span className="text-sm">Upload Video</span>
+      <DialogTrigger asChild>
+        <Button
+          variant="ghost"
+          className="flex items-center gap-2 h-10"
+          onClick={handleClick}
+        >
+          <LuFileUp className="w-5 h-5" />
+          <span>Upload Video</span>
+        </Button>
       </DialogTrigger>
       {dialogContent}
     </Dialog>

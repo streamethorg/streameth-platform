@@ -38,6 +38,11 @@ export class ClipEditorService extends SessionService {
   }
 
   async createEditorClip(data: IClip) {
+    // Get the main event session - needed regardless of captions
+    const mainEvent = data.editorOptions?.events.find(
+      (e) => e.label === 'main',
+    );
+
     data.editorOptions.events.map((e) => {
       console.log('e', e);
     });
@@ -50,9 +55,6 @@ export class ClipEditorService extends SessionService {
       organizationId: data.organizationId,
       clipSessionId: data.sessionId,
     });
-    const mainEvent = data.editorOptions?.events.find(
-      (e) => e.label === 'main',
-    );
     if (!mainEvent?.sessionId) return;
     return await this.createNormalClip(data);
   }
@@ -114,12 +116,27 @@ export class ClipEditorService extends SessionService {
             );
           }
 
-          return {
+          // If this is the main event and captions are enabled, include transcripts
+          const eventData: any = {
             id: e.label,
             label: e.label,
             type: 'media',
             url: session?.source?.streamUrl || '', // Always provide empty string as fallback
           };
+
+          if (e.label === 'main' && clipEditor.captionEnabled && session?.transcripts?.chunks) {
+            eventData.transcript = {
+              language: 'en',
+              text: session.transcripts.text || '',
+              words: session.transcripts.chunks.map(chunk => ({
+                word: chunk.word,
+                start: chunk.start,
+                end: chunk.end || chunk.start + 1, // Fallback end time if not provided
+              }))
+            };
+          }
+
+          return eventData;
         }),
         captionLinesPerPage: clipEditor.captionLinesPerPage.toString(),
         captionEnabled: clipEditor.captionEnabled,
