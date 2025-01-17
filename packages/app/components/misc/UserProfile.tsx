@@ -68,15 +68,27 @@ const UserProfile = async ({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href={`/studio`} className="flex items-center w-full">
-            <Button
-              className="hidden lg:flex items-center space-x-2"
-              variant={'link'}
-            >
-              <Users size={16} />
-              <span>Switch Accounts</span>
-            </Button>
-          </Link>
+          {organizations.length <= 1 ? (
+            <Link href="/studio/create" className="flex items-center w-full">
+              <Button
+                className="hidden lg:flex items-center space-x-2"
+                variant={'link'}
+              >
+                <Users size={16} />
+                <span>Create Organization</span>
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/studio" className="flex items-center w-full">
+              <Button
+                className="hidden lg:flex items-center space-x-2"
+                variant={'link'}
+              >
+                <Users size={16} />
+                <span>Switch Accounts</span>
+              </Button>
+            </Link>
+          )}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link href="/auth/logout" className="flex items-center w-full">
