@@ -5,7 +5,10 @@ import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
 import { useEffect, useRef } from 'react';
-import { calculateTimelineScale, convertSecondsToUnix } from '@/lib/utils/utils';
+import {
+  calculateTimelineScale,
+  convertSecondsToUnix,
+} from '@/lib/utils/utils';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 import { IExtendedMarker } from '@/lib/types';
 const Timeline = () => {
@@ -76,7 +79,10 @@ const Timeline = () => {
     }
   };
 
-  const handleMarkerClick = (videoRef: React.RefObject<HTMLVideoElement>, marker: IExtendedMarker) => {
+  const handleMarkerClick = (
+    videoRef: React.RefObject<HTMLVideoElement>,
+    marker: IExtendedMarker
+  ) => {
     if (videoRef.current) {
       videoRef.current.currentTime = marker.startClipTime;
       setStartTime({
@@ -95,7 +101,6 @@ const Timeline = () => {
     }
   };
 
-  
   if (!maxLength || !timelineWidth || !videoRef.current)
     return (
       // loading state

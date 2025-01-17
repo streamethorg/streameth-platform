@@ -66,7 +66,7 @@ export default function Sidebar({
           <Markers sessionId={sessionId || ''} />
         </TabsContent>
         <TabsContent value="clips" className="flex-grow overflow-hidden">
-          <SessionSidebar  />
+          <SessionSidebar />
         </TabsContent>
         {words && (
           <TabsContent

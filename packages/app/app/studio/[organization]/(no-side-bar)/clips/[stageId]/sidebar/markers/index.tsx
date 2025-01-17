@@ -67,7 +67,8 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
       sessionId: sessionId,
       stageId: stageId,
       prompt: prompt,
-    }).then((res) => {
+    })
+      .then((res) => {
         console.log(res);
         fetchAndSetMarkers();
         setIsExtracting(false);

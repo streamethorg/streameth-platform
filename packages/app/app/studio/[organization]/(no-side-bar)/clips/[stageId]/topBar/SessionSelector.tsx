@@ -25,9 +25,7 @@ const SessionSelector = ({
   return (
     <div className="p-2 flex w-full bg-white flex-row justify-between items-center">
       <div className="flex flex-row items-center w-full">
-        <p className="text-md uppercase font-light mr-4">
-          Editing {stageName}
-        </p>
+        <p className="text-md uppercase font-light mr-4">Editing {stageName}</p>
         <Combobox
           items={recordings.map((recording, index) => ({
             label: `Recording ${index + 1}`,

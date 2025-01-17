@@ -186,8 +186,8 @@ const ZoraUploadButton = ({
         {isUploading
           ? 'Uploading...'
           : !state[0]
-            ? 'Upload to Zora'
-            : 'Already Uploaded'}
+          ? 'Upload to Zora'
+          : 'Already Uploaded'}
       </Button>
       <Dialog open={isPublishedModal} onOpenChange={setIsPublishedModal}>
         <DialogContent className="lg:min-w-[600px]">

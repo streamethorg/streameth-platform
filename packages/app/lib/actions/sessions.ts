@@ -33,7 +33,7 @@ export const updateAssetAction = async (session: IExtendedSession) => {
         ipfs: true,
       },
     },
-    session.assetId as string,
+    session.assetId as string
   );
   await updateSessionAction({
     session: {
@@ -280,7 +280,6 @@ export const generateTranscriptionActions = async ({
     return null;
   }
 };
-
 
 export const extractHighlightsAction = async ({
   stageId,

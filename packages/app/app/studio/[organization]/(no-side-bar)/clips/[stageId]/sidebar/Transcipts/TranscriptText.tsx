@@ -24,7 +24,7 @@ const TranscriptText = ({
     const handleTimeUpdate = () => {
       const activeWord = words.find((word) =>
         isWordActive(word, videoRef.current?.currentTime || 0)
-      );  
+      );
 
       if (activeWord && containerRef.current) {
         const activeElement = document.getElementById(
@@ -34,13 +34,12 @@ const TranscriptText = ({
           // Replace scrollIntoView with manual scroll calculation
           const containerRect = containerRef.current.getBoundingClientRect();
           const elementRect = activeElement.getBoundingClientRect();
-          
-          containerRef.current.scrollTop += (
-            elementRect.top - 
-            containerRect.top - 
-            containerRect.height / 2 + 
-            elementRect.height / 2
-          );
+
+          containerRef.current.scrollTop +=
+            elementRect.top -
+            containerRect.top -
+            containerRect.height / 2 +
+            elementRect.height / 2;
         }
       }
     };

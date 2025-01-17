@@ -8,7 +8,7 @@ import { fetchAllSessions } from '@/lib/services/sessionService';
 import { fetchStage } from '@/lib/services/stageService';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import SessionSelector from './SessionSelector';
-const TopBar =  async ({
+const TopBar = async ({
   stageId,
   organization,
   currentSessionId,

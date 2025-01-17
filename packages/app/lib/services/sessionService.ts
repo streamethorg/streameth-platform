@@ -77,7 +77,7 @@ export async function fetchAllSessions({
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {
       cache: 'no-store',
-      next: { revalidate: 0 }
+      next: { revalidate: 0 },
     }
   );
   const a = await response.json();

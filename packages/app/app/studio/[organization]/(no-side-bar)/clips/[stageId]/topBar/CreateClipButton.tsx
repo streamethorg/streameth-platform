@@ -22,14 +22,8 @@ const CreateClipButton = ({
 }: {
   liveRecordingId?: string;
 }) => {
-  const {
-    stageId,
-    setIsCreatingClip,
-    startTime,
-    endTime,
-    videoRef,
-    clipUrl,
-  } = useClipContext();
+  const { stageId, setIsCreatingClip, startTime, endTime, videoRef, clipUrl } =
+    useClipContext();
 
   const { markers, selectedMarkerId, setSelectedMarkerId, organizationId } =
     useMarkersContext();
