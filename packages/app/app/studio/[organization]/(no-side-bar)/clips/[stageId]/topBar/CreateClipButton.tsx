@@ -17,11 +17,7 @@ import { fetchStage } from '@/lib/services/stageService';
 import CreateClipForm from './CreateClipForm';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 
-const CreateClipButton = ({
-  liveRecordingId,
-}: {
-  liveRecordingId?: string;
-}) => {
+const CreateClipButton = ({}: {}) => {
   const { stageId, setIsCreatingClip, startTime, endTime, videoRef, clipUrl } =
     useClipContext();
 
@@ -158,10 +154,7 @@ const CreateClipButton = ({
 
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
     setIsCreateClip(true);
-    if (
-      !stage?.streamSettings?.playbackId ||
-      (!sessionRecording?.assetId && !liveRecordingId)
-    ) {
+    if (!stage?.streamSettings?.playbackId || !sessionRecording?.assetId) {
       setIsCreateClip(false);
       console.error('🚨 Missing required data for clip creation');
       return toast.error('Missing required data for clip creation');

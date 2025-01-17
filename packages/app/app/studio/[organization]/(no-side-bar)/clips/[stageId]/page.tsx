@@ -1,10 +1,9 @@
 import { fetchOrganization } from '@/lib/services/organizationService';
-import { fetchAllSessions, fetchSession } from '@/lib/services/sessionService';
-import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
+import { fetchSession } from '@/lib/services/sessionService';
+import { fetchStage } from '@/lib/services/stageService';
 import { ClipsPageParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import React, { Suspense } from 'react';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { ClipProvider } from './ClipContext';
 import Controls from './Controls';
 import ReactHlsPlayer from './Player';
@@ -112,7 +111,6 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
           </div>
           <div className="flex w-[400px] h-full">
             <Sidebar
-              liveRecordingId={videoDetails.liveRecording?.id}
               words={videoDetails.words}
               sessionId={sessionId}
             />

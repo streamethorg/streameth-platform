@@ -10,11 +10,9 @@ import Transcripts from './Transcipts';
 import { useMarkersContext } from './markers/markersContext';
 
 export default function Sidebar({
-  liveRecordingId,
   words,
   sessionId,
 }: {
-  liveRecordingId?: string;
   words?: {
     start: number;
     end: number;
@@ -29,7 +27,6 @@ export default function Sidebar({
     {
       condition: isCreatingClip,
       Component: CreateClipButton,
-      usesLiveRecordingId: true,
     },
     {
       condition: isAddingOrEditingMarker,
@@ -44,15 +41,13 @@ export default function Sidebar({
   return (
     <div className="h-full w-full border-l bg-white relative flex flex-col">
       {overlayComponents.map(
-        ({ condition, Component, usesLiveRecordingId }) =>
+        ({ condition, Component }) =>
           condition && (
             <div
               key={Component.name}
               className="absolute inset-0 z-50 bg-white"
             >
-              <Component
-                {...(usesLiveRecordingId ? { liveRecordingId } : {})}
-              />
+              <Component />
             </div>
           )
       )}
