@@ -46,6 +46,8 @@ export const MarkersProvider = ({
   const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
   const [isAddingOrEditingMarker, setIsAddingOrEditingMarker] =
     useState<boolean>(false);
+
+
   const fetchAndSetMarkers = async () => {
     if (stageId) {
       setIsLoadingMarkers(true);

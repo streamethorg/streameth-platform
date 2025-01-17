@@ -11,13 +11,13 @@ import {
 import { CardTitle } from '@/components/ui/card';
 import Marker from './Marker';
 import { IExtendedMarker } from '@/lib/types';
-import PushMarkersButton from './PushMarkersButton';
 import { useMarkersContext } from './markersContext';
 import { extractHighlightsAction } from '@/lib/actions/sessions';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useClipContext } from '../../ClipContext';
 import { toast } from 'sonner';
+import { Textarea } from '@/components/ui/textarea';
 
 const Markers = ({ sessionId }: { sessionId: string }) => {
   const {
@@ -26,6 +26,7 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
     setFilteredMarkers,
     filteredMarkers,
     organizationId,
+    fetchAndSetMarkers,
   } = useMarkersContext();
 
   const { stageId } = useClipContext();
@@ -68,6 +69,7 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
       prompt: prompt,
     }).then((res) => {
         console.log(res);
+        fetchAndSetMarkers();
         setIsExtracting(false);
       })
       .catch((err) => {
@@ -92,8 +94,8 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
 
   return (
     <div className="h-full w-full border-l flex flex-col">
-      <CardTitle className="w-full border-b bg-white p-2 text-lg flex-shrink-0">
-        <div className="flex flex-col space-y-2">
+      <CardTitle className="w-full border-b bg-white p-2 space-y-2 text-lg flex-shrink-0">
+        {/* <div className="flex flex-col space-y-2">
           <p className="text-sm font-semibold">Filter by Date</p>
           <Select defaultValue={selectedDate} onValueChange={handleDateChange}>
             <SelectTrigger className="bg-white">
@@ -112,8 +114,8 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
               </SelectGroup>
             </SelectContent>
           </Select>
-        </div>
-        <Input
+        </div> */}
+        <Textarea
           placeholder="Prompt for highlights"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
@@ -122,6 +124,8 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
           <Button disabled>Extracting...</Button>
         ) : (
           <Button
+            className="w-full"
+            variant="primary"
             onClick={() => {
               handleExtractHighlights();
             }}
@@ -130,9 +134,6 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
           </Button>
         )}
       </CardTitle>
-      {filteredMarkers.length > 0 && (
-        <PushMarkersButton organizationId={organizationId} />
-      )}
       <div className="flex-grow overflow-y-auto pb-4">
         {filteredMarkers.length > 0 ? (
           filteredMarkers.map((marker: IExtendedMarker) => (

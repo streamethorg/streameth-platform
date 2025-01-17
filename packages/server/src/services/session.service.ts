@@ -431,6 +431,7 @@ export default class SessionService {
     });
     const chunks = session.transcripts.chunks;
     const transcript = session.transcripts.text;
+    console.log(transcript);
     const chat = new ChatAPI();
     const highlights = await chat.chat([
       {
@@ -445,13 +446,15 @@ export default class SessionService {
               - Introductions: e.g.,\"Thank you so much ....\", \"Welcome to...\", \"Next up, we have...\", \"Please give it up for...\", \"Let's get started with...\", \"We're excited to welcome...\", \"We're honored to present...\"
               - Transitions or cues indicating the start or end of a keynote/panel: e.g., \"discussion on...\", \"presentation about...\", \"closing remarks on...\"
         
+            Input: 
+            - You will be given a vtt transcript of the livestream.
             Output:
             - Return a JSON array of objects where each object represents a speaker presentation or panel. Use the following structure:
               {
                 "start": number,    // Timestamp in seconds where the speaker presentation or panel begins
                 "end": number,      // Timestamp in seconds where the speaker presentation or panel ends
                 "title": string     // A concise, descriptive title for the speaker presentation or panel, based on its content
-              }
+                }
       
           Strict Rules:
           - Titles should summarize the topic or theme of each speaker presentation or panel clearly and concisely.
@@ -466,7 +469,7 @@ export default class SessionService {
       },
       {
         role: 'user',
-        content: `Here is the transcript: ${transcript}, and here is the word-level transcript: ${chunks}
+        content: ` Here is the transcript: ${transcript}, here is the word level transcript: ${JSON.stringify(chunks)}
        ${prompt ? `Here is the prompt provided by the user: ${prompt}` : ''}
        ${markers.length > 0 ? `I have already identified the following speaker presentations and panels: ${JSON.stringify(markers)}, please identify the next speaker presentations and panels that are not already identified.` : ''}
       `,
@@ -474,7 +477,7 @@ export default class SessionService {
     ]);
 
     const parsedHighlights: unknown = JSON.parse(highlights);
-
+    console.log('parsedHighlights', parsedHighlights);
     // Type guard function to validate the structure
     const isValidHighlight = (item: unknown): item is AIHighlight => {
       return (

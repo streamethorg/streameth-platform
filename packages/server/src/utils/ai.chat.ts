@@ -16,17 +16,24 @@ export class ChatAPI {
 
   async chat(messages: ChatCompletionMessageParam[]) {
 
-
-
-
-    const completion = await this.openai.chat.completions.create({
-      temperature: 1,
-      model: 'gemini-1.5-flash-latest',
-      messages,
-      response_format: { type: 'json_object' },
-    });
-    return completion.choices[0].message.content;
+    const tokenCount = messages.reduce((acc, message) => {
+      return acc + message.content.length;
+    }, 0);
+    console.log('tokenCount', tokenCount);
+    
+    try {
+      const completion = await this.openai.chat.completions.create({
+        temperature: 1,
+        model: 'gemini-1.5-pro-latest',
+        messages,
+        max_tokens: 1000000,
+        response_format: { type: 'json_object' },
+      });
+      return completion.choices[0].message.content;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
-
-
 }
+

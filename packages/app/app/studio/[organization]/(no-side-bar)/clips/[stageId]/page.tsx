@@ -3,7 +3,7 @@ import { fetchAllSessions, fetchSession } from '@/lib/services/sessionService';
 import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
 import { ClipsPageParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { ClipProvider } from './ClipContext';
 import Controls from './Controls';
@@ -88,11 +88,19 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       <MarkersProvider organizationId={organizationId} stageId={stageId}>
         <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
           <div className="flex h-full w-[calc(100%-400px)] flex-col">
-            <TopBar
-              stageId={stageId}
-              organization={organization}
-              currentSessionId={sessionId}
-            />
+            <Suspense
+              fallback={
+                <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
+                  Loading...
+                </div>
+              }
+            >
+              <TopBar
+                stageId={stageId}
+                organization={organization}
+                currentSessionId={sessionId}
+              />
+            </Suspense>
             <ReactHlsPlayer
               src={videoDetails.videoSrc}
               type={videoDetails.type}
