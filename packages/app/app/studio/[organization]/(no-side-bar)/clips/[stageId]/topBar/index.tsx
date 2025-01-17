@@ -1,9 +1,3 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-import Combobox from '@/components/ui/combo-box';
-import { useRouter } from 'next/navigation';
-import { IExtendedSession } from '@/lib/types';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 import { fetchStage } from '@/lib/services/stageService';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';

@@ -7,7 +7,6 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import useSearchParams from '@/lib/hooks/useSearchParams';
 import Hls from 'hls.js';
 import { convertSecondsToUnix } from '@/lib/utils/utils';
 
