@@ -16,9 +16,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 const SessionSidebar = () => {
   const {
-    sessions,
     filteredSessions,
-    searchTerm,
     setSearchTerm,
     selectedDate,
     setSelectedDate,

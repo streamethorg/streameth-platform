@@ -69,7 +69,6 @@ const Markers = ({ sessionId }: { sessionId: string }) => {
       prompt: prompt,
     })
       .then((res) => {
-        console.log(res);
         fetchAndSetMarkers();
         setIsExtracting(false);
       })

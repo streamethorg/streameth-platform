@@ -255,7 +255,12 @@ export const getVideoPhaseAction = async (
 export const getStreamRecordings = async (streamId: string): Promise<LivepeerRecording[]> => {
   try {
     const parentStream = await getStreamInfo(streamId);
-    const response = await livepeer.session.getRecorded(parentStream?.streamId ?? '');
+    console.log('parentStream', parentStream.streamId, parentStream.id);
+    if (!parentStream.id) {
+      return [];
+    }
+    const response = await livepeer.session.getRecorded(parentStream.id);
+    console.log('response', response);
     const recordings = response.data;
     if (!recordings) {
       return [];

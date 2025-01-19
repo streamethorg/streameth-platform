@@ -33,7 +33,6 @@ const Layout = async ({
 
   const userData = await fetchUserAction();
 
-  console.log(organization);
   if (!organization) {
     return NotFound();
   }

@@ -31,10 +31,6 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
     })
   ).sessions;
 
-  const stageMarkers = await fetchMarkers({
-    organizationId: organization._id,
-    stageId: params.streamId,
-  });
 
   return (
     <div className="flex flex-col p-4 w-full h-full max-h-screen max-w-screen-3xl">
@@ -48,7 +44,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
           <StageControls
             organization={organization}
             stream={stream}
-            stageMarkers={stageMarkers}
+            stageMarkers={[]}
           />
         </div>
         <div className="flex flex-col w-1/3">

@@ -34,11 +34,6 @@ export default function Clip({ session }: { session: IExtendedSession }) {
         getAsset();
       }, 10000);
       return () => clearInterval(interval);
-    } else if (session.processingStatus === ProcessingStatus.pending) {
-      const interval = setInterval(() => {
-        router.refresh();
-      }, 10000);
-      return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [asset?.status?.phase]);

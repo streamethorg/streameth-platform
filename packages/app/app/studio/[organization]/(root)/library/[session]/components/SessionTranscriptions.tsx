@@ -29,7 +29,6 @@ const SessionTranscriptions = ({
       sessionId,
     })
       .then((response) => {
-        console.log('response', response);
         if (response) {
           toast.success('Transcription request sent successfully');
         } else {

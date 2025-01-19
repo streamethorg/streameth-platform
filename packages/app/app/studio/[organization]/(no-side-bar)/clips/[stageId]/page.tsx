@@ -1,6 +1,6 @@
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { fetchSession } from '@/lib/services/sessionService';
-import { fetchStage } from '@/lib/services/stageService';
+import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
 import { ClipsPageParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import React, { Suspense } from 'react';
@@ -13,6 +13,7 @@ import TopBar from './topBar';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { MarkersProvider } from './sidebar/markers/markersContext';
 import { ClipsSidebarProvider } from './sidebar/clips/ClipsContext';
+import { getLiveStageSrcValue } from '@/lib/utils/utils';
 const fetchVideoDetails = async (
   videoType: string,
   stageId: string,
@@ -23,9 +24,14 @@ const fetchVideoDetails = async (
       const liveStage = await fetchStage({ stage: stageId });
       const streamId = liveStage?.streamSettings?.streamId;
       if (!streamId) return null;
-
+      const allRecordings = await fetchStageRecordings({ streamId });
+      if (!allRecordings) return null;
+      const latestRecording = allRecordings[0];
       return {
-        videoSrc: `https://livepeercdn.studio/hls/${liveStage.streamSettings?.playbackId}/index.m3u8`,
+        videoSrc: getLiveStageSrcValue({
+          playbackId: latestRecording.playbackId,
+          recordingId: latestRecording.id,
+        }),
         type: 'livepeer',
         name: liveStage.name,
         transcribe: liveStage.transcripts?.chunks,
@@ -98,7 +104,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
                 <TopBar
                   stageId={stageId}
                   organization={organization}
-                  currentSessionId={sessionId}
+                  sessionId={sessionId}
                 />
               </Suspense>
               <ReactHlsPlayer

@@ -58,18 +58,11 @@ export function ClipsSidebarProvider({
       type: SessionType.clip,
     });
     setSessions(sessions.sessions);
-    console.log('sessions', sessions.sessions);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      fetchSessions();
-    }, 5000);
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    fetchSessions();
   }, [stageId]);
 
   useEffect(() => {

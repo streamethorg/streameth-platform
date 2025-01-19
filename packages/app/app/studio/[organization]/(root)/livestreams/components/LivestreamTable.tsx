@@ -59,8 +59,11 @@ const LivestreamTable = async ({
       {isOverLimit && (
         <Alert variant="destructive">
           <AlertDescription>
-            You have {currentStages - paidStages} more {currentStages - paidStages === 1 ? 'stage' : 'stages'} than your subscription allows. 
-            Please delete {currentStages - paidStages === 1 ? 'it' : 'them'} or upgrade your subscription to continue using all features.
+            You have {currentStages - paidStages} more{' '}
+            {currentStages - paidStages === 1 ? 'stage' : 'stages'} than your
+            subscription allows. Please delete{' '}
+            {currentStages - paidStages === 1 ? 'it' : 'them'} or upgrade your
+            subscription to continue using all features.
           </AlertDescription>
         </Alert>
       )}
@@ -97,20 +100,18 @@ const LivestreamTable = async ({
                 {isOverLimit ? (
                   <div className="flex items-center gap-2">
                     <Lock className="h-4 w-4 text-gray-500" />
-                    <p className="line-clamp-3 font-medium text-lg text-gray-500">
+                    <p className="line-clamp-3 font-medium text-lg text-gray-500 text-ellipsis">
                       {stream?.name}
                     </p>
                   </div>
                 ) : (
                   <Link
                     href={`/studio/${organizationSlug}/livestreams/${stream._id}`}
-                    className="w-full"
+                    className="w-full max-h-6"
                   >
-                    <Button variant="link" className="md:p-0">
-                      <p className="line-clamp-3 font-medium text-lg">
-                        {stream?.name}
-                      </p>
-                    </Button>
+                    <p className="line-clamp-3 font-medium text-lg text-ellipsis">
+                      {stream?.name}
+                    </p>
                   </Link>
                 )}
                 <p className="text-sm">

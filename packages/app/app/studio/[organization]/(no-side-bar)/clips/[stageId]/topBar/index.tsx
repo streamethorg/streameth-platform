@@ -1,28 +1,67 @@
 import { fetchAllSessions } from '@/lib/services/sessionService';
-import { fetchStage } from '@/lib/services/stageService';
+import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import SessionSelector from './SessionSelector';
+import { RecordingStatus } from 'livepeer/models/components';
+
+interface SessionOption {
+  label: string;
+  value: string;
+  url: string;
+}
+
 const TopBar = async ({
   stageId,
   organization,
-  currentSessionId,
+  sessionId,
 }: {
   stageId: string;
   organization: string;
-  currentSessionId: string;
+  sessionId?: string;
 }) => {
-  const stage = await fetchStage({ stage: stageId });
-  if (!stage) return null;
-  const allRecordings = await fetchAllSessions({
-    stageId,
-    type: SessionType.livestream,
+  const [allSessions, stage] = await Promise.all([
+    fetchAllSessions({
+      stageId,
+      type: SessionType.livestream,
+    }),
+    fetchStage({ stage: stageId }),
+  ]);
+
+  const stageRecordings = await fetchStageRecordings({
+    streamId: stage?.streamSettings?.streamId || '',
   });
-  const recordings = allRecordings.sessions;
+
+  const hasActiveLivestream = stageRecordings?.some(
+    (recording) => recording.recordingStatus === RecordingStatus.Waiting
+  );
+  const sessionOptions: SessionOption[] = allSessions.sessions.map(
+    (session) => ({
+      label: session.name,
+      value: session._id,
+      url: `/studio/${organization}/clips/${stageId}?sessionId=${session._id}&videoType=recording`,
+    })
+  );
+
+  let currentSession: SessionOption;
+  currentSession =
+    sessionOptions.find((session) => session.value === sessionId) ||
+    sessionOptions[0];
+
+  if (!sessionId || hasActiveLivestream) {
+    // Add live option when sessionId is provided
+    const liveOption: SessionOption = {
+      label: 'Live',
+      value: stageId,
+      url: `/studio/${organization}/clips/${stageId}?videoType=livestream`,
+    };
+    sessionOptions.push(liveOption);
+    !sessionId && (currentSession = liveOption);
+  }
   return (
     <SessionSelector
-      recordings={recordings}
-      currentSessionId={currentSessionId}
-      stageName={stage?.name}
+      recordings={sessionOptions}
+      currentSession={currentSession}
+      stageName={stage?.name || ''}
       organization={organization}
     />
   );
