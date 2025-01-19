@@ -82,16 +82,16 @@ const SidebarMenu = async ({
               {organization?.name.slice(0, 2)}
             </div>
           )}
-          <p className="text-lg font-bold">{organization?.name}</p>
+          <p className="text-lg font-bold w-full text-center p-2">{organization?.name}</p>
 
           <div className="flex flex-row items-center space-x-2">
-            <Button variant={'secondary'} size={'sm'}>
+            <Button variant={'outline'} size={'sm'}>
               <Link href={`/studio/${organizationSlug}/settings`}>
                 Settings
               </Link>
             </Button>
 
-            <Button variant={'primary'} size={'sm'}>
+            <Button variant={'outline'} size={'sm'}>
               <Link href={`/${organizationSlug}`}>Channel </Link>
             </Button>
           </div>

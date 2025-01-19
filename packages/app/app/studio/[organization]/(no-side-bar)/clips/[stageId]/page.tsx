@@ -12,7 +12,7 @@ import Sidebar from './sidebar';
 import TopBar from './topBar';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { MarkersProvider } from './sidebar/markers/markersContext';
-
+import { ClipsSidebarProvider } from './sidebar/clips/ClipsContext';
 const fetchVideoDetails = async (
   videoType: string,
   stageId: string,
@@ -85,37 +85,36 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       clipUrl={videoDetails.videoSrc}
     >
       <MarkersProvider organizationId={organizationId} stageId={stageId}>
-        <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
-          <div className="flex h-full w-[calc(100%-400px)] flex-col">
-            <Suspense
-              fallback={
-                <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
-                  Loading...
-                </div>
-              }
-            >
-              <TopBar
-                stageId={stageId}
-                organization={organization}
-                currentSessionId={sessionId}
+        <ClipsSidebarProvider>
+          <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
+            <div className="flex h-full w-[calc(100%-400px)] flex-col">
+              <Suspense
+                fallback={
+                  <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
+                    Loading...
+                  </div>
+                }
+              >
+                <TopBar
+                  stageId={stageId}
+                  organization={organization}
+                  currentSessionId={sessionId}
+                />
+              </Suspense>
+              <ReactHlsPlayer
+                src={videoDetails.videoSrc}
+                type={videoDetails.type}
               />
-            </Suspense>
-            <ReactHlsPlayer
-              src={videoDetails.videoSrc}
-              type={videoDetails.type}
-            />
-            <Controls />
-            <div className="w-full p-2 bg-white">
-              <Timeline />
+              <Controls />
+              <div className="w-full p-2 bg-white">
+                <Timeline />
+              </div>
+            </div>
+            <div className="flex w-[400px] h-full">
+              <Sidebar words={videoDetails.words} sessionId={sessionId} />
             </div>
           </div>
-          <div className="flex w-[400px] h-full">
-            <Sidebar
-              words={videoDetails.words}
-              sessionId={sessionId}
-            />
-          </div>
-        </div>
+        </ClipsSidebarProvider>
       </MarkersProvider>
     </ClipProvider>
   );

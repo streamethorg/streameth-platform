@@ -73,14 +73,6 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
         },
       }));
 
-      // updateSessionAction({ session: updatedSession as IExtendedSession })
-      //   .then(() => {
-      //     console.log('Session updated successfully');
-      //   })
-      //   .catch((error) => {
-      //     console.error('Failed to update session:', error);
-      //   });
-
       setOnEdit(null);
       setOpen(false);
       setPendingUpdate(null);
@@ -123,7 +115,7 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          variant="ghost"
+          variant="outline"
           className="flex items-center gap-2 h-10"
           onClick={handleClick}
         >

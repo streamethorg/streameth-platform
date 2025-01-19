@@ -1,88 +1,27 @@
 'use client';
 
 import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
-import { Card } from '@/components/ui/card';
-import React, { useState, useEffect } from 'react';
-import { useClipContext } from '../ClipContext';
+import { useState, useEffect, use } from 'react';
+import { useClipContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipContext';
 import { clipSchema } from '@/lib/schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import useSearchParams from '@/lib/hooks/useSearchParams';
-import { fetchSession } from '@/lib/services/sessionService';
-import { IExtendedSession, IExtendedStage } from '@/lib/types';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { fetchStage } from '@/lib/services/stageService';
-import CreateClipForm from './CreateClipForm';
-import { useMarkersContext } from '../sidebar/markers/markersContext';
+import { useMarkersContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/markers/markersContext';
+import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
 
-const CreateClipButton = ({}: {}) => {
+export const useCreateClip = () => {
   const { stageId, setIsCreatingClip, startTime, endTime, videoRef, clipUrl } =
     useClipContext();
 
   const { markers, selectedMarkerId, setSelectedMarkerId, organizationId } =
     useMarkersContext();
+  const { fetchSessions } = useClipsSidebar();
 
   const [isCreateClip, setIsCreateClip] = useState(false);
-  const [sessionRecording, setSessionRecording] =
-    useState<IExtendedSession | null>(null);
-  const [stage, setStage] = useState<IExtendedStage | null>(null);
-  const { searchParams } = useSearchParams();
 
-  const sessionId = searchParams?.get('sessionId');
-
-  const getSession = async () => {
-    if (!sessionId) return;
-    try {
-      const session = await fetchSession({ session: sessionId });
-      if (!session) {
-        toast.error('Failed to fetch session');
-        console.error('🚨 Session fetch failed');
-        return;
-      }
-      setSessionRecording(session);
-      console.log('🔄 Session fetched successfully');
-    } catch (error) {
-      console.error('🚨 Error fetching session:', error);
-      toast.error('Failed to fetch session data');
-    }
-  };
-
-  const getStage = async () => {
-    if (!stageId) return;
-    try {
-      const stageData = await fetchStage({ stage: stageId });
-      if (!stageData) {
-        toast.error('Failed to fetch stage');
-        console.error('🚨 Stage fetch failed');
-        return;
-      }
-      setStage(stageData);
-      console.log('🔄 Stage fetched successfully');
-    } catch (error) {
-      console.error('🚨 Error fetching stage:', error);
-      toast.error('Failed to fetch stage data');
-    }
-  };
-
-  useEffect(() => {
-    getSession();
-    getStage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId]);
-
-  const handlePreview = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = startTime.displayTime;
-      videoRef.current.play();
-      console.log('🔄 Preview started');
-    }
-  };
-
-  const selectedMarker = markers.find(
-    (marker) => marker._id === selectedMarkerId
-  );
   const form = useForm<z.infer<typeof clipSchema>>({
     resolver: zodResolver(clipSchema),
     defaultValues: {
@@ -103,7 +42,6 @@ const CreateClipButton = ({}: {}) => {
     },
   });
 
-  // Check for caption and animations
   const checkEditorOptions = (values: z.infer<typeof clipSchema>) => {
     return (
       values.captionEnabled ||
@@ -112,7 +50,14 @@ const CreateClipButton = ({}: {}) => {
       values.selectedAspectRatio !== '16:9'
     );
   };
-  const hasEditorOptions = checkEditorOptions(form.getValues());
+
+  const handlePreview = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = startTime.displayTime;
+      videoRef.current.play();
+      console.log('🔄 Preview started');
+    }
+  };
 
   const handleClearMarker = () => {
     setSelectedMarkerId('');
@@ -127,6 +72,14 @@ const CreateClipButton = ({}: {}) => {
     });
     console.log('🔄 Marker cleared');
   };
+
+  const selectedMarker = markers.find(
+    (marker) => marker._id === selectedMarkerId
+  );
+
+  useEffect(() => {
+    console.log('form', form.getValues());
+  }, [form]);
 
   useEffect(() => {
     if (selectedMarker) {
@@ -154,11 +107,6 @@ const CreateClipButton = ({}: {}) => {
 
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
     setIsCreateClip(true);
-    if (!stage?.streamSettings?.playbackId || !sessionRecording?.assetId) {
-      setIsCreateClip(false);
-      console.error('🚨 Missing required data for clip creation');
-      return toast.error('Missing required data for clip creation');
-    }
 
     if (endTime.unix < startTime.unix) {
       setIsCreateClip(false);
@@ -179,10 +127,6 @@ const CreateClipButton = ({}: {}) => {
       pretalxSessionCode: values.pretalxSessionCode,
     };
 
-    const sessionType = hasEditorOptions
-      ? SessionType.editorClip
-      : SessionType.clip;
-
     try {
       const session = await createSessionAction({
         session: { ...mainClipSession, type: SessionType.clip },
@@ -200,28 +144,17 @@ const CreateClipButton = ({}: {}) => {
         clipUrl: clipUrl,
       };
 
+      const hasEditorOptions = checkEditorOptions(values);
+
       if (hasEditorOptions) {
         const events = [
           ...(values.outroAnimation
-            ? [
-                {
-                  videoUrl: values.outroAnimation,
-                  label: 'outro',
-                },
-              ]
+            ? [{ videoUrl: values.outroAnimation, label: 'outro' }]
             : []),
           ...(values.introAnimation
-            ? [
-                {
-                  videoUrl: values.introAnimation,
-                  label: 'intro',
-                },
-              ]
+            ? [{ videoUrl: values.introAnimation, label: 'intro' }]
             : []),
-          {
-            sessionId: session._id as string,
-            label: 'main',
-          },
+          { sessionId: session._id as string, label: 'main' },
         ];
 
         const clipCreationOptions = {
@@ -238,46 +171,27 @@ const CreateClipButton = ({}: {}) => {
             captionFont: 'Arial',
           },
         };
-        console.log(
-          'Creating clip with options:',
-          JSON.stringify(clipCreationOptions, null, 2)
-        );
-        // Call createClipAction with the prepared editor options
         await createClipAction(clipCreationOptions);
-        console.log('🔄 Clip created with editor options');
       } else {
-        console.log(
-          'Creating clip without editor options:',
-          JSON.stringify(mainClipData, null, 2)
-        );
         await createClipAction({ ...mainClipData, isEditorEnabled: false });
-        console.log('🔄 Clip created without editor options');
       }
 
       toast.success('Clip created');
       setIsCreatingClip(false);
+      fetchSessions();
     } catch (error) {
       console.error('🚨 Error creating clip:', error);
-      toast.error(
-        error instanceof Error ? error.message : 'Error creating clip'
-      );
+      toast.error(error instanceof Error ? error.message : 'Error creating clip');
     } finally {
       setIsCreateClip(false);
     }
   };
 
-  return (
-    <Card className="border-none rounded-none shadow-none">
-      <CreateClipForm
-        form={form}
-        handleCreateClip={handleCreateClip}
-        handleClearMarker={handleClearMarker}
-        organizationId={organizationId}
-        isCreateClip={isCreateClip}
-        handlePreview={handlePreview}
-      />
-    </Card>
-  );
+  return {
+    form,
+    isCreateClip,
+    handleCreateClip,
+    handleClearMarker,
+    handlePreview,
+  };
 };
-
-export default CreateClipButton;

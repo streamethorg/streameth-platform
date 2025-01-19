@@ -43,6 +43,8 @@ export class ClipEditorService extends SessionService {
       (e) => e.label === 'main',
     );
 
+    console.log('data', data);
+
     data.editorOptions.events.map((e) => {
       console.log('e', e);
     });

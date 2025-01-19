@@ -398,7 +398,7 @@ const processClip = async (data: IClip) => {
                   await Session.findByIdAndUpdate(sessionId, {
                     $set: {
                       assetId,
-                      processingStatus: ProcessingStatus.completed,
+                      processingStatus: ProcessingStatus.pending,
                     },
                   });
                   console.log('✅ Session updated with asset ID');

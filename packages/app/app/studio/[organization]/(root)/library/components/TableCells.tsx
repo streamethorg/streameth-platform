@@ -24,7 +24,7 @@ const TableCells = ({
   item: IExtendedSession;
   organization: string;
 }) => {
-  const isPending = item.processingStatus === ProcessingStatus.pending;
+  const isPending = item.processingStatus === ProcessingStatus.pending || item.processingStatus === ProcessingStatus.rendering;
   const isFailed = item.processingStatus === ProcessingStatus.failed;
 
   const getStatusClassName = () => {
@@ -104,14 +104,14 @@ const TableCells = ({
         </div>
       </TableCell>
       <TableCell className={`${rowBackgroundClass} w-[220px]`}>
-        <div className="flex justify-end items-center gap-2">
+        <div className="flex justify-between items-center gap-2">
           {!isDisabled && (
             <Link
               href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
             >
               <FeatureButton
                 organizationId={organization}
-                variant="ghost"
+                variant="outlinePrimary"
                 size="sm"
                 className="flex items-center gap-2 h-8"
               >

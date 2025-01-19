@@ -10,9 +10,9 @@ import UploadVideoDialog from '@/app/studio/[organization]/(root)/library/compon
 import LogoDark from '@/public/logo_dark.png';
 import FeatureButton from '../ui/feature-button';
 import { Radio, FileUp } from 'lucide-react';
+import { isFeatureAvailable } from '@/lib/utils/utils';
+
 const NavbarStudio = ({
-  logo,
-  showLogo = true,
   showSearchBar = true,
   organizations,
   currentOrganization,
@@ -49,20 +49,21 @@ const NavbarStudio = ({
         />
       </div>
       <div className="flex items-center justify-end space-x-2">
-        {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
+        {isFeatureAvailable(organization.expirationDate) ? (
           <CreateLivestreamModal
+            variant="outline"
             organization={organization}
           />
         ): (
-          <FeatureButton organizationId={organization._id.toString()} variant="primary" className="flex items-center gap-2">
+          <FeatureButton organizationId={organization._id.toString()} variant="outline" className="flex items-center gap-2">
             <Radio className="w-5 h-5" />
             Create Livestream
           </FeatureButton>
         )}
-        {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
+        {isFeatureAvailable(organization.expirationDate) ? (
           <UploadVideoDialog organizationId={organization._id.toString()} />
         ): (
-          <FeatureButton organizationId={organization._id.toString()} variant="ghost" className="flex items-center gap-2">
+          <FeatureButton organizationId={organization._id.toString()} variant="outline" className="flex items-center gap-2">
             <FileUp className="w-5 h-5" />
             Upload Video
           </FeatureButton>

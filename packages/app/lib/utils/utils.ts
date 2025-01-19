@@ -20,6 +20,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const isFeatureAvailable = (expirationDate: Date | null | undefined) => {
+  return expirationDate && new Date(expirationDate).getTime() > new Date().getTime();
+};
+
 export const selectOptionFocusHandle = (
   event: React.KeyboardEvent<HTMLDivElement>,
   optionClickCallback: () => void,

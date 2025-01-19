@@ -30,7 +30,7 @@ const UserProfile = async ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center space-x-2">
+        <Button variant="ghost" className="flex items-center space-x-2">
           <Image
             src={data?.logo}
             alt="Organization Logo"

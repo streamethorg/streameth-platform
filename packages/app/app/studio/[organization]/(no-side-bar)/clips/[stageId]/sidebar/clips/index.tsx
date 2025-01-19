@@ -1,6 +1,5 @@
 'use client';
-import React, { useMemo, useState, useEffect } from 'react';
-import { IExtendedSession } from '@/lib/types';
+import React from 'react';
 import {
   Select,
   SelectTrigger,
@@ -12,57 +11,18 @@ import {
 import { CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Clip from './Clip';
-import { fetchAllSessions } from '@/lib/services/sessionService';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { useClipContext } from '../../ClipContext';
+import { useClipsSidebar } from './ClipsContext';
 
 const SessionSidebar = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [sessions, setSessions] = useState<IExtendedSession[]>([]);
-  const { stageId } = useClipContext();
-  useEffect(() => {
-    const fetchSessions = async () => {
-      const sessions = await fetchAllSessions({
-        stageId,
-        type: SessionType.clip,
-      });
-      setSessions(sessions.sessions);
-      setIsLoading(false);
-    };
-    fetchSessions();
-  }, []);
-  const [filteredSessions, setFilteredSessions] =
-    useState<IExtendedSession[]>(sessions);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Find unique dates among sessions
-  const uniqueDates = useMemo(() => {
-    const dates = Array.from(
-      new Set(
-        sessions?.map((session) =>
-          new Date(session.createdAt as string).toDateString()
-        )
-      )
-    ).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
-    return ['All dates', ...dates];
-  }, [sessions]);
-
-  const [selectedDate, setSelectedDate] = useState(uniqueDates[0]);
-
-  useEffect(() => {
-    const filtered = sessions.filter((session) => {
-      const dateMatches =
-        selectedDate === 'All dates' ||
-        new Date(session.createdAt as string).toDateString() === selectedDate;
-      const searchMatches = session.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      return dateMatches && searchMatches;
-    });
-    setFilteredSessions(filtered);
-  }, [sessions, selectedDate, searchTerm]);
-
-  if (isLoading) return <div>Loading...</div>;
+  const {
+    sessions,
+    filteredSessions,
+    searchTerm,
+    setSearchTerm,
+    selectedDate,
+    setSelectedDate,
+    uniqueDates,
+  } = useClipsSidebar();
 
   return (
     <div className="h-full w-full flex flex-col">

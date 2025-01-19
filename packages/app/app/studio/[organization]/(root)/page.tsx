@@ -14,6 +14,8 @@ import Link from 'next/link';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import FeatureButton from '@/components/ui/feature-button';
 import { Radio } from 'lucide-react';
+import { isFeatureAvailable } from '@/lib/utils/utils';
+
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -33,35 +35,40 @@ const OrganizationPage = async ({
       <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center gap-4 p-4">
-        {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
-          <CreateLivestreamModal
-            show={searchParams?.show}
-            organization={organization}
-          />
-        ): (
-          <FeatureButton organizationId={organization._id.toString()} variant="primary" className="flex items-center gap-2">
-            <Radio className="w-5 h-5" />
-            Create Livestream
-          </FeatureButton>
-        )}
+          {isFeatureAvailable(organization.expirationDate) ? (
+            <CreateLivestreamModal
+              variant="primary"
+              show={searchParams?.show}
+              organization={organization}
+            />
+          ) : (
+            <FeatureButton
+              organizationId={organization._id.toString()}
+              variant="primary"
+              className="flex items-center gap-2"
+            >
+              <Radio className="w-5 h-5" />
+              Create Livestream
+            </FeatureButton>
+          )}
 
-
-{organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? ( 
-          <UploadVideoDialog organizationId={organization._id.toString()} />
-        ): (
-          <FeatureButton organizationId={organization._id.toString()} variant="ghost" className="flex items-center gap-2">
-            <FileUp className="w-5 h-5" />
-            Upload Video
-          </FeatureButton>
-        )}
-          {organization.expirationDate && new Date(organization.expirationDate).getTime() > new Date().getTime() ? (
+          {isFeatureAvailable(organization.expirationDate) ? (
+            <UploadVideoDialog organizationId={organization._id.toString()} />
+          ) : (
+            <FeatureButton
+              organizationId={organization._id.toString()}
+              variant="ghost"
+              className="flex items-center gap-2"
+            >
+              <FileUp className="w-5 h-5" />
+              Upload Video
+            </FeatureButton>
+          )}
+          {isFeatureAvailable(organization.expirationDate) ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >
-              <Button
-                variant="ghost"
-                className="flex items-center gap-2 h-10"
-              >
+              <Button variant="outline" className="flex items-center gap-2 h-10">
                 <ScissorsLineDashed className="w-5 h-5" />
                 <span>Clip Content</span>
               </Button>
@@ -69,7 +76,7 @@ const OrganizationPage = async ({
           ) : (
             <FeatureButton
               organizationId={organization._id.toString()}
-              variant="ghost"
+              variant="outline"
               className="flex items-center gap-2 h-10"
             >
               <ScissorsLineDashed className="w-5 h-5" />

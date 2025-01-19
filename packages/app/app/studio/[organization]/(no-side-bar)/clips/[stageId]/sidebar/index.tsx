@@ -3,11 +3,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markers from './markers/index';
 import SessionSidebar from './clips';
 import { useClipContext } from '../ClipContext';
-import CreateClipButton from '../topBar/CreateClipButton';
 import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
 import ImportMarkersForm from './markers/ImportMarkersForm';
 import Transcripts from './Transcipts';
 import { useMarkersContext } from './markers/markersContext';
+import CreateClipForm from './clips/CreateClipForm';
 
 export default function Sidebar({
   words,
@@ -26,7 +26,7 @@ export default function Sidebar({
   const overlayComponents = [
     {
       condition: isCreatingClip,
-      Component: CreateClipButton,
+      Component: CreateClipForm,
     },
     {
       condition: isAddingOrEditingMarker,
