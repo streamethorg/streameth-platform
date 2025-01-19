@@ -101,7 +101,7 @@ const CreateClipForm = () => {
                   <Combobox
                     items={[
                       ...markers.map((marker) => ({
-                        label: marker.name,
+                        label: marker.name.length > 20 ? `${marker.name.substring(0, 20)}...` : marker.name,
                         value: marker._id,
                       })),
                     ]}
