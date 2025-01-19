@@ -194,7 +194,7 @@ export const getAsset = async (assetId: string): Promise<Asset> => {
     });
     const data = await response.json();
     if (!data) {
-      return '';
+      return null;
     }
     return data;
   } catch (e) {
@@ -219,7 +219,7 @@ export const uploadToIpfs = async (assetId: string) => {
     await response.json();
     await sleep(20000);
     const asset = await getAsset(assetId);
-    return asset.storage.ipfs.cid;
+    return asset.storage.ipfs.nftMetadata?.cid;
   } catch (e) {
     console.error(`Error updating asset:`, e);
   }
