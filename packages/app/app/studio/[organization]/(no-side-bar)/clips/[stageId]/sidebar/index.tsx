@@ -10,10 +10,10 @@ import { useMarkersContext } from './markers/markersContext';
 import CreateClipForm from './clips/CreateClipForm';
 
 export default function Sidebar({
-  words,
+  transcribe,
   sessionId,
 }: {
-  words?: {
+  transcribe?: {
     start: number;
     end: number;
     word: string;
@@ -55,7 +55,9 @@ export default function Sidebar({
         <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
           <TabsTrigger value="markers">Markers</TabsTrigger>
           <TabsTrigger value="clips">Clips</TabsTrigger>
-          {words && <TabsTrigger value="words">Words</TabsTrigger>}
+          {transcribe && (
+            <TabsTrigger value="transcribe">Transcribe</TabsTrigger>
+          )}
         </TabsList>
         <TabsContent value="markers" className="flex-grow overflow-hidden">
           <Markers sessionId={sessionId || ''} />
@@ -63,12 +65,12 @@ export default function Sidebar({
         <TabsContent value="clips" className="flex-grow overflow-hidden">
           <SessionSidebar />
         </TabsContent>
-        {words && (
+        {transcribe && (
           <TabsContent
-            value="words"
+            value="transcribe"
             className="flex-grow overflow-hidden h-full p-4"
           >
-            <Transcripts words={words} />
+            <Transcripts transcribe={transcribe} />
           </TabsContent>
         )}
       </Tabs>

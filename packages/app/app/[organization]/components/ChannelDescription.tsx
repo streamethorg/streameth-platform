@@ -24,7 +24,9 @@ const ChannelDescription = ({ description }: { description?: string }) => {
     <div className="hidden w-4/5 md:block overflow-hidden">
       <div
         ref={contentRef}
-        className={!isExpanded ? 'line-clamp-2 break-words' : 'line-clamp-4'}
+        className={
+          !isExpanded ? 'line-clamp-2 break-transcribe' : 'line-clamp-4'
+        }
       >
         {' '}
         {description}

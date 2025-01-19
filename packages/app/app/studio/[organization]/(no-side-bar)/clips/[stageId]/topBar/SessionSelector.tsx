@@ -43,9 +43,9 @@ const SessionSelector = ({
         />
       </div>
       <Link href={`/studio/${organization}/library?clipable=true`}>
-        <Button variant="ghost" className="mb-2 px-2">
+        <Button variant="secondary" className="mb-2 px-2">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to library
+          Exit
         </Button>
       </Link>
     </div>

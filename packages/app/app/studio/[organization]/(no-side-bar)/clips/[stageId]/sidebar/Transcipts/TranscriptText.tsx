@@ -2,9 +2,9 @@ import { useClipContext } from '../../ClipContext';
 import { useEffect, useRef } from 'react';
 
 const TranscriptText = ({
-  words,
+  transcribe,
 }: {
-  words: { word: string; start: number; end: number }[];
+  transcribe: { word: string; start: number; end: number }[];
 }) => {
   // Add ref for the container
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,9 +20,19 @@ const TranscriptText = ({
 
   const { currentTime, videoRef } = useClipContext();
 
+  // Define time window (30 minutes before and after current time)
+  const TIME_WINDOW = 30 * 60; // 30 minutes in seconds
+
+  // Filter words to only show those within the time window
+  const visibleWords = transcribe.filter(
+    (word) =>
+      word.start >= currentTime - TIME_WINDOW &&
+      word.end <= currentTime + TIME_WINDOW
+  );
+
   useEffect(() => {
     const handleTimeUpdate = () => {
-      const activeWord = words.find((word) =>
+      const activeWord = visibleWords.find((word) =>
         isWordActive(word, videoRef.current?.currentTime || 0)
       );
 
@@ -44,21 +54,15 @@ const TranscriptText = ({
       }
     };
 
-    const video = videoRef.current;
-    video?.addEventListener('timeupdate', handleTimeUpdate);
-
-    // Cleanup function
-    return () => {
-      video?.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, [words]); // Remove currentTime from dependencies since we get it from videoRef
+    videoRef.current?.addEventListener('timeupdate', handleTimeUpdate);
+  }, [currentTime]); // Remove currentTime from dependencies since we get it from videoRef
 
   return (
     <div
       ref={containerRef}
       className="whitespace-pre-wrap p-4 leading-loose h-full overflow-y-scroll"
     >
-      {words?.map((word, index) => (
+      {visibleWords.map((word, index) => (
         <span
           key={`${word.word}-${index}`}
           id={`word-${word.start}`}

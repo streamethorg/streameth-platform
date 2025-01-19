@@ -28,7 +28,7 @@ const fetchVideoDetails = async (
         videoSrc: `https://livepeercdn.studio/hls/${liveStage.streamSettings?.playbackId}/index.m3u8`,
         type: 'livepeer',
         name: liveStage.name,
-        words: liveStage.transcripts?.chunks,
+        transcribe: liveStage.transcripts?.chunks,
       };
     }
 
@@ -43,7 +43,7 @@ const fetchVideoDetails = async (
         videoSrc,
         type: 'livepeer',
         name: session.name,
-        words: session.transcripts?.chunks,
+        transcribe: session.transcripts?.chunks,
       };
     }
 
@@ -55,7 +55,7 @@ const fetchVideoDetails = async (
         videoSrc: stage.source.m3u8Url,
         type: stage.source.type,
         name: stage.name,
-        words: stage.transcripts?.chunks,
+        transcribe: stage.transcripts?.chunks,
       };
     }
 
@@ -111,7 +111,10 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
               </div>
             </div>
             <div className="flex w-[400px] h-full">
-              <Sidebar words={videoDetails.words} sessionId={sessionId} />
+              <Sidebar
+                transcribe={videoDetails.transcribe}
+                sessionId={sessionId}
+              />
             </div>
           </div>
         </ClipsSidebarProvider>

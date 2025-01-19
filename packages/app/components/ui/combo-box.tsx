@@ -60,7 +60,7 @@ export default function Combobox({
     <Popover modal={true} open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          className="w-full"
+          className=""
           variant={'outline'}
           role="combobox"
           aria-expanded={open}

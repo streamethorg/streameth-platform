@@ -12,6 +12,7 @@ import { CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Clip from './Clip';
 import { useClipsSidebar } from './ClipsContext';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const SessionSidebar = () => {
   const {
@@ -22,6 +23,7 @@ const SessionSidebar = () => {
     selectedDate,
     setSelectedDate,
     uniqueDates,
+    isLoading,
   } = useClipsSidebar();
 
   return (
@@ -57,7 +59,15 @@ const SessionSidebar = () => {
         </div>
       </CardTitle>
       <div className="flex-grow overflow-y-auto pb-4">
-        {filteredSessions.length > 0 ? (
+        {isLoading ? (
+          <div className="flex flex-col h-full">
+            {[...Array(10)].map((_, index) => (
+              <div key={index} className="w-full px-4 py-2">
+                <Skeleton className="h-32 w-full " />
+              </div>
+            ))}
+          </div>
+        ) : filteredSessions.length > 0 ? (
           filteredSessions.map((session) => (
             <div key={session._id} className="w-full px-4 py-2">
               <Clip session={session} />

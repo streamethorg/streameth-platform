@@ -2,13 +2,13 @@
 import TranscriptText from './TranscriptText';
 
 const Transcripts = ({
-  words,
+  transcribe,
 }: {
-  words: { word: string; start: number; end: number }[];
+  transcribe: { word: string; start: number; end: number }[];
 }) => {
   return (
     <div className="flex flex-col h-full overflow-y-scroll">
-      <TranscriptText words={words} />
+      <TranscriptText transcribe={transcribe} />
     </div>
   );
 };
