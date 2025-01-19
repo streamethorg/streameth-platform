@@ -150,7 +150,7 @@ const CreateLivestreamModal = ({
     >
       <DialogTrigger asChild>
         <Button 
-          variant="primary"
+          variant={variant}
           className="flex items-center gap-2"
           onClick={handleClick}
         >

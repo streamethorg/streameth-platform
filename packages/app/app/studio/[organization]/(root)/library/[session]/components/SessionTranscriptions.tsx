@@ -29,7 +29,6 @@ const SessionTranscriptions = ({
       sessionId,
     })
       .then((response) => {
-        console.log('response', response);
         if (response) {
           toast.success('Transcription request sent successfully');
         } else {
@@ -44,21 +43,21 @@ const SessionTranscriptions = ({
       });
   };
 
-  // if (transcriptionState === TranscriptionStatus.processing) {
-  //   return (
-  //     <div className="flex items-center">
-  //       <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
-  //       transcription...{' '}
-  //       <p
-  //         className="pl-2 cursor-pointer"
-  //         title="refresh"
-  //         onClick={() => router.refresh()}
-  //       >
-  //         <LuRefreshCcw />
-  //       </p>
-  //     </div>
-  //   );
-  // }
+  if (transcriptionState === TranscriptionStatus.processing) {
+    return (
+      <div className="flex items-center">
+        <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
+        transcription...{' '}
+        <p
+          className="pl-2 cursor-pointer"
+          title="refresh"
+          onClick={() => router.refresh()}
+        >
+          <LuRefreshCcw />
+        </p>
+      </div>
+    );
+  }
 
   if (
     transcriptionState === TranscriptionStatus.completed &&

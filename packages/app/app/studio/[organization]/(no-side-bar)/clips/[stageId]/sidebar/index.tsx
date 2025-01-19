@@ -3,38 +3,30 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markers from './markers/index';
 import SessionSidebar from './clips';
 import { useClipContext } from '../ClipContext';
-import CreateClipButton from '../topBar/CreateClipButton';
 import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
-import { IExtendedSession } from '@/lib/types';
 import ImportMarkersForm from './markers/ImportMarkersForm';
 import Transcripts from './Transcipts';
+import { useMarkersContext } from './markers/markersContext';
+import CreateClipForm from './clips/CreateClipForm';
 
 export default function Sidebar({
-  organizationId,
-  stageSessions,
-  liveRecordingId,
-  animations,
-  words,
+  transcribe,
+  sessionId,
 }: {
-  organizationId: string;
-  stageSessions: IExtendedSession[];
-  liveRecordingId?: string;
-  animations: IExtendedSession[];
-  words?: {
-    word: string;
+  transcribe?: {
     start: number;
     end: number;
+    word: string;
   }[];
+  sessionId?: string;
 }) {
-  const { isCreatingClip, isAddingOrEditingMarker, isImportingMarkers } =
-    useClipContext();
+  const { isCreatingClip } = useClipContext();
+  const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
 
   const overlayComponents = [
     {
       condition: isCreatingClip,
-      Component: CreateClipButton,
-      usesLiveRecordingId: true,
-      animations: animations,
+      Component: CreateClipForm,
     },
     {
       condition: isAddingOrEditingMarker,
@@ -49,17 +41,13 @@ export default function Sidebar({
   return (
     <div className="h-full w-full border-l bg-white relative flex flex-col">
       {overlayComponents.map(
-        ({ condition, Component, usesLiveRecordingId }) =>
+        ({ condition, Component }) =>
           condition && (
             <div
               key={Component.name}
               className="absolute inset-0 z-50 bg-white"
             >
-              <Component
-                organizationId={organizationId}
-                {...(usesLiveRecordingId ? { liveRecordingId } : {})}
-                animations={animations}
-              />
+              <Component />
             </div>
           )
       )}
@@ -67,17 +55,22 @@ export default function Sidebar({
         <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
           <TabsTrigger value="markers">Markers</TabsTrigger>
           <TabsTrigger value="clips">Clips</TabsTrigger>
-          {words && <TabsTrigger value="words">Words</TabsTrigger>}
+          {transcribe && (
+            <TabsTrigger value="transcribe">Transcribe</TabsTrigger>
+          )}
         </TabsList>
         <TabsContent value="markers" className="flex-grow overflow-hidden">
-          {<Markers organizationId={organizationId} />}
+          <Markers sessionId={sessionId || ''} />
         </TabsContent>
         <TabsContent value="clips" className="flex-grow overflow-hidden">
-          <SessionSidebar sessions={stageSessions} />
+          <SessionSidebar />
         </TabsContent>
-        {words && (
-          <TabsContent value="words" className="flex-grow overflow-auto p-4">
-            <Transcripts words={words} />
+        {transcribe && (
+          <TabsContent
+            value="transcribe"
+            className="flex-grow overflow-hidden h-full p-4"
+          >
+            <Transcripts transcribe={transcribe} />
           </TabsContent>
         )}
       </Tabs>

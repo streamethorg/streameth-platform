@@ -21,7 +21,10 @@ import { useDropzone, FileRejection } from 'react-dropzone';
 import { videoUploadAction } from '@/lib/actions/videoUpload';
 import { createSessionAction } from '@/lib/actions/sessions';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
-import { SessionType, eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
+import {
+  SessionType,
+  eVisibilty,
+} from 'streameth-new-server/src/interfaces/session.interface';
 
 function getVideoData(file: File) {
   const dataTransfer = new DataTransfer();
@@ -85,7 +88,7 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
       className,
       options: {
         placeholder = 'Click to upload video',
-        maxSize = 15000000, // 15MB default
+        maxSize = 20000000, // 20MB default
       },
       onChange,
       value,
@@ -123,30 +126,33 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
           // Create session for animation if path includes 'animations'
           const organizationId = path.split('/')[1]; // Extract org ID from path
           try {
-             await createSessionAction({
+            await createSessionAction({
               session: {
-                  name: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
-                  description: 'Animation video',
-                  type: SessionType.animation,
-                  organizationId,
-                  videoUrl: videoUrl,
-                  start: Date.now(),
-                  end: Date.now(),
-                  speakers: [],
-                  track: [],
-                  published: eVisibilty.private,
-                  assetId: '',
-                  processingStatus: ProcessingStatus.completed,
-                },
-              });
-              console.log('✅ Animation session created with videoUrl:', videoUrl);
-              toast.success('Animation uploaded');
-            } catch (error) {
-              console.error('❌ Failed to create animation session:', error);
-              toast.error('Failed to create animation session');
-              // Continue even if session creation fails, as we still have the video URL
-            }
-          
+                name: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
+                description: 'Animation video',
+                type: SessionType.animation,
+                organizationId,
+                videoUrl: videoUrl,
+                start: Date.now(),
+                end: Date.now(),
+                speakers: [],
+                track: [],
+                published: eVisibilty.private,
+                assetId: '',
+                processingStatus: ProcessingStatus.completed,
+              },
+            });
+            console.log(
+              '✅ Animation session created with videoUrl:',
+              videoUrl
+            );
+            toast.success('Animation uploaded');
+          } catch (error) {
+            console.error('❌ Failed to create animation session:', error);
+            toast.error('Failed to create animation session');
+            // Continue even if session creation fails, as we still have the video URL
+          }
+
           return videoUrl;
         } catch (e) {
           console.error('❌ Animation upload failed:', e);
@@ -164,7 +170,9 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
         const { code, message } = fileRejections[0].errors[0];
         console.log('⚠️ Animation file rejected:', { code, message });
         if (code === 'file-too-large') {
-          setError(`Animation file is too large. Max size is ${maxSize / 1000000}MB.`);
+          setError(
+            `Animation file is too large. Max size is ${maxSize / 2000000}MB.` // 20MB
+          );
         } else {
           setError(message);
         }
@@ -191,7 +199,9 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
               target: { name: props.name, value: '' },
             } as React.ChangeEvent<HTMLInputElement>);
             setPreview('');
-            toast.error(error instanceof Error ? error.message : 'Upload failed');
+            toast.error(
+              error instanceof Error ? error.message : 'Upload failed'
+            );
           }
         }
       },

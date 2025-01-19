@@ -58,7 +58,6 @@ const Library = async ({
     clipable: searchParams.clipable,
   });
 
-  console.log('sessions', sessions);
   // We do not need to refilter sessions since we are fetching onlyVideos
   const sortedSessions = sortArray(
     sessions.sessions,

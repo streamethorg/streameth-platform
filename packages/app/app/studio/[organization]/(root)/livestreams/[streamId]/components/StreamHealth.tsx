@@ -33,6 +33,18 @@ const StreamHealth = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stream?.streamSettings?.isHealthy]);
 
+  if (!isLive) {
+    return (
+      <div className="flex items-center rounded-full bg-gray-300 p-2 py-1 pl-3 text-sm">
+        <span className="relative mr-2 flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75"></span>
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-gray-600"></span>
+        </span>
+        Offline
+      </div>
+    );
+  }
+
   return (
     isLive && (
       <>

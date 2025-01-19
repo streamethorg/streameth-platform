@@ -32,12 +32,13 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
+import { useMarkersContext } from './markersContext';
 
-const ImportMarkersForm = ({ organizationId }: { organizationId: string }) => {
-  const { stageId, setIsImportingMarkers, fetchAndSetMarkers } =
-    useClipContext();
+const ImportMarkersForm = () => {
+  const { stageId } = useClipContext();
   const [isImporting, setIsImporting] = useState(false);
-
+  const { setIsImportingMarkers, fetchAndSetMarkers, organizationId } =
+    useMarkersContext();
   const form = useForm<z.infer<typeof markersImportSchema>>({
     resolver: zodResolver(markersImportSchema),
     defaultValues: {

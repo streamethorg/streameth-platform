@@ -27,7 +27,7 @@ const Layout = async ({
         organizations={userData?.organizations}
       />
       <div className=" flex-row top-[72px] flex h-[calc(100vh-72px)]">
-        <div className="w-full max-w-[calc(100%)] h-full  flex-col overflow-hidden border-t ">
+        <div className="w-full max-w-full h-full  flex-col border-t overflow-hidden">
           {!hasOrganization(userData?.organizations, params.organization) ? (
             <div className="mx-auto flex h-screen w-4/5 flex-col items-center justify-center text-center">
               Organization not found or You do not belong to this organization,

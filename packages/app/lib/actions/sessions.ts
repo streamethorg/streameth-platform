@@ -33,7 +33,7 @@ export const updateAssetAction = async (session: IExtendedSession) => {
         ipfs: true,
       },
     },
-    session.assetId as string,
+    session.assetId as string
   );
   await updateSessionAction({
     session: {
@@ -249,7 +249,6 @@ export const saveSessionImportAction = async ({
   try {
     const res = await saveSessionImport({
       scheduleId,
-
       organizationId,
     });
     revalidatePath('/studio');
@@ -282,12 +281,15 @@ export const generateTranscriptionActions = async ({
   }
 };
 
-
 export const extractHighlightsAction = async ({
+  stageId,
   sessionId,
+  prompt,
 }: {
+  stageId: string;
   sessionId: string;
+  prompt: string;
 }) => {
-  const res = await extractHighlights({ sessionId });
+  const res = await extractHighlights({ stageId, sessionId, prompt });
   return res;
 };

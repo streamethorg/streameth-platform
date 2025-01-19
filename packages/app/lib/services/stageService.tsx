@@ -10,9 +10,7 @@ export async function fetchStage({
   stage: string;
 }): Promise<IExtendedStage | null> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/${stage}`, {
-      cache: 'no-cache',
-    });
+    const response = await fetch(`${apiUrl()}/stages/${stage}`);
     const data = (await response.json()).data;
     if (!data) {
       return null;
@@ -31,10 +29,7 @@ export async function fetchStages({
 }): Promise<IExtendedStage[]> {
   try {
     const stages = await fetchClient(
-      `${apiUrl()}/stages/organization/${organizationId}`,
-      {
-        cache: 'no-cache',
-      }
+      `${apiUrl()}/stages/organization/${organizationId}`
     );
     const data = (await stages.json()).data;
     return data.map((stage: IStage) => stage);
@@ -219,11 +214,9 @@ export async function fetchStageRecordings({
   streamId,
 }: {
   streamId: string;
-}): Promise<{ parentStream: Stream; recordings: Session[] } | null> {
+}): Promise<Session[] | null> {
   try {
-    const response = await fetch(`${apiUrl()}/streams/recording/${streamId}`, {
-      cache: 'no-cache',
-    });
+    const response = await fetch(`${apiUrl()}/streams/recording/${streamId}`);
     const data = (await response.json()).data;
 
     if (!data) {

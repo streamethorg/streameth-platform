@@ -53,6 +53,7 @@ x-common-environment: &common-environment
   REDIS_HOST: redis
   REDIS_PORT: 6379
   OPENAI_API_KEY_FILE: /run/secrets/openai-api-key
+  GEMINI_API_KEY_FILE: /run/secrets/gemini-api-key
   AWS_ACCESS_KEY_ID: /run/secrets/aws-access-key
   AWS_SECRET_ACCESS_KEY: /run/secrets/aws-secret-key
   STRIPE_SECRET_KEY_FILE: /run/secrets/prod-stripe-secret-key
@@ -93,7 +94,7 @@ x-common-secrets: &common-secrets
   - aws-secret-key
   - prod-stripe-secret-key
   - prod-stripe-publishable-key
-
+  - gemini-api-key
 services:
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:prod
@@ -313,4 +314,6 @@ secrets:
   prod-stripe-secret-key:
     external: true
   prod-stripe-publishable-key:
+    external: true
+  gemini-api-key:
     external: true

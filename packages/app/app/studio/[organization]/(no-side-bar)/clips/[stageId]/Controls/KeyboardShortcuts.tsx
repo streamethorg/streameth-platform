@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useClipContext } from '../ClipContext';
 import { toast } from 'sonner';
+import { useMarkersContext } from '../sidebar/markers/markersContext';
 
 const KeyboardShortcuts = ({
   setPlaybackRate,
@@ -32,11 +33,12 @@ const KeyboardShortcuts = ({
     endTime,
     setCurrentTime,
     timelineContainerWidth,
-    isAddingOrEditingMarker,
     isCreatingClip,
     timeReference,
     convertSecondsToUnix,
   } = useClipContext();
+  const { isAddingOrEditingMarker } = useMarkersContext();
+
   const isCreatingClipOrMarker = isCreatingClip || isAddingOrEditingMarker;
   const maxLength = videoRef.current?.duration || 0;
 

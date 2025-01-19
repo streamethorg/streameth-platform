@@ -37,7 +37,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
         <h1 className="text-lg font-bold mb-4">Video Details</h1>
         <div className="mb-4">
           <Link href={`/studio/${params.organization}/library`}>
-            <Button variant="ghost" className="mb-2 px-2">
+            <Button variant="secondary" className="mb-2 px-2">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to homepage
             </Button>

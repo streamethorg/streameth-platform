@@ -31,7 +31,6 @@ export async function GET(request: NextRequest) {
 
     const streamEnabled = await isStreamingEnabled(tokenDetails.access_token);
     if (redirectUrl.includes('speaker/') && tokenDetails.channelId) {
-      console.log('tokenDetails', tokenDetails);
       // store data to local storage
       cookies().set(
         'youtube_publish',

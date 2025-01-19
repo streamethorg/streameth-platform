@@ -115,7 +115,7 @@ export default function PaymentsPage() {
     // If subscription has expired, show purchase options
     if (daysLeft <= 0) {
       return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 ">
 
           {/* Purchase options */}
           <div className="text-center mb-12">
@@ -129,7 +129,7 @@ export default function PaymentsPage() {
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className="border rounded-lg p-8 hover:shadow-lg transition-shadow flex flex-col"
+                className="border rounded-lg p-8 hover:shadow-lg transition-shadow flex flex-col bg-white"
               >
                 <div className="flex-1">
                   <h2 className="text-2xl font-bold mb-4">{tier.name}</h2>
@@ -284,7 +284,7 @@ export default function PaymentsPage() {
         {tiers.map((tier) => (
           <div
             key={tier.name}
-            className="border rounded-lg p-8 hover:shadow-lg transition-shadow flex flex-col"
+            className="border rounded-lg p-8 hover:shadow-lg transition-shadow flex flex-col bg-white"
           >
             <div className="flex-1">
               <h2 className="text-2xl font-bold mb-4">{tier.name}</h2>

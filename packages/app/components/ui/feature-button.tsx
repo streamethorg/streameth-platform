@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 interface FeatureButtonProps {
   children: ReactNode;
   organizationId: string;
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'primary' | 'destructive-outline';
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'primary' | 'destructive-outline' | 'outlinePrimary';
   className?: string;
   onClick?: () => void;
   disabled?: boolean;

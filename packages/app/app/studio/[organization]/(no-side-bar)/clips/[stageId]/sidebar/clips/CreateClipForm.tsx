@@ -19,60 +19,58 @@ import {
   LuSmartphone,
   LuSubtitles,
   LuEye,
-  LuPalette,
+
 } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-import { UseFormReturn } from 'react-hook-form';
-import { z } from 'zod';
-import { clipSchema } from '@/lib/schema';
 import { formatClipTime } from '@/lib/utils/time';
-import { useClipContext } from '../ClipContext';
+import { useClipContext } from '../../ClipContext';
 import { IExtendedSession } from '@/lib/types';
-import SelectAnimation from './SelectAnimation';
+import SelectAnimation from '../../topBar/SelectAnimation';
 import Combobox from '@/components/ui/combo-box';
+import { useMarkersContext } from '../markers/markersContext';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import { fetchAllSessions } from '@/lib/services/sessionService';
+import { useCreateClip } from '@/lib/hooks/useCreateClip';
+import useClickOutside from '@/lib/hooks/useClickOutside';
+const CreateClipForm = () => {
+  const {
+    handleCreateClip,
+    form,
+    isCreateClip,
+    handleClearMarker,
+    handlePreview,
+  } = useCreateClip();
 
-const CreateClipForm = ({
-  form,
-  handleCreateClip,
-  handleClearMarker,
-  organizationId,
-  isCreateClip,
-  handlePreview,
-  animations,
-}: {
-  form: UseFormReturn<z.infer<typeof clipSchema>>;
-  handleCreateClip: (values: z.infer<typeof clipSchema>) => void;
-  handleClearMarker: () => void;
-  organizationId: string;
-  isCreateClip: boolean;
-  handlePreview: () => void;
-  animations: IExtendedSession[];
-}) => {
   const {
     isLoading,
-    markers,
     setIsCreatingClip,
     startTime,
     endTime,
-    selectedMarkerId,
-    setSelectedMarkerId,
+    stageId,
+    organizationId,
   } = useClipContext();
+
+  const { markers, selectedMarkerId, setSelectedMarkerId } =
+    useMarkersContext();
+
+
+  const [animations, setAnimations] = useState<IExtendedSession[]>([]);
+
+  useEffect(() => {
+    const fetchAnimations = async () => {
+      const animations = await fetchAllSessions({
+        stageId,
+        type: SessionType.animation,
+      });
+      setAnimations(animations.sessions);
+    };
+    fetchAnimations();
+  }, [stageId]);
 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const colorPickerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (colorPickerRef.current && !colorPickerRef.current.contains(event.target as Node)) {
-        setShowColorPicker(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useClickOutside(colorPickerRef, () => setShowColorPicker(false));
 
   const colorPresets = [
     '#6C757D',
@@ -96,14 +94,14 @@ const CreateClipForm = ({
           {/* Marker Selection */}
           {markers && markers.length > 0 && (
             <>
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-col w-full justify-between gap-2">
                 <FormLabel className="w-full">Select Marker</FormLabel>
 
-                <div className="w-full max-w-[200px]">
+                <div className=" flex flex-row gap-2 w-2/3">
                   <Combobox
                     items={[
                       ...markers.map((marker) => ({
-                        label: marker.name,
+                        label: marker.name.length > 20 ? `${marker.name.substring(0, 20)}...` : marker.name,
                         value: marker._id,
                       })),
                     ]}
@@ -111,16 +109,16 @@ const CreateClipForm = ({
                     value={selectedMarkerId}
                     setValue={(value) => setSelectedMarkerId(value)}
                   />
+                  <Button
+                    variant={'outline'}
+                    onClick={handleClearMarker}
+                    type="button"
+                    className="w-1/3"
+                  >
+                    <LuRotateCcw size={16} />
+                    {/* Clear */}
+                  </Button>
                 </div>
-
-                <Button
-                  variant={'outline'}
-                  onClick={handleClearMarker}
-                  type="button"
-                >
-                  <LuRotateCcw size={16} />
-                  {/* Clear */}
-                </Button>
               </div>
             </>
           )}
@@ -131,7 +129,7 @@ const CreateClipForm = ({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-col gap-2 ">
                   <FormLabel>Name:</FormLabel>
                   <FormControl>
                     <Input
@@ -213,9 +211,11 @@ const CreateClipForm = ({
                               <LuSubtitles size={20} />
                             </button>
                             {field.value && form.watch('captionColor') && (
-                              <div 
+                              <div
                                 className="w-4 h-4 rounded-md border border-gray-200"
-                                style={{ backgroundColor: form.watch('captionColor') }}
+                                style={{
+                                  backgroundColor: form.watch('captionColor'),
+                                }}
                               />
                             )}
                           </div>
@@ -224,7 +224,7 @@ const CreateClipForm = ({
                       </FormControl>
                     </div>
                     {field.value && showColorPicker && (
-                      <div 
+                      <div
                         ref={colorPickerRef}
                         className="absolute mt-2 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-10"
                       >

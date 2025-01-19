@@ -60,10 +60,10 @@ export default function Combobox({
     <Popover modal={true} open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          className=""
           variant={'outline'}
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
           disabled={disabled}
         >
           {logo && renderLogo(orgLogo)}

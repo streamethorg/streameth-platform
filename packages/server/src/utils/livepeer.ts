@@ -11,6 +11,7 @@ import { refreshAccessToken } from './oauth';
 import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 import { IStreamSettings } from '@interfaces/stage.interface';
+import { Asset, Session } from 'livepeer/models/components';
 
 // Define the youtube-dl output type since this is specific to the youtube-dl library
 interface YoutubeDLOutput {
@@ -182,7 +183,7 @@ export const getDownloadUrl = async (assetId: string): Promise<string> => {
   }
 };
 
-export const getAsset = async (assetId: string) => {
+export const getAsset = async (assetId: string): Promise<Asset> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'get',
@@ -193,7 +194,7 @@ export const getAsset = async (assetId: string) => {
     });
     const data = await response.json();
     if (!data) {
-      return '';
+      return null;
     }
     return data;
   } catch (e) {
@@ -218,7 +219,7 @@ export const uploadToIpfs = async (assetId: string) => {
     await response.json();
     await sleep(20000);
     const asset = await getAsset(assetId);
-    return asset.storage.ipfs.cid;
+    return asset.storage.ipfs.nftMetadata?.cid;
   } catch (e) {
     console.error(`Error updating asset:`, e);
   }
@@ -255,7 +256,14 @@ export const getVideoPhaseAction = async (
 export const getStreamRecordings = async (streamId: string): Promise<LivepeerRecording[]> => {
   try {
     const parentStream = await getStreamInfo(streamId);
-    const response = await livepeer.session.getRecorded(parentStream?.streamId ?? '');
+    // @ts-ignore
+    if (!parentStream.id) {
+      return [];
+    }
+    // TODO: wrong types provided by livepeer
+    // @ts-ignore
+    const response = await livepeer.session.getRecorded(parentStream.id);
+    console.log('response', response);
     const recordings = response.data;
     if (!recordings) {
       return [];
@@ -478,3 +486,5 @@ export const buildPlaybackUrl = (playbackId: string, vod?: boolean): string => {
   }
   return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`;
 };
+
+

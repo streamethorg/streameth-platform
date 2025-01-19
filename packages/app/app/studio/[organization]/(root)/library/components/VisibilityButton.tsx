@@ -2,7 +2,7 @@
 
 import { IExtendedSession } from '@/lib/types';
 import { updateSessionAction } from '@/lib/actions/sessions';
-import { Globe, Lock, Loader2, Binoculars, EyeClosed } from 'lucide-react';
+import { Globe, Lock, Loader2, Binoculars, ScanEye } from 'lucide-react';
 import { useState } from 'react';
 import {
   DropdownMenuPortal,
@@ -87,7 +87,7 @@ const VisibilityButton = ({ session }: { session: IExtendedSession }) => {
               className="flex items-center space-x-2 cursor-pointer"
               value={eVisibilty.unlisted}
             >
-              <EyeClosed className="w-4 h-4" />
+              <ScanEye className="w-4 h-4" />
               <span>Unlisted</span>
             </DropdownMenuRadioItem>
             <DropdownMenuRadioItem

@@ -24,6 +24,14 @@ import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
+import MarkerService from './marker.service';
+import { IMarker } from '@interfaces/marker.interface';
+
+interface AIHighlight {
+  start: number;
+  end: number;
+  title: string;
+}
 
 export default class SessionService {
   private path: string;
@@ -110,7 +118,9 @@ export default class SessionService {
     // Only exclude animations and editor clips if no specific type is requested
     if (d.type === undefined) {
       console.log('No type specified, excluding animations and editor clips');
-      filter = { type: { $nin: [SessionType.animation, SessionType.editorClip] } };
+      filter = {
+        type: { $nin: [SessionType.animation, SessionType.editorClip] },
+      };
     } else {
       console.log('Type specified:', d.type);
       filter = { type: d.type };
@@ -153,9 +163,9 @@ export default class SessionService {
       filter = {
         ...filter,
         $or: [
-          { playbackId: { $ne: '' } }, 
+          { playbackId: { $ne: '' } },
           { assetId: { $ne: '' } },
-          { type: SessionType.animation }
+          { type: SessionType.animation },
         ],
       };
     }
@@ -262,7 +272,6 @@ export default class SessionService {
       0,
       10,
     );
-    console.log(sessions);
     console.timeEnd('filterSessionsExecutionTime');
     return sessions;
   }
@@ -403,52 +412,115 @@ export default class SessionService {
     return query;
   }
 
-  async extractHighlights(sessionId: string) {
-    const session = await this.get(sessionId);
+  async extractHighlights(
+    stageId: string,
+    sessionId: string,
+    prompt?: string,
+  ): Promise<IMarker[]> {
 
+    const session = await this.get(sessionId);
     if (!session.transcripts) {
+      console.log('Session has no transcripts');
       throw new HttpException(400, 'Session has no transcripts');
     }
 
+    const markerService = new MarkerService();
+    const markers = await markerService.getAll({
+      organization: session.organizationId.toString(),
+      stageId: stageId,
+    });
     const chunks = session.transcripts.chunks;
-    const chunkSlices = [
-      chunks.slice(0, Math.floor(chunks.length / 3)),
-      chunks.slice(
-        Math.floor(chunks.length / 3),
-        Math.floor(chunks.length / 3) * 2,
-      ),
-      chunks.slice(Math.floor(chunks.length / 3) * 2, chunks.length),
-    ];
+    const transcript = session.transcripts.text;
+    console.log(transcript);
+    const chat = new ChatAPI();
+    const highlights = await chat.chat([
+      {
+        role: 'system',
+        content: `
 
-    for (let i = 0; i < 1; i++) {
-      const chat = new ChatAPI();
-      const highlights = await chat.chat([
-        {
-          role: 'system',
-          content: `
-          You are an expert video editor specializing in creating highlights optimized for social media platforms like TikTok, X, and Instagram.
-          Task: Extract segments from the transcript that are 30 to 120 seconds long and are the most engaging and impactful moments of the event that are related to ethereum technology.
-          Input: You will receive an array of words with timestamps from the English transcript.
-          Output: Return a JSON array of objects with the following structure:
-          {
-            "start": number,    // Timestamp when highlight begins
-            "end": number,      // Timestamp when highlight ends
-            "full_transcript": string  // Complete transcript of the highlighted segment
-          }
-start-ends should be 60 to 120 seconds long
-          Guidelines:
-          - Select engaging, impactful moments that will resonate on social media
-          - Each highlight should be 60-120 seconds long
-          - Focus on key technical insights, announcements, or memorable quotes
-          - Ensure the selected segments are self-contained and make sense standalone`,
-        },
-        {
-          role: 'user',
-          content: `Here is the transcript: ${chunkSlices[i]}`,
-        },
-      ]);
-      console.log(highlights);
-      return highlights;
+          Task:
+            - You are an expert video editor specializing in extracting and structuring full speaker presentations and panels from livestreams. 
+            - Your task is to precisely indentify the start and end points of speaker presentations and panels from start to end, include the full speaker presentation or panel.
+            - Usually speaker presentation and pannel are between 10 to 30 minutes long, dont extract 1 minute segemnts or similar, look for full speaker presentations and panels.
+             - Identify segments using markers such as:
+              - Introductions: e.g.,\"Thank you so much ....\", \"Welcome to...\", \"Next up, we have...\", \"Please give it up for...\", \"Let's get started with...\", \"We're excited to welcome...\", \"We're honored to present...\"
+              - Transitions or cues indicating the start or end of a keynote/panel: e.g., \"discussion on...\", \"presentation about...\", \"closing remarks on...\"
+        
+            Input: 
+            - You will be given a vtt transcript of the livestream.
+            Output:
+            - Return a JSON array of objects where each object represents a speaker presentation or panel. Use the following structure:
+              {
+                "start": number,    // Timestamp in seconds where the speaker presentation or panel begins
+                "end": number,      // Timestamp in seconds where the speaker presentation or panel ends
+                "title": string     // A concise, descriptive title for the speaker presentation or panel, based on its content
+                }
+      
+          Strict Rules:
+          - Titles should summarize the topic or theme of each speaker presentation or panel clearly and concisely.
+          - Timestamps must align precisely with the transcript to avoid cutting off content mid-sentence.
+          - Follow the output format exactly, just return an array of objects.
+          - NEVER RETURN ANYTHING OTHER THAN AN ARRAY OF OBJECTS, ITS FORBIDDEN TO RETURN ANYTHING ELSE.
+          - NEVER RETURN ANTYHNING WITH A TITLE THAT IS ALREADY PRESENTED AS A MARKER.
+          - RETURNED CLIPS SHOULD NOT OVERLAP WITH EACH OTHER.
+          - RETURNED CLIPS SHOULD NOT BE SHORTER THAN 10 MINUTES.
+          - DONT CLIPS THAT ARE ALREADY PRESENTED AS A MARKER.
+        `,
+      },
+      {
+        role: 'user',
+        content: ` Here is the transcript: ${transcript}, here is the word level transcript: ${JSON.stringify(chunks)}
+       ${prompt ? `Here is the prompt provided by the user: ${prompt}` : ''}
+       ${markers.length > 0 ? `I have already identified the following speaker presentations and panels: ${JSON.stringify(markers)}, please identify the next speaker presentations and panels that are not already identified.` : ''}
+      `,
+      },
+    ]);
+
+    const parsedHighlights: unknown = JSON.parse(highlights);
+    console.log('parsedHighlights', parsedHighlights);
+    // Type guard function to validate the structure
+    const isValidHighlight = (item: unknown): item is AIHighlight => {
+      return (
+        typeof item === 'object' &&
+        item !== null &&
+        'start' in item &&
+        'end' in item &&
+        'title' in item &&
+        typeof (item as AIHighlight).start === 'number' &&
+        typeof (item as AIHighlight).end === 'number' &&
+        typeof (item as AIHighlight).title === 'string'
+      );
+    };
+
+    // Validate array and its contents
+    if (
+      !Array.isArray(parsedHighlights) ||
+      !parsedHighlights.every(isValidHighlight)
+    ) {
+      throw new HttpException(500, 'AI returned invalid highlight format');
     }
+
+    if (parsedHighlights.length === 0) {
+      return [];
+    }
+
+    const markerPromises = await Promise.all(
+      parsedHighlights.map(
+        async (highlight) =>
+          await markerService.create({
+            name: highlight.title,
+            start: highlight.start,
+            end: highlight.end,
+            stageId: stageId,
+            organizationId: session.organizationId.toString(),
+            date: session.createdAt.toString(),
+            color: '#000000',
+            startClipTime: highlight.start,
+            endClipTime: highlight.end,
+          }),
+      ),
+    );
+
+    return markerPromises;
   }
 }

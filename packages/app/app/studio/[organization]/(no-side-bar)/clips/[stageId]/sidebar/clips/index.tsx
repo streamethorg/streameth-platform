@@ -1,6 +1,5 @@
 'use client';
-import React, { useMemo, useState, useEffect } from 'react';
-import { IExtendedSession } from '@/lib/types';
+import React from 'react';
 import {
   Select,
   SelectTrigger,
@@ -12,42 +11,18 @@ import {
 import { CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Clip from './Clip';
+import { useClipsSidebar } from './ClipsContext';
+import { Skeleton } from '@/components/ui/skeleton';
 
-const SessionSidebar = ({
-  sessions = [],
-}: {
-  sessions: IExtendedSession[];
-}) => {
-  const [filteredSessions, setFilteredSessions] =
-    useState<IExtendedSession[]>(sessions);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // Find unique dates among sessions
-  const uniqueDates = useMemo(() => {
-    const dates = Array.from(
-      new Set(
-        sessions?.map((session) =>
-          new Date(session.createdAt as string).toDateString()
-        )
-      )
-    ).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
-    return ['All dates', ...dates];
-  }, [sessions]);
-
-  const [selectedDate, setSelectedDate] = useState(uniqueDates[0]);
-
-  useEffect(() => {
-    const filtered = sessions.filter((session) => {
-      const dateMatches =
-        selectedDate === 'All dates' ||
-        new Date(session.createdAt as string).toDateString() === selectedDate;
-      const searchMatches = session.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      return dateMatches && searchMatches;
-    });
-    setFilteredSessions(filtered);
-  }, [sessions, selectedDate, searchTerm]);
+const SessionSidebar = () => {
+  const {
+    filteredSessions,
+    setSearchTerm,
+    selectedDate,
+    setSelectedDate,
+    uniqueDates,
+    isLoading,
+  } = useClipsSidebar();
 
   return (
     <div className="h-full w-full flex flex-col">
@@ -82,7 +57,15 @@ const SessionSidebar = ({
         </div>
       </CardTitle>
       <div className="flex-grow overflow-y-auto pb-4">
-        {filteredSessions.length > 0 ? (
+        {isLoading ? (
+          <div className="flex flex-col h-full">
+            {[...Array(10)].map((_, index) => (
+              <div key={index} className="w-full px-4 py-2">
+                <Skeleton className="h-32 w-full " />
+              </div>
+            ))}
+          </div>
+        ) : filteredSessions.length > 0 ? (
           filteredSessions.map((session) => (
             <div key={session._id} className="w-full px-4 py-2">
               <Clip session={session} />
@@ -90,7 +73,7 @@ const SessionSidebar = ({
           ))
         ) : (
           <div className="flex h-full justify-center mt-10 text-gray-500">
-            No clip found
+            No clips created
           </div>
         )}
       </div>
