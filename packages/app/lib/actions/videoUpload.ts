@@ -11,7 +11,7 @@ export const videoUploadAction = async ({ data }: { data: FormData }) => {
 
     return res;
   } catch (e) {
-    console.error('Error uploading video action');
-    return '';
+    console.error('Error uploading video action:', e);
+    throw e;
   }
 };
