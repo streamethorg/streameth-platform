@@ -96,7 +96,7 @@ const SelectAnimation = ({
                     path={`organizations/${organizationId}/animations`}
                     options={{
                       placeholder: 'Upload animation video (max 15MB)',
-                      maxSize: 15 * 1024 * 1024, // 15MB
+                      maxSize: 20 * 1024 * 1024, // 15MB
                     }}
                     onChange={(e) => {
                       // Store the S3 URL directly

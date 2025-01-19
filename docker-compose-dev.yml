@@ -79,7 +79,7 @@ services:
       dockerfile: packages/server/workers/clips/Dockerfile.dev
     environment: 
       <<: *common-environment
-      REMOTION_WEBHOOK_URL: ${REMOTION_WEBHOOK_URL}
+      REMOTION_WEBHOOK_URL: https://kodiak-feasible-distinctly.ngrok-free.app/webhook/remotion
 
   reel-creator:
     build:
@@ -90,7 +90,7 @@ services:
       - /app/packages/reel-creator/node_modules
     environment:
       NODE_ENV: ${NODE_ENV}
-      SERVER_WEBHOOK_URL: https://6c5a-83-38-191-227.ngrok-free.app/webhook/remotion
+      SERVER_WEBHOOK_URL: https://kodiak-feasible-distinctly.ngrok-free.app/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: ${LIVEPEER_WEBHOOK_SECRET_FILE}
       AWS_ACCESS_KEY_ID_FILE: ${AWS_ACCESS_KEY_ID_FILE}
       AWS_SECRET_ACCESS_KEY_FILE: ${AWS_SECRET_ACCESS_KEY_FILE}

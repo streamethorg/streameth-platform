@@ -3,7 +3,8 @@ import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
 import { UploadSessionDto } from '@dtos/session/upload-session.dto';
 import { IMarker } from '@interfaces/marker.interface';
-import { ISession } from '@interfaces/session.interface';
+import { ISession, ProcessingStatus } from '@interfaces/session.interface';
+import clipEditorService from '@services/clipEditor.service';
 import SessionServcie from '@services/session.service';
 import { IStandardResponse, SendApiResponse } from '@utils/api.response';
 import {
@@ -20,6 +21,7 @@ import {
   SuccessResponse,
   Tags,
 } from 'tsoa';
+import { getAsset } from '@utils/livepeer';
 
 @Tags('Session')
 @Route('sessions')
@@ -216,5 +218,35 @@ export class SessionController extends Controller {
       body.prompt,
     );
     return SendApiResponse('highlights extracted', highlights);
+  }
+  /**
+   * @summary get session rendeing progress
+   */
+  @SuccessResponse('200')
+  @Get('{sessionId}/progress')
+  async getSessionRenderingProgress(@Path() sessionId: string): Promise<
+    IStandardResponse<{
+      type: 'progress' | 'done';
+      progress: number;
+    }>
+  > {
+    const session = await this.sessionService.get(sessionId);
+    if (session.processingStatus === ProcessingStatus.rendering) {
+      const progress =
+        await clipEditorService.getSessionRenderingProgress(sessionId);
+      return SendApiResponse('session rendering progress', progress);
+    }
+    if (session.processingStatus === ProcessingStatus.pending) {
+      const asset = await getAsset(session.assetId);
+      return SendApiResponse('session rendering progress', {
+        type: 'done',
+        progress: asset.status.progress,
+      });
+    }
+
+    return SendApiResponse('session rendering progress', {
+      type: 'done',
+      progress: 100,
+    });
   }
 }

@@ -3058,6 +3058,42 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse__type-progress-or-done--progress-number__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"properties": {
+							"progress": {
+								"type": "number",
+								"format": "double"
+							},
+							"type": {
+								"type": "string",
+								"enum": [
+									"progress",
+									"done"
+								]
+							}
+						},
+						"required": [
+							"progress",
+							"type"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"ImportType": {
 				"enum": [
 					"gsheet",
@@ -6519,6 +6555,38 @@
 						}
 					}
 				}
+			}
+		},
+		"/sessions/{sessionId}/progress": {
+			"get": {
+				"operationId": "GetSessionRenderingProgress",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse__type-progress-or-done--progress-number__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "get session rendeing progress",
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "sessionId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/schedule/import": {

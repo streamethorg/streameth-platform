@@ -331,6 +331,18 @@ export const fetchSessionMetrics = async ({
   }
 };
 
+export const fetchSessionRenderingProgress = async ({
+  sessionId,
+}: {
+  sessionId: string;
+}): Promise<{ type: 'progress' | 'done'; progress: number }> => {
+  const response = await fetch(`${apiUrl()}/sessions/${sessionId}/progress`, {
+    cache: 'no-store',
+  });
+  return (await response.json()).data;
+};
+
+
 export const fetchAsset = async ({
   assetId,
 }: {
@@ -338,7 +350,7 @@ export const fetchAsset = async ({
 }): Promise<Asset | null> => {
   try {
     const response = await fetch(`${apiUrl()}/streams/asset/${assetId}`, {
-      cache: 'no-store',
+      next: { revalidate: 100 },
     });
     if (!response.ok) {
       return null;

@@ -13,6 +13,21 @@ import {
   IClipEditor,
 } from '@interfaces/clip.editor.interface';
 import { clipsQueue } from '@utils/redis';
+
+interface RemotionProgressResponse {
+  type: 'success';
+  data:
+    | {
+        type: 'progress';
+        progress: number;
+      }
+    | {
+        type: 'done';
+        url: string;
+        size: number;
+      };
+}
+
 export class ClipEditorService extends SessionService {
   constructor(
     private readonly livepeer: Livepeer,
@@ -73,9 +88,9 @@ export class ClipEditorService extends SessionService {
   async launchRemotionRender(clipEditor: IClipEditor) {
     // get all event session data based on event session ids
     const sessionIds = clipEditor.events
-      .filter(e => e.sessionId)
-      .map(e => e.sessionId);
-    
+      .filter((e) => e.sessionId)
+      .map((e) => e.sessionId);
+
     // Get all sessions in one query
     const eventSessions = await Session.find({
       _id: { $in: sessionIds },
@@ -110,7 +125,9 @@ export class ClipEditorService extends SessionService {
           }
 
           // Otherwise, look up the session from our map
-          const session = e.sessionId ? sessionsMap[e.sessionId.toString()] : null;
+          const session = e.sessionId
+            ? sessionsMap[e.sessionId.toString()]
+            : null;
 
           if (!session?.source?.streamUrl) {
             console.log(
@@ -126,15 +143,19 @@ export class ClipEditorService extends SessionService {
             url: session?.source?.streamUrl || '', // Always provide empty string as fallback
           };
 
-          if (e.label === 'main' && clipEditor.captionEnabled && session?.transcripts?.chunks) {
+          if (
+            e.label === 'main' &&
+            clipEditor.captionEnabled &&
+            session?.transcripts?.chunks
+          ) {
             eventData.transcript = {
               language: 'en',
               text: session.transcripts.text || '',
-              words: session.transcripts.chunks.map(chunk => ({
+              words: session.transcripts.chunks.map((chunk) => ({
                 word: chunk.word,
                 start: chunk.start,
                 end: chunk.end || chunk.start + 1, // Fallback end time if not provided
-              }))
+              })),
             };
           }
 
@@ -179,6 +200,38 @@ export class ClipEditorService extends SessionService {
       { runValidators: false, new: true, lean: true },
     );
     return data;
+  }
+
+  async getSessionRenderingProgress(sessionId: string) {
+    const session = await this.findByClipSessionId(sessionId);
+
+    const response = await fetch(
+      `${config.remotion.host}/api/lambda/progress`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          id: session.renderId,
+          bucketName: 'remotionlambda-useast2-w6uye0gtql',
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    const data = (await response.json()) as RemotionProgressResponse;
+    if (data.data.type === 'progress') {
+      return data.data;
+    }
+
+    if (data.data.type === 'done') {
+      return {
+        type: 'done' as const,
+        progress: 1,
+      };
+    }
+
+    return data.data;
   }
 }
 

@@ -11,6 +11,7 @@ import { refreshAccessToken } from './oauth';
 import { fetchAndParseVTT, getSourceType } from './util';
 import { deleteYoutubeLiveStream } from './youtube';
 import { IStreamSettings } from '@interfaces/stage.interface';
+import { Asset, Session } from 'livepeer/models/components';
 
 // Define the youtube-dl output type since this is specific to the youtube-dl library
 interface YoutubeDLOutput {
@@ -182,7 +183,7 @@ export const getDownloadUrl = async (assetId: string): Promise<string> => {
   }
 };
 
-export const getAsset = async (assetId: string) => {
+export const getAsset = async (assetId: string): Promise<Asset> => {
   try {
     const response = await fetch(`${host}/api/asset/${assetId}`, {
       method: 'get',
@@ -485,3 +486,5 @@ export const buildPlaybackUrl = (playbackId: string, vod?: boolean): string => {
   }
   return `https://livepeercdn.studio/hls/${playbackId}/index.m3u8`;
 };
+
+

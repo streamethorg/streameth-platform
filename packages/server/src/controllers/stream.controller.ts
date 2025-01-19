@@ -171,6 +171,7 @@ export class StreamController extends Controller {
     }
   }
 
+
   /**
    * @summary  Generate thumbnail
    */
