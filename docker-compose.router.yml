@@ -44,7 +44,7 @@ services:
       # CORS middleware for production
       - "traefik.http.routers.to-prod.middlewares=to-prod-cors"
       - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolalloworiginlist=*"
-      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolalloworiginlist=http://localhost:3000,http://localhost,https://prod.api.streameth.org"
+      - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolalloworiginlist=http://localhost:3000,http://localhost,https://prod.api.streameth.org,https://streameth.org"
       - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolallowheaders=*"
       - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH"
       - "traefik.http.middlewares.to-prod-cors.headers.accesscontrolmaxage=100"
