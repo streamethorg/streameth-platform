@@ -7,8 +7,15 @@ export const videoUpload = async ({
   data: FormData;
 }): Promise<string> => {
   try {
-    console.log('🎥 Starting video upload to:', `${apiUrl()}/upload`);
-    const response = await fetchClient(`${apiUrl()}/upload`, {
+    const uploadUrl = `${apiUrl()}/upload`;
+    console.log('🎥 Starting video upload service call:', {
+      url: uploadUrl,
+      fileSize: (data.get('file') as File)?.size,
+      directory: data.get('directory'),
+    });
+
+    console.log('🔑 Checking auth headers...');
+    const response = await fetchClient(uploadUrl, {
       method: 'POST',
       cache: 'no-cache',
       headers: {},
@@ -17,19 +24,27 @@ export const videoUpload = async ({
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('❌ Video upload failed:', {
+      console.error('❌ Video upload service failed:', {
         status: response.status,
         statusText: response.statusText,
-        error: errorText
+        error: errorText,
+        headers: Object.fromEntries(response.headers.entries()),
       });
       throw new Error(`Error uploading video: ${errorText}`);
     }
 
     const result = await response.json();
-    console.log('✅ Video upload successful:', result);
+    console.log('✅ Video upload service successful:', {
+      result,
+      responseHeaders: Object.fromEntries(response.headers.entries()),
+    });
     return result.data;
   } catch (e) {
-    console.error('❌ Error in upload video service:', e);
+    console.error('💥 Error in video upload service:', {
+      error: e,
+      message: e instanceof Error ? e.message : 'Unknown error',
+      stack: e instanceof Error ? e.stack : undefined,
+    });
     throw e;
   }
 };
