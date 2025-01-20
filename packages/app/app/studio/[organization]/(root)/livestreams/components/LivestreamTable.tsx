@@ -107,7 +107,7 @@ const LivestreamTable = async ({
                 ) : (
                   <Link
                     href={`/studio/${organizationSlug}/livestreams/${stream._id}`}
-                    className="w-full max-h-6"
+                    className="w-full max-h-12 overflow-clip "
                   >
                     <p className="line-clamp-3 font-medium text-lg text-ellipsis">
                       {stream?.name}

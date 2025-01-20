@@ -442,9 +442,9 @@ export default class SessionService {
             - You are an expert video editor specializing in extracting and structuring full speaker presentations and panels from livestreams. 
             - Your task is to precisely indentify the start and end points of speaker presentations and panels from start to end, include the full speaker presentation or panel.
             - Usually speaker presentation and pannel are between 10 to 30 minutes long, dont extract 1 minute segemnts or similar, look for full speaker presentations and panels.
-             - Identify segments using markers such as:
-              - Introductions: e.g.,\"Thank you so much ....\", \"Welcome to...\", \"Next up, we have...\", \"Please give it up for...\", \"Let's get started with...\", \"We're excited to welcome...\", \"We're honored to present...\"
-              - Transitions or cues indicating the start or end of a keynote/panel: e.g., \"discussion on...\", \"presentation about...\", \"closing remarks on...\"
+            - Identify segments using markers such as:
+            - Introductions: e.g.,\"Thank you so much ....\", \"Welcome to...\", \"Next up, we have...\", \"Please give it up for...\", \"Let's get started with...\", \"We're excited to welcome...\", \"We're honored to present...\"
+            - Transitions or cues indicating the start or end of a keynote/panel: e.g., \"discussion on...\", \"presentation about...\", \"closing remarks on...\"
         
             Input: 
             - You will be given a vtt transcript of the livestream.
@@ -462,7 +462,6 @@ export default class SessionService {
           - Follow the output format exactly, just return an array of objects.
           - NEVER RETURN ANYTHING OTHER THAN AN ARRAY OF OBJECTS, ITS FORBIDDEN TO RETURN ANYTHING ELSE.
           - NEVER RETURN ANTYHNING WITH A TITLE THAT IS ALREADY PRESENTED AS A MARKER.
-          - RETURNED CLIPS SHOULD NOT OVERLAP WITH EACH OTHER.
           - RETURNED CLIPS SHOULD NOT BE SHORTER THAN 10 MINUTES.
           - DONT CLIPS THAT ARE ALREADY PRESENTED AS A MARKER.
         `,

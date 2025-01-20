@@ -15,7 +15,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import FeatureButton from '@/components/ui/feature-button';
 import { Radio } from 'lucide-react';
 import { isFeatureAvailable } from '@/lib/utils/utils';
-
+import { useSubscription } from '@/lib/hooks/useSubscription';
 const OrganizationPage = async ({
   params,
   searchParams,
@@ -57,7 +57,7 @@ const OrganizationPage = async ({
           ) : (
             <FeatureButton
               organizationId={organization._id.toString()}
-              variant="ghost"
+              variant="outline"
               className="flex items-center gap-2"
             >
               <FileUp className="w-5 h-5" />

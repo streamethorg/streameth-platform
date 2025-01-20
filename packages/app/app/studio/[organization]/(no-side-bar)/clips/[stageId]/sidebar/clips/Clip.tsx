@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { fetchSessionRenderingProgress } from '@/lib/services/sessionService';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import Preview from './Preview';

@@ -31,16 +31,15 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
     })
   ).sessions;
 
-
   return (
     <div className="flex flex-col p-4 w-full h-full max-h-screen max-w-screen-3xl">
-      <StreamHeader
-        organizationSlug={params.organization}
-        stream={stream}
-        isLiveStreamPage
-      />
       <div className="flex flex-row flex-grow space-x-4 w-full">
         <div className="flex flex-col w-2/3">
+          <StreamHeader
+            organizationSlug={params.organization}
+            stream={stream}
+            isLiveStreamPage
+          />
           <StageControls
             organization={organization}
             stream={stream}

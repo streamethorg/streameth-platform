@@ -14,7 +14,9 @@ const StreamHeader = ({
   isLiveStreamPage?: boolean;
 }) => {
   return (
-    <div>
+    <div className="flex flex-row justify-between items-center">
+      <span className="pr-4 text-2xl font-bold">{stream.name}</span>
+
       {isLiveStreamPage && (
         <Link href={`/studio/${organizationSlug}`}>
           <Button variant="secondary" className="mb-2 px-2">
