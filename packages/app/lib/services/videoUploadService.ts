@@ -7,6 +7,7 @@ export const videoUpload = async ({
   data: FormData;
 }): Promise<string> => {
   try {
+    console.log('🎥 Starting video upload to:', `${apiUrl()}/upload`);
     const response = await fetchClient(`${apiUrl()}/upload`, {
       method: 'POST',
       cache: 'no-cache',
@@ -15,12 +16,20 @@ export const videoUpload = async ({
     });
 
     if (!response.ok) {
-      throw 'Error uploading video service';
+      const errorText = await response.text();
+      console.error('❌ Video upload failed:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      throw new Error(`Error uploading video: ${errorText}`);
     }
 
-    return (await response.json()).data;
+    const result = await response.json();
+    console.log('✅ Video upload successful:', result);
+    return result.data;
   } catch (e) {
-    console.log('error in upload video service', e);
+    console.error('❌ Error in upload video service:', e);
     throw e;
   }
 };

@@ -115,13 +115,13 @@ export default class SessionService {
   }> {
     let filter: {} = {};
 
-    // Only exclude animations and editor clips if no specific type is requested
-    if (d.type === undefined) {
-      console.log('No type specified, excluding animations and editor clips');
+    // Only exclude animations and editor clips if no specific type is requested and no stageId is provided
+    if (d.type === undefined && d.stageId === undefined) {
+      console.log('No type or stageId specified, excluding animations and editor clips');
       filter = {
         type: { $nin: [SessionType.animation, SessionType.editorClip] },
       };
-    } else {
+    } else if (d.type !== undefined) {
       console.log('Type specified:', d.type);
       filter = { type: d.type };
     }

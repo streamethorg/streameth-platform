@@ -171,7 +171,7 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
         console.log('⚠️ Animation file rejected:', { code, message });
         if (code === 'file-too-large') {
           setError(
-            `Animation file is too large. Max size is ${maxSize / 2000000}MB.` // 20MB
+            `Animation file is too large. Max size is ${maxSize / 1024 / 1024}MB.` // 20MB
           );
         } else {
           setError(message);
