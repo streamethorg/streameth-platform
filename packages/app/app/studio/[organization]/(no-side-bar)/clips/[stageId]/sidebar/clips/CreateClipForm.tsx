@@ -60,13 +60,13 @@ const CreateClipForm = () => {
   useEffect(() => {
     const fetchAnimations = async () => {
       const animations = await fetchAllSessions({
-        stageId,
         type: SessionType.animation,
+        organizationSlug: organizationId,
       });
       setAnimations(animations.sessions);
     };
     fetchAnimations();
-  }, [stageId]);
+  }, [organizationId]);
 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const colorPickerRef = useRef<HTMLDivElement>(null);
