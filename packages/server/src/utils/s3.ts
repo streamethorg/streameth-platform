@@ -15,6 +15,8 @@ export default class StorageService {
   constructor() {
     this.s3Client = new S3({
       endpoint: 'https://ams3.digitaloceanspaces.com',
+      requestChecksumCalculation: "WHEN_REQUIRED",
+      responseChecksumValidation: "WHEN_REQUIRED",
       region: 'us-east-1',
       credentials: {
         accessKeyId: apiKey,
