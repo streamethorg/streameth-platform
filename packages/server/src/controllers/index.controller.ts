@@ -56,11 +56,17 @@ export class IndexController extends Controller {
     @UploadedFile() file: Express.Multer.File,
     @FormField() directory: string,
   ): Promise<IStandardResponse<string>> {
-    if (!file) throw new HttpException(400, 'no file or invalid file');
+    if (!file) {
+      console.error('❌ Upload request rejected: No file provided');
+      throw new HttpException(400, 'no file or invalid file');
+    }
+    
     console.log('📥 Received file upload request:', {
       filename: file.originalname,
       size: `${(file.size / 1024 / 1024).toFixed(2)}MB`,
       type: file.mimetype,
+      encoding: file.encoding,
+      directory
     });
 
     const timestamp = Date.now().toString();
@@ -69,20 +75,42 @@ export class IndexController extends Controller {
     const newFileName = `${fileName}-${timestamp}.${fileExtension}`;
     
     console.log('📝 Processing file:', {
+      originalName: file.originalname,
       newFileName,
       directory,
+      timestamp,
+      extension: fileExtension
     });
 
     try {
+      console.log('🚀 Initiating S3 upload:', {
+        path: `${directory}/${newFileName}`,
+        contentType: file.mimetype,
+        size: file.size
+      });
+
       const fileUrl = await this.storageService.uploadFile(
         `${directory}/${newFileName}`,
         file.buffer,
         file.mimetype,
       );
-      console.log('✅ File uploaded successfully to S3:', fileUrl);
+
+      console.log('✅ File uploaded successfully:', {
+        url: fileUrl,
+        path: `${directory}/${newFileName}`,
+        size: `${(file.size / 1024 / 1024).toFixed(2)}MB`
+      });
+
       return SendApiResponse('file uploaded', fileUrl);
     } catch (error) {
-      console.error('❌ File upload failed:', error);
+      console.error('❌ File upload failed:', {
+        error,
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        fileName: newFileName,
+        directory,
+        size: file.size
+      });
       throw error;
     }
   }
