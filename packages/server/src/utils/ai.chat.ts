@@ -26,7 +26,7 @@ export class ChatAPI {
         temperature: 1,
         model: 'gemini-1.5-pro-latest',
         messages,
-        max_tokens: 1000000,
+        max_tokens: 2000,
         response_format: { type: 'json_object' },
       });
       return completion.choices[0].message.content;

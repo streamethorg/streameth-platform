@@ -55,7 +55,7 @@ x-common-environment: &common-environment
   STRIPE_PUBLISHABLE_KEY_FILE: ${STRIPE_PUBLISHABLE_KEY_FILE}
   STRIPE_SECRET_KEY_FILE: ${STRIPE_SECRET_KEY_FILE}
   FRONTEND_URL: ${FRONTEND_URL}
-
+  PINECONE_API_KEY_FILE: ${PINECONE_API_KEY_FILE}
 x-common-worker: &common-worker
   volumes:
     - ./packages/server:/app/packages/server

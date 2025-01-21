@@ -4,8 +4,9 @@ import { model, Schema } from 'mongoose';
 const MarkerSchema = new Schema<IMarker>(
   {
     name: { type: String, default: '', required: true, maxlength: 255 },
+    sessionId: { type: Schema.Types.ObjectId, ref: 'Session', index: true },
     description: { type: String, default: '' },
-    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization' },
+    organizationId: { type: Schema.Types.ObjectId, ref: 'Organization', index: true },
     stageId: { type: Schema.Types.ObjectId, index: true, ref: 'Stage' },
     start: { type: Number, default: 0, required: true },
     end: { type: Number, default: 0, required: true },

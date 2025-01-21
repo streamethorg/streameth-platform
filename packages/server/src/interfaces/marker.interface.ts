@@ -3,6 +3,7 @@ import { ISpeaker } from './speaker.interface';
 
 export interface IMarker {
   _id?: Types.ObjectId;
+  sessionId?: Types.ObjectId | string;
   name: string;
   description?: string;
   organizationId: Types.ObjectId | string;
