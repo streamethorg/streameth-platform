@@ -25,7 +25,6 @@ import {
   eVisibilty,
 } from 'streameth-new-server/src/interfaces/session.interface';
 import { videoUpload } from '@/lib/services/videoUploadService';
-import { apiUrl } from '@/lib/utils/utils';
 
 function getVideoData(file: File) {
   const dataTransfer = new DataTransfer();
@@ -108,57 +107,31 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
         if (!file) return '';
 
         try {
-          console.log('📦 Preparing animation video for upload:', {
-            fileName: file.name,
-            fileSize: file.size,
-            fileType: file.type,
-            lastModified: new Date(file.lastModified).toISOString()
-          });
-
           const data = new FormData();
           const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
-          console.log('🔄 Sanitized file name:', sanitizedFileName);
-          
           const uploadFile = new File([file], sanitizedFileName, {
             type: file.type,
           });
           data.set('file', uploadFile);
           data.set('directory', path);
 
-          console.log('🚀 Starting animation upload to path:', {
-            path,
-            fileDetails: {
-              name: uploadFile.name,
-              size: uploadFile.size,
-              type: uploadFile.type
-            }
-          });
-
           const videoUrl = await videoUpload({ 
             data,
-            headers: {} // Let the browser handle Content-Type header with boundary
+            headers: {}
           }).catch(async (error) => {
-            console.error('🔥 Video upload failed:', {
-              error,
-              message: error instanceof Error ? error.message : 'Unknown error',
-              stack: error instanceof Error ? error.stack : undefined,
-              response: error.response ? await error.response.text() : undefined
-            });
+            console.error('❌ Upload failed:', error instanceof Error ? error.message : 'Unknown error');
             throw error;
           });
 
           if (!videoUrl) {
-            console.error('⚠️ No video URL returned from upload');
-            throw new Error('Error uploading animation: No URL returned');
+            throw new Error('No URL returned from upload');
           }
 
-          console.log('✅ Animation upload successful! URL:', videoUrl);
           setPreview(videoUrl);
 
           // Create session for animation if path includes 'animations'
           const organizationId = path.split('/')[1]; // Extract org ID from path
           try {
-            console.log('🎯 Creating animation session for organization:', organizationId);
             await createSessionAction({
               session: {
                 name: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
@@ -175,30 +148,14 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
                 processingStatus: ProcessingStatus.completed,
               },
             });
-            console.log('✨ Animation session created successfully');
             toast.success('Animation uploaded');
           } catch (error) {
-            console.error('❌ Failed to create animation session:', {
-              error,
-              message: error instanceof Error ? error.message : 'Unknown error',
-              stack: error instanceof Error ? error.stack : undefined,
-              organizationId,
-              videoUrl
-            });
+            console.error('❌ Session creation failed:', error instanceof Error ? error.message : 'Unknown error');
             toast.error('Failed to create animation session');
-            // Continue even if session creation fails, as we still have the video URL
           }
 
           return videoUrl;
         } catch (e) {
-          console.error('❌ Animation upload failed:', {
-            error: e,
-            message: e instanceof Error ? e.message : 'Unknown error',
-            stack: e instanceof Error ? e.stack : undefined,
-            fileName: file.name,
-            fileSize: file.size,
-            path
-          });
           setPreview('');
           throw e;
         } finally {
