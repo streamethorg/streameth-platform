@@ -18,13 +18,14 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useDropzone, FileRejection } from 'react-dropzone';
-import { videoUploadAction } from '@/lib/actions/videoUpload';
 import { createSessionAction } from '@/lib/actions/sessions';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import {
   SessionType,
   eVisibilty,
 } from 'streameth-new-server/src/interfaces/session.interface';
+import { videoUpload } from '@/lib/services/videoUploadService';
+import { apiUrl } from '@/lib/utils/utils';
 
 function getVideoData(file: File) {
   const dataTransfer = new DataTransfer();
@@ -133,8 +134,11 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
             }
           });
 
-          const videoUrl = await videoUploadAction({ data }).catch(async (error) => {
-            console.error('🔥 Video upload action failed:', {
+          const videoUrl = await videoUpload({ 
+            data,
+            headers: {} // Let the browser handle Content-Type header with boundary
+          }).catch(async (error) => {
+            console.error('🔥 Video upload failed:', {
               error,
               message: error instanceof Error ? error.message : 'Unknown error',
               stack: error instanceof Error ? error.stack : undefined,

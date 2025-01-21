@@ -50,7 +50,6 @@ export class IndexController extends Controller {
     return SendApiResponse('OK');
   }
 
-  @Security('jwt')
   @Post('/upload')
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,

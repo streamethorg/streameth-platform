@@ -7635,11 +7635,7 @@
 				"tags": [
 					"Index"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [],
 				"requestBody": {
 					"required": true,

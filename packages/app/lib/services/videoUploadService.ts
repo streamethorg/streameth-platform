@@ -3,8 +3,10 @@ import { fetchClient } from './fetch-client';
 
 export const videoUpload = async ({
   data,
+  headers = {}
 }: {
   data: FormData;
+  headers?: Record<string, string>;
 }): Promise<string> => {
   const uploadUrl = `${apiUrl()}/upload`;
   
@@ -19,10 +21,13 @@ export const videoUpload = async ({
     });
 
     console.log('🔑 Checking auth headers and preparing request...');
-    const response = await fetchClient(uploadUrl, {
+    const response = await fetch(uploadUrl, {
       method: 'POST',
       cache: 'no-cache',
-      headers: {},
+      headers: {
+        ...headers,
+        // Remove Content-Type header to let the browser set it with the correct boundary
+      },
       body: data,
     });
 
