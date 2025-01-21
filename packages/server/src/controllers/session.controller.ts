@@ -22,6 +22,7 @@ import {
   Tags,
 } from 'tsoa';
 import { getAsset } from '@utils/livepeer';
+import { HttpException } from '@exceptions/HttpException';
 
 @Tags('Session')
 @Route('sessions')
@@ -210,14 +211,10 @@ export class SessionController extends Controller {
   @Post('{sessionId}/highlights')
   async extractHighlights(
     @Path() sessionId: string,
-    @Body() body: { prompt?: string; stageId: string },
-  ): Promise<IStandardResponse<IMarker[]>> {
-    const highlights = await this.sessionService.extractHighlights(
-      body.stageId,
-      sessionId,
-      body.prompt,
-    );
-    return SendApiResponse('highlights extracted', highlights);
+    @Body() body: { prompt?: string },
+  ): Promise<IStandardResponse<void>> {
+    await this.sessionService.launchExtractHighlights(sessionId, body.prompt);
+    return SendApiResponse('highlights extraction started');
   }
   /**
    * @summary get session rendeing progress
@@ -231,11 +228,12 @@ export class SessionController extends Controller {
     }>
   > {
     const session = await this.sessionService.get(sessionId);
-    if (session.processingStatus === ProcessingStatus.rendering) {
-      const progress =
-        await clipEditorService.getSessionRenderingProgress(sessionId);
-      return SendApiResponse('session rendering progress', progress);
-    }
+    try {
+      if (session.processingStatus === ProcessingStatus.rendering) {
+        const progress =
+          await clipEditorService.getSessionRenderingProgress(sessionId);
+        return SendApiResponse('session rendering progress', progress);
+      }
     if (session.processingStatus === ProcessingStatus.pending) {
       const asset = await getAsset(session.assetId);
       return SendApiResponse('session rendering progress', {
@@ -245,8 +243,12 @@ export class SessionController extends Controller {
     }
 
     return SendApiResponse('session rendering progress', {
-      type: 'done',
-      progress: 100,
-    });
+        type: 'done',
+        progress: 100,
+      }); 
+    } catch (error) {
+      console.error('Error getting session rendering progress', error);
+      throw new HttpException(500, 'Error getting session rendering progress');
+    }
   }
 }

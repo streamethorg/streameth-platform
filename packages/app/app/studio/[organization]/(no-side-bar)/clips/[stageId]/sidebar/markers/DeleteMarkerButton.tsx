@@ -15,7 +15,7 @@ const DeleteMarkerButton = ({
   organizationId: string;
 }) => {
   const [isDeleting, setIsDeleting] = useState(false);
-  const { setMarkers, markers, setFilteredMarkers } = useMarkersContext();
+  const { fetchAndSetMarkers } = useMarkersContext();
 
   const handleDeleteMarker = async () => {
     setIsDeleting(true);
@@ -25,12 +25,7 @@ const DeleteMarkerButton = ({
     })
       .then((response) => {
         if (response) {
-          // Update markers directly in the context
-          const updatedMarkers = markers.filter(
-            (marker) => marker._id !== markerId
-          );
-          setMarkers(updatedMarkers);
-          setFilteredMarkers(updatedMarkers);
+          fetchAndSetMarkers();
           toast.success('Marker deleted');
         } else {
           toast.error('Error deleting marker');

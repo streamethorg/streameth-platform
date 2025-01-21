@@ -26,13 +26,7 @@ import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
 import MarkerService from './marker.service';
 import { IMarker } from '@interfaces/marker.interface';
-import PineconeService from './pinecone.service';
-
-interface AIHighlight {
-  start: number;
-  end: number;
-  title: string;
-}
+import { chat } from 'googleapis/build/src/apis/chat';
 
 export default class SessionService {
   private path: string;
@@ -118,7 +112,9 @@ export default class SessionService {
 
     // Only exclude animations and editor clips if no specific type is requested and no stageId is provided
     if (d.type === undefined && d.stageId === undefined) {
-      console.log('No type or stageId specified, excluding animations and editor clips');
+      console.log(
+        'No type or stageId specified, excluding animations and editor clips',
+      );
       filter = {
         type: { $nin: [SessionType.animation, SessionType.editorClip] },
       };
@@ -413,231 +409,63 @@ export default class SessionService {
     return query;
   }
 
-  async extractHighlights(
-    stageId: string,
-    sessionId: string,
-    prompt?: string,
-  ): Promise<IMarker[]> {
+  async launchExtractHighlights(sessionId: string, prompt?: string) {
     const session = await this.get(sessionId);
-    if (!session.transcripts) {
-      console.log('Session has no transcripts');
-      throw new HttpException(400, 'Session has no transcripts');
+    if (session.aiAnalysis.status === ProcessingStatus.pending) {
+      throw new HttpException(400, 'Highlights already being extracted');
     }
-
-    const chat = new ChatAPI();
-    const chunks = session.transcripts.chunks;
-
-    const pineconeService = new PineconeService(session._id.toString());
-    if (!(await pineconeService.namespaceHasData())) {
-      const phrases = await pineconeService.wordsToPhrases(chunks);
-      await pineconeService.embed(phrases);
-    }
-
-    const queries = [
-      'thank you, thank you',
-      'APLAUSE',
-      'please take a seat',
-      'we are going to start',
-      'alright thank you so much',
-      'Welcome to',
-      'Next up, we have',
-      'Please give it up for',
-      "Let's get started with",
-      "We're excited to welcome",
-      "We're honored to present",
-      'time is unfortunately up',
-      'Thank you for your time',
-      'Thank you for your attention',
-      'Thank you for your time',
-      'Thank you for your attention',
-      'a round of applause for',
-      'thank you all to our panelists',
-      'hi everyone',
-      'Excited to have',
-      'Four our next panel',
-      'please welcome',
-      'please give it up for',
-      'I thnik we will move on to our ',
-      'I wanted to welcome to the stage',
-      'going to hand over to',
-      'welcome to the stage ',
-    ];
-
-    let similarityScores = await pineconeService.query(queries);
-
-    console.log('similarityScores', similarityScores);
-    similarityScores = similarityScores.filter((score) => score.score > 0.9);
-    // if b < a + 15, remove b, if not keep and and b and evaluate c
-    // for (let i = 0; i < similarityScores.length; i++) {
-    //   if (
-    //     similarityScores[i + 1] &&
-    //     Number(similarityScores[i + 1].metadata.start) <
-    //       Number(similarityScores[i].metadata.start) + 15
-    //   ) {
-    //     similarityScores.splice(i + 1, 1);
-    //   }
-    // }
-
-    const words = similarityScores.map((score) => {
-      // return all words 10 seconds before and after the score
-      const start = Number(score.metadata.start);
-      const end = Number(score.metadata.end) + 120;
-      const chunkss = chunks.filter(
-        (chunk) => chunk.start >= start && chunk.end <= end,
-      );
-      return {
-        ...score,
-        chunks: chunkss,
-        text: chunkss.map((chunk) => chunk.word).join(' '),
-      };
-    });
-
-    console.log('words', words);
-
-    const markerService = new MarkerService();
-
-    const highlights = await chat.chat([
+    this.extractHighlights(session, prompt);
+    await Session.updateOne(
+      { _id: sessionId },
       {
-        role: 'system',
-        content: `
-        Task Description:
-          You are an AI assistant specializing in analyzing transcripts of livestreams to identify and structure key segments.
-          Your task is to extract full speaker presentations or panel discussions based on specific markers and content cues,
-          ensuring logical and complete coverage of each segment.
-          A prior analysis has been done on the transcript to identify posible speaker or 
-          panel introductions or stage transitions using cosine similarity based on the following queries: ${queries}
-          We have then extracted 60 seconds before and after the text that generated the similarity score.
-          Finally we have prepared a data structure that you need to analyze and return the start and end timestamps of the speaker presentations or panel discussions.
-
-          Data structure input:
-          [{
-            "start": number, // start timestamp of the text
-            "end": number, // end timestamp of the text
-            "text": string, // text that was used to generate the similarity score
-            "chunks": [{ // 120 seconds after the text
-              "start": number, // start timestamp of the word
-              "end": number, // end timestamp of the word
-              "word": string // word
-            }
-            ...  
-            ]
-          }
-          ...          
-          ]
-
-          Instructions:
-          Analyze the provided transcript segments to identify start and end timestamps for full speaker presentations or panels. 
-          Use context markers such as:
-          Introductions: Phrases like "Thank you, thank you," "Welcome to," "Next up, we have," "Please give it up for," etc.
-          Transitions: Indicators such as "discussion on," "presentation about," "closing remarks on," or similar cues that suggest a shift in the event's focus.
-          You may have to infer or use logic to determine the start and end of the segment. For example: 
-          DataStructure[0]
-          {
-            "start": 100,
-            "text": "So now lets bring up on stage xyz person",
-            "chunks": [{
-              "start": 10,
-              "end": 120,
-              "word": "Thank"
-            }
-              ...
-            ]
-          }
-
-          DataStructure[1]
-          {
-            "start": 300,
-            "text": "Thank you xyz person, now we will move on to our next speaker Peter",
-            "chunks": [{
-              "start": 10,
-              "end": 120,
-              "word": "Thank"
-            }
-              ...
-            ]
-          }
-
-          You should use logic to determine the following output:
-          [{
-            "start": 100,
-            "end": 300,
-            "title": "XYZ Person presentation"
+        $set: {
+          aiAnalysis: {
+            status: ProcessingStatus.pending,
+            isVectorized: false,
           },
-          {
-            "start": 300,
-            "end": ...
-            "title": "Peter presentation"
-          }]
-
-          Output Format:
-          Return a JSON array with each object representing a speaker presentation or panel. 
-          Use the following structure exactly:
-            [{
-              "start": number,    // Timestamp (in seconds) where the segment begins
-              "end": number,      // Timestamp (in seconds) where the segment ends
-              "title": string     // A clear and descriptive title summarizing the segment
-            }
-              ...
-            ]
-
-
-          Constraints:
-          Talsk or panel discussions usually last 10-30 minutes
-          If not explicitly stated, never return clips shorter than 10 minutes
-          Ensure that titles accurately summarize the segment content without repetition.
-          Do not return anything other than an array of objects.
-          Clip timestamps must be precise and aligned with the transcript.
-          Never return null attribute value
-
-          Notes:
-          Use your expertise to identify clear transitions and logical breaks in the event.
-          Handle any edge cases or ambiguity by aiming for completeness and consistency.
-        `,
+        },
       },
-      {
-        role: 'user',
-        content: ` Here is the data structure: ${JSON.stringify(words)}
-       ${prompt ? `Here is the prompt provided by the user: ${prompt}` : ''}
-      `,
-      },
-    ]);
+    );
+    return;
+  }
 
-    const parsedHighlights: unknown = JSON.parse(highlights);
-    console.log('parsedHighlights', parsedHighlights);
-    // Type guard function to validate the structure
-    const isValidHighlight = (item: unknown): item is AIHighlight => {
-      return (
-        typeof item === 'object' &&
-        item !== null &&
-        'start' in item &&
-        'end' in item &&
-        'title' in item &&
-        typeof (item as AIHighlight).start === 'number' &&
-        typeof (item as AIHighlight).end === 'number' &&
-        typeof (item as AIHighlight).title === 'string'
+  async extractHighlights(session: ISession, prompt?: string): Promise<void> {
+    const chat = new ChatAPI();
+    try {
+      const { query, llmPrompt } = await chat.choosePrompt(prompt);
+
+      const chunks = session.transcripts.chunks;
+      const similarPhrases = await chat.getSimilarPhrases(
+        session._id.toString(),
+        chunks,
+        query,
       );
-    };
+      console.log('similarPhrases', similarPhrases);
+      const contextualizedPhrases = chat.contextualizePhrasesWithTimestamps(
+        similarPhrases,
+        chunks,
+      );
 
-    // Validate array and its contents
-    if (
-      !Array.isArray(parsedHighlights) ||
-      !parsedHighlights.every(isValidHighlight)
-    ) {
-      throw new HttpException(500, 'AI returned invalid highlight format');
-    }
+      console.log('contextualizedPhrases', contextualizedPhrases);
 
-    if (parsedHighlights.length === 0) {
-      return [];
-    }
+      const highlights = await chat.getAIHighlights(
+        chat,
+        llmPrompt,
+        contextualizedPhrases,
+        prompt,
+      );
 
-    const markerPromises = await Promise.all(
-      parsedHighlights.map(
-        async (highlight) =>
-          await markerService.create({
+      console.log('highlights', highlights);
+      const parsedHighlights = chat.parseAndValidateHighlights(highlights);
+
+      const markerService = new MarkerService();
+      await Promise.all(
+        parsedHighlights.map((highlight) =>
+          markerService.create({
             name: highlight.title,
             start: Number(highlight.start),
             end: Number(highlight.end),
-            stageId: stageId,
+            stageId: session.stageId,
             sessionId: session._id,
             organizationId: session.organizationId.toString(),
             date: session.createdAt.toString(),
@@ -645,9 +473,31 @@ export default class SessionService {
             startClipTime: Number(highlight.start),
             endClipTime: Number(highlight.end),
           }),
-      ),
-    );
-
-    return markerPromises;
+        ),
+      );
+      await Session.updateOne(
+        { _id: session._id },
+        {
+          $set: {
+          aiAnalysis: {
+            status: ProcessingStatus.completed,
+            isVectorized: true,
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Error extracting highlights:', error);
+      await Session.updateOne(
+        { _id: session._id },
+        {
+          $set: {
+            aiAnalysis: {
+              status: ProcessingStatus.failed,
+              isVectorized: false,
+            },
+          },
+        },
+      );
+    }
   }
 }

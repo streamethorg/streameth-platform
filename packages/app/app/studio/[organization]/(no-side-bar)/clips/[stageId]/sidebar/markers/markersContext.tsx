@@ -18,6 +18,7 @@ interface IMarkersContext {
   isAddingOrEditingMarker: boolean;
   setIsAddingOrEditingMarker: (addingOrEditing: boolean) => void;
   organizationId: string;
+  sessionId: string;
 }
 
 const MarkersContext = createContext<IMarkersContext | null>(null);
@@ -34,22 +35,23 @@ export const MarkersProvider = ({
   children,
   organizationId,
   stageId,
+  sessionId,
 }: {
   children: React.ReactNode;
   organizationId: string;
   stageId: string;
+  sessionId?: string;
 }) => {
   const [markers, setMarkers] = useState<IExtendedMarker[]>([]);
   const [filteredMarkers, setFilteredMarkers] = useState<IExtendedMarker[]>([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState<string>('');
   const [isImportingMarkers, setIsImportingMarkers] = useState<boolean>(false);
-  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
+  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(true);
   const [isAddingOrEditingMarker, setIsAddingOrEditingMarker] =
     useState<boolean>(false);
 
   const fetchAndSetMarkers = async () => {
     if (stageId) {
-      setIsLoadingMarkers(true);
       try {
         const markers = await fetchMarkers({
           organizationId,
@@ -59,7 +61,10 @@ export const MarkersProvider = ({
           (a, b) => a.startClipTime - b.startClipTime
         );
         setMarkers(sortedMarkers);
-        setFilteredMarkers(sortedMarkers);
+        sessionId &&
+          setFilteredMarkers(
+            sortedMarkers.filter((marker) => marker.sessionId === sessionId)
+          );
       } catch (error) {
         console.error('Error fetching markers:', error);
       } finally {
@@ -70,7 +75,7 @@ export const MarkersProvider = ({
 
   useEffect(() => {
     fetchAndSetMarkers();
-  }, [stageId]);
+  }, [stageId, sessionId]);
 
   return (
     <MarkersContext.Provider
@@ -89,6 +94,7 @@ export const MarkersProvider = ({
         isAddingOrEditingMarker,
         setIsAddingOrEditingMarker,
         organizationId,
+        sessionId: sessionId || '',
       }}
     >
       {children}

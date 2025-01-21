@@ -580,11 +580,9 @@ export const generateTranscriptions = async ({
 };
 
 export const extractHighlights = async ({
-  stageId,
   sessionId,
   prompt,
 }: {
-  stageId: string;
   sessionId: string;
   prompt: string;
 }): Promise<IHighlight[]> => {
@@ -597,7 +595,7 @@ export const extractHighlights = async ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          stageId,
+          prompt,
         }),
       }
     );
