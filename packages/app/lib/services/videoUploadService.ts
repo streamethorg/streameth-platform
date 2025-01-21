@@ -2,13 +2,13 @@ import { apiUrl } from '../utils/utils';
 
 export const videoUpload = async ({
   data,
-  headers = {}
+  headers = {},
 }: {
   data: FormData;
   headers?: Record<string, string>;
 }): Promise<string> => {
   const uploadUrl = `${apiUrl()}/upload`;
-  
+
   try {
     const response = await fetch(uploadUrl, {
       method: 'POST',
@@ -23,7 +23,7 @@ export const videoUpload = async ({
       const errorText = await response.text();
       console.error('❌ Upload failed:', {
         status: response.status,
-        error: errorText
+        error: errorText,
       });
       throw new Error(`Error uploading video: ${errorText}`);
     }
@@ -31,7 +31,10 @@ export const videoUpload = async ({
     const result = await response.json();
     return result.data;
   } catch (e) {
-    console.error('❌ Upload error:', e instanceof Error ? e.message : 'Unknown error');
+    console.error(
+      '❌ Upload error:',
+      e instanceof Error ? e.message : 'Unknown error'
+    );
     throw e;
   }
 };

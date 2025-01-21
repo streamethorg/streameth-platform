@@ -26,7 +26,6 @@ export default function Sidebar({
   transcribeStatus: TranscriptionStatus | null;
   aiAnalysisStatus: ProcessingStatus | null;
 }) {
-  console.log('transcribeStatus', transcribeStatus);
   const { isCreatingClip } = useClipContext();
   const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
 

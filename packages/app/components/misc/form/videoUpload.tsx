@@ -115,11 +115,14 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
           data.set('file', uploadFile);
           data.set('directory', path);
 
-          const videoUrl = await videoUpload({ 
+          const videoUrl = await videoUpload({
             data,
-            headers: {}
+            headers: {},
           }).catch(async (error) => {
-            console.error('❌ Upload failed:', error instanceof Error ? error.message : 'Unknown error');
+            console.error(
+              '❌ Upload failed:',
+              error instanceof Error ? error.message : 'Unknown error'
+            );
             throw error;
           });
 
@@ -150,7 +153,10 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
             });
             toast.success('Animation uploaded');
           } catch (error) {
-            console.error('❌ Session creation failed:', error instanceof Error ? error.message : 'Unknown error');
+            console.error(
+              '❌ Session creation failed:',
+              error instanceof Error ? error.message : 'Unknown error'
+            );
             toast.error('Failed to create animation session');
           }
 
@@ -171,7 +177,9 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
         console.log('⚠️ Animation file rejected:', { code, message });
         if (code === 'file-too-large') {
           setError(
-            `Animation file is too large. Max size is ${maxSize / 1024 / 1024}MB.` // 20MB
+            `Animation file is too large. Max size is ${
+              maxSize / 1024 / 1024
+            }MB.` // 20MB
           );
         } else {
           setError(message);

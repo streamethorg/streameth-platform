@@ -68,7 +68,6 @@ const KeyboardShortcuts = ({
         if (event.key === 'i') {
           if (endTime.displayTime > currentTime) {
             setStartTime({
-              unix: convertSecondsToUnix(timeReference, currentTime),
               displayTime: currentTime,
             });
           } else {
@@ -77,7 +76,6 @@ const KeyboardShortcuts = ({
         } else if (event.key === 'o') {
           if (startTime.displayTime < currentTime) {
             setEndTime({
-              unix: convertSecondsToUnix(timeReference, currentTime),
               displayTime: currentTime,
             });
           } else {
@@ -117,16 +115,19 @@ const KeyboardShortcuts = ({
         event.shiftKey &&
         videoRef.current
       ) {
+        event.preventDefault();
         // Increase current time by 5 seconds
         const newTime = Math.min(currentTime + 5, maxLength);
         setCurrentTime(newTime);
         videoRef.current.currentTime = newTime;
       } else if (event.key === 'ArrowLeft' && videoRef.current) {
+        event.preventDefault();
         // Decrease current time by 1 frame if 60fps
         const newTime = Math.max(currentTime - 1 / 20, 0);
         setCurrentTime(newTime);
         videoRef.current.currentTime = newTime;
       } else if (event.key === 'ArrowRight' && videoRef.current) {
+        event.preventDefault();
         // Increase current time by 1 second
         const newTime = Math.min(currentTime + 1 / 20, maxLength);
         setCurrentTime(newTime);

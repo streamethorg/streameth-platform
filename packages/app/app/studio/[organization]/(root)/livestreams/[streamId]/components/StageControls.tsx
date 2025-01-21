@@ -92,10 +92,7 @@ const StageControls = ({
                 }?videoType=livestream`}
                 target="_blank"
               >
-                <Button
-                  variant="primary"
-                  className="flex gap-1 items-center"
-                >
+                <Button variant="primary" className="flex gap-1 items-center">
                   Clip Live
                   <LuScissorsLineDashed className="ml-1 w-5 h-5" />
                 </Button>

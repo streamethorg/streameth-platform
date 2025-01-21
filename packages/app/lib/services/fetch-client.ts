@@ -8,11 +8,13 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
       url,
       method: options.method || 'GET',
       hasBody: !!options.body,
-      bodyType: options.body instanceof FormData ? 'FormData' : typeof options.body,
-      bodySize: options.body instanceof FormData ? 
-        `${((options.body.get('file') as File)?.size || 0) / 1024 / 1024}MB` : 
-        undefined,
-      timestamp: new Date().toISOString()
+      bodyType:
+        options.body instanceof FormData ? 'FormData' : typeof options.body,
+      bodySize:
+        options.body instanceof FormData
+          ? `${((options.body.get('file') as File)?.size || 0) / 1024 / 1024}MB`
+          : undefined,
+      timestamp: new Date().toISOString(),
     });
 
     const session = await auth();
@@ -25,7 +27,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
       console.warn(`⚠️ [${requestId}] No auth token available for request:`, {
         url,
         method: options.method,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
 
@@ -33,9 +35,10 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
       method: options.method,
       headers: Object.fromEntries(headers.entries()),
       hasBody: !!options.body,
-      bodyType: options.body instanceof FormData ? 'FormData' : typeof options.body,
+      bodyType:
+        options.body instanceof FormData ? 'FormData' : typeof options.body,
       url,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     const startTime = Date.now();
@@ -47,7 +50,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
 
     const responseHeaders = Object.fromEntries(response.headers.entries());
     const contentType = responseHeaders['content-type'] || '';
-    
+
     console.log(`📥 [${requestId}] Received response:`, {
       status: response.status,
       statusText: response.statusText,
@@ -55,7 +58,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
       timeToComplete: `${endTime - startTime}ms`,
       contentType,
       url,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     if (!response.ok) {
@@ -78,7 +81,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
         error: errorDetails,
         url,
         method: options.method,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
 
@@ -90,7 +93,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
       stack: e instanceof Error ? e.stack : undefined,
       url,
       method: options.method,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
     throw e;
   }

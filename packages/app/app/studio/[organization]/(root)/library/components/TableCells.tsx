@@ -24,7 +24,9 @@ const TableCells = ({
   item: IExtendedSession;
   organization: string;
 }) => {
-  const isPending = item.processingStatus === ProcessingStatus.pending || item.processingStatus === ProcessingStatus.rendering;
+  const isPending =
+    item.processingStatus === ProcessingStatus.pending ||
+    item.processingStatus === ProcessingStatus.rendering;
   const isFailed = item.processingStatus === ProcessingStatus.failed;
 
   const getStatusClassName = () => {

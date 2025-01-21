@@ -76,12 +76,14 @@ export const SidebarItem = ({
         {text}
       </span>
       {badge && expanded && (
-        <div className={cn(
-          'ml-auto px-2 py-0.5 rounded-full text-xs font-medium',
-          badge.variant === 'success' && 'bg-green-100 text-green-700',
-          badge.variant === 'warning' && 'bg-amber-100 text-amber-700',
-          badge.variant === 'error' && 'bg-red-100 text-red-700'
-        )}>
+        <div
+          className={cn(
+            'ml-auto px-2 py-0.5 rounded-full text-xs font-medium',
+            badge.variant === 'success' && 'bg-green-100 text-green-700',
+            badge.variant === 'warning' && 'bg-amber-100 text-amber-700',
+            badge.variant === 'error' && 'bg-red-100 text-red-700'
+          )}
+        >
           {badge.text}
         </div>
       )}

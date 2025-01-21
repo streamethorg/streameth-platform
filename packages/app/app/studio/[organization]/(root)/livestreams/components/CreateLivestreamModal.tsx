@@ -55,9 +55,13 @@ const CreateLivestreamModal = ({
   const [open, setOpen] = useState(show ?? false);
   const [isMultiDate, setIsMultiDate] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [streamType, setStreamType] = useState<'instant' | 'schedule' | undefined>();
+  const [streamType, setStreamType] = useState<
+    'instant' | 'schedule' | undefined
+  >();
   const router = useRouter();
-  const { canUseFeatures, organizationSlug } = useSubscription(organization._id.toString());
+  const { canUseFeatures, organizationSlug } = useSubscription(
+    organization._id.toString()
+  );
 
   const handleClick = (e: React.MouseEvent) => {
     if (!canUseFeatures) {
@@ -149,7 +153,7 @@ const CreateLivestreamModal = ({
       }}
     >
       <DialogTrigger asChild>
-        <Button 
+        <Button
           variant={variant}
           className="flex items-center gap-2"
           onClick={handleClick}

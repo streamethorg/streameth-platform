@@ -23,17 +23,11 @@ const Markers = ({
   transcribeStatus: TranscriptionStatus | null;
   aiAnalysisStatus: ProcessingStatus | null;
 }) => {
-  const {
-    isLoadingMarkers,
-    markers,
-    filteredMarkers,
-    organizationId,
-    fetchAndSetMarkers,
-  } = useMarkersContext();
+  const { isLoadingMarkers, markers, organizationId, fetchAndSetMarkers } =
+    useMarkersContext();
 
   const [prompt, setPrompt] = useState('');
   const [isExtracting, setIsExtracting] = useState(false);
-  console.log('aiAnalysisStatus', aiAnalysisStatus);
   const handleExtractHighlights = async () => {
     if (transcribeStatus !== 'completed') {
       toast.error('Please transcribe the video first');
@@ -69,7 +63,7 @@ const Markers = ({
     );
   }
 
-  if (filteredMarkers.length === 0) {
+  if (markers.length === 0) {
     return (
       <div className="w-full bg-white p-4 space-y-4 text-lg flex-shrink-0">
         <p className="text-lg font-bold">AI video analysis</p>
@@ -84,7 +78,7 @@ const Markers = ({
               setPrompt('Extract all talk and panels from this video')
             }
           >
-            "Extract all talk and panels from this video"
+            &quot;Extract all talk and panels from this video&quot;
           </Badge>
           <Badge
             variant="default"
@@ -93,7 +87,7 @@ const Markers = ({
               setPrompt('Extract key moments for short form content')
             }
           >
-            "Extract key moments for short form content"
+            &quot;Extract key moments for short form content&quot;
           </Badge>
         </div>
         <Textarea
@@ -130,7 +124,7 @@ const Markers = ({
               setPrompt('Extract all talk and panels from this video')
             }
           >
-            "Extract all talk and panels from this video"
+            &quot;Extract all talk and panels from this video&quot;
           </Badge>
           <Badge
             variant="default"
@@ -139,7 +133,7 @@ const Markers = ({
               setPrompt('Extract key moments for short form content')
             }
           >
-            "Extract key moments for short form content"
+            &quot;Extract key moments for short form content&quot;
           </Badge>
         </div>
         <Textarea
@@ -162,8 +156,8 @@ const Markers = ({
         )}
       </CardTitle>
       <div className="flex-grow overflow-y-auto pb-4">
-        {filteredMarkers.length > 0 ? (
-          filteredMarkers.map((marker: IExtendedMarker) => (
+        {markers.length > 0 ? (
+          markers.map((marker: IExtendedMarker) => (
             <div key={marker._id} className="w-full px-4 py-2">
               <Marker marker={marker} organizationId={organizationId} />
             </div>

@@ -26,7 +26,7 @@ const Timeline = () => {
     timeReference,
   } = useClipContext();
 
-  const { filteredMarkers, selectedMarkerId, setSelectedMarkerId } =
+  const { markers, selectedMarkerId, setSelectedMarkerId } =
     useMarkersContext();
 
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -87,12 +87,10 @@ const Timeline = () => {
       videoRef.current.currentTime = marker.startClipTime;
       setStartTime({
         displayTime: marker.startClipTime,
-        unix: convertSecondsToUnix(timeReference, marker.startClipTime),
       });
 
       setEndTime({
         displayTime: marker.endClipTime,
-        unix: convertSecondsToUnix(timeReference, marker.endClipTime),
       });
 
       setSelectedMarkerId(marker._id);
@@ -118,8 +116,8 @@ const Timeline = () => {
         className="h-[100px] relative"
         style={{ width: `${timelineWidth}px` }}
       >
-        {filteredMarkers &&
-          filteredMarkers.map((marker) => {
+        {markers &&
+          markers.map((marker) => {
             if (
               marker.startClipTime > maxLength ||
               marker.endClipTime > maxLength

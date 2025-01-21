@@ -33,7 +33,6 @@ const AddOrEditMarkerForm = () => {
     setSelectedMarkerId,
     fetchAndSetMarkers,
     setMarkers,
-    setFilteredMarkers,
     organizationId,
   } = useMarkersContext();
 
@@ -87,13 +86,7 @@ const AddOrEditMarkerForm = () => {
           speakers: selectedMarker.speakers,
         };
         await updateMarkersAction({ markers: updatedMarker });
-        // Update the markers array in the context
-        const updateMarkerInArray = markers.map((marker) =>
-          marker._id === selectedMarker._id ? updatedMarker : marker
-        );
-        setMarkers(updateMarkerInArray);
-        setFilteredMarkers(updateMarkerInArray);
-
+        fetchAndSetMarkers();
         handleClose();
         setSelectedMarkerId('');
         toast.success('Marker updated successfully');

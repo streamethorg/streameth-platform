@@ -36,9 +36,9 @@ export async function acceptPayment(
       throw new Error(`Payment failed: ${response.statusText}`);
     }
 
-    const data = await response.json() as { data: StripeCheckoutResponse };
+    const data = (await response.json()) as { data: StripeCheckoutResponse };
     console.log('✅ Payment session created successfully');
-    
+
     return data.data.url;
   } catch (error) {
     console.error('💥 Payment process error:', error);

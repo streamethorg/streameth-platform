@@ -16,6 +16,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     videoRef,
     setHls,
     setTimeReference,
+    startTime,
+    endTime,
   } = useClipContext();
 
   const playbackRef = useRef({ progress: 0, offset: 0 });
@@ -87,6 +89,12 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
 
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
+      <div className="absolute z-[9999] top-0 left-20 w-50 h-50 bg-white">
+        <div className="flex flex-col items-center justify-center h-full">
+          {startTime && <div>start: {startTime.displayTime}</div>}
+          {endTime && <div>end: {endTime.displayTime}</div>}
+        </div>
+      </div>
       <video
         ref={videoRef}
         autoPlay={false}

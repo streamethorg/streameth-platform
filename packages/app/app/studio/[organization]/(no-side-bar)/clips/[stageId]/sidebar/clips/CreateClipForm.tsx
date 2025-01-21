@@ -19,7 +19,6 @@ import {
   LuSmartphone,
   LuSubtitles,
   LuEye,
-
 } from 'react-icons/lu';
 import { Label } from '@/components/ui/label';
 
@@ -34,26 +33,14 @@ import { fetchAllSessions } from '@/lib/services/sessionService';
 import { useCreateClip } from '@/lib/hooks/useCreateClip';
 import useClickOutside from '@/lib/hooks/useClickOutside';
 const CreateClipForm = () => {
-  const {
-    handleCreateClip,
-    form,
-    isCreateClip,
-    handleClearMarker,
-    handlePreview,
-  } = useCreateClip();
+  const { handleCreateClip, form, isCreateClip, handleClearMarker } =
+    useCreateClip();
 
-  const {
-    isLoading,
-    setIsCreatingClip,
-    startTime,
-    endTime,
-    stageId,
-    organizationId,
-  } = useClipContext();
+  const { isLoading, setIsCreatingClip, startTime, endTime, organizationId } =
+    useClipContext();
 
   const { markers, selectedMarkerId, setSelectedMarkerId } =
     useMarkersContext();
-
 
   const [animations, setAnimations] = useState<IExtendedSession[]>([]);
 
@@ -101,7 +88,10 @@ const CreateClipForm = () => {
                   <Combobox
                     items={[
                       ...markers.map((marker) => ({
-                        label: marker.name.length > 20 ? `${marker.name.substring(0, 20)}...` : marker.name,
+                        label:
+                          marker.name.length > 20
+                            ? `${marker.name.substring(0, 20)}...`
+                            : marker.name,
                         value: marker._id,
                       })),
                     ]}
@@ -321,10 +311,7 @@ const CreateClipForm = () => {
             >
               Cancel
             </Button>
-            <Button variant={'secondary'} onClick={handlePreview} type="button">
-              <LuEye className="h-4 w-4 mr-2" />
-              Preview
-            </Button>
+
             <Button
               className="w-3/4"
               variant="primary"

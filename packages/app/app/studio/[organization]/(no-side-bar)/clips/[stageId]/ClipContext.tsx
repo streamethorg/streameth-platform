@@ -17,7 +17,6 @@ type PlaybackStatus = {
 
 type PlaybackTime = {
   displayTime: number;
-  unix: number;
 };
 
 type ClipContextType = {
@@ -112,12 +111,10 @@ export const ClipProvider = ({
     unixTime: 0,
   });
   const [startTime, setStartTime] = useState({
-    unix: convertSecondsToUnix(timeReference, 0),
     displayTime: 0,
   });
 
   const [endTime, setEndTime] = useState({
-    unix: convertSecondsToUnix(timeReference, 60),
     displayTime: 60,
   });
   const [timelineContainerWidth, setTimelineContainerWidth] =
@@ -159,11 +156,9 @@ export const ClipProvider = ({
     ) {
       const duration = videoRef.current.duration;
       setStartTime({
-        unix: convertSecondsToUnix(timeReference, 0),
         displayTime: 0,
       });
       setEndTime({
-        unix: convertSecondsToUnix(timeReference, duration * 1),
         displayTime: duration * 1,
       });
       hasSetEndTimeRef.current = true;
@@ -179,23 +174,6 @@ export const ClipProvider = ({
   const handleMouseDown = (marker: string, event: React.MouseEvent) => {
     setDragging(marker);
     setSelectedTooltip(marker);
-
-    // const updateTime = (newTime: number) => {
-    //   if (marker === 'start') {
-    //     setStartTime({
-    //       unix: Date.now() - (playbackStatus?.offset ?? 0),
-    //       displayTime: Math.max(0, Math.min(newTime, endTime.displayTime - 1)),
-    //     });
-    //   } else if (marker === 'end') {
-    //     setEndTime({
-    //       unix: Date.now() - (playbackStatus?.offset ?? 0),
-    //       displayTime: Math.min(
-    //         videoRef.current?.duration || Infinity,
-    //         Math.max(newTime, startTime.displayTime + 1)
-    //       ),
-    //     });
-    //   }
-    // };
     setInitialMousePos(event.clientX);
     setInitialMarkerPos(
       marker === 'start' ? startTime.displayTime : endTime.displayTime
@@ -203,12 +181,6 @@ export const ClipProvider = ({
 
     // Reset the hasMouseMoved flag
     setHasMouseMoved(false);
-
-    // Capture the current playhead position
-    // if (videoRef.current) {
-    //   setPlayheadPosition(videoRef.current.currentTime);
-    // }
-    // Calculate the initial position based on the marker type
     if (marker === 'overlay') {
       const timelineRect = event.currentTarget.getBoundingClientRect();
       const relativeClickX = event.clientX - timelineRect.left; // Get the click position relative to the timeline
@@ -232,7 +204,6 @@ export const ClipProvider = ({
         if (dragging === 'start') {
           if (newTime >= 0 && newTime < endTime.displayTime) {
             setStartTime({
-              unix: convertSecondsToUnix(timeReference, newTime),
               displayTime: newTime,
             });
           }
@@ -242,7 +213,6 @@ export const ClipProvider = ({
             newTime <= videoRef.current.duration
           ) {
             setEndTime({
-              unix: convertSecondsToUnix(timeReference, newTime),
               displayTime: newTime,
             });
           }
@@ -260,16 +230,12 @@ export const ClipProvider = ({
           );
 
           setStartTime({
-            unix: convertSecondsToUnix(timeReference, newStartTime),
             displayTime: newStartTime,
           });
           setEndTime({
-            unix: convertSecondsToUnix(timeReference, newEndTime),
             displayTime: newEndTime,
           });
         }
-        // Update currentTime state without changing video's currentTime
-        // setCurrentTime(newTime);
       }
     },
     [

@@ -10,7 +10,16 @@ import { useRouter } from 'next/navigation';
 interface FeatureButtonProps {
   children: ReactNode;
   organizationId: string;
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | 'primary' | 'destructive-outline' | 'outlinePrimary';
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link'
+    | 'primary'
+    | 'destructive-outline'
+    | 'outlinePrimary';
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
@@ -31,7 +40,8 @@ const FeatureButton = ({
   type = 'button',
 }: FeatureButtonProps) => {
   const router = useRouter();
-  const { canUseFeatures, isLoading, organizationSlug } = useSubscription(organizationId);
+  const { canUseFeatures, isLoading, organizationSlug } =
+    useSubscription(organizationId);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!canUseFeatures) {
@@ -57,6 +67,6 @@ const FeatureButton = ({
       {children}
     </Button>
   );
-}
+};
 
 export default FeatureButton;

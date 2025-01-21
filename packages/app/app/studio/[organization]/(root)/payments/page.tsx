@@ -19,7 +19,7 @@ const tiers = [
       'Best video quality',
       'Access to all platform features',
     ],
-    priceId: 'price_basic_monthly'
+    priceId: 'price_basic_monthly',
   },
   {
     name: 'Big Event',
@@ -31,8 +31,8 @@ const tiers = [
       'Post-event support',
       'Custom integrations',
     ],
-    priceId: 'contact_sales'
-  }
+    priceId: 'contact_sales',
+  },
 ];
 
 export default function PaymentsPage() {
@@ -42,17 +42,28 @@ export default function PaymentsPage() {
   const [streamingDays, setStreamingDays] = useState(1);
   const [numberOfStages, setNumberOfStages] = useState(1);
   const organizationId = params.organization;
-  const { organization, loading: orgLoading, error: orgError } = useOrganization(organizationId as string);
+  const {
+    organization,
+    loading: orgLoading,
+    error: orgError,
+  } = useOrganization(organizationId as string);
 
   const calculateTotalPrice = (days: number, stages: number) => {
     return days * stages * 250;
   };
 
-  const handleCounter = (type: 'days' | 'stages', operation: 'increment' | 'decrement') => {
+  const handleCounter = (
+    type: 'days' | 'stages',
+    operation: 'increment' | 'decrement'
+  ) => {
     if (type === 'days') {
-      setStreamingDays(prev => operation === 'increment' ? prev + 1 : Math.max(1, prev - 1));
+      setStreamingDays((prev) =>
+        operation === 'increment' ? prev + 1 : Math.max(1, prev - 1)
+      );
     } else {
-      setNumberOfStages(prev => operation === 'increment' ? prev + 1 : Math.max(1, prev - 1));
+      setNumberOfStages((prev) =>
+        operation === 'increment' ? prev + 1 : Math.max(1, prev - 1)
+      );
     }
   };
 
@@ -71,7 +82,7 @@ export default function PaymentsPage() {
         streamingDays,
         numberOfStages
       );
-      
+
       // Redirect to Stripe Checkout
       window.location.href = checkoutUrl;
     } catch (error) {
@@ -99,7 +110,9 @@ export default function PaymentsPage() {
         <Card className="p-6 max-w-2xl mx-auto bg-red-50">
           <div className="flex items-center gap-2 text-red-600">
             <AlertCircle className="h-5 w-5" />
-            <span>Failed to load subscription details. Please try again later.</span>
+            <span>
+              Failed to load subscription details. Please try again later.
+            </span>
           </div>
         </Card>
       </div>
@@ -110,13 +123,14 @@ export default function PaymentsPage() {
   if (organization?.expirationDate) {
     const expiryDate = new Date(organization.expirationDate);
     const now = new Date();
-    const daysLeft = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24));
+    const daysLeft = Math.ceil(
+      (expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
+    );
 
     // If subscription has expired, show purchase options
     if (daysLeft <= 0) {
       return (
         <div className="container mx-auto px-4 py-8 ">
-
           {/* Purchase options */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
@@ -140,7 +154,9 @@ export default function PaymentsPage() {
                     </div>
                   ) : (
                     <div className="mb-6">
-                      <span className="text-3xl font-bold">${calculateTotalPrice(streamingDays, numberOfStages)}</span>
+                      <span className="text-3xl font-bold">
+                        ${calculateTotalPrice(streamingDays, numberOfStages)}
+                      </span>
                       <span className="text-gray-600 ml-1">total</span>
                     </div>
                   )}
@@ -156,7 +172,9 @@ export default function PaymentsPage() {
                 {tier.price !== 'Custom' && (
                   <div className="mt-6 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Streaming days</span>
+                      <span className="text-sm font-medium">
+                        Streaming days
+                      </span>
                       <div className="flex items-center gap-3">
                         <Button
                           variant="outline"
@@ -166,7 +184,9 @@ export default function PaymentsPage() {
                         >
                           <Minus className="h-3 w-3" />
                         </Button>
-                        <span className="w-8 text-center font-medium">{streamingDays}</span>
+                        <span className="w-8 text-center font-medium">
+                          {streamingDays}
+                        </span>
                         <Button
                           variant="outline"
                           size="icon"
@@ -188,7 +208,9 @@ export default function PaymentsPage() {
                         >
                           <Minus className="h-3 w-3" />
                         </Button>
-                        <span className="w-8 text-center font-medium">{numberOfStages}</span>
+                        <span className="w-8 text-center font-medium">
+                          {numberOfStages}
+                        </span>
                         <Button
                           variant="outline"
                           size="icon"
@@ -207,11 +229,14 @@ export default function PaymentsPage() {
                   variant="primary"
                   className="w-full mt-6"
                 >
-                  {loading ? 'Processing...' : tier.price === 'Custom' ? 'Contact Sales' : 'Buy Now'}
+                  {loading
+                    ? 'Processing...'
+                    : tier.price === 'Custom'
+                    ? 'Contact Sales'
+                    : 'Buy Now'}
                 </Button>
               </div>
             ))}
-            
           </div>
           <div className="mt-8 max-w-2xl mx-auto">
             <Card className="p-6 bg-amber-50">
@@ -219,7 +244,9 @@ export default function PaymentsPage() {
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 <div>
                   <p className="font-medium">Your subscription has expired</p>
-                  <p className="text-sm">Purchase a new subscription to continue streaming.</p>
+                  <p className="text-sm">
+                    Purchase a new subscription to continue streaming.
+                  </p>
                 </div>
               </div>
             </Card>
@@ -242,12 +269,16 @@ export default function PaymentsPage() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Stages</span>
-                <span className="font-medium">{organization.paidStages} stages</span>
+                <span className="font-medium">
+                  {organization.paidStages} stages
+                </span>
               </div>
-              
+
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Streaming Days</span>
-                <span className="font-medium">{organization.streamingDays} days</span>
+                <span className="font-medium">
+                  {organization.streamingDays} days
+                </span>
               </div>
 
               <div className="flex justify-between items-center">
@@ -260,7 +291,9 @@ export default function PaymentsPage() {
               {daysLeft <= 2 && (
                 <div className="flex items-center gap-2 text-amber-600 mt-4 p-3 bg-amber-50 rounded-lg">
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                  <span className="text-sm">Your subscription will expire soon.</span>
+                  <span className="text-sm">
+                    Your subscription will expire soon.
+                  </span>
                 </div>
               )}
             </div>
@@ -295,7 +328,9 @@ export default function PaymentsPage() {
                 </div>
               ) : (
                 <div className="mb-6">
-                  <span className="text-3xl font-bold">${calculateTotalPrice(streamingDays, numberOfStages)}</span>
+                  <span className="text-3xl font-bold">
+                    ${calculateTotalPrice(streamingDays, numberOfStages)}
+                  </span>
                   <span className="text-gray-600 ml-1">total</span>
                 </div>
               )}
@@ -321,7 +356,9 @@ export default function PaymentsPage() {
                     >
                       <Minus className="h-3 w-3" />
                     </Button>
-                    <span className="w-8 text-center font-medium">{streamingDays}</span>
+                    <span className="w-8 text-center font-medium">
+                      {streamingDays}
+                    </span>
                     <Button
                       variant="outline"
                       size="icon"
@@ -343,7 +380,9 @@ export default function PaymentsPage() {
                     >
                       <Minus className="h-3 w-3" />
                     </Button>
-                    <span className="w-8 text-center font-medium">{numberOfStages}</span>
+                    <span className="w-8 text-center font-medium">
+                      {numberOfStages}
+                    </span>
                     <Button
                       variant="outline"
                       size="icon"
@@ -362,11 +401,15 @@ export default function PaymentsPage() {
               variant="primary"
               className="w-full mt-6"
             >
-              {loading ? 'Processing...' : tier.price === 'Custom' ? 'Contact Sales' : 'Buy Now'}
+              {loading
+                ? 'Processing...'
+                : tier.price === 'Custom'
+                ? 'Contact Sales'
+                : 'Buy Now'}
             </Button>
           </div>
         ))}
       </div>
     </div>
   );
-} 
+}

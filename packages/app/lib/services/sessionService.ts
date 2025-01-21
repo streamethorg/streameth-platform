@@ -346,7 +346,6 @@ export const fetchSessionRenderingProgress = async ({
   return (await response.json()).data;
 };
 
-
 export const fetchAsset = async ({
   assetId,
 }: {

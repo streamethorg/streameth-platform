@@ -38,4 +38,4 @@ export const useOrganization = (organizationId: string) => {
   }, [organizationId]);
 
   return { organization, loading, error };
-} 
+};

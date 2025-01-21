@@ -37,7 +37,7 @@ const LoginPage = ({
                 )}
                 <SignInWithSocials callbackUrl={callbackUrl} />
               </div>
-{/* 
+              {/* 
               <div className="pt-6 text-sm">
                 Don&apos;t have an account? {` `}
                 <Link

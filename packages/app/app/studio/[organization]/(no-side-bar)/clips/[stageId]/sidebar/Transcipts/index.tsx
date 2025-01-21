@@ -14,7 +14,6 @@ const Transcripts = ({
 }) => {
   const { organizationId } = useMarkersContext();
 
-
   if (transcribe?.length === 0) {
     return (
       <div className="flex flex-col h-full overflow-y-scroll">
