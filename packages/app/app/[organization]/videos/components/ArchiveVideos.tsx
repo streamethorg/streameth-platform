@@ -9,7 +9,7 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 
 interface ArchiveVideosProps {
-  organizationSlug: string;
+  organizationSlug?: string;
   event?: string;
   searchQuery?: string;
 }
@@ -34,37 +34,35 @@ const ArchiveVideos = ({
   }) => {
     setIsLoading(true);
     try {
-      console.log('🎯 Fetching organization:', organizationSlug);
-      const organization = await fetchOrganization({ organizationSlug });
-      if (!organization) {
-        console.error('❌ Organization not found');
-        setIsLoading(false);
-        return;
+      let params: Parameters<typeof fetchAllSessions>[0] = {
+        event,
+        limit: 12,
+        onlyVideos: true,
+        published: 'public',
+        searchQuery,
+        page,
+        itemStatus: ProcessingStatus.completed,
+      };
+
+      if (organizationSlug) {
+        console.log('🎯 Fetching organization:', organizationSlug);
+        const organization = await fetchOrganization({ organizationSlug });
+        if (!organization) {
+          console.error('❌ Organization not found');
+          setIsLoading(false);
+          return;
+        }
+        console.log('✅ Found organization:', organization._id);
+        params = {
+          ...params,
+          organizationId: organization._id,
+          organizationSlug,
+        };
       }
-      console.log('✅ Found organization:', organization._id);
 
-      console.log('🎯 Fetching sessions with params:', {
-        organizationId: organization._id,
-        event,
-        limit: 12,
-        onlyVideos: true,
-        published: 'public',
-        searchQuery,
-        page,
-        itemStatus: ProcessingStatus.completed,
-      });
+      console.log('🎯 Fetching sessions with params:', params);
 
-      const { sessions, pagination: newPagination } = await fetchAllSessions({
-        organizationId: organization._id,
-        organizationSlug,
-        event,
-        limit: 12,
-        onlyVideos: true,
-        published: 'public',
-        searchQuery,
-        page,
-        itemStatus: ProcessingStatus.completed,
-      });
+      const { sessions, pagination: newPagination } = await fetchAllSessions(params);
 
       console.log('✅ Fetched sessions:', {
         sessionsCount: sessions.length,
