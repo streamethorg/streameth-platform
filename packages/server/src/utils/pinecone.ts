@@ -4,8 +4,10 @@ import {
   ScoredPineconeRecord,
 } from '@pinecone-database/pinecone';
 
+import { config } from '@config';
+
 const pc = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY_FILE,
+  apiKey: config.pinecone.apiKey,
 });
 
 export default class PineconeService {
