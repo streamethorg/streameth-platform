@@ -134,9 +134,9 @@ const MobileNavBar = ({
               <Image
                 src={'/logo_dark.png'}
                 alt="Logo"
-                height={50}
-                width={230}
-                className="h-full aspect-square"
+                height={30}
+                width={140}
+                className="h-[30px] w-auto"
               />
             </Link>
           )
