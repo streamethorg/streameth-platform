@@ -20,6 +20,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     endTime,
   } = useClipContext();
 
+
   const playbackRef = useRef({ progress: 0, offset: 0 });
   const [error, setError] = useState<string | null>(null);
 

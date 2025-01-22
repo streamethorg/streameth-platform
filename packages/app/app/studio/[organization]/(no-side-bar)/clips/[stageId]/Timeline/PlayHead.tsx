@@ -1,22 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useClipContext } from '../ClipContext';
+import useTimeline from './useTimeline';
+import { useTimelineContext } from './TimelineContext';
 
-interface TimelinePlayheadProps {
-  maxLength: number;
-  timelineWidth: number;
-}
-
-const Playhead: React.FC<TimelinePlayheadProps> = ({
-  maxLength,
-  timelineWidth,
-}) => {
+const Playhead = () => {
   const [draggingPlayhead, setDraggingPlayhead] = useState(false);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [initialEventStart, setInitialEventStart] = useState(0);
-  const { videoRef, currentTime, setCurrentTime } = useClipContext();
+  const { videoDuration, timelineWidth, currentTime, handleSetCurrentTime } = useTimelineContext();
+  const { calculateTimeFromPosition, calculatePositionOnTimeline } = useTimeline();
 
-  const getMarkerPosition = (time: number) =>
-    (time / maxLength) * timelineWidth;
 
   const handlePlayheadMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -27,25 +19,25 @@ const Playhead: React.FC<TimelinePlayheadProps> = ({
 
   const handlePlayheadMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (draggingPlayhead && videoRef.current) {
-        const mouseDelta = e.clientX - initialMousePos;
-        const timeDelta = (mouseDelta / timelineWidth) * maxLength;
-        const newTime = Math.max(
-          0,
-          Math.min(maxLength, initialEventStart + timeDelta)
+      if (draggingPlayhead) {
+
+        const newTime = calculateTimeFromPosition(
+          initialMousePos,
+          e.clientX,
+          videoDuration,
+          timelineWidth,
+          initialEventStart
         );
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
+        handleSetCurrentTime(newTime);
       }
     },
     [
       draggingPlayhead,
       initialMousePos,
       initialEventStart,
-      maxLength,
-      setCurrentTime,
+      videoDuration,
       timelineWidth,
-      videoRef,
+      handleSetCurrentTime,
     ]
   );
 
@@ -65,7 +57,7 @@ const Playhead: React.FC<TimelinePlayheadProps> = ({
   return (
     <div
       className="absolute top-0 bottom-0 w-1 bg-black border-white cursor-ew-resize z-[22]"
-      style={{ left: `${getMarkerPosition(currentTime)}px` }}
+      style={{ left: `${calculatePositionOnTimeline(currentTime, videoDuration, timelineWidth)}px` }}
       onMouseDown={handlePlayheadMouseDown}
     >
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-black border border-white rounded-3xl" />

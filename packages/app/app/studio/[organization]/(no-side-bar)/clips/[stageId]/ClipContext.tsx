@@ -255,13 +255,13 @@ export const ClipProvider = ({
     ]
   );
 
-  const handleMouseUp = useCallback(() => {
-    setDragging(null);
-    // Set the video's currentTime to match the dragged position
-    if (videoRef.current) {
-      videoRef.current.currentTime = currentTime;
-    }
-  }, [currentTime]);
+    const handleMouseUp = useCallback(() => {
+      setDragging(null);
+      // Set the video's currentTime to match the dragged position
+      if (videoRef.current) {
+        videoRef.current.currentTime = currentTime;
+      }
+    }, [currentTime]);
 
   const goToClickTime = (event: React.MouseEvent) => {
     if (videoRef.current && playbackStatus) {

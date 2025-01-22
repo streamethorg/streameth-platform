@@ -14,6 +14,8 @@ import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { MarkersProvider } from './sidebar/markers/markersContext';
 import { ClipsSidebarProvider } from './sidebar/clips/ClipsContext';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
+import { TimelineProvider } from './Timeline/TimelineContext';
+import { TrimmControlsProvider } from './Timeline/TrimmControlsContext';
 const fetchVideoDetails = async (
   videoType: string,
   stageId: string,
@@ -92,15 +94,17 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       stageId={stageId}
       clipUrl={videoDetails.videoSrc}
     >
+      <TimelineProvider>
       <MarkersProvider
         organizationId={organizationId}
         stageId={stageId}
         sessionId={sessionId}
       >
         <ClipsSidebarProvider>
-          <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
-            <div className="flex h-full w-[calc(100%-400px)] flex-col">
-              <Suspense
+          <TrimmControlsProvider>
+            <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
+              <div className="flex h-full w-[calc(100%-400px)] flex-col">
+                <Suspense
                 fallback={
                   <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
                     Loading...
@@ -131,8 +135,10 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
               />
             </div>
           </div>
+          </TrimmControlsProvider>
         </ClipsSidebarProvider>
-      </MarkersProvider>
+        </MarkersProvider>
+      </TimelineProvider>
     </ClipProvider>
   );
 };
