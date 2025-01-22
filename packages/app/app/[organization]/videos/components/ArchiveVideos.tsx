@@ -1,26 +1,31 @@
 'use client';
-import Videos from '@/components/misc/Videos';
-import { FileQuestion, VideoOff } from 'lucide-react';
-import Pagination from './pagination';
-import { useEffect, useState } from 'react';
 import { IExtendedSession, IPagination } from '@/lib/types';
 import { fetchAllSessions } from '@/lib/services/sessionService';
+import VideoGrid from '@/components/misc/Videos';
+import { useEffect, useState } from 'react';
+import { FileQuestion, VideoOff } from 'lucide-react';
+import Pagination from './pagination';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+
+interface ArchiveVideosProps {
+  organizationSlug: string;
+  event?: string;
+  searchQuery?: string;
+}
 
 const ArchiveVideos = ({
   organizationSlug,
   event,
   searchQuery,
-}: {
-  organizationSlug?: string;
-  event?: string;
-  searchQuery?: string;
-}) => {
+}: ArchiveVideosProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [videos, setVideos] = useState<IExtendedSession[]>([]);
   const [pagination, setPagination] = useState<IPagination | null>(null);
   const [currentSearchQuery, setCurrentSearchQuery] = useState('');
   const [currentEvent, setCurrentEvent] = useState('');
-  const fetchSessions = ({
+
+  const fetchSessions = async ({
     page = 1,
     reset,
   }: {
@@ -28,42 +33,73 @@ const ArchiveVideos = ({
     reset?: boolean;
   }) => {
     setIsLoading(true);
-    fetchAllSessions({
-      organizationSlug,
-      event: event,
-      limit: 12,
-      onlyVideos: true,
-      published: 'public',
-      searchQuery,
-      page,
-    })
-      .then((data) => {
-        if (reset) {
-          setVideos(data.sessions);
-        } else {
-          setVideos([...videos, ...data.sessions]);
-        }
-        setPagination(data.pagination);
-      })
-      .finally(() => {
+    try {
+      console.log('🎯 Fetching organization:', organizationSlug);
+      const organization = await fetchOrganization({ organizationSlug });
+      if (!organization) {
+        console.error('❌ Organization not found');
         setIsLoading(false);
+        return;
+      }
+      console.log('✅ Found organization:', organization._id);
+
+      console.log('🎯 Fetching sessions with params:', {
+        organizationId: organization._id,
+        event,
+        limit: 12,
+        onlyVideos: true,
+        published: 'public',
+        searchQuery,
+        page,
+        itemStatus: ProcessingStatus.completed,
       });
+
+      const { sessions, pagination: newPagination } = await fetchAllSessions({
+        organizationId: organization._id,
+        organizationSlug,
+        event,
+        limit: 12,
+        onlyVideos: true,
+        published: 'public',
+        searchQuery,
+        page,
+        itemStatus: ProcessingStatus.completed,
+      });
+
+      console.log('✅ Fetched sessions:', {
+        sessionsCount: sessions.length,
+        pagination: newPagination,
+      });
+
+      if (reset) {
+        setVideos(sessions);
+      } else {
+        setVideos([...videos, ...sessions]);
+      }
+      setPagination(newPagination);
+    } catch (error) {
+      console.error('❌ Failed to fetch sessions:', error);
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+      }
+      if (error instanceof Response) {
+        const text = await error.text();
+        console.error('Response error:', text);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    fetchSessions({
-      page: 1,
-      reset: searchQuery !== currentSearchQuery || event !== currentEvent,
-    });
-    if (searchQuery && searchQuery !== currentSearchQuery) {
-      setCurrentSearchQuery(searchQuery);
-    }
-    if (event && event !== currentEvent) {
-      setCurrentEvent(event);
+    if (searchQuery !== currentSearchQuery || event !== currentEvent) {
+      setCurrentSearchQuery(searchQuery || '');
+      setCurrentEvent(event || '');
+      fetchSessions({ reset: true });
     }
   }, [searchQuery, event]);
 
-  if (Videos.length === 0) {
+  if (videos.length === 0) {
     return (
       <div className="mt-10 flex h-full w-full flex-col items-center justify-center">
         <FileQuestion size={65} />
@@ -76,10 +112,13 @@ const ArchiveVideos = ({
 
   return (
     <>
-      <Videos OrganizationSlug={organizationSlug} videos={videos} />
+      <VideoGrid
+        OrganizationSlug={organizationSlug}
+        videos={videos}
+      />
       <Pagination
-        fetch={fetchSessions}
         pagination={pagination}
+        fetch={fetchSessions}
         isLoading={isLoading}
       />
     </>

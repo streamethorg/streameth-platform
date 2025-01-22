@@ -22,6 +22,7 @@ interface ApiParams {
   speakerIds?: string[]; // Assuming speakerIds is an array of strings
   date?: Date;
   type?: string;
+  itemStatus?: string;
 }
 
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
@@ -38,6 +39,7 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
 export async function fetchAllSessions({
   event,
   organizationSlug,
+  organizationId,
   stageId,
   speakerIds,
   onlyVideos,
@@ -46,9 +48,11 @@ export async function fetchAllSessions({
   limit,
   searchQuery = '',
   type,
+  itemStatus,
 }: {
   event?: string;
   organizationSlug?: string;
+  organizationId?: string;
   stageId?: string;
   speakerIds?: string[];
   onlyVideos?: boolean;
@@ -57,6 +61,7 @@ export async function fetchAllSessions({
   limit?: number;
   searchQuery?: string;
   type?: string;
+  itemStatus?: string;
 }): Promise<{
   sessions: IExtendedSession[];
   pagination: IPagination;
@@ -64,13 +69,14 @@ export async function fetchAllSessions({
   const params: ApiParams = {
     event,
     stageId,
-    organizationId: organizationSlug,
+    organizationId: organizationId || organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
     published,
     speakerIds,
     type,
+    itemStatus,
   };
 
   const response = await fetch(
