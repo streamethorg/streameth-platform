@@ -24,7 +24,7 @@ import { sessionSchema } from '@/lib/schema';
 import { IExtendedSession } from '@/lib/types';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2, Trash2 } from 'lucide-react';
+import { Loader2, Trash2, Image } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -32,6 +32,7 @@ import { toast } from 'sonner';
 import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 import * as z from 'zod';
 import DeleteAsset from '../../components/DeleteAsset';
+import { generateThumbnail as generateThumbnailService } from '@/lib/services/sessionService';
 
 const EditSessionForm = ({
   session,
@@ -151,20 +152,42 @@ const EditSessionForm = ({
           name="coverImage"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Thumbnail</FormLabel>
+              <div className="flex items-center gap-2">
+                <FormLabel>Thumbnail</FormLabel>
+                <Button
+                  onClick={generateThumbnail}
+                  disabled={isLoading}
+                  variant={'outline'}
+                  size="sm"
+                  className="flex items-center gap-2"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <Image className="w-4 h-4" />
+                      Generate thumbnail
+                    </>
+                  )}
+                </Button>
+              </div>
               <FormControl>
                 <ImageUpload
                   options={{
                     resize: true,
                     placeholder:
-                      'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
+                    'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
                     aspectRatio: 16 / 9,
                   }}
                   className="relative rounded-xl aspect-video max-w-[480px] bg-neutrals-300"
                   path={`sessions/${organizationSlug}`}
                   {...field}
-                />
+                  />
               </FormControl>
+
             </FormItem>
           )}
         />
