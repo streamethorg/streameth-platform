@@ -12,6 +12,7 @@ import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
+import Hls from 'hls.js';
 
 export interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -269,3 +270,40 @@ export interface IExtendedMarker extends Omit<IMarker, '_id'> {
   updatedAt?: string;
   __v?: string;
 }
+
+export type PlaybackStatus = {
+  progress: number;
+  offset: number;
+};
+
+export type TimeSettings = {
+  unix: number;
+  displayTime: number;
+};
+
+export type ClipContextType = {
+  playbackStatus: PlaybackStatus | null;
+  setPlaybackStatus: React.Dispatch<React.SetStateAction<PlaybackStatus | null>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  videoRef: React.RefObject<HTMLVideoElement>;
+  dragging: string | null;
+  setDragging: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedTooltip: string | null;
+  setSelectedTooltip: React.Dispatch<React.SetStateAction<string | null>>;
+  stageId: string;
+  isCreatingClip: boolean;
+  setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
+  hls: Hls | null;
+  setHls: React.Dispatch<React.SetStateAction<Hls | null>>;
+  pixelsPerSecond: number;
+  setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
+  clipUrl: string;
+  organizationId: string;
+  startTime: TimeSettings;
+  endTime: TimeSettings;
+  setStartTime: (time: TimeSettings) => void;
+  setEndTime: (time: TimeSettings) => void;
+  timeReference: number;
+  convertSecondsToUnix: (reference: number, seconds: number) => number;
+};
