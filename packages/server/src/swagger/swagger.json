@@ -2148,6 +2148,21 @@
 					"processingStatus": {
 						"$ref": "#/components/schemas/ProcessingStatus"
 					},
+					"aiAnalysis": {
+						"properties": {
+							"isVectorized": {
+								"type": "boolean"
+							},
+							"status": {
+								"$ref": "#/components/schemas/ProcessingStatus"
+							}
+						},
+						"required": [
+							"isVectorized",
+							"status"
+						],
+						"type": "object"
+					},
 					"transcripts": {
 						"properties": {
 							"text": {
@@ -2388,6 +2403,21 @@
 					"processingStatus": {
 						"$ref": "#/components/schemas/ProcessingStatus"
 					},
+					"aiAnalysis": {
+						"properties": {
+							"isVectorized": {
+								"type": "boolean"
+							},
+							"status": {
+								"$ref": "#/components/schemas/ProcessingStatus"
+							}
+						},
+						"required": [
+							"isVectorized",
+							"status"
+						],
+						"type": "object"
+					},
 					"transcripts": {
 						"properties": {
 							"text": {
@@ -2587,6 +2617,21 @@
 					},
 					"processingStatus": {
 						"$ref": "#/components/schemas/ProcessingStatus"
+					},
+					"aiAnalysis": {
+						"properties": {
+							"isVectorized": {
+								"type": "boolean"
+							},
+							"status": {
+								"$ref": "#/components/schemas/ProcessingStatus"
+							}
+						},
+						"required": [
+							"isVectorized",
+							"status"
+						],
+						"type": "object"
 					},
 					"transcripts": {
 						"properties": {
@@ -2944,111 +2989,6 @@
 							"sessions"
 						],
 						"type": "object"
-					}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IMarker": {
-				"properties": {
-					"_id": {
-						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-					},
-					"name": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					},
-					"organizationId": {
-						"anyOf": [
-							{
-								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-							},
-							{
-								"type": "string"
-							}
-						]
-					},
-					"stageId": {
-						"anyOf": [
-							{
-								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
-							},
-							{
-								"type": "string"
-							}
-						]
-					},
-					"start": {
-						"type": "number",
-						"format": "double"
-					},
-					"end": {
-						"type": "number",
-						"format": "double"
-					},
-					"date": {
-						"type": "string"
-					},
-					"color": {
-						"type": "string"
-					},
-					"speakers": {
-						"items": {
-							"$ref": "#/components/schemas/ISpeaker"
-						},
-						"type": "array"
-					},
-					"slug": {
-						"type": "string"
-					},
-					"startClipTime": {
-						"type": "number",
-						"format": "double"
-					},
-					"endClipTime": {
-						"type": "number",
-						"format": "double"
-					},
-					"pretalxSessionCode": {
-						"type": "string"
-					},
-					"talkType": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"name",
-					"organizationId",
-					"stageId",
-					"start",
-					"end",
-					"date",
-					"color",
-					"startClipTime",
-					"endClipTime"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IStandardResponse_IMarker-Array_": {
-				"properties": {
-					"status": {
-						"type": "string"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {
-						"items": {
-							"$ref": "#/components/schemas/IMarker"
-						},
-						"type": "array"
 					}
 				},
 				"required": [
@@ -3814,6 +3754,99 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IMarker": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"sessionId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organizationId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"stageId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
+					},
+					"start": {
+						"type": "number",
+						"format": "double"
+					},
+					"end": {
+						"type": "number",
+						"format": "double"
+					},
+					"date": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"speakers": {
+						"items": {
+							"$ref": "#/components/schemas/ISpeaker"
+						},
+						"type": "array"
+					},
+					"slug": {
+						"type": "string"
+					},
+					"startClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"endClipTime": {
+						"type": "number",
+						"format": "double"
+					},
+					"pretalxSessionCode": {
+						"type": "string"
+					},
+					"talkType": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"organizationId",
+					"stageId",
+					"start",
+					"end",
+					"date",
+					"color",
+					"startClipTime",
+					"endClipTime"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStandardResponse_IMarker_": {
 				"properties": {
 					"status": {
@@ -3837,6 +3870,16 @@
 				"properties": {
 					"_id": {
 						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"sessionId": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							},
+							{
+								"type": "string"
+							}
+						]
 					},
 					"name": {
 						"type": "string"
@@ -3902,6 +3945,28 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"IStandardResponse_IMarker-Array_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IMarker"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"Pick_IMarker.Exclude_keyofIMarker.talkType__": {
 				"properties": {
 					"organizationId": {
@@ -3960,6 +4025,16 @@
 					},
 					"pretalxSessionCode": {
 						"type": "string"
+					},
+					"sessionId": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+							}
+						]
 					},
 					"date": {
 						"type": "string"
@@ -6513,7 +6588,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/IStandardResponse_IMarker-Array_"
+									"$ref": "#/components/schemas/IStandardResponse_void_"
 								}
 							}
 						}
@@ -6540,16 +6615,10 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"stageId": {
-										"type": "string"
-									},
 									"prompt": {
 										"type": "string"
 									}
 								},
-								"required": [
-									"stageId"
-								],
 								"type": "object"
 							}
 						}
@@ -7635,11 +7704,7 @@
 				"tags": [
 					"Index"
 				],
-				"security": [
-					{
-						"jwt": []
-					}
-				],
+				"security": [],
 				"parameters": [],
 				"requestBody": {
 					"required": true,

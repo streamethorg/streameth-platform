@@ -55,6 +55,7 @@ x-common-environment: &common-environment
   STRIPE_PUBLISHABLE_KEY_FILE: ${STRIPE_PUBLISHABLE_KEY_FILE}
   STRIPE_SECRET_KEY_FILE: ${STRIPE_SECRET_KEY_FILE}
   FRONTEND_URL: ${FRONTEND_URL}
+  PINECONE_API_KEY_FILE: ${PINECONE_API_KEY_FILE}
 
 x-common-worker: &common-worker
   volumes:
@@ -79,7 +80,7 @@ services:
       dockerfile: packages/server/workers/clips/Dockerfile.dev
     environment: 
       <<: *common-environment
-      REMOTION_WEBHOOK_URL: https://kodiak-feasible-distinctly.ngrok-free.app/webhook/remotion
+      REMOTION_WEBHOOK_URL: https://kit-great-optionally.ngrok-free.app/webhook/remotion
 
   reel-creator:
     build:
@@ -90,7 +91,7 @@ services:
       - /app/packages/reel-creator/node_modules
     environment:
       NODE_ENV: ${NODE_ENV}
-      SERVER_WEBHOOK_URL: https://kodiak-feasible-distinctly.ngrok-free.app/webhook/remotion
+      SERVER_WEBHOOK_URL: https://kit-great-optionally.ngrok-free.app/webhook/remotion
       SERVER_WEBHOOK_SECRET_FILE: ${LIVEPEER_WEBHOOK_SECRET_FILE}
       AWS_ACCESS_KEY_ID_FILE: ${AWS_ACCESS_KEY_ID_FILE}
       AWS_SECRET_ACCESS_KEY_FILE: ${AWS_SECRET_ACCESS_KEY_FILE}

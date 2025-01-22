@@ -21,6 +21,9 @@ export const config = {
   gemini: {
     apiKey: readSecretFile(validatedEnv.GEMINI_API_KEY_FILE),
   },
+  pinecone: {
+    apiKey: readSecretFile(validatedEnv.PINECONE_API_KEY_FILE),
+  },
   baseUrl: validatedEnv.BASE_URL,
   playerUrl: validatedEnv.PLAYER_URL,
   frontendUrl: validatedEnv.FRONTEND_URL,

@@ -44,7 +44,7 @@ const UserProfile = async ({
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>
           <Link
-            href={`/studio/${organization}`}
+            href={`/studio/${data.slug}`}
             className="flex items-center w-full"
           >
             <Button

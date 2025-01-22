@@ -45,7 +45,7 @@ const SessionTranscriptions = ({
 
   if (transcriptionState === TranscriptionStatus.processing) {
     return (
-      <div className="flex items-center">
+      <div className="flex items-center border rounded-xl p-2">
         <LuLoader2 className="mr-2 w-4 h-4 animate-spin" /> Processing
         transcription...{' '}
         <p
@@ -73,7 +73,7 @@ const SessionTranscriptions = ({
           loading={isGeneratingTranscript}
           className="flex items-center gap-2"
         >
-          <LuRefreshCcw className="w-4 h-4" />
+          <LuRefreshCcw className="w-4 h-4 cursor-pointer" />
           Regenerate Transcription
         </Button>
       </div>

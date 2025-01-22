@@ -68,7 +68,10 @@ const OrganizationPage = async ({
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >
-              <Button variant="outline" className="flex items-center gap-2 h-10">
+              <Button
+                variant="outline"
+                className="flex items-center gap-2 h-10"
+              >
                 <ScissorsLineDashed className="w-5 h-5" />
                 <span>Clip Content</span>
               </Button>

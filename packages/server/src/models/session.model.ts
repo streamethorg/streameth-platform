@@ -68,6 +68,10 @@ const SessionSchema = new Schema<ISessionModel>(
     ],
     talkType: { type: String, default: '' },
     processingStatus: { type: String, enum: Object.keys(ProcessingStatus) },
+    aiAnalysis: {
+      status: { type: String, enum: Object.keys(ProcessingStatus) },
+      isVectorized: { type: Boolean, default: false },
+    },
     transcripts: {
       status: { type: String, enum: Object.keys(TranscriptionStatus) },
       subtitleUrl: { type: String, default: '' },

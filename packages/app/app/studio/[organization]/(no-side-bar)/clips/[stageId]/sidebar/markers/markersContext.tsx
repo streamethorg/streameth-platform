@@ -6,8 +6,6 @@ import { createContext, useContext, useState, useEffect } from 'react';
 interface IMarkersContext {
   markers: IExtendedMarker[];
   setMarkers: (markers: IExtendedMarker[]) => void;
-  filteredMarkers: IExtendedMarker[];
-  setFilteredMarkers: (markers: IExtendedMarker[]) => void;
   selectedMarkerId: string;
   setSelectedMarkerId: (id: string) => void;
   isImportingMarkers: boolean;
@@ -18,6 +16,7 @@ interface IMarkersContext {
   isAddingOrEditingMarker: boolean;
   setIsAddingOrEditingMarker: (addingOrEditing: boolean) => void;
   organizationId: string;
+  sessionId: string;
 }
 
 const MarkersContext = createContext<IMarkersContext | null>(null);
@@ -34,32 +33,32 @@ export const MarkersProvider = ({
   children,
   organizationId,
   stageId,
+  sessionId,
 }: {
   children: React.ReactNode;
   organizationId: string;
   stageId: string;
+  sessionId?: string;
 }) => {
   const [markers, setMarkers] = useState<IExtendedMarker[]>([]);
-  const [filteredMarkers, setFilteredMarkers] = useState<IExtendedMarker[]>([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState<string>('');
   const [isImportingMarkers, setIsImportingMarkers] = useState<boolean>(false);
-  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(false);
+  const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(true);
   const [isAddingOrEditingMarker, setIsAddingOrEditingMarker] =
     useState<boolean>(false);
 
   const fetchAndSetMarkers = async () => {
     if (stageId) {
-      setIsLoadingMarkers(true);
       try {
         const markers = await fetchMarkers({
           organizationId,
           stageId,
         });
-        const sortedMarkers = markers.sort(
-          (a, b) => a.startClipTime - b.startClipTime
-        );
+        const sortedMarkers = markers
+          .sort((a, b) => a.startClipTime - b.startClipTime)
+          .filter((marker) => marker.sessionId === sessionId);
+        console.log('sortedMarkers', sortedMarkers);
         setMarkers(sortedMarkers);
-        setFilteredMarkers(sortedMarkers);
       } catch (error) {
         console.error('Error fetching markers:', error);
       } finally {
@@ -70,15 +69,13 @@ export const MarkersProvider = ({
 
   useEffect(() => {
     fetchAndSetMarkers();
-  }, [stageId]);
+  }, [stageId, sessionId]);
 
   return (
     <MarkersContext.Provider
       value={{
         markers,
         setMarkers,
-        filteredMarkers,
-        setFilteredMarkers,
         selectedMarkerId,
         setSelectedMarkerId,
         isImportingMarkers,
@@ -89,6 +86,7 @@ export const MarkersProvider = ({
         isAddingOrEditingMarker,
         setIsAddingOrEditingMarker,
         organizationId,
+        sessionId: sessionId || '',
       }}
     >
       {children}

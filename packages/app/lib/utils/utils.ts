@@ -21,7 +21,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const isFeatureAvailable = (expirationDate: Date | null | undefined) => {
-  return expirationDate && new Date(expirationDate).getTime() > new Date().getTime();
+  return (
+    expirationDate && new Date(expirationDate).getTime() > new Date().getTime()
+  );
 };
 
 export const selectOptionFocusHandle = (

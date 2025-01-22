@@ -1,26 +1,40 @@
 import { apiUrl } from '../utils/utils';
-import { fetchClient } from './fetch-client';
 
 export const videoUpload = async ({
   data,
+  headers = {},
 }: {
   data: FormData;
+  headers?: Record<string, string>;
 }): Promise<string> => {
+  const uploadUrl = `${apiUrl()}/upload`;
+
   try {
-    const response = await fetchClient(`${apiUrl()}/upload`, {
+    const response = await fetch(uploadUrl, {
       method: 'POST',
       cache: 'no-cache',
-      headers: {},
+      headers: {
+        ...headers,
+      },
       body: data,
     });
 
     if (!response.ok) {
-      throw 'Error uploading video service';
+      const errorText = await response.text();
+      console.error('❌ Upload failed:', {
+        status: response.status,
+        error: errorText,
+      });
+      throw new Error(`Error uploading video: ${errorText}`);
     }
 
-    return (await response.json()).data;
+    const result = await response.json();
+    return result.data;
   } catch (e) {
-    console.log('error in upload video service', e);
+    console.error(
+      '❌ Upload error:',
+      e instanceof Error ? e.message : 'Unknown error'
+    );
     throw e;
   }
 };

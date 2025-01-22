@@ -54,16 +54,24 @@ const NavbarStudio = ({
             variant="outline"
             organization={organization}
           />
-        ): (
-          <FeatureButton organizationId={organization._id.toString()} variant="outline" className="flex items-center gap-2">
+        ) : (
+          <FeatureButton
+            organizationId={organization._id.toString()}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
             <Radio className="w-5 h-5" />
             Create Livestream
           </FeatureButton>
         )}
         {isFeatureAvailable(organization.expirationDate) ? (
           <UploadVideoDialog organizationId={organization._id.toString()} />
-        ): (
-          <FeatureButton organizationId={organization._id.toString()} variant="outline" className="flex items-center gap-2">
+        ) : (
+          <FeatureButton
+            organizationId={organization._id.toString()}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
             <FileUp className="w-5 h-5" />
             Upload Video
           </FeatureButton>

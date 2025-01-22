@@ -35,13 +35,13 @@ const fetchVideoDetails = async (
         type: 'livepeer',
         name: liveStage.name,
         transcribe: liveStage.transcripts?.chunks,
+        transcibeStatus: liveStage.transcripts?.status,
       };
     }
 
     case 'recording': {
       const session = await fetchSession({ session: sessionId! });
       if (!session?.playbackId || !session?.assetId) return null;
-
       // const stage = await fetchStage({ stage: session.stageId as string });
       // if (!stage?.streamSettings?.playbackId) return null;
       const videoSrc = await getVideoUrlAction(session);
@@ -50,6 +50,8 @@ const fetchVideoDetails = async (
         type: 'livepeer',
         name: session.name,
         transcribe: session.transcripts?.chunks,
+        transcribeStatus: session.transcripts?.status,
+        aiAnalysisStatus: session.aiAnalysis?.status,
       };
     }
 
@@ -90,7 +92,11 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       stageId={stageId}
       clipUrl={videoDetails.videoSrc}
     >
-      <MarkersProvider organizationId={organizationId} stageId={stageId}>
+      <MarkersProvider
+        organizationId={organizationId}
+        stageId={stageId}
+        sessionId={sessionId}
+      >
         <ClipsSidebarProvider>
           <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
             <div className="flex h-full w-[calc(100%-400px)] flex-col">
@@ -118,8 +124,10 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
             </div>
             <div className="flex w-[400px] h-full">
               <Sidebar
-                transcribe={videoDetails.transcribe}
-                sessionId={sessionId}
+                transcribe={videoDetails.transcribe || []}
+                sessionId={sessionId || ''}
+                transcribeStatus={videoDetails.transcribeStatus ?? null}
+                aiAnalysisStatus={videoDetails.aiAnalysisStatus ?? null}
               />
             </div>
           </div>

@@ -13,7 +13,7 @@ import FuzzySearch from 'fuzzy-search';
 import { fetchClient } from './fetch-client';
 interface ApiParams {
   event?: string;
-  organization?: string;
+  organizationId?: string;
   stageId?: string;
   page?: number;
   size?: number;
@@ -64,7 +64,7 @@ export async function fetchAllSessions({
   const params: ApiParams = {
     event,
     stageId,
-    organization: organizationSlug,
+    organizationId: organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
@@ -79,6 +79,10 @@ export async function fetchAllSessions({
       next: { revalidate: 100 },
     }
   );
+  if (!response.ok) {
+    console.error('❌ Failed to fetch sessions:', await response.text());
+    throw new Error('Failed to fetch sessions');
+  }
   const a = await response.json();
   const allSessions = a.data;
   if (searchQuery) {
@@ -342,7 +346,6 @@ export const fetchSessionRenderingProgress = async ({
   return (await response.json()).data;
 };
 
-
 export const fetchAsset = async ({
   assetId,
 }: {
@@ -576,11 +579,9 @@ export const generateTranscriptions = async ({
 };
 
 export const extractHighlights = async ({
-  stageId,
   sessionId,
   prompt,
 }: {
-  stageId: string;
   sessionId: string;
   prompt: string;
 }): Promise<IHighlight[]> => {
@@ -593,7 +594,7 @@ export const extractHighlights = async ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          stageId,
+          prompt,
         }),
       }
     );

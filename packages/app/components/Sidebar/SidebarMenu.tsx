@@ -62,7 +62,9 @@ const SidebarMenu = async ({
   if (organization?.expirationDate) {
     const expiryDate = new Date(organization.expirationDate);
     const now = new Date();
-    daysLeft = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24));
+    daysLeft = Math.ceil(
+      (expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
+    );
   }
 
   return (
@@ -82,7 +84,9 @@ const SidebarMenu = async ({
               {organization?.name.slice(0, 2)}
             </div>
           )}
-          <p className="text-lg font-bold w-full text-center p-2">{organization?.name}</p>
+          <p className="text-lg font-bold w-full text-center p-2">
+            {organization?.name}
+          </p>
 
           <div className="flex flex-row items-center space-x-2">
             <Button variant={'outline'} size={'sm'}>
@@ -103,10 +107,13 @@ const SidebarMenu = async ({
             text={item.text}
             icon={item.icon}
             badge={
-              item.text === 'Subscription' && organization?.paymentStatus === 'active' && daysLeft && daysLeft > 0
-                ? { 
-                    text: daysLeft === 1 ? '1 day left' : 'Active', 
-                    variant: daysLeft === 1 ? 'warning' : 'success' 
+              item.text === 'Subscription' &&
+              organization?.paymentStatus === 'active' &&
+              daysLeft &&
+              daysLeft > 0
+                ? {
+                    text: daysLeft === 1 ? '1 day left' : 'Active',
+                    variant: daysLeft === 1 ? 'warning' : 'success',
                   }
                 : undefined
             }

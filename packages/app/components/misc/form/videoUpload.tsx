@@ -18,13 +18,13 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useDropzone, FileRejection } from 'react-dropzone';
-import { videoUploadAction } from '@/lib/actions/videoUpload';
 import { createSessionAction } from '@/lib/actions/sessions';
 import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
 import {
   SessionType,
   eVisibilty,
 } from 'streameth-new-server/src/interfaces/session.interface';
+import { videoUpload } from '@/lib/services/videoUploadService';
 
 function getVideoData(file: File) {
   const dataTransfer = new DataTransfer();
@@ -107,20 +107,29 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
         if (!file) return '';
 
         try {
-          console.log('📦 Preparing animation video for upload:', file.name);
           const data = new FormData();
-          data.set(
-            'file',
-            new File([file], file.name.replace(/[^a-zA-Z0-9.]/g, '_'), {
-              type: file.type,
-            })
-          );
+          const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
+          const uploadFile = new File([file], sanitizedFileName, {
+            type: file.type,
+          });
+          data.set('file', uploadFile);
           data.set('directory', path);
-          console.log('🚀 Starting animation upload to path:', path);
-          const videoUrl = await videoUploadAction({ data });
-          if (!videoUrl) throw new Error('Error uploading animation');
 
-          console.log('✅ Animation upload successful! URL:', videoUrl);
+          const videoUrl = await videoUpload({
+            data,
+            headers: {},
+          }).catch(async (error) => {
+            console.error(
+              '❌ Upload failed:',
+              error instanceof Error ? error.message : 'Unknown error'
+            );
+            throw error;
+          });
+
+          if (!videoUrl) {
+            throw new Error('No URL returned from upload');
+          }
+
           setPreview(videoUrl);
 
           // Create session for animation if path includes 'animations'
@@ -142,20 +151,17 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
                 processingStatus: ProcessingStatus.completed,
               },
             });
-            console.log(
-              '✅ Animation session created with videoUrl:',
-              videoUrl
-            );
             toast.success('Animation uploaded');
           } catch (error) {
-            console.error('❌ Failed to create animation session:', error);
+            console.error(
+              '❌ Session creation failed:',
+              error instanceof Error ? error.message : 'Unknown error'
+            );
             toast.error('Failed to create animation session');
-            // Continue even if session creation fails, as we still have the video URL
           }
 
           return videoUrl;
         } catch (e) {
-          console.error('❌ Animation upload failed:', e);
           setPreview('');
           throw e;
         } finally {
@@ -171,7 +177,9 @@ const VideoUpload = forwardRef<HTMLInputElement, VideoUploadProps>(
         console.log('⚠️ Animation file rejected:', { code, message });
         if (code === 'file-too-large') {
           setError(
-            `Animation file is too large. Max size is ${maxSize / 2000000}MB.` // 20MB
+            `Animation file is too large. Max size is ${
+              maxSize / 1024 / 1024
+            }MB.` // 20MB
           );
         } else {
           setError(message);

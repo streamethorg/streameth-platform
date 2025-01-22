@@ -26,12 +26,7 @@ import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
 import MarkerService from './marker.service';
 import { IMarker } from '@interfaces/marker.interface';
-
-interface AIHighlight {
-  start: number;
-  end: number;
-  title: string;
-}
+import { chat } from 'googleapis/build/src/apis/chat';
 
 export default class SessionService {
   private path: string;
@@ -115,13 +110,15 @@ export default class SessionService {
   }> {
     let filter: {} = {};
 
-    // Only exclude animations and editor clips if no specific type is requested
-    if (d.type === undefined) {
-      console.log('No type specified, excluding animations and editor clips');
+    // Only exclude animations and editor clips if no specific type is requested and no stageId is provided
+    if (d.type === undefined && d.stageId === undefined) {
+      console.log(
+        'No type or stageId specified, excluding animations and editor clips',
+      );
       filter = {
         type: { $nin: [SessionType.animation, SessionType.editorClip] },
       };
-    } else {
+    } else if (d.type !== undefined) {
       console.log('Type specified:', d.type);
       filter = { type: d.type };
     }
@@ -412,114 +409,95 @@ export default class SessionService {
     return query;
   }
 
-  async extractHighlights(
-    stageId: string,
-    sessionId: string,
-    prompt?: string,
-  ): Promise<IMarker[]> {
-
+  async launchExtractHighlights(sessionId: string, prompt?: string) {
     const session = await this.get(sessionId);
-    if (!session.transcripts) {
-      console.log('Session has no transcripts');
-      throw new HttpException(400, 'Session has no transcripts');
+    if (session.aiAnalysis.status === ProcessingStatus.pending) {
+      throw new HttpException(400, 'Highlights already being extracted');
     }
+    this.extractHighlights(session, prompt);
+    await Session.updateOne(
+      { _id: sessionId },
+      {
+        $set: {
+          aiAnalysis: {
+            status: ProcessingStatus.pending,
+            isVectorized: false,
+          },
+        },
+      },
+    );
+    return;
+  }
 
-    const markerService = new MarkerService();
-    const markers = await markerService.getAll({
-      organization: session.organizationId.toString(),
-      stageId: stageId,
-    });
-    const chunks = session.transcripts.chunks;
-    const transcript = session.transcripts.text;
-    console.log(transcript);
+  async extractHighlights(session: ISession, prompt?: string): Promise<void> {
     const chat = new ChatAPI();
-    const highlights = await chat.chat([
-      {
-        role: 'system',
-        content: `
+    try {
+      const { query, llmPrompt } = await chat.choosePrompt(prompt);
 
-          Task:
-            - You are an expert video editor specializing in extracting and structuring full speaker presentations and panels from livestreams. 
-            - Your task is to precisely indentify the start and end points of speaker presentations and panels from start to end, include the full speaker presentation or panel.
-            - Usually speaker presentation and pannel are between 10 to 30 minutes long, dont extract 1 minute segemnts or similar, look for full speaker presentations and panels.
-            - Identify segments using markers such as:
-            - Introductions: e.g.,\"Thank you so much ....\", \"Welcome to...\", \"Next up, we have...\", \"Please give it up for...\", \"Let's get started with...\", \"We're excited to welcome...\", \"We're honored to present...\"
-            - Transitions or cues indicating the start or end of a keynote/panel: e.g., \"discussion on...\", \"presentation about...\", \"closing remarks on...\"
-        
-            Input: 
-            - You will be given a vtt transcript of the livestream.
-            Output:
-            - Return a JSON array of objects where each object represents a speaker presentation or panel. Use the following structure:
-              {
-                "start": number,    // Timestamp in seconds where the speaker presentation or panel begins
-                "end": number,      // Timestamp in seconds where the speaker presentation or panel ends
-                "title": string     // A concise, descriptive title for the speaker presentation or panel, based on its content
-                }
-      
-          Strict Rules:
-          - Titles should summarize the topic or theme of each speaker presentation or panel clearly and concisely.
-          - Timestamps must align precisely with the transcript to avoid cutting off content mid-sentence.
-          - Follow the output format exactly, just return an array of objects.
-          - NEVER RETURN ANYTHING OTHER THAN AN ARRAY OF OBJECTS, ITS FORBIDDEN TO RETURN ANYTHING ELSE.
-          - NEVER RETURN ANTYHNING WITH A TITLE THAT IS ALREADY PRESENTED AS A MARKER.
-          - RETURNED CLIPS SHOULD NOT BE SHORTER THAN 10 MINUTES.
-          - DONT CLIPS THAT ARE ALREADY PRESENTED AS A MARKER.
-        `,
-      },
-      {
-        role: 'user',
-        content: ` Here is the transcript: ${transcript}, here is the word level transcript: ${JSON.stringify(chunks)}
-       ${prompt ? `Here is the prompt provided by the user: ${prompt}` : ''}
-       ${markers.length > 0 ? `I have already identified the following speaker presentations and panels: ${JSON.stringify(markers)}, please identify the next speaker presentations and panels that are not already identified.` : ''}
-      `,
-      },
-    ]);
-
-    const parsedHighlights: unknown = JSON.parse(highlights);
-    console.log('parsedHighlights', parsedHighlights);
-    // Type guard function to validate the structure
-    const isValidHighlight = (item: unknown): item is AIHighlight => {
-      return (
-        typeof item === 'object' &&
-        item !== null &&
-        'start' in item &&
-        'end' in item &&
-        'title' in item &&
-        typeof (item as AIHighlight).start === 'number' &&
-        typeof (item as AIHighlight).end === 'number' &&
-        typeof (item as AIHighlight).title === 'string'
+      const chunks = session.transcripts.chunks;
+      const similarPhrases = await chat.getSimilarPhrases(
+        session._id.toString(),
+        chunks,
+        query,
       );
-    };
+      console.log('similarPhrases', similarPhrases);
+      const contextualizedPhrases = chat.contextualizePhrasesWithTimestamps(
+        similarPhrases,
+        chunks,
+      );
 
-    // Validate array and its contents
-    if (
-      !Array.isArray(parsedHighlights) ||
-      !parsedHighlights.every(isValidHighlight)
-    ) {
-      throw new HttpException(500, 'AI returned invalid highlight format');
-    }
+      console.log('contextualizedPhrases', contextualizedPhrases);
 
-    if (parsedHighlights.length === 0) {
-      return [];
-    }
+      const highlights = await chat.getAIHighlights(
+        chat,
+        llmPrompt,
+        contextualizedPhrases,
+        prompt,
+      );
 
-    const markerPromises = await Promise.all(
-      parsedHighlights.map(
-        async (highlight) =>
-          await markerService.create({
+      console.log('highlights', highlights);
+      const parsedHighlights = chat.parseAndValidateHighlights(highlights);
+
+      const markerService = new MarkerService();
+      await Promise.all(
+        parsedHighlights.map((highlight) =>
+          markerService.create({
             name: highlight.title,
-            start: highlight.start,
-            end: highlight.end,
-            stageId: stageId,
+            start: Number(highlight.start),
+            end: Number(highlight.end),
+            stageId: session.stageId,
+            sessionId: session._id,
             organizationId: session.organizationId.toString(),
             date: session.createdAt.toString(),
             color: '#000000',
-            startClipTime: highlight.start,
-            endClipTime: highlight.end,
+            startClipTime: Number(highlight.start),
+            endClipTime: Number(highlight.end),
           }),
-      ),
-    );
-
-    return markerPromises;
+        ),
+      );
+      await Session.updateOne(
+        { _id: session._id },
+        {
+          $set: {
+          aiAnalysis: {
+            status: ProcessingStatus.completed,
+            isVectorized: true,
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Error extracting highlights:', error);
+      await Session.updateOne(
+        { _id: session._id },
+        {
+          $set: {
+            aiAnalysis: {
+              status: ProcessingStatus.failed,
+              isVectorized: false,
+            },
+          },
+        },
+      );
+    }
   }
 }

@@ -17,6 +17,7 @@ import {
   LuArrowBigUp,
   LuArrowLeft,
   LuArrowRight,
+  LuEye,
   LuImport,
   LuInfo,
   LuPlus,
@@ -25,6 +26,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
+import { useCreateClip } from '@/lib/hooks/useCreateClip';
 
 const Controls = () => {
   const {
@@ -37,11 +39,12 @@ const Controls = () => {
     timelineContainerWidth,
   } = useClipContext();
 
+  const { handlePreview } = useCreateClip();
+
   const {
     isAddingOrEditingMarker,
     isImportingMarkers,
     setIsAddingOrEditingMarker,
-    setIsImportingMarkers,
     setSelectedMarkerId,
   } = useMarkersContext();
 
@@ -319,13 +322,9 @@ const Controls = () => {
             Add marker
           </Button>
           <div className="hidden xl:flex space-x-2">
-            <Button
-              disabled={isDisabled}
-              variant="outline"
-              onClick={() => setIsImportingMarkers(true)}
-            >
-              <LuImport className="w-4 h-4 mr-2" />
-              Import Markers
+            <Button variant={'secondary'} onClick={handlePreview} type="button">
+              <LuEye className="h-4 w-4 mr-2" />
+              Preview
             </Button>
             <Button
               disabled={isDisabled}

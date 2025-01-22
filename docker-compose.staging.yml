@@ -58,7 +58,7 @@ x-common-environment: &common-environment
   AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/aws-secret-key
   STRIPE_SECRET_KEY_FILE: /run/secrets/stripe-secret-key
   STRIPE_PUBLISHABLE_KEY_FILE: /run/secrets/stripe-publishable-key
-
+  PINECONE_API_KEY_FILE: /run/secrets/pinecone-api-key
 x-common-deploy: &common-deploy
   restart_policy:
     condition: on-failure
@@ -95,6 +95,8 @@ x-common-secrets: &common-secrets
   - stripe-secret-key
   - stripe-publishable-key
   - gemini-api-key
+  - pinecone-api-key
+
 services:
   server:
     image: ghcr.io/streamethorg/streameth-platform/server:staging
@@ -329,4 +331,6 @@ secrets:
   stripe-publishable-key:
     external: true
   gemini-api-key:
+    external: true
+  pinecone-api-key:
     external: true

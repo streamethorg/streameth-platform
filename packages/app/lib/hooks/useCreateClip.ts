@@ -108,7 +108,7 @@ export const useCreateClip = () => {
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
     setIsCreateClip(true);
 
-    if (endTime.unix < startTime.unix) {
+    if (endTime.displayTime < startTime.displayTime) {
       setIsCreateClip(false);
       console.error('🚨 End time must be greater than start time');
       return toast.error('End time must be greater than start time');
@@ -118,8 +118,8 @@ export const useCreateClip = () => {
       name: values.name,
       description: values.description,
       speakers: values?.speakers,
-      startClipTime: startTime.unix,
-      endClipTime: endTime.unix,
+      startClipTime: startTime.displayTime,
+      endClipTime: endTime.displayTime,
       start: values.start,
       end: values.end,
       organizationId,
@@ -181,7 +181,9 @@ export const useCreateClip = () => {
       fetchSessions();
     } catch (error) {
       console.error('🚨 Error creating clip:', error);
-      toast.error(error instanceof Error ? error.message : 'Error creating clip');
+      toast.error(
+        error instanceof Error ? error.message : 'Error creating clip'
+      );
     } finally {
       setIsCreateClip(false);
     }

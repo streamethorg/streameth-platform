@@ -33,7 +33,10 @@ const SessionSelector = ({
   return (
     <div className="p-2 flex w-full bg-white flex-row justify-between items-center">
       <div className="flex flex-row items-center w-full">
-        <p className="text-md uppercase font-light mr-4" aria-label={`Editing stage: ${stageName}`}>
+        <p
+          className="text-md uppercase font-light mr-4"
+          aria-label={`Editing stage: ${stageName}`}
+        >
           Editing: {stageName}
         </p>
         <Combobox
@@ -42,7 +45,9 @@ const SessionSelector = ({
           value={currentSession.value}
           setValue={(value) => {
             if (!value) return;
-            const selectedRecording = recordings.find(rec => rec.value === value);
+            const selectedRecording = recordings.find(
+              (rec) => rec.value === value
+            );
             if (selectedRecording) {
               router.push(selectedRecording.url);
             }
@@ -50,7 +55,7 @@ const SessionSelector = ({
           aria-label="Select recording session"
         />
       </div>
-      <Link 
+      <Link
         href={`/studio/${organization}/library?clipable=true`}
         aria-label="Exit to library"
       >

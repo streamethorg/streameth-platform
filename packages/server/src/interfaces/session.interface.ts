@@ -71,6 +71,10 @@ export interface ISession {
   socials?: { name: string; date: number }[];
   talkType?: string;
   processingStatus?: ProcessingStatus;
+  aiAnalysis?: {
+    status: ProcessingStatus;
+    isVectorized: boolean;
+  };
   transcripts?: {
     status: TranscriptionStatus;
     subtitleUrl: string;

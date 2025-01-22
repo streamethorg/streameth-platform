@@ -27,7 +27,7 @@ export const useSubscription = (organizationId: string) => {
         isProcessing: false,
         isPending: false,
         isFailed: false,
-      } as SubscriptionStatus
+      } as SubscriptionStatus,
     };
   }
 
@@ -37,13 +37,15 @@ export const useSubscription = (organizationId: string) => {
     isPending: organization.paymentStatus === 'pending',
     isFailed: organization.paymentStatus === 'failed',
     daysLeft: 0,
-    hasExpired: true
+    hasExpired: true,
   };
 
   if (organization.expirationDate) {
     const expiryDate = new Date(organization.expirationDate);
     const now = new Date();
-    status.daysLeft = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24));
+    status.daysLeft = Math.ceil(
+      (expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
+    );
     status.hasExpired = status.daysLeft <= 0;
   }
 
@@ -55,6 +57,6 @@ export const useSubscription = (organizationId: string) => {
     isLoading: loading,
     error,
     organizationSlug: organization.slug || '',
-    status
+    status,
   };
-} 
+};
