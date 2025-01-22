@@ -6,38 +6,8 @@ import React, {
   useRef,
 } from 'react';
 import Hls from 'hls.js';
-
-type PlaybackStatus = {
-  progress: number;
-  offset: number;
-};
-
-type PlaybackTime = {
-  displayTime: number;
-};
-
-type ClipContextType = {
-  playbackStatus: PlaybackStatus | null;
-  setPlaybackStatus: React.Dispatch<
-    React.SetStateAction<PlaybackStatus | null>
-  >;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  videoRef: React.RefObject<HTMLVideoElement>;
-  dragging: string | null;
-  setDragging: React.Dispatch<React.SetStateAction<string | null>>;
-  selectedTooltip: string | null;
-  setSelectedTooltip: React.Dispatch<React.SetStateAction<string | null>>;
-  stageId: string;
-  isCreatingClip: boolean;
-  setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
-  hls: Hls | null;
-  setHls: React.Dispatch<React.SetStateAction<Hls | null>>;
-  pixelsPerSecond: number;
-  setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
-  clipUrl: string;
-  organizationId: string;
-};
+import { PlaybackStatus, TimeSettings } from '@/lib/types';
+import { ClipContextType } from '@/lib/types';
 
 const ClipContext = createContext<ClipContextType | null>(null);
 
@@ -64,7 +34,13 @@ export const ClipProvider = ({
   const [isCreatingClip, setIsCreatingClip] = useState<boolean>(false);
   const [pixelsPerSecond, setPixelsPerSecond] = useState(3);
   const [hls, setHls] = useState<Hls | null>(null);
+  const [startTime, setStartTime] = useState<TimeSettings>({ unix: 0, displayTime: 0 });
+  const [endTime, setEndTime] = useState<TimeSettings>({ unix: 0, displayTime: 0 });
+  const [timeReference, setTimeReference] = useState(0);
 
+  const convertSecondsToUnix = (reference: number, seconds: number) => {
+    return reference + seconds;
+  };
 
   return (
     <ClipContext.Provider
@@ -87,6 +63,12 @@ export const ClipProvider = ({
         setPixelsPerSecond,
         clipUrl,
         organizationId,
+        startTime,
+        endTime,
+        setStartTime,
+        setEndTime,
+        timeReference,
+        convertSecondsToUnix,
       }}
     >
       {children}

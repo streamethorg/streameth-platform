@@ -32,7 +32,7 @@ const Timeline = () => {
         >
           {markers &&
             markers.map((marker) => {
-              return <TimelineMarker marker={marker} />;
+              return <TimelineMarker key={marker._id} marker={marker} />;
             })}
           <Playhead />
           <div
