@@ -95,8 +95,32 @@ const EditSessionForm = ({
           throw new Error('No response from thumbnail generation');
         }
         console.log('✅ Generated thumbnail URL:', response);
+        
+        // Update form state
         form.setValue('coverImage', response);
-        toast.success('Thumbnail generated successfully');
+        
+        // Get current form values and merge with session data
+        const currentValues = form.getValues();
+        
+        // Automatically update session with new thumbnail
+        return updateSessionAction({
+          session: {
+            ...currentValues,
+            _id: session._id,
+            organizationId: session.organizationId,
+            eventId: session.eventId,
+            stageId: session.stageId,
+            start: session.start ?? Number(new Date()),
+            end: session.end ?? Number(new Date()),
+            speakers: session.speakers ?? [],
+            type: session.type,
+            coverImage: response,
+          },
+        });
+      })
+      .then(() => {
+        toast.success('Thumbnail generated and saved');
+        router.refresh();
       })
       .catch((error) => {
         console.error('❌ Error generating thumbnail:', error);
