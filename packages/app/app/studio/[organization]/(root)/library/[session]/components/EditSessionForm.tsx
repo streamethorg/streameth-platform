@@ -1,38 +1,20 @@
 'use client';
 
-import ImageUpload from '@/components/misc/form/imageUpload';
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
+import { Form } from '@/components/ui/form';
 import { updateSessionAction } from '@/lib/actions/sessions';
 import { sessionSchema } from '@/lib/schema';
 import { IExtendedSession } from '@/lib/types';
-import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2, Trash2, Image } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 import * as z from 'zod';
-import DeleteAsset from '../../components/DeleteAsset';
-import { generateThumbnailAction } from '@/lib/actions/sessions';
+import BasicFormFields from './form/BasicFormFields';
+import VisibilitySelector from './form/VisibilitySelector';
+import ThumbnailSection from './form/ThumbnailSection';
+import FormActions from './form/FormActions';
+import { createSessionUpdatePayload } from './form/utils';
 
 const EditSessionForm = ({
   session,
@@ -58,19 +40,7 @@ const EditSessionForm = ({
   function onSubmit(values: z.infer<typeof sessionSchema>) {
     setIsLoading(true);
 
-    updateSessionAction({
-      session: {
-        ...values,
-        _id: session._id,
-        organizationId: session.organizationId,
-        eventId: session.eventId,
-        stageId: session.stageId,
-        start: session.start ?? Number(new Date()),
-        end: session.end ?? Number(new Date()),
-        speakers: session.speakers ?? [],
-        type: session.type,
-      },
-    })
+    updateSessionAction(createSessionUpdatePayload(values, session))
       .then(() => {
         toast.success('Session updated');
         form.reset(values); // Reset the form with the current values
@@ -82,223 +52,22 @@ const EditSessionForm = ({
       });
   }
 
-  function generateThumbnail() {
-    setIsLoading(true);
-    console.log('🎯 Starting thumbnail generation:', {
-      playbackId: session.playbackId,
-      assetId: session.assetId
-    });
-
-    generateThumbnailAction(session)
-      .then((response) => {
-        if (!response) {
-          throw new Error('No response from thumbnail generation');
-        }
-        console.log('✅ Generated thumbnail URL:', response);
-        
-        // Update form state
-        form.setValue('coverImage', response);
-        
-        // Get current form values and merge with session data
-        const currentValues = form.getValues();
-        
-        // Automatically update session with new thumbnail
-        return updateSessionAction({
-          session: {
-            ...currentValues,
-            _id: session._id,
-            organizationId: session.organizationId,
-            eventId: session.eventId,
-            stageId: session.stageId,
-            start: session.start ?? Number(new Date()),
-            end: session.end ?? Number(new Date()),
-            speakers: session.speakers ?? [],
-            type: session.type,
-            coverImage: response,
-          },
-        });
-      })
-      .then(() => {
-        toast.success('Thumbnail generated and saved');
-        router.refresh();
-      })
-      .catch((error) => {
-        console.error('❌ Error generating thumbnail:', error);
-        toast.error(error?.message || 'Failed to generate thumbnail');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel required>Video title</FormLabel>
-              <FormControl>
-                <Input
-                  className="bg-white rounded-md border border-gray-300"
-                  placeholder="name"
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
+        <BasicFormFields form={form} />
+        <VisibilitySelector form={form} />
+        <ThumbnailSection 
+          form={form} 
+          session={session} 
+          organizationSlug={organizationSlug} 
         />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem className="h-50">
-              <FormLabel required>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  className="bg-white rounded-md border border-gray-300"
-                  placeholder="description"
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
+        <FormActions 
+          form={form} 
+          session={session} 
+          organizationSlug={organizationSlug} 
+          isLoading={isLoading} 
         />
-
-        <FormField
-          control={form.control}
-          name="published"
-          render={({ field }) => (
-            <FormItem className="w-[200px]">
-              <FormLabel>Visibility</FormLabel>
-              <FormControl>
-                <Select
-                  value={field.value}
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                  }}
-                >
-                  <SelectTrigger className="bg-white">
-                    <SelectValue placeholder="Select visibility" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={eVisibilty.public}>Public</SelectItem>
-                    <SelectItem value={eVisibilty.unlisted}>
-                      Unlisted
-                    </SelectItem>
-                    <SelectItem value={eVisibilty.private}>Private</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="coverImage"
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex items-center gap-2">
-                <FormLabel>Thumbnail</FormLabel>
-                {!session.coverImage && (
-                  <Button
-                    onClick={generateThumbnail}
-                    disabled={isLoading}
-                    variant={'outline'}
-                    size="sm"
-                    className="flex items-center gap-2"
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Generating...
-                      </>
-                    ) : (
-                      <>
-                        <Image className="w-4 h-4" />
-                        Generate thumbnail
-                      </>
-                    )}
-                  </Button>
-                )}
-              </div>
-              <FormControl>
-                <ImageUpload
-                  options={{
-                    resize: true,
-                    placeholder:
-                      'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
-                    aspectRatio: 16 / 9,
-                    resizeDimensions: { width: 1280, height: 720 },
-                    coverImage: true
-                  }}
-                  className="relative rounded-xl aspect-video max-w-[480px] bg-neutrals-300"
-                  path={`sessions/${organizationSlug}`}
-                  onDelete={async () => {
-                    setIsLoading(true);
-                    try {
-                      await updateSessionAction({
-                        session: {
-                          ...form.getValues(),
-                          _id: session._id,
-                          organizationId: session.organizationId,
-                          eventId: session.eventId,
-                          stageId: session.stageId,
-                          start: session.start ?? Number(new Date()),
-                          end: session.end ?? Number(new Date()),
-                          speakers: session.speakers ?? [],
-                          type: session.type,
-                          coverImage: '',
-                        },
-                      });
-                      toast.success('Thumbnail deleted');
-                      router.refresh();
-                    } catch (error) {
-                      toast.error('Error deleting thumbnail');
-                    } finally {
-                      setIsLoading(false);
-                    }
-                  }}
-                  {...field}
-                />
-              </FormControl>
-
-            </FormItem>
-          )}
-        />
-
-        <div className="flex justify-start items-start space-x-2">
-          <DeleteAsset
-            session={session}
-            href={`/studio/${organizationSlug}/library`}
-            TriggerComponent={
-              <Button
-                variant={'destructive-outline'}
-                className="space-x-2 hover:bg-gray-100"
-              >
-                <Trash2 />
-                <p>Delete video</p>
-              </Button>
-            }
-          />
-          <Button
-            disabled={getFormSubmitStatus(form) || isLoading}
-            type="submit"
-            variant={'primary'}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                Please wait...
-              </>
-            ) : (
-              'Update details'
-            )}
-          </Button>
-        </div>
       </form>
     </Form>
   );
