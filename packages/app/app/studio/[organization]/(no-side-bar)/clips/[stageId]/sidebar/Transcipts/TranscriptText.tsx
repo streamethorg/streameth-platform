@@ -1,13 +1,6 @@
+import usePlayer from '@/lib/hooks/usePlayer';
 import { useClipContext } from '../../ClipContext';
 import { useEffect, useRef } from 'react';
-
-const TranscriptText = ({
-  transcribe,
-}: {
-  transcribe: { word: string; start: number; end: number }[];
-}) => {
-  // Add ref for the container
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Helper function to determine if a word should be highlighted
   const isWordActive = (
@@ -18,12 +11,16 @@ const TranscriptText = ({
     return word.start <= currentTime && word.end > currentTime;
   };
 
-  const { currentTime, videoRef } = useClipContext();
-
-  // Define time window (30 minutes before and after current time)
+const TranscriptText = ({
+  transcribe,
+}: {
+  transcribe: { word: string; start: number; end: number }[];
+}) => {
+  const { videoRef } = useClipContext();
+  const { currentTime } = usePlayer(videoRef);
+  const containerRef = useRef<HTMLDivElement>(null);
   const TIME_WINDOW = 30 * 60; // 30 minutes in seconds
 
-  // Filter words to only show those within the time window
   const visibleWords = transcribe.filter(
     (word) =>
       word.start >= currentTime - TIME_WINDOW &&

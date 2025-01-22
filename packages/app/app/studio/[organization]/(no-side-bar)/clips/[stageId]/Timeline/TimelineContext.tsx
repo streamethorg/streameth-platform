@@ -1,14 +1,9 @@
 'use client';
 
-import {
-  createContext,
-  useContext,
-  useRef,
-  useState,
-  useEffect,
-} from 'react';
+import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { useClipContext } from '../ClipContext';
-import  useTimeline  from './useTimeline';
+import useTimeline from './useTimeline';
+import usePlayer from '@/lib/hooks/usePlayer';
 
 type TimelineContextType = {
   timelineRef: React.RefObject<HTMLDivElement>;
@@ -16,17 +11,12 @@ type TimelineContextType = {
   setVideoDuration: React.Dispatch<React.SetStateAction<number>>;
   timelineWidth: number;
   setTimelineWidth: React.Dispatch<React.SetStateAction<number>>;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   videoRef: React.RefObject<HTMLVideoElement>;
-  isCreatingClip: boolean;
-  setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
   pixelsPerSecond: number;
   setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
-  currentTime: number;
   playheadPosition: number;
   setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
-  handleSetCurrentTime: (time: number) => void;
+  handleTimelineClick: (event: React.MouseEvent) => void;
 };
 
 const TimelineContext = createContext<TimelineContextType | null>(null);
@@ -39,11 +29,13 @@ export const TimelineProvider = ({
   children: React.ReactNode;
 }) => {
   const { videoRef } = useClipContext();
-  const {calculateTimelineScale} = useTimeline();
+  const { handleSetCurrentTime } = usePlayer(videoRef);
+  const { calculateTimelineScale } = useTimeline();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [pixelsPerSecond, setPixelsPerSecond] = useState(10);
   const [timelineWidth, setTimelineWidth] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
+  const [playheadPosition, setPlayheadPosition] = useState<number>(0);
 
   useEffect(() => {
     if (videoRef.current && timelineRef.current) {
@@ -57,28 +49,23 @@ export const TimelineProvider = ({
     }
   }, [videoRef.current?.duration]);
 
-  const handleSetCurrentTime = (time: number) => {
-    videoRef.current!.currentTime = time;
+
+  const handleTimelineClick = (event: React.MouseEvent) => {
+    if (videoRef.current) {
+      const timelineElement = event.currentTarget as HTMLElement;
+      const timelineRect = timelineElement.getBoundingClientRect();
+      const relativeClickX = event.clientX - timelineRect.left;
+      const clickTime = (relativeClickX / timelineWidth) * videoDuration;
+      handleSetCurrentTime(clickTime);
+      setPlayheadPosition(clickTime);
+    }
   };
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isCreatingClip, setIsCreatingClip] = useState<boolean>(false);
-  const [playheadPosition, setPlayheadPosition] = useState<number>(0);
-
-
-
 
   return (
     <TimelineContext.Provider
       value={{
-        isLoading,
-        setIsLoading,
         videoRef,
         timelineRef,
-        isCreatingClip,
-        setIsCreatingClip,
-        currentTime: videoRef.current?.currentTime || 0,
-        handleSetCurrentTime,
         pixelsPerSecond,
         setPixelsPerSecond,
         timelineWidth,
@@ -87,6 +74,7 @@ export const TimelineProvider = ({
         setPlayheadPosition,
         setTimelineWidth,
         setVideoDuration,
+        handleTimelineClick,
       }}
     >
       {children}

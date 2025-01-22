@@ -9,28 +9,16 @@ import { useTimelineContext } from './TimelineContext';
 import TimelineMarker from '../sidebar/markers/TimelineMarker';
 import useTimeline from './useTimeline';
 const Timeline = () => {
-  const { videoRef, dragging, isLoading, handleMouseDown, setCurrentTime } =
-    useClipContext();
+  const { dragging, isLoading } = useClipContext();
 
   const {
     timelineRef,
     timelineWidth,
-    videoDuration,
+    handleTimelineClick,
   } = useTimelineContext();
 
   const { markers } =
     useMarkersContext();
-
-  const handleTimelineClick = (event: React.MouseEvent) => {
-    if (videoRef.current) {
-      const timelineElement = event.currentTarget as HTMLElement;
-      const timelineRect = timelineElement.getBoundingClientRect();
-      const relativeClickX = event.clientX - timelineRect.left;
-      const clickTime = (relativeClickX / timelineWidth) * videoDuration;
-      videoRef.current.currentTime = clickTime;
-      setCurrentTime(clickTime);
-    }
-  };
 
   return (
     <div

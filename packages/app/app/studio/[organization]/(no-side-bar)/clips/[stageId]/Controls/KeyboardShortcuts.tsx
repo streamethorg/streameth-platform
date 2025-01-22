@@ -1,169 +1,113 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { useClipContext } from '../ClipContext';
-import { toast } from 'sonner';
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from '@/components/ui/hover-card';
+
+import { InfoIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
+import { LuArrowLeft, LuArrowRight, LuArrowBigUp } from 'react-icons/lu';
+import { useTrimmControlsContext } from '../Timeline/TrimmControlsContext';
+import { useTimelineContext } from '../Timeline/TimelineContext';
+import usePlayer from '@/lib/hooks/usePlayer';
 
 const KeyboardShortcuts = ({
   setPlaybackRate,
-  isFit,
-  handleZoomOut,
-  handleZoomIn,
-  handleFit,
   playbackRates,
   currentPlaybackRateIndex,
   setCurrentPlaybackRateIndex,
 }: {
   setPlaybackRate: Dispatch<SetStateAction<number>>;
   setCurrentPlaybackRateIndex: (index: number) => void;
-  isFit: boolean;
-  handleZoomOut: () => void;
-  handleZoomIn: () => void;
-  handleFit: () => void;
   playbackRates: number[];
   playbackRate: number;
   currentPlaybackRateIndex: number;
 }) => {
-  const {
-    videoRef,
-    currentTime,
-    setStartTime,
-    playbackStatus,
-    setEndTime,
-    startTime,
-    endTime,
-    setCurrentTime,
-    timelineContainerWidth,
-    isCreatingClip,
-    timeReference,
-    convertSecondsToUnix,
-  } = useClipContext();
-  const { isAddingOrEditingMarker } = useMarkersContext();
 
+  const { videoRef, playbackStatus, isCreatingClip } = useClipContext();
+  const { isAddingOrEditingMarker } = useMarkersContext();
+  const { setStartTime, setEndTime, startTime, endTime } =
+    useTrimmControlsContext();
+  const { videoDuration } =
+    useTimelineContext();
   const isCreatingClipOrMarker = isCreatingClip || isAddingOrEditingMarker;
-  const maxLength = videoRef.current?.duration || 0;
+
+  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    // disable shortcuts when creating clip or markers
-    if (!isCreatingClipOrMarker) {
-      // Pause/play in player
-      if (
-        event.key == ' ' ||
-        event.code == 'Space' ||
-        event.keyCode == 32 ||
-        event.key === 'k'
-      ) {
-        if (videoRef.current) {
-          if (videoRef.current.paused) {
-            videoRef.current.play();
-          } else {
-            videoRef.current.playbackRate = 1.0;
-            setPlaybackRate(1);
-            setCurrentPlaybackRateIndex(1);
-            videoRef.current.pause();
-          }
-        }
-      }
-      // Slider shortcuts
-      if (playbackStatus) {
-        if (event.key === 'i') {
-          if (endTime.displayTime > currentTime) {
-            setStartTime({
-              displayTime: currentTime,
-            });
-          } else {
-            toast.error('Start time must be less than end time');
-          }
-        } else if (event.key === 'o') {
-          if (startTime.displayTime < currentTime) {
-            setEndTime({
-              displayTime: currentTime,
-            });
-          } else {
-            toast.error('End time must be greater than start time');
-          }
-        }
-        // } else if (event.key === 'r') {
-        //   // Reset start and end times
-        //   setStartTime({
-        //     unix: Date.now() - playbackStatus.offset,
-        //     displayTime: currentTime,
-        //   });
-        //   setEndTime({
-        //     unix: Date.now() - playbackStatus.offset,
-        //     displayTime: currentTime,
-        //   });
-        // }
-      }
+    if (isCreatingClipOrMarker) return;
+    if (!videoRef.current) return;
 
-      // keyboard shortcuts for zooming and fitting
-      if (event.key === '-') {
-        if (!isFit) handleZoomOut();
-      } else if (event.key === '+' || event.key === '=') {
-        handleZoomIn();
-      } else if (event.key === '0') {
-        if (!isFit) handleFit();
-      }
-
-      // Video Seek shortcuts
-      if (event.key === 'ArrowLeft' && event.shiftKey && videoRef.current) {
-        // Decrease current time by 5 seconds
-        const newTime = Math.max(currentTime - 5, 0);
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
-      } else if (
-        event.key === 'ArrowRight' &&
-        event.shiftKey &&
-        videoRef.current
-      ) {
-        event.preventDefault();
-        // Increase current time by 5 seconds
-        const newTime = Math.min(currentTime + 5, maxLength);
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
-      } else if (event.key === 'ArrowLeft' && videoRef.current) {
-        event.preventDefault();
-        // Decrease current time by 1 frame if 60fps
-        const newTime = Math.max(currentTime - 1 / 20, 0);
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
-      } else if (event.key === 'ArrowRight' && videoRef.current) {
-        event.preventDefault();
-        // Increase current time by 1 second
-        const newTime = Math.min(currentTime + 1 / 20, maxLength);
-        setCurrentTime(newTime);
-        videoRef.current.currentTime = newTime;
-      }
-
-      // keyboard shortcuts for playback rate control
-      if (event.key === 'j') {
-        // Decrease speed
-        const newIndex = Math.max(currentPlaybackRateIndex - 1, 0);
-        if (videoRef.current) {
-          videoRef.current.playbackRate = playbackRates[newIndex];
-          setPlaybackRate(playbackRates[newIndex]);
-          setCurrentPlaybackRateIndex(newIndex);
+    switch (event.key) {
+      // Playback controls
+      case ' ':
+      case 'k':
+        if (videoRef.current.paused) {
+          videoRef.current.play();
+        } else {
+          videoRef.current.playbackRate = 1.0;
+          setPlaybackRate(1);
+          setCurrentPlaybackRateIndex(1);
+          videoRef.current.pause();
         }
-      } else if (event.key === 'l') {
-        // Increase speed
-        const newIndex = Math.min(
+        break;
+
+      // Trim controls
+      case 'i':
+        if (playbackStatus && endTime > currentTime) {
+          setStartTime(currentTime);
+        }
+        break;
+      case 'o':
+        if (playbackStatus && startTime < currentTime) {
+          setEndTime(currentTime);
+        }
+        break;
+
+      // Seeking controls
+      case 'ArrowLeft':
+        event.preventDefault();
+        const backwardSeek = event.shiftKey ? 10 : 1 / 20;
+        const newBackwardTime = Math.max(currentTime - backwardSeek, 0);
+        handleSetCurrentTime(newBackwardTime);
+        videoRef.current.currentTime = newBackwardTime;
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        const forwardSeek = event.shiftKey ? 10 : 1 / 20;
+        const newForwardTime = Math.min(
+          currentTime + forwardSeek,
+          videoDuration
+        );
+        handleSetCurrentTime(newForwardTime);
+        videoRef.current.currentTime = newForwardTime;
+        break;
+
+      // Playback rate controls
+      case 'j':
+        const fasterIndex = Math.min(
           currentPlaybackRateIndex + 1,
           playbackRates.length - 1
         );
-
-        if (videoRef.current) {
-          videoRef.current.playbackRate = playbackRates[newIndex];
-          setCurrentPlaybackRateIndex(newIndex);
-          setPlaybackRate(playbackRates[newIndex]);
-        }
-      } else if (event.key === 'h') {
-        // Reset to 1x (index of 1)
-        const newIndex = 1;
-        if (videoRef.current) {
-          videoRef.current.playbackRate = playbackRates[newIndex];
-          setPlaybackRate(1);
-          setCurrentPlaybackRateIndex(1);
-        }
-      }
+        videoRef.current.playbackRate = playbackRates[fasterIndex];
+        setCurrentPlaybackRateIndex(fasterIndex);
+        setPlaybackRate(playbackRates[fasterIndex]);
+        break;
+      case 'l':
+        const slowerIndex = Math.max(currentPlaybackRateIndex - 1, 0);
+        videoRef.current.playbackRate = playbackRates[slowerIndex];
+        setPlaybackRate(playbackRates[slowerIndex]);
+        setCurrentPlaybackRateIndex(slowerIndex);
+        break;
+      case 'h':
+        videoRef.current.playbackRate = playbackRates[1];
+        setPlaybackRate(1);
+        setCurrentPlaybackRateIndex(1);
+        break;
     }
   };
 
@@ -174,17 +118,101 @@ const KeyboardShortcuts = ({
       window.removeEventListener('keydown', handleKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    currentTime,
-    playbackStatus,
-    startTime,
-    endTime,
-    videoRef,
-    timelineContainerWidth,
-    isFit,
-  ]);
+  }, [currentTime, playbackStatus, startTime, endTime, videoRef]);
 
-  return null;
+  return (
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <Button variant={'ghost'} size={'icon'}>
+          <InfoIcon size={22} />
+        </Button>
+      </HoverCardTrigger>
+      <HoverCardContent className="z-[9999] w-[400px] overflow-auto">
+        <div className="text-xs text-gray-700">
+          <p className="font-semibold pb-2">Keyboard shortcuts</p>
+
+          <div>
+            <Badge variant="outline">
+              <code>k</code>
+            </Badge>{' '}
+            Pause/Play in player.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>+</code>
+            </Badge>{' '}
+            Zoom in.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>-</code>
+            </Badge>{' '}
+            Zoom out.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>0</code>
+            </Badge>{' '}
+            Zoom to fit.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>i</code>
+            </Badge>{' '}
+            Slider start.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>o</code>
+            </Badge>{' '}
+            Slider end.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>j</code>
+            </Badge>{' '}
+            Speed up the video playback rate.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <code>l</code>
+            </Badge>{' '}
+            Slow down the video playback rate.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <LuArrowLeft size={12} />
+            </Badge>{' '}
+            Seek backward one second.
+          </div>
+          <div>
+            <Badge variant="outline">
+              <LuArrowRight size={12} />
+            </Badge>{' '}
+            Seek forward one second.
+          </div>
+          <div className="flex items-center">
+            <Badge variant="outline">
+              <code className="text-xs flex items-center">
+                <LuArrowBigUp size={12} className="mr-1" /> +
+                <LuArrowLeft size={12} className="ml-1" />
+              </code>
+            </Badge>
+            Seek backward 10 seconds.
+          </div>
+          <div className="flex items-center">
+            <Badge variant="outline">
+              <code className="text-xs flex items-center">
+                <LuArrowBigUp size={12} className="mr-1" /> +
+                <LuArrowRight size={12} className="ml-1" />
+              </code>
+            </Badge>
+            Seek forward 10 seconds.
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
+  );
 };
 
 export default KeyboardShortcuts;

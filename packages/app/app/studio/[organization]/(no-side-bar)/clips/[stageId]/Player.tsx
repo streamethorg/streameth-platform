@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import { useClipContext } from './ClipContext';
+import usePlayer from '@/lib/hooks/usePlayer';
 
 export interface HlsPlayerProps {
   src: string;
@@ -15,12 +16,9 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     isLoading,
     videoRef,
     setHls,
-    setTimeReference,
-    startTime,
-    endTime,
   } = useClipContext();
 
-
+  const { currentTime } = usePlayer(videoRef);
   const playbackRef = useRef({ progress: 0, offset: 0 });
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +31,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
   const handleFragmentChange = (event: any, data: any) => {
     if (!videoRef.current) return;
 
-    const progress = videoRef.current.currentTime;
+    const progress = currentTime;
     const fragmentTime = data.frag.rawProgramDateTime;
     const offset =
       Date.now() -
@@ -42,11 +40,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     const newPlaybackStatus = { progress, offset };
     playbackRef.current = newPlaybackStatus;
     setPlaybackStatus(newPlaybackStatus);
-
-    setTimeReference({
-      unixTime: new Date(fragmentTime as string).getTime(),
-      currentTime: progress,
-    });
   };
 
   const setupHlsInstance = () => {
@@ -90,12 +83,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
 
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">
-      <div className="absolute z-[9999] top-0 left-20 w-50 h-50 bg-white">
-        <div className="flex flex-col items-center justify-center h-full">
-          {startTime && <div>start: {startTime.displayTime}</div>}
-          {endTime && <div>end: {endTime.displayTime}</div>}
-        </div>
-      </div>
       <video
         ref={videoRef}
         autoPlay={false}
