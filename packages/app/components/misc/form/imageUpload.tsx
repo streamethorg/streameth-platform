@@ -81,6 +81,8 @@ interface ImageUploadProps extends React.InputHTMLAttributes<HTMLInputElement> {
     resizeDimensions?: { width: number; height: number };
     coverImage?: boolean;
   };
+  value?: string;
+  onDelete?: () => Promise<void>;
 }
 
 const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
@@ -100,12 +102,13 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
       },
       onChange,
       value,
+      onDelete,
       ...props
     },
     ref
   ) => {
     const [preview, setPreview] = useState<string>(
-      value ? getImageUrl('/' + path + '/' + value) : ''
+      value ? (value.startsWith('http') ? value : getImageUrl('/' + path + '/' + value)) : ''
     );
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -204,6 +207,7 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
                 height: resizeDimensions?.height ?? 720,
                 contentType: acceptedFiles[0].type,
                 quality: 0.8,
+                cover: coverImage,
               })
             : acceptedFiles[0];
           const { displayUrl } = getImageData(file);
@@ -255,11 +259,12 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
         target: { name: props.name, value: '' },
       } as React.ChangeEvent<HTMLInputElement>);
       setPreview('');
-    }, [onChange, props.name]);
+      onDelete?.();
+    }, [onChange, props.name, onDelete]);
 
     const containerClasses = isProfileImage
       ? 'relative z-40 mx-4 mt-[-50px] flex h-24 w-24 rounded-full bg-white p-1'
-      : `${className} relative w-full h-40`;
+      : `${className} relative w-full aspect-video`;
 
     const imageClasses = isProfileImage
       ? 'm-auto h-full w-full rounded-full bg-neutrals-300 text-white object-cover'

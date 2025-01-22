@@ -203,38 +203,67 @@ const EditSessionForm = ({
             <FormItem>
               <div className="flex items-center gap-2">
                 <FormLabel>Thumbnail</FormLabel>
-                <Button
-                  onClick={generateThumbnail}
-                  disabled={isLoading}
-                  variant={'outline'}
-                  size="sm"
-                  className="flex items-center gap-2"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Generating...
-                    </>
-                  ) : (
-                    <>
-                      <Image className="w-4 h-4" />
-                      Generate thumbnail
-                    </>
-                  )}
-                </Button>
+                {!session.coverImage && (
+                  <Button
+                    onClick={generateThumbnail}
+                    disabled={isLoading}
+                    variant={'outline'}
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <Image className="w-4 h-4" />
+                        Generate thumbnail
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
               <FormControl>
                 <ImageUpload
                   options={{
                     resize: true,
                     placeholder:
-                    'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
+                      'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
                     aspectRatio: 16 / 9,
+                    resizeDimensions: { width: 1280, height: 720 },
+                    coverImage: true
                   }}
                   className="relative rounded-xl aspect-video max-w-[480px] bg-neutrals-300"
                   path={`sessions/${organizationSlug}`}
+                  onDelete={async () => {
+                    setIsLoading(true);
+                    try {
+                      await updateSessionAction({
+                        session: {
+                          ...form.getValues(),
+                          _id: session._id,
+                          organizationId: session.organizationId,
+                          eventId: session.eventId,
+                          stageId: session.stageId,
+                          start: session.start ?? Number(new Date()),
+                          end: session.end ?? Number(new Date()),
+                          speakers: session.speakers ?? [],
+                          type: session.type,
+                          coverImage: '',
+                        },
+                      });
+                      toast.success('Thumbnail deleted');
+                      router.refresh();
+                    } catch (error) {
+                      toast.error('Error deleting thumbnail');
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
                   {...field}
-                  />
+                />
               </FormControl>
 
             </FormItem>
