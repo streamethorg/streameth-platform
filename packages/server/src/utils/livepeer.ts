@@ -405,26 +405,57 @@ export const generateThumbnail = async (data: {
   playbackId: string;
 }) => {
   try {
+    console.log('🎬 Livepeer: Starting thumbnail generation:', data);
     let playbackId = data.playbackId;
     if (!data.playbackId) {
+      console.log('🔍 Livepeer: No playbackId provided, fetching from asset');
       const asset = await getAsset(data.assetId);
       playbackId = asset.playbackId;
     }
+    console.log('🎮 Livepeer: Getting playback info for:', playbackId);
     const asset = await livepeer.playback.get(playbackId);
+    console.log('📼 Livepeer: Full playback response:', JSON.stringify(asset, null, 2));
 
+    // First check for direct thumbnail in source array
+    const directThumbnail = asset.playbackInfo?.meta?.source?.find(
+      (source) => source.hrn === 'Thumbnail (PNG)' || source.type === 'image/png'
+    );
+
+    if (directThumbnail) {
+      console.log('🎯 Livepeer: Found direct thumbnail URL:', directThumbnail.url);
+      return directThumbnail.url;
+    }
+
+    // If no direct thumbnail, try the VTT method
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
         (source) => source.hrn === 'Thumbnails',
       ) ?? [];
 
+    console.log('🖼️ Livepeer: Found thumbnails:', lpThumbnails.length);
     if (lpThumbnails.length > 0) {
-      return lpThumbnails[0].url.replace(
-        'thumbnails.vtt',
-        `${await fetchAndParseVTT(lpThumbnails[0].url)}`,
-      );
+      console.log('🎯 Livepeer: Thumbnail details:', JSON.stringify(lpThumbnails[0], null, 2));
     }
+
+    if (lpThumbnails.length === 0) {
+      console.log('⚠️ Livepeer: No thumbnails found');
+      throw new HttpException(404, 'No thumbnails found for this video');
+    }
+
+    const thumbnailUrl = lpThumbnails[0].url.replace(
+      'thumbnails.vtt',
+      `${await fetchAndParseVTT(lpThumbnails[0].url)}`,
+    );
+    console.log('✨ Livepeer: Generated thumbnail URL:', thumbnailUrl);
+    
+    if (!thumbnailUrl) {
+      throw new HttpException(404, 'Failed to generate thumbnail URL');
+    }
+    
+    return thumbnailUrl;
   } catch (e) {
-    throw new HttpException(400, 'Error generating thumbnail');
+    console.error('💥 Livepeer: Error generating thumbnail:', e);
+    throw e instanceof HttpException ? e : new HttpException(400, 'Error generating thumbnail');
   }
 };
 

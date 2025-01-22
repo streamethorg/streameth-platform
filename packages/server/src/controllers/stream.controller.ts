@@ -17,6 +17,7 @@ import {
   uploadToIpfs,
 } from '@utils/livepeer';
 import ClipEditorService from '@services/clipEditor.service';
+import { HttpException } from '@exceptions/HttpException';
 
 import {
   Body,
@@ -171,18 +172,34 @@ export class StreamController extends Controller {
     }
   }
 
-
   /**
    * @summary  Generate thumbnail
    */
   @SuccessResponse('201')
   @Post('thumbnail/generate')
   async generateThumbnail(@Body() body: any): Promise<IStandardResponse<any>> {
-    const thumbnail = await generateThumbnail({
-      assetId: body.assetId,
+    console.log('🎥 Controller: Generating thumbnail for:', {
       playbackId: body.playbackId,
+      assetId: body.assetId
     });
-    return SendApiResponse('thumbnail generated', thumbnail);
+
+    try {
+      const thumbnail = await generateThumbnail({
+        assetId: body.assetId,
+        playbackId: body.playbackId,
+      });
+
+      if (!thumbnail) {
+        console.log('⚠️ Controller: No thumbnail generated');
+        throw new HttpException(404, 'Failed to generate thumbnail');
+      }
+
+      console.log('🎨 Controller: Generated thumbnail:', thumbnail);
+      return SendApiResponse('thumbnail generated', thumbnail);
+    } catch (e) {
+      console.error('💥 Controller: Error generating thumbnail:', e);
+      throw e;
+    }
   }
 
   /**
