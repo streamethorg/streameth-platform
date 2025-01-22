@@ -38,12 +38,24 @@ const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionP
         }
         console.log('✅ Generated thumbnail URL:', response);
         
+        // Handle different response formats from Livepeer
+        let thumbnailUrl = response;
+        if (typeof response === 'object' && response.playbackInfo?.meta?.source) {
+          const thumbnailSource = response.playbackInfo.meta.source.find(
+            (src: any) => src.hrn === 'Thumbnail (PNG)' || src.type === 'image/png'
+          );
+          if (!thumbnailSource) {
+            throw new Error('No thumbnail URL found in response');
+          }
+          thumbnailUrl = thumbnailSource.url;
+        }
+        
         // Update form state
-        form.setValue('coverImage', response);
+        form.setValue('coverImage', thumbnailUrl);
         
         // Get current form values and merge with session data
         const currentValues = form.getValues();
-        currentValues.coverImage = response;
+        currentValues.coverImage = thumbnailUrl;
         
         // Automatically update session with new thumbnail
         return updateSessionAction(createSessionUpdatePayload(currentValues, session));

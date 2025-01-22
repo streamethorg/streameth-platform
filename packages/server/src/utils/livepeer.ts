@@ -416,6 +416,17 @@ export const generateThumbnail = async (data: {
     const asset = await livepeer.playback.get(playbackId);
     console.log('📼 Livepeer: Full playback response:', JSON.stringify(asset, null, 2));
 
+    // First check for direct thumbnail in source array
+    const directThumbnail = asset.playbackInfo?.meta?.source?.find(
+      (source) => source.hrn === 'Thumbnail (PNG)' || source.type === 'image/png'
+    );
+
+    if (directThumbnail) {
+      console.log('🎯 Livepeer: Found direct thumbnail URL:', directThumbnail.url);
+      return directThumbnail.url;
+    }
+
+    // If no direct thumbnail, try the VTT method
     const lpThumbnails =
       asset.playbackInfo?.meta.source.filter(
         (source) => source.hrn === 'Thumbnails',
