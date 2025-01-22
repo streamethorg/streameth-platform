@@ -213,12 +213,13 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
           const { displayUrl } = getImageData(file);
 
           setPreview(displayUrl);
+          setIsUploading(true);
+          
           toast.promise(
             onSubmit(file).then((uploadedPath) => {
               onChange?.({
                 target: { name: props.name, value: uploadedPath },
               } as React.ChangeEvent<HTMLInputElement>);
-              setIsUploading(true);
               return 'Image uploaded successfully';
             }),
             {
