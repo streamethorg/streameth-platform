@@ -32,7 +32,7 @@ import { toast } from 'sonner';
 import { eVisibilty } from 'streameth-new-server/src/interfaces/session.interface';
 import * as z from 'zod';
 import DeleteAsset from '../../components/DeleteAsset';
-import { generateThumbnail as generateThumbnailService } from '@/lib/services/sessionService';
+import { generateThumbnailAction } from '@/lib/actions/sessions';
 
 const EditSessionForm = ({
   session,
@@ -79,6 +79,31 @@ const EditSessionForm = ({
       .finally(() => {
         setIsLoading(false);
         router.refresh();
+      });
+  }
+
+  function generateThumbnail() {
+    setIsLoading(true);
+    console.log('🎯 Starting thumbnail generation:', {
+      playbackId: session.playbackId,
+      assetId: session.assetId
+    });
+
+    generateThumbnailAction(session)
+      .then((response) => {
+        if (!response) {
+          throw new Error('No response from thumbnail generation');
+        }
+        console.log('✅ Generated thumbnail URL:', response);
+        form.setValue('coverImage', response);
+        toast.success('Thumbnail generated successfully');
+      })
+      .catch((error) => {
+        console.error('❌ Error generating thumbnail:', error);
+        toast.error(error?.message || 'Failed to generate thumbnail');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
