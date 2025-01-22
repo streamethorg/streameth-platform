@@ -418,7 +418,11 @@ export const generateThumbnail = async (data: {
 
     // First check for direct thumbnail in source array
     const directThumbnail = asset.playbackInfo?.meta?.source?.find(
-      (source) => source.hrn === 'Thumbnail (PNG)' || source.type === 'image/png'
+      (source) => 
+        source.hrn === 'Thumbnail (PNG)' || 
+        source.hrn === 'Thumbnail (JPEG)' ||
+        source.type === 'image/png' ||
+        source.type === 'image/jpeg'
     );
 
     if (directThumbnail) {
