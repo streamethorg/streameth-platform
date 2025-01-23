@@ -3,9 +3,11 @@ import { IExtendedMarker } from '@/lib/types';
 import { useMarkersContext } from './markersContext';
 import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
 import useTimeline from '../../Timeline/useTimeline';
+import usePlayer from '@/lib/hooks/usePlayer';
 
 const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
-  const { videoDuration, timelineWidth, isPreviewMode } = useTimelineContext();
+  const { videoDuration, timelineWidth, isPreviewMode, videoRef } = useTimelineContext();
+  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
   const { setStartTime, setEndTime } = useTrimmControlsContext();
   const { selectedMarkerId, setSelectedMarkerId } = useMarkersContext();
   const { calculatePositionOnTimeline } = useTimeline();
@@ -20,6 +22,7 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
     setStartTime(marker.startClipTime);
     setEndTime(marker.endClipTime);
     setSelectedMarkerId(marker._id);
+    handleSetCurrentTime(marker.startClipTime);
   };
 
   const position = calculatePositionOnTimeline(marker.startClipTime, videoDuration, timelineWidth);

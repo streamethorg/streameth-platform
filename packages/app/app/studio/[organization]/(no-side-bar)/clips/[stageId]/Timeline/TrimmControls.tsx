@@ -13,7 +13,7 @@ const TrimmControls = ({
   blocked: boolean;
 }) => {
   const { startTime, endTime, handleMouseDown } = useTrimmControlsContext();
-  const { videoDuration, timelineWidth } = useTimelineContext();
+  const { videoDuration, timelineWidth, pixelsPerSecond } = useTimelineContext();
   const { calculatePositionOnTimeline } = useTimeline();
 
   const position = calculatePositionOnTimeline(
@@ -24,7 +24,7 @@ const TrimmControls = ({
 
   return (
     <div
-      className={`absolute h-[calc(100%-20px)] w-[10px] top-6 z-40`}
+      className={`absolute h-[calc(100%-20px)] w-[5px] top-6 z-40`}
       style={{ left: `${position}px` }}
       onMouseDown={(e) => {
         !blocked && handleMouseDown(marker, e);

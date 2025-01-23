@@ -10,6 +10,8 @@ const usePlayer = (videoRef: React.RefObject<HTMLVideoElement>) => {
     setCurrentTime(time);
   };
 
+  const videoDuration = videoRef.current?.duration ?? 0;
+
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
@@ -21,7 +23,7 @@ const usePlayer = (videoRef: React.RefObject<HTMLVideoElement>) => {
     }
   }, [videoRef]);
 
-  return { currentTime, handleSetCurrentTime };
+  return { currentTime, handleSetCurrentTime, videoDuration };
 };
 
 export default usePlayer;

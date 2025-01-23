@@ -9,6 +9,7 @@ import {
 } from 'react';
 import useTimeline from './useTimeline';
 import { useTimelineContext } from './TimelineContext';
+import usePlayer from '@/lib/hooks/usePlayer';
 interface TrimmControlsContextType {
   startTime: number;
   endTime: number;
@@ -28,13 +29,13 @@ export const TrimmControlsProvider = ({
   children: React.ReactNode;
 }) => {
   const { calculateTimeFromPosition } = useTimeline();
-  const { timelineWidth, videoDuration, isPreviewMode } = useTimelineContext();
+  const { timelineWidth, videoRef, isPreviewMode } = useTimelineContext();
   const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(videoDuration);
+  const [endTime, setEndTime] = useState(0);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [dragging, setDragging] = useState<string | null>(null);
   const [initialEventStart, setInitialEventStart] = useState(0);
-
+  const { videoDuration } = usePlayer(videoRef);
   const handleMouseDown = (marker: string, event: React.MouseEvent) => {
     setDragging(marker);
     // setSelectedTooltip(marker);
@@ -43,7 +44,9 @@ export const TrimmControlsProvider = ({
   };
 
   useEffect(() => {
-    setEndTime(videoDuration);
+    if (endTime === 0 || isNaN(endTime)) {
+      setEndTime(videoDuration);
+    }
   }, [videoDuration]);
 
   const handleMouseMove = useCallback(
@@ -58,6 +61,9 @@ export const TrimmControlsProvider = ({
               timelineWidth,
               initialEventStart
             );
+            if (newStartTime > videoDuration || newStartTime < 0) {
+              return;
+            }
             setStartTime(newStartTime);
             break;
           case 'end':
@@ -68,6 +74,12 @@ export const TrimmControlsProvider = ({
               timelineWidth,
               initialEventStart
             );
+            if (newEndTime > videoDuration) {
+              setEndTime(videoDuration);
+            }
+            if (newEndTime < 0 || newEndTime < startTime) {
+              return;
+            }
             setEndTime(newEndTime);
             break;
           // case 'overlay':
@@ -84,6 +96,10 @@ export const TrimmControlsProvider = ({
       timelineWidth,
       setStartTime,
       setEndTime,
+      isPreviewMode,
+      initialEventStart,
+      calculateTimeFromPosition,
+      startTime,
     ]
   );
 

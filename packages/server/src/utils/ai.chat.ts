@@ -38,7 +38,7 @@ export class ChatAPI {
     }
   }
 
-  async getSimilarPhrases(sessionId: string, chunks: any[], query: string[]) {
+  async getSimilarPhrases(sessionId: string, chunks: any[], query: string[], optimalScore: number) {
     const pineconeService = new PineconeService(sessionId);
     if (!(await pineconeService.namespaceHasData())) {
       const phrases = await pineconeService.wordsToPhrases(chunks);
@@ -46,7 +46,7 @@ export class ChatAPI {
     }
 
     const scores = await pineconeService.query(query);
-    return scores.filter((score) => score.score > 0.88);
+    return scores.filter((score) => score.score > optimalScore);
   }
 
   contextualizePhrasesWithTimestamps(similarityScores: any[], chunks: any[]) {
@@ -111,11 +111,13 @@ export class ChatAPI {
     query: string[];
     llmPrompt: string;
     color: string;
+    optimalScore: number;
   }> {
     if (prompt === 'Extract all talk and panels from this video') {
       return {
         query: defaultQueries.panels_and_talks_identification,
         llmPrompt: prompts.panels_and_talks_identification,
+        optimalScore: optimalScores.panels_and_talks_identification,
         color: 'blue',
       };
     }
@@ -124,6 +126,7 @@ export class ChatAPI {
       return {
         query: defaultQueries.key_moments_identification,
         llmPrompt: prompts.key_moments_identification,
+        optimalScore: optimalScores.key_moments_identification,
         color: 'green',
       };
     }
@@ -131,9 +134,16 @@ export class ChatAPI {
     return {
       query: [prompt],
       llmPrompt: prompt,
+      optimalScore: optimalScores.key_moments_identification,
       color: 'gray',
     };
   }
+}
+
+
+const optimalScores = {
+  panels_and_talks_identification: 0.9,
+  key_moments_identification: 0.87,
 }
 
 const defaultQueries = {
@@ -354,7 +364,7 @@ const prompts = {
             ]
 
           Constraints:
-          The key moments should be 10-30 seconds long
+          The key moments should be 30-60 seconds long
           Ensure that titles accurately summarize the segment content without repetition.
           Do not return anything other than an array of objects.
           Clip timestamps must be precise and aligned with the transcript.

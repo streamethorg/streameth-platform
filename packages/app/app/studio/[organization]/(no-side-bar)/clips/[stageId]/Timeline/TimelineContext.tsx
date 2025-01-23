@@ -88,7 +88,7 @@ export const TimelineProvider = ({
         handleSetCurrentTime(previewTimeBounds.startTime);
       }
       if (currentTime < previewTimeBounds.startTime) {
-        handleSetCurrentTime(previewTimeBounds.startTime);
+        handleSetCurrentTime(previewTimeBounds.startTime+0.1);
       }
     }
   }, [currentTime, isPreviewMode, previewTimeBounds]);

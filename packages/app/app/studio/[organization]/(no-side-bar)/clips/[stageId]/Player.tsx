@@ -15,6 +15,8 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     isLoading,
     videoRef,
     setHls,
+    playbackStatus,
+    setPlaybackStatus,
   } = useClipContext();
 
   const { currentTime } = usePlayer(videoRef);
@@ -35,9 +37,9 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     const offset =
       Date.now() -
       (fragmentTime ? new Date(fragmentTime).getTime() : Date.now());
-
     const newPlaybackStatus = { progress, offset };
     playbackRef.current = newPlaybackStatus;
+    setPlaybackStatus(newPlaybackStatus);
   };
 
   const setupHlsInstance = () => {

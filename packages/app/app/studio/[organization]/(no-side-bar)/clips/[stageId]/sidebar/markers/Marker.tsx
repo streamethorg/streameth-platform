@@ -7,6 +7,9 @@ import { formatTime } from '@/lib/utils/time';
 import { Card } from '@/components/ui/card';
 import DeleteMarkerButton from './DeleteMarkerButton';
 import { useMarkersContext } from './markersContext';
+import { useTimelineContext } from '../../Timeline/TimelineContext';
+import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
+import usePlayer from '@/lib/hooks/usePlayer';
 
 const Marker = ({
   marker,
@@ -22,9 +25,23 @@ const Marker = ({
     selectedMarkerId,
   } = useMarkersContext();
 
+  const { videoDuration, timelineWidth, isPreviewMode, videoRef } = useTimelineContext();
+  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
+  const { setStartTime, setEndTime } = useTrimmControlsContext();
+
+  const handleMarkerClick = (marker: IExtendedMarker) => {
+    if (isPreviewMode) {
+      return;
+    }
+    setStartTime(marker.startClipTime);
+    setEndTime(marker.endClipTime);
+    setSelectedMarkerId(marker._id);
+    handleSetCurrentTime(marker.startClipTime);
+  };
+
   return (
     <Card
-      onClick={() => setSelectedMarkerId(marker._id)}
+      onClick={() => handleMarkerClick(marker)}
       className={`w-full max-w-2xl overflow-hidden p-0 shadow-none h-[100px] ${
         selectedMarkerId === marker._id
           ? 'border-2 border-blue border-opacity-50'
