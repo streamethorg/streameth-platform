@@ -32,8 +32,8 @@ const AddOrEditMarkerForm = () => {
     selectedMarkerId,
     setSelectedMarkerId,
     fetchAndSetMarkers,
-    setMarkers,
     organizationId,
+    sessionId,
   } = useMarkersContext();
 
   const [loading, setLoading] = useState(false);
@@ -56,6 +56,7 @@ const AddOrEditMarkerForm = () => {
             organizationId: speaker?.organizationId?.toString(),
           })),
           pretalxSessionCode: selectedMarker.pretalxSessionCode,
+          sessionId: selectedMarker.sessionId?.toString(),
         }
       : {
           name: '',
@@ -67,6 +68,7 @@ const AddOrEditMarkerForm = () => {
           end: new Date().getTime() + 1,
           startClipTime: Math.round(Number(currentTime)),
           endClipTime: Math.round(Number(currentTime + 1)),
+          sessionId: sessionId,
         },
   });
 

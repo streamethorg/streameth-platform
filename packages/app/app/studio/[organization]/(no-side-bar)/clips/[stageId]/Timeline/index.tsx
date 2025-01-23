@@ -11,19 +11,17 @@ import useTimeline from './useTimeline';
 const Timeline = () => {
   const { dragging, isLoading } = useClipContext();
 
-  const {
-    timelineRef,
-    timelineWidth,
-    handleTimelineClick,
-  } = useTimelineContext();
+  const { timelineRef, timelineWidth, handleTimelineClick, isPreviewMode } =
+    useTimelineContext();
 
-  const { markers } =
-    useMarkersContext();
+  const { markers } = useMarkersContext();
 
   return (
     <div
       ref={timelineRef}
-      className={`relative flex flex-col w-full bg-white h-[200px] overflow-x-scroll overflow-y-hidden`}
+      className={`relative flex flex-col w-full ${
+        isPreviewMode ? 'bg-muted' : 'bg-white'
+      } h-[200px] overflow-x-scroll overflow-y-hidden`}
     >
       {timelineWidth ? (
         <div
@@ -91,7 +89,11 @@ const TimelineDrawing = () => {
 
   const markers = [];
   for (let i = 0; i <= videoDuration; i += minorInterval) {
-    const position = calculatePositionOnTimeline(i, videoDuration, timelineWidth);
+    const position = calculatePositionOnTimeline(
+      i,
+      videoDuration,
+      timelineWidth
+    );
 
     if (i % majorInterval === 0) {
       markers.push(

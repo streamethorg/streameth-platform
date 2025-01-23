@@ -4,6 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useClipContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipContext';
 import { Badge } from '@/components/ui/badge';
+import { useTrimmControlsContext } from '../[stageId]/Timeline/TrimmControlsContext';
+import usePlayer from '@/lib/hooks/usePlayer';
 
 type TimeSetterProps = {
   label: string;
@@ -11,28 +13,17 @@ type TimeSetterProps = {
 };
 
 const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
-  const {
-    playbackStatus,
-    setStartTime,
-    setEndTime,
-    startTime,
-    endTime,
-    timeReference,
-    convertSecondsToUnix,
-  } = useClipContext();
+  const { videoRef } = useClipContext();
+
+  const { currentTime } = usePlayer(videoRef);
+  const { setStartTime, setEndTime, startTime, endTime } =
+    useTrimmControlsContext();
 
   const handleSetTime = () => {
-    if (playbackStatus) {
-      const timeSetting = {
-        unix: convertSecondsToUnix(timeReference, playbackStatus.progress),
-        displayTime: playbackStatus.progress,
-      };
-
-      if (type === 'start') {
-        setStartTime(timeSetting);
-      } else {
-        setEndTime(timeSetting);
-      }
+    if (type === 'start') {
+      setStartTime(currentTime);
+    } else {
+      setEndTime(currentTime);
     }
   };
 
@@ -42,9 +33,7 @@ const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
       <div className="relative flex h-full flex-row rounded-xl border">
         <Input
           className="border-none bg-white"
-          value={
-            type === 'start' ? startTime?.displayTime : endTime?.displayTime
-          }
+          value={type === 'start' ? startTime : endTime}
         />
         <Badge
           className="absolute right-0 top-1/2 mx-2 -translate-y-1/2 transform rounded-full bg-accent text-xs text-accent-foreground"

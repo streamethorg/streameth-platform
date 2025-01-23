@@ -11,7 +11,6 @@ export interface HlsPlayerProps {
 
 const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
   const {
-    setPlaybackStatus,
     setIsLoading,
     isLoading,
     videoRef,
@@ -39,7 +38,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
 
     const newPlaybackStatus = { progress, offset };
     playbackRef.current = newPlaybackStatus;
-    setPlaybackStatus(newPlaybackStatus);
   };
 
   const setupHlsInstance = () => {
@@ -79,7 +77,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     return () => {
       hls?.destroy();
     };
-  }, [proxiedSrc, setPlaybackStatus, videoRef, setIsLoading, src]);
+  }, [proxiedSrc, videoRef, setIsLoading, src]);
 
   return (
     <div className="relative flex h-2/3 flex-grow aspect-video w-full bg-black">

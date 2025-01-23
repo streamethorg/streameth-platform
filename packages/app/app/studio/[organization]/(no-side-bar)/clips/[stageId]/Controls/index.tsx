@@ -1,25 +1,18 @@
 'use client';
 import React, { useRef, useState } from 'react';
-import {
-  PlayIcon,
-  PauseIcon,
-} from 'lucide-react';
+import { PlayIcon, PauseIcon, EyeIcon, PlusIcon } from 'lucide-react';
 import { useClipContext } from '../ClipContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
-import { LuEye, LuPlus, LuScissorsLineDashed } from 'react-icons/lu';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
-import { useCreateClip } from '@/lib/hooks/useCreateClip';
 import ZoomControls from './ZoomControls';
 import { useTimelineContext } from '../Timeline/TimelineContext';
 import usePlayer from '@/lib/hooks/usePlayer';
+import { useTrimmControlsContext } from '../Timeline/TrimmControlsContext';
 
 const Controls = () => {
-  const { videoRef, isCreatingClip, setIsCreatingClip } =
-    useClipContext();
-
-  const { handlePreview } = useCreateClip();
+  const { videoRef, isCreatingClip } = useClipContext();
 
   const {
     isAddingOrEditingMarker,
@@ -28,8 +21,14 @@ const Controls = () => {
     setSelectedMarkerId,
   } = useMarkersContext();
 
-  const { videoDuration } = useTimelineContext();
+  const {
+    videoDuration,
+    isPreviewMode,
+    setIsPreviewMode,
+    setPreviewTimeBounds,
+  } = useTimelineContext();
 
+  const { startTime, endTime } = useTrimmControlsContext();
   const { currentTime } = usePlayer(videoRef);
 
   const [playbackRate, setPlaybackRate] = useState(1);
@@ -41,20 +40,41 @@ const Controls = () => {
   const isDisabled =
     isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
 
+  const handlePreviewMode = () => {
+    if (isPreviewMode) {
+      setIsPreviewMode(false);
+      return;
+    }
+    setPreviewTimeBounds({
+      startTime: startTime,
+      endTime: endTime,
+    });
+    setIsPreviewMode(true);
+  };
   return (
-    <div className="bg-white flex w-full justify-between border-b items-center border-t p-2 gap-4">
-      <div className="space-x-6 flex flex-row items-center">
-        {videoRef.current?.paused ? (
-          <button onClick={() => videoRef.current?.play()}>
-            <PlayIcon />
-          </button>
-        ) : (
-          <button onClick={() => videoRef.current?.pause()}>
-            <PauseIcon />
-          </button>
-        )}
+    <div className="bg-white flex flex-row w-full border-b items-center border-t p-2 gap-4">
+      <Button
+        disabled={isDisabled}
+        onClick={() => {
+          setIsAddingOrEditingMarker(true);
+          setSelectedMarkerId('');
+        }}
+        variant="ghost"
+      >
+        <PlusIcon size={22} className="mr-1" />
+        <p className="text-sm text-primary">Add marker</p>
+      </Button>
+      <div className="space-x-6 flex flex-row items-center justify-center flex-1">
+        <KeyboardShortcuts
+          playbackRates={playbackRates}
+          setPlaybackRate={setPlaybackRate}
+          currentPlaybackRateIndex={currentPlaybackRateIndexRef.current}
+          playbackRate={playbackRate}
+          setCurrentPlaybackRateIndex={(index) => {
+            currentPlaybackRateIndexRef.current = index;
+          }}
+        />
         <label>
-          Speed:
           <select
             value={playbackRate}
             onChange={(e) => {
@@ -72,47 +92,39 @@ const Controls = () => {
             ))}
           </select>
         </label>
+        {videoRef.current?.paused ? (
+          <button onClick={() => videoRef.current?.play()}>
+            <PlayIcon size={22} className="text-primary" />
+          </button>
+        ) : (
+          <button onClick={() => videoRef.current?.pause()}>
+            <PauseIcon size={22} className="text-primary" />
+          </button>
+        )}
+
         <span>
           {formatTime(currentTime)} /{' '}
           {videoDuration ? formatTime(videoDuration) : '00:00:00'}
         </span>
-        <ZoomControls />
-        <KeyboardShortcuts
-          playbackRates={playbackRates}
-          setPlaybackRate={setPlaybackRate}
-          currentPlaybackRateIndex={currentPlaybackRateIndexRef.current}
-          playbackRate={playbackRate}
-          setCurrentPlaybackRateIndex={(index) => {
-            currentPlaybackRateIndexRef.current = index;
-          }}
-        />
       </div>
+      <div className="space-x-2 flex items-center self-end">
+        <ZoomControls />
 
-      <div className="ml-auto space-x-2 flex items-center">
-        <Button
-          disabled={isDisabled}
-          onClick={() => {
-            setIsAddingOrEditingMarker(true);
-            setSelectedMarkerId('');
-          }}
-          variant="outline"
-        >
-          <LuPlus className="w-4 h-4 mr-1" />
-          Add marker
-        </Button>
         <div className="hidden xl:flex space-x-2">
-          <Button variant={'secondary'} onClick={handlePreview} type="button">
-            <LuEye className="h-4 w-4 mr-2" />
-            Preview
-          </Button>
-          <Button
-            disabled={isDisabled}
-            variant="primary"
-            className="bg-blue-500 text-white"
-            onClick={() => setIsCreatingClip(true)}
-          >
-            <LuScissorsLineDashed className="w-4 h-4 mr-1" />
-            Create Clip
+          <Button variant={'ghost'} onClick={handlePreviewMode} type="button">
+            <EyeIcon
+              size={22}
+              className={`mr-2 ${
+                isPreviewMode ? 'text-primary animate-pulse' : 'text-primary'
+              }`}
+            />
+            <p
+              className={` ${
+                isPreviewMode ? 'text-primary animate-pulse' : 'text-primary'
+              }`}
+            >
+              Preview
+            </p>
           </Button>
         </div>
       </div>

@@ -28,9 +28,9 @@ export const TrimmControlsProvider = ({
   children: React.ReactNode;
 }) => {
   const { calculateTimeFromPosition } = useTimeline();
-  const { timelineWidth, videoDuration } = useTimelineContext();
+  const { timelineWidth, videoDuration, isPreviewMode } = useTimelineContext();
   const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(1000);
+  const [endTime, setEndTime] = useState(videoDuration);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [dragging, setDragging] = useState<string | null>(null);
   const [initialEventStart, setInitialEventStart] = useState(0);
@@ -42,9 +42,13 @@ export const TrimmControlsProvider = ({
     setInitialEventStart(marker === 'start' ? startTime : endTime);
   };
 
+  useEffect(() => {
+    setEndTime(videoDuration);
+  }, [videoDuration]);
+
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
-      if (dragging) {
+      if (dragging && !isPreviewMode) {
         switch (dragging) {
           case 'start':
             const newStartTime = calculateTimeFromPosition(

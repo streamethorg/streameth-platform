@@ -27,13 +27,11 @@ const KeyboardShortcuts = ({
   playbackRate: number;
   currentPlaybackRateIndex: number;
 }) => {
-
-  const { videoRef, playbackStatus, isCreatingClip } = useClipContext();
+  const { videoRef, isCreatingClip } = useClipContext();
   const { isAddingOrEditingMarker } = useMarkersContext();
   const { setStartTime, setEndTime, startTime, endTime } =
     useTrimmControlsContext();
-  const { videoDuration } =
-    useTimelineContext();
+  const { videoDuration } = useTimelineContext();
   const isCreatingClipOrMarker = isCreatingClip || isAddingOrEditingMarker;
 
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
@@ -58,12 +56,12 @@ const KeyboardShortcuts = ({
 
       // Trim controls
       case 'i':
-        if (playbackStatus && endTime > currentTime) {
+        if (endTime > currentTime) {
           setStartTime(currentTime);
         }
         break;
       case 'o':
-        if (playbackStatus && startTime < currentTime) {
+        if (startTime < currentTime) {
           setEndTime(currentTime);
         }
         break;
@@ -117,8 +115,7 @@ const KeyboardShortcuts = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTime, playbackStatus, startTime, endTime, videoRef]);
+  }, [currentTime, startTime, endTime, videoRef]);
 
   return (
     <HoverCard>

@@ -4,12 +4,10 @@ import { ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { HoverCard } from '@radix-ui/react-hover-card';
 import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { LuArrowBigUp, LuArrowLeft, LuArrowRight } from 'react-icons/lu';
 import { Badge } from '@/components/ui/badge';
 import { useTimelineContext } from '../Timeline/TimelineContext';
 import useTimeline from '../Timeline/useTimeline';
 import { useClipContext } from '../ClipContext';
-import usePlayer from '@/lib/hooks/usePlayer';
 const ZoomControls = () => {
   const { videoRef } = useClipContext();
   const {
@@ -79,7 +77,19 @@ const ZoomControls = () => {
       timelineContainerWidth: timelineRef.current.offsetWidth,
       maxLength: videoRef.current.duration,
     });
+    
+    // Update pixels per second
     setPixelsPerSecond(scale);
+    
+    // Update timeline width
+    const newTimelineWidth = videoDuration * scale;
+    setTimelineWidth(newTimelineWidth);
+
+    // Adjust scroll position to center on current time
+    const newScrollPosition =
+      playheadPosition * scale - timelineRef.current.clientWidth / 2;
+    timelineRef.current.scrollLeft = newScrollPosition;
+
     setIsFit(true);
   };
 
@@ -136,7 +146,7 @@ const ZoomControls = () => {
             className="disabled:pointer-events-auto"
             onClick={handleFit}
             disabled={isFit}
-            variant={'outline'}
+            variant={'ghost'}
             size={'icon'}
           >
             Fit

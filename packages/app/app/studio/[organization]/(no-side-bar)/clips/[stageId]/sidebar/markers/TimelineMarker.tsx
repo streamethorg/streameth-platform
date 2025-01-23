@@ -5,7 +5,7 @@ import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
 import useTimeline from '../../Timeline/useTimeline';
 
 const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
-  const { videoDuration, timelineWidth } = useTimelineContext();
+  const { videoDuration, timelineWidth, isPreviewMode } = useTimelineContext();
   const { setStartTime, setEndTime } = useTrimmControlsContext();
   const { selectedMarkerId, setSelectedMarkerId } = useMarkersContext();
   const { calculatePositionOnTimeline } = useTimeline();
@@ -14,6 +14,9 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
     return null;
 
   const handleMarkerClick = (marker: IExtendedMarker) => {
+    if (isPreviewMode) {
+      return;
+    }
     setStartTime(marker.startClipTime);
     setEndTime(marker.endClipTime);
     setSelectedMarkerId(marker._id);
@@ -27,9 +30,13 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
       className={`absolute h-[20px] border bg-opacity-20 rounded z-[21]`}
       onClick={() => handleMarkerClick(marker)}
       style={{
-        backgroundColor: marker.color,
+        backgroundColor: isPreviewMode ? 'gray' : marker.color,
         border: `2px solid ${
-          selectedMarkerId === marker._id ? '#066FF9' : marker.color
+          isPreviewMode
+            ? 'gray'
+            : selectedMarkerId === marker._id
+            ? '#066FF9'
+            : marker.color
         }`,
         left: `${position}px`,
         width: `${

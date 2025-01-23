@@ -8,11 +8,18 @@ const Playhead = () => {
   const [draggingPlayhead, setDraggingPlayhead] = useState(false);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [initialEventStart, setInitialEventStart] = useState(0);
-  const { videoDuration, timelineWidth, setPlayheadPosition, playheadPosition } = useTimelineContext();
-  const { calculateTimeFromPosition, calculatePositionOnTimeline } = useTimeline();
+  const {
+    videoDuration,
+    timelineWidth,
+    setPlayheadPosition,
+    playheadPosition,
+    isPreviewMode,
+    previewTimeBounds,
+  } = useTimelineContext();
+  const { calculateTimeFromPosition, calculatePositionOnTimeline } =
+    useTimeline();
   const { videoRef } = useClipContext();
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
-
 
   const handleSetPlayheadPosition = (time: number) => {
     setPlayheadPosition(time);
@@ -33,7 +40,6 @@ const Playhead = () => {
   const handlePlayheadMouseMove = useCallback(
     (e: MouseEvent) => {
       if (draggingPlayhead) {
-
         const newTime = calculateTimeFromPosition(
           initialMousePos,
           e.clientX,
@@ -41,6 +47,14 @@ const Playhead = () => {
           timelineWidth,
           initialEventStart
         );
+        if (isPreviewMode) {
+          if (
+            newTime < previewTimeBounds.startTime ||
+            newTime > previewTimeBounds.endTime
+          ) {
+            return;
+          }
+        }
         handleSetPlayheadPosition(newTime);
       }
     },
@@ -70,7 +84,9 @@ const Playhead = () => {
   return (
     <div
       className="absolute top-0 bottom-0 w-1 bg-black border-white cursor-ew-resize z-[22]"
-      style={{ left: `${calculatePositionOnTimeline(playheadPosition, videoDuration, timelineWidth)}px` }}
+      style={{
+        left: `${calculatePositionOnTimeline(playheadPosition, videoDuration, timelineWidth)}px`,
+      }}
       onMouseDown={handlePlayheadMouseDown}
     >
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-black border border-white rounded-3xl" />

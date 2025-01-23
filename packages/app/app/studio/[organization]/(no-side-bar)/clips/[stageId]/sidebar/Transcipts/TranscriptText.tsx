@@ -2,14 +2,14 @@ import usePlayer from '@/lib/hooks/usePlayer';
 import { useClipContext } from '../../ClipContext';
 import { useEffect, useRef } from 'react';
 
-  // Helper function to determine if a word should be highlighted
-  const isWordActive = (
-    word: { word: string; start: number; end: number },
-    currentTime: number
-  ) => {
-    // You might want to adjust this logic based on your requirements
-    return word.start <= currentTime && word.end > currentTime;
-  };
+// Helper function to determine if a word should be highlighted
+const isWordActive = (
+  word: { word: string; start: number; end: number },
+  currentTime: number
+) => {
+  // You might want to adjust this logic based on your requirements
+  return word.start <= currentTime && word.end >= currentTime;
+};
 
 const TranscriptText = ({
   transcribe,
@@ -17,7 +17,7 @@ const TranscriptText = ({
   transcribe: { word: string; start: number; end: number }[];
 }) => {
   const { videoRef } = useClipContext();
-  const { currentTime } = usePlayer(videoRef);
+  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
   const containerRef = useRef<HTMLDivElement>(null);
   const TIME_WINDOW = 30 * 60; // 30 minutes in seconds
 
@@ -30,7 +30,7 @@ const TranscriptText = ({
   useEffect(() => {
     const handleTimeUpdate = () => {
       const activeWord = visibleWords.find((word) =>
-        isWordActive(word, videoRef.current?.currentTime || 0)
+        isWordActive(word, currentTime)
       );
 
       if (activeWord && containerRef.current) {
@@ -59,7 +59,7 @@ const TranscriptText = ({
       ref={containerRef}
       className="whitespace-pre-wrap p-4 leading-loose h-full overflow-y-scroll"
     >
-      {visibleWords.map((word, index) => (
+      {transcribe.map((word, index) => (
         <span
           key={`${word.word}-${index}`}
           id={`word-${word.start}`}
@@ -67,9 +67,7 @@ const TranscriptText = ({
             isWordActive(word, currentTime) ? 'bg-yellow-200' : ''
           } inline-block mr-1 cursor-pointer hover:bg-gray-100`}
           onClick={() => {
-            if (videoRef.current) {
-              videoRef.current.currentTime = word.start;
-            }
+            handleSetCurrentTime(word.end);
           }}
         >
           {word.word}

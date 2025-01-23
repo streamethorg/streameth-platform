@@ -4,6 +4,7 @@ import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { useClipContext } from '../ClipContext';
 import useTimeline from './useTimeline';
 import usePlayer from '@/lib/hooks/usePlayer';
+import { useTrimmControlsContext } from './TrimmControlsContext';
 
 type TimelineContextType = {
   timelineRef: React.RefObject<HTMLDivElement>;
@@ -17,6 +18,15 @@ type TimelineContextType = {
   playheadPosition: number;
   setPlayheadPosition: React.Dispatch<React.SetStateAction<number>>;
   handleTimelineClick: (event: React.MouseEvent) => void;
+  isPreviewMode: boolean;
+  setIsPreviewMode: React.Dispatch<React.SetStateAction<boolean>>;
+  previewTimeBounds: {
+    startTime: number;
+    endTime: number;
+  };
+  setPreviewTimeBounds: React.Dispatch<
+    React.SetStateAction<{ startTime: number; endTime: number }>
+  >;
 };
 
 const TimelineContext = createContext<TimelineContextType | null>(null);
@@ -29,14 +39,18 @@ export const TimelineProvider = ({
   children: React.ReactNode;
 }) => {
   const { videoRef } = useClipContext();
-  const { handleSetCurrentTime } = usePlayer(videoRef);
+  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
   const { calculateTimelineScale } = useTimeline();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [pixelsPerSecond, setPixelsPerSecond] = useState(10);
   const [timelineWidth, setTimelineWidth] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const [playheadPosition, setPlayheadPosition] = useState<number>(0);
-
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [previewTimeBounds, setPreviewTimeBounds] = useState<{
+    startTime: number;
+    endTime: number;
+  }>({ startTime: 0, endTime: 0 });
   useEffect(() => {
     if (videoRef.current && timelineRef.current) {
       setVideoDuration(videoRef.current.duration);
@@ -49,17 +63,35 @@ export const TimelineProvider = ({
     }
   }, [videoRef.current?.duration]);
 
-
   const handleTimelineClick = (event: React.MouseEvent) => {
     if (videoRef.current) {
       const timelineElement = event.currentTarget as HTMLElement;
       const timelineRect = timelineElement.getBoundingClientRect();
       const relativeClickX = event.clientX - timelineRect.left;
       const clickTime = (relativeClickX / timelineWidth) * videoDuration;
+      console.log(clickTime, previewTimeBounds);
+      if (
+        isPreviewMode &&
+        (clickTime < previewTimeBounds.startTime ||
+          clickTime > previewTimeBounds.endTime)
+      ) {
+        return;
+      }
       handleSetCurrentTime(clickTime);
       setPlayheadPosition(clickTime);
     }
   };
+
+  useEffect(() => {
+    if (isPreviewMode) {
+      if (currentTime >= previewTimeBounds.endTime) {
+        handleSetCurrentTime(previewTimeBounds.startTime);
+      }
+      if (currentTime < previewTimeBounds.startTime) {
+        handleSetCurrentTime(previewTimeBounds.startTime);
+      }
+    }
+  }, [currentTime, isPreviewMode, previewTimeBounds]);
 
   return (
     <TimelineContext.Provider
@@ -75,6 +107,10 @@ export const TimelineProvider = ({
         setTimelineWidth,
         setVideoDuration,
         handleTimelineClick,
+        isPreviewMode,
+        setIsPreviewMode,
+        previewTimeBounds,
+        setPreviewTimeBounds,
       }}
     >
       {children}

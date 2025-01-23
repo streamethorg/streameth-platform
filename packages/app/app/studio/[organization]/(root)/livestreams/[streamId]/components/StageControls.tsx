@@ -3,9 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { fetchStage } from '@/lib/services/stageService';
 import {
-  IExtendedMarker,
   IExtendedOrganization,
-  IExtendedSession,
   IExtendedStage,
 } from '@/lib/types';
 import Link from 'next/link';
@@ -20,11 +18,9 @@ import StreamHealth from './StreamHealth';
 const StageControls = ({
   organization,
   stream,
-  stageMarkers,
 }: {
   organization: IExtendedOrganization;
   stream: IExtendedStage;
-  stageMarkers: IExtendedMarker[];
 }) => {
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
