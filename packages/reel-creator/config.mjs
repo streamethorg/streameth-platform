@@ -9,7 +9,7 @@ import * as fs from 'fs';
 
 const readSecretFile = (path) => {
   // Add debug logging
-  console.log('Attempting to read secret file, path:', path);
+  // console.log('Attempting to read secret file, path:', path);
   
   if (!path) {
     console.warn('No path provided for secret file');
@@ -31,7 +31,7 @@ const readSecretFile = (path) => {
 export const REGION = "us-east-2";
 
 export const SITE_NAME = 'rendering-engine';
-export const RAM = 4096;
+export const RAM = 10240;
 export const DISK = 10240;
 export const TIMEOUT = 900;
 
