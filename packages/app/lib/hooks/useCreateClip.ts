@@ -1,7 +1,7 @@
 'use client';
 
 import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { useClipContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipContext';
 import { clipSchema } from '@/lib/schema';
 import { useForm } from 'react-hook-form';
@@ -11,10 +11,12 @@ import { toast } from 'sonner';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { useMarkersContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/markers/markersContext';
 import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
+import { useTrimmControlsContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/Timeline/TrimmControlsContext';
 
 export const useCreateClip = () => {
-  const { stageId, setIsCreatingClip, startTime, endTime, videoRef, clipUrl } =
+  const { stageId, setIsCreatingClip, videoRef, clipUrl } =
     useClipContext();
+  const { startTime, endTime } = useTrimmControlsContext();
 
   const { markers, selectedMarkerId, setSelectedMarkerId, organizationId } =
     useMarkersContext();
@@ -32,8 +34,8 @@ export const useCreateClip = () => {
       organizationId: organizationId,
       stageId: stageId,
       speakers: [],
-      startClipTime: startTime.displayTime,
-      endClipTime: endTime.displayTime,
+      startClipTime: startTime,
+      endClipTime: endTime,
       captionEnabled: false,
       introAnimation: '',
       outroAnimation: '',
@@ -53,7 +55,7 @@ export const useCreateClip = () => {
 
   const handlePreview = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = startTime.displayTime;
+      videoRef.current.currentTime = startTime;
       videoRef.current.play();
       console.log('🔄 Preview started');
     }
@@ -88,8 +90,8 @@ export const useCreateClip = () => {
         description: selectedMarker.description ?? 'No description',
         start: selectedMarker.start,
         end: selectedMarker.end,
-        startClipTime: startTime.displayTime,
-        endClipTime: endTime.displayTime,
+        startClipTime: startTime,
+        endClipTime: endTime,
         organizationId: organizationId,
         stageId: stageId,
         speakers:
@@ -108,7 +110,7 @@ export const useCreateClip = () => {
   const handleCreateClip = async (values: z.infer<typeof clipSchema>) => {
     setIsCreateClip(true);
 
-    if (endTime.displayTime < startTime.displayTime) {
+    if (endTime < startTime) {
       setIsCreateClip(false);
       console.error('🚨 End time must be greater than start time');
       return toast.error('End time must be greater than start time');
@@ -118,8 +120,8 @@ export const useCreateClip = () => {
       name: values.name,
       description: values.description,
       speakers: values?.speakers,
-      startClipTime: startTime.displayTime,
-      endClipTime: endTime.displayTime,
+      startClipTime: startTime,
+      endClipTime: endTime,
       start: values.start,
       end: values.end,
       organizationId,
@@ -137,8 +139,8 @@ export const useCreateClip = () => {
       }
 
       const mainClipData = {
-        start: startTime.displayTime,
-        end: endTime.displayTime,
+        start: startTime,
+        end: endTime,
         sessionId: session._id,
         organizationId,
         clipUrl: clipUrl,

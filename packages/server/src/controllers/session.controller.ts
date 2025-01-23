@@ -237,7 +237,7 @@ export class SessionController extends Controller {
     if (session.processingStatus === ProcessingStatus.pending) {
       const asset = await getAsset(session.assetId);
       return SendApiResponse('session rendering progress', {
-        type: 'done',
+        type: 'progress',
         progress: asset.status.progress,
       });
     }

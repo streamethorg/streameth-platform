@@ -32,12 +32,14 @@ import { SessionType } from 'streameth-new-server/src/interfaces/session.interfa
 import { fetchAllSessions } from '@/lib/services/sessionService';
 import { useCreateClip } from '@/lib/hooks/useCreateClip';
 import useClickOutside from '@/lib/hooks/useClickOutside';
+import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
 const CreateClipForm = () => {
   const { handleCreateClip, form, isCreateClip, handleClearMarker } =
     useCreateClip();
 
-  const { isLoading, setIsCreatingClip, startTime, endTime, organizationId } =
-    useClipContext();
+  const { isLoading, setIsCreatingClip, organizationId } = useClipContext();
+
+  const { startTime, endTime } = useTrimmControlsContext();
 
   const { markers, selectedMarkerId, setSelectedMarkerId } =
     useMarkersContext();
@@ -159,11 +161,11 @@ const CreateClipForm = () => {
           <div className="grid grid-cols-2 gap-x-2">
             <div className="flex gap-1 items-center">
               <FormLabel>Start:</FormLabel>
-              <p className="text-sm">{formatClipTime(startTime.displayTime)}</p>
+              <p className="text-sm">{formatClipTime(startTime)}</p>
             </div>
             <div className="flex gap-1 items-center">
               <FormLabel>End:</FormLabel>
-              <p className="text-sm">{formatClipTime(endTime.displayTime)}</p>
+              <p className="text-sm">{formatClipTime(endTime)}</p>
             </div>
           </div>
 

@@ -9,7 +9,6 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import StageControls from './components/StageControls';
-import { fetchMarkers } from '@/lib/services/markerSevice';
 import Sidebar from './components/Sidebar';
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return null;
@@ -43,7 +42,6 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
           <StageControls
             organization={organization}
             stream={stream}
-            stageMarkers={[]}
           />
         </div>
         <div className="flex flex-col w-1/3">

@@ -14,7 +14,9 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { useParams } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
-
+import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
+import Link from 'next/link';
+import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
 const Preview = ({
   isOpen,
   organizationId,
@@ -29,7 +31,7 @@ const Preview = ({
   const [shareUrl, setShareUrl] = useState('');
   const params = useParams();
   const organizationSlug = params?.organization as string;
-
+  const { fetchSessions } = useClipsSidebar();
   useEffect(() => {
     setShareUrl(
       `${window.location.origin}/${organizationSlug}/watch?session=${session._id}`
@@ -48,6 +50,7 @@ const Preview = ({
       .then(() => {
         toast.success('Session deleted');
         handleClose();
+        fetchSessions();
       })
       .catch(() => {
         toast.error('Error deleting session');
@@ -83,9 +86,20 @@ const Preview = ({
             </Button>
 
             <ShareButton url={shareUrl} shareFor="video" />
-            <Button variant={'outline'} onClick={handleClose}>
-              Close
-            </Button>
+            <VideoDownloadClient
+              className="space-x-1 border"
+              variant={'outline'}
+              videoName={session.name}
+              assetId={session.assetId}
+              collapsable={true}
+            />
+            <Link 
+              href={`/studio/${organizationSlug}/library/${session._id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant={'outline'}>Go to Session</Button>
+            </Link>
           </DialogFooter>
         </div>
       </DialogContent>
