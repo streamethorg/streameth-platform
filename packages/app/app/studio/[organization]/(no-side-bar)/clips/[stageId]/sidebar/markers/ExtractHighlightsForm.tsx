@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { fetchSession } from '@/lib/services/sessionService';
 import { fetchMarkers } from '@/lib/services/markerSevice';
 import { useMarkersContext } from './markersContext';
+import { useClipContext } from '../../ClipContext';
 const PRESET_PROMPTS = [
   'Extract all talk and panels from this video',
   'Extract key moments for short form content',
@@ -27,6 +28,7 @@ export const ExtractHighlightsForm = ({
   transcribeStatus: TranscriptionStatus | null;
   aiAnalysisStatus: ProcessingStatus | null;
 }) => {
+  const { setIsInputFocused } = useClipContext();
   const { fetchAndSetMarkers } = useMarkersContext();
   const [prompt, setPrompt] = useState('');
   const [isExtracting, setIsExtracting] = useState(false);
@@ -75,6 +77,8 @@ export const ExtractHighlightsForm = ({
       }
     };
 
+    fetchStatus();
+
     if (status === 'pending') {
       poll();
     }
@@ -113,6 +117,8 @@ export const ExtractHighlightsForm = ({
         ))}
       </div>
       <Textarea
+        onFocus={() => setIsInputFocused(true)}
+        onBlur={() => setIsInputFocused(false)}
         placeholder="Prompt for highlights"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}

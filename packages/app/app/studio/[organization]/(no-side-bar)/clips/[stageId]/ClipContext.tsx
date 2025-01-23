@@ -33,6 +33,8 @@ export const ClipProvider = ({
     null
   );
 
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
+
   return (
     <ClipContext.Provider
       value={{     
@@ -52,6 +54,8 @@ export const ClipProvider = ({
         organizationId,
         playbackStatus,
         setPlaybackStatus,
+        isInputFocused,
+        setIsInputFocused,
       }}
     >
       {children}

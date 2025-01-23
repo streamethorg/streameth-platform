@@ -27,17 +27,16 @@ const KeyboardShortcuts = ({
   playbackRate: number;
   currentPlaybackRateIndex: number;
 }) => {
-  const { videoRef, isCreatingClip } = useClipContext();
+  const { videoRef, isCreatingClip, isInputFocused } = useClipContext();
   const { isAddingOrEditingMarker } = useMarkersContext();
   const { setStartTime, setEndTime, startTime, endTime } =
     useTrimmControlsContext();
   const { videoDuration } = useTimelineContext();
-  const isCreatingClipOrMarker = isCreatingClip || isAddingOrEditingMarker;
 
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (isCreatingClipOrMarker) return;
+    if (isAddingOrEditingMarker || isCreatingClip || isInputFocused) return;
     if (!videoRef.current) return;
 
     switch (event.key) {
@@ -115,7 +114,7 @@ const KeyboardShortcuts = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentTime, startTime, endTime, videoRef]);
+  }, [currentTime, startTime, endTime, videoRef, isCreatingClip, isAddingOrEditingMarker, isInputFocused]);
 
   return (
     <HoverCard>
