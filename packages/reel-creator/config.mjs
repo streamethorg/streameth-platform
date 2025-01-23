@@ -31,7 +31,7 @@ const readSecretFile = (path) => {
 export const REGION = "us-east-2";
 
 export const SITE_NAME = 'rendering-engine';
-export const RAM = 10240;
+export const RAM = 4096;
 export const DISK = 10240;
 export const TIMEOUT = 900;
 
