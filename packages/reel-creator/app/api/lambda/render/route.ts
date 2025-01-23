@@ -37,22 +37,35 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 
     // set REMOTION_AWS_SECRET_ACCESS_KEY env
     process.env.REMOTION_AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY;
-    // set REMOTION_AWS_ACCESS_KEY_ID env
     process.env.REMOTION_AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID;
+    console.log("🔑 AWS credentials set for Lambda rendering");
 
 		// Add webhook configuration
 		const webhook = {
 			url: WEBHOOK_URL,
 			secret: WEBHOOK_SECRET,
 			customData: {
-				compositionId: body.id, // Add custom data here.
+				compositionId: body.id,
 			},
 		};
+
+		// Set a fixed framesPerLambda to control concurrency
+		// Higher value = fewer concurrent Lambdas
+		// Example: with 300 frames total:
+		// - framesPerLambda = 30 → 10 concurrent Lambdas
+		// - framesPerLambda = 60 → 5 concurrent Lambdas
+		// const framesPerLambda = 630; // Adjust this value to control concurrency
+
+		// console.log("\n🎯 Lambda Configuration:", {
+		// 	framesPerLambda,
+		// 	maxPossibleConcurrency: Math.ceil(108402 / framesPerLambda), // 
+		// 	note: "Actual concurrency will depend on total frames in the video"
+		// });
 
 		// run
 		const result = await renderMediaOnLambda({
 			codec: "h264",
-      timeoutInMilliseconds: 900000,
+      		timeoutInMilliseconds: 900000,
 			functionName: speculateFunctionName({
 				diskSizeInMb: DISK,
 				memorySizeInMb: RAM,
@@ -67,9 +80,13 @@ export const POST = executeApi<RenderMediaOnLambdaOutput, typeof RenderRequest>(
 				fileName: "video.mp4",
 			},
 			webhook,
+			// framesPerLambda,
 		});
-
-		console.log("secrets", AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, WEBHOOK_SECRET, WEBHOOK_URL, SITE_NAME);
+		console.log("✨ Render media on Lambda initiated");
+		console.log("📝 Lambda render details:", {
+			renderId: result.renderId,
+			bucketName: result.bucketName,
+		});
 
 		return result;
 	},
