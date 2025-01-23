@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import Hls from 'hls.js';
 import { ClipContextType } from '@/lib/types';
-
+import { PlaybackStatus } from '@/lib/types';
 const ClipContext = createContext<ClipContextType | null>(null);
 
 export const useClipContext = () => useContext(ClipContext)!;
@@ -29,6 +29,9 @@ export const ClipProvider = ({
   const [selectedTooltip, setSelectedTooltip] = useState<string | null>(null);
   const [isCreatingClip, setIsCreatingClip] = useState<boolean>(false);
   const [hls, setHls] = useState<Hls | null>(null);
+  const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
+    null
+  );
 
   return (
     <ClipContext.Provider
@@ -47,6 +50,8 @@ export const ClipProvider = ({
         setHls,
         clipUrl,
         organizationId,
+        playbackStatus,
+        setPlaybackStatus,
       }}
     >
       {children}

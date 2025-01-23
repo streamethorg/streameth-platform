@@ -432,13 +432,14 @@ export default class SessionService {
   async extractHighlights(session: ISession, prompt?: string): Promise<void> {
     const chat = new ChatAPI();
     try {
-      const { query, llmPrompt } = await chat.choosePrompt(prompt);
+      const { query, llmPrompt, optimalScore } = await chat.choosePrompt(prompt);
 
       const chunks = session.transcripts.chunks;
       const similarPhrases = await chat.getSimilarPhrases(
         session._id.toString(),
         chunks,
         query,
+        optimalScore,
       );
       console.log('similarPhrases', similarPhrases);
       const contextualizedPhrases = chat.contextualizePhrasesWithTimestamps(

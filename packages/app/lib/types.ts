@@ -18,6 +18,11 @@ export interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
+export interface PlaybackStatus {
+  progress: number;
+  offset: number;
+}
+
 export interface IHighlight {
   start: number;
   end: number;
@@ -292,4 +297,6 @@ export type ClipContextType = {
   setHls: React.Dispatch<React.SetStateAction<Hls | null>>;
   clipUrl: string;
   organizationId: string;
+  playbackStatus: PlaybackStatus | null;
+  setPlaybackStatus: React.Dispatch<React.SetStateAction<PlaybackStatus | null>>;
 };

@@ -349,6 +349,9 @@ export const fetchSessionRenderingProgress = async ({
   const response = await fetch(`${apiUrl()}/sessions/${sessionId}/progress`, {
     cache: 'no-store',
   });
+  if (response.status !== 200) {
+    throw new Error('Error fetching session rendering progress');
+  }
   return (await response.json()).data;
 };
 
