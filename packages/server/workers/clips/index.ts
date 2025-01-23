@@ -14,6 +14,8 @@ import * as fs from 'fs';
 import clipEditorService from '@services/clipEditor.service';
 import fetch from 'node-fetch';
 import ClipEditor from '@models/clip.editor.model';
+import { createReadStream } from 'fs';
+import { stat } from 'fs/promises';
 
 interface Segment {
   duration: number;
@@ -334,12 +336,22 @@ const processClip = async (data: IClip) => {
 
                 console.log('✅ Clip creation finished');
                 const storageService = new StorageService();
-                const fileBuffer = await fs.promises.readFile(outputPath);
-                console.log('📤 Uploading clip to S3');
+                
+                // Get file size for logging
+                const stats = await stat(outputPath);
+                console.log('📊 Output file size:', {
+                  bytes: stats.size,
+                  megabytes: (stats.size / (1024 * 1024)).toFixed(2) + ' MB',
+                  gigabytes: (stats.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB'
+                });
+
+                // Create read stream instead of loading entire file
+                const fileStream = createReadStream(outputPath);
+                console.log('📤 Uploading clip to S3 using stream');
                 const url = await storageService.uploadFile(
                   'clips/' + sessionId,
-                  fileBuffer,
-                  'video/mp4',
+                  fileStream,
+                  'video/mp4'
                 );
                 console.log('✅ Clip uploaded to S3:', url);
 

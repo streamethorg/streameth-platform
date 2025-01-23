@@ -9,7 +9,7 @@ import * as fs from 'fs';
 
 const readSecretFile = (path) => {
   // Add debug logging
-  console.log('Attempting to read secret file, path:', path);
+  // console.log('Attempting to read secret file, path:', path);
   
   if (!path) {
     console.warn('No path provided for secret file');

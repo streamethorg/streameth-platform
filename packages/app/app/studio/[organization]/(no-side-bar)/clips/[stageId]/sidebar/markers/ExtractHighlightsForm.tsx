@@ -77,6 +77,8 @@ export const ExtractHighlightsForm = ({
       }
     };
 
+    fetchStatus();
+
     if (status === 'pending') {
       poll();
     }
