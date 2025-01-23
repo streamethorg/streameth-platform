@@ -299,4 +299,6 @@ export type ClipContextType = {
   organizationId: string;
   playbackStatus: PlaybackStatus | null;
   setPlaybackStatus: React.Dispatch<React.SetStateAction<PlaybackStatus | null>>;
+  isInputFocused: boolean;
+  setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 };

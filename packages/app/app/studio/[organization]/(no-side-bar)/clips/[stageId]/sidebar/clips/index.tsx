@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import Clip from './Clip';
 import { useClipsSidebar } from './ClipsContext';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useClipContext } from '../../ClipContext';
 
 const SessionSidebar = () => {
   const {
@@ -23,6 +24,8 @@ const SessionSidebar = () => {
     uniqueDates,
     isLoading,
   } = useClipsSidebar();
+  
+  const { setIsInputFocused } = useClipContext();
 
   return (
     <div className="h-full w-full flex flex-col">
@@ -52,6 +55,8 @@ const SessionSidebar = () => {
           </Select>
           <Input
             placeholder="Search"
+            onFocus={() => setIsInputFocused(true)}
+            onBlur={() => setIsInputFocused(false)}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
