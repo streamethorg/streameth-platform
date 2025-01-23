@@ -7,12 +7,10 @@ import { Card, CardHeader, CardDescription } from '@/components/ui/card';
 
 export default function VideoGrid({
   videos,
-  OrganizationSlug,
   maxVideos,
   scroll,
 }: {
   videos: IExtendedSession[];
-  OrganizationSlug?: string;
   maxVideos?: number;
   scroll?: boolean;
 }) {
@@ -53,7 +51,7 @@ export default function VideoGrid({
                 <VideoCardWithMenu
                   session={video}
                   link={`/${
-                    OrganizationSlug || video.organizationId
+                    video.organizationId
                   }/watch?session=${video._id.toString()}`}
                 />
               </Suspense>

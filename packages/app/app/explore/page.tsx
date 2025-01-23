@@ -58,7 +58,7 @@ const Explore = async ({ searchParams }: HomePageProps) => {
           <ExploreTabs />
           <div className="mt-8">
             <Suspense fallback={<div> Loading... </div>}>
-              <ArchiveVideos {...searchParams} />
+              <ArchiveVideos {...searchParams} gridLength={12} />
             </Suspense>
           </div>
         </section>

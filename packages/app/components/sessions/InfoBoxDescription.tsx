@@ -14,25 +14,32 @@ const InfoBoxDescription = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [isExpandable, setIsExpandable] = useState(false);
-  const [maxHeight, setMaxHeight] = useState('0px');
+  const [maxHeight, setMaxHeight] = useState('auto');
+  const [isClient, setIsClient] = useState(false);
   const descriptionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
       if (descriptionRef.current) {
         const descriptionHeight = descriptionRef.current.scrollHeight;
-        setIsExpandable(descriptionHeight > 100); // Adjust height threshold as needed
+        setIsExpandable(descriptionHeight > 100);
         setMaxHeight(isOpened ? `${descriptionHeight}px` : '50px');
       }
     };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    if (isClient) {
+      handleResize();
+      window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [isOpened]);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
+  }, [isOpened, isClient]);
 
   if (!description) return null;
 
@@ -40,8 +47,10 @@ const InfoBoxDescription = ({
     <div className="relative py-4">
       <div
         ref={descriptionRef}
-        className="transition-max-height overflow-hidden duration-300 ease-in-out"
-        style={{ maxHeight: maxHeight }}
+        className={`transition-max-height overflow-hidden duration-300 ease-in-out ${
+          !isClient ? 'max-h-[50px]' : ''
+        }`}
+        style={{ maxHeight: isClient ? maxHeight : undefined }}
       >
         {description && (
           <div className="space-y-2">
@@ -56,16 +65,16 @@ const InfoBoxDescription = ({
           </div>
         )}
       </div>
-      {isExpandable && !isOpened && (
+      {isClient && isExpandable && !isOpened && (
         <div className="pointer-events-none absolute bottom-4 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent"></div>
       )}
-      {isExpandable && (
+      {isClient && isExpandable && (
         <button
           onClick={() => {
             setIsOpened(!isOpened);
             if (descriptionRef.current) {
               setMaxHeight(
-                !isOpened ? `${descriptionRef.current.scrollHeight}px` : '100px'
+                !isOpened ? `${descriptionRef.current.scrollHeight}px` : '50px'
               );
             }
           }}

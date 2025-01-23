@@ -3,22 +3,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import useSearchParams from '@/lib/hooks/useSearchParams';
-import useDebounce from '@/lib/hooks/useDebounce';
-import { apiUrl, archivePath } from '@/lib/utils/utils';
+import { archivePath } from '@/lib/utils/utils';
 import useClickOutside from '@/lib/hooks/useClickOutside';
 import { useRouter } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
-import { LoaderCircle } from 'lucide-react';
+import { useSearch } from './useSearch';
+import { SearchResults } from './SearchResults';
 
-interface IEventSearchResult {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface ISessionSearchResult {
-  id: string;
-  name: string;
+interface SearchBarProps {
+  organizationId: string;
+  organizationSlug: string;
+  searchVisible?: boolean;
+  isMobile?: boolean;
+  isStudio?: boolean;
 }
 
 export default function SearchBar({
@@ -27,160 +24,76 @@ export default function SearchBar({
   searchVisible = true,
   isMobile = false,
   isStudio = false,
-}: {
-  organizationId: string;
-  organizationSlug: string;
-  searchVisible?: boolean;
-  isMobile?: boolean;
-  isStudio?: boolean;
-}): JSX.Element {
-  const { searchParams, handleTermChange: handleStudioTermChange } =
-    useSearchParams();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>(
-    searchParams.get('searchQuery') || ''
-  );
-  const [isOpened, setIsOpened] = useState<boolean>(false);
-  const [searchResults, setSearchResults] = useState<IExtendedSession[]>([]);
-  const debouncedSearchQuery = useDebounce(searchQuery, 500);
-
-  const dropdownRef = useRef<HTMLDivElement>(null); // ref for the dropdown
-  const inputRef = useRef<HTMLInputElement>(null); // ref for the input field
+}: SearchBarProps): JSX.Element {
+  const { searchParams, handleTermChange: handleStudioTermChange } = useSearchParams();
+  const [isOpened, setIsOpened] = useState(false);
+  const { searchQuery, setSearchQuery, searchResults, isLoading } = useSearch(organizationId, isStudio);
+  
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    if (debouncedSearchQuery) {
-      setIsLoading(true);
-      if (organizationId) {
-        fetch(
-          `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}&onlyVideos=true&organizationId=${organizationId}`
-        )
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
-            const items = data.data.slice(0, 10);
-            setSearchResults(items);
-            setIsLoading(false);
-          });
-      } else {
-        fetch(
-          `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}&onlyVideos=true`
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            const items = data.data.map((obj: any) => obj.item).slice(0, 10);
-
-            setSearchResults(items);
-            setIsLoading(false);
-          });
-      }
-    }
-  }, [debouncedSearchQuery]);
 
   useEffect(() => {
     if (searchVisible && isMobile && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [searchVisible]);
+  }, [searchVisible, isMobile]);
 
   useClickOutside(dropdownRef, () => setIsOpened(false));
 
   const handleTermChange = (session: IExtendedSession) => {
-    router.push(
-      isStudio
-        ? `/studio/${organizationSlug}/library/${session._id.toString()}`
-        : `/${
-            organizationSlug || session.organizationId
-          }/watch?session=${session._id.toString()}`
-    );
-    return;
+    const path = isStudio
+      ? `/studio/${organizationSlug}/library/${session._id.toString()}`
+      : `/${organizationSlug}/watch?session=${session._id.toString()}`;
+    router.push(path);
   };
-  const handleEventChange = (term: string) => {
-    window.location.href = archivePath({
-      organizationSlug: organizationSlug,
-      event: term,
-    });
+
+  const handleSearch = () => {
+    setIsOpened(false);
+    if (isStudio) {
+      handleStudioTermChange([
+        { key: 'searchQuery', value: searchQuery },
+        { key: 'page', value: '1' },
+      ]);
+    } else {
+      router.push(
+        archivePath({
+          organizationSlug,
+          searchQuery,
+        })
+      );
+    }
   };
 
   return (
     <div className="relative flex w-full max-w-[500px] flex-col items-center justify-center p-2">
       <Input
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            setIsOpened(false);
-            isStudio
-              ? handleStudioTermChange([
-                  {
-                    key: 'searchQuery',
-                    value: searchQuery,
-                  },
-                  {
-                    key: 'page',
-                    value: '1',
-                  },
-                ])
-              : router.push(
-                  archivePath({
-                    organizationSlug: organizationSlug,
-                    searchQuery: searchQuery,
-                  })
-                );
-          }
-        }}
         ref={inputRef}
-        onFocus={() => setIsOpened(true)}
-        className="max-w-[500px] bg-white"
+        className="max-w-[500px] bg-white border-primary border-2"
         placeholder="Search..."
         value={searchQuery}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setSearchQuery(e.target.value);
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onFocus={() => setIsOpened(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSearch();
+          }
         }}
       />
-      {isOpened && debouncedSearchQuery && (
+      
+      {isOpened && searchQuery && (
         <div
           ref={dropdownRef}
           className="absolute top-[55px] w-full max-w-[500px] bg-secondary p-2"
         >
-          {isLoading ? (
-            <span>Loading...</span>
-          ) : (
-            <div className="flex flex-col bg-white">
-              {searchResults.length > 0 && (
-                <div className="mt-2">
-                  <div className="text p-1 font-bold">Videos</div>
-                  {searchResults.map((result) => (
-                    <div
-                      onClick={() => {
-                        handleTermChange(result);
-                        setIsOpened(false);
-                      }}
-                      className="cursor-pointer p-1 hover:bg-gray-100"
-                      key={result._id.toString()}
-                    >
-                      {result.name}
-                    </div>
-                  ))}
-                </div>
-              )}
-              {/*{eventResults.length > 0 && (
-                <div className="p-2 mx-2 mt-2">
-                  <div className="font-bold text">Events</div>
-                  {eventResults.map((result: IEventSearchResult) => (
-                    <div
-                      onClick={() => {
-                        handleEventChange(result.slug)
-                        setIsOpened(false)
-                      }}
-                      className="p-1"
-                      key={result.name}>
-                      {result.name}
-                    </div>
-                  ))}
-                </div>
-              )}*/}
-            </div>
-          )}
+          <SearchResults
+            isLoading={isLoading}
+            searchResults={searchResults}
+            onSelect={(result) => {
+              handleTermChange(result);
+              setIsOpened(false);
+            }}
+          />
         </div>
       )}
     </div>

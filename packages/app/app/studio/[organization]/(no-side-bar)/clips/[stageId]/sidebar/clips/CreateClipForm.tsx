@@ -50,7 +50,7 @@ const CreateClipForm = () => {
     const fetchAnimations = async () => {
       const animations = await fetchAllSessions({
         type: SessionType.animation,
-        organizationSlug: organizationId,
+        organizationId: organizationId,
       });
       setAnimations(animations.sessions);
     };

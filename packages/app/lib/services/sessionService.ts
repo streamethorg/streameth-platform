@@ -9,8 +9,8 @@ import { apiUrl } from '@/lib/utils/utils';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
 import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components/asset';
-import FuzzySearch from 'fuzzy-search';
 import { fetchClient } from './fetch-client';
+
 interface ApiParams {
   event?: string;
   organizationId?: string;
@@ -20,10 +20,12 @@ interface ApiParams {
   onlyVideos?: boolean;
   published?: string;
   speakerIds?: string[]; // Assuming speakerIds is an array of strings
-  date?: Date;
+  itemDate?: string;
   type?: string;
   itemStatus?: string;
+  clipable?: boolean;
 }
+
 
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
   const queryParams = Object.entries(params)
@@ -38,7 +40,6 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
 
 export async function fetchAllSessions({
   event,
-  organizationSlug,
   organizationId,
   stageId,
   speakerIds,
@@ -49,9 +50,10 @@ export async function fetchAllSessions({
   searchQuery = '',
   type,
   itemStatus,
+  itemDate,
+  clipable,
 }: {
   event?: string;
-  organizationSlug?: string;
   organizationId?: string;
   stageId?: string;
   speakerIds?: string[];
@@ -62,14 +64,16 @@ export async function fetchAllSessions({
   searchQuery?: string;
   type?: string;
   itemStatus?: string;
+  itemDate?: string;
+  clipable?: boolean;
 }): Promise<{
   sessions: IExtendedSession[];
   pagination: IPagination;
 }> {
   const params: ApiParams = {
     event,
+    organizationId,
     stageId,
-    organizationId: organizationId || organizationSlug,
     page,
     size: searchQuery ? 0 : limit,
     onlyVideos,
@@ -77,59 +81,19 @@ export async function fetchAllSessions({
     speakerIds,
     type,
     itemStatus,
+    itemDate,
+    clipable,
   };
-
+  console.log(constructApiUrl(`${apiUrl()}/sessions`, params));
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {
-      next: { revalidate: 100 },
+      cache: 'no-store',
     }
   );
-  if (!response.ok) {
-    console.error('❌ Failed to fetch sessions:', await response.text());
-    throw new Error('Failed to fetch sessions');
-  }
   const a = await response.json();
-  const allSessions = a.data;
-  if (searchQuery) {
-    const normalizedQuery = searchQuery.toLowerCase();
-    const fuzzySearch = new FuzzySearch(
-      allSessions?.sessions,
-      ['name', 'description', 'speakers.name'],
-      {
-        caseSensitive: false,
-        sort: true,
-      }
-    );
-
-    allSessions.sessions = fuzzySearch.search(normalizedQuery);
-  }
-
-  // Calculate total items and total pages
-  const totalItems = searchQuery
-    ? allSessions.sessions.length
-    : allSessions.totalDocuments;
-  const totalPages = limit ? Math.ceil(totalItems / limit) : 1;
-
-  // Implement manual pagination for fuzzy search
-  const startIndex = (page - 1) * limit!;
-  const endIndex = startIndex + limit!;
-  const paginatedSessions = allSessions.sessions.slice(startIndex, endIndex);
-
-  // Return paginated data and pagination metadata
-  return {
-    sessions: searchQuery ? paginatedSessions : allSessions.sessions,
-    pagination: allSessions?.pagination
-      ? allSessions.pagination
-      : {
-          currentPage: page,
-          totalPages,
-          totalItems,
-          limit,
-        },
-  };
+  return a.data;
 }
-
 export const createSession = async ({
   session,
 }: {

@@ -3,40 +3,39 @@
 import { CardTitle } from '@/components/ui/card';
 import InfoBoxDescription from './InfoBoxDescription';
 import {
-  IExtendedNftCollections,
   IExtendedSession,
+  IExtendedSpeaker,
   IExtendedStage,
 } from '@/lib/types';
 import ShareButton from '../misc/interact/ShareButton';
-import CollectVideButton from './CollectVideButton';
-import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
 import ViewCounts from '@/app/[organization]/components/ViewCounts';
 import CalendarReminder from '@/app/[organization]/livestream/components/CalendarReminder';
-import { IExtendedSpeaker } from '@/lib/types';
 import VideoDownloadClient from '../misc/VideoDownloadClient';
 import TranscriptionModal from './TranscriptionModal';
 import Timezone from '@/lib/utils/timezone';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import { Button } from '../ui/button';
+import { EllipsisVertical } from 'lucide-react';
 
 const DesktopButtons = ({
   name,
   description,
   date,
   video,
-  nftCollection,
   vod,
 }: {
   name: string;
   description: string;
   date: string;
   video?: IExtendedSession;
-  nftCollection: IExtendedNftCollections | null;
   vod: boolean;
 }) => {
   return (
     <>
-      {video?.nftCollections?.[0] && (
-        <CollectVideButton video={video} nftCollection={nftCollection} />
-      )}
       <div className="flex flex-row space-x-2">
         <ShareButton shareFor="video" />
         {video?.assetId && (
@@ -55,9 +54,7 @@ const DesktopButtons = ({
           end={date}
         />
       )}
-      {video?.transcripts?.chunks?.length && (
-        <TranscriptionModal video={video as IExtendedSession} />
-      )}
+      <TranscriptionModal video={video as IExtendedSession} />
     </>
   );
 };
@@ -67,46 +64,47 @@ const MobileButtons = ({
   description,
   date,
   video,
-  nftCollection,
   vod,
 }: {
   name: string;
   description: string;
   date: string;
   video?: IExtendedSession;
-  nftCollection: IExtendedNftCollections | null;
   vod: boolean;
 }) => {
   const hasCalendarReminder = !vod;
 
   return (
-    <div className="flex flex-wrap gap-2 items-center w-full">
-      {video?.nftCollections?.[0] && (
-        <CollectVideButton video={video} nftCollection={nftCollection} />
-      )}
-      <ShareButton
-        variant={video?.nftCollections?.[0] ? 'outline' : 'primary'}
-        shareFor="video"
-      />
-      {video?.assetId && (
-        <VideoDownloadClient
-          variant="outline"
-          videoName={`${video.name}.mp4`}
-          assetId={video?.assetId}
-        />
-      )}
-      {hasCalendarReminder && (
-        <CalendarReminder
-          eventName={name}
-          description={description}
-          start={date}
-          end={date}
-        />
-      )}
-      {video?.transcripts?.chunks && (
-        <TranscriptionModal video={video as IExtendedSession} />
-      )}
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Button variant={'ghost'}>
+          <EllipsisVertical className="w-5 h-5 cursor-pointer" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <div className="flex flex-col gap-2 items-center w-full">
+          <ShareButton variant={'ghost'} shareFor="video" />
+          {video?.assetId && (
+            <VideoDownloadClient
+              variant="ghost"
+              videoName={`${video.name}.mp4`}
+              assetId={video?.assetId}
+            />
+          )}
+          {hasCalendarReminder && (
+            <CalendarReminder
+              eventName={name}
+              description={description}
+              start={date}
+              end={date}
+            />
+          )}
+          {video?.transcripts?.chunks && (
+            <TranscriptionModal video={video as IExtendedSession} />
+          )}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
@@ -118,8 +116,6 @@ const SessionInfoBox = async ({
   playbackId,
   inverted,
   vod = false,
-  organizationSlug,
-  viewCount = false,
   video,
 }: {
   name: string;
@@ -135,10 +131,6 @@ const SessionInfoBox = async ({
     | (IExtendedSession & { isMultipleDate?: boolean; streamEndDate?: string })
     | IExtendedStage;
 }) => {
-  const nftCollection = await fetchNFTCollection({
-    collectionId: video?.nftCollections?.[0],
-  });
-
   return (
     <div
       className={`flex flex-col py-4 md:flex-row md:space-x-2 ${
@@ -146,42 +138,36 @@ const SessionInfoBox = async ({
       }`}
     >
       <div className="flex flex-col justify-start w-full">
-        <CardTitle className="flex flex-row justify-between items-start text-xl lg:text-2xl">
-          <span>{name}</span>
+        <CardTitle className="flex flex-col justify-between items-start text-xl lg:text-2xl">
+          <div className="flex flex-row justify-start items-center w-full">
+            <p className="text-xl lg:text-2xl my-auto">{name}</p>
+            <div className="md:hidden">
+              <MobileButtons
+                name={name}
+                description={description}
+                date={date}
+                video={video as IExtendedSession | undefined}
+                vod={vod}
+              />
+            </div>
+            <div className="hidden justify-end items-center ml-auto space-x-2 md:flex">
+              <DesktopButtons
+                name={name}
+                description={description}
+                date={date}
+                video={video as IExtendedSession | undefined}
+                vod={vod}
+              />
+            </div>
+          </div>
+          <div className="flex items-center space-x-2 text-sm">
+            {playbackId && <ViewCounts playbackId={playbackId} />}
+            <span>|</span>
+            <Timezone date={date} video={video as IExtendedStage} />
+          </div>
         </CardTitle>
         <InfoBoxDescription speakers={speakers} description={description} />
-        <div className="flex items-center space-x-2 text-sm">
-          <Timezone date={date} video={video as IExtendedStage} />
-          {playbackId && (
-            <>
-              <span className="font-bold">|</span>
-              <ViewCounts playbackId={playbackId} />
-            </>
-          )}
-        </div>
       </div>
-      <>
-        <div className="hidden justify-end items-center mt-0 mb-auto space-x-2 md:flex">
-          <DesktopButtons
-            name={name}
-            description={description}
-            date={date}
-            video={video as IExtendedSession | undefined}
-            nftCollection={nftCollection}
-            vod={vod}
-          />
-        </div>
-        <div className="flex justify-between items-center mt-2 mb-auto space-x-2 md:hidden">
-          <MobileButtons
-            name={name}
-            description={description}
-            date={date}
-            video={video as IExtendedSession | undefined}
-            nftCollection={nftCollection}
-            vod={vod}
-          />
-        </div>
-      </>
     </div>
   );
 };

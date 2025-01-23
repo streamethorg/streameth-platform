@@ -1,7 +1,7 @@
 import Player from '@/components/ui/Player';
 import SessionInfoBox from '@/components/sessions/SessionInfoBox';
 import { EventPageProps } from '@/lib/types';
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import { fetchEvent } from '@/lib/services/eventService';
 import { fetchStage } from '@/lib/services/stageService';
 import UpcomingSession from '../components/UpcomingSession';

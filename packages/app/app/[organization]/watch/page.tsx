@@ -7,10 +7,11 @@ import { generalMetadata, watchMetadata } from '@/lib/utils/metadata';
 import { fetchSession } from '@/lib/services/sessionService';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { Suspense } from 'react';
-import WatchGrid from '../components/WatchGrid';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
 import { generateThumbnailAction } from '@/lib/actions/sessions';
 import Link from 'next/link';
+import ArchiveVideos from '../videos/components/ArchiveVideos';
+import ArchiveVideoSkeleton from '../livestream/components/ArchiveVideosSkeleton';
 const Loading = () => {
   return (
     <div className="mx-auto flex h-full w-full max-w-7xl animate-pulse flex-col gap-4">
@@ -59,7 +60,6 @@ export default async function Watch({
   // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
-  const thumbnail = await generateThumbnailAction(session);
 
   return (
     <Suspense key={session._id} fallback={<Loading />}>
@@ -67,7 +67,7 @@ export default async function Watch({
         <div className="flex h-full w-full flex-col md:p-4">
           <PlayerWithControls
             name={session.name}
-            thumbnail={session.coverImage ?? thumbnail}
+            thumbnail={session.coverImage}
             caption={session?.transcripts?.subtitleUrl}
             src={[
               {
@@ -100,17 +100,22 @@ export default async function Watch({
             </Link>
           </div>
           <div className="md:hidden">
-            <WatchGrid
-              organizationSlug={params.organization}
-              organizationId={organization._id}
-            />
+            <Suspense fallback={<ArchiveVideoSkeleton />}>
+              <ArchiveVideos
+                organizationId={organization._id}
+                organizationSlug={params.organization}
+                gridLength={4}
+              />
+            </Suspense>
           </div>
           <div className="hidden md:block">
-            <WatchGrid
-              organizationSlug={params.organization}
-              organizationId={organization._id}
-              gridLength={8}
-            />
+            <Suspense fallback={<ArchiveVideoSkeleton />}>
+              <ArchiveVideos
+                organizationId={organization._id}
+                organizationSlug={params.organization}
+                gridLength={8}
+              />
+            </Suspense>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateNFTForm from './CreateNFTForm';
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { INFTSessions } from '@/lib/types';
 import { fetchOrganizationStages } from '@/lib/services/stageService';

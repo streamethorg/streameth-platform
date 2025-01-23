@@ -2,14 +2,11 @@ import NotFound from '@/not-found';
 import { Metadata, ResolvingMetadata } from 'next';
 import {
   fetchOrganization,
-  fetchOrganizations,
 } from '@/lib/services/organizationService';
 import { ChannelPageParams } from '@/lib/types';
 import ChannelShareIcons from './components/ChannelShareIcons';
 import Image from 'next/image';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Suspense } from 'react';
-import { Card } from '@/components/ui/card';
 import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite';
 import UpcomingStreams, {
   UpcomingStreamsLoading,
@@ -19,14 +16,12 @@ import ChannelDescription from './components/ChannelDescription';
 import { livestreamMetadata, generalMetadata } from '@/lib/utils/metadata';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import ArchiveVideos from './videos/components/ArchiveVideos';
+import ArchiveVideoSkeleton from './livestream/components/ArchiveVideosSkeleton';
 
 const OrganizationHome = async ({
   params,
   searchParams,
 }: ChannelPageParams) => {
-  if (!params.organization) {
-    return NotFound();
-  }
 
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
@@ -36,24 +31,7 @@ const OrganizationHome = async ({
     return NotFound();
   }
 
-  const allStreams = (
-    await fetchOrganizationStages({
-      organizationId: organization._id,
-    })
-  ).filter(
-    (stream) =>
-      stream.published &&
-      (stream.streamSettings?.isActive ||
-        new Date(stream?.streamDate as string) > new Date())
-  );
 
-  const sortedStreams = allStreams.sort(
-    (a, b) =>
-      new Date(a.streamDate as string).getTime() -
-      new Date(b.streamDate as string).getTime()
-  );
-
-  const stage = sortedStreams.length > 0 ? sortedStreams[0] : null;
 
   return (
     <div className="mx-auto w-full max-w-7xl space-y-4 md:p-4">
@@ -95,7 +73,7 @@ const OrganizationHome = async ({
             <h1 className="text-xl font-bold">Videos</h1>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="livestreams">
+        <TabsContent value="livestreams" className="px-4 md:px-0">
           <Suspense fallback={<UpcomingStreamsLoading />}>
             <UpcomingStreams
               organizationId={organization._id}
@@ -104,11 +82,16 @@ const OrganizationHome = async ({
             />
           </Suspense>
         </TabsContent>
-        <TabsContent value="videos">
+        <TabsContent value="videos" className="px-4 md:px-0">
+        <Suspense fallback={<ArchiveVideoSkeleton />}>
           <ArchiveVideos
-            organizationSlug={params.organization}
-            searchQuery={searchParams.search}
-          />
+              organizationId={organization._id}
+              organizationSlug={params.organization}
+              searchQuery={searchParams.search}
+              gridLength={12}
+              page={Number(searchParams.page) || 1}
+            />
+          </Suspense>
         </TabsContent>
       </Tabs>
     </div>

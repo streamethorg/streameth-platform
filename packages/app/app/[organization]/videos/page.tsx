@@ -12,10 +12,9 @@ import Image from 'next/image';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import EventSelect from './components/eventSelect';
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import {
   generalMetadata,
-  livestreamMetadata,
   organizationMetadata,
 } from '@/lib/utils/metadata';
 
@@ -80,9 +79,11 @@ export default async function ArchivePage({
         </div>
         <Suspense fallback={<ArchiveVideoSkeleton />}>
           <ArchiveVideos
+            organizationId={organization._id}
             organizationSlug={params.organization}
-            searchQuery={searchParams.searchQuery || ''}
-            event={searchParams.event}
+            searchQuery={searchParams.searchQuery}
+            page={Number(searchParams.page) || 1}
+            gridLength={12}
           />
         </Suspense>
       </div>

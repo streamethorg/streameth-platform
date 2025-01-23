@@ -1,6 +1,6 @@
 import Player from '@/components/ui/Player';
 import SessionInfoBox from '@/components/sessions/SessionInfoBox';
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import { fetchStage } from '@/lib/services/stageService';
 import { fetchChat } from '@/lib/services/chatService';
 import { Livepeer } from 'livepeer';

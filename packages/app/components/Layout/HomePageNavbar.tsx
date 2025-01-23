@@ -38,7 +38,7 @@ const HomePageNavbar = ({
   }
 
   return (
-    <Suspense fallback={null}>
+    <>
       <MobileNavBar
         logo={logo}
         pages={pages}
@@ -55,7 +55,7 @@ const HomePageNavbar = ({
         organizations={organizations}
         currentOrganization={currentOrganization || ''}
       />
-    </Suspense>
+    </>
   );
 };
 
@@ -114,14 +114,6 @@ const MobileNavBar = ({
           searchVisible && showSearchBar && 'bg-background'
         )}
       >
-        {organizations && (
-          <div className="m-1 mr-2">
-            <SwitchOrganization
-              organization={currentOrganization}
-              organizations={organizations}
-            />
-          </div>
-        )}
         {showGoBack ? (
           <Link href={`/studio/${currentOrganization}/clips`}>
             <Button className="mr-2" variant="outline" size="sm">
