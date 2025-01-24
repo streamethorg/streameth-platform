@@ -64,12 +64,6 @@ const CreateLivestreamModal = ({
   );
 
   const handleClick = (e: React.MouseEvent) => {
-    if (!canUseFeatures) {
-      e.preventDefault();
-      e.stopPropagation();
-      router.push(`/studio/${organizationSlug}/payments`);
-      return;
-    }
     setOpen(true);
   };
 

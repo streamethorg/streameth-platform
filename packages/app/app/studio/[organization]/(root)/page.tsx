@@ -15,16 +15,18 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import FeatureButton from '@/components/ui/feature-button';
 import { Radio } from 'lucide-react';
 import { isFeatureAvailable } from '@/lib/utils/utils';
-import { useSubscription } from '@/lib/hooks/useSubscription';
-const OrganizationPage = async ({
+
+export default async function OrganizationPage({
   params,
   searchParams,
-}: LivestreamPageParams) => {
+}: LivestreamPageParams) {
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   });
 
   if (!organization) return notFound();
+
+  const hasFeatures = isFeatureAvailable(organization.expirationDate);
 
   // Calculate the start of the current day
   const startOfDay = new Date();
@@ -35,7 +37,7 @@ const OrganizationPage = async ({
       <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center gap-4 p-4">
-          {isFeatureAvailable(organization.expirationDate) ? (
+          {hasFeatures ? (
             <CreateLivestreamModal
               variant="primary"
               show={searchParams?.show}
@@ -52,7 +54,7 @@ const OrganizationPage = async ({
             </FeatureButton>
           )}
 
-          {isFeatureAvailable(organization.expirationDate) ? (
+          {hasFeatures ? (
             <UploadVideoDialog organizationId={organization._id.toString()} />
           ) : (
             <FeatureButton
@@ -64,7 +66,8 @@ const OrganizationPage = async ({
               Upload Video
             </FeatureButton>
           )}
-          {isFeatureAvailable(organization.expirationDate) ? (
+
+          {hasFeatures ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >
@@ -124,6 +127,4 @@ const OrganizationPage = async ({
       </Tabs>
     </div>
   );
-};
-
-export default OrganizationPage;
+}
