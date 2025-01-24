@@ -36,7 +36,7 @@ const AddDestination = ({ organization }: { organization: Organization }) => {
       <CardContent>
         <div className="flex items-center gap-4 w-fit">
           <YoutubeConnectButton state={state} />
-          <TwitterConnectButton state={state} />
+          {/* <TwitterConnectButton state={state} /> */}
         </div>
       </CardContent>
     </Card>
