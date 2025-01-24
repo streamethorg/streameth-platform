@@ -10,7 +10,9 @@ export async function fetchStage({
   stage: string;
 }): Promise<IExtendedStage | null> {
   try {
-    const response = await fetch(`${apiUrl()}/stages/${stage}`);
+    const response = await fetch(`${apiUrl()}/stages/${stage}`, {
+      cache: 'no-cache',
+    });
     const data = (await response.json()).data;
     if (!data) {
       return null;
@@ -29,7 +31,10 @@ export async function fetchStages({
 }): Promise<IExtendedStage[]> {
   try {
     const stages = await fetchClient(
-      `${apiUrl()}/stages/organization/${organizationId}`
+      `${apiUrl()}/stages/organization/${organizationId}`,
+      {
+        cache: 'no-cache',
+      }
     );
     const data = (await stages.json()).data;
     return data.map((stage: IStage) => stage);
@@ -113,7 +118,10 @@ export async function fetchOrganizationStages({
     const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
     const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
     const response = await fetch(
-      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`
+      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`,
+      {
+        cache: 'no-cache',
+      }
     );
 
     const data = (await response.json()).data;

@@ -93,7 +93,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
               </Suspense>
               <GetHashButton session={session} />
               <div className="flex flex-col space-y-2">
-                <Label>Publish to Socials</Label>
+                {/* <Label>Publish to Socials</Label> */}
                 <div className="flex flex-row gap-2">
                   {/* <UploadToYoutubeButton
                     organization={organization}

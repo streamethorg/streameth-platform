@@ -125,6 +125,7 @@ export const useCreateClip = () => {
       end: values.end,
       organizationId,
       pretalxSessionCode: values.pretalxSessionCode,
+      stageId: stageId || '',
     };
 
     try {
