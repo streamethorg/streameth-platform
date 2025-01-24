@@ -142,8 +142,8 @@ export class ChatAPI {
 
 
 const optimalScores = {
-  panels_and_talks_identification: 0.9,
-  key_moments_identification: 0.87,
+  panels_and_talks_identification: 0.89,
+  key_moments_identification: 0.86,
 }
 
 const defaultQueries = {
