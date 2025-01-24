@@ -24,11 +24,8 @@ export default async function OrganizationPage({
 
   if (!organization) return notFound();
 
-  const hasFeatures = isFeatureAvailable(
-    organization.expirationDate,
-    organization.currentStages,
-    organization.paidStages
-  );
+  const hasValidSubscription = isFeatureAvailable(organization.expirationDate);
+  const hasReachedStageLimit = (organization.currentStages ?? 0) >= (organization.paidStages ?? 0);
 
   // Calculate the start of the current day
   const startOfDay = new Date();
@@ -39,12 +36,24 @@ export default async function OrganizationPage({
       <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center gap-4 p-4">
-          {hasFeatures ? (
-            <CreateLivestreamModal
-              variant="primary"
-              show={searchParams?.show}
-              organization={organization}
-            />
+          {hasValidSubscription ? (
+            hasReachedStageLimit ? (
+              <FeatureButton
+                organizationId={organization._id.toString()}
+                variant="primary"
+                className="flex items-center gap-2"
+                forceLockedState={true}
+              >
+                <Radio className="w-5 h-5" />
+                Create Livestream
+              </FeatureButton>
+            ) : (
+              <CreateLivestreamModal
+                variant="primary"
+                show={searchParams?.show}
+                organization={organization}
+              />
+            )
           ) : (
             <FeatureButton
               organizationId={organization._id.toString()}
@@ -56,7 +65,7 @@ export default async function OrganizationPage({
             </FeatureButton>
           )}
 
-          {hasFeatures ? (
+          {hasValidSubscription ? (
             <UploadVideoDialog organizationId={organization._id.toString()} />
           ) : (
             <FeatureButton
@@ -69,7 +78,7 @@ export default async function OrganizationPage({
             </FeatureButton>
           )}
 
-          {hasFeatures ? (
+          {hasValidSubscription ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >

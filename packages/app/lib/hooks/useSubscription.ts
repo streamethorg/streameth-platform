@@ -9,6 +9,7 @@ interface SubscriptionStatus {
   isProcessing: boolean;
   isPending: boolean;
   isFailed: boolean;
+  hasAvailableStages: boolean;
 }
 
 export const useSubscription = (organizationId: string) => {
@@ -17,6 +18,7 @@ export const useSubscription = (organizationId: string) => {
   if (loading || error || !organization) {
     return {
       canUseFeatures: false,
+      canCreateStages: false,
       isLoading: loading,
       error,
       organizationSlug: '',
@@ -27,6 +29,7 @@ export const useSubscription = (organizationId: string) => {
         isProcessing: false,
         isPending: false,
         isFailed: false,
+        hasAvailableStages: false
       } as SubscriptionStatus,
     };
   }
@@ -38,6 +41,9 @@ export const useSubscription = (organizationId: string) => {
     isFailed: organization.paymentStatus === 'failed',
     daysLeft: 0,
     hasExpired: true,
+    hasAvailableStages: typeof organization.currentStages === 'undefined' || 
+                       typeof organization.paidStages === 'undefined' || 
+                       organization.currentStages < organization.paidStages
   };
 
   if (organization.expirationDate) {
@@ -49,11 +55,15 @@ export const useSubscription = (organizationId: string) => {
     status.hasExpired = status.daysLeft <= 0;
   }
 
-  // Can use features if subscription is active and not expired
+  // Base feature access - only checks subscription status and expiry
   const canUseFeatures = status.isActive && !status.hasExpired;
+  
+  // Stage creation - checks subscription, expiry AND stage limits
+  const canCreateStages = canUseFeatures && status.hasAvailableStages;
 
   return {
     canUseFeatures,
+    canCreateStages,
     isLoading: loading,
     error,
     organizationSlug: organization.slug || '',

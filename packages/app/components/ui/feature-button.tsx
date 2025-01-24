@@ -26,6 +26,7 @@ interface FeatureButtonProps {
   size?: 'default' | 'sm' | 'lg' | 'icon';
   loading?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  forceLockedState?: boolean;
 }
 
 const FeatureButton = ({
@@ -38,13 +39,14 @@ const FeatureButton = ({
   size = 'default',
   loading,
   type = 'button',
+  forceLockedState = false,
 }: FeatureButtonProps) => {
   const router = useRouter();
   const { canUseFeatures, isLoading, organizationSlug } =
     useSubscription(organizationId);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (!canUseFeatures) {
+    if (!canUseFeatures || forceLockedState) {
       event.preventDefault();
       event.stopPropagation();
       router.push(`/studio/${organizationSlug}/payments`);
@@ -53,17 +55,19 @@ const FeatureButton = ({
     onClick?.();
   };
 
+  const isLocked = !canUseFeatures || forceLockedState;
+
   return (
     <Button
       variant={variant}
-      className={cn(className, 'relative', !canUseFeatures && 'opacity-60')}
+      className={cn(className, 'relative', isLocked && 'opacity-60')}
       onClick={handleClick}
       disabled={disabled || isLoading}
       size={size}
       type={type}
       loading={loading}
     >
-      {!canUseFeatures && !loading && <Lock className="w-4 h-4 mr-2" />}
+      {isLocked && !loading && <Lock className="w-4 h-4 mr-2" />}
       {children}
     </Button>
   );
