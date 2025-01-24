@@ -24,6 +24,12 @@ export default async function OrganizationPage({
 
   if (!organization) return notFound();
 
+  const hasFeatures = isFeatureAvailable(
+    organization.expirationDate,
+    organization.currentStages,
+    organization.paidStages
+  );
+
   // Calculate the start of the current day
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
@@ -33,7 +39,7 @@ export default async function OrganizationPage({
       <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center gap-4 p-4">
-          {isFeatureAvailable(organization.expirationDate) ? (
+          {hasFeatures ? (
             <CreateLivestreamModal
               variant="primary"
               show={searchParams?.show}
@@ -50,7 +56,7 @@ export default async function OrganizationPage({
             </FeatureButton>
           )}
 
-          {isFeatureAvailable(organization.expirationDate) ? (
+          {hasFeatures ? (
             <UploadVideoDialog organizationId={organization._id.toString()} />
           ) : (
             <FeatureButton
@@ -63,7 +69,7 @@ export default async function OrganizationPage({
             </FeatureButton>
           )}
 
-          {isFeatureAvailable(organization.expirationDate) ? (
+          {hasFeatures ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >

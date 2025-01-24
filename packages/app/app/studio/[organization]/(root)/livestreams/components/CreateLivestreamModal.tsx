@@ -37,8 +37,6 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
-import { cn } from '@/lib/utils/utils';
-import FeatureButton from '@/components/ui/feature-button';
 import { useSubscription } from '@/lib/hooks/useSubscription';
 
 const CreateLivestreamModal = ({
