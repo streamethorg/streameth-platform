@@ -1,10 +1,5 @@
 'use client';
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useRef,
-} from 'react';
+import React, { createContext, useContext, useState, useRef } from 'react';
 import Hls from 'hls.js';
 import { ClipContextType } from '@/lib/types';
 import { PlaybackStatus } from '@/lib/types';
@@ -19,7 +14,7 @@ export const ClipProvider = ({
   clipUrl,
 }: {
   children: React.ReactNode;
-  stageId: string;
+  stageId?: string;
   organizationId: string;
   clipUrl: string;
 }) => {
@@ -37,7 +32,7 @@ export const ClipProvider = ({
 
   return (
     <ClipContext.Provider
-      value={{     
+      value={{
         isLoading,
         setIsLoading,
         videoRef,

@@ -28,17 +28,10 @@ const SessionSelector = ({
 }: SessionSelectorProps) => {
   const router = useRouter();
   const { isCreatingClip, setIsCreatingClip } = useClipContext();
-  const {
-    isAddingOrEditingMarker,
-    isImportingMarkers,
-  } = useMarkersContext();
+  const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
 
   const isDisabled =
     isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
-
-  if (!currentSession || !recordings.length) {
-    return null;
-  }
 
   return (
     <div className="p-2 flex w-full bg-white flex-row items-center">
@@ -57,21 +50,23 @@ const SessionSelector = ({
         >
           Editing: {stageName}
         </p>
-        <Combobox
-          items={recordings}
-          variant="outline"
-          value={currentSession.value}
-          setValue={(value) => {
-            if (!value) return;
-            const selectedRecording = recordings.find(
-              (rec) => rec.value === value
-            );
-            if (selectedRecording) {
-              router.push(selectedRecording.url);
-            }
-          }}
-          aria-label="Select recording session"
-        />
+        {recordings.length > 0 && (
+          <Combobox
+            items={recordings}
+            variant="outline"
+            value={currentSession.value}
+            setValue={(value) => {
+              if (!value) return;
+              const selectedRecording = recordings.find(
+                (rec) => rec.value === value
+              );
+              if (selectedRecording) {
+                router.push(selectedRecording.url);
+              }
+            }}
+            aria-label="Select recording session"
+          />
+        )}
       </div>
       <Button
         disabled={isDisabled}

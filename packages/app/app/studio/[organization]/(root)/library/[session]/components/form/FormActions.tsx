@@ -16,7 +16,12 @@ interface FormActionsProps {
   isLoading: boolean;
 }
 
-const FormActions = ({ form, session, organizationSlug, isLoading }: FormActionsProps) => {
+const FormActions = ({
+  form,
+  session,
+  organizationSlug,
+  isLoading,
+}: FormActionsProps) => {
   return (
     <div className="flex justify-start items-start space-x-2">
       <DeleteAsset
@@ -50,4 +55,4 @@ const FormActions = ({ form, session, organizationSlug, isLoading }: FormActions
   );
 };
 
-export default FormActions; 
+export default FormActions;

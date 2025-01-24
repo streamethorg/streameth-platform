@@ -277,7 +277,6 @@ export interface IExtendedMarker extends Omit<IMarker, '_id'> {
   __v?: string;
 }
 
-
 export type TimeSettings = {
   unix: number;
   displayTime: number;
@@ -291,7 +290,7 @@ export type ClipContextType = {
   setDragging: React.Dispatch<React.SetStateAction<string | null>>;
   selectedTooltip: string | null;
   setSelectedTooltip: React.Dispatch<React.SetStateAction<string | null>>;
-  stageId: string;
+  stageId?: string;
   isCreatingClip: boolean;
   setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
   hls: Hls | null;
@@ -299,7 +298,9 @@ export type ClipContextType = {
   clipUrl: string;
   organizationId: string;
   playbackStatus: PlaybackStatus | null;
-  setPlaybackStatus: React.Dispatch<React.SetStateAction<PlaybackStatus | null>>;
+  setPlaybackStatus: React.Dispatch<
+    React.SetStateAction<PlaybackStatus | null>
+  >;
   isInputFocused: boolean;
   setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 };

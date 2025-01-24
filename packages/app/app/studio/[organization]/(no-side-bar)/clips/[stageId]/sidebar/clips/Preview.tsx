@@ -93,7 +93,7 @@ const Preview = ({
               assetId={session.assetId}
               collapsable={true}
             />
-            <Link 
+            <Link
               href={`/studio/${organizationSlug}/library/${session._id}`}
               target="_blank"
               rel="noopener noreferrer"

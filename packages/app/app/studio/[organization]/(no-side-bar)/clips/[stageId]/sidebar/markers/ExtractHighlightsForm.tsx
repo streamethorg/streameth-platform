@@ -88,7 +88,7 @@ export const ExtractHighlightsForm = ({
         clearTimeout(timeoutId);
       }
     };
-  }, [status, sessionId, fetchAndSetMarkers]);
+  }, [status, sessionId]);
 
   if (status === 'pending') {
     return (

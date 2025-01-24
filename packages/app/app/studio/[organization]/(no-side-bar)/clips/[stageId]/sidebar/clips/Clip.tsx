@@ -9,10 +9,14 @@ import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.in
 import Preview from './Preview';
 
 // Processing Card Component
-function ProcessingCard({ session, status, progress }: {
+function ProcessingCard({
+  session,
+  status,
+  progress,
+}: {
   session: IExtendedSession;
   status: ProcessingStatus;
-  progress: { type: 'progress' | 'done'; progress: number; } | null;
+  progress: { type: 'progress' | 'done'; progress: number } | null;
 }) {
   console.log('progress', progress);
   return (
@@ -33,7 +37,10 @@ function ProcessingCard({ session, status, progress }: {
               {Math.round(Number(progress?.progress ?? 0) * 100)}% complete.
             </p>
             <p className="text-[11px] text-gray-500 mt-1">
-              {formatDate(new Date(session.createdAt as string), 'ddd. MMM. D, YYYY')}
+              {formatDate(
+                new Date(session.createdAt as string),
+                'ddd. MMM. D, YYYY'
+              )}
             </p>
           </div>
         </CardContent>
@@ -71,7 +78,10 @@ export default function Clip({ session }: { session: IExtendedSession }) {
     };
     setStatus(session.processingStatus ?? ProcessingStatus.pending);
 
-    if (session.processingStatus === ProcessingStatus.pending || session.processingStatus === ProcessingStatus.rendering) {
+    if (
+      session.processingStatus === ProcessingStatus.pending ||
+      session.processingStatus === ProcessingStatus.rendering
+    ) {
       getAsset(); // Initial fetch
       intervalId = setInterval(getAsset, 20000);
     }
@@ -82,8 +92,13 @@ export default function Clip({ session }: { session: IExtendedSession }) {
   }, [session._id, session.processingStatus]);
 
   const renderContent = () => {
-    if (status === ProcessingStatus.pending || status === ProcessingStatus.rendering) {
-      return <ProcessingCard session={session} status={status} progress={progress} />;
+    if (
+      status === ProcessingStatus.pending ||
+      status === ProcessingStatus.rendering
+    ) {
+      return (
+        <ProcessingCard session={session} status={status} progress={progress} />
+      );
     }
 
     if (status === ProcessingStatus.failed) {
@@ -94,10 +109,17 @@ export default function Clip({ session }: { session: IExtendedSession }) {
               <Thumbnail imageUrl={session.coverImage} />
             </div>
             <CardContent className="lg:p-2 p-2 flex-grow">
-              <h2 className="text-lg font-semibold line-clamp-1">{session.name}</h2>
-              <p className="text-sm text-destructive mt-1">Video processing failed</p>
+              <h2 className="text-lg font-semibold line-clamp-1">
+                {session.name}
+              </h2>
+              <p className="text-sm text-destructive mt-1">
+                Video processing failed
+              </p>
               <p className="text-[11px] text-gray-500 mt-1">
-                {formatDate(new Date(session.createdAt as string), 'ddd. MMM. D, YYYY')}
+                {formatDate(
+                  new Date(session.createdAt as string),
+                  'ddd. MMM. D, YYYY'
+                )}
               </p>
             </CardContent>
           </div>
@@ -115,9 +137,14 @@ export default function Clip({ session }: { session: IExtendedSession }) {
             <Thumbnail imageUrl={session.coverImage} />
           </div>
           <CardContent className="lg:p-2 p-2 flex-grow">
-            <h2 className="text-lg font-semibold line-clamp-1">{session.name}</h2>
+            <h2 className="text-lg font-semibold line-clamp-1">
+              {session.name}
+            </h2>
             <p className="text-sm text-gray-500 mt-1">
-              {formatDate(new Date(session.createdAt as string), 'ddd. MMM. D, YYYY')}
+              {formatDate(
+                new Date(session.createdAt as string),
+                'ddd. MMM. D, YYYY'
+              )}
             </p>
           </CardContent>
         </div>

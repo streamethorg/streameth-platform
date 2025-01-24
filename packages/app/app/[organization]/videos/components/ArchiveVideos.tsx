@@ -18,7 +18,6 @@ const ArchiveVideos = async ({
   page,
   gridLength = 10,
 }: ArchiveVideosProps) => {
-
   const { sessions: videos, pagination } = await fetchAllSessions({
     organizationId,
     limit: gridLength,
@@ -26,8 +25,7 @@ const ArchiveVideos = async ({
     published: 'public',
     searchQuery,
     page,
-    });
-
+  });
 
   if (videos.length === 0) {
     return (

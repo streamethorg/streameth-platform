@@ -4,7 +4,6 @@ import { useTrimmControlsContext } from './TrimmControlsContext';
 import { useTimelineContext } from './TimelineContext';
 import useTimeline from './useTimeline';
 
-
 const TrimmControls = ({
   marker,
   blocked,
@@ -13,7 +12,8 @@ const TrimmControls = ({
   blocked: boolean;
 }) => {
   const { startTime, endTime, handleMouseDown } = useTrimmControlsContext();
-  const { videoDuration, timelineWidth, pixelsPerSecond } = useTimelineContext();
+  const { videoDuration, timelineWidth, pixelsPerSecond } =
+    useTimelineContext();
   const { calculatePositionOnTimeline } = useTimeline();
 
   const position = calculatePositionOnTimeline(
@@ -52,8 +52,16 @@ export const TrimmOverlay = () => {
   const { videoDuration, timelineWidth } = useTimelineContext();
   const { calculatePositionOnTimeline } = useTimeline();
 
-  const startPosition = calculatePositionOnTimeline(startTime, videoDuration, timelineWidth);
-    const endPosition = calculatePositionOnTimeline(endTime, videoDuration, timelineWidth);
+  const startPosition = calculatePositionOnTimeline(
+    startTime,
+    videoDuration,
+    timelineWidth
+  );
+  const endPosition = calculatePositionOnTimeline(
+    endTime,
+    videoDuration,
+    timelineWidth
+  );
 
   return (
     <div

@@ -16,7 +16,7 @@ const ZoomControls = () => {
     timelineRef,
     videoDuration,
     setTimelineWidth,
-    playheadPosition
+    playheadPosition,
   } = useTimelineContext();
 
   const { calculateTimelineScale } = useTimeline();
@@ -31,7 +31,6 @@ const ZoomControls = () => {
     // Calculate new zoom level
     const newPixelsPerSecond = Math.max(pixelsPerSecond / 1.2, 0.1);
 
-
     // Update pixels per second
     setPixelsPerSecond(newPixelsPerSecond);
 
@@ -42,7 +41,8 @@ const ZoomControls = () => {
     // Adjust scroll position to center on current time
     if (timelineRef.current) {
       const newScrollPosition =
-        playheadPosition * newPixelsPerSecond - timelineRef.current.clientWidth / 2;
+        playheadPosition * newPixelsPerSecond -
+        timelineRef.current.clientWidth / 2;
       timelineRef.current.scrollLeft = newScrollPosition;
     }
   };
@@ -55,7 +55,6 @@ const ZoomControls = () => {
     // Calculate new zoom level
     const newPixelsPerSecond = Math.min(pixelsPerSecond * 1.2, 10);
 
-
     // Update pixels per second
     setPixelsPerSecond(newPixelsPerSecond);
 
@@ -66,7 +65,8 @@ const ZoomControls = () => {
     // Adjust scroll position to center on current time
     if (timelineRef.current) {
       const newScrollPosition =
-        playheadPosition * newPixelsPerSecond - timelineRef.current.clientWidth / 2;
+        playheadPosition * newPixelsPerSecond -
+        timelineRef.current.clientWidth / 2;
       timelineRef.current.scrollLeft = newScrollPosition;
     }
   };
@@ -77,10 +77,10 @@ const ZoomControls = () => {
       timelineContainerWidth: timelineRef.current.offsetWidth,
       maxLength: videoRef.current.duration,
     });
-    
+
     // Update pixels per second
     setPixelsPerSecond(scale);
-    
+
     // Update timeline width
     const newTimelineWidth = videoDuration * scale;
     setTimelineWidth(newTimelineWidth);

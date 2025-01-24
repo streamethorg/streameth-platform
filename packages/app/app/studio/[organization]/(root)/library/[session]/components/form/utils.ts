@@ -17,4 +17,4 @@ export const createSessionUpdatePayload = (
     speakers: session.speakers ?? [],
     type: session.type,
   },
-}); 
+});

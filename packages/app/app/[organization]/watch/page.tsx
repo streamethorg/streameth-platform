@@ -60,7 +60,6 @@ export default async function Watch({
   // If we couldn't get a video URL, return a 'not found' response.
   if (!videoUrl) return notFound();
 
-
   return (
     <Suspense key={session._id} fallback={<Loading />}>
       <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-4">

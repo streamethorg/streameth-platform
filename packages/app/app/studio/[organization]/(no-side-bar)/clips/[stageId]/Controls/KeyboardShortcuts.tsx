@@ -114,7 +114,15 @@ const KeyboardShortcuts = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentTime, startTime, endTime, videoRef, isCreatingClip, isAddingOrEditingMarker, isInputFocused]);
+  }, [
+    currentTime,
+    startTime,
+    endTime,
+    videoRef,
+    isCreatingClip,
+    isAddingOrEditingMarker,
+    isInputFocused,
+  ]);
 
   return (
     <HoverCard>

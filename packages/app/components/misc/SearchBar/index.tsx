@@ -25,10 +25,14 @@ export default function SearchBar({
   isMobile = false,
   isStudio = false,
 }: SearchBarProps): JSX.Element {
-  const { searchParams, handleTermChange: handleStudioTermChange } = useSearchParams();
+  const { searchParams, handleTermChange: handleStudioTermChange } =
+    useSearchParams();
   const [isOpened, setIsOpened] = useState(false);
-  const { searchQuery, setSearchQuery, searchResults, isLoading } = useSearch(organizationId, isStudio);
-  
+  const { searchQuery, setSearchQuery, searchResults, isLoading } = useSearch(
+    organizationId,
+    isStudio
+  );
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -80,7 +84,7 @@ export default function SearchBar({
           }
         }}
       />
-      
+
       {isOpened && searchQuery && (
         <div
           ref={dropdownRef}

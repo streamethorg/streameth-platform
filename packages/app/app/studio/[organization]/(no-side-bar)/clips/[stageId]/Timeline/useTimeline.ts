@@ -1,7 +1,6 @@
 import { useTimelineContext } from './TimelineContext';
 
 const useTimeline = () => {
-
   const calculatePositionOnTimeline = (
     time: number,
     maxLength: number,

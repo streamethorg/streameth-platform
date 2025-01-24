@@ -1,9 +1,17 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form';
 import ImageUpload from '@/components/misc/form/imageUpload';
-import { generateThumbnailAction, updateSessionAction } from '@/lib/actions/sessions';
+import {
+  generateThumbnailAction,
+  updateSessionAction,
+} from '@/lib/actions/sessions';
 import { IExtendedSession } from '@/lib/types';
 import { Loader2, Image } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -20,7 +28,11 @@ interface ThumbnailSectionProps {
   organizationSlug: string;
 }
 
-const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionProps) => {
+const ThumbnailSection = ({
+  form,
+  session,
+  organizationSlug,
+}: ThumbnailSectionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -28,7 +40,7 @@ const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionP
     setIsLoading(true);
     console.log('🎯 Starting thumbnail generation:', {
       playbackId: session.playbackId,
-      assetId: session.assetId
+      assetId: session.assetId,
     });
 
     generateThumbnailAction(session)
@@ -37,28 +49,34 @@ const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionP
           throw new Error('No response from thumbnail generation');
         }
         console.log('✅ Generated thumbnail URL:', response);
-        
+
         // Handle different response formats from Livepeer
         let thumbnailUrl = response;
-        if (typeof response === 'object' && response.playbackInfo?.meta?.source) {
+        if (
+          typeof response === 'object' &&
+          response.playbackInfo?.meta?.source
+        ) {
           const thumbnailSource = response.playbackInfo.meta.source.find(
-            (src: any) => src.hrn === 'Thumbnail (PNG)' || src.type === 'image/png'
+            (src: any) =>
+              src.hrn === 'Thumbnail (PNG)' || src.type === 'image/png'
           );
           if (!thumbnailSource) {
             throw new Error('No thumbnail URL found in response');
           }
           thumbnailUrl = thumbnailSource.url;
         }
-        
+
         // Update form state
         form.setValue('coverImage', thumbnailUrl);
-        
+
         // Get current form values and merge with session data
         const currentValues = form.getValues();
         currentValues.coverImage = thumbnailUrl;
-        
+
         // Automatically update session with new thumbnail
-        return updateSessionAction(createSessionUpdatePayload(currentValues, session));
+        return updateSessionAction(
+          createSessionUpdatePayload(currentValues, session)
+        );
       })
       .then(() => {
         toast.success('Thumbnail generated and saved');
@@ -111,7 +129,7 @@ const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionP
                   'Drag and drop your thumbnail to upload...Or just click here! Maximum image file size is 2MB. Best resolution is 1280 x 720. Aspect ratio of 16:9',
                 aspectRatio: 16 / 9,
                 resizeDimensions: { width: 1280, height: 720 },
-                coverImage: true
+                coverImage: true,
               }}
               className="relative rounded-xl aspect-video max-w-[480px] bg-neutrals-300"
               path={`sessions/${organizationSlug}`}
@@ -120,7 +138,9 @@ const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionP
                 try {
                   const currentValues = form.getValues();
                   currentValues.coverImage = '';
-                  await updateSessionAction(createSessionUpdatePayload(currentValues, session));
+                  await updateSessionAction(
+                    createSessionUpdatePayload(currentValues, session)
+                  );
                   toast.success('Thumbnail deleted');
                   router.refresh();
                 } catch (error) {
@@ -138,4 +158,4 @@ const ThumbnailSection = ({ form, session, organizationSlug }: ThumbnailSectionP
   );
 };
 
-export default ThumbnailSection; 
+export default ThumbnailSection;
