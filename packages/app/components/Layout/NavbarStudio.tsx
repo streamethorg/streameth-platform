@@ -30,6 +30,12 @@ const NavbarStudio = ({
     return notFound();
   }
 
+  const hasFeatures = isFeatureAvailable(
+    organization.expirationDate,
+    organization.currentStages,
+    organization.paidStages
+  );
+
   return (
     <NavigationMenu className="h-[72px] w-full  sticky top-0 flex items-center p-2 px-4 bg-white md:hidden lg:flex z-[30]">
       <Image
@@ -48,7 +54,7 @@ const NavbarStudio = ({
         />
       </div>
       <div className="flex items-center justify-end space-x-2">
-        {isFeatureAvailable(organization.expirationDate) ? (
+        {hasFeatures ? (
           <CreateLivestreamModal
             variant="outline"
             organization={organization}
@@ -63,7 +69,7 @@ const NavbarStudio = ({
             Create Livestream
           </FeatureButton>
         )}
-        {isFeatureAvailable(organization.expirationDate) ? (
+        {hasFeatures ? (
           <UploadVideoDialog organizationId={organization._id.toString()} />
         ) : (
           <FeatureButton
