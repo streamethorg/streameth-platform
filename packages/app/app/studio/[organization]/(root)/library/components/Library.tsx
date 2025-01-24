@@ -1,6 +1,6 @@
 'use server';
 
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import { Suspense } from 'react';
 import EmptyLibrary from './EmptyLibrary';
 import {

@@ -12,21 +12,15 @@ import { IExtendedSession } from '@/lib/types';
 import { formatTimestamp } from '@/lib/utils/utils';
 
 const TranscriptionModal = ({ video }: { video: IExtendedSession }) => {
+  if (!video?.transcripts?.text) return null;
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'outline'}>View Transcript</Button>
+        <Button variant={'ghost'}>View Transcript</Button>
       </DialogTrigger>
       <DialogContent className="lg:max-w-[800px] max-h-[400px] lg:max-h-[600px] overflow-auto">
         <DialogTitle>Transcript for {video?.name}</DialogTitle>
-        <div className="space-y-4">
-          {video?.transcripts?.chunks.map((chunk, index) => (
-            <div key={index}>
-              <p>[{formatTimestamp(chunk.start)}]</p>
-              <p>{chunk.word}</p>
-            </div>
-          ))}
-        </div>
+        <div className="space-y-4">{video?.transcripts?.text}</div>
       </DialogContent>
     </Dialog>
   );

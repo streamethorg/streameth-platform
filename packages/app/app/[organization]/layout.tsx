@@ -6,6 +6,8 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import NotFound from '@/not-found';
 import Support from '@/components/misc/Support';
 import { fetchUserAction } from '@/lib/actions/users';
+import React from 'react';
+
 const Layout = async ({
   params,
   children,
@@ -41,7 +43,7 @@ const Layout = async ({
     <div className="mx-auto flex min-h-[100vh] w-full flex-col bg-white">
       <HomePageNavbar
         logo={organization?.logo}
-        currentOrganization={params.organization}
+        currentOrganization={organization._id}
         pages={pages}
         showSearchBar
         showLogo={true}

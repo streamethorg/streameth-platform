@@ -20,7 +20,7 @@ const Timezone = ({
   video?: IExtendedStage;
 }) => {
   const [formattedDate, setFormattedDate] = useState<string>(
-    formatDate(new Date(date), 'ddd. MMM. D, YYYY, h:mm a')
+    formatDate(new Date(date), 'ddd. MMM. D, YYYY')
   );
   const [timezoneAbbr, setTimezoneAbbr] = useState<string>('UTC');
 
@@ -32,11 +32,11 @@ const Timezone = ({
       setFormattedDate(
         `${formatDate(
           new Date(date),
-          'ddd. MMM. D, YYYY, h:mm a',
+          'ddd. MMM. D, YYYY',
           userTimezone
         )} - ${formatDate(
           new Date(video.streamEndDate),
-          'ddd. MMM. D, YYYY, h:mm a',
+          'ddd. MMM. D, YYYY',
           userTimezone
         )}`
       );
@@ -44,7 +44,7 @@ const Timezone = ({
     }
 
     setFormattedDate(
-      formatDate(new Date(date), 'ddd. MMM. D, YYYY, h:mm a', userTimezone)
+      formatDate(new Date(date), 'ddd. MMM. D, YYYY', userTimezone)
     );
   }, [date, video]);
 

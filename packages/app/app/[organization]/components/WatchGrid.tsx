@@ -1,4 +1,4 @@
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import Link from 'next/link';
 import VideoCardSkeleton from '@/components/misc/VideoCard/VideoCardSkeleton';
 import Videos from '@/components/misc/Videos';
@@ -23,11 +23,7 @@ const WatchGrid = async ({
 
   return (
     <div className="w-full">
-      <Videos
-        videos={videos}
-        OrganizationSlug={organizationSlug}
-        maxVideos={gridLength}
-      />
+      <Videos videos={videos} maxVideos={gridLength} />
       {videos.length === 0 && (
         <div className="flex flex-row items-center justify-center space-x-4 rounded-xl bg-secondary p-4">
           <Video size={20} />

@@ -107,7 +107,7 @@ const ShareButton = ({
     <Credenza>
       <CredenzaTrigger>
         <Button className={buttonClassNames} variant={variant}>
-          <Share2 className=" h-5 w-5" />
+          <Share2 className=" h-5 w-5 mr-2" />
           {title}
         </Button>
       </CredenzaTrigger>

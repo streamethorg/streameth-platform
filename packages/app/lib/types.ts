@@ -249,6 +249,7 @@ export interface ChannelPageParams {
     search: string;
     id: string;
     streamId: string;
+    page?: string;
   };
 }
 

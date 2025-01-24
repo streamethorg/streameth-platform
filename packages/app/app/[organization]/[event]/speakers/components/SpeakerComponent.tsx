@@ -1,6 +1,7 @@
 import SpeakerCard from './SpeakerCard';
 
-import { fetchEventSpeakers, fetchAllSessions } from '@/lib/data';
+import { fetchEventSpeakers } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { IExtendedEvent } from '@/lib/types';
 

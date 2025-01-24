@@ -1,7 +1,7 @@
 import StageSelect from './StageSelect';
 import DateSelect from './DateSelect';
 import SessionList from '@/components/sessions/SessionList';
-import { fetchAllSessions } from '@/lib/data';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 import { getEventDays, getSessionDays } from '@/lib/utils/time';
 import { isSameDay } from '@/lib/utils/time';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
