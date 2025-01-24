@@ -124,11 +124,14 @@ export default class StageService {
     const stage = await this.get(stageId);
     await deleteStream(stage.streamSettings.streamId);
 
-    // Decrement currentStages for the organization
-    await Organization.findByIdAndUpdate(
-      stage.organizationId,
-      { $inc: { currentStages: -1 } }
-    );
+    // Get organization and only decrement if currentStages > 0
+    const organization = await Organization.findById(stage.organizationId);
+    if (organization && organization.currentStages > 0) {
+      await Organization.findByIdAndUpdate(
+        stage.organizationId,
+        { $inc: { currentStages: -1 } }
+      );
+    }
 
     return await this.controller.store.delete(stageId);
   }
