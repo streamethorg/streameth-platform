@@ -95,7 +95,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
               <div className="flex flex-col space-y-2">
                 <Label>Publish to Socials</Label>
                 <div className="flex flex-row gap-2">
-                  <UploadToYoutubeButton
+                  {/* <UploadToYoutubeButton
                     organization={organization}
                     organizationSlug={params.organization}
                     sessionId={session._id}
@@ -104,7 +104,7 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                     organization={organization}
                     organizationSlug={params.organization}
                     sessionId={session._id}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
