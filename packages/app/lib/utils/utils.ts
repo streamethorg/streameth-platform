@@ -20,9 +20,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const isFeatureAvailable = (expirationDate: Date | null | undefined, currentStages?: number, paidStages?: number) => {
-  const hasValidSubscription = expirationDate && new Date(expirationDate).getTime() > new Date().getTime();
-  const hasAvailableStages = typeof currentStages === 'undefined' || typeof paidStages === 'undefined' || currentStages < paidStages;
+export const isFeatureAvailable = (
+  expirationDate: Date | null | undefined,
+  currentStages?: number,
+  paidStages?: number
+) => {
+  const hasValidSubscription =
+    expirationDate && new Date(expirationDate).getTime() > new Date().getTime();
+  const hasAvailableStages =
+    typeof currentStages === 'undefined' ||
+    typeof paidStages === 'undefined' ||
+    currentStages < paidStages;
   return hasValidSubscription && hasAvailableStages;
 };
 

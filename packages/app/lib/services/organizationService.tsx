@@ -21,7 +21,7 @@ export async function fetchOrganization({
       }`,
       {
         cache: 'no-store',
-        next: { revalidate: 0 }
+        next: { revalidate: 0 },
       }
     );
     const data = (await response.json()).data;

@@ -57,16 +57,16 @@ const EditSessionForm = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <BasicFormFields form={form} />
         <VisibilitySelector form={form} />
-        <ThumbnailSection 
-          form={form} 
-          session={session} 
-          organizationSlug={organizationSlug} 
+        <ThumbnailSection
+          form={form}
+          session={session}
+          organizationSlug={organizationSlug}
         />
-        <FormActions 
-          form={form} 
-          session={session} 
-          organizationSlug={organizationSlug} 
-          isLoading={isLoading} 
+        <FormActions
+          form={form}
+          session={session}
+          organizationSlug={organizationSlug}
+          isLoading={isLoading}
         />
       </form>
     </Form>

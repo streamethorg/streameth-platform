@@ -20,7 +20,13 @@ const LoadingSkeleton = () => (
   </div>
 );
 
-const MarkersList = ({ markers, organizationId }: { markers: IExtendedMarker[], organizationId: string }) => (
+const MarkersList = ({
+  markers,
+  organizationId,
+}: {
+  markers: IExtendedMarker[];
+  organizationId: string;
+}) => (
   <div className="flex-grow overflow-y-auto pb-4">
     {markers.length > 0 ? (
       markers.map((marker: IExtendedMarker) => (
@@ -58,9 +64,9 @@ const Markers = ({
         <p className="text-sm">
           Use AI to identify key moments in your video to create clips from.
         </p>
-        <ExtractHighlightsForm 
-          sessionId={sessionId} 
-          transcribeStatus={transcribeStatus} 
+        <ExtractHighlightsForm
+          sessionId={sessionId}
+          transcribeStatus={transcribeStatus}
           aiAnalysisStatus={aiAnalysisStatus}
         />
       </div>
@@ -70,9 +76,9 @@ const Markers = ({
   return (
     <div className="h-full w-full border-l flex flex-col">
       <CardTitle className="w-full border-b bg-white p-2 space-y-2 text-lg flex-shrink-0">
-        <ExtractHighlightsForm 
-          sessionId={sessionId} 
-          transcribeStatus={transcribeStatus} 
+        <ExtractHighlightsForm
+          sessionId={sessionId}
+          transcribeStatus={transcribeStatus}
           aiAnalysisStatus={aiAnalysisStatus}
         />
       </CardTitle>

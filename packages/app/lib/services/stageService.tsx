@@ -214,14 +214,10 @@ export async function fetchStageRecordings({
   streamId,
 }: {
   streamId: string;
-}): Promise<Session[] | null> {
+}): Promise<Session[]> {
   try {
     const response = await fetch(`${apiUrl()}/streams/recording/${streamId}`);
     const data = (await response.json()).data;
-
-    if (!data) {
-      return null;
-    }
     return data;
   } catch (e) {
     console.log(e);

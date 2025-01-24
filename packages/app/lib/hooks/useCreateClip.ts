@@ -14,8 +14,7 @@ import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips
 import { useTrimmControlsContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/Timeline/TrimmControlsContext';
 
 export const useCreateClip = () => {
-  const { stageId, setIsCreatingClip, videoRef, clipUrl } =
-    useClipContext();
+  const { stageId, setIsCreatingClip, videoRef, clipUrl } = useClipContext();
   const { startTime, endTime } = useTrimmControlsContext();
 
   const { markers, selectedMarkerId, setSelectedMarkerId, organizationId } =
@@ -125,7 +124,6 @@ export const useCreateClip = () => {
       start: values.start,
       end: values.end,
       organizationId,
-      stageId,
       pretalxSessionCode: values.pretalxSessionCode,
     };
 

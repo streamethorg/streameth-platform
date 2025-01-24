@@ -31,9 +31,11 @@ const TopBar = async ({
     streamId: stage?.streamSettings?.streamId || '',
   });
 
-  const hasActiveLivestream = stageRecordings?.some(
-    (recording) => recording.recordingStatus === RecordingStatus.Waiting
-  );
+  const hasActiveLivestream =
+    stageRecordings.length > 0 &&
+    stageRecordings?.some(
+      (recording) => recording.recordingStatus === RecordingStatus.Waiting
+    );
   const sessionOptions: SessionOption[] = allSessions.sessions.map(
     (session) => ({
       label: session.name,

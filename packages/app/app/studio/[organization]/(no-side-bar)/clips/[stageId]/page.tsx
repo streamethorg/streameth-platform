@@ -47,6 +47,7 @@ const fetchVideoDetails = async (
       // const stage = await fetchStage({ stage: session.stageId as string });
       // if (!stage?.streamSettings?.playbackId) return null;
       const videoSrc = await getVideoUrlAction(session);
+      console.log('session', session);
       return {
         videoSrc,
         type: 'livepeer',
@@ -95,48 +96,48 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
       clipUrl={videoDetails.videoSrc}
     >
       <TimelineProvider>
-      <MarkersProvider
-        organizationId={organizationId}
-        stageId={stageId}
-        sessionId={sessionId}
-      >
-        <ClipsSidebarProvider>
-          <TrimmControlsProvider>
-            <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
-              <div className="flex h-full w-[calc(100%-400px)] flex-col">
-                <Suspense
-                fallback={
-                  <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
-                    Loading...
+        <MarkersProvider
+          organizationId={organizationId}
+          stageId={stageId}
+          sessionId={sessionId}
+        >
+          <ClipsSidebarProvider>
+            <TrimmControlsProvider>
+              <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
+                <div className="flex h-full w-[calc(100%-400px)] flex-col">
+                  <Suspense
+                    fallback={
+                      <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
+                        Loading...
+                      </div>
+                    }
+                  >
+                    <TopBar
+                      stageId={stageId}
+                      organization={organization}
+                      sessionId={sessionId}
+                    />
+                  </Suspense>
+                  <ReactHlsPlayer
+                    src={videoDetails.videoSrc}
+                    type={videoDetails.type}
+                  />
+                  <Controls />
+                  <div className="w-full p-2 bg-white">
+                    <Timeline />
                   </div>
-                }
-              >
-                <TopBar
-                  stageId={stageId}
-                  organization={organization}
-                  sessionId={sessionId}
-                />
-              </Suspense>
-              <ReactHlsPlayer
-                src={videoDetails.videoSrc}
-                type={videoDetails.type}
-              />
-              <Controls />
-              <div className="w-full p-2 bg-white">
-                <Timeline />
+                </div>
+                <div className="flex w-[400px] h-full">
+                  <Sidebar
+                    transcribe={videoDetails.transcribe || []}
+                    sessionId={sessionId || ''}
+                    transcribeStatus={videoDetails.transcribeStatus ?? null}
+                    aiAnalysisStatus={videoDetails.aiAnalysisStatus ?? null}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="flex w-[400px] h-full">
-              <Sidebar
-                transcribe={videoDetails.transcribe || []}
-                sessionId={sessionId || ''}
-                transcribeStatus={videoDetails.transcribeStatus ?? null}
-                aiAnalysisStatus={videoDetails.aiAnalysisStatus ?? null}
-              />
-            </div>
-          </div>
-          </TrimmControlsProvider>
-        </ClipsSidebarProvider>
+            </TrimmControlsProvider>
+          </ClipsSidebarProvider>
         </MarkersProvider>
       </TimelineProvider>
     </ClipProvider>

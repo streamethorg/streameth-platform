@@ -39,10 +39,7 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
             stream={stream}
             isLiveStreamPage
           />
-          <StageControls
-            organization={organization}
-            stream={stream}
-          />
+          <StageControls organization={organization} stream={stream} />
         </div>
         <div className="flex flex-col w-1/3">
           <Sidebar

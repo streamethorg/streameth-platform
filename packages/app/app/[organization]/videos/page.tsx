@@ -13,10 +13,7 @@ import { fetchOrganization } from '@/lib/services/organizationService';
 import { notFound } from 'next/navigation';
 import EventSelect from './components/eventSelect';
 import { fetchAllSessions } from '@/lib/services/sessionService';
-import {
-  generalMetadata,
-  organizationMetadata,
-} from '@/lib/utils/metadata';
+import { generalMetadata, organizationMetadata } from '@/lib/utils/metadata';
 
 export default async function ArchivePage({
   params,

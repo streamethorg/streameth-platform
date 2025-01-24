@@ -1,8 +1,6 @@
 import NotFound from '@/not-found';
 import { Metadata, ResolvingMetadata } from 'next';
-import {
-  fetchOrganization,
-} from '@/lib/services/organizationService';
+import { fetchOrganization } from '@/lib/services/organizationService';
 import { ChannelPageParams } from '@/lib/types';
 import ChannelShareIcons from './components/ChannelShareIcons';
 import Image from 'next/image';
@@ -22,7 +20,6 @@ const OrganizationHome = async ({
   params,
   searchParams,
 }: ChannelPageParams) => {
-
   const organization = await fetchOrganization({
     organizationSlug: params.organization,
   });
@@ -30,8 +27,6 @@ const OrganizationHome = async ({
   if (!organization) {
     return NotFound();
   }
-
-
 
   return (
     <div className="mx-auto w-full max-w-7xl space-y-4 md:p-4">
@@ -83,8 +78,8 @@ const OrganizationHome = async ({
           </Suspense>
         </TabsContent>
         <TabsContent value="videos" className="px-4 md:px-0">
-        <Suspense fallback={<ArchiveVideoSkeleton />}>
-          <ArchiveVideos
+          <Suspense fallback={<ArchiveVideoSkeleton />}>
+            <ArchiveVideos
               organizationId={organization._id}
               organizationSlug={params.organization}
               searchQuery={searchParams.search}

@@ -85,7 +85,11 @@ const Playhead = () => {
     <div
       className="absolute top-0 bottom-0 w-1 bg-black border-white cursor-ew-resize z-[22]"
       style={{
-        left: `${calculatePositionOnTimeline(playheadPosition, videoDuration, timelineWidth)}px`,
+        left: `${calculatePositionOnTimeline(
+          playheadPosition,
+          videoDuration,
+          timelineWidth
+        )}px`,
       }}
       onMouseDown={handlePlayheadMouseDown}
     >

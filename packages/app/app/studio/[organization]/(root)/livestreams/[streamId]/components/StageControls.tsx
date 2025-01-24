@@ -2,10 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { fetchStage } from '@/lib/services/stageService';
-import {
-  IExtendedOrganization,
-  IExtendedStage,
-} from '@/lib/types';
+import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React, { useEffect, useState } from 'react';

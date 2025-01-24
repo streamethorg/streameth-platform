@@ -25,7 +25,8 @@ const Marker = ({
     selectedMarkerId,
   } = useMarkersContext();
 
-  const { videoDuration, timelineWidth, isPreviewMode, videoRef } = useTimelineContext();
+  const { videoDuration, timelineWidth, isPreviewMode, videoRef } =
+    useTimelineContext();
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
   const { setStartTime, setEndTime } = useTrimmControlsContext();
 

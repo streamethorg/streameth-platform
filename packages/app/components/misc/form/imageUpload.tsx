@@ -108,7 +108,11 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
     ref
   ) => {
     const [preview, setPreview] = useState<string>(
-      value ? (value.startsWith('http') ? value : getImageUrl('/' + path + '/' + value)) : ''
+      value
+        ? value.startsWith('http')
+          ? value
+          : getImageUrl('/' + path + '/' + value)
+        : ''
     );
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -214,7 +218,7 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
 
           setPreview(displayUrl);
           setIsUploading(true);
-          
+
           toast.promise(
             onSubmit(file).then((uploadedPath) => {
               onChange?.({

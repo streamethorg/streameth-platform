@@ -6,7 +6,11 @@ interface SearchResultsProps {
   onSelect: (result: IExtendedSession) => void;
 }
 
-export function SearchResults({ isLoading, searchResults, onSelect }: SearchResultsProps) {
+export function SearchResults({
+  isLoading,
+  searchResults,
+  onSelect,
+}: SearchResultsProps) {
   if (isLoading) {
     return <span>Loading...</span>;
   }

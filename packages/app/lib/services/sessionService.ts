@@ -26,7 +26,6 @@ interface ApiParams {
   clipable?: boolean;
 }
 
-
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
   const queryParams = Object.entries(params)
     .filter(([_, value]) => value !== undefined && value !== null)

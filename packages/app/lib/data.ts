@@ -7,7 +7,6 @@ import { fetchEvent } from '@/lib/services/eventService';
 import { fetchEventStages } from '@/lib/services/stageService';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 
-
 export async function fetchEventSpeakers({
   event,
 }: {

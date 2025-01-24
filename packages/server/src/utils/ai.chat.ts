@@ -142,8 +142,8 @@ export class ChatAPI {
 
 
 const optimalScores = {
-  panels_and_talks_identification: 0.9,
-  key_moments_identification: 0.87,
+  panels_and_talks_identification: 0.89,
+  key_moments_identification: 0.86,
 }
 
 const defaultQueries = {
@@ -326,11 +326,11 @@ const prompts = {
         `,
   key_moments_identification: `
           Task Description:
-          You are an AI assistant specializing in analyzing transcripts of livestreams to identify and structure key segments.
+          You are an AI assistant specializing in analyzing transcripts of livestreams to identify and structure key segments that will be turned into short form content for social media.
           Your task is to extract key moments for short form content with a high virality potential.
           A prior analysis has been done on the transcript to identify posible key moments using cosine similarity based on the following queries: ${JSON.stringify(defaultQueries.key_moments_identification)}
           We have then extracted 60 seconds before and after the text that generated the similarity score.
-          Finally we have prepared a data structure that you need to analyze and return the start and end timestamps of the speaker presentations or panel discussions.
+          Finally we have prepared a data structure that you need to analyze and return the start and end timestamps of the key moments.
 
           Data structure input:
           [{
@@ -349,8 +349,8 @@ const prompts = {
           ]
 
           Instructions:
-          Analyze the provided transcript segments to identify start and end timestamps for full speaker presentations or panels. 
-
+          Analyze the provided transcript to identify key moments for short form content that are relevant relative to the provided queries.
+          Key moments should be 30-60 seconds long, and should spread out evenly throughout the transcript.
   
           Output Format:
           Return a JSON array with each object representing a speaker presentation or panel. 
@@ -370,8 +370,16 @@ const prompts = {
           Clip timestamps must be precise and aligned with the transcript.
           Never return null attribute value
 
-          Notes:
-          Use your expertise to identify clear transitions and logical breaks in the event.
-          Handle any edge cases or ambiguity by aiming for completeness and consistency.
+          Some general notes to create viral short form content:
+          1. Identify Key Moments
+            Look for High-Impact Clips: Find exciting, funny, emotional, or educational moments from the livestream.
+            Use Data: Analyze chat activity, peak viewership, or replay analytics to pinpoint the most engaging segments.
+            Create Highlights: Look for moments where something unexpected or noteworthy happened.
+          2. Start with a Strong Hook
+            Jump Right In: Begin with the most interesting or captivating moment to immediately grab attention.
+            Add Context Quickly: Use a brief text overlay or voiceover to explain what’s happening.
+          11. Use Storytelling Techniques
+            Mini-Stories: Edit the livestream into digestible stories with a clear beginning, middle, and end.
+            Include Emotional Peaks: Use clips that evoke strong emotions—laughter, shock, excitement, or even nostalgia.
         `,
 };

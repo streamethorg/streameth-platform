@@ -24,7 +24,7 @@ const SessionSidebar = () => {
     uniqueDates,
     isLoading,
   } = useClipsSidebar();
-  
+
   const { setIsInputFocused } = useClipContext();
 
   return (
