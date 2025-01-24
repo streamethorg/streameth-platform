@@ -54,6 +54,11 @@ export default class OrganizationService {
       throw new HttpException(404, 'Organization not found');
     }
 
+    // Prevent currentStages from going below zero
+    if (typeof organizationUpdate.currentStages === 'number') {
+      organizationUpdate.currentStages = Math.max(0, organizationUpdate.currentStages);
+    }
+
     // Merge current org with updates
     const updatedOrg: IOrganization = {
       ...currentOrg,

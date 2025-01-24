@@ -1,7 +1,5 @@
-'use server';
-
 import TableSkeleton from '@/components/misc/Table/TableSkeleton';
-import { LivestreamPageParams, eSort } from '@/lib/types';
+import { LivestreamPageParams } from '@/lib/types';
 import CreateLivestreamModal from './livestreams/components/CreateLivestreamModal';
 import { Suspense } from 'react';
 import { fetchOrganization } from '@/lib/services/organizationService';
@@ -26,8 +24,6 @@ export default async function OrganizationPage({
 
   if (!organization) return notFound();
 
-  const hasFeatures = isFeatureAvailable(organization.expirationDate);
-
   // Calculate the start of the current day
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
@@ -37,7 +33,7 @@ export default async function OrganizationPage({
       <div className="flex w-full flex-col p-2">
         <h2 className="text-lg font-bold">Create</h2>
         <div className="flex items-center gap-4 p-4">
-          {hasFeatures ? (
+          {isFeatureAvailable(organization.expirationDate) ? (
             <CreateLivestreamModal
               variant="primary"
               show={searchParams?.show}
@@ -54,7 +50,7 @@ export default async function OrganizationPage({
             </FeatureButton>
           )}
 
-          {hasFeatures ? (
+          {isFeatureAvailable(organization.expirationDate) ? (
             <UploadVideoDialog organizationId={organization._id.toString()} />
           ) : (
             <FeatureButton
@@ -67,7 +63,7 @@ export default async function OrganizationPage({
             </FeatureButton>
           )}
 
-          {hasFeatures ? (
+          {isFeatureAvailable(organization.expirationDate) ? (
             <Link
               href={`/studio/${organization.slug}/library?layout=list&page=1&limit=20&clipable=true`}
             >
