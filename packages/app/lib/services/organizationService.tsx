@@ -18,7 +18,13 @@ export async function fetchOrganization({
     const response = await fetch(
       `${apiUrl()}/organizations/${
         organizationId ? organizationId : organizationSlug
-      }`
+      }`,
+      {
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
     );
     const data = (await response.json()).data;
 
@@ -31,7 +37,12 @@ export async function fetchOrganization({
 
 export async function fetchOrganizations(): Promise<IExtendedOrganization[]> {
   try {
-    const response = await fetch(`${apiUrl()}/organizations`);
+    const response = await fetch(`${apiUrl()}/organizations`, {
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     return (await response.json()).data ?? [];
   } catch (e) {
     console.log(e);
