@@ -99,7 +99,7 @@ const ThumbnailSection = ({
         <FormItem>
           <div className="flex items-center gap-2">
             <FormLabel>Thumbnail</FormLabel>
-            {!session.coverImage && (
+            {!session.coverImage && session.type !== 'livestream' && (
               <Button
                 onClick={generateThumbnail}
                 disabled={isLoading}
