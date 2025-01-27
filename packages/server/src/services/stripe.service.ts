@@ -45,6 +45,7 @@ export default class StripeService {
                         quantity: 1,
                     }
                 ],
+                allow_promotion_codes: true,
                 success_url: `${config.frontendUrl}/studio/${data.organizationId}/payments?success=true`,
                 cancel_url: `${config.frontendUrl}/studio/${data.organizationId}/payments?canceled=true`,
                 metadata: {
