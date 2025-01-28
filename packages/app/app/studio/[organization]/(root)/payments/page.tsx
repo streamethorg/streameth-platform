@@ -10,6 +10,7 @@ import { ActiveSubscriptionCard } from './components/ActiveSubscriptionCard';
 import { ExpiredSubscriptionCard } from './components/ExpiredSubscriptionCard';
 import { PricingTiers } from './components/PricingTiers';
 import { AddResourcesCard } from './components/AddResourcesCard';
+import { AlertCircle } from 'lucide-react';
 
 export default function PaymentsPage() {
   const params = useParams();
@@ -123,22 +124,31 @@ export default function PaymentsPage() {
     );
   }
 
-  // Check if subscription is active
-  const hasActiveSubscription = organization.paymentStatus === 'active' && organization.expirationDate;
+  // Check if subscription is active - only check payment status
+  const hasActiveSubscription = organization.paymentStatus === 'active';
   
   if (hasActiveSubscription) {
-    const expiryDate = new Date(organization.expirationDate!);
+    const expiryDate = organization.expirationDate ? new Date(organization.expirationDate) : new Date();
     const now = new Date();
-    const daysLeft = Math.ceil(
-      (expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
-    );
+    const daysLeft = organization.expirationDate 
+      ? Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24))
+      : organization.streamingDays || 0;
 
     // If subscription has expired, show expired notice + pricing tiers
+    // but keep the currentStages count for reference
     if (daysLeft <= 0) {
       return (
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
             <ExpiredSubscriptionCard />
+            {(organization.currentStages ?? 0) > 0 && (
+              <div className="mt-4 p-4 bg-amber-50 rounded-lg">
+                <p className="text-amber-600">
+                  You have {organization.currentStages} existing stage{(organization.currentStages ?? 0) > 1 ? 's' : ''}.
+                  Make sure to purchase enough stages in your new subscription.
+                </p>
+              </div>
+            )}
           </div>
           <PricingTiers
             streamingDays={streamingDays}
@@ -156,6 +166,9 @@ export default function PaymentsPage() {
     }
 
     // Active subscription - show current status + add resources card
+    const currentStages = organization.currentStages ?? 0;
+    const paidStages = organization.paidStages ?? 0;
+
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto space-y-8">
@@ -175,16 +188,35 @@ export default function PaymentsPage() {
             onDecrementStages={() => handleCounter('stages', 'decrement')}
             onSubscribe={() => handleSubscribe('price_basic_monthly')}
           />
+          {currentStages > 0 && currentStages >= paidStages && (
+            <div className="p-4 bg-red-100 rounded-lg flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-red-600" />
+              <p className="text-red-600">
+                You are using all your paid stages ({currentStages} of {paidStages}).
+                Add more stages to create new ones.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );
   }
 
   // Has had subscription before but not active - show expired notice + pricing tiers
+  const currentStages = organization.currentStages ?? 0;
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto">
         <ExpiredSubscriptionCard />
+        {currentStages > 0 && (
+          <div className="mt-4 p-4 bg-amber-50 rounded-lg">
+            <p className="text-amber-600">
+              You have {currentStages} existing stage{currentStages > 1 ? 's' : ''}.
+              Make sure to purchase enough stages in your new subscription.
+            </p>
+          </div>
+        )}
       </div>
       <PricingTiers
         streamingDays={streamingDays}

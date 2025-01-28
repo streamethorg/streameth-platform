@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 
 export function ExpiredSubscriptionCard() {
   return (
-    <Card className="p-6 bg-amber-50">
+    <Card className="p-6 bg-amber-50 mb-8">
       <div className="flex items-center gap-2 text-amber-600">
         <AlertCircle className="h-5 w-5 flex-shrink-0" />
         <div>
