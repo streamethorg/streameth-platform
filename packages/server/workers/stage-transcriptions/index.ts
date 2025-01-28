@@ -11,41 +11,83 @@ import { join } from 'path';
 import { promises as fs } from 'fs';
 import { watch } from 'fs';
 import { TranscriptionStatus } from '@interfaces/state.interface';
+
 interface StageTranscriptionsJob {
   stageId: string;
 }
 
 const consumer = async () => {
+  console.log('🎭 Starting stage transcriptions worker...');
   const queue = await stageTranscriptionsQueue();
   queue.process(async (job) => {
     const { stageId } = job.data as StageTranscriptionsJob;
-    console.log('Processing job', stageId);
+    console.log('📋 Processing stage transcription:', {
+      stageId,
+      timestamp: new Date().toISOString()
+    });
     
     return processStageTranscription(stageId);
   });
 };
 
 const processStageTranscription = async (stageId: string) => {
+  console.log('🔄 Starting stage transcription process:', {
+    stageId,
+    timestamp: new Date().toISOString()
+  });
+
   const stageService = new StageService();
+  console.log('🔍 Fetching stage details...');
   // @ts-ignore
   const stage = (await stageService.get(stageId))?.toObject();
 
   if (!stage?.streamSettings.playbackId) {
+    console.error('❌ Invalid stage data:', {
+      stageId,
+      hasPlaybackId: !!stage?.streamSettings.playbackId,
+      timestamp: new Date().toISOString()
+    });
     throw new Error('Stage not found or no playbackId');
   }
 
   if (!stage.streamSettings.isActive) {
+    console.error('❌ Stage is not active:', {
+      stageId,
+      timestamp: new Date().toISOString()
+    });
     throw new Error('Stage is not active');
   }
 
   try {
+    console.log('🎬 Starting audio transcription:', {
+      stageId,
+      playbackId: stage.streamSettings.playbackId,
+      timestamp: new Date().toISOString()
+    });
+
     await transcribeAudio(
       buildPlaybackUrl(stage.streamSettings.playbackId),
       stage,
     );
+    
+    console.log('✅ Updating transcription status to completed:', {
+      stageId,
+      timestamp: new Date().toISOString()
+    });
     await updateTranscriptionStatus(stage, 'completed');
+    
+    console.log('✅ Stage transcription completed successfully:', {
+      stageId,
+      timestamp: new Date().toISOString()
+    });
     return true;
   } catch (error) {
+    console.error('❌ Stage transcription failed:', {
+      stageId,
+      error: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString()
+    });
     await updateTranscriptionStatus(stage, 'failed');
     throw error;
   }
@@ -55,6 +97,11 @@ const updateTranscriptionStatus = async (
   stage: IStage,
   status: 'completed' | 'failed',
 ) => {
+  console.log(`🔄 Updating transcription status to ${status}:`, {
+    stageId: stage._id,
+    timestamp: new Date().toISOString()
+  });
+
   const stageService = new StageService();
   return stageService.update(stage._id.toString(), {
     ...stage,
@@ -80,11 +127,21 @@ async function transcribeAudio(
     let text = stage.transcripts?.text || '';
     let lastSegmentTimestamp = stage.transcripts?.lastSegmentTimestamp || 0;
     let ffmpegProcess: any = null;
-    console.log('lastSegmentTimestamp', stage.transcripts);
+
+    console.log('📊 Current transcription state:', {
+      stageId: stage._id,
+      existingChunks: chunks.length,
+      lastSegmentTimestamp,
+      timestamp: new Date().toISOString()
+    });
+
     const startFFmpeg = (startTime = 0) => {
-      console.log(
-        `Starting FFmpeg process with URL: ${streamUrl} at timestamp: ${startTime}`,
-      );
+      console.log('🎥 Starting FFmpeg process:', {
+        stageId: stage._id,
+        streamUrl,
+        startTime,
+        timestamp: new Date().toISOString()
+      });
 
       ffmpegProcess = ffmpeg(streamUrl)
         .inputOptions([
@@ -102,13 +159,12 @@ async function transcribeAudio(
           '-loglevel',
           'info',
           '-stats',
-          // Add seek option if we're restarting from a timestamp
           ...(startTime > 0 ? ['-ss', startTime.toString()] : []),
         ])
         .audioCodec('pcm_s16le')
-        .audioBitrate('32k') // Very low bitrate
-        .audioCodec('libmp3lame') // Use MP3 codec
-        .audioFrequency(8000) // 16kHz audio frequency
+        .audioBitrate('32k')
+        .audioCodec('libmp3lame')
+        .audioFrequency(8000)
         .audioChannels(1)
         .outputOptions([
           '-map',
@@ -124,11 +180,19 @@ async function transcribeAudio(
         ])
         .save(outputPath)
         .on('start', (commandLine) => {
-          console.log('FFmpeg started');
+          console.log('🎬 FFmpeg started:', {
+            stageId: stage._id,
+            commandLine,
+            timestamp: new Date().toISOString()
+          });
         })
         .on('stderr', (stderrLine) => {
           if (stderrLine.toLowerCase().includes('error')) {
-            console.error('FFmpeg error:', stderrLine);
+            console.error('❌ FFmpeg error:', {
+              stageId: stage._id,
+              error: stderrLine,
+              timestamp: new Date().toISOString()
+            });
           }
         })
         .on('progress', (progress) => {
@@ -139,14 +203,29 @@ async function transcribeAudio(
           } else {
             lastSegmentTimestamp = parseFloat(progress.timemark);
           }
+          
+          console.log('📈 FFmpeg progress:', {
+            stageId: stage._id,
+            timemark,
+            lastSegmentTimestamp,
+            timestamp: new Date().toISOString()
+          });
         })
         .on('error', (error) => {
-          console.error('FFmpeg error, attempting restart:', error);
-          // Wait a bit before restarting
+          console.error('❌ FFmpeg error, attempting restart:', {
+            stageId: stage._id,
+            error: error.message,
+            timestamp: new Date().toISOString()
+          });
+          
           if (!stage.streamSettings.isActive) {
-            console.log('Stage is not active, skipping restart');
+            console.log('⏹️ Stage is not active, skipping restart:', {
+              stageId: stage._id,
+              timestamp: new Date().toISOString()
+            });
             return;
           }
+          
           setTimeout(() => {
             if (lastSegmentTimestamp > 0) {
               startFFmpeg(lastSegmentTimestamp);
@@ -154,14 +233,16 @@ async function transcribeAudio(
           }, 5000);
         })
         .on('end', () => {
-          console.log('FFmpeg processing completed');
+          console.log('✅ FFmpeg processing completed:', {
+            stageId: stage._id,
+            timestamp: new Date().toISOString()
+          });
           resolve();
         });
 
       return ffmpegProcess;
     };
 
-    // Start initial FFmpeg process
     ffmpegProcess = startFFmpeg(lastSegmentTimestamp);
 
     const waitForFile = async (
@@ -212,12 +293,30 @@ async function transcribeAudio(
         ) {
           const filePath = join(tempDir, filename);
           try {
+            console.log('🔍 New segment detected:', {
+              stageId: stage._id,
+              filename,
+              timestamp: new Date().toISOString()
+            });
+            
             await waitForFile(filePath);
-            console.log('New segment file:', filePath);
-            console.log('File size:', (await fs.stat(filePath)).size);
+            const stats = await fs.stat(filePath);
+            console.log('📊 Segment file details:', {
+              stageId: stage._id,
+              filename,
+              size: stats.size,
+              timestamp: new Date().toISOString()
+            });
+            
             await processSegment(filePath);
           } catch (err) {
-            console.error('Error processing segment:', err);
+            console.error('❌ Error processing segment:', {
+              stageId: stage._id,
+              filename,
+              error: err.message,
+              stack: err.stack,
+              timestamp: new Date().toISOString()
+            });
           }
         }
       },
@@ -226,6 +325,10 @@ async function transcribeAudio(
     // Add cleanup for FFmpeg process
     process.on('exit', () => {
       if (ffmpegProcess) {
+        console.log('🧹 Cleaning up FFmpeg process:', {
+          stageId: stage._id,
+          timestamp: new Date().toISOString()
+        });
         ffmpegProcess.kill('SIGKILL');
       }
     });
@@ -234,19 +337,38 @@ async function transcribeAudio(
 
 const init = async () => {
   try {
-    console.log('Initializing stage transcriptions worker...');
+    console.log('🚀 Initializing stage transcriptions worker...');
+    
+    console.log('🔌 Connecting to database...');
     await connect(dbConnection.url);
+    console.log('✅ Database connected successfully');
+
     await consumer();
-    console.log('Worker initialized successfully');
+    console.log('✅ Worker initialization completed');
   } catch (err) {
-    console.error('Worker initialization failed:', err);
+    console.error('❌ Worker initialization failed:', {
+      error: err.message,
+      stack: err.stack,
+      timestamp: new Date().toISOString()
+    });
     process.exit(1);
   }
 };
 
 // Error handling
 process.on('unhandledRejection', (error) => {
-  console.error('Unhandled rejection:', error);
+  console.error('❌ Unhandled rejection in stage transcriptions worker:', {
+    error,
+    timestamp: new Date().toISOString()
+  });
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught exception in stage transcriptions worker:', {
+    error,
+    timestamp: new Date().toISOString()
+  });
   process.exit(1);
 });
 

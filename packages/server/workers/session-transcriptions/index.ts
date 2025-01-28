@@ -23,13 +23,25 @@ interface SessionTranscriptionsJob {
 }
 
 const consumer = async () => {
+  console.log('🎙️ Starting session transcriptions worker...');
   const queue = await sessionTranscriptionsQueue();
   queue.process(async (job) => {
     const { session } = job.data as SessionTranscriptionsJob;
+    console.log('📋 Processing transcription job:', {
+      sessionId: session.id,
+      sessionName: session.name,
+      timestamp: new Date().toISOString()
+    });
+    
     try {
       return processSessionTranscription(session);
     } catch (error) {
-      console.error('Error processing session transcription:', error);
+      console.error('❌ Error processing session transcription:', {
+        sessionId: session.id,
+        error: error.message,
+        stack: error.stack,
+        timestamp: new Date().toISOString()
+      });
     }
   });
 };
@@ -37,21 +49,47 @@ const consumer = async () => {
 const processSessionTranscription = async (
   sessionPayload: SessionTranscriptionsJob['session'],
 ) => {
-  const sessionService = new SessionService();
+  console.log('🔄 Starting session transcription process:', {
+    sessionId: sessionPayload.id,
+    sessionName: sessionPayload.name,
+    timestamp: new Date().toISOString()
+  });
 
+  const sessionService = new SessionService();
+  console.log('🔍 Fetching session details...');
   const sessionObject = // @ts-ignore
     (await sessionService.get(sessionPayload.id.toString()))?.toObject();
 
   if (!sessionPayload.videoUrl || !sessionObject) {
+    console.error('❌ Invalid session data:', {
+      sessionId: sessionPayload.id,
+      hasUrl: !!sessionPayload.videoUrl,
+      hasSession: !!sessionObject,
+      timestamp: new Date().toISOString()
+    });
     throw new Error('Session not found or no videoUrl');
   }
+
   try {
+    console.log('🎬 Starting audio transcription:', {
+      sessionId: sessionPayload.id,
+      videoUrl: sessionPayload.videoUrl,
+      timestamp: new Date().toISOString()
+    });
+
     await transcribeAudio(sessionPayload.videoUrl, sessionObject);
-    console.log(
-      `Transcription completed successfully for session: ${sessionObject._id}`,
-    );
+    console.log('✅ Transcription completed successfully:', {
+      sessionId: sessionObject._id,
+      timestamp: new Date().toISOString()
+    });
     return true;
   } catch (error) {
+    console.error('❌ Transcription failed:', {
+      sessionId: sessionObject._id,
+      error: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString()
+    });
     await updateTranscriptionStatus(sessionObject, TranscriptionStatus.failed);
     throw error;
   }
@@ -319,26 +357,35 @@ export async function transcribeAudio(
 
 const init = async () => {
   try {
+    console.log('🚀 Initializing session transcriptions worker...');
+    
     if (!dbConnection.url) {
+      console.error('❌ Database URL is not configured');
       throw new Error('Database URL is not configured');
     }
 
+    console.log('🔌 Connecting to database...');
     await connect(dbConnection.url, {
       serverSelectionTimeoutMS: 5000,
     });
+    console.log('✅ Database connected successfully');
 
+    console.log('🔄 Initializing Redis queue...');
     const queue = await sessionTranscriptionsQueue();
     if (!queue) {
+      console.error('❌ Failed to initialize Redis queue');
       throw new Error('Failed to initialize Redis queue');
     }
+    console.log('✅ Redis queue initialized successfully');
 
     await consumer();
+    console.log('✅ Worker initialization completed');
   } catch (err) {
-    console.error('Worker initialization failed with error:', err);
-    console.error('Error details:', {
+    console.error('❌ Worker initialization failed:', {
       name: err.name,
       message: err.message,
       stack: err.stack,
+      timestamp: new Date().toISOString()
     });
     process.exit(1);
   }
@@ -346,20 +393,27 @@ const init = async () => {
 
 // Add more detailed error handlers
 process.on('unhandledRejection', (error) => {
-  console.error('Unhandled rejection:', error);
+  console.error('❌ Unhandled rejection in session transcriptions worker:', {
+    error,
+    timestamp: new Date().toISOString()
+  });
   process.exit(1);
 });
 
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught exception:', error);
+  console.error('❌ Uncaught exception in session transcriptions worker:', {
+    error,
+    timestamp: new Date().toISOString()
+  });
   process.exit(1);
 });
 
 init().catch((error) => {
-  console.error('Fatal error during initialization:', {
+  console.error('❌ Fatal error during session transcriptions worker initialization:', {
     name: error.name,
     message: error.message,
     stack: error.stack,
+    timestamp: new Date().toISOString()
   });
   process.exit(1);
 });
