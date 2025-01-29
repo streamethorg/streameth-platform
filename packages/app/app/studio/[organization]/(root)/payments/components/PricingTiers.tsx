@@ -5,7 +5,7 @@ import { ResourceCounter } from './ResourceCounter';
 const tiers = [
   {
     name: 'Small Event',
-    price: '250',
+    price: '500',
     description: 'Perfect for small events and communities',
     features: [
       'During event technical support',

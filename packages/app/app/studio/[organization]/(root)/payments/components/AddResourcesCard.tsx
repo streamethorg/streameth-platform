@@ -38,7 +38,7 @@ export function AddResourcesCard({
               <span className="text-lg font-medium">Additional Resources</span>
               <div>
                 <span className="text-2xl font-bold">${totalPrice}</span>
-                {(streamingDays > 0 || numberOfStages > 0) && totalPrice === 250}
+                {(streamingDays > 0 || numberOfStages > 0) && totalPrice === 500}
               </div>
             </div>
 

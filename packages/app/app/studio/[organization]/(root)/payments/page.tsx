@@ -34,10 +34,10 @@ export default function PaymentsPage() {
     const effectiveDays = days === 0 ? 1 : days;
     const effectiveStages = stages === 0 ? 1 : stages;
     
-    const calculatedPrice = effectiveDays * effectiveStages * 250;
+    const calculatedPrice = effectiveDays * effectiveStages * 500;
     
-    // Ensure minimum price of 250
-    return Math.max(250, calculatedPrice);
+    // Ensure minimum price of 500
+    return Math.max(500, calculatedPrice);
   };
 
   const handleCounter = (
