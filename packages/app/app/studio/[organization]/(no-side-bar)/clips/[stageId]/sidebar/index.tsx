@@ -77,7 +77,7 @@ export default function Sidebar({
         </TabsContent>
         <TabsContent
           value="transcribe"
-          className="flex-grow overflow-hidden h-full p-4"
+          className="flex-grow overflow-y-auto h-full p-4"
         >
           <Transcripts
             transcribe={transcribe}

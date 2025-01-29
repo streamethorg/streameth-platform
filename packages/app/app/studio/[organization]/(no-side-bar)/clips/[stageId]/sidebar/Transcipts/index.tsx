@@ -17,7 +17,7 @@ const Transcripts = ({
   console.log('transcribe', transcribe, transcribeStatus);
   if (transcribe?.length === 0) {
     return (
-      <div className="flex flex-col h-full overflow-y-scroll">
+      <div className="flex flex-col h-full">
         <div className="flex flex-col space-y-4 text-center items-center justify-center h-full">
           <p className="text-lg font-semibold">No transcript available</p>
           <p className="text-md text-muted-foreground">
@@ -40,7 +40,7 @@ const Transcripts = ({
   }
 
   return (
-    <div className="flex flex-col h-full overflow-y-scroll">
+    <div className="flex flex-col h-full">
       <TranscriptText transcribe={transcribe} />
     </div>
   );

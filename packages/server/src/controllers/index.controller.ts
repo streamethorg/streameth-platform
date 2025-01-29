@@ -182,11 +182,21 @@ export class IndexController extends Controller {
           break;
 
         case LivepeerEvent.streamStarted:
-        case LivepeerEvent.streamIdle:
-          console.log('🎥 Stream event received:', {
-            event: payload.event,
+          console.log('🎥 Stream started event received:', {
             streamId: payload.stream?.id,
             status: payload.stream?.status,
+            isActive: payload.stream?.isActive,
+            isHealthy: payload.stream?.isHealthy
+          });
+          await this.stageService.findStreamAndUpdate(payload.stream.id);
+          break;
+          
+        case LivepeerEvent.streamIdle:
+          console.log('🎥 Stream idle event received:', {
+            streamId: payload.stream?.id,
+            status: payload.stream?.status,
+            isActive: payload.stream?.isActive,
+            isHealthy: payload.stream?.isHealthy,
           });
           await this.stageService.findStreamAndUpdate(payload.stream.id);
           break;
