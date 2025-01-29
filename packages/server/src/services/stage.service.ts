@@ -140,14 +140,17 @@ export default class StageService {
     const stream = await getStreamInfo(id);
     let stage = await Stage.findOne({ 'streamSettings.streamId': id });
     if (!stage) throw new HttpException(400, 'stage not found');
-    // send message to redis
-    const queue = await stageTranscriptionsQueue();
-    await queue.add({
-      stageId: stage._id,
-    });
+
+    if (!stream.isActive) {
+      const queue = await stageTranscriptionsQueue();
+      await queue.add({
+        stageId: stage._id,
+      });
+    }
+
     await stage.updateOne(
       {
-        'stageSettings.transcripts.status': 'in-queue',
+        'stageSettings.transcripts.status': !stream.isActive ? 'in-queue' : undefined,
         'streamSettings.isActive': stream.isActive,
         'streamSettings.isHealthy': stream.isHealthy ?? false,
       },

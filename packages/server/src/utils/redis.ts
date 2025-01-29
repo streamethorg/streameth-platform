@@ -21,7 +21,7 @@ async function connectToRedis(retries = 0): Promise<Redis> {
     });
 
     redis.on('error', (e) => {
-      logger.error('Redis connection error:', {
+      logger.error('🔴 Redis connection error:', {
         error: e.message,
         stack: e.stack,
         retries,
@@ -32,21 +32,21 @@ async function connectToRedis(retries = 0): Promise<Redis> {
     });
 
     redis.on('close', () => {
-      logger.warn('Redis connection closed', {
+      logger.warn('🟡 Redis connection closed', {
         attempt: retries + 1,
         maxRetries: MAX_RETRIES,
       });
       reconnectToRedis();
     });
 
-    logger.info('Redis connected successfully', {
+    logger.info('🟢 Redis connected successfully', {
       host: config.redis.host,
       port: config.redis.port,
     });
     return redis;
   } catch (e) {
     if (retries < MAX_RETRIES) {
-      logger.warn('Redis connection failed', {
+      logger.warn('🟡 Redis connection failed', {
         error: e instanceof Error ? e.message : String(e),
         attempt: retries + 1,
         maxRetries: MAX_RETRIES,
@@ -56,7 +56,7 @@ async function connectToRedis(retries = 0): Promise<Redis> {
         setTimeout(() => resolve(connectToRedis(retries + 1)), RETRY_INTERVAL);
       });
     } else {
-      logger.error('Redis connection failed permanently', {
+      logger.error('🔴 Redis connection failed permanently', {
         error: e instanceof Error ? e.message : String(e),
         stack: e instanceof Error ? e.stack : undefined,
         totalAttempts: MAX_RETRIES,
@@ -69,9 +69,51 @@ async function connectToRedis(retries = 0): Promise<Redis> {
 }
 
 async function reconnectToRedis() {
-  logger.info(`Reconnecting to Redis in ${RETRY_INTERVAL / 1000} seconds...`);
+  logger.info(`🔄 Reconnecting to Redis in ${RETRY_INTERVAL / 1000} seconds...`);
   return new Promise((resolve) => {
     setTimeout(() => resolve(connectToRedis()), RETRY_INTERVAL);
+  });
+}
+
+async function monitorQueue(queue: Queue.Queue) {
+  const counts = await queue.getJobCounts();
+  console.log(`📊 Queue Status - ${queue.name}:`, {
+    waiting: `⏳ ${counts.waiting}`,
+    active: `🔄 ${counts.active}`,
+    completed: `✅ ${counts.completed}`,
+    failed: `❌ ${counts.failed}`,
+    delayed: `⏰ ${counts.delayed}`
+  });
+
+  queue.on('completed', (job) => {
+    console.log(`✅ Job completed in ${queue.name}:`, {
+      jobId: job.id,
+      timestamp: new Date().toISOString(),
+    });
+  });
+
+  queue.on('failed', (job, err) => {
+    console.error(`❌ Job failed in ${queue.name}:`, {
+      jobId: job?.id,
+      error: err.message,
+      stack: err.stack,
+      timestamp: new Date().toISOString(),
+    });
+  });
+
+  queue.on('stalled', (jobId) => {
+    console.warn(`⚠️ Job stalled in ${queue.name}:`, {
+      jobId,
+      timestamp: new Date().toISOString(),
+    });
+  });
+
+  queue.on('progress', (job, progress) => {
+    console.log(`📈 Job progress in ${queue.name}:`, {
+      jobId: job.id,
+      progress,
+      timestamp: new Date().toISOString(),
+    });
   });
 }
 
@@ -83,8 +125,8 @@ export async function createQueue(
   if (!connection) {
     throw new Error('Failed to establish Redis connection');
   }
-  console.log('Creating queue', name);
-  return new Queue(name, {
+  console.log('🔧 Creating queue', name);
+  const queue = new Queue(name, {
     redis: {
       host: config.redis.host,
       port: config.redis.port,
@@ -92,25 +134,31 @@ export async function createQueue(
     },
     ...options,
   });
+
+  await monitorQueue(queue);
+  return queue;
 }
 
 export const sessionTranscriptionsQueue = async () => {
-  console.log('Creating session transcriptions queue...');
+  console.log('🎙️ Creating session transcriptions queue...');
   return await createQueue('session-transcriptions');
 };
 
 export const stageTranscriptionsQueue = async () => {
-  console.log('Creating stage transcriptions queue...');
+  console.log('🎭 Creating stage transcriptions queue...');
   return await createQueue('stage-transcriptions');
 };
+
 export const videoUploadQueue = async () => {
-  console.log('Creating video upload queue...');
+  console.log('🎥 Creating video upload queue...');
   return await createQueue('video-upload');
 };
+
 export const clipsQueue = async () => {
-  console.log('Creating clip queue...');
+  console.log('✂️ Creating clip queue...');
   return await createQueue('clips');
 };
+
 // Initialize the connection and export it
 const connection = connectToRedis();
 export default connection;

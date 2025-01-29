@@ -28,11 +28,24 @@ const consumer = async () => {
   const queue = await clipsQueue();
   queue.process(async (job) => {
     const data = job.data as IClip;
-    console.log(`📋 Processing clip job ${job.id} for session ${data.sessionId}`);
+    console.log('📋 Processing clip job:', {
+      jobId: job.id,
+      sessionId: data.sessionId,
+      start: data.start,
+      end: data.end,
+      hasEditorOptions: !!data.editorOptions,
+      timestamp: new Date().toISOString()
+    });
+    
     try {
       return await processClip(data);
     } catch (error) {
-      console.error(`❌ Clip processing failed for session ${data.sessionId}:`, error);
+      console.error('❌ Clip processing failed:', {
+        sessionId: data.sessionId,
+        error: error.message,
+        stack: error.stack,
+        timestamp: new Date().toISOString()
+      });
       await Session.findByIdAndUpdate(data.sessionId, {
         $set: {
           processingStatus: ProcessingStatus.failed,
@@ -49,32 +62,38 @@ const processClip = async (data: IClip) => {
     start: data.start,
     end: data.end,
     hasEditorOptions: !!data.editorOptions,
+    timestamp: new Date().toISOString()
   });
-  const { sessionId, clipUrl, start, end } = data;
 
   try {
-    console.log('📥 Fetching master playlist from:', clipUrl);
-    const masterResponse = await fetch(clipUrl);
+    console.log('📥 Fetching master playlist:', {
+      url: data.clipUrl,
+      timestamp: new Date().toISOString()
+    });
+    
+    const masterResponse = await fetch(data.clipUrl);
     if (!masterResponse.ok) {
       console.error('❌ Failed to fetch master playlist:', {
         status: masterResponse.status,
         statusText: masterResponse.statusText,
+        timestamp: new Date().toISOString()
       });
       throw new Error(
         `Failed to fetch master playlist: ${masterResponse.statusText}`,
       );
     }
+    
     const masterContent = await masterResponse.text();
     console.log('✅ Successfully fetched master playlist');
-    // 2. Find the 1080p variant
-    console.log('🔍 Searching for 1080p variant in master playlist');
+
+    // Find the highest quality variant
+    console.log('🔍 Searching for highest quality variant');
     const linesMaster = masterContent.split('\n');
     let variantUrl = '';
     let maxBandwidth = -1;
 
     for (let i = 0; i < linesMaster.length; i++) {
       if (linesMaster[i].startsWith('#EXT-X-STREAM-INF')) {
-        // Parse bandwidth from the stream info
         const bandwidthMatch = linesMaster[i].match(/BANDWIDTH=(\d+)/);
         if (bandwidthMatch) {
           const bandwidth = parseInt(bandwidthMatch[1]);
@@ -86,28 +105,35 @@ const processClip = async (data: IClip) => {
       }
     }
 
-    console.log('Selected variant URL:', variantUrl);
-    variantUrl = clipUrl.replace('index.m3u8', variantUrl);
-    console.log('Full variant URL:', variantUrl);
-    if (!variantUrl) {
-      console.error('❌ 1080p variant not found in master playlist');
-      throw new Error('1080p variant not found in master playlist');
-    }
-    console.log('✅ Found 1080p variant URL:', variantUrl);
+    console.log('🎯 Selected variant details:', {
+      bandwidth: maxBandwidth,
+      url: variantUrl,
+      timestamp: new Date().toISOString()
+    });
 
-    const duration = end - start;
+    variantUrl = data.clipUrl.replace('index.m3u8', variantUrl);
+    console.log('🔗 Full variant URL:', variantUrl);
+
+    if (!variantUrl) {
+      console.error('❌ Highest quality variant not found');
+      throw new Error('Highest quality variant not found in master playlist');
+    }
+
+    const duration = data.end - data.start;
     console.log('⏱️ Clip duration details:', {
-      start,
-      end,
+      start: data.start,
+      end: data.end,
       duration,
+      timestamp: new Date().toISOString()
     });
 
     const tempDir = tmpdir();
-    const concatPath = join(tempDir, `${sessionId}-concat.mp4`);
-    const outputPath = join(tempDir, `${sessionId}.mp4`);
+    const concatPath = join(tempDir, `${data.sessionId}-concat.mp4`);
+    const outputPath = join(tempDir, `${data.sessionId}.mp4`);
     console.log('📁 Temporary file paths:', {
       concatPath,
       outputPath,
+      timestamp: new Date().toISOString()
     });
 
     // 1. Fetch and parse manifest
@@ -140,8 +166,8 @@ const processClip = async (data: IClip) => {
         // Only process segments that could be part of our clip
         if (
           !url.startsWith('#') &&
-          cumulativeTime <= end + duration &&
-          cumulativeTime + duration >= start
+          cumulativeTime <= data.end + duration &&
+          cumulativeTime + duration >= data.start
         ) {
           segments.push({
             duration,
@@ -156,8 +182,8 @@ const processClip = async (data: IClip) => {
     }
 
     if (segments.length === 0) {
-      console.error('❌ No segments found for specified time range:', { start, end });
-      throw new Error(`No segments found for time range ${start}-${end}`);
+      console.error('❌ No segments found for specified time range:', { start: data.start, end: data.end });
+      throw new Error(`No segments found for time range ${data.start}-${data.end}`);
     }
 
     console.log('📊 Segment analysis:', {
@@ -285,7 +311,7 @@ const processClip = async (data: IClip) => {
 
     // 4. Create concat file
     console.log('📝 Creating concat file');
-    const concatFilePath = join(tempDir, `${sessionId}-concat.txt`);
+    const concatFilePath = join(tempDir, `${data.sessionId}-concat.txt`);
     const concatContent = segmentPaths
       .map((path) => `file '${path}'`)
       .join('\n');
@@ -294,7 +320,7 @@ const processClip = async (data: IClip) => {
     console.log('✅ Concat file created:', concatFilePath);
 
     // 5. Calculate precise offset from first segment
-    const offsetInFirstSegment = start - segments[0].startTime;
+    const offsetInFirstSegment = data.start - segments[0].startTime;
     console.log('⚡ Calculated clip parameters:', {
       offsetInFirstSegment,
       totalDuration: duration,
@@ -302,24 +328,24 @@ const processClip = async (data: IClip) => {
 
     return new Promise((resolve, reject) => {
       console.log('🎬 Starting FFmpeg concatenation');
-      // First concatenate required segments
       ffmpeg()
         .input(concatFilePath)
         .inputOptions(['-f', 'concat', '-safe', '0'])
         .outputOptions(['-c', 'copy'])
         .output(concatPath)
         .on('start', (command) => {
-          console.log('🎥 FFmpeg concat command:', command);
+          console.log('🎥 FFmpeg concat command:', {
+            command,
+            timestamp: new Date().toISOString()
+          });
         })
         .on('end', () => {
           console.log('✅ FFmpeg concatenation completed');
-          // Clean up concat file and segment files
           fs.unlinkSync(concatFilePath);
           segmentPaths.forEach((path) => fs.unlinkSync(path));
           console.log('🧹 Cleaned up temporary segment files');
 
           console.log('🎬 Starting FFmpeg trim operation');
-          // Then trim the exact portion we need
           ffmpeg()
             .input(concatPath)
             .inputOptions([`-ss ${offsetInFirstSegment}`])
@@ -327,7 +353,10 @@ const processClip = async (data: IClip) => {
             .duration(duration)
             .output(outputPath)
             .on('start', (command) => {
-              console.log('🎥 FFmpeg trim command:', command);
+              console.log('🎥 FFmpeg trim command:', {
+                command,
+                timestamp: new Date().toISOString()
+              });
             })
             .on('end', async () => {
               try {
@@ -337,19 +366,18 @@ const processClip = async (data: IClip) => {
                 console.log('✅ Clip creation finished');
                 const storageService = new StorageService();
                 
-                // Get file size for logging
                 const stats = await stat(outputPath);
                 console.log('📊 Output file size:', {
                   bytes: stats.size,
                   megabytes: (stats.size / (1024 * 1024)).toFixed(2) + ' MB',
-                  gigabytes: (stats.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB'
+                  gigabytes: (stats.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB',
+                  timestamp: new Date().toISOString()
                 });
 
-                // Create read stream instead of loading entire file
                 const fileStream = createReadStream(outputPath);
-                console.log('📤 Uploading clip to S3 using stream');
+                console.log('📤 Uploading clip to S3');
                 const url = await storageService.uploadFile(
-                  'clips/' + sessionId,
+                  'clips/' + data.sessionId,
                   fileStream,
                   'video/mp4'
                 );
@@ -357,63 +385,58 @@ const processClip = async (data: IClip) => {
 
                 if (data.editorOptions) {
                   console.log('🎨 Processing editor options:', data.editorOptions);
-                  // Make sure we're passing a plain object for the update
                   const updateData = {
                     source: {
                       streamUrl: url,
-                      start,
-                      end,
+                      start: data.start,
+                      end: data.end,
                     },
                     processingStatus: ProcessingStatus.clipCreated,
                   };
 
                   console.log('💾 Updating session with clip data');
                   const session = await Session.findByIdAndUpdate(
-                    sessionId,
+                    data.sessionId,
                     { $set: updateData },
                     { new: true },
                   );
 
                   if (!session) {
-                    console.error('❌ Session not found:', sessionId);
-                    throw new Error(`Session not found: ${sessionId}`);
+                    console.error('❌ Session not found:', data.sessionId);
+                    throw new Error(`Session not found: ${data.sessionId}`);
                   }
 
-                  console.log('🗿 data.editorOptions', data.editorOptions);
                   if (data.editorOptions.captionEnabled) {
                     console.log('🎯 Starting audio transcription');
                     await transcribeAudioSession(url, session);
                     console.log('✅ Audio transcription completed');
                   }
 
-                  console.log('🗿 sessionId', sessionId);
                   console.log('🎨 Finding clip editor configuration');
                   const clipEditor = await ClipEditor.findOne({
-                    clipSessionId: sessionId,
+                    clipSessionId: data.sessionId,
                   });
-                  console.log('🗿 clipEditor', clipEditor);
                   console.log('🎬 Launching Remotion render');
                   await clipEditorService.launchRemotionRender(clipEditor);
                   console.log('✅ Remotion render launched');
                   
-                  // Update to rendering state
-                  await Session.findByIdAndUpdate(sessionId, 
+                  await Session.findByIdAndUpdate(data.sessionId, 
                     { $set: { processingStatus: ProcessingStatus.rendering } },
                     { new: true }
                   );
+                  console.log('💾 Updated session status to rendering');
                 } else {
                   console.log('📤 Creating Livepeer asset');
-                  const assetId = await createAssetFromUrl(sessionId, url);
+                  const assetId = await createAssetFromUrl(data.sessionId, url);
                   console.log('✅ Livepeer asset created:', assetId);
 
                   console.log('💾 Updating session with asset ID');
-                  await Session.findByIdAndUpdate(sessionId, {
+                  await Session.findByIdAndUpdate(data.sessionId, {
                     $set: {
                       assetId,
                       processingStatus: ProcessingStatus.pending,
                     },
                   });
-                  console.log('✅ Session updated with asset ID');
                 }
 
                 fs.unlinkSync(outputPath);
@@ -421,17 +444,28 @@ const processClip = async (data: IClip) => {
                 console.log('✅ Clip processing completed successfully');
                 resolve(true);
               } catch (error) {
-                console.error('❌ Error in final processing steps:', error);
+                console.error('❌ Error in final processing steps:', {
+                  error: error.message,
+                  stack: error.stack,
+                  timestamp: new Date().toISOString()
+                });
                 reject(error);
               }
             })
             .on('progress', (progress) => {
-              console.log('🎥 FFmpeg trim progress:', progress);
+              console.log('📈 FFmpeg trim progress:', {
+                ...progress,
+                timestamp: new Date().toISOString()
+              });
             })
             .on('error', async (err) => {
-              console.error('❌ Error during FFmpeg trim:', err);
+              console.error('❌ Error during FFmpeg trim:', {
+                error: err.message,
+                stack: err.stack,
+                timestamp: new Date().toISOString()
+              });
               fs.unlinkSync(concatPath);
-              await Session.findByIdAndUpdate(sessionId, {
+              await Session.findByIdAndUpdate(data.sessionId, {
                 $set: {
                   processingStatus: ProcessingStatus.failed,
                 },
@@ -441,11 +475,18 @@ const processClip = async (data: IClip) => {
             .run();
         })
         .on('progress', (progress) => {
-          console.log('🎥 FFmpeg concat progress:', progress);
+          console.log('📈 FFmpeg concat progress:', {
+            ...progress,
+            timestamp: new Date().toISOString()
+          });
         })
         .on('error', async (err) => {
-          console.error('❌ Error during FFmpeg concat:', err);
-          await Session.findByIdAndUpdate(sessionId, {
+          console.error('❌ Error during FFmpeg concat:', {
+            error: err.message,
+            stack: err.stack,
+            timestamp: new Date().toISOString()
+          });
+          await Session.findByIdAndUpdate(data.sessionId, {
             $set: {
               processingStatus: ProcessingStatus.failed,
             },
@@ -455,8 +496,12 @@ const processClip = async (data: IClip) => {
         .run();
     });
   } catch (error) {
-    console.error('❌ Fatal error in clip processing:', error);
-    await Session.findByIdAndUpdate(sessionId, {
+    console.error('❌ Fatal error in clip processing:', {
+      error: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString()
+    });
+    await Session.findByIdAndUpdate(data.sessionId, {
       $set: {
         processingStatus: ProcessingStatus.failed,
       },
@@ -468,10 +513,12 @@ const processClip = async (data: IClip) => {
 const init = async () => {
   try {
     console.log('🚀 Initializing clips worker');
+    
+    console.log('🔌 Connecting to database...');
     await connect(dbConnection.url, {
       serverSelectionTimeoutMS: 5000,
     });
-    console.log('✅ Connected to database');
+    console.log('✅ Database connected successfully');
 
     await consumer();
     console.log('✅ Clips worker initialized successfully');
@@ -480,19 +527,25 @@ const init = async () => {
       name: err.name,
       message: err.message,
       stack: err.stack,
+      timestamp: new Date().toISOString()
     });
     process.exit(1);
   }
 };
 
-// Add more detailed error handlers
 process.on('unhandledRejection', (error) => {
-  console.error('❌ Unhandled rejection in clips worker:', error);
+  console.error('❌ Unhandled rejection in clips worker:', {
+    error,
+    timestamp: new Date().toISOString()
+  });
   process.exit(1);
 });
 
 process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught exception in clips worker:', error);
+  console.error('❌ Uncaught exception in clips worker:', {
+    error,
+    timestamp: new Date().toISOString()
+  });
   process.exit(1);
 });
 
@@ -501,6 +554,7 @@ init().catch((error) => {
     name: error.name,
     message: error.message,
     stack: error.stack,
+    timestamp: new Date().toISOString()
   });
   process.exit(1);
 });

@@ -165,16 +165,37 @@ export default class StripeService {
             const streamingDaysNum = parseInt(streamingDays);
             const numberOfStagesNum = parseInt(numberOfStages);
 
-            // Calculate expiry date: current date + streaming days
-            const expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
+            // Check if organization has an active subscription
+            const now = new Date();
+            const hasActiveSubscription = organization.expirationDate && organization.expirationDate > now;
+
+            // Calculate expiry date based on subscription status
+            let expiryDate;
+            if (hasActiveSubscription) {
+                // If active, add days to current expiration date
+                expiryDate = new Date(organization.expirationDate);
+                expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
+            } else {
+                // If expired or new, start from current date
+                expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
+            }
+
+            // Calculate new total stages
+            const newPaidStages = hasActiveSubscription 
+                ? (organization.paidStages || 0) + numberOfStagesNum 
+                : numberOfStagesNum;
 
             console.log('📅 Processing successful charge:', {
                 organizationId: organization._id,
                 chargeId: charge.id,
                 streamingDays: streamingDaysNum,
                 numberOfStages: numberOfStagesNum,
-                expiryDate
+                currentExpiryDate: organization.expirationDate,
+                newExpiryDate: expiryDate,
+                currentStages: organization.paidStages,
+                newTotalStages: newPaidStages,
+                isExtending: hasActiveSubscription
             });
 
             const result = await Organization.updateOne(
@@ -182,8 +203,10 @@ export default class StripeService {
                 {
                     $set: {
                         paymentStatus: 'active',
-                        streamingDays: streamingDaysNum,
-                        paidStages: numberOfStagesNum,
+                        streamingDays: hasActiveSubscription 
+                            ? (organization.streamingDays || 0) + streamingDaysNum 
+                            : streamingDaysNum,
+                        paidStages: newPaidStages,
                         lastPaymentAmount: charge.amount,
                         lastPaymentDate: new Date(),
                         expirationDate: expiryDate,
@@ -194,10 +217,12 @@ export default class StripeService {
             if (result.modifiedCount === 0) {
                 console.log('⚠️ No update performed for organization:', organization._id);
             } else {
-                console.log('✅ Organization activated:', {
+                console.log('✅ Organization subscription updated:', {
                     organizationId: organization._id,
                     chargeId: charge.id,
-                    expiryDate
+                    expiryDate,
+                    totalStages: newPaidStages,
+                    isExtension: hasActiveSubscription
                 });
             }
         } catch (error) {
