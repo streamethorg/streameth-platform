@@ -2,8 +2,6 @@ import { config } from '@config';
 const { host, user, name, password } = config.db;
 
 export const dbConnection = {
-  //url: `mongodb://${user}:${password}@${host}/${name}?authSource=admin&retryWrites=true&w=majority`,
-  // For local development use this url
   url:
     process.env.NODE_ENV === 'development'
       ? `mongodb+srv://${user}:${password}@${host}/${name}?authSource=admin`
