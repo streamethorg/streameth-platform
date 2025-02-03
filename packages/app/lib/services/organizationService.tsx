@@ -80,7 +80,17 @@ export async function updateOrganization({
 }: {
   organization: IExtendedOrganization;
 }): Promise<IOrganization> {
-  const modifiedObject = (({ _id, ...rest }) => rest)(organization);
+  const { _id, ...updateData } = organization;
+
+  console.log('🔄 Updating organization:', {
+    id: _id,
+    updateData: {
+      name: updateData.name,
+      logo: updateData.logo,
+      banner: updateData.banner,
+      description: updateData.description
+    }
+  });
 
   try {
     const response = await fetchClient(
@@ -90,17 +100,33 @@ export async function updateOrganization({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(modifiedObject),
+        body: JSON.stringify(updateData),
       }
     );
 
     if (response.ok) {
-      return (await response.json()).data;
+      const result = (await response.json()).data;
+      console.log('✅ Organization updated successfully:', {
+        id: _id,
+        name: result.name,
+        logo: result.logo,
+        banner: result.banner,
+        description: result.description
+      });
+      return result;
     } else {
-      throw await response.json();
+      const error = await response.json();
+      console.error('❌ Failed to update organization:', {
+        id: _id,
+        error
+      });
+      throw error;
     }
   } catch (e) {
-    console.error('Unexpected error:', e);
+    console.error('❌ Unexpected error updating organization:', {
+      id: _id,
+      error: e
+    });
     throw e;
   }
 }

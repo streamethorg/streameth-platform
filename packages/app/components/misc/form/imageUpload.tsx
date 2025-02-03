@@ -174,13 +174,28 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
             )
           );
           data.set('directory', path);
+          
+          console.log('🚀 Uploading image:', {
+            fileName: resizedFile.name,
+            fileType: resizedFile.type,
+            fileSize: `${(resizedFile.size / 1024 / 1024).toFixed(2)}MB`,
+            directory: path
+          });
+          
           const imageUrl = await imageUploadAction({ data });
-          if (!imageUrl) throw new Error('Error uploading image');
+          if (!imageUrl) {
+            console.error('❌ No URL returned from upload');
+            throw new Error('Error uploading image');
+          }
+
+          console.log('✅ Image uploaded successfully:', {
+            url: imageUrl
+          });
 
           setPreview(imageUrl);
           return imageUrl;
         } catch (e) {
-          console.error(e);
+          console.error('❌ Error uploading image:', e);
           setPreview('');
           throw e;
         } finally {

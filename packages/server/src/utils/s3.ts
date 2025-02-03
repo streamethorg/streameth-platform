@@ -54,11 +54,11 @@ export default class StorageService {
       ) {
         console.log('🚀 Uploading to development bucket:', {
           bucket: name,
-          key: filename,
-          contentType
-        });
-        const command = new PutObjectCommand(params);
-        await this.s3Client.send(command);
+        key: filename,
+        contentType
+      });
+      const command = new PutObjectCommand(params);
+      await this.s3Client.send(command);
         const url = `https://streameth-develop.ams3.digitaloceanspaces.com/${filename}`;
         console.log('✅ Upload successful to development:', {
           url,
@@ -77,12 +77,12 @@ export default class StorageService {
         await this.s3Client.send(command);
         const url = `https://streameth-production.ams3.digitaloceanspaces.com/${filename}`;
         console.log('✅ Upload successful to production:', {
-          url,
+        url,
           bucket: name,
-          key: filename,
-          contentType
-        });
-        return url;
+        key: filename,
+        contentType
+      });
+      return url;
       }
     } catch (error) {
       console.error('❌ S3 upload failed:', {
