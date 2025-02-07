@@ -13,7 +13,7 @@ const Loading = () => (
 const MagicLinkPage = ({
   searchParams,
 }: {
-  searchParams: { token: string; email: string };
+  searchParams: { token: string; email: string; redirect?: string };
 }) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +32,7 @@ const MagicLinkPage = ({
       const result = await signIn('credentials', {
         token: searchParams.token,
         email: searchParams.email,
+        type: 'email',
         redirect: false,
       });
 
@@ -39,8 +40,8 @@ const MagicLinkPage = ({
         setError('Error: Failed to sign in.');
         router.push('/auth/login?error=Login failed or token expired');
       } else {
-        // Redirect to /studio after successful sign-in
-        router.push('/studio');
+        // Redirect based on link parameter, default to /studio
+        router.push(searchParams.redirect || '/studio');
       }
       setLoading(false);
     };
