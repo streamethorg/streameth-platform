@@ -15,7 +15,7 @@ export default class AuthService {
   private userService = new UserService();
   private mailService = new EmailService();
 
-  async login(data: IAuth): Promise<{ user: IUser; token: string }> {
+  async login(data: IAuth): Promise<{ user: IUser; token: string; redirect?: string }> {
     let verifyToken = await this.verifyAuthToken({
       token: data.token,
       type: data.type,
@@ -25,21 +25,24 @@ export default class AuthService {
       email: verifyToken.email,
     });
 
+    let isNewUser = false;
     if (!user) {
+      isNewUser = true;
       user = await this.userService.create({
         email: verifyToken.email,
         did: generateDID(),
       });
     }
 
-    // if (user.organizations.length === 0) {
-    //   throw new HttpException(403, 'User is not whitelisted');
-    // }
-
     let token = jwt.sign({ id: user.did, email: user.email }, config.jwt.secret, {
       expiresIn: config.jwt.expiry,
     });
-    return { user, token };
+
+    // Always check for organizations regardless of environment
+    const hasNoOrganizations = !user.organizations || user.organizations.length === 0;
+    const redirect = isNewUser || hasNoOrganizations ? '/studio/create' : '/studio';
+
+    return { user, token, redirect };
   }
 
   async verifyAuthToken(d: {
@@ -132,7 +135,7 @@ export default class AuthService {
     
     // Check if user exists to determine redirect
     const user = await this.userService.findOne({ email });
-    const redirect = user ? '/studio' : '/studio/create';
+    const redirect = user && user.organizations?.length > 0 ? '/studio' : '/studio/create';
     
     const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl : config.frontendUrl;
     const htmlContent = replacePlaceHolders(emailTemplate, {
