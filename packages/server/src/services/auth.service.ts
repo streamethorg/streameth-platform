@@ -36,7 +36,7 @@ export default class AuthService {
     //   throw new HttpException(403, 'User is not whitelisted');
     // }
 
-    let token = jwt.sign({ id: user.did }, config.jwt.secret, {
+    let token = jwt.sign({ id: user.did, email: user.email }, config.jwt.secret, {
       expiresIn: config.jwt.expiry,
     });
     return { user, token };
@@ -120,7 +120,7 @@ export default class AuthService {
       'utf8',
     );
     const token = jwt.sign(
-      { id: crypto.randomUUID() },
+      { id: crypto.randomUUID(), email },
       config.jwt.magicLink.secret,
       {
         expiresIn: config.jwt.magicLink.expiry,

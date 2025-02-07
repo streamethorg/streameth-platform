@@ -66,13 +66,13 @@ const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
         </Button>
       </div>
 
-      {/* <div className="flex items-center my-8">
+      <div className="flex items-center my-8">
         <div className="flex-grow border-t border-gray-300"></div>
         <span className="px-4 text-gray-500 text-sm">or</span>
         <div className="flex-grow border-t border-gray-300"></div>
-      </div> */}
+      </div>
 
-      {/* <Form {...form}>
+      <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
@@ -101,7 +101,7 @@ const SignInWithSocials = ({ callbackUrl }: { callbackUrl: string }) => {
             Continue with email
           </Button>
         </form>
-      </Form> */}
+      </Form>
     </div>
   );
 };

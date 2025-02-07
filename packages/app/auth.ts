@@ -75,9 +75,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			if (account?.provider === "google") {
 				try {
 					const email = (account.email || user?.email || token.email) as string;
-
 					console.log("Attempting to call:", `${apiUrl()}/auth/login`);
-					
 					const response = await fetch(`${apiUrl()}/auth/login`, {
 						method: "POST",
 						credentials: "include",
@@ -88,7 +86,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 							email: email,
 						}),
 					});
-
 					if (!response.ok) {
 						const errorText = await response.text();
 						console.error("Auth error response:", response.status, errorText);
@@ -96,19 +93,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 							url: `${apiUrl()}/auth/login`,
 							method: "POST",
 							email: email,
-							tokenType: "google"
+							tokenType: "google",
 						});
 						throw new Error(`AuthError: ${response.status} ${errorText}`);
 					}
-
 					const data = await response.json();
 					token.access_token = data.data?.token;
 					if (email) {
-						token.email = email as string | null;
+						token.email = email as string;
 					}
 				} catch (error) {
 					console.error("Error in Google auth:", error);
 					throw new Error("AuthError");
+				}
+			} else if (user && user.email) {
+				token.email = user.email; // ensure credentials sign in adds email to token
+				if ((user as any).token) {
+					token.access_token = (user as any).token;
 				}
 			}
 			return token;
