@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { joinOrganizationAction } from '@/lib/actions/organizations';
 
 const JoinOrganizationSchema = z.object({
   invitationCode: z.string().min(1, 'Invitation code is required'),
@@ -39,12 +40,15 @@ export default function JoinOrganizationForm({ userEmail }: JoinOrganizationForm
   const onSubmit = async (values: z.infer<typeof JoinOrganizationSchema>) => {
     setIsLoading(true);
     try {
-      // TODO: Implement the join organization action
+      const organization = await joinOrganizationAction({
+        invitationCode: values.invitationCode,
+        email: userEmail,
+      });
       toast.success('Successfully joined organization');
-      router.refresh();
+      router.push(`/studio/${organization.slug}`);
     } catch (error) {
       console.error('Error joining organization:', error);
-      toast.error('Failed to join organization');
+      toast.error(error instanceof Error ? error.message : 'Failed to join organization');
     } finally {
       setIsLoading(false);
     }

@@ -14,6 +14,11 @@ export default class OrganizationService {
     this.path = 'organizations';
     this.controller = new BaseController<IOrganization>('db', Organization);
   }
+
+  private generateInvitationCode(): string {
+    return Math.random().toString(36).substring(2, 10).toUpperCase();
+  }
+
   async create(data: IOrganization): Promise<IOrganization> {
     const findOrg = await this.controller.store.findOne(
       { slug: generateId(data.name) },
@@ -28,7 +33,8 @@ export default class OrganizationService {
       expirationDate: new Date(0), // Set to Unix epoch to ensure features are locked
       paidStages: 0,
       currentStages: 0,
-      streamingDays: 0
+      streamingDays: 0,
+      invitationCode: this.generateInvitationCode(),
     };
 
     const createOrg = await this.controller.store.create(
@@ -44,6 +50,30 @@ export default class OrganizationService {
     );
     return createOrg;
   }
+
+  async joinOrganization(invitationCode: string, userEmail: string): Promise<IOrganization> {
+    const organization = await this.controller.store.findOne({ invitationCode });
+    if (!organization) {
+      throw new HttpException(404, 'Invalid invitation code');
+    }
+
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      throw new HttpException(404, 'User not found');
+    }
+
+    if (user.organizations?.some(orgId => orgId.toString() === organization._id.toString())) {
+      throw new HttpException(409, 'User is already a member of this organization');
+    }
+
+    await User.findOneAndUpdate(
+      { email: userEmail },
+      { $addToSet: { organizations: organization._id } }
+    );
+
+    return organization;
+  }
+
   async update(
     organizationId: string,
     organizationUpdate: IOrganizationUpdate,

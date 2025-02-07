@@ -245,3 +245,31 @@ export async function deleteDestination({
     throw e;
   }
 }
+
+export async function joinOrganization({
+  invitationCode,
+  email,
+}: {
+  invitationCode: string;
+  email: string;
+}): Promise<IOrganization> {
+  try {
+    const response = await fetchClient(`${apiUrl()}/organizations/join`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ invitationCode, email }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to join organization');
+    }
+
+    return (await response.json()).data;
+  } catch (error) {
+    console.error('Error joining organization:', error);
+    throw error;
+  }
+}

@@ -37,6 +37,19 @@ export class OrganizationController extends Controller {
   }
 
   /**
+   * @summary Join organization with invitation code
+   */
+  @Security('jwt')
+  @SuccessResponse('200')
+  @Post('join')
+  async joinOrganization(
+    @Body() body: { invitationCode: string; email: string },
+  ): Promise<IStandardResponse<IOrganization>> {
+    const org = await this.organizationService.joinOrganization(body.invitationCode, body.email);
+    return SendApiResponse('joined organization', org);
+  }
+
+  /**
    * @summary Update organization
    */
   @Security('jwt', ['org'])
