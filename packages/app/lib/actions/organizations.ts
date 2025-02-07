@@ -4,6 +4,7 @@ import {
   createOrganization,
   deleteDestination,
   deleteTeamMember,
+  joinOrganization,
   updateOrganization,
 } from '@/lib/services/organizationService';
 import { revalidatePath } from 'next/cache';
@@ -28,6 +29,31 @@ export const createOrganizationAction = async ({
   }
   revalidatePath('/studio');
   return response;
+};
+
+export const joinOrganizationAction = async ({
+  invitationCode,
+  email,
+}: {
+  invitationCode: string;
+  email: string;
+}) => {
+  try {
+    const response = await joinOrganization({
+      invitationCode,
+      email,
+    });
+
+    if (!response) {
+      throw new Error('Error joining organization');
+    }
+
+    revalidatePath('/studio');
+    return response;
+  } catch (error) {
+    console.error('Error in join organization action:', error);
+    throw error;
+  }
 };
 
 export const updateOrganizationAction = async ({
