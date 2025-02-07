@@ -46,6 +46,7 @@ ENV YOUTUBE_DL_SKIP_DOWNLOAD=true
 COPY --from=builder /app/package.json /app/yarn.lock ./
 COPY --from=builder /app/packages/server/package.json ./packages/server/
 COPY --from=builder /app/packages/server/dist ./packages/server/dist
+COPY --from=builder /app/templates ./templates
 
 # Install only production dependencies
 RUN yarn install --frozen-lockfile --production
