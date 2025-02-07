@@ -11,6 +11,7 @@ import {
 import { fetchOrganizationMembers } from '@/lib/services/organizationService';
 import AddTeamMembers from './components/AddTeamMembers';
 import DeleteTeamMember from './components/DeleteTeamMember';
+import CopyString from '@/components/misc/CopyString';
 import { truncateAddr } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +22,7 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table';
+import { Separator } from '@/components/ui/separator';
 
 const Settings = async ({
   params,
@@ -44,15 +46,22 @@ const Settings = async ({
   return (
     <div className="p-4 flex h-full w-full max-w-4xl">
       <Card className="w-full h-full rounded-r-xl border bg-white shadow-none md:p-0 flex flex-col">
-        <CardHeader className="flex flex-row justify-between">
-          <div className="flex flex-col gap-2">
-            <CardTitle>Team members</CardTitle>
-            <CardDescription className="mb-4 mt-2">
-              Invite your team members to collaborate.
-            </CardDescription>
-          </div>
-          <div className="flex justify-end p-4">
-            <AddTeamMembers organizationId={organization._id} />
+        <CardHeader>
+          <div className="flex flex-row justify-between items-center">
+            <div>
+              <CardTitle>Team members</CardTitle>
+              <CardDescription className="mt-2">
+                Invite your team members to collaborate.
+              </CardDescription>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium">Invite code:</span>
+              {organization.invitationCode && (
+                <div className="w-fit rounded-md border">
+                  <CopyString item={organization.invitationCode} itemName="invitation code" />
+                </div>
+              )}
+            </div>
           </div>
         </CardHeader>
         <CardContent className="p-0 md:p-0 lg:p-0 flex-1 overflow-auto">
@@ -70,7 +79,6 @@ const Settings = async ({
                   <TableRow key={_id}>
                     <TableCell>{email}</TableCell>
                     <TableCell>{role}</TableCell>
-
                     <TableCell>
                       <DeleteTeamMember
                         memberEmail={email as string}
