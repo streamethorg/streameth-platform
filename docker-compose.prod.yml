@@ -33,7 +33,7 @@ x-common-environment: &common-environment
   GOOGLE_CLIENT_ID_FILE: /run/secrets/google-client-id
   SERVICE_ACCOUNT_PRIVATE_KEY_FILE: /run/secrets/google-service-account-private-key
   SERVICE_ACCOUNT_EMAIL_FILE: /run/secrets/google-service-account-email
-  MAIL_HOST: smtp.ethereal.email
+  MAIL_HOST: smtp.resend.com
   MAIL_PORT: 587
   MAIL_USER_FILE: /run/secrets/mail-user
   MAIL_PASS_FILE: /run/secrets/mail-pass
