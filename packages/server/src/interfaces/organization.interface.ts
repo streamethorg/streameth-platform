@@ -26,6 +26,7 @@ export interface IOrganization {
   slug?: string;
   banner?: string;
   address?: string;
+  invitationCode?: string;
   socials?: ISocials[];
   // Payment related fields
   paymentStatus?: PaymentStatus;

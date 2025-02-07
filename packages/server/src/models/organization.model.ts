@@ -12,6 +12,7 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     location: { type: String, default: '' },
     accentColor: { type: String, default: '' },
     slug: { type: String, default: '', index: true },
+    invitationCode: { type: String, unique: true, sparse: true },
     socials: [
       {
         type: { type: String, default: '' },
