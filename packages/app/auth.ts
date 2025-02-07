@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			name: "Credentials",
 			credentials: {
 				email: { label: "Email", type: "email" },
-					token: { label: "Token", type: "text" },
+				token: { label: "Token", type: "text" },
 			},
 			async authorize(credentials) {
 				const response = await fetch(`${apiUrl()}/auth/login`, {
@@ -43,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				});
 
 				if (!response.ok) {
-					throw new Error("Login failed or token expired"); // Throw an error for failed login
+					throw new Error("Login failed or token expired");
 				}
 
 				const data = await response.json();
@@ -51,6 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				const userData = {
 					email: credentials.email as string,
 					token: data.data?.token,
+					did: data.data?.user?.did
 				};
 				return userData;
 			},
