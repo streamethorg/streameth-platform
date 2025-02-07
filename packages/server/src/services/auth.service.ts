@@ -134,8 +134,9 @@ export default class AuthService {
     const user = await this.userService.findOne({ email });
     const redirect = user ? '/studio' : '/studio/create';
     
+    const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl : config.frontendUrl;
     const htmlContent = replacePlaceHolders(emailTemplate, {
-      link: `${config.baseUrl}/auth/magic-link?token=${token}&email=${email}&redirect=${redirect}`,
+      link: `${baseUrl}/auth/magic-link?token=${token}&email=${email}&redirect=${redirect}`,
     });
     
     if (!user) {
