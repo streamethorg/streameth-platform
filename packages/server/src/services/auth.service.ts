@@ -116,7 +116,7 @@ export default class AuthService {
 
   async generateMagicLink(email: string): Promise<void> {
     const emailTemplate = fs.readFileSync(
-      path.join(process.cwd(), 'templates', 'login.html'),
+      path.join(__dirname, '../../../templates/login.html'),
       'utf8'
     );
     const token = jwt.sign(
