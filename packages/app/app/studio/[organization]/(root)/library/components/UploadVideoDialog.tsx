@@ -15,10 +15,11 @@ import Dropzone from './upload/Dropzone';
 import UploadVideoForm from './upload/UploadVideoForm';
 import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
-import FeatureButton from '@/components/ui/feature-button';
-import { useSubscription } from '@/lib/hooks/useSubscription';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { useUserContext } from '@/lib/context/UserContext';
+import FeatureButton from '@/components/ui/feature-button';
+import { FileUp } from 'lucide-react';
 
 type UploadStatus = {
   progress: number;
@@ -30,7 +31,9 @@ export type Uploads = {
   [uploadId: string]: UploadStatus;
 };
 
-const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
+const UploadVideoDialog = () => {
+  const { canUseFeatures, organizationId } = useUserContext();
+
   const [open, setOpen] = useState(false);
   const [onEdit, setOnEdit] = useState<string | null>(null);
   const [uploads, setUploads] = useState<Uploads>({});
@@ -38,15 +41,13 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
     uploadId: string;
     updatedSession: z.infer<typeof sessionSchema>;
   } | null>(null);
-
-  const { canUseFeatures, organizationSlug } = useSubscription(organizationId);
   const router = useRouter();
 
   const handleClick = (e: React.MouseEvent) => {
     if (!canUseFeatures) {
       e.preventDefault();
       e.stopPropagation();
-      router.push(`/studio/${organizationSlug}/payments`);
+      router.push(`/studio/${organizationId}/payments`);
       return;
     }
     setOpen(true);
@@ -110,6 +111,15 @@ const UploadVideoDialog = ({ organizationId }: { organizationId: string }) => {
         />
       </DialogContent>
     );
+
+  if (!canUseFeatures) {
+    return (
+      <FeatureButton variant="outline" className="flex items-center gap-2">
+        <FileUp className="w-5 h-5" />
+        Upload Video
+      </FeatureButton>
+    );
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

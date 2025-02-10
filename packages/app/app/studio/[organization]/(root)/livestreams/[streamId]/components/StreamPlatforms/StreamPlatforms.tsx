@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { SiX, SiYoutube } from 'react-icons/si';
 import { Radio } from 'lucide-react';
@@ -35,25 +36,17 @@ const Block = ({
 
 const StreamPlatformGrid = ({
   streamId,
-  organizationId,
   setIsOpen,
-  organization,
   stageId,
   streamTargets,
 }: {
-  streamId?: string;
-  organizationId?: string;
+  streamId: string;
   setIsOpen: (open: boolean) => void;
-  organization: IExtendedOrganization;
   stageId: string;
   streamTargets: TargetOutput[];
 }) => {
   const [SelectedComponent, setSelectedComponent] =
     useState<JSX.Element | null>(null);
-
-  if (!streamId || !organizationId) {
-    return NotFound();
-  }
 
   const StreamTarget: StreamTargetItem[] = [
     {
@@ -62,7 +55,6 @@ const StreamPlatformGrid = ({
       onClick: () => (
         <CreateYoutubeStream
           stageId={stageId}
-          organization={organization}
           setIsOpen={setIsOpen}
           streamTargets={streamTargets}
         />
@@ -74,7 +66,6 @@ const StreamPlatformGrid = ({
       onClick: () => (
         <CreateCustomStream
           streamId={streamId}
-          organizationId={organizationId}
           setIsOpen={setIsOpen}
         />
       ),

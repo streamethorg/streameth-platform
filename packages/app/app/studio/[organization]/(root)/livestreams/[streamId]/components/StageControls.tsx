@@ -11,14 +11,10 @@ import EditLivestream from '../../components/EditLivestream';
 import ShareAndEmbed from './ShareAndEmbed';
 import StreamConfigWithPlayer from './StreamConfigWithPlayer';
 import StreamHealth from './StreamHealth';
+import { useUserContext } from '@/lib/context/UserContext';
 
-const StageControls = ({
-  organization,
-  stream,
-}: {
-  organization: IExtendedOrganization;
-  stream: IExtendedStage;
-}) => {
+const StageControls = ({ stream }: { stream: IExtendedStage }) => {
+  const { organizationId } = useUserContext();
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
 
@@ -56,18 +52,16 @@ const StageControls = ({
           <div className="ml-auto justify-self-end flex flex-row gap-2">
             <EditLivestream
               stage={stream}
-              organizationSlug={organization.slug!}
               variant="outline"
               btnText="Edit"
             />
             <ShareAndEmbed
-              organizationSlug={organization.slug as string}
               streamId={stream._id as string}
               playerName={stream?.name}
             />
 
             <Link
-              href={`/${organization.slug as string}/livestream?stage=${
+              href={`/studio/${organizationId}/livestream?stage=${
                 stream._id
               }`}
               target="_blank"
@@ -80,9 +74,7 @@ const StageControls = ({
 
             {isLive ? (
               <Link
-                href={`/studio/${organization.slug as string}/clips/${
-                  stream._id
-                }?videoType=livestream`}
+                href={`/studio/${organizationId}/clips/${stream._id}?videoType=livestream`}
                 target="_blank"
               >
                 <Button variant="primary" className="flex gap-1 items-center">

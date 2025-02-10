@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   DropdownMenu,
@@ -7,13 +8,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { IExtendedOrganization } from '@/lib/types';
-import { fetchOrganization } from '@/lib/services/organizationService';
 import Link from 'next/link';
 import { LayoutDashboard, Home, Users, LogOut } from 'lucide-react';
 import { useUserContext } from '@/lib/context/UserContext';
 
-const UserProfile = async ({}) => {
+const UserProfile = () => {
   const { organization, user, organizationId } = useUserContext();
   const organizations = user?.organizations || [];
   return (

@@ -6,15 +6,12 @@ import SearchBar from '@/components/misc/SearchBar';
 import Link from 'next/link';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
 import { Menu, X } from 'lucide-react';
-import Navbar from './Navbar';
 import { Search } from 'lucide-react';
 import { Page } from '@/lib/types';
-import SwitchOrganization from './SwitchOrganization';
 import { IExtendedOrganization } from '@/lib/types';
 import { cn } from '@/lib/utils/utils';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
-import { useAccount } from 'wagmi';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import UserProfile from '@/components/misc/UserProfile';
@@ -100,11 +97,7 @@ const MobileNavBar = ({
 
       {searchVisible && showSearchBar && (
         <div className="absolute w-full bottom-[-56px] bg-secondary">
-          <SearchBar
-            organizationSlug={currentOrganization}
-            organizationId={currentOrganization}
-            isMobile={true}
-          />
+          <SearchBar isMobile={true} />
         </div>
       )}
       <div
@@ -212,18 +205,11 @@ const PCNavBar = ({
         )}
       </div>
       <div className="flex justify-center items-center mx-auto w-full max-w-md">
-        <SearchBar
-          searchVisible={showSearchBar}
-          organizationSlug={currentOrganization}
-          organizationId={currentOrganization}
-        />
+        <SearchBar searchVisible={showSearchBar} />
       </div>
       <div className="flex flex-1 justify-end items-center">
         {organizations ? (
-          <UserProfile
-            organization={currentOrganization}
-            organizations={organizations}
-          />
+          <UserProfile />
         ) : (
           <Button variant="primary">
             <Link href={`/studio/login`}>Login</Link>

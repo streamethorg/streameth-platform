@@ -37,16 +37,16 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
-import { useSubscription } from '@/lib/hooks/useSubscription';
+import { useUserContext } from '@/lib/context/UserContext';
+import { Radio } from 'lucide-react';
+import FeatureButton from '@/components/ui/feature-button';
 
 const CreateLivestreamModal = ({
-  organization,
   show,
   variant = 'outline',
   className,
 }: {
   show?: boolean;
-  organization: IExtendedOrganization;
   variant?: 'outline' | 'ghost' | 'primary' | 'default';
   className?: string;
 }) => {
@@ -57,9 +57,7 @@ const CreateLivestreamModal = ({
     'instant' | 'schedule' | undefined
   >();
   const router = useRouter();
-  const { canUseFeatures, organizationSlug } = useSubscription(
-    organization._id.toString()
-  );
+  const { canUseFeatures, subscriptionStatus, organization } = useUserContext();
 
   const handleClick = (e: React.MouseEvent) => {
     setOpen(true);
@@ -134,6 +132,19 @@ const CreateLivestreamModal = ({
         setIsLoading(false);
         handleModalClose();
       });
+  }
+
+  if (!canUseFeatures && !subscriptionStatus.hasAvailableStages) {
+    return (
+      <FeatureButton
+        variant="primary"
+        className="flex items-center gap-2"
+        forceLockedState={true}
+      >
+        <Radio className="w-5 h-5" />
+        Create Livestream
+      </FeatureButton>
+    );
   }
 
   return (

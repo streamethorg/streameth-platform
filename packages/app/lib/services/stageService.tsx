@@ -110,7 +110,7 @@ export async function fetchOrganizationStages({
   fromDate,
   untilDate,
 }: {
-  organizationId?: string;
+  organizationId: string;
   fromDate?: string;
   untilDate?: string;
 }): Promise<IExtendedStage[]> {

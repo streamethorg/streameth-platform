@@ -70,12 +70,12 @@ export const createMultistreamAction = async (
   const organizationId = formData.get('organizationId') as string;
 
   try {
+    console.log('createMultistreamAction', streamId, name, url, streamKey, organizationId);
     const response = await createMultistream({
       streamId,
       name,
       targetURL: url,
       targetStreamKey: streamKey,
-
       organizationId,
     });
     revalidatePath('/studio');

@@ -9,6 +9,7 @@ import { ReloadIcon } from '@radix-ui/react-icons';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { useUserContext } from '@/lib/context/UserContext';
 
 const initialState = {
   message: '',
@@ -35,15 +36,14 @@ function SubmitButton() {
 
 const CreateCustomStream = ({
   streamId,
-  organizationId,
   btnName = 'Add',
   setIsOpen,
 }: {
   streamId: string;
-  organizationId: string;
   btnName?: string;
   setIsOpen: (open: boolean) => void;
 }) => {
+  const { organizationId } = useUserContext();
   const [state, formAction] = useFormState(
     createMultistreamAction,
     initialState

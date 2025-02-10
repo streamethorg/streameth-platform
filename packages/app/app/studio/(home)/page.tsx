@@ -17,7 +17,7 @@ const Studio = async () => {
   }
 
   if (userData?.organizations?.length === 1) {
-    redirect(`/studio/${userData.organizations[0].slug}`);
+    redirect(`/studio/${userData.organizations[0]._id}`);
   }
 
   return (
@@ -35,7 +35,7 @@ const Studio = async () => {
               {userData?.organizations?.map((organization) => (
                 <Link
                   key={organization._id}
-                  href={`/studio/${organization.slug}`}
+                  href={`/studio/${organization._id}`}
                 >
                   <Card className="flex h-full flex-row overflow-hidden rounded-xl border border-secondary shadow-none">
                     <CardHeader className="relative p-3 lg:p-3">

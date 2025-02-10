@@ -11,12 +11,10 @@ import { Card } from '@/components/ui/card';
 
 const Sidebar = ({
   stage,
-  sessions,
-  organization,
+  // sessions,
 }: {
   stage: IExtendedStage;
-  sessions: IExtendedSession[];
-  organization: IExtendedOrganization;
+  // sessions: IExtendedSession[];
 }) => {
   return (
     <Card className="md:shadow-none w-full flex flex-col h-[calc(100vh-12rem)] mb-4 overflow-hidden">
@@ -37,7 +35,7 @@ const Sidebar = ({
         </TabsContent> */}
         <TabsContent className="flex-grow overflow-hidden" value="destinations">
           <div className="h-full overflow-y-auto">
-            <Destinations stream={stage} organization={organization} />
+            <Destinations stream={stage} />
           </div>
         </TabsContent>
       </Tabs>

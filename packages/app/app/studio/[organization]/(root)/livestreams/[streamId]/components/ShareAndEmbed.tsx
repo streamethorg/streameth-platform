@@ -24,26 +24,26 @@ import {
 } from 'react-share';
 import { copyToClipboard, generateEmbedCode } from '@/lib/utils/utils';
 import { Input } from '@/components/ui/input';
+import { useUserContext } from '@/lib/context/UserContext';
 
-interface ShareAndEmbedProps {
-  url?: string;
-  organizationSlug: string;
-  streamId: string;
-  playerName: string;
-}
 
-const ShareAndEmbed: React.FC<ShareAndEmbedProps> = ({
-  organizationSlug,
+const ShareAndEmbed = ({
+  url,
   streamId,
   playerName,
+}: {
+  url?: string;
+  streamId: string;
+  playerName: string;
 }) => {
+  const { organizationId } = useUserContext();
   const [open, setOpen] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
   const [embedCode, setEmbedCode] = useState('');
 
   useEffect(() => {
     setCurrentUrl(
-      `${window.location.origin}/${organizationSlug}/livestream?stage=${streamId}`
+      `${window.location.origin}/studio/${organizationId}/livestream?stage=${streamId}`
     );
     setEmbedCode(
       generateEmbedCode({
@@ -52,7 +52,7 @@ const ShareAndEmbed: React.FC<ShareAndEmbedProps> = ({
         playerName: playerName,
       })
     );
-  }, [streamId, playerName, organizationSlug]);
+  }, [streamId, playerName, organizationId]);
 
   const shareText = `Check out this livestream on @streameth!`;
 
