@@ -45,6 +45,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     {}
   );
 
+  console.log(props.stageId);
   const handleEditClick = (uploadId: string) => {
     setOnEdit?.(uploadId);
     setOpen?.(true);
@@ -86,17 +87,17 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
           stageId: props.stageId ?? '',
         },
       })
-        .then(async (session) => {
-          props.onChange?.(session._id);
-          await createStateAction({
-            state: {
-              sessionId: session._id,
-              type: StateType.video,
-              sessionSlug: session.slug,
-              organizationId: session.organizationId,
-            },
-          });
-        })
+        // .then(async (session) => {
+        //   props.onChange?.(session._id);
+        //   await createStateAction({
+        //     state: {
+        //       sessionId: session._id,
+        //       type: StateType.video,
+        //       sessionSlug: session.slug,
+        //       organizationId: session.organizationId,
+        //     },
+        //   });
+        // })
         .catch((e) => {
           console.log(e);
           toast.error('Error creating Session');
@@ -349,7 +350,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
             <FileUp size={35} />
             <input {...getInputProps()} />
             <div className="mx-4 text-xs">
-              {/* <p>Drag and drop videos to upload... Or just click here!</p> */}
               <p>
                 Maximum video file size is{' '}
                 {`${

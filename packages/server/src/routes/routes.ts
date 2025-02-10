@@ -86,6 +86,7 @@ const models: TsoaRoute.Models = {
             "slug": {"dataType":"string"},
             "banner": {"dataType":"string"},
             "address": {"dataType":"string"},
+            "invitationCode": {"dataType":"string"},
             "socials": {"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},
             "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
@@ -941,7 +942,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"invitationCode":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -959,6 +960,7 @@ const models: TsoaRoute.Models = {
             "accentColor": {"dataType":"string"},
             "banner": {"dataType":"string"},
             "address": {"dataType":"string","required":true},
+            "invitationCode": {"dataType":"string"},
             "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
             "streamingDays": {"dataType":"double"},
@@ -2989,6 +2991,37 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                 next,
                 validatedArgs,
                 successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/organizations/join',
+            authenticateMiddleware([{"jwt":[]}]),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.joinOrganization)),
+
+            async function OrganizationController_joinOrganization(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"email":{"dataType":"string","required":true},"invitationCode":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new OrganizationController();
+
+              await templateService.apiHandler({
+                methodName: 'joinOrganization',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);

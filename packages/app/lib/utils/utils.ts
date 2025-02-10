@@ -107,11 +107,11 @@ export const apiUrl = () => {
 };
 
 export const archivePath = ({
-  organizationSlug,
+  organizationId,
   event,
   searchQuery,
 }: {
-  organizationSlug: IOrganizationModel['slug'];
+  organizationId: IOrganizationModel['_id'];
   event?: IEventModel['slug'];
   searchQuery?: string;
 }) => {
@@ -147,8 +147,8 @@ export const archivePath = ({
     params.append('searchQuery', searchQuery);
   }
 
-  return organizationSlug
-    ? `/${organizationSlug}/videos?${params.toString()}`
+  return organizationId
+    ? `/${organizationId}/videos?${params.toString()}`
     : `/explore?${params.toString()}`;
 };
 

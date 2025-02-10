@@ -96,6 +96,9 @@
 					"address": {
 						"type": "string"
 					},
+					"invitationCode": {
+						"type": "string"
+					},
 					"socials": {
 						"items": {
 							"$ref": "#/components/schemas/ISocials"
@@ -3239,6 +3242,9 @@
 					"address": {
 						"type": "string"
 					},
+					"invitationCode": {
+						"type": "string"
+					},
 					"paymentStatus": {
 						"$ref": "#/components/schemas/PaymentStatus"
 					},
@@ -3326,6 +3332,9 @@
 						"type": "string"
 					},
 					"address": {
+						"type": "string"
+					},
+					"invitationCode": {
 						"type": "string"
 					},
 					"paymentStatus": {
@@ -6840,6 +6849,55 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/organizations/join": {
+			"post": {
+				"operationId": "JoinOrganization",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IOrganization_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Join organization with invitation code",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"email": {
+										"type": "string"
+									},
+									"invitationCode": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"email",
+									"invitationCode"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/organizations/{organizationId}": {

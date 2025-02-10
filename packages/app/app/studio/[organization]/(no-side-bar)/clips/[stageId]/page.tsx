@@ -43,6 +43,7 @@ const fetchVideoDetails = async (
 
     case 'recording': {
       const session = await fetchSession({ session: sessionId! });
+      console.log('session', session);
       if (!session?.playbackId || !session?.assetId) return null;
       // const stage = await fetchStage({ stage: session.stageId as string });
       // if (!stage?.streamSettings?.playbackId) return null;
@@ -58,17 +59,17 @@ const fetchVideoDetails = async (
       };
     }
 
-    case 'customUrl': {
-      const stage = await fetchStage({ stage: stageId });
-      if (!stage?.source?.m3u8Url) return null;
+    // case 'customUrl': {
+    //   const stage = await fetchStage({ stage: stageId });
+    //   if (!stage?.source?.m3u8Url) return null;
 
-      return {
-        videoSrc: stage.source.m3u8Url,
-        type: stage.source.type,
-        name: stage.name,
-        transcribe: stage.transcripts?.chunks,
-      };
-    }
+    //   return {
+    //     videoSrc: stage.source.m3u8Url,
+    //     type: stage.source.type,
+    //     name: stage.name,
+    //     transcribe: stage.transcripts?.chunks,
+    //   };
+    // }
 
     default:
       return null;

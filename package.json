@@ -16,7 +16,7 @@
 		"build:app": "yarn workspace @streameth/streameth-app build",
 		"start:app": "yarn workspace @streameth/streameth-app start",
 
-		"dev:server": "yarn workspace streameth-new-server dev:server",
+		"dev:server": "docker compose --env-file .env -f docker-compose-dev.yml up",
 		"build:server": "yarn workspace streameth-new-server build",
 		"start:server": "yarn workspace streameth-new-server start:server",
 

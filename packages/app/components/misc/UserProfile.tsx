@@ -11,40 +11,29 @@ import { IExtendedOrganization } from '@/lib/types';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import Link from 'next/link';
 import { LayoutDashboard, Home, Users, LogOut } from 'lucide-react';
+import { useUserContext } from '@/lib/context/UserContext';
 
-const UserProfile = async ({
-  organization,
-  organizations,
-}: {
-  organization: string;
-  organizations: IExtendedOrganization[];
-}) => {
-  const data = await fetchOrganization({
-    organizationSlug: organization,
-  });
-
-  if (!data) {
-    return null;
-  }
-
+const UserProfile = async ({}) => {
+  const { organization, user, organizationId } = useUserContext();
+  const organizations = user?.organizations || [];
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="flex items-center space-x-2">
           <Image
-            src={data?.logo}
+            src={organization?.logo}
             alt="Organization Logo"
             width={24}
             height={24}
             className="rounded-full"
           />
-          <span className="text-sm font-medium">{data.name}</span>
+          <span className="text-sm font-medium">{organization.name}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>
           <Link
-            href={`/studio/${data.slug}`}
+            href={`/studio/${organizationId}`}
             className="flex items-center w-full"
           >
             <Button
@@ -57,7 +46,10 @@ const UserProfile = async ({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href={`/${organization}`} className="flex items-center w-full">
+          <Link
+            href={`/${organizationId}`}
+            className="flex items-center w-full"
+          >
             <Button
               className="hidden lg:flex items-center space-x-2"
               variant={'link'}

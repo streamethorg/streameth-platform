@@ -41,7 +41,8 @@ export default class SessionService {
     let eventSlug = '';
     let stageId = '';
     if (data.stageId == undefined || data.stageId.toString().length === 0) {
-      stageId = new Types.ObjectId().toString();
+      // stageId = new Types.ObjectId().toString();
+      stageId = null;
     } else {
       let stage = await Stage.findById(data.stageId);
       stageId = stage._id;

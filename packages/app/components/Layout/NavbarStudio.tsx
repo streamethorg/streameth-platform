@@ -1,35 +1,23 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import SearchBar from '@/components/misc/SearchBar';
 import { NavigationMenu } from '@/components/ui/navigation-menu';
-import { IExtendedOrganization } from '@/lib/types';
 import UserProfile from '@/components/misc/UserProfile';
 import CreateLivestreamModal from '@/app/studio/[organization]/(root)/livestreams/components/CreateLivestreamModal';
 import UploadVideoDialog from '@/app/studio/[organization]/(root)/library/components/UploadVideoDialog';
 import FeatureButton from '../ui/feature-button';
 import { Radio, FileUp } from 'lucide-react';
 import { isFeatureAvailable } from '@/lib/utils/utils';
-import { notFound } from 'next/navigation';
+import { useUserContext } from '@/lib/context/UserContext';
 
 const NavbarStudio = ({
   showSearchBar = true,
-  organizations,
-  currentOrganization,
 }: {
-  logo?: string;
-  showLogo?: boolean;
   showSearchBar?: boolean;
-  organizations?: IExtendedOrganization[];
-  currentOrganization?: string;
 }) => {
-  const organization = organizations?.find(
-    (org) => org?.slug?.toString() === currentOrganization
-  );
-
-  if (!organization) {
-    return notFound();
-  }
-
+  const { organization } = useUserContext();
   const hasValidSubscription = isFeatureAvailable(organization.expirationDate);
   const hasReachedStageLimit = (organization.currentStages ?? 0) >= (organization.paidStages ?? 0);
 
@@ -45,8 +33,6 @@ const NavbarStudio = ({
       <div className="flex flex-grow justify-center items-center">
         <SearchBar
           searchVisible={showSearchBar}
-          organizationId={organization._id.toString()}
-          organizationSlug={organization?.slug ?? ''}
           isStudio={true}
         />
       </div>
@@ -90,12 +76,7 @@ const NavbarStudio = ({
             Upload Video
           </FeatureButton>
         )}
-        {organizations && (
-          <UserProfile
-            organization={organization._id}
-            organizations={organizations}
-          />
-        )}
+        <UserProfile />
       </div>
     </NavigationMenu>
   );

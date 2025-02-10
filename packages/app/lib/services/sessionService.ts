@@ -107,7 +107,6 @@ export const createSession = async ({
       body: JSON.stringify(session),
     });
 
-    console.log('response', response);
     if (!response.ok) {
       throw 'Error creating session';
     }
