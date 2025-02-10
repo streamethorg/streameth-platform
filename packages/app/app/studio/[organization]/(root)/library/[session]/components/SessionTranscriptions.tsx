@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 import { generateTranscriptionActions } from '@/lib/actions/sessions';
+import { useUserContext } from '@/lib/context/UserContext';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { LuLoader2, LuRefreshCcw } from 'react-icons/lu';
@@ -10,15 +11,14 @@ import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.i
 
 const SessionTranscriptions = ({
   videoTranscription,
-  organizationId,
   sessionId,
   transcriptionState,
 }: {
   videoTranscription?: string;
   sessionId: string;
-  organizationId: string;
   transcriptionState: TranscriptionStatus | null;
 }) => {
+  const { organizationId } = useUserContext();
   const router = useRouter();
   const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
 

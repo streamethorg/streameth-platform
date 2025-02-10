@@ -24,7 +24,6 @@ export async function fetchUserData(): Promise<IExtendedUser | null> {
   try {
     const user = await fetchUser();
     const data = await fetchClient(`${apiUrl()}/users/${user?.email}`, {
-      cache: 'no-cache',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -16,14 +16,10 @@ import Link from 'next/link';
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 import { ShareModalContent } from '@/components/misc/interact/ShareButton';
 import VisibilityButton from './VisibilityButton';
+import { useUserContext } from '@/lib/context/UserContext';
 
-const DropdownActions = ({
-  session,
-  organizationSlug,
-}: {
-  session: IExtendedSession;
-  organizationSlug: string;
-}) => {
+const DropdownActions = ({ session }: { session: IExtendedSession }) => {
+  const { organizationId } = useUserContext();
   const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side
@@ -31,7 +27,7 @@ const DropdownActions = ({
     setUrl(
       `${
         window?.location?.origin
-      }/${organizationSlug}/watch?session=${session._id.toString()}`
+      }/${organizationId}/watch?session=${session._id.toString()}`
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -46,7 +42,7 @@ const DropdownActions = ({
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Link
-              href={`/${organizationSlug}/watch?session=${
+              href={`/${organizationId}/watch?session=${
                 session._id as string
               }`}
             >

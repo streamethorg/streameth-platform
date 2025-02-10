@@ -7,7 +7,6 @@ import {
   IExtendedSession,
   eLayout,
   eSort,
-  IExtendedOrganization,
 } from '@/lib/types';
 
 import { sortArray } from '@/lib/utils/utils';
@@ -26,7 +25,6 @@ import TableSort from '@/components/misc/TableSort';
 const Library = async ({
   params,
   searchParams,
-  organization,
 }: {
   params: { organization: string };
   searchParams: {
@@ -43,10 +41,9 @@ const Library = async ({
     itemDate?: string;
     clipable?: boolean;
   };
-  organization: IExtendedOrganization;
 }) => {
   let sessions = await fetchAllSessions({
-    organizationId: organization._id.toString(),
+    organizationId: params.organization,
     limit: searchParams.limit || 20,
     page: searchParams.page || 1,
     searchQuery: searchParams.searchQuery,
@@ -67,7 +64,7 @@ const Library = async ({
   return (
     <>
       {!sortedSessions || sortedSessions.length === 0 ? (
-        <EmptyLibrary organizationId={organization._id.toString()} />
+        <EmptyLibrary />
       ) : (
         <Table className="bg-white">
           <TableHeader className="sticky top-0 z-10 bg-white">
@@ -91,7 +88,7 @@ const Library = async ({
                   fallback={<TableCellsSkeleton />}
                   key={JSON.stringify(searchParams)}
                 >
-                  <TableCells item={item} organization={params.organization} />
+                  <TableCells item={item} />
                 </Suspense>
               </TableRow>
             ))}
@@ -143,5 +140,29 @@ const TableCellsSkeleton = () => {
         </div>
       </TableCell>
     </>
+  );
+};
+
+export const TableSkeleton = () => {
+  return (
+    <Table className="bg-white">
+      <TableHeader className="sticky top-0 z-10 bg-white">
+        <TableRow className="hover:bg-white">
+          <TableHead>Title</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Duration</TableHead>
+          <TableHead>Created at</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody className="overflow-auto">
+        {[...Array(5)].map((_, index) => (
+          <TableRow key={index}>
+            <TableCellsSkeleton />
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };

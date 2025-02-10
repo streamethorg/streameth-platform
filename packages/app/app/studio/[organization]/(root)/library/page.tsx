@@ -3,11 +3,9 @@
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { eLayout, eSort } from '@/lib/types';
-import Library from './components/Library';
+import Library, { TableSkeleton } from './components/Library';
 import LibraryFilter from './components/LibraryFilter';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
-import { fetchOrganization } from '@/lib/services/organizationService';
-import NotFound from '@/not-found';
 
 const LibraryPage = async ({
   params,
@@ -16,14 +14,6 @@ const LibraryPage = async ({
   params: { organization: string };
   searchParams: { layout: eLayout; sort: eSort; show: boolean };
 }) => {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
-
-  if (!organization) {
-    return NotFound();
-  }
-
   if (
     !searchParams.layout ||
     (searchParams.layout !== eLayout.grid &&
@@ -40,15 +30,19 @@ const LibraryPage = async ({
         <h2 className="mb-2 text-lg font-bold">Video library</h2>
         <div className="flex justify-between">
           <div className="flex items-center">
-            <Filters organizationId={organization._id.toString()} />
+            <Suspense
+              fallback={
+                <div className="w-full h-full bg-gray-100 animate-pulse" />
+              }
+            >
+              <Filters organizationId={params.organization} />
+            </Suspense>
           </div>
         </div>
       </div>
-      <Library
-        params={params}
-        searchParams={searchParams}
-        organization={organization}
-      />
+      <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
+        <Library params={params} searchParams={searchParams} />
+      </Suspense>
     </div>
   );
 };
@@ -58,13 +52,7 @@ const Filters = async ({ organizationId }: { organizationId: string }) => {
     organizationId: organizationId,
   });
 
-  return (
-    <Suspense
-      fallback={<div className="w-full h-full bg-gray-100 animate-pulse" />}
-    >
-      <LibraryFilter stages={stages} />
-    </Suspense>
-  );
+  return <LibraryFilter stages={stages} />;
 };
 
 export default LibraryPage;

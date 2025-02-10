@@ -1,7 +1,6 @@
 import { apiUrl } from '@/lib/utils/utils';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
 import { IExtendedOrganization, IExtendedUser } from '../types';
-import { cookies } from 'next/headers';
 import { fetchClient } from './fetch-client';
 
 export async function fetchOrganization({
@@ -20,7 +19,7 @@ export async function fetchOrganization({
         organizationId ? organizationId : organizationSlug
       }`,
       {
-        cache: 'no-cache',
+        // cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
         },

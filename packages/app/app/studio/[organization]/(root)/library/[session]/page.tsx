@@ -1,6 +1,6 @@
 'use server';
 
-import { IExtendedState, studioPageParams } from '@/lib/types';
+import { studioPageParams } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
 import { PlayerWithControls } from '@/components/ui/Player';
 import { notFound } from 'next/navigation';
@@ -12,24 +12,19 @@ import { Label } from '@/components/ui/label';
 import GetHashButton from '../components/GetHashButton';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 
-import UploadToYoutubeButton from './components/UploadToYoutubeButton';
-import { fetchOrganization } from '@/lib/services/organizationService';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
-import UploadTwitterButton from './components/UploadTwitterButton';
 import SessionTranscriptions from './components/SessionTranscriptions';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 import { IExtendedSession } from '@/lib/types';
 
-const EditSession = async ({ params, searchParams }: studioPageParams) => {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
+const EditSession = async ({ params }: studioPageParams) => {
+  if (!params.session) return notFound();
   const session = await fetchSession({
     session: params.session,
   });
 
-  if (!session?.playbackId || !organization) return notFound();
+  if (!session?.playbackId) throw new Error('Session has no playbackId');
 
   return (
     <div className="flex flex-col h-full w-full overflow-hidden p-4 bg-white max-w-screen-xl">
@@ -86,7 +81,6 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
               <Suspense fallback={<TranscriptSkeleton />}>
                 <SessionTranscriptions
                   videoTranscription={session.transcripts?.text}
-                  organizationId={organization._id}
                   sessionId={session._id}
                   transcriptionState={session.transcripts?.status ?? null}
                 />
