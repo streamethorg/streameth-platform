@@ -9,11 +9,7 @@ import {
   CardContent,
 } from '@/components/ui/card';
 import { fetchOrganizationMembers } from '@/lib/services/organizationService';
-import AddTeamMembers from './components/AddTeamMembers';
 import DeleteTeamMember from './components/DeleteTeamMember';
-import CopyString from '@/components/misc/CopyString';
-import { truncateAddr } from '@/lib/utils/utils';
-import { Button } from '@/components/ui/button';
 import {
   Table,
   TableHead,
@@ -22,25 +18,11 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table';
-import { Separator } from '@/components/ui/separator';
+import InviteCode from './components/InviteCode';
 
-const Settings = async ({
-  params,
-  searchParams,
-}: {
-  params: studioPageParams['params'];
-  searchParams: {
-    settingsActiveTab?: string;
-  };
-}) => {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
-
-  if (!organization) return null;
-
+const Settings = async ({ params }: { params: studioPageParams['params'] }) => {
   const members = await fetchOrganizationMembers({
-    organizationId: organization._id,
+    organizationId: params.organization,
   });
 
   return (
@@ -54,14 +36,7 @@ const Settings = async ({
                 Invite your team members to collaborate.
               </CardDescription>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">Invite code:</span>
-              {organization.invitationCode && (
-                <div className="w-fit rounded-md border">
-                  <CopyString item={organization.invitationCode} itemName="invitation code" />
-                </div>
-              )}
-            </div>
+            <InviteCode />
           </div>
         </CardHeader>
         <CardContent className="p-0 md:p-0 lg:p-0 flex-1 overflow-auto">
@@ -80,10 +55,7 @@ const Settings = async ({
                     <TableCell>{email}</TableCell>
                     <TableCell>{role}</TableCell>
                     <TableCell>
-                      <DeleteTeamMember
-                        memberEmail={email as string}
-                        organizationId={organization._id}
-                      />
+                      <DeleteTeamMember memberEmail={email as string} />
                     </TableCell>
                   </TableRow>
                 ))}

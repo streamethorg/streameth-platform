@@ -30,11 +30,11 @@ const SidebarMenu = ({
       url: `/studio/${organizationId}/library`,
       icon: <LuVideotape size={25} />,
     },
-    {
-      text: 'Destinations',
-      url: `/studio/${organizationId}/destinations`,
-      icon: <LuShare2 size={25} />,
-    },
+    // {
+    //   text: 'Destinations',
+    //   url: `/studio/${organizationId}/destinations`,
+    //   icon: <LuShare2 size={25} />,
+    // },
     {
       text: 'Team',
       url: `/studio/${organizationId}/team`,

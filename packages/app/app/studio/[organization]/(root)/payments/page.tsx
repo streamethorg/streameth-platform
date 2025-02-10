@@ -11,18 +11,14 @@ import { ExpiredSubscriptionCard } from './components/ExpiredSubscriptionCard';
 import { PricingTiers } from './components/PricingTiers';
 import { AddResourcesCard } from './components/AddResourcesCard';
 import { AlertCircle } from 'lucide-react';
+import { useUserContext } from '@/lib/context/UserContext';
 
 export default function PaymentsPage() {
-  const params = useParams();
+  const { organization, organizationId } = useUserContext();
   const [loading, setLoading] = useState(false);
   const [streamingDays, setStreamingDays] = useState(1);
   const [numberOfStages, setNumberOfStages] = useState(1);
-  const organizationId = params.organization;
-  const {
-    organization,
-    loading: orgLoading,
-    error: orgError,
-  } = useOrganization(organizationId as string);
+
 
   const calculateTotalPrice = (days: number, stages: number) => {
     // If both are zero, return 0
@@ -80,27 +76,24 @@ export default function PaymentsPage() {
     }
   };
 
-  if (orgLoading) {
-    return <LoadingState />;
-  }
 
-  if (orgError || !organization) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <PricingTiers
-          streamingDays={streamingDays}
-          numberOfStages={numberOfStages}
-          loading={loading}
-          totalPrice={calculateTotalPrice(streamingDays, numberOfStages)}
-          onIncrementDays={() => handleCounter('days', 'increment')}
-          onDecrementDays={() => handleCounter('days', 'decrement')}
-          onIncrementStages={() => handleCounter('stages', 'increment')}
-          onDecrementStages={() => handleCounter('stages', 'decrement')}
-          onSubscribe={handleSubscribe}
-        />
-      </div>
-    );
-  }
+  // if (orgError || !organization) {
+  //   return (
+  //     <div className="container mx-auto px-4 py-8">
+  //       <PricingTiers
+  //         streamingDays={streamingDays}
+  //         numberOfStages={numberOfStages}
+  //         loading={loading}
+  //         totalPrice={calculateTotalPrice(streamingDays, numberOfStages)}
+  //         onIncrementDays={() => handleCounter('days', 'increment')}
+  //         onDecrementDays={() => handleCounter('days', 'decrement')}
+  //         onIncrementStages={() => handleCounter('stages', 'increment')}
+  //         onDecrementStages={() => handleCounter('stages', 'decrement')}
+  //         onSubscribe={handleSubscribe}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   // Check if organization has ever had a subscription
   const hasHadSubscription = organization.paymentStatus !== 'none' || organization.expirationDate;
