@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { useClipContext } from './ClipContext';
+import { useClipPageContext } from './ClipPageContext';
 import usePlayer from '@/lib/hooks/usePlayer';
 
 export interface HlsPlayerProps {
@@ -17,7 +17,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     setHls,
     playbackStatus,
     setPlaybackStatus,
-  } = useClipContext();
+  } = useClipPageContext();
 
   const { currentTime } = usePlayer(videoRef);
   const playbackRef = useRef({ progress: 0, offset: 0 });

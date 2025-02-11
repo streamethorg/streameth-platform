@@ -9,7 +9,7 @@ import { ReloadIcon } from '@radix-ui/react-icons';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const initialState = {
   message: '',
@@ -43,7 +43,7 @@ const CreateCustomStream = ({
   btnName?: string;
   setIsOpen: (open: boolean) => void;
 }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const [state, formAction] = useFormState(
     createMultistreamAction,
     initialState

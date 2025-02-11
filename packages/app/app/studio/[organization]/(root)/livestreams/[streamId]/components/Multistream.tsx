@@ -12,11 +12,11 @@ import {
 import DeleteMultistream from './DeleteMultistream';
 import { CreateMultistreamTarget } from './StreamPlatforms/CreateMultistreamTarget';
 import { IExtendedStage } from '@/lib/types';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 // Internal components
 const TargetName = ({ socialId }: { socialId: string }) => {
-  const { organization } = useUserContext();
+  const { organization } = useOrganizationContext();
   const target = organization?.socials?.find((s) => s._id === socialId);
 
   if (!target) return null;

@@ -17,26 +17,25 @@ import { IExtendedSession } from '@/lib/types';
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 import Link from 'next/link';
 import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 const Preview = ({
   isOpen,
-  organizationId,
   session,
   setIsOpen,
 }: {
   isOpen: boolean;
-  organizationId: string;
   session: IExtendedSession;
   setIsOpen: (isOpen: boolean) => void;
 }) => {
-  const [shareUrl, setShareUrl] = useState('');
-  const params = useParams();
-  const organizationSlug = params?.organization as string;
+  const { organizationId } = useOrganizationContext();
   const { fetchSessions } = useClipsSidebar();
+  const [shareUrl, setShareUrl] = useState('');
+
   useEffect(() => {
     setShareUrl(
-      `${window.location.origin}/${organizationSlug}/watch?session=${session._id}`
+      `${window.location.origin}/${organizationId}/watch?session=${session._id}`
     );
-  }, [organizationSlug, session._id]);
+  }, [organizationId, session._id]);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -94,7 +93,7 @@ const Preview = ({
               collapsable={true}
             />
             <Link
-              href={`/studio/${organizationSlug}/library/${session._id}`}
+              href={`/studio/${organizationId}/library/${session._id}`}
               target="_blank"
               rel="noopener noreferrer"
             >

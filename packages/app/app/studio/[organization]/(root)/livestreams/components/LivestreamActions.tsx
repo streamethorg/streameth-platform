@@ -8,10 +8,10 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ScissorsIcon } from 'lucide-react';
 import FeatureButton from '@/components/ui/feature-button';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const LivestreamActions = ({ stream }: { stream: IExtendedStage }) => {
-  const { stagesStatus, organizationId } = useUserContext();
+  const { stagesStatus, organizationId } = useOrganizationContext();
   const { isOverLimit } = stagesStatus;
 
   return (

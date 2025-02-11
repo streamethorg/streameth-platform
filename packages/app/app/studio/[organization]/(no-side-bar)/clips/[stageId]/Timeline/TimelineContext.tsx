@@ -1,10 +1,9 @@
 'use client';
 
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import useTimeline from './useTimeline';
 import usePlayer from '@/lib/hooks/usePlayer';
-import { useTrimmControlsContext } from './TrimmControlsContext';
 
 type TimelineContextType = {
   timelineRef: React.RefObject<HTMLDivElement>;
@@ -38,7 +37,7 @@ export const TimelineProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { videoRef } = useClipContext();
+  const { videoRef } = useClipPageContext();
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
   const { calculateTimelineScale } = useTimeline();
   const timelineRef = useRef<HTMLDivElement>(null);

@@ -2,7 +2,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markers from './markers/index';
 import SessionSidebar from './clips';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import AddOrEditMarkerForm from './markers/AddOrEditMarkerForm';
 import ImportMarkersForm from './markers/ImportMarkersForm';
 import Transcripts from './Transcipts';
@@ -13,7 +13,6 @@ import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.in
 
 export default function Sidebar({
   transcribe,
-  sessionId,
   transcribeStatus,
   aiAnalysisStatus,
 }: {
@@ -22,11 +21,10 @@ export default function Sidebar({
     end: number;
     word: string;
   }[];
-  sessionId?: string;
   transcribeStatus: TranscriptionStatus | null;
   aiAnalysisStatus: ProcessingStatus | null;
 }) {
-  const { isCreatingClip } = useClipContext();
+  const { isCreatingClip, sessionId } = useClipPageContext();
   const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
 
   const overlayComponents = [
@@ -67,7 +65,6 @@ export default function Sidebar({
         </TabsList>
         <TabsContent value="markers" className="flex-grow overflow-hidden">
           <Markers
-            sessionId={sessionId || ''}
             transcribeStatus={transcribeStatus ?? null}
             aiAnalysisStatus={aiAnalysisStatus ?? null}
           />
@@ -81,7 +78,6 @@ export default function Sidebar({
         >
           <Transcripts
             transcribe={transcribe}
-            sessionId={sessionId}
             transcribeStatus={transcribeStatus ?? null}
           />
         </TabsContent>

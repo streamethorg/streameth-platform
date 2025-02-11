@@ -37,7 +37,7 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { Radio } from 'lucide-react';
 import FeatureButton from '@/components/ui/feature-button';
 
@@ -57,7 +57,8 @@ const CreateLivestreamModal = ({
     'instant' | 'schedule' | undefined
   >();
   const router = useRouter();
-  const { canUseFeatures, subscriptionStatus, organization } = useUserContext();
+  const { canUseFeatures, subscriptionStatus, organization } =
+    useOrganizationContext();
 
   const handleClick = (e: React.MouseEvent) => {
     setOpen(true);

@@ -18,13 +18,15 @@ import {
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { createMarkerAction, updateMarkersAction } from '@/lib/actions/marker';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 import { IExtendedMarker } from '@/lib/types';
 import { LuArrowLeftToLine, LuArrowRightToLine, LuPlus } from 'react-icons/lu';
 import { useMarkersContext } from './markersContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const AddOrEditMarkerForm = () => {
-  const { stageId, videoRef } = useClipContext();
+  const { stageId, videoRef, sessionId } = useClipPageContext();
+  const { organizationId } = useOrganizationContext();
 
   const {
     markers,
@@ -32,8 +34,6 @@ const AddOrEditMarkerForm = () => {
     selectedMarkerId,
     setSelectedMarkerId,
     fetchAndSetMarkers,
-    organizationId,
-    sessionId,
   } = useMarkersContext();
 
   const [loading, setLoading] = useState(false);

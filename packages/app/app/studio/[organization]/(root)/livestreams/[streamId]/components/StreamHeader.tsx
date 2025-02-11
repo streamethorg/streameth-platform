@@ -5,7 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const StreamHeader = ({
   stream,
@@ -14,7 +14,7 @@ const StreamHeader = ({
   stream: IExtendedStage;
   isLiveStreamPage?: boolean;
 }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   return (
     <div className="flex flex-row justify-between items-center">
       <span className="pr-4 text-2xl font-bold">{stream.name}</span>

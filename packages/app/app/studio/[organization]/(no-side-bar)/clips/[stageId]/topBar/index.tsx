@@ -1,8 +1,6 @@
-import { fetchAllSessions } from '@/lib/services/sessionService';
-import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import SessionSelector from './SessionSelector';
 import { RecordingStatus } from 'livepeer/models/components';
+import { IExtendedSession } from '@/lib/types';
 
 interface SessionOption {
   label: string;
@@ -11,38 +9,31 @@ interface SessionOption {
 }
 
 const TopBar = async ({
+  stageRecordings,
+  allSessions,
+  name,
+  organizationId,
   stageId,
-  organization,
   sessionId,
 }: {
+  stageRecordings: any[];
+  allSessions: IExtendedSession[];
+  name: string;
+  organizationId: string;
   stageId: string;
-  organization: string;
   sessionId?: string;
 }) => {
-  const [allSessions, stage] = await Promise.all([
-    fetchAllSessions({
-      stageId,
-      type: SessionType.livestream,
-    }),
-    fetchStage({ stage: stageId }),
-  ]);
-
-  const stageRecordings = await fetchStageRecordings({
-    streamId: stage?.streamSettings?.streamId || '',
-  });
 
   const hasActiveLivestream =
     stageRecordings.length > 0 &&
     stageRecordings?.some(
       (recording) => recording.recordingStatus === RecordingStatus.Waiting
     );
-  const sessionOptions: SessionOption[] = allSessions.sessions.map(
-    (session) => ({
-      label: session.name,
-      value: session._id,
-      url: `/studio/${organization}/clips/${stageId}?sessionId=${session._id}&videoType=recording`,
-    })
-  );
+  const sessionOptions: SessionOption[] = allSessions.map((session) => ({
+    label: session.name,
+    value: session._id,
+    url: `/studio/${organizationId}/clips/${stageId}?sessionId=${session._id}&videoType=recording`,
+  }));
 
   let currentSession: SessionOption;
   currentSession =
@@ -54,7 +45,7 @@ const TopBar = async ({
     const liveOption: SessionOption = {
       label: 'Live',
       value: stageId,
-      url: `/studio/${organization}/clips/${stageId}?videoType=livestream`,
+      url: `/studio/${organizationId}/clips/${stageId}?videoType=livestream`,
     };
     sessionOptions.push(liveOption);
     !sessionId && (currentSession = liveOption);
@@ -63,8 +54,7 @@ const TopBar = async ({
     <SessionSelector
       recordings={sessionOptions}
       currentSession={currentSession}
-      stageName={stage?.name || ''}
-      organization={organization}
+      stageName={name}
     />
   );
 };

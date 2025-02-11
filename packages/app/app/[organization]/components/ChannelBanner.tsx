@@ -5,10 +5,10 @@ import Image from 'next/image';
 import ChannelShareIcons from './ChannelShareIcons';
 import React from 'react';
 import ChannelDescription from './ChannelDescription';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const ChannelBanner = () => {
-  const { organization } = useUserContext();
+  const { organization } = useOrganizationContext();
   return (
     <div className="relative w-full">
       <div className="relative z-0 w-full md:rounded-xl h-48">

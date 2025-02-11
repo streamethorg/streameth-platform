@@ -16,10 +16,10 @@ import Link from 'next/link';
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 import { ShareModalContent } from '@/components/misc/interact/ShareButton';
 import VisibilityButton from './VisibilityButton';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const DropdownActions = ({ session }: { session: IExtendedSession }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side
@@ -42,9 +42,7 @@ const DropdownActions = ({ session }: { session: IExtendedSession }) => {
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Link
-              href={`/${organizationId}/watch?session=${
-                session._id as string
-              }`}
+              href={`/${organizationId}/watch?session=${session._id as string}`}
             >
               <Button
                 variant={'ghost'}

@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { createSocialLivestreamStageAction } from '@/lib/actions/stages';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { CiCirclePlus } from 'react-icons/ci';
@@ -19,7 +19,7 @@ const CreateYoutubeStream = ({
 }) => {
   const [socialId, setSocialId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { organization } = useUserContext();
+  const { organization } = useOrganizationContext();
 
   const handleCreateYoutubeStream = async () => {
     setIsLoading(true);

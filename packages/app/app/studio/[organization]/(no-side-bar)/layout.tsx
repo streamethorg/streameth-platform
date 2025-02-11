@@ -10,7 +10,7 @@ const Layout = async ({
     <div className="flex h-screen w-screen flex-col">
       <NavbarStudio showSearchBar={false} />
       <div className=" flex-row top-[72px] flex h-[calc(100vh-72px)]">
-        <div className="w-full max-w-[calc(100%-73px)] h-full  flex-col overflow-hidden border-t ">
+        <div className="w-full max-w-[calc(100%)] h-full  flex-col overflow-hidden border-t ">
           <div className="flex h-full w-full flex-row ">{children}</div>
         </div>
       </div>

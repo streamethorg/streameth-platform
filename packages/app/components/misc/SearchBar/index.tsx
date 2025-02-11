@@ -9,8 +9,7 @@ import { useRouter } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
 import { useSearch } from './useSearch';
 import { SearchResults } from './SearchResults';
-import { useUserContext } from '@/lib/context/UserContext';
-
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 export default function SearchBar({
   searchVisible = true,
@@ -21,7 +20,7 @@ export default function SearchBar({
   isMobile?: boolean;
   isStudio?: boolean;
 }): JSX.Element {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const { searchParams, handleTermChange: handleStudioTermChange } =
     useSearchParams();
   const [isOpened, setIsOpened] = useState(false);

@@ -13,22 +13,20 @@ import { useRouter } from 'next/navigation';
 import { fetchSession } from '@/lib/services/sessionService';
 import { fetchMarkers } from '@/lib/services/markerSevice';
 import { useMarkersContext } from './markersContext';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 const PRESET_PROMPTS = [
   'Extract all talk and panels from this video',
   'Extract key moments for short form content',
 ] as const;
 
 export const ExtractHighlightsForm = ({
-  sessionId,
   transcribeStatus,
   aiAnalysisStatus,
 }: {
-  sessionId: string;
   transcribeStatus: TranscriptionStatus | null;
   aiAnalysisStatus: ProcessingStatus | null;
 }) => {
-  const { setIsInputFocused } = useClipContext();
+  const { setIsInputFocused, sessionId } = useClipPageContext();
   const { fetchAndSetMarkers } = useMarkersContext();
   const [prompt, setPrompt] = useState('');
   const [isExtracting, setIsExtracting] = useState(false);

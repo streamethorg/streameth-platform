@@ -1,13 +1,14 @@
 import { studioPageParams } from '@/lib/types';
 import React from 'react';
-import { fetchUserAction } from '@/lib/actions/users';
-import { hasOrganization } from '@/lib/utils/utils';
 import Support from '@/components/misc/Support';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import { UserContextProvider } from '@/lib/context/UserContext';
 import { redirect } from 'next/navigation';
 import { IExtendedOrganization } from '@/lib/types';
-import { SubscriptionStatus } from '@/lib/context/UserContext';
+import {
+  OrganizationContextProvider,
+  SubscriptionStatus,
+} from '@/lib/context/OrganizationContext';
+
 const calculateOrganizationStatus = (
   organization: IExtendedOrganization
 ): SubscriptionStatus => {
@@ -44,16 +45,11 @@ const Layout = async ({
   children: React.ReactNode;
   params: studioPageParams['params'];
 }) => {
-  const userData = await fetchUserAction();
   const currentOrganization = await fetchOrganization({
     organizationId: params.organization,
   });
 
-  if (
-    !userData ||
-    !currentOrganization ||
-    !hasOrganization(userData?.organizations, currentOrganization.slug)
-  ) {
+  if (!currentOrganization) {
     redirect('/studio');
   }
 
@@ -66,8 +62,7 @@ const Layout = async ({
     isOverLimit: !status.hasAvailableStages,
   };
   return (
-    <UserContextProvider
-      user={userData}
+    <OrganizationContextProvider
       organization={currentOrganization}
       daysLeft={status.daysLeft}
       canUseFeatures={canUseFeatures}
@@ -77,7 +72,7 @@ const Layout = async ({
     >
       {children}
       <Support />
-    </UserContextProvider>
+    </OrganizationContextProvider>
   );
 };
 

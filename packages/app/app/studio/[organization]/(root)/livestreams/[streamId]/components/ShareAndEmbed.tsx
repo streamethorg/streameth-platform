@@ -24,8 +24,7 @@ import {
 } from 'react-share';
 import { copyToClipboard, generateEmbedCode } from '@/lib/utils/utils';
 import { Input } from '@/components/ui/input';
-import { useUserContext } from '@/lib/context/UserContext';
-
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const ShareAndEmbed = ({
   url,
@@ -36,7 +35,7 @@ const ShareAndEmbed = ({
   streamId: string;
   playerName: string;
 }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const [open, setOpen] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
   const [embedCode, setEmbedCode] = useState('');

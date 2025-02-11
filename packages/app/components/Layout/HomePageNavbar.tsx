@@ -15,25 +15,25 @@ import { usePathname } from 'next/navigation';
 import { IconLeft } from 'react-day-picker';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import UserProfile from '@/components/misc/UserProfile';
+import { useUserContext } from '@/lib/context/UserContext';
 const HomePageNavbar = ({
   logo,
   pages,
   showLogo = true,
   showSearchBar = true,
-  organizations,
   currentOrganization,
 }: {
   logo?: string;
   pages: Page[];
   showLogo?: boolean;
   showSearchBar?: boolean;
-  organizations: IExtendedOrganization[] | null;
   currentOrganization?: string;
 }) => {
   if (logo === '') {
     logo = undefined;
   }
-
+  const { user } = useUserContext();
+  const organizations = user?.organizations || null;
   return (
     <>
       <MobileNavBar

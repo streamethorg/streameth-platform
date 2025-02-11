@@ -24,19 +24,20 @@ import {
 import { Loader2 } from 'lucide-react';
 import ImageUpload from '@/components/misc/form/imageUpload';
 import { useRouter } from 'next/navigation';
+import { useUserContext } from '@/lib/context/UserContext';
 import { IExtendedOrganization } from '@/lib/types';
-
 interface CreateOrganizationFormProps {
-  organization?: IExtendedOrganization;
-  userAddress: string;
   disableName?: boolean;
+  organization?: IExtendedOrganization;
 }
 
 export default function CreateOrganizationForm({
-  organization,
-  userAddress,
   disableName = false,
+  organization,
 }: CreateOrganizationFormProps) {
+  const { user } = useUserContext();
+  if (!user) throw new Error('User not found');
+  const { email } = user;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
@@ -49,7 +50,7 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
-      address: userAddress,
+      address: email,
     },
   });
 
@@ -202,7 +203,7 @@ export default function CreateOrganizationForm({
             <Button
               type="button"
               onClick={() => {
-                router.back();
+                router.push('/studio');
               }}
               variant={'outline'}
             >

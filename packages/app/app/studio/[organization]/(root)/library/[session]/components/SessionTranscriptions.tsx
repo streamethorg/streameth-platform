@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 import { generateTranscriptionActions } from '@/lib/actions/sessions';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { LuLoader2, LuRefreshCcw } from 'react-icons/lu';
@@ -18,7 +18,7 @@ const SessionTranscriptions = ({
   sessionId: string;
   transcriptionState: TranscriptionStatus | null;
 }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const router = useRouter();
   const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
 

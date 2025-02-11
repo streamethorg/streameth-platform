@@ -1,16 +1,16 @@
 'use client';
 import ShareButton from '@/components/misc/interact/ShareButton';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import React, { useEffect, useState } from 'react';
 
 const ShareLivestream = ({
   streamId,
-  variant = 'ghost'
+  variant = 'ghost',
 }: {
   variant?: 'outline' | 'ghost' | 'primary' | 'default';
   streamId: string;
 }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side

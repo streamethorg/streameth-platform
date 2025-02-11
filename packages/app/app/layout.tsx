@@ -8,7 +8,6 @@ import { generalMetadata } from '@/lib/utils/metadata';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { fetchUserAction } from '@/lib/actions/users';
-import { fetchOrganization } from '@/lib/services/organizationService';
 import { UserContextProvider } from '@/lib/context/UserContext';
 
 const inter = Inter({
@@ -25,24 +24,28 @@ export default async function RootLayout({
     organization: string;
   };
 }) {
+  const user = await fetchUserAction();
+
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body className="">
         <main
           className={`${inter.variable} mx-auto flex min-h-screen w-full flex-col bg-background`}
         >
-          <TooltipProvider>
-            <GeneralContext>
-              <Toaster />
-              <LoadingContextProvider>
-                <MobileContextProvider>
-                  <TopNavbarContextProvider>
-                    {children}
-                  </TopNavbarContextProvider>
-                </MobileContextProvider>
-              </LoadingContextProvider>
-            </GeneralContext>
-          </TooltipProvider>
+          <UserContextProvider user={user}>
+            <TooltipProvider>
+              <GeneralContext>
+                <Toaster />
+                <LoadingContextProvider>
+                  <MobileContextProvider>
+                    <TopNavbarContextProvider>
+                      {children}
+                    </TopNavbarContextProvider>
+                  </MobileContextProvider>
+                </LoadingContextProvider>
+              </GeneralContext>
+            </TooltipProvider>
+          </UserContextProvider>
         </main>
       </body>
     </html>

@@ -17,17 +17,17 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { joinOrganizationAction } from '@/lib/actions/organizations';
+import { useUserContext } from '@/lib/context/UserContext';
 
 const JoinOrganizationSchema = z.object({
   invitationCode: z.string().min(1, 'Invitation code is required'),
 });
 
-interface JoinOrganizationFormProps {
-  userEmail: string;
-}
-
-export default function JoinOrganizationForm({ userEmail }: JoinOrganizationFormProps) {
+export default function JoinOrganizationForm() {
   const router = useRouter();
+  const { user } = useUserContext();
+  if (!user) throw new Error('User not found');
+  const { email } = user;
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof JoinOrganizationSchema>>({
@@ -42,13 +42,15 @@ export default function JoinOrganizationForm({ userEmail }: JoinOrganizationForm
     try {
       const organization = await joinOrganizationAction({
         invitationCode: values.invitationCode,
-        email: userEmail,
+        email: email!,
       });
       toast.success('Successfully joined organization');
       router.push(`/studio/${organization.slug}`);
     } catch (error) {
       console.error('Error joining organization:', error);
-      toast.error(error instanceof Error ? error.message : 'Failed to join organization');
+      toast.error(
+        error instanceof Error ? error.message : 'Failed to join organization'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -64,17 +66,23 @@ export default function JoinOrganizationForm({ userEmail }: JoinOrganizationForm
             <FormItem>
               <FormLabel required>Invitation Code</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your invitation code"
-                  {...field}
-                />
+                <Input placeholder="Enter your invitation code" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-between">
+          <Button
+            type="button"
+            onClick={() => {
+              router.push('/studio');
+            }}
+            variant={'outline'}
+          >
+            Go back
+          </Button>
           <Button type="submit" variant="primary">
             {isLoading ? 'Joining...' : 'Join'}
           </Button>
@@ -82,4 +90,4 @@ export default function JoinOrganizationForm({ userEmail }: JoinOrganizationForm
       </form>
     </Form>
   );
-} 
+}

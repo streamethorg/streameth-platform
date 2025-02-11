@@ -5,7 +5,6 @@ import EmptyFolder from '@/lib/svg/EmptyFolder';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
 import SubscriptionAlert from './SubscriptionAlert';
 import LivestreamTableCard from './LivestreamTableCard';
-import { fetchOrganization } from '@/lib/services/organizationService';
 
 const LivestreamTable = async ({
   organizationId,
@@ -40,8 +39,8 @@ const LivestreamTable = async ({
     <div className="flex flex-col gap-4 w-full">
       <SubscriptionAlert />
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {streams.map((stream) => (
-          <LivestreamTableCard stream={stream} />
+        {streams.map((stream, index) => (
+          <LivestreamTableCard stream={stream} key={index} />
         ))}
       </div>
     </div>

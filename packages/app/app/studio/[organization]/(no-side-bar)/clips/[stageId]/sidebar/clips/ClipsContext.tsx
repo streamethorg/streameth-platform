@@ -9,7 +9,7 @@ import React, {
 import { IExtendedSession } from '@/lib/types';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 
 interface ClipsSidebarContextType {
   isLoading: boolean;
@@ -37,7 +37,7 @@ export function ClipsSidebarProvider({
   const [filteredSessions, setFilteredSessions] =
     useState<IExtendedSession[]>(sessions);
   const [searchTerm, setSearchTerm] = useState('');
-  const { stageId } = useClipContext();
+  const { stageId } = useClipPageContext();
 
   const uniqueDates = useMemo(() => {
     const dates = Array.from(

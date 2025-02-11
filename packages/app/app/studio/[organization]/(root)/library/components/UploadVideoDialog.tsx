@@ -17,7 +17,7 @@ import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import FeatureButton from '@/components/ui/feature-button';
 import { FileUp } from 'lucide-react';
 
@@ -32,7 +32,7 @@ export type Uploads = {
 };
 
 const UploadVideoDialog = () => {
-  const { canUseFeatures, organizationId } = useUserContext();
+  const { canUseFeatures, organizationId } = useOrganizationContext();
 
   const [open, setOpen] = useState(false);
   const [onEdit, setOnEdit] = useState<string | null>(null);

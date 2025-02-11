@@ -4,11 +4,8 @@ import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import Footer from '@/components/Layout/Footer';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import NotFound from '@/not-found';
-import Support from '@/components/misc/Support';
-import { fetchUserAction } from '@/lib/actions/users';
 import React from 'react';
-import { UserContextProvider } from '@/lib/context/UserContext';
-
+import { OrganizationContextProvider } from '@/lib/context/OrganizationContext';
 const Layout = async ({
   params,
   children,
@@ -34,15 +31,13 @@ const Layout = async ({
     organizationSlug: params.organization,
   });
 
-  const userData = await fetchUserAction();
 
   if (!organization) {
     return NotFound();
   }
 
   return (
-    <UserContextProvider
-      user={userData}
+    <OrganizationContextProvider
       organization={organization}
       daysLeft={0}
       canUseFeatures={false}
@@ -69,7 +64,6 @@ const Layout = async ({
         pages={pages}
         showSearchBar
         showLogo={true}
-        organizations={userData?.organizations || null}
       />
       <div className="h-full w-full flex-grow">
           {children}
@@ -78,7 +72,7 @@ const Layout = async ({
           <Footer />
         </div>
     </div>
-    </UserContextProvider>
+    </OrganizationContextProvider>
   );
 };
 

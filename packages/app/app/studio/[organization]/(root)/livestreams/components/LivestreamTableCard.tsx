@@ -14,10 +14,10 @@ import PlayerWithControls from '@/components/ui/Player';
 import { buildPlaybackUrl } from '@/lib/utils/utils';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
 import { IExtendedStage } from '@/lib/types';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const LivestreamTableCard = ({ stream }: { stream: IExtendedStage }) => {
-  const { stagesStatus, organizationId } = useUserContext();
+  const { stagesStatus, organizationId } = useOrganizationContext();
   const { isOverLimit } = stagesStatus;
 
   return (

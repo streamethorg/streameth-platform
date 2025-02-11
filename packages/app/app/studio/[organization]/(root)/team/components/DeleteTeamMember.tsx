@@ -12,14 +12,10 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { deleteTeamMemberAction } from '@/lib/actions/organizations';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const DeleteTeamMember = ({
-  memberEmail,
-}: {
-  memberEmail: string;
-}) => {
-  const { organizationId } = useUserContext();
+const DeleteTeamMember = ({ memberEmail }: { memberEmail: string }) => {
+  const { organizationId } = useOrganizationContext();
   const [isDeleting, setIsDeleting] = useState(false);
   const [open, setOpen] = useState(false);
 

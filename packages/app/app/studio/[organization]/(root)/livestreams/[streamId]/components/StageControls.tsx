@@ -11,10 +11,10 @@ import EditLivestream from '../../components/EditLivestream';
 import ShareAndEmbed from './ShareAndEmbed';
 import StreamConfigWithPlayer from './StreamConfigWithPlayer';
 import StreamHealth from './StreamHealth';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const StageControls = ({ stream }: { stream: IExtendedStage }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
 
@@ -50,20 +50,14 @@ const StageControls = ({ stream }: { stream: IExtendedStage }) => {
             <StreamHealth isLive={isLive} stream={stream} />
           </div>
           <div className="ml-auto justify-self-end flex flex-row gap-2">
-            <EditLivestream
-              stage={stream}
-              variant="outline"
-              btnText="Edit"
-            />
+            <EditLivestream stage={stream} variant="outline" btnText="Edit" />
             <ShareAndEmbed
               streamId={stream._id as string}
               playerName={stream?.name}
             />
 
             <Link
-              href={`/studio/${organizationId}/livestream?stage=${
-                stream._id
-              }`}
+              href={`/studio/${organizationId}/livestream?stage=${stream._id}`}
               target="_blank"
             >
               <Button variant="outline">

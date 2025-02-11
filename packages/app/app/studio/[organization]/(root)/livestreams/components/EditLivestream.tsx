@@ -36,7 +36,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import moment from 'moment-timezone';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 const EditLivestream = ({
   stage,
   btnText = 'Edit',
@@ -46,7 +46,7 @@ const EditLivestream = ({
   btnText?: string;
   variant?: 'outline' | 'ghost' | 'primary' | 'default' | 'link' | 'secondary';
 }) => {
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMultiDate, setIsMultiDate] = useState(stage?.isMultipleDate);

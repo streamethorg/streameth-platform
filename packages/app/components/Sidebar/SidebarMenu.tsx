@@ -13,11 +13,10 @@ import {
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const SidebarMenu = ({
-}) => {
-  const { organization, organizationId, daysLeft } = useUserContext();
+const SidebarMenu = ({}) => {
+  const { organization, organizationId, daysLeft } = useOrganizationContext();
 
   const navigationItems = [
     {
@@ -52,7 +51,6 @@ const SidebarMenu = ({
     },
   ];
 
-
   return (
     <div className="relative w-[1/4] h-full border-t">
       <SidebarUI>
@@ -76,9 +74,7 @@ const SidebarMenu = ({
 
           <div className="flex flex-row items-center space-x-2">
             <Button variant={'outline'} size={'sm'}>
-              <Link href={`/studio/${organizationId}/settings`}>
-                Settings
-              </Link>
+              <Link href={`/studio/${organizationId}/settings`}>Settings</Link>
             </Button>
 
             <Button variant={'outline'} size={'sm'}>

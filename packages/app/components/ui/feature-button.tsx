@@ -5,7 +5,7 @@ import { Lock } from 'lucide-react';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils/utils';
 import { useRouter } from 'next/navigation';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 interface FeatureButtonProps {
   children: ReactNode;
@@ -40,7 +40,7 @@ const FeatureButton = ({
   forceLockedState = false,
 }: FeatureButtonProps) => {
   const router = useRouter();
-  const { canUseFeatures, organizationId } = useUserContext();
+  const { canUseFeatures, organizationId } = useOrganizationContext();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!canUseFeatures || forceLockedState) {

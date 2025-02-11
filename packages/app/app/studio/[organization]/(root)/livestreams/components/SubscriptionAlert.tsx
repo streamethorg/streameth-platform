@@ -1,10 +1,10 @@
 'use client';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const SubscriptionAlert = () => {
-  const { organization } = useUserContext();
+  const { organization } = useOrganizationContext();
 
   const currentStages = organization?.currentStages || 0;
   const paidStages = organization?.paidStages || 0;

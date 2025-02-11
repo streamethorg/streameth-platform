@@ -11,7 +11,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { deleteMultistreamAction } from '@/lib/actions/stages';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { Loader2, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
@@ -24,7 +24,7 @@ const DeleteMultistream = ({
   targetId: string;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { organizationId } = useUserContext();
+  const { organizationId } = useOrganizationContext();
   const handleDelete = async () => {
     setIsLoading(true);
     try {

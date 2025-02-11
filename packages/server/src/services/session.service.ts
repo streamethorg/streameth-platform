@@ -25,8 +25,6 @@ import { refreshAccessToken } from '@utils/oauth';
 import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
 import MarkerService from './marker.service';
-import { IMarker } from '@interfaces/marker.interface';
-import { chat } from 'googleapis/build/src/apis/chat';
 
 export default class SessionService {
   private path: string;
@@ -41,11 +39,10 @@ export default class SessionService {
     let eventSlug = '';
     let stageId = '';
     if (data.stageId == undefined || data.stageId.toString().length === 0) {
-      // stageId = new Types.ObjectId().toString();
-      stageId = null;
+      stageId = new Types.ObjectId().toString();
     } else {
-      let stage = await Stage.findById(data.stageId);
-      stageId = stage._id;
+      // let stage = await Stage.findById(data.stageId);
+      stageId = data.stageId.toString();
     }
     if (data.eventId == undefined || data.eventId.toString().length === 0) {
       eventId = new Types.ObjectId().toString();
@@ -171,9 +168,9 @@ export default class SessionService {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      let query = this.queryByIdOrSlug(d.stageId);
-      let stage = await Stage.findOne(query);
-      filter = { ...filter, stageId: stage?._id };
+      // let query = this.queryByIdOrSlug(d.stageId);
+      // let stage = await Stage.findOne(query);
+      filter = { ...filter, stageId: d.stageId };
     }
 
     const pageSize = Number(d.size) || 0;

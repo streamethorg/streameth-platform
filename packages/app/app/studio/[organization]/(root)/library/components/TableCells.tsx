@@ -18,14 +18,10 @@ import {
 } from 'react-icons/lu';
 import DropdownActions from './DropdownActions';
 import FeatureButton from '@/components/ui/feature-button';
-import { useUserContext } from '@/lib/context/UserContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const TableCells = ({
-  item,
-}: {
-  item: IExtendedSession;
-}) => {
-  const { organizationId } = useUserContext();
+const TableCells = ({ item }: { item: IExtendedSession }) => {
+  const { organizationId } = useOrganizationContext();
   const isPending =
     item.processingStatus === ProcessingStatus.pending ||
     item.processingStatus === ProcessingStatus.rendering;
@@ -135,9 +131,7 @@ const TableCells = ({
               </FeatureButton>
             </Link>
           )}
-          {!isDisabled && (
-            <DropdownActions session={item} />
-          )}
+          {!isDisabled && <DropdownActions session={item} />}
         </div>
       </TableCell>
     </>
