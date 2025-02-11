@@ -95,7 +95,7 @@
     "chai": "^5.1.1",
     "chai-http": "^4.4.0",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.19.9",
+    "esbuild": "^0.25.0",
     "esbuild-register": "^3.5.0",
     "esbuild-runner": "^2.2.2",
     "lint-staged": "^13.0.3",
