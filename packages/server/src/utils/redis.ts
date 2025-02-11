@@ -159,6 +159,11 @@ export const clipsQueue = async () => {
   return await createQueue('clips');
 };
 
+export const translationsQueue = async () => {
+  console.log('🗣️ Creating translations queue...');
+  return await createQueue('translations');
+};
+
 // Initialize the connection and export it
 const connection = connectToRedis();
 export default connection;
