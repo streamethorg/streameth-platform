@@ -121,7 +121,7 @@ const CreateLivestreamModal = ({
         toast.success(`Stream ${!isSchedule ? 'created' : 'scheduled'}`);
         streamId = response?._id as string;
 
-        router.push(`/studio/${organization?.slug}/livestreams/${streamId}`);
+        router.push(`/studio/${organization?._id}/livestreams/${streamId}`);
       })
       .catch((error) => {
         const errorMessage = error.message || 'Failed to create livestream';
@@ -212,7 +212,7 @@ const CreateLivestreamModal = ({
                           resize: true,
                         }}
                         className="m-auto w-full h-full text-black bg-neutrals-300"
-                        path={`livestreams/${organization?.slug}`}
+                        path={`livestreams/${organization?._id}`}
                         {...field}
                       />
                     </FormControl>

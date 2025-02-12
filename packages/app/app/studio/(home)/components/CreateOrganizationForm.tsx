@@ -82,7 +82,7 @@ export default function CreateOrganizationForm({
     })
       .then((response) => {
         toast.success('Organization created');
-        router.push(`/studio/${response.slug}`);
+        router.push(`/studio/${response._id}`);
       })
       .catch((error) => {
         if (error) {

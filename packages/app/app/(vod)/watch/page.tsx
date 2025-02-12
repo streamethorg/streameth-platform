@@ -21,7 +21,7 @@ export default async function Watch({ searchParams }: WatchPageProps) {
     return notFound();
   }
 
-  redirect(`/${organization.slug}/watch?session=${searchParams.session}`);
+  redirect(`/${organization._id}/watch?session=${searchParams.session}`);
   return 'loading...';
 }
 

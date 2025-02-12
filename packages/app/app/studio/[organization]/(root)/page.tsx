@@ -6,7 +6,6 @@ import LivestreamTable from './livestreams/components/LivestreamTable';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import ClipContentButton from './library/components/ClipContentButton';
 import UploadVideoDialog from './library/components/UploadVideoDialog';
-import InjectUrlInput from './library/components/InjectUrlInput';
 
 export default async function OrganizationPage({
   params,
@@ -15,7 +14,7 @@ export default async function OrganizationPage({
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
 
-  
+
   return (
     <div className="flex h-full w-full flex-col p-4 overflow-auto">
       <div className="flex w-full flex-col p-2">
@@ -25,9 +24,8 @@ export default async function OrganizationPage({
             variant="primary"
             show={searchParams?.show}
           />
-          <UploadVideoDialog />
-          <ClipContentButton />
-          <InjectUrlInput />
+          <UploadVideoDialog variant="outlinePrimary" />
+          <ClipContentButton variant="outlinePrimary" />
         </div>
       </div>
 

@@ -36,11 +36,6 @@ import { Types } from 'mongoose';
 import MarkerService from './marker.service';
 import youtubedl from 'youtube-dl-exec';
 import { getSourceType } from '@utils/util';
-import fs from 'fs';
-import fetch from 'node-fetch';
-import { promisify } from 'util';
-
-const readFile = promisify(fs.readFile);
 
 export default class SessionService {
   private path: string;
@@ -152,14 +147,11 @@ export default class SessionService {
 
       filter = { ...filter, createdAt: { $gte: startOfDay, $lte: endOfDay } };
     }
-    if (d.clipable) {
-      // its clippable if createdAt not older than 7 days and processingStatus is completed and type is livestream
-      const clipableDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    if (d.clipable == true) {
       filter = {
         ...filter,
-        createdAt: { $gte: clipableDate },
         processingStatus: ProcessingStatus.completed,
-        type: SessionType.livestream,
+        type: { $in: [SessionType.livestream, SessionType.video] },
       };
     }
     if (d.event != undefined) {

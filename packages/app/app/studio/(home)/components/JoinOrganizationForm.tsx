@@ -45,7 +45,7 @@ export default function JoinOrganizationForm() {
         email: email!,
       });
       toast.success('Successfully joined organization');
-      router.push(`/studio/${organization.slug}`);
+      router.push(`/studio/${organization._id}`);
     } catch (error) {
       console.error('Error joining organization:', error);
       toast.error(

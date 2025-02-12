@@ -15,7 +15,7 @@ export default async function ArchivePage({ searchParams }: SearchPageProps) {
       return redirect('/404');
     }
 
-    return redirect(`/${organization.slug}/videos`);
+    return redirect(`/${organization._id}/videos`);
   }
 
   if (searchParams.event) {
@@ -31,7 +31,7 @@ export default async function ArchivePage({ searchParams }: SearchPageProps) {
       return redirect('/404');
     }
 
-    return redirect(`/${organization.slug}/videos`);
+    return redirect(`/${organization._id}/videos`);
   }
 
   return <>Page moved</>;
