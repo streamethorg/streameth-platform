@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { createHlsStageAction } from '@/lib/actions/stages';
+import { importVideoFromUrlAction } from '@/lib/actions/sessions';
 import {
   Dialog,
   DialogContent,
@@ -27,16 +27,12 @@ import {
 } from '@/components/ui/dialog';
 import { Link2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const InjectUrlInput = ({
-  organizationId,
-  organizationSlug,
-}: {
-  organizationId: string;
-  organizationSlug: string;
-}) => {
+const InjectUrlInput = ({}) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const { organizationId } = useOrganizationContext();
   const router = useRouter();
   const form = useForm<z.infer<typeof injectUrlSchema>>({
     resolver: zodResolver(injectUrlSchema),
@@ -49,21 +45,14 @@ const InjectUrlInput = ({
   const handleSubmit = async (values: z.infer<typeof injectUrlSchema>) => {
     setLoading(true);
     try {
-      const hlsStage = {
+      const response = await importVideoFromUrlAction({
         name: values.name,
         url: values.url,
         organizationId,
-      };
-      const response = await createHlsStageAction({ hlsStage });
-      if (response._id) {
-        router.push(
-          `/studio/${organizationSlug}/clips/${response._id}?videoType=customUrl`
-        );
-
+      }).then((res) => {
+        toast.success('Video is importing');
         setOpen(false); // Close the dialog on successful submission
-      } else {
-        toast.error('Error getting HLS URL');
-      }
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);

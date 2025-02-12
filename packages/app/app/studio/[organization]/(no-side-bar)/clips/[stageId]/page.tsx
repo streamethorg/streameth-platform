@@ -90,6 +90,21 @@ const fetchVideoDetails = async (
       };
     }
 
+    case 'customUrl': {
+      const stage = await fetchStage({ stage: stageId });
+      if (!stage || !stage.source?.m3u8Url) return null;
+      return {
+        videoSrc: stage.source?.m3u8Url,
+        name: stage.name,
+        type: 'customUrl',
+        sessions: [],
+        stageRecordings: [],
+        transcribe: [],
+        transcribeStatus: null,
+        aiAnalysisStatus: null,
+      };
+    }
+
     default:
       return null;
   }

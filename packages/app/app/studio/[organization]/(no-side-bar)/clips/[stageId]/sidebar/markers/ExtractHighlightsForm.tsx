@@ -52,7 +52,6 @@ export const ExtractHighlightsForm = ({
   };
 
   const fetchStatus = async () => {
-    console.log('fetching status');
     const session = await fetchSession({ session: sessionId });
     if (session) {
       setStatus(session.aiAnalysis?.status ?? null);

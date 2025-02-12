@@ -105,7 +105,7 @@ const TableCells = ({ item }: { item: IExtendedSession }) => {
       </TableCell>
       <TableCell className={`${rowBackgroundClass} w-[220px]`}>
         <div className="flex justify-between items-center gap-2">
-          {!isDisabled && (
+          {!isDisabled && item.type !== 'clip' && (
             <Link
               href={`/studio/${organizationId}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
             >

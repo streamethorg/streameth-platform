@@ -37,6 +37,29 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
   return `${baseUrl}?${queryParams}`;
 }
 
+export async function importVideoFromUrl({
+  name,
+  url,
+  organizationId,
+}: {
+  name: string;
+  url: string;
+  organizationId: string;
+}) {
+  const response = await fetchClient(`${apiUrl()}/sessions/import`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, url, organizationId }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+  return (await response.json()).data;
+}
+
 export async function fetchAllSessions({
   event,
   organizationId,

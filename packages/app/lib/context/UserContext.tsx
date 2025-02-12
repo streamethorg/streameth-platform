@@ -24,7 +24,6 @@ export const UserContextProvider = ({
   children: React.ReactNode;
   user: IExtendedUser | null;
 }) => {
-  console.log('user', user);
   return (
     <UserContext.Provider
       value={{

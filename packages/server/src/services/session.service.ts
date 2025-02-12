@@ -20,11 +20,20 @@ import Session from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
 import { ChatAPI } from '@utils/ai.chat';
-import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
+import { createAsset, getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
 import { Types } from 'mongoose';
 import MarkerService from './marker.service';
+import youtubedl from 'youtube-dl-exec';
+import { createAssetFromUrl } from '@utils/livepeer';
+import { getSourceType } from '@utils/util';
+import fs from 'fs';
+import fetch from 'node-fetch';
+import { promisify } from 'util';
+import ffmpeg from 'fluent-ffmpeg';
+
+const readFile = promisify(fs.readFile);
 
 export default class SessionService {
   private path: string;
@@ -427,10 +436,105 @@ export default class SessionService {
     return;
   }
 
+  async importVideoFromUrl(d: {
+    name: string;
+    url: string;
+    organizationId: string;
+  }): Promise<ISession> {
+    try {
+      const source = getSourceType(d.url);
+      if (source.type === 'youtube' || source.type === 'twitter') {
+        // First get video info
+        let output = (await youtubedl(d.url, {
+          dumpSingleJson: true,
+          noWarnings: true,
+          preferFreeFormats: true,
+          ffmpegLocation: '/usr/bin/ffmpeg',
+          addHeader: source.header,
+        })) as unknown as {
+          title: string;
+          description: string;
+          thumbnail: string;
+          url: string;
+        };
+
+        // Download the video with progress logging
+        console.log('Starting video download...');
+        const downloadedVideo = await youtubedl.exec(d.url, {
+          format: 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
+          output: `/tmp/${output.title}.mp4`,
+          ffmpegLocation: '/usr/bin/ffmpeg',
+          addHeader: source.header,
+        }, {
+          stdio: ['ignore', 'pipe', 'pipe']
+        });
+
+        if (downloadedVideo.stderr) {
+          const progressLines = downloadedVideo.stderr.split('\n');
+          for (const line of progressLines) {
+            if (line.includes('[download]')) {
+              console.log('Download progress:', line.trim());
+            }
+          }
+        }
+        console.log('Download completed');
+
+        // Read the file into a Buffer
+        const videoBuffer = await readFile(`/tmp/${output.title}.mp4`);
+
+        // Clean up the temporary file
+        fs.unlink(`/tmp/${output.title}.mp4`, (err) => {
+          if (err) console.error('Error cleaning up temp file:', err);
+          else console.log('Temporary file cleaned up successfully');
+        });
+
+        // Create asset from downloaded file
+        const asset = await createAsset(d.name);
+        
+        // Upload the video buffer to Livepeer
+        const response = await fetch(asset.url, {
+          method: 'PUT',
+          body: videoBuffer,
+          headers: {
+            'Content-Type': 'video/mp4',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to upload video to Livepeer');
+        }
+        // Create and return the session
+        return await this.controller.store.create(d.name, {
+          name: output.title,
+          description: output.description,
+          coverImage: output.thumbnail,
+          start: 0,
+          end: 0,
+          playbackId: '',
+          assetId: asset.assetId,
+          organizationId: d.organizationId,
+          type: SessionType.video,
+          processingStatus: ProcessingStatus.pending,
+        });
+      }
+      throw new HttpException(400, 'Unsupported video source');
+    } catch (e) {
+      // Clean up temp file in case of error
+      try {
+        fs.unlinkSync(`/tmp/${output.title}.mp4`);
+      } catch (cleanupError) {
+        console.error('Error cleaning up temp file:', cleanupError);
+      }
+      console.error('Error importing video:', e);
+      throw new HttpException(400, 'Error downloading video');
+    }
+  }
+
   async extractHighlights(session: ISession, prompt?: string): Promise<void> {
     const chat = new ChatAPI();
     try {
-      const { query, llmPrompt, optimalScore } = await chat.choosePrompt(prompt);
+      const { query, llmPrompt, optimalScore } =
+        await chat.choosePrompt(prompt);
 
       const chunks = session.transcripts.chunks;
       const similarPhrases = await chat.getSimilarPhrases(
@@ -478,12 +582,13 @@ export default class SessionService {
         { _id: session._id },
         {
           $set: {
-          aiAnalysis: {
-            status: ProcessingStatus.completed,
-            isVectorized: true,
+            aiAnalysis: {
+              status: ProcessingStatus.completed,
+              isVectorized: true,
+            },
           },
         },
-      });
+      );
     } catch (error) {
       console.error('Error extracting highlights:', error);
       await Session.updateOne(
@@ -500,3 +605,4 @@ export default class SessionService {
     }
   }
 }
+

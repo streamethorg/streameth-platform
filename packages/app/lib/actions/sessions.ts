@@ -15,6 +15,7 @@ import {
   generateTranscriptions,
   uploadSessionToSocialsRequest,
   extractHighlights,
+  importVideoFromUrl,
 } from '../services/sessionService';
 import {
   ISession,
@@ -41,6 +42,22 @@ export const updateAssetAction = async (session: IExtendedSession) => {
       ipfsURI: asset.asset?.storage?.ipfs?.nftMetadata?.cid,
     },
   });
+};
+
+export const importVideoFromUrlAction = async ({
+  name,
+  url,
+  organizationId,
+}: {
+  name: string;
+  url: string;
+  organizationId: string;
+}) => {
+  const response = await importVideoFromUrl({ name, url, organizationId });
+  if (!response) {
+    throw new Error('Error importing video');
+  }
+  return response;
 };
 
 export const createSessionAction = async ({

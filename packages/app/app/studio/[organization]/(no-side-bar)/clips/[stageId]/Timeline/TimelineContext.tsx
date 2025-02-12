@@ -68,7 +68,6 @@ export const TimelineProvider = ({
       const timelineRect = timelineElement.getBoundingClientRect();
       const relativeClickX = event.clientX - timelineRect.left;
       const clickTime = (relativeClickX / timelineWidth) * videoDuration;
-      console.log(clickTime, previewTimeBounds);
       if (
         isPreviewMode &&
         (clickTime < previewTimeBounds.startTime ||

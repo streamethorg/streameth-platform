@@ -6,6 +6,7 @@ import LivestreamTable from './livestreams/components/LivestreamTable';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import ClipContentButton from './library/components/ClipContentButton';
 import UploadVideoDialog from './library/components/UploadVideoDialog';
+import InjectUrlInput from './library/components/InjectUrlInput';
 
 export default async function OrganizationPage({
   params,
@@ -24,6 +25,7 @@ export default async function OrganizationPage({
           />
           <UploadVideoDialog />
           <ClipContentButton />
+          <InjectUrlInput />
         </div>
       </div>
 

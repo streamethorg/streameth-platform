@@ -61,6 +61,7 @@ const Layout = async ({
     paidStages: currentOrganization.paidStages || 0,
     isOverLimit: !status.hasAvailableStages,
   };
+  
   return (
     <OrganizationContextProvider
       organization={currentOrganization}
