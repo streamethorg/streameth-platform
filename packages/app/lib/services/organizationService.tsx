@@ -19,7 +19,6 @@ export async function fetchOrganization({
         organizationId ? organizationId : organizationSlug
       }`,
       {
-        // cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
         },

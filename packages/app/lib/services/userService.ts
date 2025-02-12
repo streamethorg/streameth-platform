@@ -6,11 +6,10 @@ export async function fetchUser(): Promise<IExtendedUser | null> {
   try {
     const data = await fetchClient(`${apiUrl()}/auth/token`, {
       method: 'GET',
-      cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    }, { logging: true });
     const responseData = await data.json();
 
     return responseData.data;

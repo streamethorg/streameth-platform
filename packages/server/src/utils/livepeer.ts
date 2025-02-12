@@ -103,7 +103,7 @@ export const createAsset = async (
       body: JSON.stringify({
         name: fileName,
         storage: {
-          ipfs: true,
+          ipfs: false,
         },
       }),
     });

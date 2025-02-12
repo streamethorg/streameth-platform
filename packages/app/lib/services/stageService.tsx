@@ -33,7 +33,7 @@ export async function fetchStages({
     const stages = await fetchClient(
       `${apiUrl()}/stages/organization/${organizationId}`,
       {
-        cache: 'no-cache',
+        cache: 'force-cache',
       }
     );
     const data = (await stages.json()).data;

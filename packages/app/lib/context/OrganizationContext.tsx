@@ -57,11 +57,12 @@ export const OrganizationContextProvider = ({
   stagesStatus: StagesStatus;
 }) => {
   const organizationId = organization?._id.toString();
-
+  
   if ( !organization || !organizationId) {
     throw new Error('User, organization, or organizationId is null');
   }
 
+  console.log('stagesStatus', stagesStatus);
   return (
     <OrganizationContext.Provider
       value={{

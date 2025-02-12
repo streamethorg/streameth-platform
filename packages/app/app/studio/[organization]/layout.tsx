@@ -8,7 +8,7 @@ import {
   OrganizationContextProvider,
   SubscriptionStatus,
 } from '@/lib/context/OrganizationContext';
-
+import { fetchStages } from '@/lib/services/stageService';
 const calculateOrganizationStatus = (
   organization: IExtendedOrganization
 ): SubscriptionStatus => {
@@ -49,6 +49,10 @@ const Layout = async ({
     organizationId: params.organization,
   });
 
+  const stages = await fetchStages({
+    organizationId: params.organization,
+  });
+
   if (!currentOrganization) {
     redirect('/studio');
   }
@@ -57,11 +61,13 @@ const Layout = async ({
   const canUseFeatures = status.isActive && !status.hasExpired;
   const canCreateStages = canUseFeatures && status.hasAvailableStages;
   const stagesStatus = {
-    currentStages: currentOrganization.currentStages || 0,
+    currentStages: stages.length || 0,
     paidStages: currentOrganization.paidStages || 0,
-    isOverLimit: !status.hasAvailableStages,
+    isOverLimit:
+      stages.length >= (currentOrganization.paidStages || 0) &&
+      currentOrganization.paidStages !== undefined,
   };
-  
+
   return (
     <OrganizationContextProvider
       organization={currentOrganization}

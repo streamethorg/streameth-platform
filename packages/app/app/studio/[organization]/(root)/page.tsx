@@ -14,6 +14,8 @@ export default async function OrganizationPage({
 }: LivestreamPageParams) {
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
+
+  
   return (
     <div className="flex h-full w-full flex-col p-4 overflow-auto">
       <div className="flex w-full flex-col p-2">

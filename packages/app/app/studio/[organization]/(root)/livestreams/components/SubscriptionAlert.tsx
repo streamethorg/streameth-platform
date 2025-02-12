@@ -4,11 +4,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const SubscriptionAlert = () => {
-  const { organization } = useOrganizationContext();
-
-  const currentStages = organization?.currentStages || 0;
-  const paidStages = organization?.paidStages || 0;
-  const isOverLimit = currentStages > paidStages;
+  const { stagesStatus } = useOrganizationContext();
+  const { isOverLimit, currentStages, paidStages } = stagesStatus;
 
   if (isOverLimit) {
     return (
