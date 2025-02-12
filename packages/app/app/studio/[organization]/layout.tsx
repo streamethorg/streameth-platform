@@ -49,6 +49,10 @@ const Layout = async ({
     organizationId: params.organization,
   });
 
+  if (!currentOrganization) {
+    redirect('/studio');
+  }
+
   const stages = await fetchStages({
     organizationId: params.organization,
   });

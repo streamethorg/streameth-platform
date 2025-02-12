@@ -27,7 +27,6 @@ export async function fetchUserData(): Promise<IExtendedUser | null> {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'force-cache',
       next: { revalidate: 3600 },
     });
 

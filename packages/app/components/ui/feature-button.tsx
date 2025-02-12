@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button, ButtonProps } from '@/components/ui/button';
 import { Lock } from 'lucide-react';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils/utils';
@@ -9,16 +9,7 @@ import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 interface FeatureButtonProps {
   children: ReactNode;
-  variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link'
-    | 'primary'
-    | 'destructive-outline'
-    | 'outlinePrimary';
+  variant?: ButtonProps['variant'];
   className?: string;
   onClick?: () => void;
   disabled?: boolean;

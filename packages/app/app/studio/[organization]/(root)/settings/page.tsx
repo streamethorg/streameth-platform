@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const Settings = async ({
+const Settings = ({
   params,
 }: {
   params: studioPageParams['params'];

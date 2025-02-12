@@ -8,7 +8,7 @@ import JoinOrganizationForm from './components/JoinOrganizationForm';
 import CreateOrganizationForm from './components/CreateOrganizationForm';
 import { useUserContext } from '@/lib/context/UserContext';
 
-const Studio = async () => {
+const Studio = () => {
   const { user } = useUserContext();
   const organizations = user?.organizations || null;
   return (

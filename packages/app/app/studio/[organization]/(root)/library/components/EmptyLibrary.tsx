@@ -13,7 +13,7 @@ const EmptyLibrary = () => {
           Upload your first video to get started!
         </p>
       </div>
-      <UploadVideoDialog />
+      <UploadVideoDialog variant="primary" />
     </div>
   );
 };

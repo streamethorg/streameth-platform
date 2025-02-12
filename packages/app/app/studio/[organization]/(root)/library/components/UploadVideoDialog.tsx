@@ -35,7 +35,7 @@ export type Uploads = {
 const UploadVideoDialog = ({
   variant = 'outline',
 }: {
-  variant: ButtonProps['variant'];
+  variant?: ButtonProps['variant'];
 }) => {
   const { canUseFeatures, organizationId } = useOrganizationContext();
 
