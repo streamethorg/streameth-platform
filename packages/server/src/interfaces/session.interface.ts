@@ -84,6 +84,7 @@ export interface ISession {
       word: string;
     }[];
     text: string;
+    summary: string;
   };
   pretalxSessionCode?: string;
 }

@@ -3,6 +3,7 @@ import { config } from '@config';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 import PineconeService from './pinecone';
 import { HttpException } from '@exceptions/HttpException';
+import { encode } from 'gpt-tokenizer';
 
 interface AIHighlight {
   start: number;
@@ -38,7 +39,47 @@ export class ChatAPI {
     }
   }
 
-  async getSimilarPhrases(sessionId: string, chunks: any[], query: string[], optimalScore: number) {
+  async initializeSession(sessionId: string, chunks: any[]) {
+    const pineconeService = new PineconeService(sessionId);
+    const phrases = await pineconeService.wordsToPhrases(chunks);
+    await pineconeService.embed(phrases);
+  }
+
+  async summarizeSession(sessionId: string, text: string) {
+    const chunks = splitTextIntoChunks(text, this.maxTokens);
+    console.log('Summarizing session with chunks:', chunks);
+    const summaries = [];
+    for (const chunk of chunks) {
+      const summary = await this.chat([
+        {
+          role: 'system',
+          content:
+            'You are an AI assistant specializing in summarizing video transcripts. Return a JSON object with a "summary" field containing your summary.',
+        },
+        {
+          role: 'user',
+          content: `Please summarize this transcript chunk: ${chunk}`,
+        },
+      ]);
+
+      try {
+        const parsedSummary = JSON.parse(summary || '{}');
+        summaries.push(parsedSummary.summary);
+      } catch (error) {
+        console.error('Failed to parse summary JSON:', error);
+        summaries.push(summary);
+      }
+    }
+    console.log('Summaries:', summaries);
+    return summaries.join('\n');
+  }
+
+  async getSimilarPhrases(
+    sessionId: string,
+    chunks: any[],
+    query: string[],
+    optimalScore: number = 0.89,
+  ) {
     const pineconeService = new PineconeService(sessionId);
     if (!(await pineconeService.namespaceHasData())) {
       const phrases = await pineconeService.wordsToPhrases(chunks);
@@ -46,7 +87,12 @@ export class ChatAPI {
     }
 
     const scores = await pineconeService.query(query);
-    return scores.filter((score) => score.score > optimalScore);
+
+    // Take all scores within 0.05 of the highest score
+    const highestScore = Math.max(...scores.map((s) => s.score));
+    const threshold = highestScore - 0.02;
+
+    return scores.filter((score) => score.score > threshold);
   }
 
   contextualizePhrasesWithTimestamps(similarityScores: any[], chunks: any[]) {
@@ -107,43 +153,109 @@ export class ChatAPI {
     );
   }
 
-  async choosePrompt(prompt: string): Promise<{
+  parseDefaultQueries(queries: string): string[] {
+    if (Array.isArray(queries)) {
+      return queries;
+    }
+    return [queries];
+  }
+
+  async choosePrompt(
+    summary: string,
+    userPrompt: string,
+  ): Promise<{
     query: string[];
     llmPrompt: string;
     color: string;
-    optimalScore: number;
   }> {
-    if (prompt === 'Extract all talk and panels from this video') {
+    if (userPrompt === 'Extract all talk and panels from this video') {
       return {
         query: defaultQueries.panels_and_talks_identification,
         llmPrompt: prompts.panels_and_talks_identification,
-        optimalScore: optimalScores.panels_and_talks_identification,
         color: 'blue',
       };
     }
 
-    if (prompt === 'Extract key moments for short form content') {
-      return {
-        query: defaultQueries.key_moments_identification,
-        llmPrompt: prompts.key_moments_identification,
-        optimalScore: optimalScores.key_moments_identification,
-        color: 'green',
-      };
-    }
+    // if (userPrompt === 'Extract key moments for short form content') {
+    //   return {
+    //     query: defaultQueries.key_moments_identification,
+    //     llmPrompt: prompts.key_moments_identification,
+    //     color: 'green',
+    //   };
+    // }
 
     return {
-      query: [prompt],
-      llmPrompt: prompt,
-      optimalScore: optimalScores.key_moments_identification,
+      query: await this.generateDefaultQueries(userPrompt, summary),
+      llmPrompt: prompts.key_moments_identification,
       color: 'gray',
     };
   }
+  async generateDefaultQueries(userPrompt: string, summary: string) {
+    if (!userPrompt || !summary) {
+      return [];
+    }
+    const queries = await this.chat([
+      {
+        role: 'system',
+        content: `
+        You are tasked with returning a list of queries that will be used 
+        to run a cosine similarity search on a transcript. The queries should be relevant to 
+        the summary of the transcript to satisfy the video exploration prompt provided by the user. 
+        Example queries if the summary is 'Layer 2 scaling solutions' and the user prompt is
+         'Extract key moments for short form content':
+        ['Layer 2 scaling solutions', 'EVM compatibility', 'Rollups and zk-rollups', 'Sharding implementation',
+         'Proof-of-stake consensus', 'Smart contract security', 'Gas optimization techniques', 
+         'Interoperability between chains', 'MEV (Maximal Extractable Value)', 'Decentralized identity',
+          'Solidity best practices', 'Tooling for smart contract developers', 'IPFS integration', 
+          'Decentralized storage solutions', 'GraphQL and The Graph', 'Optimism or Arbitrum updates',
+          'Consensus layer advancements', 'Formal verification for smart contracts',
+          'Ethereum client development', 'Dev tooling updates', 'NFT market trends', 'DAO governance models', 
+          'Zero-knowledge proofs', 'Privacy-preserving protocols', 'Tokenomics design', 'Decentralized finance (DeFi) innovations', 
+          'Future of decentralized exchanges', 'Real-world use cases of blockchain', 'Cross-chain bridges and solutions', 'Public goods funding', 
+          'The future of Ethereum', 'State of the Ethereum ecosystem', 'Lessons learned from mainnet', 'Scaling Ethereum sustainably', 
+          'Breaking blockchain trilemma', 'Decentralization at scale', 'Community-driven development', 'Onboarding the next billion users', 
+          'Challenges in Ethereum adoption', "Ethereum's role in Web3", 'Vitalik Buterin keynote', 'Danny Ryan on roadmap', 
+          'Ethereum Foundation updates', 'Hackathon winners presentation', 'Live demo of a new protocol', 'Partnership announcements', 
+          'Major updates in EIP-4844', 'Launch of a new Ethereum upgrade', 'Major breakthroughs in research', 'Showcasing cutting-edge dApps']
+        
+          Return a list of queries, such as ['Layer 2 scaling solutions', 'EVM compatibility', 'Rollups and zk-rollups'...].
+        `,
+      },
+      {
+        role: 'user',
+        content: ` 
+        Here is the summary of the transcript: ${summary}
+        Here is the prompt provided by the user: ${userPrompt}
+        `,
+      },
+    ]);
+    return this.parseDefaultQueries(JSON.parse(queries));
+  }
 }
 
+function splitTextIntoChunks(text: string, maxTokens: number): string[] {
+  const words = text.split(' ');
+  const chunks: string[] = [];
+  let currentChunk: string[] = [];
+  let currentLength = 0;
 
-const optimalScores = {
-  panels_and_talks_identification: 0.89,
-  key_moments_identification: 0.86,
+  for (const word of words) {
+    const wordTokens = encode(word + ' ').length;
+    if (currentLength + wordTokens > maxTokens) {
+      chunks.push(currentChunk.join(' '));
+      currentChunk = [word];
+      currentLength = wordTokens;
+    } else {
+      currentChunk.push(word);
+      currentLength += wordTokens;
+    }
+  }
+
+  if (currentChunk.length > 0) {
+    chunks.push(currentChunk.join(' '));
+  }
+
+  return chunks;
 }
 
 const defaultQueries = {
@@ -377,7 +489,7 @@ const prompts = {
             Create Highlights: Look for moments where something unexpected or noteworthy happened.
           2. Start with a Strong Hook
             Jump Right In: Begin with the most interesting or captivating moment to immediately grab attention.
-            Add Context Quickly: Use a brief text overlay or voiceover to explain what’s happening.
+            Add Context Quickly: Use a brief text overlay or voiceover to explain what's happening.
           11. Use Storytelling Techniques
             Mini-Stories: Edit the livestream into digestible stories with a clear beginning, middle, and end.
             Include Emotional Peaks: Use clips that evoke strong emotions—laughter, shock, excitement, or even nostalgia.

@@ -9,12 +9,15 @@ import { LuLoader2, LuRefreshCcw } from 'react-icons/lu';
 import { toast } from 'sonner';
 import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 const SessionTranscriptions = ({
   videoTranscription,
+  summary,
   sessionId,
   transcriptionState,
 }: {
   videoTranscription?: string;
+  summary?: string;
   sessionId: string;
   transcriptionState: TranscriptionStatus | null;
 }) => {
@@ -31,6 +34,7 @@ const SessionTranscriptions = ({
       .then((response) => {
         if (response) {
           toast.success('Transcription request sent successfully');
+          router.refresh();
         } else {
           toast.error('Error generating transcript');
         }
@@ -64,22 +68,30 @@ const SessionTranscriptions = ({
     videoTranscription
   ) {
     return (
-      <div className="flex flex-col space-y-2">
-        <div className="flex flex-row items-center gap-2">
-          <Label>Transcriptions</Label>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleGenerateTranscription}
-            loading={isGeneratingTranscript}
-            className="flex items-center gap-2"
-          >
-            <LuRefreshCcw className="w-4 h-4 cursor-pointer" />
-            Regenerate
-          </Button>
+      <>
+        <div className="flex flex-col space-y-2">
+          <div className="flex flex-row items-center gap-2">
+            <Label>Transcriptions</Label>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleGenerateTranscription}
+              loading={isGeneratingTranscript}
+              className="flex items-center gap-2"
+            >
+              <LuRefreshCcw className="w-4 h-4 cursor-pointer" />
+              Regenerate
+            </Button>
+          </div>
+          <TextPlaceholder text={videoTranscription} />
         </div>
-        <TextPlaceholder text={videoTranscription} />
-      </div>
+        {summary && (
+          <div className="flex flex-col space-y-2">
+            <Label>Summary</Label>
+            <Textarea value={summary} readOnly className="h-40" />
+          </div>
+        )}
+      </>
     );
   }
 

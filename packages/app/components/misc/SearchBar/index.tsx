@@ -69,7 +69,7 @@ export default function SearchBar({
     <div className="relative flex w-full max-w-[500px] flex-col items-center justify-center p-2">
       <Input
         ref={inputRef}
-        className="max-w-[500px] bg-white border-primary border-2"
+        className="max-w-[500px] bg-white border-primary border"
         placeholder="Search..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
