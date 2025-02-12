@@ -69,7 +69,7 @@ const processVideoImport = async (data: VideoImporterData) => {
   };
 
   // Download the video with progress logging
-  console.log('Starting video download...');
+  console.log('🚀 Starting video download...');
   const downloadedVideo = await youtubedl.exec(
     videoUrl,
     {
@@ -87,19 +87,19 @@ const processVideoImport = async (data: VideoImporterData) => {
     const progressLines = downloadedVideo.stderr.split('\n');
     for (const line of progressLines) {
       if (line.includes('[download]')) {
-        console.log('Download progress:', line.trim());
+        console.log('🔄 Download progress:', line.trim());
       }
     }
   }
-  console.log('Download completed');
+  console.log('🎉 Download completed');
 
   // Read the file into a Buffer
   const videoBuffer = fs.readFileSync(`/tmp/${output.title}.mp4`);
 
   // Clean up the temporary file
   fs.unlink(`/tmp/${output.title}.mp4`, (err) => {
-    if (err) console.error('Error cleaning up temp file:', err);
-    else console.log('Temporary file cleaned up successfully');
+    if (err) console.error('🚫 Error cleaning up temp file:', err);
+    else console.log('🚮 Temporary file cleaned up successfully');
   });
 
 
