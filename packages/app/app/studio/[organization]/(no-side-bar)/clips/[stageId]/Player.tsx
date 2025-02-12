@@ -21,7 +21,6 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
   const { currentTime } = usePlayer(videoRef);
   const playbackRef = useRef({ progress: 0, offset: 0 });
   const [error, setError] = useState<string | null>(null);
-  console.log('src', src);
   // Constants
   const corsProxyUrl = 'https://oyster-app-9xjon.ondigitalocean.app';
   const proxyBaseUrl = `${corsProxyUrl}/`;
@@ -45,7 +44,7 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     if (!Hls.isSupported() || !videoRef.current) return null;
 
     const hlsConfig = {
-      debug: true,
+      debug: false,
       xhrSetup: (xhr: XMLHttpRequest, url: string) => {
         if (type === 'customUrl') {
           // Ensure we don't double-proxy already proxied URLs

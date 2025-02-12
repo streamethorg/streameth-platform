@@ -18,7 +18,13 @@ import { ShareModalContent } from '@/components/misc/interact/ShareButton';
 import VisibilityButton from './VisibilityButton';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const DropdownActions = ({ session }: { session: IExtendedSession }) => {
+const DropdownActions = ({
+  session,
+  asButton,
+}: {
+  session: IExtendedSession;
+  asButton?: boolean;
+}) => {
   const { organizationId } = useOrganizationContext();
   const [url, setUrl] = useState('');
   useEffect(() => {
@@ -35,7 +41,14 @@ const DropdownActions = ({ session }: { session: IExtendedSession }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <EllipsisVertical className="w-5 h-5 cursor-pointer" />
+        {asButton ? (
+          <Button variant="outline" className=" space-x-2">
+            <p>Actions</p>
+            <EllipsisVertical className="w-5 h-5" />
+          </Button>
+        ) : (
+          <EllipsisVertical className="w-5 h-5 cursor-pointer" />
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="p-2 w-52 bg-white rounded-md shadow-md">

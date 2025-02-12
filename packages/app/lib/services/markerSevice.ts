@@ -82,14 +82,8 @@ export async function fetchMarkers({
   date?: string;
 }): Promise<IExtendedMarker[]> {
   try {
-    const response = await fetchClient(
-      `${apiUrl()}/markers?organization=${organizationId}&stageId=${stageId}`,
-      {
-        cache: 'force-cache',
-        next: {
-          tags: [`markers-${organizationId}`],
-        },
-      }
+    const response = await fetch(
+      `${apiUrl()}/markers?organization=${organizationId}&stageId=${stageId}`
     );
     const data = (await response.json()).data;
     if (!data) {

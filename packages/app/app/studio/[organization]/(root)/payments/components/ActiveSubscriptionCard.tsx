@@ -13,7 +13,7 @@ export function ActiveSubscriptionCard({
   daysLeft: number;
 }) {
   return (
-    <Card className="p-6">
+    <Card className="p-6 shadow-none">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Active Subscription</h1>
         <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">

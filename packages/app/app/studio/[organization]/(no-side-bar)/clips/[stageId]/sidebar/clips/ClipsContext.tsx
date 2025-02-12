@@ -55,7 +55,7 @@ export function ClipsSidebarProvider({
 
   const fetchSessions = async () => {
     if (!stageId) return;
-    const sessions = await fetchAllSessionsAction({
+    const sessions = await fetchAllSessions({
       stageId,
       type: SessionType.clip,
     });
