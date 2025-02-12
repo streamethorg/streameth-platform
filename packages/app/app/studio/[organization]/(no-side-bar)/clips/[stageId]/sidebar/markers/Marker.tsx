@@ -10,20 +10,16 @@ import { useMarkersContext } from './markersContext';
 import { useTimelineContext } from '../../Timeline/TimelineContext';
 import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
 import usePlayer from '@/lib/hooks/usePlayer';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const Marker = ({
-  marker,
-  organizationId,
-}: {
-  marker: IExtendedMarker;
-  organizationId: string;
-}) => {
+const Marker = ({ marker }: { marker: IExtendedMarker }) => {
   const {
     setIsAddingOrEditingMarker,
     isAddingOrEditingMarker,
     setSelectedMarkerId,
     selectedMarkerId,
   } = useMarkersContext();
+  const { organizationId } = useOrganizationContext();
 
   const { videoDuration, timelineWidth, isPreviewMode, videoRef } =
     useTimelineContext();

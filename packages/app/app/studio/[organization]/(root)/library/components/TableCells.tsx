@@ -1,6 +1,8 @@
+'use client';
+
 import { TableCell } from '@/components/ui/table';
 import { IExtendedSession } from '@/lib/types';
-import { Users, FilePenLine, Loader2 } from 'lucide-react';
+import { FilePenLine, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDuration } from '@/lib/utils/time';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
@@ -12,18 +14,17 @@ import {
   LuRadio,
   LuScissors,
   LuScissorsLineDashed,
+  LuTrash,
   LuVideo,
 } from 'react-icons/lu';
 import DropdownActions from './DropdownActions';
 import FeatureButton from '@/components/ui/feature-button';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { Button, buttonVariants } from '@/components/ui/button';
+import DeleteAsset from './DeleteAsset';
 
-const TableCells = ({
-  item,
-  organization,
-}: {
-  item: IExtendedSession;
-  organization: string;
-}) => {
+const TableCells = ({ item }: { item: IExtendedSession }) => {
+  const { organizationId } = useOrganizationContext();
   const isPending =
     item.processingStatus === ProcessingStatus.pending ||
     item.processingStatus === ProcessingStatus.rendering;
@@ -39,8 +40,8 @@ const TableCells = ({
   const rowBackgroundClass = isFailed
     ? 'bg-gray-100'
     : isPending
-    ? 'bg-gray-100 animate-pulse'
-    : '';
+      ? 'bg-gray-100'
+      : '';
 
   const duration = item.playback?.duration
     ? formatDuration(item.playback.duration * 1000) // Convert seconds to milliseconds
@@ -74,7 +75,7 @@ const TableCells = ({
           </div>
           <div className="flex flex-col">
             {!isDisabled ? (
-              <Link href={`/studio/${organization}/library/${item._id}`}>
+              <Link href={`/studio/${organizationId}/library/${item._id}`}>
                 <span className="hover:underline line-clamp-2">
                   {item.name}
                 </span>
@@ -106,13 +107,12 @@ const TableCells = ({
         </div>
       </TableCell>
       <TableCell className={`${rowBackgroundClass} w-[220px]`}>
-        <div className="flex justify-between items-center gap-2">
-          {!isDisabled && (
+        <div className="flex justify-between items-center gap-2 relative">
+          {!isDisabled && item.type !== 'clip' && (
             <Link
-              href={`/studio/${organization}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
+              href={`/studio/${organizationId}/clips/${item.stageId}?sessionId=${item._id}&videoType=recording`}
             >
               <FeatureButton
-                organizationId={organization}
                 variant="outlinePrimary"
                 size="sm"
                 className="flex items-center gap-2 h-8"
@@ -123,10 +123,9 @@ const TableCells = ({
             </Link>
           )}
           {!isDisabled && (
-            <Link href={`/studio/${organization}/library/${item._id}`}>
+            <Link href={`/studio/${organizationId}/library/${item._id}`}>
               <FeatureButton
-                organizationId={organization}
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 className="flex items-center gap-2 h-8"
               >
@@ -135,8 +134,21 @@ const TableCells = ({
               </FeatureButton>
             </Link>
           )}
-          {!isDisabled && (
-            <DropdownActions session={item} organizationSlug={organization} />
+          {!isDisabled && <DropdownActions session={item} />}
+          {isDisabled && (
+            <DeleteAsset
+              session={item}
+              TriggerComponent={
+                <Button
+                  size="sm"
+                  variant="destructiveOutline"
+                  className=""
+                >
+                  <LuTrash className="w-4 h-4" />
+                  <p>Delete</p>
+                </Button>
+              }
+            />
           )}
         </div>
       </TableCell>

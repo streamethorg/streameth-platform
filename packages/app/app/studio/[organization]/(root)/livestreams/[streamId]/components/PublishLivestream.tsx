@@ -4,10 +4,7 @@ import { Button } from '@/components/ui/button';
 import { IExtendedStage } from '@/lib/types';
 import { toast } from 'sonner';
 import { updateStageAction } from '@/lib/actions/stages';
-import { Check } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import StreamethLogo from '@/public/logo.png';
-import Image from 'next/image';
+
 
 const PublishLivestream = ({ stream }: { stream: IExtendedStage }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +45,7 @@ const PublishLivestream = ({ stream }: { stream: IExtendedStage }) => {
           loading={isLoading}
           onClick={handlePublishStream}
           disabled={!stream?.published || isLoading}
-          variant="destructive-outline"
+          variant="destructiveOutline"
         >
           Unpublish
         </Button>

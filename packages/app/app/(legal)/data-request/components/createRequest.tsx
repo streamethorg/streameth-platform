@@ -2,8 +2,11 @@
 import { CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { LuMail } from 'react-icons/lu';
+import { useUserContext } from '@/lib/context/UserContext';
 
-const CreateRequest = ({ userEmail }: { userEmail?: string }) => {
+const CreateRequest = () => {
+  const { user } = useUserContext();
+  const userEmail = user?.email;
   const handleEmailClick = () => {
     const subject = encodeURIComponent('Request for Personal Data');
     const body = encodeURIComponent(`Dear StreamETH Support,

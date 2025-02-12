@@ -2,7 +2,6 @@ import { OrgIdDto } from '@dtos/organization/orgid.dto';
 import { CreateSessionDto } from '@dtos/session/create-session.dto';
 import { UpdateSessionDto } from '@dtos/session/update-session.dto';
 import { UploadSessionDto } from '@dtos/session/upload-session.dto';
-import { IMarker } from '@interfaces/marker.interface';
 import { ISession, ProcessingStatus } from '@interfaces/session.interface';
 import clipEditorService from '@services/clipEditor.service';
 import SessionServcie from '@services/session.service';
@@ -42,6 +41,23 @@ export class SessionController extends Controller {
     return SendApiResponse('session created', session);
   }
 
+  /**
+   * @summary Import video from url
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('201')
+  @Post('import')
+  async importVideoFromUrl(
+    @Body() body: {
+      name: string;
+      url: string;
+      organizationId: string;
+    },
+  ): Promise<IStandardResponse<ISession>> {
+    const session = await this.sessionService.importVideoFromUrl(body);
+    return SendApiResponse('video imported', session);
+  }
+  
   /**
    * @summary Update Session
    */

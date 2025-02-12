@@ -139,24 +139,51 @@ export async function createQueue(
   return queue;
 }
 
+// Add queue instances at the top level
+let _sessionTranscriptionsQueue: Queue.Queue | null = null;
+let _stageTranscriptionsQueue: Queue.Queue | null = null;
+let _videoUploadQueue: Queue.Queue | null = null;
+let _clipsQueue: Queue.Queue | null = null;
+let _videoImporterQueue: Queue.Queue | null = null;
+
 export const sessionTranscriptionsQueue = async () => {
-  console.log('🎙️ Creating session transcriptions queue...');
-  return await createQueue('session-transcriptions');
+  if (!_sessionTranscriptionsQueue) {
+    console.log('🎙️ Creating session transcriptions queue...');
+    _sessionTranscriptionsQueue = await createQueue('session-transcriptions');
+  }
+  return _sessionTranscriptionsQueue;
 };
 
 export const stageTranscriptionsQueue = async () => {
-  console.log('🎭 Creating stage transcriptions queue...');
-  return await createQueue('stage-transcriptions');
+  if (!_stageTranscriptionsQueue) {
+    console.log('🎭 Creating stage transcriptions queue...');
+    _stageTranscriptionsQueue = await createQueue('stage-transcriptions');
+  }
+  return _stageTranscriptionsQueue;
 };
 
 export const videoUploadQueue = async () => {
-  console.log('🎥 Creating video upload queue...');
-  return await createQueue('video-upload');
+  if (!_videoUploadQueue) {
+    console.log('🎥 Creating video upload queue...');
+    _videoUploadQueue = await createQueue('video-upload');
+  }
+  return _videoUploadQueue;
 };
 
 export const clipsQueue = async () => {
-  console.log('✂️ Creating clip queue...');
-  return await createQueue('clips');
+  if (!_clipsQueue) {
+    console.log('✂️ Creating clip queue...');
+    _clipsQueue = await createQueue('clips');
+  }
+  return _clipsQueue;
+};
+
+export const videoImporterQueue = async () => {
+  if (!_videoImporterQueue) {
+    console.log('🎥 Creating video importer queue...');
+    _videoImporterQueue = await createQueue('video-importer');
+  }
+  return _videoImporterQueue;
 };
 
 // Initialize the connection and export it

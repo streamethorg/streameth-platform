@@ -18,7 +18,6 @@ function ProcessingCard({
   status: ProcessingStatus;
   progress: { type: 'progress' | 'done'; progress: number } | null;
 }) {
-  console.log('progress', progress);
   return (
     <Card className="w-full cursor-not-allowed animate-pulse max-w-2xl overflow-hidden px-2 py-1 shadow-none bg-muted">
       <div className="flex justify-center items-center">
@@ -50,7 +49,6 @@ function ProcessingCard({
 }
 
 export default function Clip({ session }: { session: IExtendedSession }) {
-  const { name, coverImage, assetId } = session;
   const [progress, setProgress] = useState<{
     type: 'progress' | 'done';
     progress: number;
@@ -158,7 +156,6 @@ export default function Clip({ session }: { session: IExtendedSession }) {
       {isOpen && (
         <Preview
           isOpen={isOpen}
-          organizationId={session.organizationId as string}
           session={session}
           setIsOpen={setIsOpen}
         />

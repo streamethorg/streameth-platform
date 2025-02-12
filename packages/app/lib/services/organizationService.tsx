@@ -1,7 +1,6 @@
 import { apiUrl } from '@/lib/utils/utils';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
 import { IExtendedOrganization, IExtendedUser } from '../types';
-import { cookies } from 'next/headers';
 import { fetchClient } from './fetch-client';
 
 export async function fetchOrganization({
@@ -15,15 +14,16 @@ export async function fetchOrganization({
     if (!organizationSlug && !organizationId) {
       return null;
     }
-    const response = await fetch(
+    const response = await fetchClient(
       `${apiUrl()}/organizations/${
         organizationId ? organizationId : organizationSlug
       }`,
       {
-        cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
         },
+        cache: 'force-cache',
+        next: { tags: [`organizations-${organizationId}`] },
       }
     );
     const data = (await response.json()).data;
@@ -37,11 +37,12 @@ export async function fetchOrganization({
 
 export async function fetchOrganizations(): Promise<IExtendedOrganization[]> {
   try {
-    const response = await fetch(`${apiUrl()}/organizations`, {
-      cache: 'no-cache',
+    const response = await fetchClient(`${apiUrl()}/organizations`, {
+      cache: 'force-cache',
       headers: {
         'Content-Type': 'application/json',
       },
+      next: { tags: [`organizations`] },
     });
     return (await response.json()).data ?? [];
   } catch (e) {
@@ -91,6 +92,7 @@ export async function updateOrganization({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(modifiedObject),
+        next: { tags: [`organizations-${organization._id}`] },
       }
     );
 
@@ -147,6 +149,8 @@ export async function fetchOrganizationMembers({
         headers: {
           'Content-Type': 'application/json',
         },
+        cache: 'force-cache',
+        next: { tags: [`organizations-${organizationId}`] },
       }
     );
 

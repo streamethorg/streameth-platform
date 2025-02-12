@@ -7,7 +7,6 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col mx-auto w-full bg-white min-h-[100vh]">
       <HomePageNavbar
-        organizations={[]}
         showLogo={true}
         pages={[]}
         showSearchBar={false}

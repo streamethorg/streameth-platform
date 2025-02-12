@@ -1,22 +1,21 @@
 'use client';
 import React, { createContext, useContext, useState, useRef } from 'react';
 import Hls from 'hls.js';
-import { ClipContextType } from '@/lib/types';
-import { PlaybackStatus } from '@/lib/types';
-const ClipContext = createContext<ClipContextType | null>(null);
+import { ClipPageContextType, PlaybackStatus } from '@/lib/types';
+const ClipPageContext = createContext<ClipPageContextType | null>(null);
 
-export const useClipContext = () => useContext(ClipContext)!;
+export const useClipPageContext = () => useContext(ClipPageContext)!;
 
-export const ClipProvider = ({
+export const ClipPageProvider = ({
   children,
   stageId,
-  organizationId,
   clipUrl,
+  sessionId,
 }: {
   children: React.ReactNode;
-  stageId?: string;
-  organizationId: string;
+  stageId: string;
   clipUrl: string;
+  sessionId: string;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -31,7 +30,7 @@ export const ClipProvider = ({
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
 
   return (
-    <ClipContext.Provider
+    <ClipPageContext.Provider
       value={{
         isLoading,
         setIsLoading,
@@ -39,21 +38,21 @@ export const ClipProvider = ({
         dragging,
         setDragging,
         selectedTooltip,
-        setSelectedTooltip,
+        setSelectedTooltip, 
         stageId,
         isCreatingClip,
         setIsCreatingClip,
         hls,
         setHls,
         clipUrl,
-        organizationId,
         playbackStatus,
         setPlaybackStatus,
         isInputFocused,
         setIsInputFocused,
+        sessionId,
       }}
     >
       {children}
-    </ClipContext.Provider>
+    </ClipPageContext.Provider>
   );
 };

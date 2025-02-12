@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { createSocialLivestreamStageAction } from '@/lib/actions/stages';
-import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { CiCirclePlus } from 'react-icons/ci';
@@ -9,18 +9,17 @@ import { toast } from 'sonner';
 import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interface';
 
 const CreateYoutubeStream = ({
-  organization,
   stageId,
   setIsOpen,
   streamTargets,
 }: {
-  organization: IExtendedOrganization;
   stageId: string;
   setIsOpen: (open: boolean) => void;
   streamTargets: TargetOutput[];
 }) => {
   const [socialId, setSocialId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { organization } = useOrganizationContext();
 
   const handleCreateYoutubeStream = async () => {
     setIsLoading(true);
@@ -51,8 +50,8 @@ const CreateYoutubeStream = ({
 
   const state = encodeURIComponent(
     JSON.stringify({
-      redirectUrl: `/studio/${organization?.slug}/livestreams/${stageId}`,
-      organizationId: organization?._id,
+      redirectUrl: `/studio/${organization._id}/livestreams/${stageId}`,
+      organizationId: organization._id,
     })
   );
 

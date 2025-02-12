@@ -20,13 +20,22 @@ import Session from '@models/session.model';
 import Stage from '@models/stage.model';
 import State from '@models/state.model';
 import { ChatAPI } from '@utils/ai.chat';
-import { getAsset, getDownloadUrl, getStreamRecordings } from '@utils/livepeer';
+import {
+  createAsset,
+  getAsset,
+  getDownloadUrl,
+  getStreamRecordings,
+} from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
-import { sessionTranscriptionsQueue, videoUploadQueue } from '@utils/redis';
+import {
+  sessionTranscriptionsQueue,
+  videoImporterQueue,
+  videoUploadQueue,
+} from '@utils/redis';
 import { Types } from 'mongoose';
 import MarkerService from './marker.service';
-import { IMarker } from '@interfaces/marker.interface';
-import { chat } from 'googleapis/build/src/apis/chat';
+import youtubedl from 'youtube-dl-exec';
+import { getSourceType } from '@utils/util';
 
 export default class SessionService {
   private path: string;
@@ -43,8 +52,8 @@ export default class SessionService {
     if (data.stageId == undefined || data.stageId.toString().length === 0) {
       stageId = new Types.ObjectId().toString();
     } else {
-      let stage = await Stage.findById(data.stageId);
-      stageId = stage._id;
+      // let stage = await Stage.findById(data.stageId);
+      stageId = data.stageId.toString();
     }
     if (data.eventId == undefined || data.eventId.toString().length === 0) {
       eventId = new Types.ObjectId().toString();
@@ -138,14 +147,11 @@ export default class SessionService {
 
       filter = { ...filter, createdAt: { $gte: startOfDay, $lte: endOfDay } };
     }
-    if (d.clipable) {
-      // its clippable if createdAt not older than 7 days and processingStatus is completed and type is livestream
-      const clipableDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    if (d.clipable == true) {
       filter = {
         ...filter,
-        createdAt: { $gte: clipableDate },
         processingStatus: ProcessingStatus.completed,
-        type: SessionType.livestream,
+        type: { $in: [SessionType.livestream, SessionType.video] },
       };
     }
     if (d.event != undefined) {
@@ -170,9 +176,9 @@ export default class SessionService {
       filter = { ...filter, assetId: d.assetId };
     }
     if (d.stageId != undefined) {
-      let query = this.queryByIdOrSlug(d.stageId);
-      let stage = await Stage.findOne(query);
-      filter = { ...filter, stageId: stage?._id };
+      // let query = this.queryByIdOrSlug(d.stageId);
+      // let stage = await Stage.findOne(query);
+      filter = { ...filter, stageId: d.stageId };
     }
 
     const pageSize = Number(d.size) || 0;
@@ -429,10 +435,71 @@ export default class SessionService {
     return;
   }
 
+  async importVideoFromUrl(d: {
+    name: string;
+    url: string;
+    organizationId: string;
+  }): Promise<ISession> {
+    console.log('importVideoFromUrl', d);
+    try {
+      const source = getSourceType(d.url);
+      if (source.type === 'youtube' || source.type === 'twitter') {
+        // First get video info
+        console.log('importing video from url', source);
+        let output = (await youtubedl(d.url, {
+          dumpSingleJson: true,
+          noWarnings: true,
+          preferFreeFormats: true,
+          addHeader: source.header,
+          skipDownload: true,
+        })) as unknown as {
+          title: string;
+          description: string;
+          thumbnail: string;
+          url: string;
+        };
+
+        console.log('output', output);
+
+        // Create asset from downloaded file
+        const asset = await createAsset(output.title);
+
+        // Create and return the session
+        const session = await this.controller.store.create(d.name, {
+          name: output.title,
+          description: output.description,
+          coverImage: output.thumbnail,
+          start: 0,
+          end: 0,
+          playbackId: '',
+          stageId: new Types.ObjectId().toString(),
+          organizationId: d.organizationId,
+          type: SessionType.video,
+          processingStatus: ProcessingStatus.pending,
+          assetId: asset.assetId,
+        });
+
+        // call video importer queue
+        const queue = await videoImporterQueue();
+        await queue.add({
+          session,
+          videoUrl: d.url,
+          uploadUrl: asset.url,
+        });
+        return session;
+      }
+      throw new HttpException(400, 'Unsupported video source');
+    } catch (e) {
+      console.error('Error importing video:', e);
+      throw new HttpException(400, 'Error downloading video');
+    }
+  }
+
   async extractHighlights(session: ISession, prompt?: string): Promise<void> {
     const chat = new ChatAPI();
     try {
-      const { query, llmPrompt, optimalScore } = await chat.choosePrompt(prompt);
+      const { query, llmPrompt, optimalScore } =
+        await chat.choosePrompt(prompt);
 
       const chunks = session.transcripts.chunks;
       const similarPhrases = await chat.getSimilarPhrases(
@@ -480,12 +547,13 @@ export default class SessionService {
         { _id: session._id },
         {
           $set: {
-          aiAnalysis: {
-            status: ProcessingStatus.completed,
-            isVectorized: true,
+            aiAnalysis: {
+              status: ProcessingStatus.completed,
+              isVectorized: true,
+            },
           },
         },
-      });
+      );
     } catch (error) {
       console.error('Error extracting highlights:', error);
       await Session.updateOne(

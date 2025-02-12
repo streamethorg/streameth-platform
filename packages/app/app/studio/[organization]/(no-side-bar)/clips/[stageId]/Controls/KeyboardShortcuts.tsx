@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import {
   HoverCard,
   HoverCardTrigger,
@@ -27,7 +27,7 @@ const KeyboardShortcuts = ({
   playbackRate: number;
   currentPlaybackRateIndex: number;
 }) => {
-  const { videoRef, isCreatingClip, isInputFocused } = useClipContext();
+  const { videoRef, isCreatingClip, isInputFocused } = useClipPageContext();
   const { isAddingOrEditingMarker } = useMarkersContext();
   const { setStartTime, setEndTime, startTime, endTime } =
     useTrimmControlsContext();

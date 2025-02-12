@@ -1,10 +1,8 @@
-import { fetchOrganization } from '@/lib/services/organizationService';
-import { fetchSession } from '@/lib/services/sessionService';
+import { fetchAllSessions, fetchSession } from '@/lib/services/sessionService';
 import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
-import { ClipsPageParams } from '@/lib/types';
-import { notFound } from 'next/navigation';
-import React, { Suspense } from 'react';
-import { ClipProvider } from './ClipContext';
+import { ClipsPageParams, IExtendedSession } from '@/lib/types';
+import React from 'react';
+import { ClipPageProvider } from './ClipPageContext';
 import Controls from './Controls';
 import ReactHlsPlayer from './Player';
 import Timeline from './Timeline';
@@ -16,6 +14,7 @@ import { ClipsSidebarProvider } from './sidebar/clips/ClipsContext';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
 import { TimelineProvider } from './Timeline/TimelineContext';
 import { TrimmControlsProvider } from './Timeline/TrimmControlsContext';
+import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 const fetchVideoDetails = async (
   videoType: string,
   stageId: string,
@@ -26,47 +25,83 @@ const fetchVideoDetails = async (
       const liveStage = await fetchStage({ stage: stageId });
       const streamId = liveStage?.streamSettings?.streamId;
       if (!streamId) return null;
-      const allRecordings = await fetchStageRecordings({ streamId });
-      if (!allRecordings) return null;
-      const latestRecording = allRecordings[0];
+      const stageRecordings = await fetchStageRecordings({ streamId });
+      if (!stageRecordings) return null;
+      const latestRecording = stageRecordings[0];
+      if (!latestRecording) return null;
+      const sessions =
+        (
+          await fetchAllSessions({
+            stageId: liveStage._id,
+            type: SessionType.livestream,
+          })
+        ).sessions || [];
+
+      const videoSrc = getLiveStageSrcValue({
+        playbackId: latestRecording.playbackId,
+        recordingId: latestRecording.id,
+      });
+      if (!videoSrc) return null;
       return {
-        videoSrc: getLiveStageSrcValue({
-          playbackId: latestRecording.playbackId,
-          recordingId: latestRecording.id,
-        }),
-        type: 'livepeer',
+        videoSrc,
         name: liveStage.name,
         transcribe: liveStage.transcripts?.chunks,
         transcibeStatus: liveStage.transcripts?.status,
+        aiAnalysisStatus: null,
+        type: 'livepeer',
+        sessions,
+        stageRecordings,
       };
     }
 
     case 'recording': {
       const session = await fetchSession({ session: sessionId! });
-      if (!session?.playbackId || !session?.assetId) return null;
-      // const stage = await fetchStage({ stage: session.stageId as string });
-      // if (!stage?.streamSettings?.playbackId) return null;
+      if (
+        !session ||
+        !session.stageId ||
+        !session?.playbackId ||
+        !session?.assetId
+      )
+        return null;
+      const stage = await fetchStage({ stage: session.stageId as string });
+      const stageRecordings = await fetchStageRecordings({
+        streamId: stage?.streamSettings?.streamId || '',
+      });
+      let sessions: IExtendedSession[] = [];
+      if (stage) {
+        sessions = (
+          await fetchAllSessions({
+            stageId: stage._id,
+            type: SessionType.livestream,
+          })
+        ).sessions;
+      }
       const videoSrc = await getVideoUrlAction(session);
-      console.log('session', session);
+      if (!videoSrc) return null;
       return {
         videoSrc,
-        type: 'livepeer',
         name: session.name,
         transcribe: session.transcripts?.chunks,
         transcribeStatus: session.transcripts?.status,
         aiAnalysisStatus: session.aiAnalysis?.status,
+        sessions,
+        type: 'livepeer',
+        stageRecordings,
       };
     }
 
     case 'customUrl': {
       const stage = await fetchStage({ stage: stageId });
-      if (!stage?.source?.m3u8Url) return null;
-
+      if (!stage || !stage.source?.m3u8Url) return null;
       return {
-        videoSrc: stage.source.m3u8Url,
-        type: stage.source.type,
+        videoSrc: stage.source?.m3u8Url,
         name: stage.name,
-        transcribe: stage.transcripts?.chunks,
+        type: 'customUrl',
+        sessions: [],
+        stageRecordings: [],
+        transcribe: [],
+        transcribeStatus: null,
+        aiAnalysisStatus: null,
       };
     }
 
@@ -76,48 +111,34 @@ const fetchVideoDetails = async (
 };
 
 const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
-  const { organization, stageId } = params;
+  const { organization: organizationId, stageId } = params;
   const { videoType, sessionId } = searchParams;
 
-  const organizationId = (
-    await fetchOrganization({ organizationSlug: organization })
-  )?._id;
-  if (!organizationId) return notFound();
-
   const videoDetails = await fetchVideoDetails(videoType, stageId, sessionId);
-  if (!videoDetails?.videoSrc || !videoDetails?.type || !videoDetails?.name) {
+  if (!videoDetails) {
     return <div>Video source not found</div>;
   }
 
   return (
-    <ClipProvider
-      organizationId={organizationId}
+    <ClipPageProvider
       stageId={stageId}
       clipUrl={videoDetails.videoSrc}
+      sessionId={sessionId}
     >
       <TimelineProvider>
-        <MarkersProvider
-          organizationId={organizationId}
-          stageId={stageId}
-          sessionId={sessionId}
-        >
+        <MarkersProvider>
           <ClipsSidebarProvider>
             <TrimmControlsProvider>
               <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
                 <div className="flex h-full w-[calc(100%-400px)] flex-col">
-                  <Suspense
-                    fallback={
-                      <div className="p-2 w-full h-full flex items-center justify-center bg-gray-100 animate-pulse">
-                        Loading...
-                      </div>
-                    }
-                  >
-                    <TopBar
-                      stageId={stageId}
-                      organization={organization}
-                      sessionId={sessionId}
-                    />
-                  </Suspense>
+                  <TopBar
+                    stageRecordings={videoDetails.stageRecordings}
+                    allSessions={videoDetails.sessions}
+                    name={videoDetails.name}
+                    organizationId={organizationId}
+                    stageId={stageId}
+                    sessionId={sessionId}
+                  />
                   <ReactHlsPlayer
                     src={videoDetails.videoSrc}
                     type={videoDetails.type}
@@ -130,7 +151,6 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
                 <div className="flex w-[400px] h-full">
                   <Sidebar
                     transcribe={videoDetails.transcribe || []}
-                    sessionId={sessionId || ''}
                     transcribeStatus={videoDetails.transcribeStatus ?? null}
                     aiAnalysisStatus={videoDetails.aiAnalysisStatus ?? null}
                   />
@@ -140,7 +160,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
           </ClipsSidebarProvider>
         </MarkersProvider>
       </TimelineProvider>
-    </ClipProvider>
+    </ClipPageProvider>
   );
 };
 

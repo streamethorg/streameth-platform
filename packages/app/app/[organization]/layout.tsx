@@ -4,10 +4,8 @@ import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import Footer from '@/components/Layout/Footer';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import NotFound from '@/not-found';
-import Support from '@/components/misc/Support';
-import { fetchUserAction } from '@/lib/actions/users';
 import React from 'react';
-
+import { OrganizationContextProvider } from '@/lib/context/OrganizationContext';
 const Layout = async ({
   params,
   children,
@@ -33,30 +31,48 @@ const Layout = async ({
     organizationSlug: params.organization,
   });
 
-  const userData = await fetchUserAction();
 
   if (!organization) {
     return NotFound();
   }
 
   return (
-    <div className="mx-auto flex min-h-[100vh] w-full flex-col bg-white">
-      <HomePageNavbar
+    <OrganizationContextProvider
+      organization={organization}
+      daysLeft={0}
+      canUseFeatures={false}
+      canCreateStages={false}
+      subscriptionStatus={{
+        isActive: false,
+        daysLeft: 0,
+        hasExpired: false,
+        isProcessing: false,
+        isPending: false,
+        isFailed: false,
+        hasAvailableStages: false,
+      }}
+      stagesStatus={{
+        currentStages: 0,
+        paidStages: 0,
+        isOverLimit: false,
+      }}
+    >
+      <div className="mx-auto flex min-h-[100vh] w-full flex-col bg-white">
+        <HomePageNavbar
         logo={organization?.logo}
         currentOrganization={organization._id}
         pages={pages}
         showSearchBar
         showLogo={true}
-        organizations={userData?.organizations || null}
       />
       <div className="h-full w-full flex-grow">
-        {children}
-        <Support />
-      </div>
-      <div className="sticky top-[100vh] mb-5">
-        <Footer />
-      </div>
+          {children}
+        </div>
+        <div className="sticky top-[100vh] mb-5">
+          <Footer />
+        </div>
     </div>
+    </OrganizationContextProvider>
   );
 };
 

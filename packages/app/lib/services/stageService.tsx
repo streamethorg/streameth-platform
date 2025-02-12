@@ -24,25 +24,37 @@ export async function fetchStage({
   }
 }
 
-export async function fetchStages({
+export async function fetchOrganizationStages({
   organizationId,
+  fromDate,
+  untilDate,
 }: {
   organizationId: string;
+  fromDate?: string;
+  untilDate?: string;
 }): Promise<IExtendedStage[]> {
   try {
-    const stages = await fetchClient(
-      `${apiUrl()}/stages/organization/${organizationId}`,
+    const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
+    const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
+    const response = await fetchClient(
+      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`,
       {
-        cache: 'no-cache',
+        cache: 'force-cache',
+        next: {
+          tags: [`stages-${organizationId}`],
+        },
       }
     );
-    const data = (await stages.json()).data;
+
+    const data = (await response.json()).data;
     return data.map((stage: IStage) => stage);
   } catch (e) {
     console.log(e);
     throw 'Error fetching stages';
   }
 }
+
+export const fetchStages = fetchOrganizationStages;
 
 export async function deleteStage({
   stageId,
@@ -96,33 +108,6 @@ export async function fetchEventStages({
 }): Promise<IExtendedStage[]> {
   try {
     const response = await fetch(`${apiUrl()}/stages/event/${eventId}`);
-
-    const data = (await response.json()).data;
-    return data.map((stage: IStage) => stage);
-  } catch (e) {
-    console.log(e);
-    throw 'Error fetching stages';
-  }
-}
-
-export async function fetchOrganizationStages({
-  organizationId,
-  fromDate,
-  untilDate,
-}: {
-  organizationId?: string;
-  fromDate?: string;
-  untilDate?: string;
-}): Promise<IExtendedStage[]> {
-  try {
-    const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
-    const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
-    const response = await fetch(
-      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`,
-      {
-        cache: 'no-cache',
-      }
-    );
 
     const data = (await response.json()).data;
     return data.map((stage: IStage) => stage);
@@ -275,55 +260,4 @@ export async function createSocialLivestreamStage({
 
     throw errorObject;
   }
-}
-
-export async function getHlsUrl({
-  url,
-}: {
-  url: string;
-}): Promise<{ type: string; url: string }> {
-  try {
-    const response = await fetchClient(`${apiUrl()}/streams/hls`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ url }),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      const errorMessage = `Error ${response.status}: ${
-        error.message || 'Error getting HLS URL'
-      }`;
-      throw new Error(errorMessage);
-    }
-    return (await response.json()).data;
-  } catch (error) {
-    const errorObject = {
-      message: 'Error getting HLS URL',
-      details: error instanceof Error ? error.message : 'Unknown error',
-    };
-
-    throw errorObject;
-  }
-}
-
-export async function createHlsStage({
-  hlsStage,
-}: {
-  hlsStage: IStage;
-}): Promise<IStage> {
-  const response = await fetchClient(`${apiUrl()}/stages/hls`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(hlsStage),
-  });
-
-  if (!response.ok) {
-    throw 'Error creating stage';
-  }
-  return (await response.json()).data;
 }

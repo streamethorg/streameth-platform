@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import { PlayIcon, PauseIcon, EyeIcon, PlusIcon } from 'lucide-react';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import { formatTime } from '@/lib/utils/time';
 import { Button } from '@/components/ui/button';
 import KeyboardShortcuts from './KeyboardShortcuts';
@@ -12,7 +12,7 @@ import usePlayer from '@/lib/hooks/usePlayer';
 import { useTrimmControlsContext } from '../Timeline/TrimmControlsContext';
 
 const Controls = () => {
-  const { videoRef, isCreatingClip } = useClipContext();
+  const { videoRef, isCreatingClip } = useClipPageContext();
 
   const {
     isAddingOrEditingMarker,

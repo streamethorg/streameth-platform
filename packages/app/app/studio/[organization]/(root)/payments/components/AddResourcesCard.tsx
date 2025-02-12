@@ -31,7 +31,7 @@ export function AddResourcesCard({
       <p className="text-gray-600 mb-6">
         Extend your current subscription by adding more days or stages.
       </p>
-      <Card className="p-6">
+      <Card className="p-6 shadow-none">
         <div className="space-y-6">
           <div>
             <div className="flex justify-between items-center mb-4">
