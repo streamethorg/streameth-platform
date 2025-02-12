@@ -39,13 +39,6 @@ export default async function Watch({
   params,
   searchParams,
 }: OrganizationPageProps) {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
-
-  if (!organization) {
-    return notFound();
-  }
 
   if (!searchParams.session) return notFound();
 
@@ -101,7 +94,7 @@ export default async function Watch({
           <div className="md:hidden">
             <Suspense fallback={<ArchiveVideoSkeleton />}>
               <ArchiveVideos
-                organizationId={organization._id}
+                organizationId={params.organization}
                 organizationSlug={params.organization}
                 gridLength={4}
               />
@@ -110,7 +103,7 @@ export default async function Watch({
           <div className="hidden md:block">
             <Suspense fallback={<ArchiveVideoSkeleton />}>
               <ArchiveVideos
-                organizationId={organization._id}
+                organizationId={params.organization}
                 organizationSlug={params.organization}
                 gridLength={8}
               />

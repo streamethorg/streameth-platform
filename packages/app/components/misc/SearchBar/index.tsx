@@ -9,22 +9,18 @@ import { useRouter } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
 import { useSearch } from './useSearch';
 import { SearchResults } from './SearchResults';
-
-interface SearchBarProps {
-  organizationId: string;
-  organizationSlug: string;
-  searchVisible?: boolean;
-  isMobile?: boolean;
-  isStudio?: boolean;
-}
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 export default function SearchBar({
-  organizationId,
-  organizationSlug,
   searchVisible = true,
   isMobile = false,
   isStudio = false,
-}: SearchBarProps): JSX.Element {
+}: {
+  searchVisible?: boolean;
+  isMobile?: boolean;
+  isStudio?: boolean;
+}): JSX.Element {
+  const { organizationId } = useOrganizationContext();
   const { searchParams, handleTermChange: handleStudioTermChange } =
     useSearchParams();
   const [isOpened, setIsOpened] = useState(false);
@@ -47,8 +43,8 @@ export default function SearchBar({
 
   const handleTermChange = (session: IExtendedSession) => {
     const path = isStudio
-      ? `/studio/${organizationSlug}/library/${session._id.toString()}`
-      : `/${organizationSlug}/watch?session=${session._id.toString()}`;
+      ? `/studio/${organizationId}/library/${session._id.toString()}`
+      : `/${organizationId}/watch?session=${session._id.toString()}`;
     router.push(path);
   };
 
@@ -62,7 +58,7 @@ export default function SearchBar({
     } else {
       router.push(
         archivePath({
-          organizationSlug,
+          organizationId,
           searchQuery,
         })
       );

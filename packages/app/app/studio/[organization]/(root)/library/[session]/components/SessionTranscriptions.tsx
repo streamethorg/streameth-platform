@@ -2,23 +2,23 @@
 import { Button } from '@/components/ui/button';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 import { generateTranscriptionActions } from '@/lib/actions/sessions';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { LuLoader2, LuRefreshCcw } from 'react-icons/lu';
 import { toast } from 'sonner';
 import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
-
+import { Label } from '@/components/ui/label';
 const SessionTranscriptions = ({
   videoTranscription,
-  organizationId,
   sessionId,
   transcriptionState,
 }: {
   videoTranscription?: string;
   sessionId: string;
-  organizationId: string;
   transcriptionState: TranscriptionStatus | null;
 }) => {
+  const { organizationId } = useOrganizationContext();
   const router = useRouter();
   const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
 
@@ -64,18 +64,21 @@ const SessionTranscriptions = ({
     videoTranscription
   ) {
     return (
-      <div className="space-y-4">
+      <div className="flex flex-col space-y-2">
+        <div className="flex flex-row items-center gap-2">
+          <Label>Transcriptions</Label>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleGenerateTranscription}
+            loading={isGeneratingTranscript}
+            className="flex items-center gap-2"
+          >
+            <LuRefreshCcw className="w-4 h-4 cursor-pointer" />
+            Regenerate
+          </Button>
+        </div>
         <TextPlaceholder text={videoTranscription} />
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleGenerateTranscription}
-          loading={isGeneratingTranscript}
-          className="flex items-center gap-2"
-        >
-          <LuRefreshCcw className="w-4 h-4 cursor-pointer" />
-          Regenerate Transcription
-        </Button>
       </div>
     );
   }

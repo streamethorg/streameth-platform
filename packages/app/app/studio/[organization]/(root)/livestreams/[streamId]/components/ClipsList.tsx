@@ -90,13 +90,7 @@ const ClipItem = ({
           </Link>
         </CardContent>
       </Card>
-
-      <Preview
-        isOpen={isOpen}
-        organizationId={session.organizationId as string}
-        session={session}
-        setIsOpen={setIsOpen}
-      />
+      <Preview isOpen={isOpen} session={session} setIsOpen={setIsOpen} />
     </>
   );
 };

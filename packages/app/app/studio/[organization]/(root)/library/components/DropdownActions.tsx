@@ -16,14 +16,16 @@ import Link from 'next/link';
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 import { ShareModalContent } from '@/components/misc/interact/ShareButton';
 import VisibilityButton from './VisibilityButton';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const DropdownActions = ({
   session,
-  organizationSlug,
+  asButton,
 }: {
   session: IExtendedSession;
-  organizationSlug: string;
+  asButton?: boolean;
 }) => {
+  const { organizationId } = useOrganizationContext();
   const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side
@@ -31,7 +33,7 @@ const DropdownActions = ({
     setUrl(
       `${
         window?.location?.origin
-      }/${organizationSlug}/watch?session=${session._id.toString()}`
+      }/${organizationId}/watch?session=${session._id.toString()}`
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -39,16 +41,21 @@ const DropdownActions = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <EllipsisVertical className="w-5 h-5 cursor-pointer" />
+        {asButton ? (
+          <Button variant="outline" className=" space-x-2">
+            <p>Actions</p>
+            <EllipsisVertical className="w-5 h-5" />
+          </Button>
+        ) : (
+          <EllipsisVertical className="w-5 h-5 cursor-pointer" />
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="p-2 w-52 bg-white rounded-md shadow-md">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Link
-              href={`/${organizationSlug}/watch?session=${
-                session._id as string
-              }`}
+              href={`/${organizationId}/watch?session=${session._id as string}`}
             >
               <Button
                 variant={'ghost'}

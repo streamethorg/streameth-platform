@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useTimeline from './useTimeline';
 import { useTimelineContext } from './TimelineContext';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import usePlayer from '@/lib/hooks/usePlayer';
 
 const Playhead = () => {
@@ -18,7 +18,7 @@ const Playhead = () => {
   } = useTimelineContext();
   const { calculateTimeFromPosition, calculatePositionOnTimeline } =
     useTimeline();
-  const { videoRef } = useClipContext();
+  const { videoRef } = useClipPageContext();
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
 
   const handleSetPlayheadPosition = (time: number) => {

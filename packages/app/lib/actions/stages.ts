@@ -1,19 +1,15 @@
 'use server';
 
 import {
-  createHlsStage,
   createMultistream,
   createSocialLivestreamStage,
   createStage,
   deleteMultistream,
   deleteStage,
-  getHlsUrl,
   updateStage,
 } from '../services/stageService';
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { IExtendedStage } from '../types';
-import { IStage } from 'streameth-new-server/src/interfaces/stage.interface';
 
 export const createStageAction = async ({
   stage,
@@ -24,8 +20,7 @@ export const createStageAction = async ({
     const response = await createStage({
       stage: stage,
     });
-
-    revalidatePath('/studio');
+    revalidateTag(`stages-${stage.organizationId}`);
     return response;
   } catch (error: any) {
     // If the error is from our API, it will have a message property
@@ -51,7 +46,7 @@ export const deleteStageAction = async ({
   if (!response) {
     throw new Error('Error deleting stage');
   }
-  revalidatePath('/studio');
+  revalidateTag(`stages-${organizationId}`);
   return response;
 };
 
@@ -62,7 +57,6 @@ export const createMultistreamAction = async (
   },
   formData: FormData
 ) => {
-  'use server';
   const streamId = formData.get('streamId') as string;
   const name = formData.get('name') as string;
   const url = formData.get('url') as string;
@@ -75,7 +69,6 @@ export const createMultistreamAction = async (
       name,
       targetURL: url,
       targetStreamKey: streamKey,
-
       organizationId,
     });
     revalidatePath('/studio');
@@ -102,8 +95,6 @@ export const deleteMultistreamAction = async (
   if (!response) {
     throw new Error('Error deleting stage');
   }
-  revalidatePath('/studio');
-
   return response;
 };
 
@@ -118,7 +109,6 @@ export const updateStageAction = async ({
   if (!response) {
     throw new Error('Error updating stage');
   }
-  revalidatePath('/studio');
   return response;
 };
 
@@ -151,30 +141,4 @@ export const createSocialLivestreamStageAction = async ({
       error: error,
     };
   }
-};
-
-export const getHlsUrlAction = async ({ url }: { url: string }) => {
-  const response = await getHlsUrl({
-    url,
-  });
-  if (!response) {
-    throw new Error('Error getting HLS URL');
-  }
-  revalidatePath('/studio');
-  return response;
-};
-
-export const createHlsStageAction = async ({
-  hlsStage,
-}: {
-  hlsStage: IStage;
-}) => {
-  const response = await createHlsStage({
-    hlsStage,
-  });
-  if (!response) {
-    throw new Error('Error creating HLS stage');
-  }
-  revalidatePath('/studio');
-  return response;
 };

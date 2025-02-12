@@ -1,10 +1,9 @@
 'use server';
 
-import { IExtendedState, studioPageParams } from '@/lib/types';
+import { studioPageParams } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
 import { PlayerWithControls } from '@/components/ui/Player';
 import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
 import EditSessionForm from './components/EditSessionForm';
 import Link from 'next/link';
 import SessionOptions from './components/SessionOptions';
@@ -12,63 +11,38 @@ import { Label } from '@/components/ui/label';
 import GetHashButton from '../components/GetHashButton';
 import TextPlaceholder from '@/components/ui/text-placeholder';
 
-import UploadToYoutubeButton from './components/UploadToYoutubeButton';
-import { fetchOrganization } from '@/lib/services/organizationService';
 import { getVideoUrlAction } from '@/lib/actions/livepeer';
-import UploadTwitterButton from './components/UploadTwitterButton';
 import SessionTranscriptions from './components/SessionTranscriptions';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 import { IExtendedSession } from '@/lib/types';
-
-const EditSession = async ({ params, searchParams }: studioPageParams) => {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
+const EditSession = async ({ params }: studioPageParams) => {
+  if (!params.session) return notFound();
   const session = await fetchSession({
     session: params.session,
   });
 
-  if (!session?.playbackId || !organization) return notFound();
+  if (!session?.playbackId) throw new Error('Session has no playbackId');
 
   return (
-    <div className="flex flex-col h-full w-full overflow-hidden p-4 bg-white max-w-screen-xl">
-      <div className="flex justify-between">
-        <h1 className="text-lg font-bold mb-4">Video Details</h1>
-        <div className="mb-4">
-          <Link href={`/studio/${params.organization}/library`}>
-            <Button variant="secondary" className="mb-2 px-2">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to homepage
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="flex flex-row flex-grow overflow-hidden space-x-4">
+    <div>
+      <div className="flex flex-row w-full overflow-hidden p-4 space-x-4 max-w-screen-xl">
         {/* Left Column - Video Details (2/3 width) */}
-        <div className="w-2/3 px-4 overflow-auto">
+        <div className="w-2/3 px-4 overflow-auto bg-white rounded-xl p-4 border">
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}
           />
         </div>
-
         {/* Right Column - Player and Accordions (1/3 width) */}
-        <div className="w-1/3 flex flex-col overflow-hidden">
+        <div className="w-1/3 flex flex-col overflow-hidden bg-white rounded-xl p-4 border">
           <div className="flex-shrink-0 mb-4">
             <Suspense fallback={<PlayerSkeleton />}>
               <Player session={session} />
             </Suspense>
           </div>
           <div className="flex flex-col flex-grow overflow-auto">
-            <SessionOptions
-              name={session.name}
-              sessionId={params.session}
-              organizationSlug={params.organization}
-              playbackId={session.playbackId!}
-              assetId={session.assetId}
-            />
+            <SessionOptions session={session} />
 
             <div className="space-y-4 mt-4 border-t pt-4 ">
               {session.playbackId && (
@@ -83,15 +57,12 @@ const EditSession = async ({ params, searchParams }: studioPageParams) => {
                   <TextPlaceholder text={session.assetId} />
                 </div>
               )}
-              <Suspense fallback={<TranscriptSkeleton />}>
-                <SessionTranscriptions
-                  videoTranscription={session.transcripts?.text}
-                  organizationId={organization._id}
-                  sessionId={session._id}
-                  transcriptionState={session.transcripts?.status ?? null}
-                />
-              </Suspense>
-              <GetHashButton session={session} />
+              <SessionTranscriptions
+                videoTranscription={session.transcripts?.text}
+                sessionId={session._id}
+                transcriptionState={session.transcripts?.status ?? null}
+              />
+              {/* <GetHashButton session={session} /> */}
               <div className="flex flex-col space-y-2">
                 {/* <Label>Publish to Socials</Label> */}
                 <div className="flex flex-row gap-2">

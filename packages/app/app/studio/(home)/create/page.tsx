@@ -1,47 +1,67 @@
-import { Card, CardContent } from '@/components/ui/card';
+'use client';
+
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import CreateOrganizationForm from '../components/CreateOrganizationForm';
 import JoinOrganizationForm from '../components/JoinOrganizationForm';
 import Image from 'next/image';
-import { fetchUserAction } from '@/lib/actions/users';
-import { IExtendedUser } from '@/lib/types';
-import { notFound } from 'next/navigation';
+import { useState } from 'react';
 
-const CreateOrganization = async () => {
-  const userData: IExtendedUser | null = await fetchUserAction();
-  if (!userData) {
-    return notFound();
-  }
-  return (
-    <div className="mx-auto mt-12 flex w-full max-w-4xl flex-col space-y-8">
-      <div className="flex flex-row">
-        <div className="w-1/3 space-y-4 rounded-l-xl bg-neutrals-100 p-6">
-          <Image src="/logo.png" alt="streameth logo" height={50} width={50} />
+const CreateOrganization = () => {
+  const [step, setStep] = useState(1);
+  const [action, setAction] = useState<'create' | 'join' | null>(null);
+
+  const renderStep1 = () => (
+    <Card className="flex flex-col">
+      <CardHeader>
+        <Image src="/logo_dark.png" alt="streameth logo" height={250} width={200} />
+      </CardHeader>
+      <CardContent className="flex flex-row space-x-8">
+        <div
+          className="w-1/2 cursor-pointer hover:bg-muted p-4 rounded-xl transition-colors"
+          onClick={() => {
+            setAction('create');
+            setStep(2);
+          }}
+        >
           <h1 className="text-2xl font-medium">Create an organization</h1>
           <p className="text-sm text-muted-foreground">
             Organizations are used to manage events and videos. You can create
             multiple organizations to manage different types of events.
           </p>
         </div>
-        <Card className="m-auto w-2/3 rounded-r-xl border-none bg-white shadow-none">
-          <CardContent>
-            <CreateOrganizationForm userAddress={userData?.email!} />
-          </CardContent>
-        </Card>
-      </div>
 
-      <div className="flex flex-row">
-        <div className="w-1/3 space-y-4 rounded-l-xl bg-neutrals-100 p-6">
+        <div
+          className="w-1/2 cursor-pointer hover:bg-muted p-4 rounded-xl transition-colors"
+          onClick={() => {
+            setAction('join');
+            setStep(2);
+          }}
+        >
           <h1 className="text-2xl font-medium">Join an organization</h1>
           <p className="text-sm text-muted-foreground">
-            Have an invitation code? Join an existing organization to collaborate with others.
+            Have an invitation code? Join an existing organization to
+            collaborate with others.
           </p>
         </div>
-        <Card className="m-auto w-2/3 rounded-r-xl border-none bg-white shadow-none">
-          <CardContent>
-            <JoinOrganizationForm userEmail={userData?.email!} />
-          </CardContent>
-        </Card>
-      </div>
+      </CardContent>
+    </Card>
+  );
+
+  const renderStep2 = () => (
+    <Card className="w-full">
+      <CardContent className="p-6">
+        {action === 'create' ? (
+          <CreateOrganizationForm />
+        ) : (
+          <JoinOrganizationForm />
+        )}
+      </CardContent>
+    </Card>
+  );
+
+  return (
+    <div className="mx-auto mt-12 flex w-full max-w-4xl flex-col space-y-8">
+      {step === 1 ? renderStep1() : renderStep2()}
     </div>
   );
 };

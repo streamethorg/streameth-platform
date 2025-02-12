@@ -103,7 +103,7 @@ export const createAsset = async (
       body: JSON.stringify({
         name: fileName,
         storage: {
-          ipfs: true,
+          ipfs: false,
         },
       }),
     });
@@ -481,34 +481,6 @@ export const getSessionMetrics = async (
   } catch (e) {
     throw new HttpException(400, 'Error getting metrics');
   }
-};
-
-export const getHlsUrl = async (
-  url: string,
-): Promise<{ type: string; url: string }> => {
-  const source = getSourceType(url);
-  if (source.type === 'youtube' || source.type === 'twitter') {
-    let output = await youtubedl(url, {
-      dumpSingleJson: true,
-      noWarnings: true,
-      preferFreeFormats: true,
-      addHeader: source.header,
-    }) as YoutubeDLOutput;
-    const hlsFormat = output.formats.find(
-      (format) =>
-        format.protocol === 'm3u8_native' &&
-        format.ext === 'mp4' &&
-        source.resolutions?.includes(format.resolution),
-    );
-    return {
-      type: source.type,
-      url: hlsFormat?.manifest_url || url,
-    };
-  }
-  return {
-    type: source.type,
-    url,
-  };
 };
 
 function sleep(ms: number) {
