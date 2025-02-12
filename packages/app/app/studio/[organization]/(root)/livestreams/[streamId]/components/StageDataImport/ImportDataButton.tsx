@@ -25,7 +25,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { importMarkersAction } from '@/lib/actions/marker';
-import { stageSessionImportAction } from '@/lib/actions/sessions';
 import { ScheduleImportSchema } from '@/lib/schema';
 import { IExtendedMarker, IExtendedStage } from '@/lib/types';
 import { zodResolver } from '@hookform/resolvers/zod';

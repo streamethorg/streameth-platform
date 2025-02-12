@@ -24,7 +24,7 @@ export default async function RootLayout({
     organization: string;
   };
 }) {
-  // const user = await fetchUserAction();
+  const user = await fetchUserAction();
 
   return (
     <html lang="en" className={`${inter.variable}`}>
@@ -32,7 +32,7 @@ export default async function RootLayout({
         <main
           className={`${inter.variable} mx-auto flex min-h-screen w-full flex-col bg-background`}
         >
-          <UserContextProvider user={{}}>
+          <UserContextProvider user={user}>
             <TooltipProvider>
               <GeneralContext>
                 <Toaster />

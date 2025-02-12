@@ -32,9 +32,11 @@ const StageControls = ({ stream }: { stream: IExtendedStage }) => {
       return;
     }
 
-    setInterval(() => {
+    const interval = setInterval(() => {
       checkIsLive();
     }, 5000);
+
+    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stream?.streamSettings?.isActive]);
 

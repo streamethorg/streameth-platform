@@ -448,21 +448,26 @@ export default class SessionService {
     url: string;
     organizationId: string;
   }): Promise<ISession> {
+    console.log('importVideoFromUrl', d);
     try {
       const source = getSourceType(d.url);
       if (source.type === 'youtube' || source.type === 'twitter') {
         // First get video info
+        console.log('importing video from url', source);
         let output = (await youtubedl(d.url, {
           dumpSingleJson: true,
           noWarnings: true,
           preferFreeFormats: true,
           addHeader: source.header,
+          skipDownload: true,
         })) as unknown as {
           title: string;
           description: string;
           thumbnail: string;
           url: string;
         };
+
+        console.log('output', output);
 
         // Create asset from downloaded file
         const asset = await createAsset(output.title);

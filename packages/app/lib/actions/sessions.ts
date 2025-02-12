@@ -1,6 +1,5 @@
 'use server';
 import { Livepeer } from 'livepeer';
-import { cookies } from 'next/headers';
 import { IExtendedSession } from '../types';
 import {
   updateSession,
@@ -10,18 +9,18 @@ import {
   createAsset,
   generateThumbnail,
   sessionImport,
-  stageSessionImport,
   saveSessionImport,
   generateTranscriptions,
   uploadSessionToSocialsRequest,
   extractHighlights,
   importVideoFromUrl,
+  fetchAllSessions,
 } from '../services/sessionService';
 import {
   ISession,
   SessionType,
 } from 'streameth-new-server/src/interfaces/session.interface';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -68,9 +67,21 @@ export const createSessionAction = async ({
   const response = await createSession({
     session,
   });
+  revalidateTag(`sessions-${session.organizationId}`);
   if (!response) {
     throw new Error('Error creating session');
   }
+  return response;
+};
+
+export const fetchAllSessionsAction = async ({
+  stageId,
+  type,
+}: {
+  stageId: string;
+  type: SessionType;
+}) => {
+  const response = await fetchAllSessions({ stageId, type });
   return response;
 };
 
@@ -112,7 +123,7 @@ export const createClipAction = async ({
   if (!response) {
     throw new Error('Error creating clip');
   }
-  revalidatePath('/studio');
+  // revalidateTag(`sessions-${organizationId}`);
   return response;
 };
 
@@ -127,7 +138,6 @@ export const updateSessionAction = async ({
   if (!response) {
     throw new Error('Error updating session');
   }
-  revalidatePath(`/studio/${session.organizationId}`);
   return response;
 };
 
@@ -145,7 +155,7 @@ export const deleteSessionAction = async ({
   if (!response) {
     throw new Error('Error updating session');
   }
-  revalidatePath('/studio');
+  revalidateTag(`sessions-${organizationId}`);
   return response;
 };
 
@@ -191,7 +201,6 @@ export const uploadSessionToSocialsAction = async ({
       socialId,
       type,
     });
-    revalidatePath('/studio');
 
     return res;
   } catch (e) {
@@ -215,39 +224,6 @@ export const sessionImportAction = async ({
       organizationId,
       type,
     });
-    revalidatePath('/studio');
-
-    return res;
-  } catch (e) {
-    console.error('Error importing session acton');
-    return null;
-  }
-};
-
-export const stageSessionImportAction = async ({
-  url,
-  type,
-  organizationId,
-  stageId,
-}: {
-  url: string;
-  organizationId: string;
-  type: string;
-  stageId?: string;
-}) => {
-  if (!stageId) {
-    throw new Error('No user session found');
-  }
-
-  try {
-    const res = await stageSessionImport({
-      url,
-      organizationId,
-      type,
-
-      stageId,
-    });
-    revalidatePath('/studio');
 
     return res;
   } catch (e) {
@@ -268,7 +244,6 @@ export const saveSessionImportAction = async ({
       scheduleId,
       organizationId,
     });
-    revalidatePath('/studio');
 
     return res;
   } catch (e) {
@@ -289,7 +264,6 @@ export const generateTranscriptionActions = async ({
       sessionId,
       organizationId,
     });
-    revalidatePath('/studio');
 
     return res;
   } catch (e) {

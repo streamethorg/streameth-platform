@@ -10,6 +10,7 @@ import { IExtendedSession } from '@/lib/types';
 import { fetchAllSessions } from '@/lib/services/sessionService';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { useClipPageContext } from '../../ClipPageContext';
+import { fetchAllSessionsAction } from '@/lib/actions/sessions';
 
 interface ClipsSidebarContextType {
   isLoading: boolean;
@@ -53,7 +54,8 @@ export function ClipsSidebarProvider({
   const [selectedDate, setSelectedDate] = useState(uniqueDates[0]);
 
   const fetchSessions = async () => {
-    const sessions = await fetchAllSessions({
+    if (!stageId) return;
+    const sessions = await fetchAllSessionsAction({
       stageId,
       type: SessionType.clip,
     });
@@ -62,7 +64,9 @@ export function ClipsSidebarProvider({
   };
 
   useEffect(() => {
-    fetchSessions();
+    if (stageId) {
+      fetchSessions();
+    }
   }, [stageId]);
 
   useEffect(() => {

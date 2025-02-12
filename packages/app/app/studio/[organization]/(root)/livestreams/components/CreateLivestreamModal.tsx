@@ -22,7 +22,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { createStageAction } from '@/lib/actions/stages';
 import { StageSchema } from '@/lib/schema';
-import { IExtendedOrganization } from '@/lib/types';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';

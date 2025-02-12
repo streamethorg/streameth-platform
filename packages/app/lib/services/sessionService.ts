@@ -7,7 +7,6 @@ import {
 } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
-import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components/asset';
 import { fetchClient } from './fetch-client';
 
@@ -19,7 +18,7 @@ interface ApiParams {
   size?: number;
   onlyVideos?: boolean;
   published?: string;
-  speakerIds?: string[]; // Assuming speakerIds is an array of strings
+  speakerIds?: string[];
   itemDate?: string;
   type?: string;
   itemStatus?: string;
@@ -109,7 +108,10 @@ export async function fetchAllSessions({
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {
-      cache: 'no-store',
+      cache: 'no-cache',
+      next: {
+        tags: [`sessions-${organizationId}`],
+      },
     }
   );
   const a = await response.json();
@@ -132,7 +134,6 @@ export const createSession = async ({
     if (!response.ok) {
       throw 'Error creating session';
     }
-    revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
     console.log('error in createSession', e);
@@ -280,7 +281,6 @@ export const createClip = async ({
       throw responseData.message;
     }
 
-    revalidatePath('/studio');
     return responseData;
   } catch (e) {
     console.error('Error in createClip:', {
@@ -376,7 +376,6 @@ export const createAsset = async ({
     if (!response.ok) {
       throw 'Error creating asset';
     }
-    revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
     console.log('error in createAsset', e);
@@ -404,7 +403,6 @@ export const generateThumbnail = async ({
     if (!response.ok) {
       throw 'Error generating thumbnail';
     }
-    revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
     throw e;
@@ -534,7 +532,6 @@ export const saveSessionImport = async ({
     if (!response.ok) {
       throw 'Error importing session';
     }
-    revalidatePath('/studio');
     return (await response.json()).message;
   } catch (e) {
     console.log('error in sessionImport', e);
@@ -563,7 +560,6 @@ export const generateTranscriptions = async ({
     if (!response.ok) {
       throw 'Error importing session';
     }
-    revalidatePath('/studio');
     return (await response.json()).message;
   } catch (e) {
     console.log('error in sessionImport', e);

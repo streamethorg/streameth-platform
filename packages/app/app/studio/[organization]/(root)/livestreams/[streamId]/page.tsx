@@ -15,14 +15,6 @@ const Livestream = async ({ params }: LivestreamPageParams) => {
   
   if (!stream) return NotFound();
 
-  // const stageSessions = (
-  //   await fetchAllSessions({
-  //     stageId: stream._id?.toString(),
-  //     type: SessionType.clip,
-  //     onlyVideos: true,
-  //   })
-  // ).sessions;
-
   return (
     <div className="flex flex-col p-4 w-full h-full max-h-screen max-w-screen-3xl">
       <div className="flex flex-row flex-grow space-x-4 w-full">

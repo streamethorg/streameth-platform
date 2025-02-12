@@ -9,7 +9,7 @@ export async function fetchUser(): Promise<IExtendedUser | null> {
       headers: {
         'Content-Type': 'application/json',
       },
-    }, { logging: true });
+    });
     const responseData = await data.json();
 
     return responseData.data;
@@ -27,6 +27,8 @@ export async function fetchUserData(): Promise<IExtendedUser | null> {
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'force-cache',
+      next: { revalidate: 3600 },
     });
 
     if (!data.ok) {
