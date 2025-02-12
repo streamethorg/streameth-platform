@@ -81,24 +81,6 @@ export class StripeController extends Controller {
           break;
         }
 
-        case 'charge.updated': {
-          const charge = body.data.object;
-          console.log('💫 Charge updated:', {
-            chargeId: charge.id,
-            amount: charge.amount,
-            metadata: charge.metadata,
-            status: charge.status,
-            paid: charge.paid,
-            paymentIntent: charge.payment_intent
-          });
-          
-          // Only process if charge is succeeded and paid
-          if (charge.status === 'succeeded' && charge.paid) {
-            await this.stripeService.handleChargeSucceeded(charge);
-          }
-          break;
-        }
-
         default: {
           console.log('ℹ️ Skipping unhandled event type:', body.type);
         }
