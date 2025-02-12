@@ -1953,6 +1953,9 @@
 					},
 					"transcripts": {
 						"properties": {
+							"summary": {
+								"type": "string"
+							},
 							"text": {
 								"type": "string"
 							},
@@ -1988,6 +1991,7 @@
 							}
 						},
 						"required": [
+							"summary",
 							"text",
 							"chunks",
 							"subtitleUrl",
@@ -2208,6 +2212,9 @@
 					},
 					"transcripts": {
 						"properties": {
+							"summary": {
+								"type": "string"
+							},
 							"text": {
 								"type": "string"
 							},
@@ -2243,6 +2250,7 @@
 							}
 						},
 						"required": [
+							"summary",
 							"text",
 							"chunks",
 							"subtitleUrl",
@@ -2423,6 +2431,9 @@
 					},
 					"transcripts": {
 						"properties": {
+							"summary": {
+								"type": "string"
+							},
 							"text": {
 								"type": "string"
 							},
@@ -2458,6 +2469,7 @@
 							}
 						},
 						"required": [
+							"summary",
 							"text",
 							"chunks",
 							"subtitleUrl",

@@ -12,7 +12,7 @@ import SessionService from '@services/session.service';
 import Session from '@models/session.model';
 import fs from 'fs';
 import path from 'path';
-
+import { ChatAPI } from '@utils/ai.chat';
 interface SessionTranscriptionsJob {
   session: {
     id: ISession['_id'];
@@ -273,7 +273,7 @@ export async function transcribeAudio(
   streamUrl: string,
   session: ISession,
 ): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const tempDir = tmpdir();
     const outputPath = join(tempDir, `${session._id.toString()}.mp3`);
 
@@ -322,6 +322,13 @@ export async function transcribeAudio(
           // Merge transcriptions
           const mergedTranscript = mergeTranscripts(transcriptions);
 
+          // Initialize AI chat and get summary
+          console.log('Starting AI chat processing...');
+          const aiChat = new ChatAPI();
+          await aiChat.initializeSession(session._id.toString(), mergedTranscript.words);
+          const summary = await aiChat.summarizeSession(session._id.toString(), mergedTranscript.text);
+          console.log('AI chat processing completed');
+
           // Update session with merged transcript
           await Session.findByIdAndUpdate(
             session._id,
@@ -332,10 +339,13 @@ export async function transcribeAudio(
                 'transcripts.lastSegmentTimestamp': 0,
                 'transcripts.chunks': mergedTranscript.words,
                 'transcripts.subtitleUrl': await generateVtt(mergedTranscript.words),
+                'transcripts.summary': summary,
               }
             },
             { runValidators: false }
           );
+          
+          console.log('Session update completed');
           resolve();
         } catch (err) {
           console.error('Transcription error:', err);

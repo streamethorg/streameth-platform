@@ -18,7 +18,7 @@ const NavbarStudio = ({
       <Image
         src={'/logo_dark.png'}
         alt="Logo"
-        width={230}
+        width={150}
         height={50}
         className="hidden lg:block"
       />

@@ -25,17 +25,17 @@ const EditSession = async ({ params }: studioPageParams) => {
   if (!session?.playbackId) throw new Error('Session has no playbackId');
 
   return (
-    <div>
-      <div className="flex flex-row w-full overflow-hidden p-4 space-x-4 max-w-screen-xl">
+    <div className="w-full">
+      <div className="flex flex-row w-full p-4 space-x-4 max-w-screen-xl overflow-scroll">
         {/* Left Column - Video Details (2/3 width) */}
-        <div className="w-2/3 px-4 overflow-auto bg-white rounded-xl p-4 border">
+        <div className="w-2/3 bg-white rounded-xl p-4 border">
           <EditSessionForm
             session={session}
             organizationSlug={params.organization}
           />
         </div>
         {/* Right Column - Player and Accordions (1/3 width) */}
-        <div className="w-1/3 flex flex-col overflow-hidden bg-white rounded-xl p-4 border">
+        <div className="w-1/3 flex flex-col bg-white rounded-xl p-4 border">
           <div className="flex-shrink-0 mb-4">
             <Suspense fallback={<PlayerSkeleton />}>
               <Player session={session} />
@@ -45,7 +45,7 @@ const EditSession = async ({ params }: studioPageParams) => {
             <SessionOptions session={session} />
 
             <div className="space-y-4 mt-4 border-t pt-4 ">
-              {session.playbackId && (
+              {/* {session.playbackId && (
                 <div className="flex flex-col space-y-2">
                   <Label className="">Playback Id</Label>
                   <TextPlaceholder text={session.playbackId} />
@@ -56,9 +56,10 @@ const EditSession = async ({ params }: studioPageParams) => {
                   <Label>Asset Id</Label>
                   <TextPlaceholder text={session.assetId} />
                 </div>
-              )}
+              )} */}
               <SessionTranscriptions
                 videoTranscription={session.transcripts?.text}
+                summary={session.transcripts?.summary}
                 sessionId={session._id}
                 transcriptionState={session.transcripts?.status ?? null}
               />
