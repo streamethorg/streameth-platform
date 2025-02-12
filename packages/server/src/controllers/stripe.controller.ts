@@ -44,12 +44,40 @@ export class StripeController extends Controller {
       switch (body.type) {
         case 'checkout.session.completed': {
           const session = body.data.object;
-          console.log('✅ Checkout completed:', {
+          console.log('🤑 Checkout completed:', {
             sessionId: session.id,
-            customerId: session.customer,
-            metadata: session.metadata
+            amount_subtotal: session.amount_subtotal,
+            amount_total: session.amount_total,
+            metadata: session.metadata,
+            status: session.status,
+            paid: session.paid,
+            payment_status: session.payment_status,
+            discounts: session.discounts
           });
-          await this.stripeService.handleCheckoutCompleted(session);
+          if (session.status === 'complete' && session.payment_status === 'paid') {
+            await this.stripeService.handleCheckoutCompleted(session);
+          }
+          break;
+        }
+
+        case 'customer.discount.created': {
+          const discount = body.data.object;
+          console.log('🎟️ Discount applied:', {
+            discountId: discount.id,
+            coupon: discount.coupon,
+            promotionCode: discount.promotion_code,
+            checkoutSession: discount.checkout_session
+          });
+          break;
+        }
+
+        case 'promotion_code.updated': {
+          const promoCode = body.data.object;
+          console.log('🏷️ Promotion code updated:', {
+            code: promoCode.code,
+            timesRedeemed: promoCode.times_redeemed,
+            coupon: promoCode.coupon
+          });
           break;
         }
 

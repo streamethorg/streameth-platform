@@ -89,17 +89,18 @@ export default class OrganizationService {
       organizationUpdate.currentStages = Math.max(0, organizationUpdate.currentStages);
     }
 
-    // Merge current org with updates
-    const updatedOrg: IOrganization = {
-      ...currentOrg,
-      ...organizationUpdate,
-    };
-
-    return await this.controller.store.update(
+    // Update using the Organization model directly
+    const updatedOrg = await Organization.findByIdAndUpdate(
       organizationId,
-      updatedOrg,
-      updatedOrg.name,
+      { $set: organizationUpdate },
+      { new: true }
     );
+
+    if (!updatedOrg) {
+      throw new HttpException(404, 'Failed to update organization');
+    }
+
+    return updatedOrg;
   }
 
   async get(organizationId: string): Promise<IOrganization> {

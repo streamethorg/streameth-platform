@@ -133,25 +133,79 @@ export default class StripeService {
             const organization = await this.getOrganizationFromMetadata(session.metadata);
             if (!organization) return;
 
-            console.log('📝 Setting organization to processing state:', {
+            const { streamingDays, numberOfStages } = session.metadata;
+            const streamingDaysNum = parseInt(streamingDays);
+            const numberOfStagesNum = parseInt(numberOfStages);
+
+            // Check if organization has an active subscription
+            const now = new Date();
+            const hasActiveSubscription = organization.expirationDate && organization.expirationDate > now;
+
+            // Calculate expiry date based on subscription status
+            let expiryDate;
+            if (hasActiveSubscription) {
+                // If active, add days to current expiration date
+                expiryDate = new Date(organization.expirationDate);
+                expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
+            } else {
+                // If expired or new, start from current date
+                expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
+            }
+
+            // Calculate new total stages and streaming days
+            const newPaidStages = hasActiveSubscription 
+                ? (organization.paidStages || 0) + numberOfStagesNum 
+                : numberOfStagesNum;
+
+            const newStreamingDays = hasActiveSubscription
+                ? (organization.streamingDays || 0) + streamingDaysNum
+                : streamingDaysNum;
+
+            console.log('📝 Updating organization subscription:', {
                 organizationId: organization._id,
-                sessionId: session.id
+                sessionId: session.id,
+                hasActiveSubscription,
+                currentStages: organization.paidStages,
+                newTotalStages: newPaidStages,
+                currentStreamingDays: organization.streamingDays,
+                newTotalStreamingDays: newStreamingDays,
+                amount_subtotal: session.amount_subtotal,
+                amount_total: session.amount_total,
+                discounts: session.discounts
             });
 
-            await Organization.updateOne(
+            const result = await Organization.updateOne(
                 { _id: organization._id },
                 {
                     $set: {
-                        paymentStatus: 'processing',
-                        customerId: session.customer,
-                        lastCheckoutSessionId: session.id,
+                        paymentStatus: 'active',
+                        streamingDays: newStreamingDays,
+                        paidStages: newPaidStages,
+                        lastPaymentAmount: session.amount_total,
+                        lastPaymentSubtotal: session.amount_subtotal,
+                        lastPaymentDate: new Date(),
+                        expirationDate: expiryDate,
+                        lastPaymentDiscount: session.total_details?.amount_discount || 0
                     }
                 }
             );
 
-            console.log('✅ Organization updated to processing state');
+            if (result.modifiedCount === 0) {
+                console.log('⚠️ No update performed for organization:', organization._id);
+            } else {
+                console.log('✅ Organization subscription updated:', {
+                    organizationId: organization._id,
+                    sessionId: session.id,
+                    expiryDate,
+                    totalStages: newPaidStages,
+                    totalStreamingDays: newStreamingDays,
+                    isExtension: hasActiveSubscription,
+                    discountApplied: session.total_details?.amount_discount > 0
+                });
+            }
         } catch (error) {
-            console.error('❌ Failed to handle checkout completion', error);
+            console.error('❌ Failed to handle checkout completion:', error);
             throw error;
         }
     }
@@ -207,7 +261,7 @@ export default class StripeService {
                             ? (organization.streamingDays || 0) + streamingDaysNum 
                             : streamingDaysNum,
                         paidStages: newPaidStages,
-                        lastPaymentAmount: charge.amount,
+                        lastPaymentAmount: charge.amount_total !== undefined ? charge.amount_total : charge.amount,
                         lastPaymentDate: new Date(),
                         expirationDate: expiryDate,
                     }
@@ -267,7 +321,7 @@ export default class StripeService {
                         paymentStatus: 'active',
                         streamingDays: streamingDaysNum,
                         paidStages: numberOfStagesNum,
-                        lastPaymentAmount: paymentIntent.amount,
+                        lastPaymentAmount: paymentIntent.amount_total !== undefined ? paymentIntent.amount_total : paymentIntent.amount,
                         lastPaymentDate: new Date(),
                         expirationDate: expiryDate,
                     }
