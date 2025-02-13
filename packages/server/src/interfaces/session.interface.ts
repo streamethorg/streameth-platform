@@ -38,7 +38,8 @@ export enum ProcessingStatus {
   completed = 'completed',
   translating = 'translating',
   generatingAudio = 'generating_audio',
-  processingVideo = 'processing_video'
+  processingVideo = 'processing_video',
+  audioFailed = 'audio_failed'
 }
 
 export interface ISession {
@@ -88,6 +89,13 @@ export interface ISession {
     }[];
     text: string;
     summary: string;
+  };
+  translations?: {
+    [language: string]: {
+      status: ProcessingStatus;
+      assetId?: string;
+      text?: string;
+    };
   };
   pretalxSessionCode?: string;
 }

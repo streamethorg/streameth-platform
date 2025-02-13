@@ -597,3 +597,31 @@ export const extractHighlights = async ({
     throw e;
   }
 };
+
+export const startSessionTranslation = async ({
+  sessionId,
+  language,
+  organizationId,
+}: {
+  sessionId: string;
+  language: string;
+  organizationId: string;
+}): Promise<void> => {
+  try {
+    const response = await fetchClient(`${apiUrl()}/sessions/${sessionId}/translate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ language, organizationId }),
+    });
+
+    if (!response.ok) {
+      throw 'Error starting translation';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in startSessionTranslation', e);
+    throw e;
+  }
+};

@@ -85,6 +85,15 @@ const SessionSchema = new Schema<ISessionModel>(
       text: { type: String, default: '' },
       summary: { type: String, default: '' },
     },
+    translations: {
+      type: Map,
+      of: {
+        status: { type: String, enum: Object.keys(ProcessingStatus) },
+        assetId: { type: String },
+        text: { type: String },
+      },
+      default: {},
+    },
     createdAt: { type: Date, default: Date.now },
     pretalxSessionCode: { type: String, default: '' },
   },

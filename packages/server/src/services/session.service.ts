@@ -31,6 +31,7 @@ import {
   sessionTranscriptionsQueue,
   videoImporterQueue,
   videoUploadQueue,
+  translationsQueue,
 } from '@utils/redis';
 import { Types } from 'mongoose';
 import MarkerService from './marker.service';
@@ -569,5 +570,34 @@ export default class SessionService {
         },
       );
     }
+  }
+
+  async startTranslation(
+    sessionId: string,
+    targetLanguage: string,
+    organizationId: string,
+  ): Promise<void> {
+    const session = await this.get(sessionId);
+    
+    if (!session.transcripts?.text) {
+      throw new HttpException(400, 'Session must have transcriptions before it can be translated');
+    }
+
+    // Initialize translation status in session
+    await Session.findByIdAndUpdate(sessionId, {
+      $set: {
+        [`translations.${targetLanguage}`]: {
+          status: ProcessingStatus.pending,
+        },
+      },
+    });
+
+    // Add job to translations queue
+    const queue = await translationsQueue();
+    await queue.add({
+      sessionId: session._id.toString(),
+      targetLanguage,
+      organizationId,
+    });
   }
 }

@@ -232,6 +232,21 @@ export class SessionController extends Controller {
     await this.sessionService.launchExtractHighlights(sessionId, body.prompt);
     return SendApiResponse('highlights extraction started');
   }
+
+  /**
+   * @summary Start session translation
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('201')
+  @Post('{sessionId}/translate')
+  async translateSession(
+    @Path() sessionId: string,
+    @Body() body: { language: string, organizationId: string },
+  ): Promise<IStandardResponse<void>> {
+    await this.sessionService.startTranslation(sessionId, body.language, body.organizationId);
+    return SendApiResponse('translation started');
+  }
+
   /**
    * @summary get session rendeing progress
    */
