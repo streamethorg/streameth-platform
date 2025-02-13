@@ -56,6 +56,7 @@ x-common-environment: &common-environment
   STRIPE_SECRET_KEY_FILE: ${STRIPE_SECRET_KEY_FILE}
   FRONTEND_URL: ${FRONTEND_URL}
   PINECONE_API_KEY_FILE: ${PINECONE_API_KEY_FILE}
+  HF_TOKEN: ${HF_TOKEN}
 
 x-common-worker: &common-worker
   volumes:
@@ -112,6 +113,14 @@ services:
     build:
       context: .
       dockerfile: packages/server/workers/stage-transcriptions/Dockerfile.dev
+    environment:
+      <<: *common-environment
+
+  session-translations:
+    <<: *common-worker
+    build:
+      context: .
+      dockerfile: packages/server/workers/session-translations/Dockerfile.dev
     environment:
       <<: *common-environment
 

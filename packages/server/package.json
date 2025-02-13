@@ -13,6 +13,7 @@
     "dev:session-transcriptions": "nodemon --config ./workers/session-transcriptions/nodemon.json",
     "dev:clips": "nodemon --config ./workers/clips/nodemon.json",
     "dev:video-importer": "nodemon --config ./workers/video-importer/nodemon.json",
+    "dev:session-translations": "nodemon --config ./workers/session-translations/nodemon.json",
     "build": "yarn run generate:routes && tsc --build tsconfig.prod.json && tsc-alias -p tsconfig.prod.json && ncp templates dist/templates",
     "test": "mocha",
     "prettier:fix": "prettier --write './src' './test'",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.509.0",
+    "@huggingface/inference": "^3.3.3",
     "@pinecone-database/pinecone": "^4.1.0",
     "@privy-io/server-auth": "^1.7.3",
     "@pulsecron/pulse": "^1.6.3",

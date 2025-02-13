@@ -2,7 +2,7 @@ import { translationsQueue } from '@utils/redis';
 import { dbConnection } from '@databases/index';
 import { connect } from 'mongoose';
 import { tmpdir } from 'os';
-import { join } from 'path';
+import * as path from 'path';
 import StorageService from '@utils/s3';
 import { ProcessingStatus } from '@interfaces/session.interface';
 import Session from '@models/session.model';
@@ -11,175 +11,188 @@ import * as fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import { createReadStream } from 'fs';
 import { stat } from 'fs/promises';
+import { HfInference, HfInferenceEndpoint } from "@huggingface/inference";
+import SessionService from "@services/session.service";
+import { HttpException } from "@exceptions/HttpException";
 
 interface TranslationJob {
   sessionId: string;
   targetLanguage: string;
 }
 
+const hfToken = process.env.HF_TOKEN;
+if (!hfToken) {
+  console.error("❌ HF_TOKEN is not set in environment variables");
+  process.exit(1);
+}
+
+const inference = new HfInference(hfToken);
+
+// Map of language codes to TTS models
+const TTS_MODELS = {
+  'es': 'facebook/mms-tts-spa',
+  'en': 'facebook/mms-tts-eng',
+  'fr': 'facebook/mms-tts-fra',
+  'de': 'facebook/mms-tts-deu',
+  'it': 'facebook/mms-tts-ita',
+  'ja': 'facebook/mms-tts-jpn',
+  'ko': 'facebook/mms-tts-kor',
+  'pt': 'facebook/mms-tts-por',
+  'ru': 'facebook/mms-tts-rus',
+  'zh': 'facebook/mms-tts-cmn'
+};
+
 const consumer = async () => {
-  console.log('🌐 Starting session translations worker consumer');
+  console.log("🚀 Starting session translations worker...");
   const queue = await translationsQueue();
   queue.process(async (job) => {
-    const data = job.data as TranslationJob;
-    console.log('📋 Processing translation job:', {
-      jobId: job.id,
-      sessionId: data.sessionId,
-      targetLanguage: data.targetLanguage,
-      timestamp: new Date().toISOString()
-    });
-    
+    const { sessionId, targetLanguage } = job.data;
+    console.log(`🔄 Processing translation for session ${sessionId} to language ${targetLanguage}... 🚀`);
     try {
-      return await processTranslation(data);
-    } catch (error) {
-      console.error('❌ Translation processing failed:', {
-        sessionId: data.sessionId,
-        error: error.message,
-        stack: error.stack,
-        timestamp: new Date().toISOString()
-      });
-      await Session.findByIdAndUpdate(data.sessionId, {
+      const sessionService = new SessionService();
+      const session = await sessionService.get(sessionId);
+      if (!session.transcripts || !session.transcripts.text) {
+        console.error("❌ No transcription found for session:", sessionId);
+        throw new HttpException(400, 'Session must have transcriptions before translation');
+      }
+      const originalText = session.transcripts.text;
+      console.log("📝 Original transcript found. Starting text-to-text translation...");
+
+      // Update session status to translating
+      await Session.findByIdAndUpdate(sessionId, {
         $set: {
-          [`translations.${data.targetLanguage}.status`]: ProcessingStatus.failed,
-        },
+          [`translations.${targetLanguage}`]: { 
+            status: ProcessingStatus.translating 
+          }
+        }
       });
+
+      // Perform text translation
+      const translationResponse = await inference.translation({
+        model: 'facebook/mbart-large-50-many-to-many-mmt',
+        inputs: originalText,
+        parameters: {
+          "src_lang": "en_XX",
+          "tgt_lang": targetLanguage
+        }
+      }).catch(error => {
+        console.error("❌ Translation API error:", error);
+        throw new Error(`Translation failed: ${error.message}`);
+      });
+
+      // Store translated text immediately
+      console.log("🔤 Translation complete:", translationResponse);
+      await Session.findByIdAndUpdate(sessionId, {
+        $set: {
+          [`translations.${targetLanguage}`]: {
+            status: ProcessingStatus.translating,
+            text: translationResponse.translation_text
+          }
+        }
+      });
+      console.log("💾 Session updated with translated transcript.");
+
+      try {
+        // Text-to-speech conversion for the translated text
+        console.log("🔊 Converting translated text to speech...");
+        
+        // Get the appropriate TTS model for the target language
+        const ttsModel = TTS_MODELS[targetLanguage] || TTS_MODELS['en']; // Default to English if language not supported
+        console.log(`Using TTS model: ${ttsModel}`);
+
+        const endpoint = new HfInferenceEndpoint(
+          `https://huggingface.co/facebook/${ttsModel}`,
+          hfToken
+        );
+
+        const audioBlob = await endpoint.textToSpeech({
+          inputs: translationResponse.translation_text,
+        });
+
+        const arrayBuffer = await audioBlob.arrayBuffer();
+        const audioBuffer = Buffer.from(arrayBuffer);
+        const audioFilePath = path.join(tmpdir(), `${session._id}-${targetLanguage}.mp3`);
+        await fs.promises.writeFile(audioFilePath, audioBuffer);
+        console.log("🔊 Audio file created at:", audioFilePath);
+
+        // Create a new asset for the audio
+        console.log("⏫ Uploading audio to Livepeer...");
+        const newTitle = `${session.name} [${targetLanguage}] Audio`;
+        const audioAsset = await createAssetFromUrl(newTitle, audioFilePath);
+
+        // Update session with audio asset and mark as completed
+        await Session.findByIdAndUpdate(sessionId, {
+          $set: {
+            [`translations.${targetLanguage}`]: {
+              status: ProcessingStatus.completed,
+              text: translationResponse.translation_text,
+              assetId: audioAsset
+            }
+          }
+        });
+        console.log("🎉 Session translation and audio completed successfully for session:", sessionId);
+
+      } catch (audioError) {
+        console.error("❌ Error in audio processing:", audioError);
+        // Even if audio fails, keep the translation but mark it accordingly
+        await Session.findByIdAndUpdate(sessionId, {
+          $set: {
+            [`translations.${targetLanguage}`]: {
+              status: ProcessingStatus.audioFailed,
+              text: translationResponse.translation_text
+            }
+          }
+        });
+        // Don't throw here - we want to keep the translation even if audio fails
+      }
+
+      return true;
+    } catch (error) {
+      console.error("❌ Error processing session translation:", error);
+      if (job.data.sessionId) {
+        await Session.findByIdAndUpdate(job.data.sessionId, {
+          $set: {
+            [`translations.${targetLanguage}`]: { 
+              status: ProcessingStatus.failed 
+            }
+          }
+        });
+      }
       throw error;
     }
   });
 };
 
-const processTranslation = async (data: TranslationJob) => {
-  console.log('🔄 Starting translation process:', {
-    sessionId: data.sessionId,
-    targetLanguage: data.targetLanguage,
-    timestamp: new Date().toISOString()
-  });
-
-  try {
-    // 1. Get session and check for transcriptions
-    const session = await Session.findById(data.sessionId);
-    if (!session?.transcripts?.text) {
-      throw new Error('Session has no transcriptions to translate');
-    }
-
-    // 2. Update status to translating
-    await Session.findByIdAndUpdate(data.sessionId, {
-      $set: {
-        [`translations.${data.targetLanguage}.status`]: ProcessingStatus.translating,
-      },
-    });
-
-    // TODO: Implement translation service call here
-    // const translatedText = await translateService.translate(session.transcripts.text, data.targetLanguage);
-
-    // 3. Update status to generating audio
-    await Session.findByIdAndUpdate(data.sessionId, {
-      $set: {
-        [`translations.${data.targetLanguage}.status`]: ProcessingStatus.generatingAudio,
-      },
-    });
-
-    // TODO: Implement text-to-speech service call here
-    // const audioFile = await ttsService.generateSpeech(translatedText, data.targetLanguage);
-
-    // 4. Update status to processing video
-    await Session.findByIdAndUpdate(data.sessionId, {
-      $set: {
-        [`translations.${data.targetLanguage}.status`]: ProcessingStatus.processingVideo,
-      },
-    });
-
-    const tempDir = tmpdir();
-    const outputPath = join(tempDir, `${session._id.toString()}_${data.targetLanguage}.mp4`);
-
-    // TODO: Implement ffmpeg processing to merge video with new audio
-    // await mergeVideoWithAudio(session.videoUrl, audioFile, outputPath);
-
-    // 5. Upload to Livepeer
-    const storageService = new StorageService();
-    const fileStream = createReadStream(outputPath);
-    console.log('📤 Uploading translated video to S3');
-    const url = await storageService.uploadFile(
-      `translations/${data.sessionId}/${data.targetLanguage}`,
-      fileStream,
-      'video/mp4'
-    );
-
-    console.log('📤 Creating Livepeer asset for translation');
-    const assetId = await createAssetFromUrl(`${data.sessionId}_${data.targetLanguage}`, url);
-
-    // 6. Update session with translation data
-    await Session.findByIdAndUpdate(data.sessionId, {
-      $set: {
-        [`translations.${data.targetLanguage}`]: {
-          status: ProcessingStatus.completed,
-          assetId,
-          text: 'translatedText', // TODO: Replace with actual translated text
-        },
-      },
-    });
-
-    // Cleanup
-    fs.unlinkSync(outputPath);
-    console.log('✅ Translation completed successfully');
-    return true;
-
-  } catch (error) {
-    console.error('❌ Error in translation process:', {
-      sessionId: data.sessionId,
-      error: error.message,
-      stack: error.stack,
-      timestamp: new Date().toISOString()
-    });
-    throw error;
-  }
-};
-
 const init = async () => {
   try {
-    console.log('🚀 Initializing session translations worker');
-    
-    console.log('🔌 Connecting to database...');
-    await connect(dbConnection.url, {
-      serverSelectionTimeoutMS: 5000,
-    });
-    console.log('✅ Database connected successfully');
+    console.log("🚀 Initializing session translations worker...");
+    if (!dbConnection.url) {
+      console.error("❌ Database URL is not configured");
+      throw new Error("Database URL is not configured");
+    }
+    console.log("🔌 Connecting to database...");
+    await connect(dbConnection.url, { serverSelectionTimeoutMS: 5000 });
+    console.log("✅ Database connected successfully");
 
     await consumer();
-    console.log('✅ Session translations worker initialized successfully');
+    console.log("✅ Worker initialization completed.");
   } catch (err) {
-    console.error('❌ Worker initialization failed:', {
-      name: err.name,
-      message: err.message,
-      stack: err.stack,
-      timestamp: new Date().toISOString()
-    });
+    console.error("❌ Worker initialization failed:", err);
     process.exit(1);
   }
 };
 
-process.on('unhandledRejection', (error) => {
-  console.error('❌ Unhandled rejection in session translations worker:', {
-    error,
-    timestamp: new Date().toISOString()
-  });
+process.on("unhandledRejection", (error) => {
+  console.error("❌ Unhandled rejection in session translations worker:", error);
   process.exit(1);
 });
 
-process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught exception in session translations worker:', {
-    error,
-    timestamp: new Date().toISOString()
-  });
+process.on("uncaughtException", (error) => {
+  console.error("❌ Uncaught exception in session translations worker:", error);
   process.exit(1);
 });
 
 init().catch((error) => {
-  console.error('❌ Fatal error during session translations worker initialization:', {
-    name: error.name,
-    message: error.message,
-    stack: error.stack,
-    timestamp: new Date().toISOString()
-  });
+  console.error("❌ Fatal error during session translations worker initialization:", error);
   process.exit(1);
 }); 

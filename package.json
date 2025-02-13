@@ -28,11 +28,13 @@
 
 		"dev:stage-transcriptions": "yarn workspace streameth-new-server dev:stage-transcriptions",
 		"dev:session-transcriptions": "yarn workspace streameth-new-server dev:session-transcriptions",
+		"dev:session-translations": "yarn workspace streameth-new-server dev:session-translations",
 		"dev:clips": "yarn workspace streameth-new-server dev:clips",
 		"dev:video-importer": "yarn workspace streameth-new-server dev:video-importer",
 		
-    "start:stage-transcriptions": "yarn workspace streameth-new-server start:stage-transcriptions",
+    	"start:stage-transcriptions": "yarn workspace streameth-new-server start:stage-transcriptions",
 		"start:session-transcriptions": "yarn workspace streameth-new-server start:session-transcriptions",
+		"start:session-translations": "yarn workspace streameth-new-server start:session-translations",
 		"start:clips": "yarn workspace streameth-new-server start:clips",
 		"start:video-importer": "yarn workspace streameth-new-server start:video-importer",
 
