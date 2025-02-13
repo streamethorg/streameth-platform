@@ -17,8 +17,9 @@ import { IExtendedStage } from '@/lib/types';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const LivestreamTableCard = ({ stream }: { stream: IExtendedStage }) => {
-  const { stagesStatus, organizationId } = useOrganizationContext();
+  const { stagesStatus, subscriptionStatus, organizationId } = useOrganizationContext();
   const { isOverLimit } = stagesStatus;
+  const isLocked = isOverLimit || subscriptionStatus.hasExpired;
 
   return (
     <div key={stream._id} className="flex flex-col rounded-2xl border bg-white">
@@ -46,7 +47,7 @@ const LivestreamTableCard = ({ stream }: { stream: IExtendedStage }) => {
       </div>
       <div className="p-4 flex flex-row justify-between">
         <div className="flex flex-col">
-          {isOverLimit ? (
+          {isLocked ? (
             <div className="flex items-center gap-2">
               <Lock className="h-4 w-4 text-gray-500" />
               <p className="line-clamp-3 font-medium text-lg text-gray-500 text-ellipsis">

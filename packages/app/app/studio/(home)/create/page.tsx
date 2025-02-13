@@ -17,7 +17,7 @@ const CreateOrganization = () => {
       </CardHeader>
       <CardContent className="flex flex-row space-x-8">
         <div
-          className="w-1/2 cursor-pointer hover:bg-muted p-4 rounded-xl transition-colors"
+          className="w-1/2 cursor-pointer hover:bg-muted hover:scale-[1.02] p-4 rounded-xl transition-all shadow-sm hover:shadow-md border border-border hover:border-primary/50"
           onClick={() => {
             setAction('create');
             setStep(2);
@@ -31,7 +31,7 @@ const CreateOrganization = () => {
         </div>
 
         <div
-          className="w-1/2 cursor-pointer hover:bg-muted p-4 rounded-xl transition-colors"
+          className="w-1/2 cursor-pointer hover:bg-muted hover:scale-[1.02] p-4 rounded-xl transition-all shadow-sm hover:shadow-md border border-border hover:border-primary/50"
           onClick={() => {
             setAction('join');
             setStep(2);
