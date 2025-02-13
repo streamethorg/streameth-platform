@@ -1,5 +1,3 @@
-'use server';
-
 import { studioPageParams } from '@/lib/types';
 import { fetchSession } from '@/lib/services/sessionService';
 import { PlayerWithControls } from '@/components/ui/Player';
@@ -16,6 +14,18 @@ import SessionTranscriptions from './components/SessionTranscriptions';
 import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 import { IExtendedSession } from '@/lib/types';
+import { TranslationPanel } from './components/TranslationPanel';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+
+// Add this type to handle translations data structure
+type SerializableTranslation = {
+  [key: string]: {
+    status: ProcessingStatus;
+    assetId?: string;
+    text?: string;
+  };
+};
+
 const EditSession = async ({ params }: studioPageParams) => {
   if (!params.session) return notFound();
   const session = await fetchSession({
@@ -23,6 +33,18 @@ const EditSession = async ({ params }: studioPageParams) => {
   });
 
   if (!session?.playbackId) throw new Error('Session has no playbackId');
+
+  // Serialize the translations data
+  const serializedTranslations: SerializableTranslation = {};
+  if (session.translations) {
+    Object.entries(session.translations).forEach(([lang, data]) => {
+      serializedTranslations[lang] = {
+        status: data.status as ProcessingStatus, // Cast to ProcessingStatus
+        assetId: data.assetId,
+        text: data.text
+      };
+    });
+  }
 
   return (
     <div className="w-full">
@@ -64,6 +86,13 @@ const EditSession = async ({ params }: studioPageParams) => {
                 transcriptionState={session.transcripts?.status ?? null}
               />
               {/* <GetHashButton session={session} /> */}
+              {session.transcripts?.status === 'completed' && (
+                <TranslationPanel
+                  sessionId={String(session._id)} // Ensure ID is a string
+                  translations={serializedTranslations}
+                  organizationId={params.organization}
+                />
+              )}
               <div className="flex flex-col space-y-2">
                 {/* <Label>Publish to Socials</Label> */}
                 <div className="flex flex-row gap-2">
