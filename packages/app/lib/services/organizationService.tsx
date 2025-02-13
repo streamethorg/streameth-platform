@@ -22,8 +22,8 @@ export async function fetchOrganization({
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'force-cache',
-        next: { tags: [`organizations-${organizationId}`] },
+        // cache: 'force-cache',
+        // next: { tags: [`organizations-${organizationId}`] },
       }
     );
     const data = (await response.json()).data;
