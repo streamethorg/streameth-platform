@@ -52,7 +52,6 @@ export default class SessionService {
     if (data.stageId == undefined || data.stageId.toString().length === 0) {
       stageId = new Types.ObjectId().toString();
     } else {
-      // let stage = await Stage.findById(data.stageId);
       stageId = data.stageId.toString();
     }
     if (data.eventId == undefined || data.eventId.toString().length === 0) {
@@ -283,6 +282,15 @@ export default class SessionService {
     let stage = await Stage.findOne({
       'streamSettings.streamId': payload.parentId,
     });
+
+    if (!stage) {
+      console.error('❌ Stage not found for stream ID:', {
+        streamId: payload.parentId,
+        timestamp: new Date().toISOString()
+      });
+      throw new HttpException(404, `Stage not found for stream ID: ${payload.parentId}`);
+    }
+
     const asset = await getAsset(payload.assetId);
     const session = await this.create({
       name: `${stage.name}-Recording ${stage.recordingIndex}`.trim(),
@@ -396,6 +404,15 @@ export default class SessionService {
     const recordings = await getStreamRecordings(streamId);
     for (const recording of recordings) {
       let stage = await Stage.findOne({ 'streamSettings.streamId': streamId });
+      
+      if (!stage) {
+        console.error('❌ Stage not found for stream ID:', {
+          streamId,
+          timestamp: new Date().toISOString()
+        });
+        throw new HttpException(404, `Stage not found for stream ID: ${streamId}`);
+      }
+
       await this.create({
         name: recording.name,
         description: recording.name,
