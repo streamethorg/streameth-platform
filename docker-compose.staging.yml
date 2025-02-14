@@ -264,6 +264,27 @@ services:
         max-file: "3"
         mode: "non-blocking"
 
+  video-importer:
+    image: ghcr.io/streamethorg/streameth-platform/video-importer:staging
+    networks:
+      - traefik-public
+      - default
+    depends_on:
+      - mongodb
+      - redis
+    environment: *common-environment
+    deploy:
+      <<: *common-deploy
+      mode: replicated
+      replicas: 1
+    secrets: *common-secrets
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        mode: "non-blocking"
+
 networks:
   default:
   traefik-public:

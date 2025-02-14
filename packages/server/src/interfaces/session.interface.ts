@@ -36,6 +36,9 @@ export enum ProcessingStatus {
   failed = 'failed',
   clipCreated = 'clipCreated',
   completed = 'completed',
+  translating = 'translating',
+  generatingAudio = 'generating_audio',
+  processingVideo = 'processing_video'
 }
 
 export interface ISession {
@@ -84,6 +87,7 @@ export interface ISession {
       word: string;
     }[];
     text: string;
+    summary: string;
   };
   pretalxSessionCode?: string;
 }

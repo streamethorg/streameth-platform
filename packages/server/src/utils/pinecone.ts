@@ -224,7 +224,6 @@ export default class PineconeService {
         });
       }
     }
-    console.log('phraseArray', phraseArray);
     return phraseArray;
   }
 }

@@ -7,14 +7,14 @@ import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Badge } from '@/components/ui/badge';
 import { useTimelineContext } from '../Timeline/TimelineContext';
 import useTimeline from '../Timeline/useTimeline';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 const ZoomControls = () => {
-  const { videoRef } = useClipContext();
+  const { videoRef } = useClipPageContext();
   const {
     pixelsPerSecond,
     setPixelsPerSecond,
     timelineRef,
-    videoDuration,
+    videoDuration,  
     setTimelineWidth,
     playheadPosition,
   } = useTimelineContext();

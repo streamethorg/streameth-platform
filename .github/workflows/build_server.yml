@@ -38,6 +38,8 @@ jobs:
             dockerfile: ./packages/server/workers/session-transcriptions/Dockerfile
           - image: clips
             dockerfile: ./packages/server/workers/clips/Dockerfile
+          - image: video-importer
+            dockerfile: ./packages/server/workers/video-importer/Dockerfile
           - image: reel-creator
             dockerfile: ./packages/reel-creator/Dockerfile
     steps:
@@ -143,7 +145,7 @@ jobs:
           
           # Start all updates in parallel and capture PIDs
           pids=()
-          for service in server stage-transcriptions session-transcriptions clips reel-creator; do
+          for service in server stage-transcriptions session-transcriptions clips video-importer reel-creator; do
             update_service $service &
             pids+=($!)
           done

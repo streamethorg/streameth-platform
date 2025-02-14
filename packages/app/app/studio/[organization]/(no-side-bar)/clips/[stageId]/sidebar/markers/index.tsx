@@ -22,16 +22,14 @@ const LoadingSkeleton = () => (
 
 const MarkersList = ({
   markers,
-  organizationId,
 }: {
   markers: IExtendedMarker[];
-  organizationId: string;
 }) => (
   <div className="flex-grow overflow-y-auto pb-4">
     {markers.length > 0 ? (
       markers.map((marker: IExtendedMarker) => (
         <div key={marker._id} className="w-full px-4 py-2">
-          <Marker marker={marker} organizationId={organizationId} />
+          <Marker marker={marker} />
         </div>
       ))
     ) : (
@@ -43,15 +41,13 @@ const MarkersList = ({
 );
 
 const Markers = ({
-  sessionId,
   transcribeStatus,
   aiAnalysisStatus,
 }: {
-  sessionId: string;
   transcribeStatus: TranscriptionStatus | null;
   aiAnalysisStatus: ProcessingStatus | null;
 }) => {
-  const { isLoadingMarkers, markers, organizationId } = useMarkersContext();
+  const { isLoadingMarkers, markers } = useMarkersContext();
 
   if (isLoadingMarkers) {
     return <LoadingSkeleton />;
@@ -65,7 +61,6 @@ const Markers = ({
           Use AI to identify key moments in your video to create clips from.
         </p>
         <ExtractHighlightsForm
-          sessionId={sessionId}
           transcribeStatus={transcribeStatus}
           aiAnalysisStatus={aiAnalysisStatus}
         />
@@ -77,12 +72,11 @@ const Markers = ({
     <div className="h-full w-full border-l flex flex-col">
       <CardTitle className="w-full border-b bg-white p-2 space-y-2 text-lg flex-shrink-0">
         <ExtractHighlightsForm
-          sessionId={sessionId}
           transcribeStatus={transcribeStatus}
           aiAnalysisStatus={aiAnalysisStatus}
         />
       </CardTitle>
-      <MarkersList markers={markers} organizationId={organizationId} />
+      <MarkersList markers={markers} />
     </div>
   );
 };

@@ -1,10 +1,30 @@
 'use server';
 import { auth } from '@/auth';
 
-export const fetchClient = async (url: string, options: RequestInit = {}) => {
+export const fetchClient = async (
+  url: string,
+  options: RequestInit = {},
+  config: { logging?: boolean } = { logging: false }
+) => {
   const requestId = Math.random().toString(36).substring(7);
+  const log = (...args: Parameters<typeof console.log>) => {
+    if (config.logging) {
+      console.log(...args);
+    }
+  };
+  const warn = (...args: Parameters<typeof console.warn>) => {
+    if (config.logging) {
+      console.warn(...args);
+    }
+  };
+  const error = (...args: Parameters<typeof console.error>) => {
+    if (config.logging) {
+      console.error(...args);
+    }
+  };
+
   try {
-    console.log(`🌐 [${requestId}] Fetch client starting request:`, {
+    log(`🌐 [${requestId}] Fetch client starting request:`, {
       url,
       method: options.method || 'GET',
       hasBody: !!options.body,
@@ -21,17 +41,17 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
     const headers = new Headers(options.headers);
 
     if (session?.accessToken) {
-      console.log(`🔐 [${requestId}] Adding auth token to request`);
+      log(`🔐 [${requestId}] Adding auth token to request`);
       headers.set('Authorization', `Bearer ${session.accessToken}`);
     } else {
-      console.warn(`⚠️ [${requestId}] No auth token available for request:`, {
+      warn(`⚠️ [${requestId}] No auth token available for request:`, {
         url,
         method: options.method,
         timestamp: new Date().toISOString(),
       });
     }
 
-    console.log(`📡 [${requestId}] Making request with headers:`, {
+    log(`📡 [${requestId}] Making request with headers:`, {
       method: options.method,
       headers: Object.fromEntries(headers.entries()),
       hasBody: !!options.body,
@@ -51,7 +71,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
     const responseHeaders = Object.fromEntries(response.headers.entries());
     const contentType = responseHeaders['content-type'] || '';
 
-    console.log(`📥 [${requestId}] Received response:`, {
+    log(`📥 [${requestId}] Received response:`, {
       status: response.status,
       statusText: response.statusText,
       headers: responseHeaders,
@@ -74,7 +94,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
         errorDetails = 'Could not parse error response';
       }
 
-      console.error(`❌ [${requestId}] Request failed:`, {
+      error(`❌ [${requestId}] Request failed:`, {
         status: response.status,
         statusText: response.statusText,
         headers: responseHeaders,
@@ -87,7 +107,7 @@ export const fetchClient = async (url: string, options: RequestInit = {}) => {
 
     return response;
   } catch (e) {
-    console.error(`💥 [${requestId}] Error in fetch client:`, {
+    error(`💥 [${requestId}] Error in fetch client:`, {
       error: e,
       message: e instanceof Error ? e.message : 'Unknown error',
       stack: e instanceof Error ? e.stack : undefined,

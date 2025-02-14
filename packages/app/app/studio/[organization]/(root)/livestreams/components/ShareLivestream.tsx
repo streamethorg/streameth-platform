@@ -1,16 +1,16 @@
 'use client';
 import ShareButton from '@/components/misc/interact/ShareButton';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import React, { useEffect, useState } from 'react';
 
 const ShareLivestream = ({
   streamId,
   variant = 'ghost',
-  organization,
 }: {
-  organization: string;
   variant?: 'outline' | 'ghost' | 'primary' | 'default';
   streamId: string;
 }) => {
+  const { organizationId } = useOrganizationContext();
   const [url, setUrl] = useState('');
   useEffect(() => {
     // This code will only run on the client side
@@ -23,7 +23,7 @@ const ShareLivestream = ({
       <ShareButton
         className="justify-start items-center w-full gap-2"
         variant={variant}
-        url={`${url}/${organization}/livestream?stage=${streamId}`}
+        url={`${url}/${organizationId}/livestream?stage=${streamId}`}
         shareFor="livestream"
       />
     </div>

@@ -94,7 +94,7 @@ const AddMedia = ({
                 setIsOpen(false);
               }}
               className="border-none shadow-none"
-              variant="destructive-outline"
+              variant="destructiveOutline"
             >
               Cancel
             </Button>

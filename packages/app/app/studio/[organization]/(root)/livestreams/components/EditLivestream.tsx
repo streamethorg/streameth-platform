@@ -36,18 +36,17 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import moment from 'moment-timezone';
-
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 const EditLivestream = ({
   stage,
-  organizationSlug,
   btnText = 'Edit',
   variant = 'ghost',
 }: {
   stage: IExtendedStage;
-  organizationSlug: string;
   btnText?: string;
   variant?: 'outline' | 'ghost' | 'primary' | 'default' | 'link' | 'secondary';
 }) => {
+  const { organizationId } = useOrganizationContext();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMultiDate, setIsMultiDate] = useState(stage?.isMultipleDate);
@@ -165,7 +164,7 @@ const EditLivestream = ({
                           'Click to upload image here. Maximum image file size is 20MB. Best resolution of 1920 x 1080. Aspect ratio of 16:9.',
                       }}
                       className="m-auto w-full h-full text-black bg-neutrals-300"
-                      path={`stages/${organizationSlug}`}
+                      path={`stages/${organizationId}`}
                       {...field}
                     />
                   </FormControl>

@@ -11,14 +11,10 @@ import EditLivestream from '../../components/EditLivestream';
 import ShareAndEmbed from './ShareAndEmbed';
 import StreamConfigWithPlayer from './StreamConfigWithPlayer';
 import StreamHealth from './StreamHealth';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const StageControls = ({
-  organization,
-  stream,
-}: {
-  organization: IExtendedOrganization;
-  stream: IExtendedStage;
-}) => {
+const StageControls = ({ stream }: { stream: IExtendedStage }) => {
+  const { organizationId } = useOrganizationContext();
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
 
@@ -36,9 +32,11 @@ const StageControls = ({
       return;
     }
 
-    setInterval(() => {
+    const interval = setInterval(() => {
       checkIsLive();
     }, 5000);
+
+    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stream?.streamSettings?.isActive]);
 
@@ -54,22 +52,14 @@ const StageControls = ({
             <StreamHealth isLive={isLive} stream={stream} />
           </div>
           <div className="ml-auto justify-self-end flex flex-row gap-2">
-            <EditLivestream
-              stage={stream}
-              organizationSlug={organization.slug!}
-              variant="outline"
-              btnText="Edit"
-            />
+            <EditLivestream stage={stream} variant="outline" btnText="Edit" />
             <ShareAndEmbed
-              organizationSlug={organization.slug as string}
               streamId={stream._id as string}
               playerName={stream?.name}
             />
 
             <Link
-              href={`/${organization.slug as string}/livestream?stage=${
-                stream._id
-              }`}
+              href={`/studio/${organizationId}/livestream?stage=${stream._id}`}
               target="_blank"
             >
               <Button variant="outline">
@@ -80,9 +70,7 @@ const StageControls = ({
 
             {isLive ? (
               <Link
-                href={`/studio/${organization.slug as string}/clips/${
-                  stream._id
-                }?videoType=livestream`}
+                href={`/studio/${organizationId}/clips/${stream._id}?videoType=livestream`}
                 target="_blank"
               >
                 <Button variant="primary" className="flex gap-1 items-center">

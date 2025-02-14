@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import Clip from './Clip';
 import { useClipsSidebar } from './ClipsContext';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 
 const SessionSidebar = () => {
   const {
@@ -25,7 +25,7 @@ const SessionSidebar = () => {
     isLoading,
   } = useClipsSidebar();
 
-  const { setIsInputFocused } = useClipContext();
+  const { setIsInputFocused } = useClipPageContext();
 
   return (
     <div className="h-full w-full flex flex-col">

@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import {
   createMarker,
   deleteMarker,
@@ -20,7 +20,7 @@ export const createMarkerAction = async ({ marker }: { marker: IMarker }) => {
     if (!response) {
       return { error: 'Error creating markers' };
     }
-    revalidatePath('/studio');
+    revalidateTag(`markers-${marker.organizationId}`);
     return { data: response };
   } catch (error: any) {
     return {
@@ -40,7 +40,7 @@ export const updateMarkersAction = async ({
   if (!response) {
     throw new Error('Error updating markers');
   }
-  revalidatePath('/studio');
+  revalidateTag(`markers-${markers.organizationId}`);
   return response;
 };
 
@@ -58,7 +58,7 @@ export const updateMultipleMarkersAction = async ({
   if (!response) {
     throw new Error('Error updating markers');
   }
-  revalidatePath('/studio');
+  revalidateTag(`markers-${organizationId}`);
   return response;
 };
 
@@ -76,7 +76,7 @@ export const deleteMarkerAction = async ({
   if (!response) {
     throw new Error('Error deleting marker');
   }
-  revalidatePath('/studio');
+  revalidateTag(`markers-${organizationId}`);
   return response;
 };
 
@@ -98,7 +98,7 @@ export const importMarkersAction = async ({
       type,
       url,
     });
-    revalidatePath('/studio');
+    revalidateTag(`markers-${organizationId}`);
     return { data: response };
   } catch (error) {
     return { error: 'Error importing markers' };

@@ -10,6 +10,7 @@ import {
   createStream,
   deleteStream,
   getStreamInfo,
+  createAssetFromUrl,
 } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import { getSourceType } from '@utils/util';
@@ -158,48 +159,6 @@ export default class StageService {
     );
   }
 
-  async createHlsStage(d: {
-    name: string;
-    url: string;
-    organizationId: string;
-  }): Promise<IStage> {
-    try {
-      let hlsUrl = '';
-      const source = getSourceType(d.url);
-      if (source.type === 'youtube' || source.type === 'twitter') {
-        let output = await youtubedl(d.url, {
-          dumpSingleJson: true,
-          noWarnings: true,
-          preferFreeFormats: true,
-          addHeader: source.header,
-        }) as {
-          formats: Array<{
-            protocol: string;
-            ext: string;
-            resolution: string;
-            manifest_url: string;
-          }>;
-        };
-        const hlsFormat = output.formats.find(
-          (format) =>
-            format.protocol === 'm3u8_native' &&
-            format.ext === 'mp4' &&
-            source.resolutions?.includes(format.resolution),
-        );
-        hlsUrl = hlsFormat.manifest_url;
-      } else {
-        hlsUrl = d.url;
-      }
-      return await this.controller.store.create(d.name, {
-        name: d.name,
-        source: { url: d.url, type: source.type, m3u8Url: hlsUrl },
-        organizationId: d.organizationId,
-        type: StageType.custom,
-      });
-    } catch (e) {
-      throw new HttpException(400, 'Error getting HLS URL');
-    }
-  }
 
   async createMetadata(stageId: string) {
     let stage = await Stage.findById(stageId);

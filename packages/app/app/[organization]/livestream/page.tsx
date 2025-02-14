@@ -41,13 +41,6 @@ export default async function Livestream({
   params,
   searchParams,
 }: OrganizationPageProps) {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
-
-  if (!organization) {
-    return notFound();
-  }
 
   if (!searchParams.stage) return notFound();
 
@@ -72,13 +65,13 @@ export default async function Livestream({
         <div className="px-4 md:px-0">
           <div className="md:hidden">
             <WatchGrid
-              organizationId={organization._id}
+              organizationId={params.organization}
               organizationSlug={params.organization}
             />
           </div>
           <div className="hidden md:block">
             <WatchGrid
-              organizationId={organization._id}
+              organizationId={params.organization}
               organizationSlug={params.organization}
               gridLength={6}
             />

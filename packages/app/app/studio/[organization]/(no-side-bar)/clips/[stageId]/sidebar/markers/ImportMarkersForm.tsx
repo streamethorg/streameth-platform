@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { importMarkersAction } from '@/lib/actions/marker';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 import {
   Card,
   CardContent,
@@ -33,12 +33,13 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { useMarkersContext } from './markersContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const ImportMarkersForm = () => {
-  const { stageId } = useClipContext();
+  const { stageId } = useClipPageContext();
+  const { organizationId } = useOrganizationContext();
   const [isImporting, setIsImporting] = useState(false);
-  const { setIsImportingMarkers, fetchAndSetMarkers, organizationId } =
-    useMarkersContext();
+  const { setIsImportingMarkers, fetchAndSetMarkers } = useMarkersContext();
   const form = useForm<z.infer<typeof markersImportSchema>>({
     resolver: zodResolver(markersImportSchema),
     defaultValues: {

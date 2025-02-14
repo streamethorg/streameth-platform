@@ -1,7 +1,8 @@
+'use client';
+
 import React from 'react';
 import CreateOrganizationForm from '@/app/studio/(home)/components/CreateOrganizationForm';
-import { IExtendedUser, studioPageParams } from '@/lib/types';
-import { fetchOrganization } from '@/lib/services/organizationService';
+import { studioPageParams } from '@/lib/types';
 import {
   Card,
   CardContent,
@@ -9,9 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { fetchUserAction } from '@/lib/actions/users';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const Settings = async ({
+const Settings = ({
   params,
 }: {
   params: studioPageParams['params'];
@@ -19,12 +20,7 @@ const Settings = async ({
     settingsActiveTab?: string;
   };
 }) => {
-  const organization = await fetchOrganization({
-    organizationSlug: params.organization,
-  });
-  const userData: IExtendedUser | null = await fetchUserAction();
-  if (!organization || !userData) return null;
-
+  const { organization } = useOrganizationContext();
   return (
     <div className="mx-auto my-12 flex w-full max-w-4xl">
       <Card className="h-full w-full rounded-r-xl border bg-white shadow-none">
@@ -35,11 +31,7 @@ const Settings = async ({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <CreateOrganizationForm
-            userAddress={userData?.email!}
-            disableName={true}
-            organization={organization}
-          />
+          <CreateOrganizationForm disableName={true} organization={organization} />
         </CardContent>
       </Card>
     </div>

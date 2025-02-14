@@ -1,5 +1,5 @@
 import usePlayer from '@/lib/hooks/usePlayer';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 import { useEffect, useRef } from 'react';
 
 // Helper function to determine if a word should be highlighted
@@ -16,7 +16,7 @@ const TranscriptText = ({
 }: {
   transcribe: { word: string; start: number; end: number }[];
 }) => {
-  const { videoRef } = useClipContext();
+  const { videoRef } = useClipPageContext();
   const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
   const containerRef = useRef<HTMLDivElement>(null);
   const TIME_WINDOW = 30 * 60; // 30 minutes in seconds

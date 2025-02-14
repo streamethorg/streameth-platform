@@ -22,7 +22,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { createStageAction } from '@/lib/actions/stages';
 import { StageSchema } from '@/lib/schema';
-import { IExtendedOrganization } from '@/lib/types';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -37,16 +36,16 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { LuRadio } from 'react-icons/lu';
-import { useSubscription } from '@/lib/hooks/useSubscription';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { Radio } from 'lucide-react';
+import FeatureButton from '@/components/ui/feature-button';
 
 const CreateLivestreamModal = ({
-  organization,
   show,
   variant = 'outline',
   className,
 }: {
   show?: boolean;
-  organization: IExtendedOrganization;
   variant?: 'outline' | 'ghost' | 'primary' | 'default';
   className?: string;
 }) => {
@@ -57,9 +56,8 @@ const CreateLivestreamModal = ({
     'instant' | 'schedule' | undefined
   >();
   const router = useRouter();
-  const { canUseFeatures, organizationSlug } = useSubscription(
-    organization._id.toString()
-  );
+  const { canUseFeatures, subscriptionStatus, organization } =
+    useOrganizationContext();
 
   const handleClick = (e: React.MouseEvent) => {
     setOpen(true);
@@ -123,7 +121,7 @@ const CreateLivestreamModal = ({
         toast.success(`Stream ${!isSchedule ? 'created' : 'scheduled'}`);
         streamId = response?._id as string;
 
-        router.push(`/studio/${organization?.slug}/livestreams/${streamId}`);
+        router.push(`/studio/${organization?._id}/livestreams/${streamId}`);
       })
       .catch((error) => {
         const errorMessage = error.message || 'Failed to create livestream';
@@ -134,6 +132,19 @@ const CreateLivestreamModal = ({
         setIsLoading(false);
         handleModalClose();
       });
+  }
+
+  if (!canUseFeatures && !subscriptionStatus.hasAvailableStages) {
+    return (
+      <FeatureButton
+        variant="primary"
+        className="flex items-center gap-2"
+        forceLockedState={true}
+      >
+        <Radio className="w-5 h-5" />
+        Create Livestream
+      </FeatureButton>
+    );
   }
 
   return (
@@ -201,7 +212,7 @@ const CreateLivestreamModal = ({
                           resize: true,
                         }}
                         className="m-auto w-full h-full text-black bg-neutrals-300"
-                        path={`livestreams/${organization?.slug}`}
+                        path={`livestreams/${organization?._id}`}
                         {...field}
                       />
                     </FormControl>

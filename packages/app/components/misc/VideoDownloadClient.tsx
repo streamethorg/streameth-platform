@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button, ButtonProps } from '@/components/ui/button';
 import { LuDownload } from 'react-icons/lu';
 import { toast } from 'sonner';
 import { apiUrl, cn } from '@/lib/utils/utils';
@@ -15,16 +15,7 @@ const VideoDownloadClient = ({
 }: {
   videoName: string;
   assetId?: string;
-  variant?:
-    | 'primary'
-    | 'default'
-    | 'destructive'
-    | 'destructive-outline'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'green'
-    | 'link';
+  variant?: ButtonProps['variant'];
   className?: string;
   collapsable?: boolean;
 }) => {

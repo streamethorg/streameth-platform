@@ -278,7 +278,7 @@ const CreateNFTForm = ({
               <Link href={`/studio/${organizationSlug}/nfts`}>
                 <Button
                   className="border-none shadow-none"
-                  variant="destructive-outline"
+                  variant="destructiveOutline"
                 >
                   Cancel
                 </Button>
@@ -306,8 +306,8 @@ const CreateNFTForm = ({
                   {step == 1
                     ? 'Continue'
                     : type == 'multiple'
-                    ? 'Publish Collection'
-                    : 'Publish VideoNFT'}
+                      ? 'Publish Collection'
+                      : 'Publish VideoNFT'}
                 </Button>
               )}
             </div>

@@ -2,7 +2,6 @@ import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedMarker } from '../types';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { fetchClient } from './fetch-client';
-
 // create marker for a stage
 export async function createMarker({
   marker,
@@ -16,7 +15,6 @@ export async function createMarker({
     },
     body: JSON.stringify(marker),
   });
-
   if (!response.ok) {
     throw 'Error creating marker';
   }
@@ -39,7 +37,6 @@ export const updateMarkers = async ({
       },
       body: JSON.stringify(rest),
     });
-
     if (!response.ok) {
       throw new Error('Error updating markers');
     }
@@ -86,10 +83,7 @@ export async function fetchMarkers({
 }): Promise<IExtendedMarker[]> {
   try {
     const response = await fetch(
-      `${apiUrl()}/markers?organization=${organizationId}&stageId=${stageId}`,
-      {
-        cache: 'no-cache',
-      }
+      `${apiUrl()}/markers?organization=${organizationId}&stageId=${stageId}`
     );
     const data = (await response.json()).data;
     if (!data) {

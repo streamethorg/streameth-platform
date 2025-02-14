@@ -7,10 +7,8 @@ import {
   joinOrganization,
   updateOrganization,
 } from '@/lib/services/organizationService';
-import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
+import { revalidateTag } from 'next/cache';
 import { IOrganization } from 'streameth-new-server/src/interfaces/organization.interface';
-import { redirect } from 'next/navigation';
 import { IExtendedOrganization } from '../types';
 
 export const createOrganizationAction = async ({
@@ -23,11 +21,10 @@ export const createOrganizationAction = async ({
       ...organization,
     },
   });
-
+  revalidateTag(`organizations-${organization._id}`);
   if (!response) {
     throw new Error('Error creating organization');
   }
-  revalidatePath('/studio');
   return response;
 };
 
@@ -43,12 +40,10 @@ export const joinOrganizationAction = async ({
       invitationCode,
       email,
     });
-
     if (!response) {
       throw new Error('Error joining organization');
     }
 
-    revalidatePath('/studio');
     return response;
   } catch (error) {
     console.error('Error in join organization action:', error);
@@ -66,11 +61,10 @@ export const updateOrganizationAction = async ({
       ...organization,
     },
   });
-
+  revalidateTag(`organizations-${organization._id}`);
   if (!response) {
     throw new Error('Error updating organization');
   }
-  revalidatePath('/studio');
   return response;
 };
 
@@ -85,11 +79,10 @@ export const addOrganizationMemberAction = async ({
     organizationId,
     memberAddress,
   });
-
+  revalidateTag(`organizations-${organizationId}`);
   if (!response) {
     throw new Error('Error adding organization member');
   }
-  revalidatePath('/studio');
   return response;
 };
 
@@ -105,7 +98,7 @@ export const deleteTeamMemberAction = async ({
       memberEmail,
       organizationId,
     });
-    revalidatePath('/studio');
+    revalidateTag(`organizations-${organizationId}`);
     return response;
   } catch (error) {
     console.error('Error deleting team member:', error);
@@ -127,6 +120,6 @@ export const deleteDestinationAction = async ({
   if (!response) {
     throw new Error('Error deleting team member action');
   }
-  revalidatePath('/studio');
+  revalidateTag(`organizations-${organizationId}`);
   return response;
 };

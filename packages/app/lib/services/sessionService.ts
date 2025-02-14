@@ -7,7 +7,6 @@ import {
 } from '../types';
 import { apiUrl } from '@/lib/utils/utils';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
-import { revalidatePath } from 'next/cache';
 import { Asset } from 'livepeer/models/components/asset';
 import { fetchClient } from './fetch-client';
 
@@ -19,7 +18,7 @@ interface ApiParams {
   size?: number;
   onlyVideos?: boolean;
   published?: string;
-  speakerIds?: string[]; // Assuming speakerIds is an array of strings
+  speakerIds?: string[];
   itemDate?: string;
   type?: string;
   itemStatus?: string;
@@ -35,6 +34,29 @@ function constructApiUrl(baseUrl: string, params: ApiParams): string {
     })
     .join('&');
   return `${baseUrl}?${queryParams}`;
+}
+
+export async function importVideoFromUrl({
+  name,
+  url,
+  organizationId,
+}: {
+  name: string;
+  url: string;
+  organizationId: string;
+}) {
+  const response = await fetchClient(`${apiUrl()}/sessions/import`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, url, organizationId }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+  return (await response.json()).data;
 }
 
 export async function fetchAllSessions({
@@ -83,11 +105,13 @@ export async function fetchAllSessions({
     itemDate,
     clipable,
   };
-  console.log(constructApiUrl(`${apiUrl()}/sessions`, params));
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {
-      cache: 'no-store',
+      cache: 'no-cache',
+      next: {
+        tags: [`sessions-${organizationId}`],
+      },
     }
   );
   const a = await response.json();
@@ -107,11 +131,9 @@ export const createSession = async ({
       body: JSON.stringify(session),
     });
 
-    console.log('response', response);
     if (!response.ok) {
       throw 'Error creating session';
     }
-    revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
     console.log('error in createSession', e);
@@ -259,7 +281,6 @@ export const createClip = async ({
       throw responseData.message;
     }
 
-    revalidatePath('/studio');
     return responseData;
   } catch (e) {
     console.error('Error in createClip:', {
@@ -355,7 +376,6 @@ export const createAsset = async ({
     if (!response.ok) {
       throw 'Error creating asset';
     }
-    revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
     console.log('error in createAsset', e);
@@ -383,7 +403,6 @@ export const generateThumbnail = async ({
     if (!response.ok) {
       throw 'Error generating thumbnail';
     }
-    revalidatePath('/studio');
     return (await response.json()).data;
   } catch (e) {
     throw e;
@@ -513,7 +532,6 @@ export const saveSessionImport = async ({
     if (!response.ok) {
       throw 'Error importing session';
     }
-    revalidatePath('/studio');
     return (await response.json()).message;
   } catch (e) {
     console.log('error in sessionImport', e);
@@ -542,7 +560,6 @@ export const generateTranscriptions = async ({
     if (!response.ok) {
       throw 'Error importing session';
     }
-    revalidatePath('/studio');
     return (await response.json()).message;
   } catch (e) {
     console.log('error in sessionImport', e);

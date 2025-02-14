@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import Combobox from '@/components/ui/combo-box';
 import { useRouter } from 'next/navigation';
-import { LuEye, LuPlus, LuScissorsLineDashed } from 'react-icons/lu';
-import { useClipContext } from '../ClipContext';
+import { LuScissorsLineDashed } from 'react-icons/lu';
+import { useClipPageContext } from '../ClipPageContext';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 interface Recording {
   label: string;
   value: string;
@@ -17,17 +18,16 @@ interface SessionSelectorProps {
   recordings: Recording[];
   currentSession: Recording;
   stageName: string;
-  organization: string;
 }
 
 const SessionSelector = ({
   recordings,
   currentSession,
   stageName,
-  organization,
 }: SessionSelectorProps) => {
   const router = useRouter();
-  const { isCreatingClip, setIsCreatingClip } = useClipContext();
+  const { organizationId } = useOrganizationContext();
+  const { isCreatingClip, setIsCreatingClip } = useClipPageContext();
   const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
 
   const isDisabled =
@@ -36,7 +36,7 @@ const SessionSelector = ({
   return (
     <div className="p-2 flex w-full bg-white flex-row items-center">
       <Link
-        href={`/studio/${organization}/library?clipable=true`}
+        href={`/studio/${organizationId}/library?clipable=true`}
         aria-label="Exit to library"
       >
         <Button variant="ghost" className="p-2">

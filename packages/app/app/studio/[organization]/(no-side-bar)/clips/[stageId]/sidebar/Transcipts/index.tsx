@@ -1,20 +1,17 @@
 'use client';
 import SessionTranscriptions from '@/app/studio/[organization]/(root)/library/[session]/components/SessionTranscriptions';
 import TranscriptText from './TranscriptText';
-import { useMarkersContext } from '../markers/markersContext';
 import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { useClipPageContext } from '../../ClipPageContext';
 const Transcripts = ({
   transcribe,
-  sessionId,
   transcribeStatus,
 }: {
   transcribe: { word: string; start: number; end: number }[];
-  sessionId?: string;
   transcribeStatus: TranscriptionStatus | null;
 }) => {
-  const { organizationId } = useMarkersContext();
-
-  console.log('transcribe', transcribe, transcribeStatus);
+  const { sessionId } = useClipPageContext();
   if (transcribe?.length === 0) {
     return (
       <div className="flex flex-col h-full">
@@ -25,8 +22,7 @@ const Transcripts = ({
             transcribe it
           </p>
           <SessionTranscriptions
-            organizationId={organizationId}
-            sessionId={sessionId || ''}
+            sessionId={sessionId}
             transcriptionState={transcribeStatus ?? null}
           />
           {transcribeStatus === 'processing' && (

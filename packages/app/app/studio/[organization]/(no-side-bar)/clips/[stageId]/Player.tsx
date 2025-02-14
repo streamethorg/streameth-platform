@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { useClipContext } from './ClipContext';
+import { useClipPageContext } from './ClipPageContext';
 import usePlayer from '@/lib/hooks/usePlayer';
 
 export interface HlsPlayerProps {
@@ -15,18 +15,16 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     isLoading,
     videoRef,
     setHls,
-    playbackStatus,
     setPlaybackStatus,
-  } = useClipContext();
+  } = useClipPageContext();
 
   const { currentTime } = usePlayer(videoRef);
   const playbackRef = useRef({ progress: 0, offset: 0 });
   const [error, setError] = useState<string | null>(null);
-
   // Constants
-  const corsProxyUrl = process.env.NEXT_PUBLIC_CORS_PROXY_URL || '';
-  const proxyBaseUrl = `${corsProxyUrl}/raw?url=`;
-  const proxiedSrc = `${proxyBaseUrl}${encodeURIComponent(src)}`;
+  const corsProxyUrl = 'https://oyster-app-9xjon.ondigitalocean.app';
+  const proxyBaseUrl = `${corsProxyUrl}/`;
+  const proxiedSrc = `${proxyBaseUrl}${src}`;
 
   // Helper functions
   const handleFragmentChange = (event: any, data: any) => {
@@ -48,17 +46,20 @@ const ReactHlsPlayer: React.FC<HlsPlayerProps> = ({ src, type }) => {
     const hlsConfig = {
       debug: false,
       xhrSetup: (xhr: XMLHttpRequest, url: string) => {
-        if (type === 'youtube') {
-          const proxiedUrl = `${proxyBaseUrl}${encodeURIComponent(url)}`;
-          xhr.open('GET', proxiedUrl, true);
+        if (type === 'customUrl') {
+          // Ensure we don't double-proxy already proxied URLs
+          const urlToProxy = url.startsWith(corsProxyUrl) ? url : `${proxyBaseUrl}${url}`;
+          xhr.open('GET', urlToProxy, true);
         }
       },
     };
 
     const hls = new Hls(hlsConfig);
-    setHls(hls);
+    setHls(hls);  
 
-    hls.loadSource(type === 'youtube' ? proxiedSrc : src);
+    // For the initial manifest load
+    const sourceUrl = type === 'customUrl' ? proxiedSrc : src;
+    hls.loadSource(sourceUrl);
     hls.attachMedia(videoRef.current);
 
     // Event listeners

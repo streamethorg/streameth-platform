@@ -99,6 +99,14 @@ services:
     ports:
       - "4000:4000"
 
+  video-importer:
+    <<: *common-worker
+    build:
+      context: .
+      dockerfile: packages/server/workers/video-importer/Dockerfile.dev
+    environment:
+      <<: *common-environment
+
   stage-transcriptions:
     <<: *common-worker
     build:

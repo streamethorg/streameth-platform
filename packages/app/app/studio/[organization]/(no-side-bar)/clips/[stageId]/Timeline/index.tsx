@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
@@ -9,7 +9,7 @@ import { useTimelineContext } from './TimelineContext';
 import TimelineMarker from '../sidebar/markers/TimelineMarker';
 import useTimeline from './useTimeline';
 const Timeline = () => {
-  const { dragging, isLoading } = useClipContext();
+  const { dragging, isLoading } = useClipPageContext();
 
   const { timelineRef, timelineWidth, handleTimelineClick, isPreviewMode } =
     useTimelineContext();

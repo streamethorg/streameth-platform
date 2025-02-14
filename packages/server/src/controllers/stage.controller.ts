@@ -40,18 +40,6 @@ export class StageController extends Controller {
     return SendApiResponse('stage created', stage);
   }
 
-  /**
-   * @summary Create HLS Stage
-   */
-  @Security('jwt', ['org'])
-  @SuccessResponse('201')
-  @Post('hls')
-  async createHlsStage(
-    @Body() body: CreateHlsStageDto,
-  ): Promise<IStandardResponse<IStage>> {
-    const stage = await this.stageService.createHlsStage(body);
-    return SendApiResponse('HLS stage created', stage);
-  }
 
   /**
    * @summary Update Stage

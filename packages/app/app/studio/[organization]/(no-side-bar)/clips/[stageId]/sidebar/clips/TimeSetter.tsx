@@ -2,9 +2,9 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useClipContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipContext';
+import { useClipPageContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipPageContext';
 import { Badge } from '@/components/ui/badge';
-import { useTrimmControlsContext } from '../[stageId]/Timeline/TrimmControlsContext';
+import { useTrimmControlsContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/Timeline/TrimmControlsContext';
 import usePlayer from '@/lib/hooks/usePlayer';
 
 type TimeSetterProps = {
@@ -13,7 +13,7 @@ type TimeSetterProps = {
 };
 
 const TimeSetter: React.FC<TimeSetterProps> = ({ label, type }) => {
-  const { videoRef } = useClipContext();
+  const { videoRef } = useClipPageContext();
 
   const { currentTime } = usePlayer(videoRef);
   const { setStartTime, setEndTime, startTime, endTime } =

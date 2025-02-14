@@ -1,46 +1,33 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { IExtendedSession } from '@/lib/types';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
-import { Loader2, Trash2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
 import * as z from 'zod';
 import { sessionSchema } from '@/lib/schema';
-import DeleteAsset from '../../../components/DeleteAsset';
-
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { LuArrowLeft } from 'react-icons/lu';
+import Link from 'next/link';
 interface FormActionsProps {
   form: UseFormReturn<z.infer<typeof sessionSchema>>;
-  session: IExtendedSession;
-  organizationSlug: string;
   isLoading: boolean;
 }
 
-const FormActions = ({
-  form,
-  session,
-  organizationSlug,
-  isLoading,
-}: FormActionsProps) => {
+const FormActions = ({ form, isLoading }: FormActionsProps) => {
+  const { organizationId } = useOrganizationContext();
   return (
-    <div className="flex justify-start items-start space-x-2">
-      <DeleteAsset
-        session={session}
-        href={`/studio/${organizationSlug}/library`}
-        TriggerComponent={
-          <Button
-            variant={'destructive-outline'}
-            className="space-x-2 hover:bg-gray-100"
-          >
-            <Trash2 />
-            <p>Delete video</p>
-          </Button>
-        }
-      />
+    <div className="flex justify-start items-start gap-2">
+      <Link href={`/studio/${organizationId}/library`}>
+        <Button variant="secondary" className="gap-2">
+          <LuArrowLeft className="h-4 w-4" />
+          <p>Back</p>
+        </Button>
+      </Link>
       <Button
         disabled={getFormSubmitStatus(form) || isLoading}
         type="submit"
-        variant={'primary'}
+        variant={'outlinePrimary'}
       >
         {isLoading ? (
           <>

@@ -1,25 +1,15 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { useSubscription } from '@/lib/hooks/useSubscription';
+import { Button, ButtonProps } from '@/components/ui/button';
 import { Lock } from 'lucide-react';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils/utils';
 import { useRouter } from 'next/navigation';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 interface FeatureButtonProps {
   children: ReactNode;
-  organizationId: string;
-  variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link'
-    | 'primary'
-    | 'destructive-outline'
-    | 'outlinePrimary';
+  variant?: ButtonProps['variant'];
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
@@ -31,7 +21,6 @@ interface FeatureButtonProps {
 
 const FeatureButton = ({
   children,
-  organizationId,
   variant = 'default',
   className,
   onClick,
@@ -42,14 +31,13 @@ const FeatureButton = ({
   forceLockedState = false,
 }: FeatureButtonProps) => {
   const router = useRouter();
-  const { canUseFeatures, isLoading, organizationSlug } =
-    useSubscription(organizationId);
+  const { canUseFeatures, organizationId } = useOrganizationContext();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!canUseFeatures || forceLockedState) {
       event.preventDefault();
       event.stopPropagation();
-      router.push(`/studio/${organizationSlug}/payments`);
+      router.push(`/studio/${organizationId}/payments`);
       return;
     }
     onClick?.();
@@ -62,7 +50,7 @@ const FeatureButton = ({
       variant={variant}
       className={cn(className, 'relative', isLocked && 'opacity-60')}
       onClick={handleClick}
-      disabled={disabled || isLoading}
+      disabled={disabled}
       size={size}
       type={type}
       loading={loading}

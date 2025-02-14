@@ -2,7 +2,7 @@
 
 import { createClipAction, createSessionAction } from '@/lib/actions/sessions';
 import { useState, useEffect } from 'react';
-import { useClipContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipContext';
+import { useClipPageContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/ClipPageContext';
 import { clipSchema } from '@/lib/schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,12 +12,14 @@ import { SessionType } from 'streameth-new-server/src/interfaces/session.interfa
 import { useMarkersContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/markers/markersContext';
 import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
 import { useTrimmControlsContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/Timeline/TrimmControlsContext';
+import { useOrganizationContext } from '../context/OrganizationContext';
 
 export const useCreateClip = () => {
-  const { stageId, setIsCreatingClip, videoRef, clipUrl } = useClipContext();
+  const { stageId, setIsCreatingClip, videoRef, clipUrl } =
+    useClipPageContext();
   const { startTime, endTime } = useTrimmControlsContext();
-
-  const { markers, selectedMarkerId, setSelectedMarkerId, organizationId } =
+  const { organizationId } = useOrganizationContext();
+  const { markers, selectedMarkerId, setSelectedMarkerId } =
     useMarkersContext();
   const { fetchSessions } = useClipsSidebar();
 

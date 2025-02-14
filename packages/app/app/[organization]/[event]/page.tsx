@@ -29,7 +29,7 @@ export default async function EventHome({
   if (!organization) {
     return notFound();
   } else {
-    redirect(`/${organization.slug}`);
+    redirect(`/${organization._id}`);
     return 'loading...';
   }
 

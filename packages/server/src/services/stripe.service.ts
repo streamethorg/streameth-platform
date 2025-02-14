@@ -144,11 +144,9 @@ export default class StripeService {
             // Calculate expiry date based on subscription status
             let expiryDate;
             if (hasActiveSubscription) {
-                // If active, add days to current expiration date
                 expiryDate = new Date(organization.expirationDate);
                 expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
             } else {
-                // If expired or new, start from current date
                 expiryDate = new Date();
                 expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
             }
@@ -186,7 +184,8 @@ export default class StripeService {
                         lastPaymentSubtotal: session.amount_subtotal,
                         lastPaymentDate: new Date(),
                         expirationDate: expiryDate,
-                        lastPaymentDiscount: session.total_details?.amount_discount || 0
+                        lastPaymentDiscount: session.total_details?.amount_discount || 0,
+                        lastCheckoutSessionId: session.id
                     }
                 }
             );
@@ -206,85 +205,6 @@ export default class StripeService {
             }
         } catch (error) {
             console.error('❌ Failed to handle checkout completion:', error);
-            throw error;
-        }
-    }
-
-    async handleChargeSucceeded(charge: any): Promise<void> {
-        try {
-            const organization = await this.getOrganizationFromMetadata(charge.metadata);
-            if (!organization) return;
-
-            const { streamingDays, numberOfStages } = charge.metadata;
-            const streamingDaysNum = parseInt(streamingDays);
-            const numberOfStagesNum = parseInt(numberOfStages);
-
-            // Check if organization has an active subscription
-            const now = new Date();
-            const hasActiveSubscription = organization.expirationDate && organization.expirationDate > now;
-
-            // Calculate expiry date based on subscription status
-            let expiryDate;
-            if (hasActiveSubscription) {
-                // If active, add days to current expiration date
-                expiryDate = new Date(organization.expirationDate);
-                expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
-            } else {
-                // If expired or new, start from current date
-                expiryDate = new Date();
-                expiryDate.setDate(expiryDate.getDate() + streamingDaysNum);
-            }
-
-            // Calculate new total stages
-            const newPaidStages = hasActiveSubscription 
-                ? (organization.paidStages || 0) + numberOfStagesNum 
-                : numberOfStagesNum;
-
-            console.log('📅 Processing successful charge:', {
-                organizationId: organization._id,
-                chargeId: charge.id,
-                streamingDays: streamingDaysNum,
-                numberOfStages: numberOfStagesNum,
-                currentExpiryDate: organization.expirationDate,
-                newExpiryDate: expiryDate,
-                currentStages: organization.paidStages,
-                newTotalStages: newPaidStages,
-                isExtending: hasActiveSubscription
-            });
-
-            const result = await Organization.updateOne(
-                { _id: organization._id },
-                {
-                    $set: {
-                        paymentStatus: 'active',
-                        streamingDays: hasActiveSubscription 
-                            ? (organization.streamingDays || 0) + streamingDaysNum 
-                            : streamingDaysNum,
-                        paidStages: newPaidStages,
-                        lastPaymentAmount: charge.amount_total !== undefined ? charge.amount_total : charge.amount,
-                        lastPaymentDate: new Date(),
-                        expirationDate: expiryDate,
-                    }
-                }
-            );
-
-            if (result.modifiedCount === 0) {
-                console.log('⚠️ No update performed for organization:', organization._id);
-            } else {
-                console.log('✅ Organization subscription updated:', {
-                    organizationId: organization._id,
-                    chargeId: charge.id,
-                    expiryDate,
-                    totalStages: newPaidStages,
-                    isExtension: hasActiveSubscription
-                });
-            }
-        } catch (error) {
-            console.error('❌ Failed to handle charge success:', {
-                error,
-                chargeId: charge.id,
-                organizationId: charge.metadata?.organizationId
-            });
             throw error;
         }
     }

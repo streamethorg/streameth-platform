@@ -109,7 +109,7 @@ export interface IPagination {
 export interface studioPageParams {
   params: {
     organization: string;
-    session: string;
+    session?: string;
     eventId?: string;
   };
   searchParams: {
@@ -282,7 +282,7 @@ export type TimeSettings = {
   displayTime: number;
 };
 
-export type ClipContextType = {
+export type ClipPageContextType = {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   videoRef: React.RefObject<HTMLVideoElement>;
@@ -296,11 +296,11 @@ export type ClipContextType = {
   hls: Hls | null;
   setHls: React.Dispatch<React.SetStateAction<Hls | null>>;
   clipUrl: string;
-  organizationId: string;
   playbackStatus: PlaybackStatus | null;
   setPlaybackStatus: React.Dispatch<
     React.SetStateAction<PlaybackStatus | null>
   >;
   isInputFocused: boolean;
   setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  sessionId: string;
 };

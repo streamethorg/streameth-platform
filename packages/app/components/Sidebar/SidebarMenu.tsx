@@ -1,53 +1,47 @@
+'use client';
+
 import { SidebarUI, SidebarItem } from './Sidebar';
 
 import {
   LuUsers,
   LuVideotape,
   LuHome,
-  LuSettings,
   LuShare2,
-  LuLock,
   LuBookOpen,
   LuDollarSign,
 } from 'react-icons/lu';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { fetchOrganization } from '@/lib/services/organizationService';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
-const SidebarMenu = async ({
-  organizationSlug,
-}: {
-  organizationSlug: string;
-}) => {
-  const organization = await fetchOrganization({
-    organizationSlug,
-  });
+const SidebarMenu = ({}) => {
+  const { organization, organizationId, daysLeft } = useOrganizationContext();
 
   const navigationItems = [
     {
       text: 'Home',
-      url: `/studio/${organizationSlug}`,
+      url: `/studio/${organizationId}`,
       icon: <LuHome size={25} />,
     },
     {
       text: 'Library',
-      url: `/studio/${organizationSlug}/library`,
+      url: `/studio/${organizationId}/library`,
       icon: <LuVideotape size={25} />,
     },
-    {
-      text: 'Destinations',
-      url: `/studio/${organizationSlug}/destinations`,
-      icon: <LuShare2 size={25} />,
-    },
+    // {
+    //   text: 'Destinations',
+    //   url: `/studio/${organizationId}/destinations`,
+    //   icon: <LuShare2 size={25} />,
+    // },
     {
       text: 'Team',
-      url: `/studio/${organizationSlug}/team`,
+      url: `/studio/${organizationId}/team`,
       icon: <LuUsers size={25} />,
     },
     {
       text: 'Subscription',
-      url: `/studio/${organizationSlug}/payments`,
+      url: `/studio/${organizationId}/payments`,
       icon: <LuDollarSign size={25} />,
     },
     {
@@ -56,16 +50,6 @@ const SidebarMenu = async ({
       icon: <LuBookOpen size={25} />,
     },
   ];
-
-  // Calculate days left until expiration
-  let daysLeft: number | undefined;
-  if (organization?.expirationDate) {
-    const expiryDate = new Date(organization.expirationDate);
-    const now = new Date();
-    daysLeft = Math.ceil(
-      (expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
-    );
-  }
 
   return (
     <div className="relative w-[1/4] h-full border-t">
@@ -90,13 +74,11 @@ const SidebarMenu = async ({
 
           <div className="flex flex-row items-center space-x-2">
             <Button variant={'outline'} size={'sm'}>
-              <Link href={`/studio/${organizationSlug}/settings`}>
-                Settings
-              </Link>
+              <Link href={`/studio/${organizationId}/settings`}>Settings</Link>
             </Button>
 
             <Button variant={'outline'} size={'sm'}>
-              <Link href={`/${organizationSlug}`}>Channel </Link>
+              <Link href={`/${organizationId}`}>Channel </Link>
             </Button>
           </div>
         </div>

@@ -11,9 +11,6 @@ const uploadVideo = (
   const upload = new Upload(video, {
     endpoint: url,
     uploadSize: video.size,
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_LIVEPEER_API_KEY}`,
-    },
     metadata: {
       filename: video.name,
       filetype: video.type,

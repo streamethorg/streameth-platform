@@ -126,7 +126,6 @@ const ZoraUploadButton = ({
         mediaUrl: downloadUrl,
         thumbnailUrl: coverImageUri,
       });
-      console.log('coverImageUri', coverImageUri, 'thumbnailUrl', thumbnail);
       const tokenMetadataUri = await uploadToIPFS(tokenMetadata);
 
       if (BASE_CHAIN_ID !== (await publicClient.getChainId())) {

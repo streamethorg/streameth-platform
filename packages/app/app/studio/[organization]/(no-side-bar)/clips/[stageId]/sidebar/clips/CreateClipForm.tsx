@@ -23,7 +23,7 @@ import {
 import { Label } from '@/components/ui/label';
 
 import { formatClipTime } from '@/lib/utils/time';
-import { useClipContext } from '../../ClipContext';
+import { useClipPageContext } from '../../ClipPageContext';
 import { IExtendedSession } from '@/lib/types';
 import SelectAnimation from '../../topBar/SelectAnimation';
 import Combobox from '@/components/ui/combo-box';
@@ -33,11 +33,13 @@ import { fetchAllSessions } from '@/lib/services/sessionService';
 import { useCreateClip } from '@/lib/hooks/useCreateClip';
 import useClickOutside from '@/lib/hooks/useClickOutside';
 import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 const CreateClipForm = () => {
   const { handleCreateClip, form, isCreateClip, handleClearMarker } =
     useCreateClip();
+  const { organizationId } = useOrganizationContext();
 
-  const { isLoading, setIsCreatingClip, organizationId } = useClipContext();
+  const { isLoading, setIsCreatingClip } = useClipPageContext();
 
   const { startTime, endTime } = useTrimmControlsContext();
 

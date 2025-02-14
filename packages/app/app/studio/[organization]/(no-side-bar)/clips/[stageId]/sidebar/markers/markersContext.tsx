@@ -1,7 +1,9 @@
 'use client';
+import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { fetchMarkers } from '@/lib/services/markerSevice';
 import { IExtendedMarker } from '@/lib/types';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useClipPageContext } from '../../ClipPageContext';
 
 interface IMarkersContext {
   markers: IExtendedMarker[];
@@ -15,8 +17,6 @@ interface IMarkersContext {
   fetchAndSetMarkers: () => void;
   isAddingOrEditingMarker: boolean;
   setIsAddingOrEditingMarker: (addingOrEditing: boolean) => void;
-  organizationId: string;
-  sessionId: string;
 }
 
 const MarkersContext = createContext<IMarkersContext | null>(null);
@@ -31,22 +31,17 @@ export const useMarkersContext = () => {
 
 export const MarkersProvider = ({
   children,
-  organizationId,
-  stageId,
-  sessionId,
 }: {
   children: React.ReactNode;
-  organizationId: string;
-  stageId: string;
-  sessionId?: string;
 }) => {
+  const { stageId, sessionId } = useClipPageContext();
   const [markers, setMarkers] = useState<IExtendedMarker[]>([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState<string>('');
   const [isImportingMarkers, setIsImportingMarkers] = useState<boolean>(false);
   const [isLoadingMarkers, setIsLoadingMarkers] = useState<boolean>(true);
   const [isAddingOrEditingMarker, setIsAddingOrEditingMarker] =
     useState<boolean>(false);
-
+  const { organizationId } = useOrganizationContext();
   const fetchAndSetMarkers = async () => {
     if (stageId) {
       try {
@@ -57,7 +52,6 @@ export const MarkersProvider = ({
         const sortedMarkers = markers
           .sort((a, b) => a.startClipTime - b.startClipTime)
           .filter((marker) => marker.sessionId === sessionId);
-        console.log('sortedMarkers', sortedMarkers);
         setMarkers(sortedMarkers);
       } catch (error) {
         console.error('Error fetching markers:', error);
@@ -85,8 +79,6 @@ export const MarkersProvider = ({
         fetchAndSetMarkers,
         isAddingOrEditingMarker,
         setIsAddingOrEditingMarker,
-        organizationId,
-        sessionId: sessionId || '',
       }}
     >
       {children}

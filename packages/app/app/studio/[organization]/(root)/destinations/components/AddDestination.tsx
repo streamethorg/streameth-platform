@@ -19,7 +19,7 @@ interface Organization {
 const AddDestination = ({ organization }: { organization: Organization }) => {
   const state = encodeURIComponent(
     JSON.stringify({
-      redirectUrl: `/studio/${organization.slug}/destinations`,
+      redirectUrl: `/studio/${organization._id}/destinations`,
       organizationId: organization._id,
     })
   );

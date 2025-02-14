@@ -16,15 +16,11 @@ import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interfac
 
 export const CreateMultistreamTarget = ({
   streamId,
-  organizationId,
   btnName = 'Add',
-  organization,
   stageId,
   streamTargets,
 }: {
-  organization: IExtendedOrganization;
   streamId: string;
-  organizationId: string;
   btnName?: string;
   stageId: string;
   streamTargets: TargetOutput[];
@@ -34,7 +30,7 @@ export const CreateMultistreamTarget = ({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="primary" className="space-x-1 mx-auto">
+        <Button variant="outlinePrimary" className="space-x-1 mx-auto w-full">
           <Plus />
           <span className="">{btnName}</span>
         </Button>
@@ -47,9 +43,7 @@ export const CreateMultistreamTarget = ({
         </DialogHeader>
         <StreamPlatformGrid
           streamId={streamId}
-          organizationId={organizationId}
           setIsOpen={setIsOpen}
-          organization={organization}
           stageId={stageId}
           streamTargets={streamTargets}
         />

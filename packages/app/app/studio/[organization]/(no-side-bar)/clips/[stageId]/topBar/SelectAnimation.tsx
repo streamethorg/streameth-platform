@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { IExtendedSession } from '@/lib/types';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import {
   Form,
   FormControl,
@@ -11,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useClipContext } from '../ClipContext';
+import { useClipPageContext } from '../ClipPageContext';
 import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { clipSchema } from '@/lib/schema';
@@ -34,7 +33,7 @@ const SelectAnimation = ({
   organizationId: string;
 }) => {
   const [upload, setUpload] = useState<Uploads>({});
-  const { stageId } = useClipContext();
+  const { stageId } = useClipPageContext();
 
   const isAnimationUploading = () => {
     const uploadProgress = Object.values(upload).some(

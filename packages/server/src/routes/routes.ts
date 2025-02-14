@@ -86,6 +86,7 @@ const models: TsoaRoute.Models = {
             "slug": {"dataType":"string"},
             "banner": {"dataType":"string"},
             "address": {"dataType":"string"},
+            "invitationCode": {"dataType":"string"},
             "socials": {"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},
             "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
@@ -280,16 +281,6 @@ const models: TsoaRoute.Models = {
             "editorOptions": {"dataType":"nestedObjectLiteral","nestedProperties":{"captionColor":{"dataType":"string","required":true},"captionFont":{"dataType":"string","required":true},"captionLinesPerPage":{"dataType":"double","required":true},"captionPosition":{"dataType":"string","required":true},"captionEnabled":{"dataType":"boolean","required":true},"selectedAspectRatio":{"dataType":"string","required":true},"events":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"videoUrl":{"dataType":"string"},"sessionId":{"dataType":"string"},"label":{"dataType":"string","required":true}}},"required":true},"frameRate":{"dataType":"double","required":true}}},
             "clipSessionId": {"dataType":"string"},
             "clipEditorId": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IStandardResponse__type-string--url-string__": {
-        "dataType": "refObject",
-        "properties": {
-            "status": {"dataType":"string","required":true},
-            "message": {"dataType":"string","required":true},
-            "data": {"dataType":"nestedObjectLiteral","nestedProperties":{"url":{"dataType":"string","required":true},"type":{"dataType":"string","required":true}}},
         },
         "additionalProperties": false,
     },
@@ -491,35 +482,6 @@ const models: TsoaRoute.Models = {
             "type": {"ref":"StageType"},
             "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"lastSegmentTimestamp":{"dataType":"double","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},
             "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CreateHlsStageDto": {
-        "dataType": "refObject",
-        "properties": {
-            "_id": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
-            "name": {"dataType":"string","required":true},
-            "description": {"dataType":"string"},
-            "eventId": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"string"}]},
-            "streamSettings": {"ref":"IStreamSettings"},
-            "plugins": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlugin"}},
-            "order": {"dataType":"double"},
-            "slug": {"dataType":"string"},
-            "published": {"dataType":"boolean"},
-            "isMultipleDate": {"dataType":"boolean"},
-            "organizationId": {"dataType":"string","required":true},
-            "thumbnail": {"dataType":"string"},
-            "streamDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
-            "streamEndDate": {"dataType":"union","subSchemas":[{"dataType":"datetime"},{"dataType":"string"}]},
-            "mintable": {"dataType":"boolean"},
-            "createdAt": {"dataType":"string"},
-            "nftCollections": {"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},
-            "recordingIndex": {"dataType":"double"},
-            "type": {"ref":"StageType"},
-            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"lastSegmentTimestamp":{"dataType":"double","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},
-            "source": {"dataType":"nestedObjectLiteral","nestedProperties":{"type":{"dataType":"string","required":true},"m3u8Url":{"dataType":"string","required":true},"url":{"dataType":"string","required":true}}},
-            "url": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -726,7 +688,7 @@ const models: TsoaRoute.Models = {
             "talkType": {"dataType":"string"},
             "processingStatus": {"ref":"ProcessingStatus"},
             "aiAnalysis": {"dataType":"nestedObjectLiteral","nestedProperties":{"isVectorized":{"dataType":"boolean","required":true},"status":{"ref":"ProcessingStatus","required":true}}},
-            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},
+            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"summary":{"dataType":"string","required":true},"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},
             "pretalxSessionCode": {"dataType":"string"},
         },
         "additionalProperties": false,
@@ -744,7 +706,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_ISession.Exclude_keyofISession._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"name":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"slug":{"dataType":"string"},"description":{"dataType":"string"},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"startClipTime":{"dataType":"double"},"endClipTime":{"dataType":"double"},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"speakers":{"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},"source":{"ref":"ISource"},"assetId":{"dataType":"string"},"playback":{"ref":"IPlayback"},"videoUrl":{"dataType":"string"},"playbackId":{"dataType":"string"},"track":{"dataType":"array","array":{"dataType":"string"}},"coverImage":{"dataType":"string"},"eventSlug":{"dataType":"string"},"videoTranscription":{"dataType":"string"},"aiDescription":{"dataType":"string"},"autoLabels":{"dataType":"array","array":{"dataType":"string"}},"ipfsURI":{"dataType":"string"},"mintable":{"dataType":"boolean"},"published":{"ref":"eVisibilty"},"type":{"ref":"SessionType","required":true},"createdAt":{"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"datetime"}]},"nftCollections":{"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},"socials":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"date":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}}}},"talkType":{"dataType":"string"},"processingStatus":{"ref":"ProcessingStatus"},"aiAnalysis":{"dataType":"nestedObjectLiteral","nestedProperties":{"isVectorized":{"dataType":"boolean","required":true},"status":{"ref":"ProcessingStatus","required":true}}},"transcripts":{"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},"pretalxSessionCode":{"dataType":"string"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}],"required":true},"name":{"dataType":"string","required":true},"eventId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"slug":{"dataType":"string"},"description":{"dataType":"string"},"start":{"dataType":"double","required":true},"end":{"dataType":"double","required":true},"startClipTime":{"dataType":"double"},"endClipTime":{"dataType":"double"},"stageId":{"dataType":"union","subSchemas":[{"dataType":"string"},{"ref":"mongoose.Types.ObjectId"}]},"speakers":{"dataType":"array","array":{"dataType":"refAlias","ref":"Omit_ISpeaker.organizationId_"}},"source":{"ref":"ISource"},"assetId":{"dataType":"string"},"playback":{"ref":"IPlayback"},"videoUrl":{"dataType":"string"},"playbackId":{"dataType":"string"},"track":{"dataType":"array","array":{"dataType":"string"}},"coverImage":{"dataType":"string"},"eventSlug":{"dataType":"string"},"videoTranscription":{"dataType":"string"},"aiDescription":{"dataType":"string"},"autoLabels":{"dataType":"array","array":{"dataType":"string"}},"ipfsURI":{"dataType":"string"},"mintable":{"dataType":"boolean"},"published":{"ref":"eVisibilty"},"type":{"ref":"SessionType","required":true},"createdAt":{"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"datetime"}]},"nftCollections":{"dataType":"union","subSchemas":[{"ref":"mongoose.Types.ObjectId"},{"dataType":"array","array":{"dataType":"string"}}]},"socials":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"date":{"dataType":"double","required":true},"name":{"dataType":"string","required":true}}}},"talkType":{"dataType":"string"},"processingStatus":{"ref":"ProcessingStatus"},"aiAnalysis":{"dataType":"nestedObjectLiteral","nestedProperties":{"isVectorized":{"dataType":"boolean","required":true},"status":{"ref":"ProcessingStatus","required":true}}},"transcripts":{"dataType":"nestedObjectLiteral","nestedProperties":{"summary":{"dataType":"string","required":true},"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},"pretalxSessionCode":{"dataType":"string"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateSessionDto": {
@@ -782,7 +744,7 @@ const models: TsoaRoute.Models = {
             "talkType": {"dataType":"string"},
             "processingStatus": {"ref":"ProcessingStatus"},
             "aiAnalysis": {"dataType":"nestedObjectLiteral","nestedProperties":{"isVectorized":{"dataType":"boolean","required":true},"status":{"ref":"ProcessingStatus","required":true}}},
-            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},
+            "transcripts": {"dataType":"nestedObjectLiteral","nestedProperties":{"summary":{"dataType":"string","required":true},"text":{"dataType":"string","required":true},"chunks":{"dataType":"array","array":{"dataType":"nestedObjectLiteral","nestedProperties":{"word":{"dataType":"string","required":true},"end":{"dataType":"double","required":true},"start":{"dataType":"double","required":true}}},"required":true},"subtitleUrl":{"dataType":"string","required":true},"status":{"ref":"TranscriptionStatus","required":true}}},
             "pretalxSessionCode": {"dataType":"string"},
             "autolabels": {"dataType":"array","array":{"dataType":"string"}},
         },
@@ -941,7 +903,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"invitationCode":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -959,6 +921,7 @@ const models: TsoaRoute.Models = {
             "accentColor": {"dataType":"string"},
             "banner": {"dataType":"string"},
             "address": {"dataType":"string","required":true},
+            "invitationCode": {"dataType":"string"},
             "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
             "streamingDays": {"dataType":"double"},
@@ -1991,36 +1954,6 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/streams/hls',
-            ...(fetchMiddlewares<RequestHandler>(StreamController)),
-            ...(fetchMiddlewares<RequestHandler>(StreamController.prototype.getHls)),
-
-            async function StreamController_getHls(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"url":{"dataType":"string","required":true}}},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new StreamController();
-
-              await templateService.apiHandler({
-                methodName: 'getHls',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/states',
             authenticateMiddleware([{"jwt":["org"]}]),
             ...(fetchMiddlewares<RequestHandler>(StateController)),
@@ -2138,37 +2071,6 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'createStage',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: 201,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/stages/hls',
-            authenticateMiddleware([{"jwt":["org"]}]),
-            ...(fetchMiddlewares<RequestHandler>(StageController)),
-            ...(fetchMiddlewares<RequestHandler>(StageController.prototype.createHlsStage)),
-
-            async function StageController_createHlsStage(request: ExRequest, response: ExResponse, next: any) {
-            const args: Record<string, TsoaRoute.ParameterSchema> = {
-                    body: {"in":"body","name":"body","required":true,"ref":"CreateHlsStageDto"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args, request, response });
-
-                const controller = new StageController();
-
-              await templateService.apiHandler({
-                methodName: 'createHlsStage',
                 controller,
                 response,
                 next,
@@ -2508,6 +2410,37 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'createSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/sessions/import',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(SessionController)),
+            ...(fetchMiddlewares<RequestHandler>(SessionController.prototype.importVideoFromUrl)),
+
+            async function SessionController_importVideoFromUrl(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"url":{"dataType":"string","required":true},"name":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new SessionController();
+
+              await templateService.apiHandler({
+                methodName: 'importVideoFromUrl',
                 controller,
                 response,
                 next,
@@ -2989,6 +2922,37 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                 next,
                 validatedArgs,
                 successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/organizations/join',
+            authenticateMiddleware([{"jwt":[]}]),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.joinOrganization)),
+
+            async function OrganizationController_joinOrganization(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"email":{"dataType":"string","required":true},"invitationCode":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new OrganizationController();
+
+              await templateService.apiHandler({
+                methodName: 'joinOrganization',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);
