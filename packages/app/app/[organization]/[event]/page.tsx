@@ -23,7 +23,7 @@ export default async function EventHome({
   // })
 
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationId: params.organization,
   });
 
   if (!organization) {

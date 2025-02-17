@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 export default async function ArchivePage({ searchParams }: SearchPageProps) {
   if (searchParams.organization) {
     const organization = await fetchOrganization({
-      organizationSlug: searchParams.organization,
+      organizationId: searchParams.organization,
     });
 
     if (!organization) {

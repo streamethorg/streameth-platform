@@ -125,7 +125,7 @@ export async function generateMetadata({
     session: searchParams.session,
   });
   const organization = await fetchOrganization({
-    organizationSlug: params?.organization,
+    organizationId: params?.organization,
   });
 
   if (!session || !organization) return generalMetadata;
