@@ -188,7 +188,7 @@ export interface IExtendedStage extends Omit<IStage, '_id' | 'nftCollections'> {
 export interface IExtendedSpeaker extends Omit<ISpeaker, 'organizationId'> {}
 export interface IExtendedUser extends Omit<IUser, 'organizations'> {
   _id: string;
-  organizations: IExtendedOrganization[];
+  organizations: string[];
 }
 export interface IExtendedChat extends Omit<IChat, '_id'> {
   _id: string;

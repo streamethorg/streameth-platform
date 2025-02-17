@@ -159,6 +159,7 @@ export default class SessionService {
       filter = { ...filter, eventId: event?._id };
     }
     if (d.organizationId != undefined) {
+      const organization = await Organization.findById(d.organizationId);
       filter = { ...filter, organizationId: d.organizationId };
     }
     if (d.onlyVideos) {

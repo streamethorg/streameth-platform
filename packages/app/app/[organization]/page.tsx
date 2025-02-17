@@ -66,9 +66,11 @@ export async function generateMetadata(
     organizationId: params.organization,
   });
 
+
   if (!organization) {
     return generalMetadata;
   }
+
 
   const allStreams = (
     await fetchOrganizationStages({

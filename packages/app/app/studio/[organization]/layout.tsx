@@ -9,6 +9,7 @@ import {
   SubscriptionStatus,
 } from '@/lib/context/OrganizationContext';
 import { fetchStages } from '@/lib/services/stageService';
+import { fetchUser } from '@/lib/services/userService';
 const calculateOrganizationStatus = (
   organization: IExtendedOrganization
 ): SubscriptionStatus => {
@@ -49,7 +50,18 @@ const Layout = async ({
     organizationId: params.organization,
   });
 
+  const user = await fetchUser();
+  if (!user) {
+    redirect('/studio');
+  }
+
   if (!currentOrganization) {
+    redirect('/studio');
+  }
+
+  const isOwner = user.organizations.includes(currentOrganization._id);
+
+  if (!isOwner) {
     redirect('/studio');
   }
 

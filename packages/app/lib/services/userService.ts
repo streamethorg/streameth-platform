@@ -22,6 +22,9 @@ export async function fetchUser(): Promise<IExtendedUser | null> {
 export async function fetchUserData(): Promise<IExtendedUser | null> {
   try {
     const user = await fetchUser();
+    if (!user) {
+      return null;
+    }
     const data = await fetchClient(`${apiUrl()}/users/${user?.email}`, {
       method: 'GET',
       headers: {

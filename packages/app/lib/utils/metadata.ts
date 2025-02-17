@@ -8,6 +8,8 @@ import {
 
 const BASE_IMAGE = 'https://streameth.org/streameth_banner.png';
 
+
+
 export const generalMetadata: Metadata = {
   title: 'StreamETH',
   description: 'The complete solution to host your hybrid or virtual event.',
