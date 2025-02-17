@@ -4,28 +4,15 @@ import { IExtendedOrganization, IExtendedUser } from '../types';
 import { fetchClient } from './fetch-client';
 
 export async function fetchOrganization({
-  organizationSlug,
   organizationId,
 }: {
-  organizationSlug?: string;
-  organizationId?: string;
+  organizationId: string;
 }): Promise<IExtendedOrganization | null> {
   try {
-    if (!organizationSlug && !organizationId) {
+    if (!organizationId) {
       return null;
     }
-    const response = await fetchClient(
-      `${apiUrl()}/organizations/${
-        organizationId ? organizationId : organizationSlug
-      }`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // cache: 'force-cache',
-        // next: { tags: [`organizations-${organizationId}`] },
-      }
-    );
+    const response = await fetch(`${apiUrl()}/organizations/${organizationId}`);
     const data = (await response.json()).data;
 
     return data;

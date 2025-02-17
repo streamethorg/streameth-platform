@@ -6,11 +6,9 @@ import { Podcast } from 'lucide-react';
 
 const UpcomingStreams = async ({
   organizationId,
-  organizationSlug,
   currentStreamId,
 }: {
   organizationId: string;
-  organizationSlug: string;
   currentStreamId: string;
 }) => {
   let livestreams = await fetchStages({
@@ -25,7 +23,6 @@ const UpcomingStreams = async ({
   livestreams = livestreams.filter((livestream) => {
     return livestream.published;
   });
-  const org = organizationSlug === 'livepeertv' ? 'tv' : organizationSlug;
 
   return (
     <>
@@ -38,7 +35,7 @@ const UpcomingStreams = async ({
                 name={livestream.name}
                 date={livestream.streamDate as string}
                 thumbnail={livestream.thumbnail ?? ''}
-                link={`/${org}/livestream?stage=${livestream?._id?.toString()}`}
+                link={`/${organizationId}/livestream?stage=${livestream?._id?.toString()}`}
               />
             </div>
           </React.Fragment>
