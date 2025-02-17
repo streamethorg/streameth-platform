@@ -58,7 +58,6 @@ const Layout = async ({
   if (!currentOrganization) {
     redirect('/studio');
   }
-
   const isOwner = user.organizations.includes(currentOrganization._id);
 
   if (!isOwner) {
