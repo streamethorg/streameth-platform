@@ -15,7 +15,7 @@ const CreateNFT = async ({
 }) => {
   const { type } = searchParams;
   const organizationId = (
-    await fetchOrganization({ organizationSlug: params.organization })
+    await fetchOrganization({ organizationId: params.organization })
   )?._id;
   const videos = (
     await fetchAllSessions({

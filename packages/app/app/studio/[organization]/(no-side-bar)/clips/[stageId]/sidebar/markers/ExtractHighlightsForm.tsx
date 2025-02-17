@@ -55,7 +55,6 @@ export const ExtractHighlightsForm = ({
     const session = await fetchSession({ session: sessionId });
     if (session) {
       setStatus(session.aiAnalysis?.status ?? null);
-      console.log('session.aiAnalysis?.status', session.aiAnalysis?.status);
       if (session.aiAnalysis?.status === 'completed') {
         fetchAndSetMarkers();
         return true;

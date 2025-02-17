@@ -139,13 +139,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 							}),
 						});
 						if (!response.ok) {
-							await signOut({ redirect: false });
 							return session;
 						}
 						session.accessToken = token.access_token as string;
 					} catch (error) {
 						console.error("Error verifying session token:", error);
-						await signOut({ redirect: false });
 						return session;
 					}
 				}

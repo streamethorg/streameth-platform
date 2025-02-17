@@ -45,7 +45,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     {}
   );
 
-  console.log(props.stageId);
   const handleEditClick = (uploadId: string) => {
     setOnEdit?.(uploadId);
     setOpen?.(true);

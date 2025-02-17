@@ -33,25 +33,18 @@ export async function fetchOrganizationStages({
   fromDate?: string;
   untilDate?: string;
 }): Promise<IExtendedStage[]> {
-  try {
-    const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
-    const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
-    const response = await fetchClient(
-      `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`,
-      {
-        cache: 'force-cache',
-        next: {
-          tags: [`stages-${organizationId}`],
-        },
-      }
-    );
-
-    const data = (await response.json()).data;
-    return data.map((stage: IStage) => stage);
-  } catch (e) {
-    console.log(e);
-    throw 'Error fetching stages';
-  }
+  const fromDateQuery = fromDate ? `&fromDate=${fromDate}` : '';
+  const untilDateQuery = untilDate ? `&untilDate=${untilDate}` : '';
+  const response = await fetch(
+    `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`,
+    {
+      cache: 'force-cache',
+      next: {
+        tags: [`stages-${organizationId}`],
+      },
+    }
+  );
+  return (await response.json()).data;
 }
 
 export const fetchStages = fetchOrganizationStages;
@@ -62,7 +55,7 @@ export async function deleteStage({
 }: {
   stageId: string;
   organizationId: string;
-}): Promise<IExtendedStage> {
+}): Promise<IExtendedStage | null> {
   try {
     const response = await fetchClient(`${apiUrl()}/stages/${stageId}`, {
       method: 'DELETE',
@@ -72,7 +65,8 @@ export async function deleteStage({
       body: JSON.stringify({ organizationId }),
     });
     if (!response.ok) {
-      throw 'Error deleting stage';
+      console.log('error in deleteStage', response);
+      return null;
     }
     return await response.json();
   } catch (e) {

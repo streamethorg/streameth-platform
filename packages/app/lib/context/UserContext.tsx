@@ -1,10 +1,10 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { IExtendedUser } from '../types';
+import { IExtendedUserWithOrganizations } from '../types';
 
 type UserContextType = {
-  user: IExtendedUser | null;
+  user: IExtendedUserWithOrganizations | null;
 };
 
 export const useUserContext = () => {
@@ -22,8 +22,9 @@ export const UserContextProvider = ({
   user,
 }: {
   children: React.ReactNode;
-  user: IExtendedUser | null;
+  user: IExtendedUserWithOrganizations | null;
 }) => {
+
   return (
     <UserContext.Provider
       value={{

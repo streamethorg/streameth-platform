@@ -115,6 +115,17 @@ export async function fetchAllSessions({
     }
   );
   const a = await response.json();
+  if (a.status === 500) {
+    return {
+      sessions: [],
+      pagination: {
+        currentPage: 1,
+        totalPages: 1,
+        totalItems: 0,
+        limit: 0,
+      },
+    };
+  }
   return a.data;
 }
 export const createSession = async ({
@@ -265,15 +276,6 @@ export const createClip = async ({
         editorOptions,
         organizationId,
       }),
-    });
-    console.log('response', {
-      end,
-      clipUrl,
-      sessionId,
-      start,
-      isEditorEnabled,
-      editorOptions,
-      organizationId,
     });
 
     const responseData = await response.json();

@@ -3,7 +3,7 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import Footer from '@/components/Layout/Footer';
 import { fetchOrganization } from '@/lib/services/organizationService';
-import NotFound from '@/not-found';
+import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 import { OrganizationContextProvider } from '@/lib/context/OrganizationContext';
 const Layout = async ({
@@ -28,12 +28,15 @@ const Layout = async ({
   ];
 
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationId: params.organization,
   });
 
+  if (params.organization === organization?.slug) {
+    redirect(`/${organization?._id}`);
+  }
 
   if (!organization) {
-    return NotFound();
+    return notFound();
   }
 
   return (
@@ -59,19 +62,17 @@ const Layout = async ({
     >
       <div className="mx-auto flex min-h-[100vh] w-full flex-col bg-white">
         <HomePageNavbar
-        logo={organization?.logo}
-        currentOrganization={organization._id}
-        pages={pages}
-        showSearchBar
-        showLogo={true}
-      />
-      <div className="h-full w-full flex-grow">
-          {children}
-        </div>
+          logo={organization?.logo}
+          currentOrganization={organization._id}
+          pages={pages}
+          showSearchBar
+          showLogo={true}
+        />
+        <div className="h-full w-full flex-grow">{children}</div>
         <div className="sticky top-[100vh] mb-5">
           <Footer />
         </div>
-    </div>
+      </div>
     </OrganizationContextProvider>
   );
 };

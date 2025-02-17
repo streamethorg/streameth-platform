@@ -34,7 +34,7 @@ const Destinations = async ({
   params: { organization: string };
 }) => {
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationId: params.organization,
   });
 
   if (!organization) return null;

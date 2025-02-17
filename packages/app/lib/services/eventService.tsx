@@ -13,7 +13,7 @@ export async function fetchEvents({
   date,
   unlisted = false,
 }: {
-  organizationId?: string;
+  organizationId: string;
   organizationSlug?: string;
   date?: Date;
   unlisted?: boolean;
@@ -23,8 +23,7 @@ export async function fetchEvents({
 
     if (organizationId || organizationSlug) {
       const organization = await fetchOrganization({
-        organizationId,
-        organizationSlug,
+        organizationId: organizationId,
       });
       if (!organization) {
         return [];

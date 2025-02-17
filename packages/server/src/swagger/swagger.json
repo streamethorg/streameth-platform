@@ -1766,7 +1766,10 @@
 					"rendering",
 					"failed",
 					"clipCreated",
-					"completed"
+					"completed",
+					"translating",
+					"generating_audio",
+					"processing_video"
 				],
 				"type": "string"
 			},

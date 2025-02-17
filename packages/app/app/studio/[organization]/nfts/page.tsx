@@ -25,7 +25,7 @@ const NFT = async ({
 }) => {
   const { type } = searchParams;
   const organizationId = (
-    await fetchOrganization({ organizationSlug: params.organization })
+    await fetchOrganization({ organizationId: params.organization })
   )?._id;
   if (!organizationId) return null;
   const nftCollections = sortArray(
