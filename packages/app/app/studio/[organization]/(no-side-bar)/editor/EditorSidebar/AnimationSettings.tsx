@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTimeline } from '../context/TimelineContext';
+import { useTimelineContext } from '../context/TimelineContext';
 import { Button } from '@/components/ui/button';
 export default function AnimationSettings() {
   
-  const { events, addEvent } = useTimeline();
+  const { events, addEvent } = useTimelineContext();
   return (
     <div className="space-y-6">
       <h2 className="text-lg font-semibold">Animation Settings</h2>

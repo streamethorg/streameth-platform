@@ -57,11 +57,17 @@ export interface Transcript {
   }[];
 }
 
-export interface MediaEvent extends Event {
+export interface EditorEvent {
+  id: string;
+  label: string;
   type: 'media';
   url: string;
   duration?: number;
   transcript?: Transcript;
+  start: number;
+  end: number;
+  timeLineStart: number;
+  timeLineEnd: number;
 }
 
 // export interface TextEvent extends Event {
@@ -74,7 +80,6 @@ export interface MediaEvent extends Event {
 //   url: string;
 // }
 
-export type EditorEvent = MediaEvent;
 
 // This interface should match the Zod schema above
 export type EditorProps = {

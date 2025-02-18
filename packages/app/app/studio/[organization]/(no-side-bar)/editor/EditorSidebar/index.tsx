@@ -6,7 +6,7 @@ import CaptionSettings from './CaptionSettings';
 import AnimationSettings from './AnimationSettings';
 import BrandingSettings from './BrandingSettings';
 // import { RenderControls } from './RenderControls';
-import { useTimeline } from '../context/TimelineContext';
+import { useTimelineContext } from '../context/TimelineContext';
 import { Button } from '@/components/ui/button';
 
 type SettingTab = 'layout' | 'captions' | 'animations' | 'branding';
@@ -24,7 +24,7 @@ export default function EditorSidebar() {
     fps,
   } = useEditorContext();
 
-  const { events } = useTimeline();
+  const { events } = useTimelineContext();
 
   const inputProps = {
     videoUrl,

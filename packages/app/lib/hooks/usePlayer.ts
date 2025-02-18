@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-
-const usePlayer = (videoRef: React.RefObject<HTMLVideoElement>) => {
+const usePlayer = (videoRef: React.RefObject<HTMLVideoElement> ) => {
   const [currentTime, setCurrentTime] = useState(0);
 
   const handleSetCurrentTime = (time: number) => {

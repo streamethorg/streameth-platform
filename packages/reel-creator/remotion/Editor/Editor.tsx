@@ -7,18 +7,18 @@ import {
   OffthreadVideo,
 } from "remotion";
 import Captions from "./Captions";
-import { EditorProps, MediaEvent, Transcript } from "@/types/constants";
+import { EditorProps, EditorEvent, Transcript } from "@/types/constants";
 
 const MediaEventComponent: React.FC<{
-  event: MediaEvent;
+  event: EditorEvent;
   editorProps: EditorProps;
 }> = ({ event, editorProps }) => {
   const { fps } = useVideoConfig();
   if (!event.url || event.start === undefined || event.end === undefined || !event.duration) {
     return null;
   }
-  const startFrame = Math.round(event.start * fps);
-  const endFrame = Math.round(event.end * fps);
+  const startFrame = Math.round(event.timeLineStart * fps);
+  const endFrame = Math.round(event.timeLineEnd * fps);
 
   const isVertical = editorProps.selectedAspectRatio === "9:16";
 
@@ -31,7 +31,7 @@ const MediaEventComponent: React.FC<{
             style={{ height: "100%", width: "100%" }}
             src={event.url}
             className="object-cover z-1 blur-lg"
-            startFrom={0}
+            startFrom={event.start * fps}
             endAt={event.duration * fps}
           />
         ) : null}
@@ -41,14 +41,14 @@ const MediaEventComponent: React.FC<{
           <OffthreadVideo
             src={event.url}
             className="my-auto z-10"
-            startFrom={0}
+            startFrom={event.start * fps}
             endAt={event.duration * fps}
           />
         ) : (
           <OffthreadVideo
             src={event.url}
             className="my-auto"
-            startFrom={0}
+            startFrom={event.start * fps}
             endAt={event.duration * fps}
           />
         )}

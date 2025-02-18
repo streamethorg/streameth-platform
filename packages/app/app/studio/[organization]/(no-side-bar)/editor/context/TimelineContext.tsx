@@ -6,17 +6,16 @@ import React, {
   ReactNode,
   useCallback,
   useEffect,
+  useRef,
 } from 'react';
 import { EditorEvent } from '../types';
-
+import { useEditorContext } from './EditorContext';
 // Define the context value type
 export interface TimelineContextType {
   events: EditorEvent[];
   addEvent: (event: EditorEvent) => void;
   removeEvent: (index: number) => void;
   updateEvents: (newEvents: EditorEvent[]) => void;
-  currentTime: number;
-  setCurrentTime: (time: number) => void;
   selectedEvents: string[];
   setSelectedEvents: (eventIds: string[]) => void;
   movingEvent: string | null;
@@ -36,6 +35,16 @@ export interface TimelineContextType {
   handleTrimEnd: (eventId: string, event: React.MouseEvent) => void;
   handleMoveStart: (eventId: string, event: React.MouseEvent) => void;
   handleEventClick: (eventId: string, e: React.MouseEvent) => void;
+  currentTime: number;
+  setCurrentTime: (time: number) => void;
+  timelineAction: 'trimStart' | 'trimEnd' | 'move' | 'playheadDrag' | null;
+  setTimelineAction: (
+    action: 'trimStart' | 'trimEnd' | 'move' | 'playheadDrag' | null
+  ) => void;
+  timelineRef: React.RefObject<HTMLDivElement>;
+  pixelsPerSecond: number;
+  timelineWidth: number;
+  maxDuration: number;
 }
 
 // Create the context
@@ -47,27 +56,35 @@ const TimelineContext = createContext<TimelineContextType | undefined>(
 interface TimelineProviderProps {
   children: ReactNode;
   initialEvent?: EditorEvent;
+  fps: number;
 }
 
 // Update the provider component
 export const TimelineProvider: React.FC<TimelineProviderProps> = ({
   children,
   initialEvent,
+  fps,
 }) => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { playerRef } = useEditorContext();
+  const maxDuration = 60 * 30;
+  const pixelsPerSecond = 2;
+  const timelineWidth = maxDuration * pixelsPerSecond;
+
   const [events, setEvents] = useState<EditorEvent[]>(
     initialEvent ? [initialEvent] : []
   );
+
+  const [timelineAction, setTimelineAction] = useState<
+    'trimStart' | 'trimEnd' | 'move' | 'playheadDrag' | null
+  >(null);
+
   const [currentTime, setCurrentTime] = useState(0);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [movingEvent, setMovingEvent] = useState<string | null>(null);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [initialEventStart, setInitialEventStart] = useState(0);
-  const [initialEventEnd, setInitialEventEnd] = useState(0);
-  const [trimmingEvent, setTrimmingEvent] = useState<string | null>(null);
-  const [trimmingHandle, setTrimmingHandle] = useState<'start' | 'end' | null>(
-    null
-  );
-  const [seekTime, setSeekTime] = useState<number | null>(null);
+
   const addEvent = (event: EditorEvent) => {
     setEvents((prevEvents) =>
       [...prevEvents, event].sort((a, b) => (a.start ?? 0) - (b.start ?? 0))
@@ -80,39 +97,6 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
 
   const updateEvents = (newEvents: EditorEvent[]) => {
     setEvents(newEvents);
-  };
-
-  const handleTrimStart = (eventId: string, event: React.MouseEvent) => {
-    event.stopPropagation();
-    setTrimmingEvent(eventId);
-    setTrimmingHandle('start');
-    setInitialMousePos(event.clientX);
-    const targetEvent = events.find((e) => e.id === eventId);
-    if (targetEvent) {
-      setInitialEventStart(targetEvent.start ?? 0);
-    }
-  };
-
-  const handleTrimEnd = (eventId: string, event: React.MouseEvent) => {
-    event.stopPropagation();
-    setTrimmingEvent(eventId);
-    setTrimmingHandle('end');
-    setInitialMousePos(event.clientX);
-    const targetEvent = events.find((e) => e.id === eventId);
-    if (targetEvent) {
-      setInitialEventEnd(targetEvent.end ?? 0);
-    }
-  };
-
-  const handleMoveStart = (eventId: string, event: React.MouseEvent) => {
-    event.stopPropagation();
-    setMovingEvent(eventId);
-    setInitialMousePos(event.clientX);
-    const targetEvent = events.find((e) => e.id === eventId);
-    if (targetEvent) {
-      setInitialEventStart(targetEvent.start ?? 0);
-      setInitialEventEnd(targetEvent.end ?? 0);
-    }
   };
 
   const handleEventClick = (eventId: string, e: React.MouseEvent) => {
@@ -129,9 +113,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
   };
 
   const handleMouseUp = useCallback(() => {
-    setTrimmingEvent(null);
-    setTrimmingHandle(null);
-    setMovingEvent(null);
+    setTimelineAction(null);
   }, []);
 
   useEffect(() => {
@@ -141,8 +123,92 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
     };
   }, [handleMouseUp]);
 
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!timelineRef.current) return;
+      const rect = timelineRef.current.getBoundingClientRect();
+      const mousePos = e.clientX - rect.left;
+      const timePosition = mousePos / pixelsPerSecond;
+      const mouseDelta = mousePos - (initialMousePos - rect.left);
+      const timeDelta = mouseDelta / pixelsPerSecond;
+      const activeEvent = events.find((event) => event.id === movingEvent);
+
+      switch (timelineAction) {
+        case 'move':
+          if (!activeEvent) return;
+          const duration = activeEvent.timeLineEnd - activeEvent.timeLineStart;
+          const newStartMove = Math.max(0, initialEventStart + timeDelta);
+          const newEndMove = newStartMove + duration;
+
+          updateEvents(
+            events.map((event) =>
+              event.id === movingEvent
+                ? {
+                    ...event,
+                    timeLineStart: newStartMove,
+                    timeLineEnd: newEndMove,
+                  }
+                : event
+            )
+          );
+          break;
+
+        case 'trimStart':
+          if (!activeEvent) return;
+          const newStart = Math.max(0, initialEventStart + timeDelta);
+          if (newStart > activeEvent.timeLineEnd ) return;
+          updateEvents(
+            events.map((event) =>
+              event.id === movingEvent &&
+              event.timeLineEnd - newStart < event.duration
+                ? {
+                    ...event,
+                    timeLineStart: newStart,
+                    start: newStart,
+                    timeLineEnd: event.timeLineEnd,
+                  }
+                : event
+            )
+          );
+          break;
+          
+        case 'trimEnd':
+          if (!activeEvent) return;
+          const newEnd = Math.min(maxDuration, initialEventStart + timeDelta);
+          if (newEnd < activeEvent.timeLineStart) return;
+          updateEvents(
+            events.map((event) => 
+              event.id === movingEvent &&
+              newEnd - event.timeLineStart < event.duration
+                ? {
+                    ...event,
+                    timeLineEnd: newEnd,
+                  } 
+                : event
+            )
+          );
+          break;
+
+        case 'playheadDrag':
+          const newTime = Math.max(0, Math.min(maxDuration, timePosition));
+          setCurrentTime(newTime);
+          playerRef.current?.seekTo(newTime * fps);
+          break;
+      }
+    },
+    [events, movingEvent, timelineAction, pixelsPerSecond, maxDuration]
+  );
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [handleMouseMove]);
+
   const value = {
-    maxLength: 900,
+    maxDuration,
+    pixelsPerSecond,
+    timelineWidth,
     events,
     addEvent,
     removeEvent,
@@ -155,20 +221,11 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
     setMovingEvent,
     initialMousePos,
     setInitialMousePos,
-    initialEventStart,
-    setInitialEventStart,
-    initialEventEnd,
-    setInitialEventEnd,
-    trimmingEvent,
-    setTrimmingEvent,
-    trimmingHandle,
-    setTrimmingHandle,
-    handleTrimStart,
-    handleTrimEnd,
-    handleMoveStart,
     handleEventClick,
-    seekTime,
-    setSeekTime,
+    timelineAction,
+    setTimelineAction,
+    timelineRef,
+    setInitialEventStart,
   };
 
   return (
@@ -179,7 +236,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
 };
 
 // Custom hook to use the TimelineContext
-export const useTimeline = () => {
+export const useTimelineContext = (): TimelineContextType => {
   const context = useContext(TimelineContext);
   if (context === undefined) {
     throw new Error('useTimeline must be used within a TimelineProvider');

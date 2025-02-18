@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Player } from '@remotion/player';
 import Editor from 'streameth-reel-creator/remotion/Editor/Editor';
 import { useEditorContext } from '../context/EditorContext';
-import { useTimeline } from '../context/TimelineContext'; // Import the timeline context
+import { useTimelineContext } from '../context/TimelineContext'; // Import the timeline context
 import { z } from 'zod';
 import PlayerControlBar from './PlayerControls';
 
@@ -19,16 +19,11 @@ const PlayerComponent: React.FC = () => {
     playerRef,
   } = useEditorContext();
 
-  const { currentTime, events } = useTimeline();
+  const { events } = useTimelineContext();
 
-  useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.seekTo(currentTime * fps);
-    }
-  }, [currentTime, fps]);
 
   const getVideoDurationInFrames = () => {
-    const maxEndTime = Math.max(...events.map((event) => event.end ?? 0));
+    const maxEndTime = Math.max(...events.map((event) => event.timeLineEnd ?? 0));
 
     return Math.max(1, Math.round(maxEndTime * fps));
   };

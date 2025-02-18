@@ -1,19 +1,19 @@
-import React from "react";
-
-const TimelineMarkers = ({
-  maxLength,
-  timelineWidth,
-}: {
-  maxLength: number;
-  timelineWidth: number;
-}): React.ReactNode => {
-  const getMarkerPosition = (time: number) =>
-    (time / maxLength) * timelineWidth;
+import React from 'react';
+import { useTimelineContext } from '../context/TimelineContext';
+import useTimeline from '../../clips/[stageId]/Timeline/useTimeline';
+const TimelineMarkers = (): React.ReactNode => {
+  
+  const { maxDuration, timelineWidth } = useTimelineContext();
+  const { calculatePositionOnTimeline } = useTimeline();
 
   const renderSecondMarkers = () => {
     const markers = [];
-    for (let i = 0; i <= maxLength; i += 30) {
-      const position = getMarkerPosition(i);
+    for (let i = 0; i <= maxDuration; i += 30) {
+      const position = calculatePositionOnTimeline(
+        i,
+        maxDuration,
+        timelineWidth
+      );
       markers.push(
         <div
           key={i}

@@ -3,10 +3,12 @@ export interface EditorEvent {
   label: string;
   type: 'media';
   url: string;
-  duration?: number;
+  duration: number;
   transcript?: Transcript;
   start: number;
   end: number;
+  timeLineStart: number;
+  timeLineEnd: number;
 }
 
 export interface Transcript {

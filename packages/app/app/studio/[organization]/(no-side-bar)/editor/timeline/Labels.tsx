@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTimeline } from '../context/TimelineContext';
+import { useTimelineContext } from '../context/TimelineContext';
 
 const TimelineLabels: React.FC = () => {
-  const { events } = useTimeline();
+  const { events } = useTimelineContext();
 
   return (
     <div className="w-full mt-8">

@@ -1,15 +1,15 @@
 import React from 'react';
-import { useTimeline } from '../context/TimelineContext';
+import { useTimelineContext } from '../context/TimelineContext';
 
 const TimelineToolbar: React.FC = () => {
-  const { events, updateEvents, currentTime, selectedEvents, setSelectedEvents } = useTimeline();
+  const { events, updateEvents, currentTime, selectedEvents, setSelectedEvents } = useTimelineContext();
 
   const splitEvent = () => {
     const newEvents = events.map(event => {
       if (event.start !== undefined && event.end !== undefined && currentTime > event.start && currentTime < event.end) {
         return [
-          { ...event, end: currentTime },
-          { ...event, id: `${event.id}-split`, start: currentTime, trimStart: currentTime, trimEnd: event.end }
+          { ...event, end: currentTime, timeLineEnd: currentTime },
+          { ...event, id: `${event.id}-split`, start: currentTime, timeLineStart: currentTime, timeLineEnd: event.end }
         ];
       }
       // Return the original event if it's not being split

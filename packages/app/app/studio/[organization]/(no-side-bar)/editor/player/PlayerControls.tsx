@@ -4,7 +4,7 @@ import {
   Play, Pause, SkipBack, SkipForward, Repeat,
   Square, Maximize2, Minimize2, Volume2, VolumeX
 } from 'lucide-react';
-import { useTimeline } from '../context/TimelineContext';
+import { useTimelineContext } from '../context/TimelineContext';
 import { useEditorContext } from '../context/EditorContext';
 import { useCurrentPlayerFrame } from 'streameth-reel-creator/app/hooks/useCurrentPlayerFrame';
 
@@ -14,7 +14,6 @@ interface PlayerControlBarProps {
 
 const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ playerRef }) => {
   const {fps} = useEditorContext()
-  const { setCurrentTime} = useTimeline()
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);

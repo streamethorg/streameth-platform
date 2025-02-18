@@ -3,8 +3,10 @@ import PlayerComponent from './player';
 import Timeline from './timeline';
 import { TimelineProvider } from './context/TimelineContext';
 import { EditorProvider } from './context/EditorContext';
-import { fetchAsset, fetchSession, getPlaybackInfo } from '@/lib/services/sessionService';
-import { getVideoMetadata } from '@remotion/media-utils';
+import {
+  fetchAsset,
+  fetchSession,
+} from '@/lib/services/sessionService';
 import { parseMedia } from '@remotion/media-parser';
 import { CalculateMetadataFunction } from 'remotion';
 import { z } from 'zod';
@@ -25,9 +27,10 @@ export const calculateCaptionedVideoMetadata: CalculateMetadataFunction<
       fps: true,
     },
   });
-
+  
+  console.log('metadata', metadata);
   return {
-    fps: metadata.fps,
+    fps: metadata.fps === 0 ? 30 : metadata.fps,
     durationInSeconds: metadata.durationInSeconds ?? 0,
     width: metadata.dimensions?.width ?? 0,
     height: metadata.dimensions?.height ?? 0,
@@ -52,7 +55,7 @@ export default async function VideoEditorLayout({
   const asset = await fetchAsset({ assetId: session?.assetId });
 
   const videoUrl = asset?.downloadUrl;
-  console.log("videoUrl", videoUrl);
+  console.log('videoUrl', videoUrl);
 
   // Fetch video metadata server-side
   const metadata = await calculateCaptionedVideoMetadata({
@@ -62,18 +65,18 @@ export default async function VideoEditorLayout({
     compositionId: '',
   });
 
-  console.log("metadata", metadata);
-
   const initialEvent: EditorEvent = {
     id: 'main',
     label: 'main',
     type: 'media',
-    start: 0,
+    start: 0, 
+    timeLineStart: 0,
     duration: metadata.durationInSeconds,
     end: metadata.durationInSeconds,
+    timeLineEnd: metadata.durationInSeconds,
     url: videoUrl,
     transcript: {
-      language: "en",
+      language: 'en',
       duration: metadata.durationInSeconds,
       words: session.transcripts?.chunks,
       text: session.transcripts?.text,
@@ -86,21 +89,21 @@ export default async function VideoEditorLayout({
 
   return (
     <EditorProvider>
-      <TimelineProvider initialEvent={initialEvent}>
-        <div className="flex flex-col h-screen bg-background">
-          <div className="flex flex-row h-[calc(100%-18rem)]">
+      <TimelineProvider initialEvent={initialEvent} fps={metadata.fps ?? 30}>
+        <div className="flex flex-col h-screen bg-background w-full">
+          <div className="flex flex-row h-2/3">
             <div className="w-1/3 flex h-full">
-              <VideoEditorSidebar />
+                <VideoEditorSidebar />
+              </div>
+              <div className="w-2/3 flex h-full">
+                <PlayerComponent />
+              </div>
             </div>
-            <div className="w-2/3 flex h-full">
-              <PlayerComponent />
+            <div className="h-1/3 bg-muted w-full">
+              <Timeline />
             </div>
           </div>
-          <div className="h-72 bg-muted w-full">
-            <Timeline />
-          </div>
-        </div>
-      </TimelineProvider>
-    </EditorProvider>
+        </TimelineProvider>
+      </EditorProvider>
   );
 }

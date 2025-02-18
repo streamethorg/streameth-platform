@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { useTimeline } from '../context/TimelineContext';
+import { useTimelineContext } from '../context/TimelineContext';
 
 export default function CaptionSettings() {
   const {
@@ -25,7 +25,7 @@ export default function CaptionSettings() {
     setCaptionColor,
   } = useEditorContext();
 
-  const { addEvent } = useTimeline();
+  const { addEvent } = useTimelineContext();
 
   return (
     <div className="space-y-4">
