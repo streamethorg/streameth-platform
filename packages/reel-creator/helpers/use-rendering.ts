@@ -34,10 +34,7 @@ const wait = async (milliSeconds: number) => {
   });
 };
 
-export const useRendering = (
-  id: string,
-  inputProps: EditorProps,
-) => {
+export const useRendering = (id: string, inputProps: EditorProps) => {
   const [state, setState] = useState<State>({
     status: "init",
   });

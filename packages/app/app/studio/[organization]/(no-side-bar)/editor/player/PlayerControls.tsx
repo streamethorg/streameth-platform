@@ -4,9 +4,9 @@ import {
   Play, Pause, SkipBack, SkipForward, Repeat,
   Square, Maximize2, Minimize2, Volume2, VolumeX
 } from 'lucide-react';
-import { useTimeline } from '@/context/TimelineContext';
-import { useEditorContext } from '@/context/EditorContext';
-import { useCurrentPlayerFrame } from '@/app/hooks/useCurrentPlayerFrame';
+import { useTimeline } from '../context/TimelineContext';
+import { useEditorContext } from '../context/EditorContext';
+import { useCurrentPlayerFrame } from 'streameth-reel-creator/app/hooks/useCurrentPlayerFrame';
 
 interface PlayerControlBarProps {
   playerRef: React.RefObject<PlayerRef>;

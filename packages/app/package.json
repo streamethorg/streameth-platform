@@ -14,7 +14,6 @@
 		"prettier:check": "prettier --check './app' './components' './lib' ./tests/"
 	},
 	"dependencies": {
-		"mux-embed": "^5.3.3",
 		"@hookform/resolvers": "^3.3.4",
 		"@livepeer/react": "^4.2.7",
 		"@radix-ui/react-accordion": "^1.1.2",
@@ -31,6 +30,7 @@
 		"@radix-ui/react-navigation-menu": "^1.1.4",
 		"@radix-ui/react-popover": "^1.0.7",
 		"@radix-ui/react-progress": "^1.0.3",
+		"@radix-ui/react-radio-group": "^1.2.3",
 		"@radix-ui/react-select": "^2.0.0",
 		"@radix-ui/react-separator": "^1.0.3",
 		"@radix-ui/react-slot": "^1.0.2",
@@ -65,6 +65,7 @@
 		"lokijs": "^1.5.12",
 		"lucide-react": "^0.453.0",
 		"moment-timezone": "^0.5.46",
+		"mux-embed": "^5.3.3",
 		"next": "^14.2.21",
 		"next-auth": "^5.0.0-beta.22",
 		"next-themes": "^0.2.1",

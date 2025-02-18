@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTimeline } from '@/context/TimelineContext';
+import { useTimeline } from '../context/TimelineContext';
 
 const TimelineLabels: React.FC = () => {
   const { events } = useTimeline();

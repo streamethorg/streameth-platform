@@ -1,7 +1,5 @@
 import "../styles/global.css";
 import { Metadata } from "next";
-import { TimelineProvider } from '@/context/TimelineContext';
-import { EditorProvider } from '../context/EditorContext';
 
 export const metadata: Metadata = {
   title: "Remotion and Next.js",
@@ -16,11 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="">
-          <EditorProvider>
-          <TimelineProvider>
-      <body className="bg-background">{children}</body>
-      </TimelineProvider>
-      </EditorProvider>
+          <body className="bg-background">{children}</body>
     </html>
   );
 }

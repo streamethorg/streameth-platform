@@ -1,4 +1,4 @@
-import { useTimeline } from '@/context/TimelineContext';
+import { useTimeline } from '../context/TimelineContext';
 import React, { useCallback, useEffect, useState } from 'react';
 
 interface TimelinePlayheadProps {

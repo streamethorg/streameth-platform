@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { useTimeline } from "@/context/TimelineContext";
-import { MediaEvent } from "@/types/constants";
+import { useTimeline } from "../context/TimelineContext";
+import { EditorEvent } from "../types";
 
-type EditorEvent = MediaEvent;
 
 interface TimelineEventsProps {
   timelineWidth: number;

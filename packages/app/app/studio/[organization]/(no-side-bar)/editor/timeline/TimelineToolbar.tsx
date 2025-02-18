@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTimeline } from '@/context/TimelineContext';
+import { useTimeline } from '../context/TimelineContext';
 
 const TimelineToolbar: React.FC = () => {
   const { events, updateEvents, currentTime, selectedEvents, setSelectedEvents } = useTimeline();

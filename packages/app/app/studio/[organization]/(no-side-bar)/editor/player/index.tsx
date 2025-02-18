@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { Player } from "@remotion/player";
-import Editor from "../remotion/Editor"; // Import EditorProps
+import Editor from "streameth-reel-creator/remotion/Editor";
 import { useEditorContext } from "../context/EditorContext";
 import { useTimeline } from "../context/TimelineContext"; // Import the timeline context
 import { CalculateMetadataFunction } from "remotion";
 import { z } from "zod";
 import { getVideoMetadata } from "@remotion/media-utils";
-import PlayerControlBar from "./PlayerControl";
-import { transcipt } from "../app/data/transcription";
+import PlayerControlBar from "./PlayerControls";
+
 
 export const captionedVideoSchema = z.object({
     src: z.string(),
@@ -91,7 +91,6 @@ const PlayerComponent: React.FC = () => {
                     duration: metadata.durationInFrames / metadata.fps,
                     end: metadata.durationInFrames / metadata.fps, // End time in seconds
                     url: videoUrl,
-                    transcript: transcipt,
                 });
             } catch (e) {
                 console.error("Error fetching metadata:", e);

@@ -32,6 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "../reel-creator/components/Spacing.tsx",
+    "../reel-creator/helpers/use-rendering.ts"
   ],
   "exclude": ["node_modules", "packages"]
 }

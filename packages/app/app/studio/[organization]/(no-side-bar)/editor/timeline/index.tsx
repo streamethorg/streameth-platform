@@ -1,12 +1,11 @@
 "use client";
 import React, { useCallback, useRef, useEffect } from "react";
-import { useTimeline } from "@/context/TimelineContext";
+import { useTimeline } from "../context/TimelineContext";
 import TimelineToolbar from "./TimelineToolbar";
 import TimelineMarkers from "./TimelineMarkers";
 import TimelineEvents from "./TimelineEvents";
 import TimelinePlayhead from "./TimelinePlayhead";
-import { EditorEvent } from "@/types/constants";
-import TimelineLabels from "../Labels";
+import TimelineLabels from "./Labels";
 const Timeline: React.FC = () => {
     const {
         events,
