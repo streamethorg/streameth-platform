@@ -10,7 +10,7 @@ interface TimelineEventsProps {
 const getEventColor = (type: EditorEvent["type"]) => {
   switch (type) {
     case "media":
-      return "bg-blue-400";
+      return "bg-blue";
     default:
       return "bg-gray-400";
   }

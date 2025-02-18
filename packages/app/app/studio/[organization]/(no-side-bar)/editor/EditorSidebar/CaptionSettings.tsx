@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEditorContext } from '../context/EditorContext';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';

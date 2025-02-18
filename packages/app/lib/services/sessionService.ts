@@ -599,3 +599,37 @@ export const extractHighlights = async ({
     throw e;
   }
 };
+
+interface PlaybackSource {
+  hrn: string;
+  type: string;
+  url: string;
+  size?: number;
+  width?: number;
+  height?: number;
+  bitrate?: number;
+}
+
+interface PlaybackInfo {
+  type: string;
+  meta: {
+    source: PlaybackSource[];
+  };
+}
+
+export const getPlaybackInfo = async ({
+  playbackId,
+}: {
+  playbackId: string;
+}): Promise<PlaybackInfo> => {
+  try {
+    const response = await fetch(`${apiUrl()}/sessions/${playbackId}/playback`);
+    if (!response.ok) {
+      throw 'Error fetching playback info';
+    }
+    return (await response.json()).data;
+  } catch (e) {
+    console.log('error in getPlaybackInfo', e);
+    throw e;
+  }
+};

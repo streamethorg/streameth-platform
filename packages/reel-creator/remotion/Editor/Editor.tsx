@@ -14,7 +14,6 @@ const MediaEventComponent: React.FC<{
   editorProps: EditorProps;
 }> = ({ event, editorProps }) => {
   const { fps } = useVideoConfig();
-  console.log(event);
   if (!event.url || event.start === undefined || event.end === undefined || !event.duration) {
     return null;
   }
@@ -99,7 +98,6 @@ const CaptionsEventComponent: React.FC<{
 
 const Editor: React.FC<EditorProps> = ({ events, ...props }) => {
   const editorProps = { ...props, events };
-  console.log(events);
   return (
     <AbsoluteFill className="w-full bg-black">
       {events.map((event, index) => {

@@ -6410,6 +6410,38 @@
 				}
 			}
 		},
+		"/sessions/{playbackId}/playback": {
+			"get": {
+				"operationId": "GetPlaybackInfo",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get playback info",
+				"tags": [
+					"Session"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "playbackId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/sessions/{sessionId}/progress": {
 			"get": {
 				"operationId": "GetSessionRenderingProgress",

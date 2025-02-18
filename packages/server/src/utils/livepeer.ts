@@ -23,7 +23,7 @@ interface YoutubeDLOutput {
   }>;
 }
 const { host, secretKey } = config.livepeer;
-const livepeer = new Livepeer({
+export const livepeer = new Livepeer({
   apiKey: secretKey,
 });
 

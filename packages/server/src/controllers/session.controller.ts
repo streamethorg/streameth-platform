@@ -232,6 +232,18 @@ export class SessionController extends Controller {
     await this.sessionService.launchExtractHighlights(sessionId, body.prompt);
     return SendApiResponse('highlights extraction started');
   }
+
+
+  /**
+   * @summary Get playback info
+   */
+  @SuccessResponse('200')
+  @Get('{playbackId}/playback')
+  async getPlaybackInfo(@Path() playbackId: string): Promise<IStandardResponse<any>> {
+    const playback = await this.sessionService.getPlaybackInfo(playbackId);
+    return SendApiResponse('playback info', playback);
+  }
+
   /**
    * @summary get session rendeing progress
    */

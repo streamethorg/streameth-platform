@@ -24,7 +24,9 @@ import {
   createAsset,
   getAsset,
   getDownloadUrl,
+  getPlayback,
   getStreamRecordings,
+  livepeer,
 } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
 import {
@@ -287,9 +289,12 @@ export default class SessionService {
     if (!stage) {
       console.error('❌ Stage not found for stream ID:', {
         streamId: payload.parentId,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
-      throw new HttpException(404, `Stage not found for stream ID: ${payload.parentId}`);
+      throw new HttpException(
+        404,
+        `Stage not found for stream ID: ${payload.parentId}`,
+      );
     }
 
     const asset = await getAsset(payload.assetId);
@@ -401,17 +406,26 @@ export default class SessionService {
     }
   }
 
+  async getPlaybackInfo(playbackId: string) {
+    const playback = await livepeer.playback.get(playbackId);
+    const data = playback.playbackInfo; 
+    return data;
+  }
+
   private async createMultipleStreamRecordings(streamId: string) {
     const recordings = await getStreamRecordings(streamId);
     for (const recording of recordings) {
       let stage = await Stage.findOne({ 'streamSettings.streamId': streamId });
-      
+
       if (!stage) {
         console.error('❌ Stage not found for stream ID:', {
           streamId,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
-        throw new HttpException(404, `Stage not found for stream ID: ${streamId}`);
+        throw new HttpException(
+          404,
+          `Stage not found for stream ID: ${streamId}`,
+        );
       }
 
       await this.create({
@@ -525,7 +539,7 @@ export default class SessionService {
       const similarPhrases = await chat.getSimilarPhrases(
         session._id.toString(),
         chunks,
-        query
+        query,
       );
       console.log('similarPhrases', similarPhrases);
       const contextualizedPhrases = chat.contextualizePhrasesWithTimestamps(

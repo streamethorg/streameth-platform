@@ -43,11 +43,20 @@ const TimelineContext = createContext<TimelineContextType | undefined>(
   undefined
 );
 
-// Create a provider component
-export const TimelineProvider: React.FC<{ children: ReactNode }> = ({
+// Update the provider props type
+interface TimelineProviderProps {
+  children: ReactNode;
+  initialEvent?: EditorEvent;
+}
+
+// Update the provider component
+export const TimelineProvider: React.FC<TimelineProviderProps> = ({
   children,
+  initialEvent,
 }) => {
-  const [events, setEvents] = useState<EditorEvent[]>([]);
+  const [events, setEvents] = useState<EditorEvent[]>(
+    initialEvent ? [initialEvent] : []
+  );
   const [currentTime, setCurrentTime] = useState(0);
   const [selectedEvents, setSelectedEvents] = useState<string[]>([]);
   const [movingEvent, setMovingEvent] = useState<string | null>(null);
