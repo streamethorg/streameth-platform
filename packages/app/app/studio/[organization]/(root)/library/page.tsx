@@ -6,7 +6,7 @@ import { eLayout, eSort } from '@/lib/types';
 import Library, { TableSkeleton } from './components/Library';
 import LibraryFilter from './components/LibraryFilter';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
-import Pagination from './components/Pagination';
+import { CreatePlaylistDialog } from './components/CreatePlaylistDialog';
 
 const LibraryPage = async ({
   params,
@@ -30,13 +30,16 @@ const LibraryPage = async ({
       <div className="flex flex-row justify-between">
         <div className="p-4 w-full flex flex-row items-center space-x-4">
           <h2 className="text-lg font-bold">Video library</h2>
-          <Suspense
-            fallback={
-              <div className="w-full h-full bg-gray-100 animate-pulse" />
-            }
-          >
-            <Filters organizationId={params.organization} />
-          </Suspense>
+          <div className="flex items-center space-x-4">
+            <Suspense
+              fallback={
+                <div className="w-full h-full bg-gray-100 animate-pulse" />
+              }
+            >
+              <Filters organizationId={params.organization} />
+            </Suspense>
+            <CreatePlaylistDialog organizationId={params.organization} />
+          </div>
         </div>
       </div>
       <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
