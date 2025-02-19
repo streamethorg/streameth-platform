@@ -91,6 +91,7 @@ export async function fetchAllSessions({
   sessions: IExtendedSession[];
   pagination: IPagination;
 }> {
+  console.log('searchQuery', searchQuery);
   const params: ApiParams = {
     event,
     organizationId,

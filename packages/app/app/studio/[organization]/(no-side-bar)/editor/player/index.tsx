@@ -15,8 +15,8 @@ const PlayerComponent: React.FC = () => {
     captionPosition,
     captionFont,
     captionColor,
-    fps,
     playerRef,
+    fps,
   } = useEditorContext();
 
   const { events } = useTimelineContext();
@@ -57,7 +57,7 @@ const PlayerComponent: React.FC = () => {
           captionFont,
           captionColor,
         }}
-        className="'w-full object-cover"
+        className="'w-full object-cover "
         durationInFrames={getVideoDurationInFrames()}
         fps={fps}
         compositionHeight={getCompositionDimensions().height}

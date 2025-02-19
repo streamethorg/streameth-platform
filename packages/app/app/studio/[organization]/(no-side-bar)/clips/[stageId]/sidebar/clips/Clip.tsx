@@ -48,7 +48,13 @@ function ProcessingCard({
   );
 }
 
-export default function Clip({ session }: { session: IExtendedSession }) {
+export default function Clip({
+  session,
+  importSession,
+}: {
+  session: IExtendedSession;
+  importSession?: (session: IExtendedSession) => void;
+}) {
   const [progress, setProgress] = useState<{
     type: 'progress' | 'done';
     progress: number;
@@ -158,6 +164,7 @@ export default function Clip({ session }: { session: IExtendedSession }) {
           isOpen={isOpen}
           session={session}
           setIsOpen={setIsOpen}
+          importSession={importSession}
         />
       )}
     </>

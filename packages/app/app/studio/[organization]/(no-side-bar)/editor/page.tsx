@@ -3,40 +3,10 @@ import PlayerComponent from './player';
 import Timeline from './timeline';
 import { TimelineProvider } from './context/TimelineContext';
 import { EditorProvider } from './context/EditorContext';
-import {
-  fetchAsset,
-  fetchSession,
-} from '@/lib/services/sessionService';
-import { parseMedia } from '@remotion/media-parser';
-import { CalculateMetadataFunction } from 'remotion';
-import { z } from 'zod';
+import { fetchSession } from '@/lib/services/sessionService';
 import { EditorEvent } from './types';
-
-export const captionedVideoSchema = z.object({
-  src: z.string(),
-});
-
-export const calculateCaptionedVideoMetadata: CalculateMetadataFunction<
-  z.infer<typeof captionedVideoSchema>
-> = async ({ props }) => {
-  const metadata = await parseMedia({
-    src: props.src,
-    fields: {
-      durationInSeconds: true,
-      dimensions: true,
-      fps: true,
-    },
-  });
-  
-  console.log('metadata', metadata);
-  return {
-    fps: metadata.fps === 0 ? 30 : metadata.fps,
-    durationInSeconds: metadata.durationInSeconds ?? 0,
-    width: metadata.dimensions?.width ?? 0,
-    height: metadata.dimensions?.height ?? 0,
-  };
-};
-
+import { ParseSessionMediaAction } from '@/lib/actions/sessions';
+import InfoSidebar from './InfoSidebar';
 export default async function VideoEditorLayout({
   params,
   searchParams,
@@ -52,34 +22,28 @@ export default async function VideoEditorLayout({
   if (!session?.assetId) {
     return <div>Asset not found</div>;
   }
-  const asset = await fetchAsset({ assetId: session?.assetId });
-
-  const videoUrl = asset?.downloadUrl;
-  console.log('videoUrl', videoUrl);
 
   // Fetch video metadata server-side
-  const metadata = await calculateCaptionedVideoMetadata({
-    props: { src: videoUrl },
-    defaultProps: { src: videoUrl },
-    abortSignal: AbortSignal.timeout(1_000 * 60 * 5),
-    compositionId: '',
+  const metadata = await ParseSessionMediaAction({
+    assetId: session.assetId,
   });
 
   const initialEvent: EditorEvent = {
-    id: 'main',
-    label: 'main',
+    id: session._id,
+    label: session.name,
     type: 'media',
-    start: 0, 
+    start: 0,
     timeLineStart: 0,
     duration: metadata.durationInSeconds,
     end: metadata.durationInSeconds,
     timeLineEnd: metadata.durationInSeconds,
-    url: videoUrl,
+    url: metadata.videoUrl,
+    fps: metadata.fps,
     transcript: {
       language: 'en',
       duration: metadata.durationInSeconds,
-      words: session.transcripts?.chunks,
-      text: session.transcripts?.text,
+      words: session.transcripts?.chunks ?? [],
+      text: session.transcripts?.text ?? '',
     },
   };
 
@@ -88,22 +52,25 @@ export default async function VideoEditorLayout({
   }
 
   return (
-    <EditorProvider>
-      <TimelineProvider initialEvent={initialEvent} fps={metadata.fps ?? 30}>
+    <EditorProvider initialSessions={[session]}>
+      <TimelineProvider initialEvents={[initialEvent]}>
         <div className="flex flex-col h-screen bg-background w-full">
-          <div className="flex flex-row h-2/3">
-            <div className="w-1/3 flex h-full">
-                <VideoEditorSidebar />
-              </div>
-              <div className="w-2/3 flex h-full">
-                <PlayerComponent />
-              </div>
+          <div className="flex flex-row h-[60%]">
+            <div className="w-1/4 flex h-full">
+              <VideoEditorSidebar />
             </div>
-            <div className="h-1/3 bg-muted w-full">
-              <Timeline />
+            <div className="w-2/4 flex h-full">
+              <PlayerComponent />
+            </div>
+            <div className="w-1/4 flex h-full">
+              <InfoSidebar />
             </div>
           </div>
-        </TimelineProvider>
-      </EditorProvider>
+          <div className="h-[40%] bg-muted w-full">
+            <Timeline />
+          </div>
+        </div>
+      </TimelineProvider>
+    </EditorProvider>
   );
 }

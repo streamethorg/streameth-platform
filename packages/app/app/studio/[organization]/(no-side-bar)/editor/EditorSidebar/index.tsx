@@ -1,75 +1,37 @@
 'use client';
-import React, { useState } from 'react';
-import { useEditorContext } from '../context/EditorContext';
+import React from 'react';
 import LayoutSettings from './LayoutSettings';
 import CaptionSettings from './CaptionSettings';
 import AnimationSettings from './AnimationSettings';
 import BrandingSettings from './BrandingSettings';
-// import { RenderControls } from './RenderControls';
-import { useTimelineContext } from '../context/TimelineContext';
-import { Button } from '@/components/ui/button';
-
-type SettingTab = 'layout' | 'captions' | 'animations' | 'branding';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function EditorSidebar() {
-  const [activeTab, setActiveTab] = useState<SettingTab>('layout');
-  const {
-    selectedAspectRatio,
-    captionEnabled,
-    captionLinesPerPage,
-    captionPosition,
-    captionFont, // Add this
-    captionColor, // Add this
-    videoUrl,
-    fps,
-  } = useEditorContext();
-
-  const { events } = useTimelineContext();
-
-  const inputProps = {
-    videoUrl,
-    transcription: undefined,
-    frameRate: fps,
-    events,
-    selectedAspectRatio,
-    captionEnabled,
-    captionPosition,
-    captionLinesPerPage,
-    captionFont,
-    captionColor,
-  };
-
-  const NavItem: React.FC<{ tab: SettingTab; label: string }> = ({
-    tab,
-    label,
-  }) => (
-    <Button
-      variant={activeTab === tab ? 'default' : 'ghost'}
-      onClick={() => setActiveTab(tab)}
-    >
-      {label}
-    </Button>
-  );
-
   return (
-    <div className="flex h-screen bg-background border-r">
-      <nav className="w-28 bg-muted h-full">
-        <div className="space-y-1 py-4">
-          <NavItem tab="layout" label="Layout" />
-          <NavItem tab="captions" label="Captions" />
-          <NavItem tab="animations" label="Animations" />
-          <NavItem tab="branding" label="Branding" />
-        </div>
-        <div className="mt-auto">
-          {/* <RenderControls inputProps={inputProps} /> */}
-        </div>
-      </nav>
-      <div className="flex-1 p-6 overflow-y-auto">
-        {activeTab === 'layout' && <LayoutSettings />}
-        {activeTab === 'captions' && <CaptionSettings />}
-        {activeTab === 'animations' && <AnimationSettings />}
-        {activeTab === 'branding' && <BrandingSettings />}
+    <Tabs
+      defaultValue="layout"
+      className="flex flex-col h-full bg-white w-full"
+    >
+      <TabsList className="grid w-full grid-cols-4 flex-shrink-0">
+        <TabsTrigger value="layout">Layout</TabsTrigger>
+        <TabsTrigger value="captions">Captions</TabsTrigger>
+        <TabsTrigger value="import">Import</TabsTrigger>
+        <TabsTrigger value="branding">Branding</TabsTrigger>
+      </TabsList>
+      <div className="flex-1 overflow-y-auto p-4">
+        <TabsContent value="layout">
+          <LayoutSettings />
+        </TabsContent>
+        <TabsContent value="captions">
+          <CaptionSettings />
+        </TabsContent>
+        <TabsContent value="import">
+          <AnimationSettings />
+        </TabsContent>
+        <TabsContent value="branding">
+          <BrandingSettings />
+        </TabsContent>
       </div>
-    </div>
+    </Tabs>
   );
 }

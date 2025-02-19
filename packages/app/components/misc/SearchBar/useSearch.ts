@@ -6,6 +6,7 @@ import useDebounce from '@/lib/hooks/useDebounce';
 export function useSearch(organizationId: string, isStudio: boolean) {
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [assetType, setAssetType] = useState<'video' | 'animation'>('video');
   const [searchResults, setSearchResults] = useState<IExtendedSession[]>([]);
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
@@ -18,7 +19,7 @@ export function useSearch(organizationId: string, isStudio: boolean) {
     const fetchSearchResults = async () => {
       setIsLoading(true);
       try {
-        const baseUrl = `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}&onlyVideos=true`;
+        const baseUrl = `${apiUrl()}/sessions/search?search=${debouncedSearchQuery}&type=${assetType}`;
         const url = organizationId
           ? `${baseUrl}&organizationId=${organizationId}`
           : baseUrl;
@@ -41,5 +42,12 @@ export function useSearch(organizationId: string, isStudio: boolean) {
     fetchSearchResults();
   }, [debouncedSearchQuery, organizationId, isStudio]);
 
-  return { searchQuery, setSearchQuery, searchResults, isLoading };
+  return {
+    searchQuery,
+    setSearchQuery,
+    searchResults,
+    isLoading,
+    assetType,
+    setAssetType,
+  };
 }

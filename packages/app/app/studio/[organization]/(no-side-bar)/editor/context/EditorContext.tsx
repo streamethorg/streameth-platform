@@ -1,6 +1,13 @@
-"use client"
-import React, { createContext, useContext, useState, useRef, ReactNode, useEffect } from 'react';
+'use client';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  ReactNode,
+} from 'react';
 import { PlayerRef } from '@remotion/player';
+import { IExtendedSession } from '@/lib/types';
 
 // Define the shape of the context state
 export interface EditorState {
@@ -23,22 +30,26 @@ export interface EditorState {
   captionColor: string;
   setCaptionFont: (font: string) => void;
   setCaptionColor: (color: string) => void;
-  currentTime: number;
-  setCurrentTime: (time: number) => void;
-  fps: number;
-  setFps: (fps: number) => void;
-  videoUrl: string;
-  setVideoUrl: (url: string) => void;
-  transcript: string;
-  setTranscript: (transcript: string) => void;
+  importedSessions: IExtendedSession[];
+  addSession: (session: IExtendedSession) => void;
+  removeSession: (sessionId: string) => void;
   playerRef: React.RefObject<PlayerRef>;
+  fps: number;
+  selectedSession: IExtendedSession | null;
+  setSelectedSession: (session: IExtendedSession | null) => void;
 }
 
 // Create the context with default values
 export const EditorContext = createContext<EditorState | undefined>(undefined);
 
 // Create a provider component
-export const EditorProvider = ({ children }: { children: ReactNode }) => {
+export const EditorProvider = ({
+  children,
+  initialSessions,
+}: {
+  children: ReactNode;
+  initialSessions: IExtendedSession[];
+}) => {
   const [addCaptions, setAddCaptions] = useState(false);
   const [addBranding, setAddBranding] = useState(false);
   const [selectedAspectRatio, setSelectedAspectRatio] = useState('16:9');
@@ -47,13 +58,24 @@ export const EditorProvider = ({ children }: { children: ReactNode }) => {
   const [captionPosition, setCaptionPosition] = useState('Auto');
   const [animation, setAnimation] = useState('None');
   const aspectRatios = ['9:16', '1:1', '16:9'];
-  const [captionFont, setCaptionFont] = useState("Arial");
-  const [captionColor, setCaptionColor] = useState("#FFFFFF");
-  const [currentTime, setCurrentTime] = useState(0);
+  const [captionFont, setCaptionFont] = useState('Arial');
+  const [captionColor, setCaptionColor] = useState('#FFFFFF');
   const [fps, setFps] = useState(30);
-  const [transcript, setTranscript] = useState('');
-  const [videoUrl, setVideoUrl] = useState<string>("https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/0b9furirfbkz2qlx/1080p0.mp4");
-  // const [videoUrl, setVideoUrl] = useState<string>("/video.mp4");
+  const [selectedSession, setSelectedSession] = useState<IExtendedSession | null>(null);
+
+  const [importedSessions, setImportedSessions] = useState<IExtendedSession[]>(
+    initialSessions ?? []
+  );
+
+  const addSession = (session: IExtendedSession) => {
+    setImportedSessions([...importedSessions, session]);
+  };
+
+  const removeSession = (sessionId: string) => {
+    setImportedSessions(
+      importedSessions.filter((session) => session._id !== sessionId)
+    );
+  };
 
   const playerRef = useRef<PlayerRef>(null);
 
@@ -79,15 +101,13 @@ export const EditorProvider = ({ children }: { children: ReactNode }) => {
         captionColor,
         setCaptionFont,
         setCaptionColor,
-        currentTime,
-        setCurrentTime,
-        fps,
-        setFps,
-        videoUrl,
-        setVideoUrl,
-        transcript,
-        setTranscript,
+        importedSessions,
+        addSession,
+        removeSession,
         playerRef,
+        fps,
+        selectedSession,
+        setSelectedSession,
       }}
     >
       {children}

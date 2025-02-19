@@ -4,6 +4,7 @@ export interface EditorEvent {
   type: 'media';
   url: string;
   duration: number;
+  fps: number;
   transcript?: Transcript;
   start: number;
   end: number;

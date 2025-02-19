@@ -14,7 +14,7 @@ import { useEditorContext } from './EditorContext';
 export interface TimelineContextType {
   events: EditorEvent[];
   addEvent: (event: EditorEvent) => void;
-  removeEvent: (index: number) => void;
+  removeEvent: (eventId: string) => void;
   updateEvents: (newEvents: EditorEvent[]) => void;
   selectedEvents: string[];
   setSelectedEvents: (eventIds: string[]) => void;
@@ -55,24 +55,22 @@ const TimelineContext = createContext<TimelineContextType | undefined>(
 // Update the provider props type
 interface TimelineProviderProps {
   children: ReactNode;
-  initialEvent?: EditorEvent;
-  fps: number;
+  initialEvents?: EditorEvent[];
 }
 
 // Update the provider component
 export const TimelineProvider: React.FC<TimelineProviderProps> = ({
   children,
-  initialEvent,
-  fps,
+  initialEvents,
 }) => {
   const timelineRef = useRef<HTMLDivElement>(null);
-  const { playerRef } = useEditorContext();
+  const { playerRef, fps } = useEditorContext();
   const maxDuration = 60 * 30;
   const pixelsPerSecond = 2;
   const timelineWidth = maxDuration * pixelsPerSecond;
 
   const [events, setEvents] = useState<EditorEvent[]>(
-    initialEvent ? [initialEvent] : []
+    initialEvents ? [...initialEvents] : []
   );
 
   const [timelineAction, setTimelineAction] = useState<
@@ -91,8 +89,8 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
     );
   };
 
-  const removeEvent = (index: number) => {
-    setEvents((prevEvents) => prevEvents.filter((_, i) => i !== index));
+  const removeEvent = (eventId: string) => {
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventId));
   };
 
   const updateEvents = (newEvents: EditorEvent[]) => {
@@ -156,7 +154,7 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
         case 'trimStart':
           if (!activeEvent) return;
           const newStart = Math.max(0, initialEventStart + timeDelta);
-          if (newStart > activeEvent.timeLineEnd ) return;
+          if (newStart > activeEvent.timeLineEnd) return;
           updateEvents(
             events.map((event) =>
               event.id === movingEvent &&
@@ -171,19 +169,19 @@ export const TimelineProvider: React.FC<TimelineProviderProps> = ({
             )
           );
           break;
-          
+
         case 'trimEnd':
           if (!activeEvent) return;
           const newEnd = Math.min(maxDuration, initialEventStart + timeDelta);
           if (newEnd < activeEvent.timeLineStart) return;
           updateEvents(
-            events.map((event) => 
+            events.map((event) =>
               event.id === movingEvent &&
               newEnd - event.timeLineStart < event.duration
                 ? {
                     ...event,
                     timeLineEnd: newEnd,
-                  } 
+                  }
                 : event
             )
           );

@@ -31,7 +31,7 @@ export default function Thumbnail({ imageUrl, fallBack }: ThumbnailProps) {
         loading="lazy"
         decoding="async"
         data-nimg="fill"
-        className="rounded-xl z-1"
+        className="rounded-lg z-1"
         alt="Session image"
         quality={100}
         src={srcUrl}

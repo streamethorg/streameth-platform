@@ -12,25 +12,25 @@ import ShareButton from '@/components/misc/interact/ShareButton';
 import { deleteSessionAction } from '@/lib/actions/sessions';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { useParams } from 'next/navigation';
 import { IExtendedSession } from '@/lib/types';
 import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 import Link from 'next/link';
-import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { useRouter } from 'next/navigation';
 const Preview = ({
   isOpen,
   session,
   setIsOpen,
+  importSession,
 }: {
   isOpen: boolean;
   session: IExtendedSession;
   setIsOpen: (isOpen: boolean) => void;
+  importSession?: (session: IExtendedSession) => void;
 }) => {
   const { organizationId } = useOrganizationContext();
-  const { fetchSessions } = useClipsSidebar();
   const [shareUrl, setShareUrl] = useState('');
-
+  const router = useRouter();
   useEffect(() => {
     setShareUrl(
       `${window.location.origin}/${organizationId}/watch?session=${session._id}`
@@ -49,7 +49,7 @@ const Preview = ({
       .then(() => {
         toast.success('Session deleted');
         handleClose();
-        fetchSessions();
+        router.refresh();
       })
       .catch(() => {
         toast.error('Error deleting session');
@@ -76,29 +76,41 @@ const Preview = ({
           />
 
           <DialogFooter className="flex flex-row text-black">
-            <Button
-              className="mr-auto"
-              variant={'destructive'}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
+            {importSession ? (
+              <Button
+                className="mr-auto"
+                variant={'outline'}
+                onClick={() => importSession(session)}
+              >
+                Import Session
+              </Button>
+            ) : (
+              <>
+                <Button
+                  className="mr-auto"
+                  variant={'destructive'}
+                  onClick={handleDelete}
+                >
+                  Delete
+                </Button>
 
-            <ShareButton url={shareUrl} shareFor="video" />
-            <VideoDownloadClient
-              className="space-x-1 border"
-              variant={'outline'}
-              videoName={session.name}
-              assetId={session.assetId}
-              collapsable={true}
-            />
-            <Link
-              href={`/studio/${organizationId}/library/${session._id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant={'outline'}>Go to Session</Button>
-            </Link>
+                <ShareButton url={shareUrl} shareFor="video" />
+                <VideoDownloadClient
+                  className="space-x-1 border"
+                  variant={'outline'}
+                  videoName={session.name}
+                  assetId={session.assetId}
+                  collapsable={true}
+                />
+                <Link
+                  href={`/studio/${organizationId}/library/${session._id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant={'outline'}>Go to Session</Button>
+                </Link>
+              </>
+            )}
           </DialogFooter>
         </div>
       </DialogContent>

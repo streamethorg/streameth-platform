@@ -15,12 +15,14 @@ import {
   extractHighlights,
   importVideoFromUrl,
   fetchAllSessions,
+  fetchAsset,
 } from '../services/sessionService';
 import {
   ISession,
   SessionType,
 } from 'streameth-new-server/src/interfaces/session.interface';
 import { revalidatePath, revalidateTag } from 'next/cache';
+import { parseMedia } from '@remotion/media-parser';
 
 const livepeer = new Livepeer({
   apiKey: process.env.LIVEPEER_API_KEY,
@@ -281,4 +283,35 @@ export const extractHighlightsAction = async ({
 }) => {
   const res = await extractHighlights({ sessionId, prompt });
   return res;
+};
+
+export const ParseSessionMediaAction = async ({
+  assetId,
+}: {
+  assetId: string;
+}) => {
+  const asset = await fetchAsset({ assetId });
+
+  const videoUrl = asset?.downloadUrl;
+  if (!videoUrl) {
+    throw new Error('Video URL not found');
+  }
+
+  const metadata = await parseMedia({
+    src: videoUrl,
+    fields: {
+      durationInSeconds: true,
+      dimensions: true,
+      fps: true,
+    },
+  });
+
+  console.log('metadata', metadata);
+  return {
+    fps: metadata.fps === 0 ? 30 : metadata.fps ?? 30,
+    durationInSeconds: metadata.durationInSeconds ?? 0,
+    width: metadata.dimensions?.width ?? 0,
+    height: metadata.dimensions?.height ?? 0,
+    videoUrl,
+  };
 };
