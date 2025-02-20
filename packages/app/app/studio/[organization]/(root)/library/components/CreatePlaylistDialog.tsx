@@ -11,9 +11,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { createPlaylistAction } from '@/lib/actions/playlists';
+import { createPlaylistAction, updatePlaylistAction } from '@/lib/actions/playlists';
 import { PlusIcon } from 'lucide-react';
 import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
@@ -28,18 +27,27 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
 import { useOrganization } from '@/lib/hooks/useOrganization';
+import { Switch } from '@/components/ui/switch';
+import { IPlaylist } from 'streameth-new-server/src/interfaces/playlist.interface';
 
 const PlaylistSchema = z.object({
   name: z.string().min(1, 'Name is required').max(255),
   description: z.string().optional(),
+  isPublic: z.boolean().default(false),
 });
 
 type PlaylistFormData = z.infer<typeof PlaylistSchema>;
 
-export function CreatePlaylistDialog() {
+interface CreatePlaylistDialogProps {
+  playlist?: IPlaylist;
+  trigger?: React.ReactNode;
+}
+
+export function CreatePlaylistDialog({ playlist, trigger }: CreatePlaylistDialogProps) {
   const params = useParams();
   const { organization } = useOrganization(params.organization as string);
   const [open, setOpen] = useState(false);
@@ -49,8 +57,9 @@ export function CreatePlaylistDialog() {
   const form = useForm<PlaylistFormData>({
     resolver: zodResolver(PlaylistSchema),
     defaultValues: {
-      name: '',
-      description: '',
+      name: playlist?.name || '',
+      description: playlist?.description || '',
+      isPublic: playlist?.isPublic || false,
     },
   });
 
@@ -64,17 +73,28 @@ export function CreatePlaylistDialog() {
     
     setIsLoading(true);
     try {
-      await createPlaylistAction({
-        playlist: {
-          ...values,
+      if (playlist) {
+        // Update existing playlist
+        await updatePlaylistAction({
+          playlist: values,
           organizationId: organization._id,
-        },
-      });
-      toast.success('Playlist created successfully');
+          playlistId: playlist._id?.toString() as string,
+        });
+        toast.success('Playlist updated successfully');
+      } else {
+        // Create new playlist
+        await createPlaylistAction({
+          playlist: {
+            ...values,
+            organizationId: organization._id,
+          },
+        });
+        toast.success('Playlist created successfully');
+      }
       router.refresh();
       handleModalClose();
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to create playlist';
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save playlist';
       toast.error(errorMessage);
     } finally {
       setIsLoading(false);
@@ -84,18 +104,20 @@ export function CreatePlaylistDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="gap-2">
-          <PlusIcon className="h-4 w-4" />
-          Create Playlist
-        </Button>
+        {trigger || (
+          <Button variant="outline" className="gap-2">
+            <PlusIcon className="h-4 w-4" />
+            Create Playlist
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
-              <DialogTitle>Create New Playlist</DialogTitle>
+              <DialogTitle>{playlist ? 'Edit' : 'Create New'} Playlist</DialogTitle>
               <DialogDescription>
-                Create a new playlist to organize your sessions.
+                {playlist ? 'Update your playlist details.' : 'Create a new playlist to organize your sessions.'}
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
@@ -131,6 +153,26 @@ export function CreatePlaylistDialog() {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="isPublic"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
+                    <div className="space-y-0.5">
+                      <FormLabel>Public Playlist</FormLabel>
+                      <FormDescription>
+                        Make this playlist visible to everyone
+                      </FormDescription>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
             <DialogFooter>
               <Button
@@ -146,7 +188,7 @@ export function CreatePlaylistDialog() {
                 disabled={getFormSubmitStatus(form) || isLoading}
                 loading={isLoading}
               >
-                Create
+                {playlist ? 'Update' : 'Create'}
               </Button>
             </DialogFooter>
           </form>
