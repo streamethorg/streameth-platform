@@ -52,6 +52,7 @@ export async function updatePlaylistAction({
     name?: string;
     description?: string;
     isPublic?: boolean;
+    sessions?: string[];
   };
   organizationId: string;
   playlistId: string;
