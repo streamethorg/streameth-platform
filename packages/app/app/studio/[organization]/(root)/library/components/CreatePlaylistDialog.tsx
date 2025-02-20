@@ -15,7 +15,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { createPlaylistAction } from '@/lib/actions/playlists';
 import { PlusIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -30,6 +30,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { getFormSubmitStatus } from '@/lib/utils/utils';
+import { useOrganization } from '@/lib/hooks/useOrganization';
 
 const PlaylistSchema = z.object({
   name: z.string().min(1, 'Name is required').max(255),
@@ -38,11 +39,9 @@ const PlaylistSchema = z.object({
 
 type PlaylistFormData = z.infer<typeof PlaylistSchema>;
 
-export function CreatePlaylistDialog({
-  organizationId,
-}: {
-  organizationId: string;
-}) {
+export function CreatePlaylistDialog() {
+  const params = useParams();
+  const { organization } = useOrganization(params.organization as string);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -61,12 +60,14 @@ export function CreatePlaylistDialog({
   };
 
   const onSubmit = async (values: PlaylistFormData) => {
+    if (!organization?._id) return;
+    
     setIsLoading(true);
     try {
       await createPlaylistAction({
         playlist: {
           ...values,
-          organizationId,
+          organizationId: organization._id,
         },
       });
       toast.success('Playlist created successfully');

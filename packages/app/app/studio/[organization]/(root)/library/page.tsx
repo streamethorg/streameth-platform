@@ -7,6 +7,7 @@ import Library, { TableSkeleton } from './components/Library';
 import LibraryFilter from './components/LibraryFilter';
 import { fetchOrganizationStages } from '@/lib/services/stageService';
 import { CreatePlaylistDialog } from './components/CreatePlaylistDialog';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 const LibraryPage = async ({
   params,
@@ -27,10 +28,17 @@ const LibraryPage = async ({
 
   return (
     <div className="flex flex-col w-full h-full relative mt-2">
-      <div className="flex flex-row justify-between">
-        <div className="p-4 w-full flex flex-row items-center space-x-4">
-          <h2 className="text-lg font-bold">Video library</h2>
-          <div className="flex items-center space-x-4">
+      <Tabs defaultValue="videos" className="flex-1">
+        <TabsList className="ml-4 mb-4">
+          <TabsTrigger value="videos">
+            <p className="text-lg font-bold">Videos</p>
+          </TabsTrigger>
+          <TabsTrigger value="playlists">
+            <p className="text-lg font-bold">Playlists</p>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="videos" className="flex-1">
+          <div className="px-4 mb-4">
             <Suspense
               fallback={
                 <div className="w-full h-full bg-gray-100 animate-pulse" />
@@ -38,13 +46,22 @@ const LibraryPage = async ({
             >
               <Filters organizationId={params.organization} />
             </Suspense>
-            <CreatePlaylistDialog organizationId={params.organization} />
           </div>
-        </div>
-      </div>
-      <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
-        <Library params={params} searchParams={searchParams} />
-      </Suspense>
+          <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
+            <Library params={params} searchParams={searchParams} />
+          </Suspense>
+        </TabsContent>
+        <TabsContent value="playlists" className="flex-1">
+          <div className="px-4 mb-4">
+            <CreatePlaylistDialog />
+          </div>
+          <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
+            <div className="px-4">
+              <p>Playlists content coming soon...</p>
+            </div>
+          </Suspense>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
