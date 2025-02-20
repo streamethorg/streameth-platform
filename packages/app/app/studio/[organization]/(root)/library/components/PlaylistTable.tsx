@@ -87,7 +87,7 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
                 <TableCell className="p-2 md:p-2 relative font-medium max-w-[300px] h-20">
                   <div className="flex flex-row items-center space-x-4 w-full h-full max-w-[500px]">
                     <div className="min-w-[100px]">
-                      <Thumbnail imageUrl={playlist.coverImage} />
+                      <Thumbnail />
                     </div>
                     <div className="flex flex-col">
                       <Link href={`/studio/${params.organization}/library/playlists/${playlist._id}`}>
