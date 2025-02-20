@@ -25,7 +25,6 @@ export class PlaylistController extends Controller {
   /**
    * @summary Create playlist
    */
-  @Security('jwt', ['org'])
   @SuccessResponse('201')
   @Post('{organizationId}')
   async createPlaylist(
@@ -39,7 +38,6 @@ export class PlaylistController extends Controller {
   /**
    * @summary Update playlist
    */
-  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Put('{organizationId}/{playlistId}')
   async updatePlaylist(
@@ -54,7 +52,6 @@ export class PlaylistController extends Controller {
   /**
    * @summary Get playlist by id
    */
-  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Get('{organizationId}/{playlistId}')
   async getPlaylist(
@@ -71,7 +68,6 @@ export class PlaylistController extends Controller {
   /**
    * @summary Get all playlists for organization
    */
-  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Get('{organizationId}')
   async getOrganizationPlaylists(
@@ -84,7 +80,6 @@ export class PlaylistController extends Controller {
   /**
    * @summary Delete playlist
    */
-  @Security('jwt', ['org'])
   @SuccessResponse('200')
   @Delete('{organizationId}/{playlistId}')
   async deletePlaylist(
