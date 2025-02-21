@@ -12,6 +12,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import ArchiveVideos from './videos/components/ArchiveVideos';
 import ArchiveVideoSkeleton from './livestream/components/ArchiveVideosSkeleton';
 import ChannelBanner from './components/ChannelBanner';
+import ArchivePlaylists, { PlaylistSkeleton } from './playlists/components/ArchivePlaylists';
 
 const OrganizationHome = async ({
   params,
@@ -28,6 +29,9 @@ const OrganizationHome = async ({
           </TabsTrigger>
           <TabsTrigger value="videos">
             <h1 className="text-xl font-bold">Videos</h1>
+          </TabsTrigger>
+          <TabsTrigger value="playlists">
+            <h1 className="text-xl font-bold">Playlists</h1>
           </TabsTrigger>
         </TabsList>
         <TabsContent value="livestreams" className="px-4 md:px-0">
@@ -46,6 +50,14 @@ const OrganizationHome = async ({
               searchQuery={searchParams.search}
               gridLength={12}
               page={Number(searchParams.page) || 1}
+            />
+          </Suspense>
+        </TabsContent>
+        <TabsContent value="playlists" className="px-4 md:px-0">
+          <Suspense fallback={<PlaylistSkeleton />}>
+            <ArchivePlaylists
+              organizationId={params.organization}
+              gridLength={12}
             />
           </Suspense>
         </TabsContent>
