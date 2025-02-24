@@ -1,21 +1,20 @@
 import { useTimelineContext } from '../../Timeline/TimelineContext';
 import { IExtendedMarker } from '@/lib/types';
 import { useMarkersContext } from './markersContext';
-import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
 import useTimeline from '../../Timeline/useTimeline';
-import usePlayer from '@/lib/hooks/usePlayer';
+import { useClipPageContext } from '../../ClipPageContext';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
-  const { videoDuration, timelineWidth, isPreviewMode, videoRef } =
-    useTimelineContext();
-  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
-  const { setStartTime, setEndTime } = useTrimmControlsContext();
+  const { metadata, videoRef } = useClipPageContext();
+  const { isPreviewMode, timelineWidth } = useTimelineContext();
+  const { handleSetCurrentTime } = useRemotionPlayer(videoRef, metadata.fps);
   const { selectedMarkerId, setSelectedMarkerId } = useMarkersContext();
   const { calculatePositionOnTimeline } = useTimeline();
 
   if (
-    marker.startClipTime > videoDuration ||
-    marker.endClipTime > videoDuration
+    marker.startClipTime > metadata.duration ||
+    marker.endClipTime > metadata.duration
   )
     return null;
 
@@ -23,15 +22,15 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
     if (isPreviewMode) {
       return;
     }
-    setStartTime(marker.startClipTime);
-    setEndTime(marker.endClipTime);
+    // setStartTime(marker.startClipTime);
+    // setEndTime(marker.endClipTime);
     setSelectedMarkerId(marker._id);
     handleSetCurrentTime(marker.startClipTime);
   };
 
   const position = calculatePositionOnTimeline(
     marker.startClipTime,
-    videoDuration,
+    metadata.duration,
     timelineWidth
   );
 
@@ -46,12 +45,12 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
           isPreviewMode
             ? 'gray'
             : selectedMarkerId === marker._id
-            ? '#066FF9'
-            : marker.color
+              ? '#066FF9'
+              : marker.color
         }`,
         left: `${position}px`,
         width: `${
-          ((marker.endClipTime - marker.startClipTime) / videoDuration) *
+          ((marker.endClipTime - marker.startClipTime) / metadata.duration) *
           timelineWidth
         }px`,
       }}

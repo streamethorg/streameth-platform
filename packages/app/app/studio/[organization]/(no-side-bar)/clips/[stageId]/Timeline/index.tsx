@@ -1,18 +1,19 @@
 'use client';
 import React from 'react';
-import { useClipPageContext } from '../ClipPageContext';
-import TrimmControls, { TrimmOverlay } from './TrimmControls';
 import Playhead from './PlayHead';
 import { formatTime } from '@/lib/utils/time';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 import { useTimelineContext } from './TimelineContext';
 import TimelineMarker from '../sidebar/markers/TimelineMarker';
 import useTimeline from './useTimeline';
+import TimelineEvent from './TimelineEvent';
+import { useEventContext } from './EventConntext';
+import { useClipPageContext } from '../ClipPageContext';
 const Timeline = () => {
-  const { dragging, isLoading } = useClipPageContext();
 
   const { timelineRef, timelineWidth, handleTimelineClick, isPreviewMode } =
     useTimelineContext();
+  const { events } = useEventContext();
 
   const { markers } = useMarkersContext();
 
@@ -39,19 +40,13 @@ const Timeline = () => {
           >
             <TimelineDrawing />
           </div>
-          <TrimmControls
-            {...{
-              marker: 'start',
-              blocked: isLoading && dragging !== 'start',
-            }}
-          />
-          <TrimmOverlay />
-          <TrimmControls
-            {...{
-              marker: 'end',
-              blocked: isLoading && dragging !== 'end',
-            }}
-          />
+          {events.map((event) => (
+            <TimelineEvent
+              key={event.id}
+              event={event}
+              timelineWidth={timelineWidth}
+            />
+          ))}
         </div>
       ) : (
         <div className="h-[100px] relative">
@@ -66,11 +61,10 @@ export default Timeline;
 
 const TimelineDrawing = () => {
   const {
-    videoDuration,
     timelineWidth,
     pixelsPerSecond: scale,
   } = useTimelineContext();
-
+  const { metadata } = useClipPageContext();
   const { calculatePositionOnTimeline } = useTimeline();
   // Function to calculate intervals based on scale
   const calculateIntervals = (scale: number) => {
@@ -88,10 +82,10 @@ const TimelineDrawing = () => {
     calculateIntervals(scale);
 
   const markers = [];
-  for (let i = 0; i <= videoDuration; i += minorInterval) {
+  for (let i = 0; i <= metadata.duration; i += minorInterval) {
     const position = calculatePositionOnTimeline(
       i,
-      videoDuration,
+      metadata.duration,
       timelineWidth
     );
 

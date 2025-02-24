@@ -4,8 +4,10 @@ import { CardTitle } from '@/components/ui/card';
 import Marker from './Marker';
 import { IExtendedMarker } from '@/lib/types';
 import { useMarkersContext } from './markersContext';
-import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import {
+  TranscriptionStatus,
+  ProcessingStatus,
+} from 'streameth-new-server/src/interfaces/state.interface';
 import { ExtractHighlightsForm } from './ExtractHighlightsForm';
 
 const LoadingSkeleton = () => (
@@ -20,11 +22,7 @@ const LoadingSkeleton = () => (
   </div>
 );
 
-const MarkersList = ({
-  markers,
-}: {
-  markers: IExtendedMarker[];
-}) => (
+const MarkersList = ({ markers }: { markers: IExtendedMarker[] }) => (
   <div className="flex-grow overflow-y-auto pb-4">
     {markers.length > 0 ? (
       markers.map((marker: IExtendedMarker) => (

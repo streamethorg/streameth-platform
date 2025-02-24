@@ -1,18 +1,19 @@
 'use client';
 import SessionTranscriptions from '@/app/studio/[organization]/(root)/library/[session]/components/SessionTranscriptions';
 import TranscriptText from './TranscriptText';
-import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
-import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { useClipPageContext } from '../../ClipPageContext';
+import { ITranscript } from 'streameth-new-server/src/interfaces/transcribe.interface';
 const Transcripts = ({
-  transcribe,
-  transcribeStatus,
+  transcripts,
 }: {
-  transcribe: { word: string; start: number; end: number }[];
-  transcribeStatus: TranscriptionStatus | null;
+  transcripts: ITranscript | null;
 }) => {
+  const { status: transcribeStatus, chunks } = transcripts ?? {
+    status: null,
+    chunks: [],
+  };
   const { sessionId } = useClipPageContext();
-  if (transcribe?.length === 0) {
+  if (chunks?.length === 0 || !transcripts) {
     return (
       <div className="flex flex-col h-full">
         <div className="flex flex-col space-y-4 text-center items-center justify-center h-full">
@@ -37,7 +38,7 @@ const Transcripts = ({
 
   return (
     <div className="flex flex-col h-full">
-      <TranscriptText transcribe={transcribe} />
+      <TranscriptText chunks={chunks} />
     </div>
   );
 };

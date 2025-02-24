@@ -8,24 +8,22 @@ import ImportMarkersForm from './markers/ImportMarkersForm';
 import Transcripts from './Transcipts';
 import { useMarkersContext } from './markers/markersContext';
 import CreateClipForm from './clips/CreateClipForm';
-import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import {
+  IAiAnalysis,
+  ITranscript,
+} from 'streameth-new-server/src/interfaces/transcribe.interface';
 
 export default function Sidebar({
-  transcribe,
-  transcribeStatus,
-  aiAnalysisStatus,
+  transcripts,
+  aiAnalysis,
 }: {
-  transcribe: {
-    start: number;
-    end: number;
-    word: string;
-  }[];
-  transcribeStatus: TranscriptionStatus | null;
-  aiAnalysisStatus: ProcessingStatus | null;
+  transcripts: ITranscript | null;
+  aiAnalysis: IAiAnalysis | null;
 }) {
   const { isCreatingClip, sessionId } = useClipPageContext();
   const { isAddingOrEditingMarker, isImportingMarkers } = useMarkersContext();
+  const { status: transcribeStatus } = transcripts ?? { status: null };
+  const { status: aiAnalysisStatus } = aiAnalysis ?? { status: null };
 
   const overlayComponents = [
     {
@@ -59,14 +57,12 @@ export default function Sidebar({
         <TabsList className="grid w-full grid-cols-3 flex-shrink-0">
           <TabsTrigger value="markers">Markers</TabsTrigger>
           <TabsTrigger value="clips">Clips</TabsTrigger>
-          {transcribe && (
-            <TabsTrigger value="transcribe">Transcribe</TabsTrigger>
-          )}
+          <TabsTrigger value="transcribe">Transcribe</TabsTrigger>
         </TabsList>
         <TabsContent value="markers" className="flex-grow overflow-hidden">
           <Markers
-            transcribeStatus={transcribeStatus ?? null}
-            aiAnalysisStatus={aiAnalysisStatus ?? null}
+            transcribeStatus={transcribeStatus}
+            aiAnalysisStatus={aiAnalysisStatus}
           />
         </TabsContent>
         <TabsContent value="clips" className="flex-grow overflow-hidden">
@@ -76,10 +72,7 @@ export default function Sidebar({
           value="transcribe"
           className="flex-grow overflow-y-auto h-full p-4"
         >
-          <Transcripts
-            transcribe={transcribe}
-            transcribeStatus={transcribeStatus ?? null}
-          />
+          <Transcripts transcripts={transcripts} />
         </TabsContent>
       </Tabs>
     </div>

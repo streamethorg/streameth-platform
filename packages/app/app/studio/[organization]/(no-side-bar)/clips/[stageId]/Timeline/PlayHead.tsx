@@ -2,24 +2,28 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useTimeline from './useTimeline';
 import { useTimelineContext } from './TimelineContext';
 import { useClipPageContext } from '../ClipPageContext';
-import usePlayer from '@/lib/hooks/usePlayer';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
+
 
 const Playhead = () => {
   const [draggingPlayhead, setDraggingPlayhead] = useState(false);
   const [initialMousePos, setInitialMousePos] = useState(0);
   const [initialEventStart, setInitialEventStart] = useState(0);
   const {
-    videoDuration,
     timelineWidth,
     setPlayheadPosition,
     playheadPosition,
     isPreviewMode,
     previewTimeBounds,
   } = useTimelineContext();
+  const { metadata } = useClipPageContext();
   const { calculateTimeFromPosition, calculatePositionOnTimeline } =
     useTimeline();
   const { videoRef } = useClipPageContext();
-  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
+  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    metadata.fps
+  );
 
   const handleSetPlayheadPosition = (time: number) => {
     setPlayheadPosition(time);
@@ -43,7 +47,7 @@ const Playhead = () => {
         const newTime = calculateTimeFromPosition(
           initialMousePos,
           e.clientX,
-          videoDuration,
+          metadata.duration,
           timelineWidth,
           initialEventStart
         );
@@ -62,7 +66,7 @@ const Playhead = () => {
       draggingPlayhead,
       initialMousePos,
       initialEventStart,
-      videoDuration,
+      metadata.duration,
       timelineWidth,
       handleSetPlayheadPosition,
     ]
@@ -87,7 +91,7 @@ const Playhead = () => {
       style={{
         left: `${calculatePositionOnTimeline(
           playheadPosition,
-          videoDuration,
+          metadata.duration,
           timelineWidth
         )}px`,
       }}

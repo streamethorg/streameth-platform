@@ -8,11 +8,11 @@ import KeyboardShortcuts from './KeyboardShortcuts';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 import ZoomControls from './ZoomControls';
 import { useTimelineContext } from '../Timeline/TimelineContext';
-import usePlayer from '@/lib/hooks/usePlayer';
-import { useTrimmControlsContext } from '../Timeline/TrimmControlsContext';
+import { useEventContext } from '../Timeline/EventConntext';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 const Controls = () => {
-  const { videoRef, isCreatingClip } = useClipPageContext();
+  const { videoRef, isCreatingClip, metadata } = useClipPageContext();
 
   const {
     isAddingOrEditingMarker,
@@ -22,15 +22,13 @@ const Controls = () => {
   } = useMarkersContext();
 
   const {
-    videoDuration,
     isPreviewMode,
     setIsPreviewMode,
     setPreviewTimeBounds,
   } = useTimelineContext();
-
-  const { startTime, endTime } = useTrimmControlsContext();
-  const { currentTime } = usePlayer(videoRef);
-
+  const { currentTime } = useRemotionPlayer(videoRef, metadata.fps);
+  const { getEventsBounds } = useEventContext();
+  const { minStart, maxEnd } = getEventsBounds();
   const [playbackRate, setPlaybackRate] = useState(1);
   const currentPlaybackRateIndexRef = useRef(1);
 
@@ -46,8 +44,8 @@ const Controls = () => {
       return;
     }
     setPreviewTimeBounds({
-      startTime: startTime,
-      endTime: endTime,
+      startTime: minStart,
+      endTime: maxEnd,
     });
     setIsPreviewMode(true);
   };
@@ -80,7 +78,7 @@ const Controls = () => {
             onChange={(e) => {
               if (videoRef.current) {
                 const newIndex = parseFloat(e.target.value);
-                videoRef.current.playbackRate = newIndex;
+                videoRef.current.dispatchRateChange(newIndex);
                 setPlaybackRate(newIndex);
               }
             }}
@@ -92,7 +90,7 @@ const Controls = () => {
             ))}
           </select>
         </label>
-        {videoRef.current?.paused ? (
+        {videoRef.current?.isPlaying() ? (
           <button onClick={() => videoRef.current?.play()}>
             <PlayIcon size={22} className="text-primary" />
           </button>
@@ -104,7 +102,7 @@ const Controls = () => {
 
         <span>
           {formatTime(currentTime)} /{' '}
-          {videoDuration ? formatTime(videoDuration) : '00:00:00'}
+          {metadata.duration ? formatTime(metadata.duration) : '00:00:00'}
         </span>
       </div>
       <div className="space-x-2 flex items-center self-end">

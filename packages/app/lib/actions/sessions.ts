@@ -1,6 +1,6 @@
 'use server';
 import { Livepeer } from 'livepeer';
-import { IExtendedSession } from '../types';
+import { IExtendedSession, IMetadata } from '../types';
 import {
   updateSession,
   createSession,
@@ -286,32 +286,29 @@ export const extractHighlightsAction = async ({
 };
 
 export const ParseSessionMediaAction = async ({
-  assetId,
+  videoUrl,
 }: {
-  assetId: string;
-}) => {
-  const asset = await fetchAsset({ assetId });
-
-  const videoUrl = asset?.downloadUrl;
+  videoUrl: string;
+}): Promise<IMetadata> => {
   if (!videoUrl) {
     throw new Error('Video URL not found');
   }
 
-  const metadata = await parseMedia({
-    src: videoUrl,
-    fields: {
-      durationInSeconds: true,
-      dimensions: true,
-      fps: true,
-    },
-  });
+  // const metadata = await parseMedia({
+  //   src: videoUrl,
+  //   fields: {
+  //     durationInSeconds: true,
+  //     dimensions: true,
+  //     fps: true,
+  //   },
+  // });
 
-  console.log('metadata', metadata);
+  // console.log('metadata', metadata);
   return {
-    fps: metadata.fps === 0 ? 30 : metadata.fps ?? 30,
-    durationInSeconds: metadata.durationInSeconds ?? 0,
-    width: metadata.dimensions?.width ?? 0,
-    height: metadata.dimensions?.height ?? 0,
+    fps:  30,
+    duration: 2000,
+    width: 1080,
+    height: 1920,
     videoUrl,
   };
 };

@@ -4,11 +4,10 @@ import {
   useCurrentFrame,
   useVideoConfig,
   Sequence,
-  OffthreadVideo,
 } from "remotion";
 import Captions from "./Captions";
 import { EditorProps, EditorEvent, Transcript } from "@/types/constants";
-
+import { HlsVideo } from "./HlsPlayer";
 const MediaEventComponent: React.FC<{
   event: EditorEvent;
   editorProps: EditorProps;
@@ -26,7 +25,7 @@ const MediaEventComponent: React.FC<{
     <Sequence from={startFrame} durationInFrames={endFrame - startFrame}>
       <AbsoluteFill>
         {isVertical ? (
-          <OffthreadVideo
+          <HlsVideo
             muted
             style={{ height: "100%", width: "100%" }}
             src={event.url}
@@ -38,14 +37,14 @@ const MediaEventComponent: React.FC<{
       </AbsoluteFill>
       <AbsoluteFill className="z-10">
         {isVertical ? (
-          <OffthreadVideo
+          <HlsVideo
             src={event.url}
             className="my-auto z-10"
             startFrom={event.start * fps}
             endAt={event.duration * fps}
           />
         ) : (
-          <OffthreadVideo
+          <HlsVideo
             src={event.url}
             className="my-auto"
             startFrom={event.start * fps}

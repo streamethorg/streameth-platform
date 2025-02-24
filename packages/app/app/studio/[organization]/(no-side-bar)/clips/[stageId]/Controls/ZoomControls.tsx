@@ -8,16 +8,17 @@ import { Badge } from '@/components/ui/badge';
 import { useTimelineContext } from '../Timeline/TimelineContext';
 import useTimeline from '../Timeline/useTimeline';
 import { useClipPageContext } from '../ClipPageContext';
+
 const ZoomControls = () => {
-  const { videoRef } = useClipPageContext();
+  const { videoRef, metadata } = useClipPageContext();
   const {
     pixelsPerSecond,
     setPixelsPerSecond,
     timelineRef,
-    videoDuration,  
     setTimelineWidth,
     playheadPosition,
   } = useTimelineContext();
+  const { duration } = metadata;
 
   const { calculateTimelineScale } = useTimeline();
   const [isFit, setIsFit] = useState(false);
@@ -35,7 +36,7 @@ const ZoomControls = () => {
     setPixelsPerSecond(newPixelsPerSecond);
 
     // Update timeline width
-    const newTimelineWidth = videoDuration * newPixelsPerSecond;
+    const newTimelineWidth = duration * newPixelsPerSecond;
     setTimelineWidth(newTimelineWidth);
 
     // Adjust scroll position to center on current time
@@ -59,7 +60,7 @@ const ZoomControls = () => {
     setPixelsPerSecond(newPixelsPerSecond);
 
     // Update timeline width
-    const newTimelineWidth = videoDuration * newPixelsPerSecond;
+    const newTimelineWidth = duration * newPixelsPerSecond;
     setTimelineWidth(newTimelineWidth);
 
     // Adjust scroll position to center on current time
@@ -75,14 +76,14 @@ const ZoomControls = () => {
     if (!timelineRef.current || !videoRef.current) return;
     const scale = calculateTimelineScale({
       timelineContainerWidth: timelineRef.current.offsetWidth,
-      maxLength: videoRef.current.duration,
+      maxLength: duration,
     });
 
     // Update pixels per second
     setPixelsPerSecond(scale);
 
     // Update timeline width
-    const newTimelineWidth = videoDuration * scale;
+    const newTimelineWidth = duration * scale;
     setTimelineWidth(newTimelineWidth);
 
     // Adjust scroll position to center on current time
@@ -160,7 +161,7 @@ const ZoomControls = () => {
               variant="outline"
             >
               <code>0</code>
-            </Badge>{' '}
+            </Badge>
           </p>
         </HoverCardContent>
       </HoverCard>
@@ -184,7 +185,7 @@ const ZoomControls = () => {
               variant="outline"
             >
               <code>+</code>
-            </Badge>{' '}
+            </Badge>
           </p>
         </HoverCardContent>
       </HoverCard>

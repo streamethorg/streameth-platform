@@ -6,7 +6,7 @@ import { FilePenLine, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDuration } from '@/lib/utils/time';
 import Thumbnail from '@/components/misc/VideoCard/thumbnail';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/state.interface';
 import { getTypeLabel } from '@/lib/utils/utils';
 import {
   LuClapperboard,
@@ -139,11 +139,7 @@ const TableCells = ({ item }: { item: IExtendedSession }) => {
             <DeleteAsset
               session={item}
               TriggerComponent={
-                <Button
-                  size="sm"
-                  variant="destructiveOutline"
-                  className=""
-                >
+                <Button size="sm" variant="destructiveOutline" className="">
                   <LuTrash className="w-4 h-4" />
                   <p>Delete</p>
                 </Button>

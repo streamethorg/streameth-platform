@@ -8,9 +8,9 @@ import { Card } from '@/components/ui/card';
 import DeleteMarkerButton from './DeleteMarkerButton';
 import { useMarkersContext } from './markersContext';
 import { useTimelineContext } from '../../Timeline/TimelineContext';
-import { useTrimmControlsContext } from '../../Timeline/TrimmControlsContext';
-import usePlayer from '@/lib/hooks/usePlayer';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
+import { useClipPageContext } from '../../ClipPageContext';
 
 const Marker = ({ marker }: { marker: IExtendedMarker }) => {
   const {
@@ -20,18 +20,20 @@ const Marker = ({ marker }: { marker: IExtendedMarker }) => {
     selectedMarkerId,
   } = useMarkersContext();
   const { organizationId } = useOrganizationContext();
-
-  const { videoDuration, timelineWidth, isPreviewMode, videoRef } =
-    useTimelineContext();
-  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
-  const { setStartTime, setEndTime } = useTrimmControlsContext();
+  const { metadata, videoRef } = useClipPageContext();
+  const { isPreviewMode } = useTimelineContext();
+  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    metadata.fps
+  );
+  // const { setStartTime, setEndTime } = useTrimmControlsContext();
 
   const handleMarkerClick = (marker: IExtendedMarker) => {
     if (isPreviewMode) {
       return;
     }
-    setStartTime(marker.startClipTime);
-    setEndTime(marker.endClipTime);
+    // setStartTime(marker.startClipTime);
+    // setEndTime(marker.endClipTime);
     setSelectedMarkerId(marker._id);
     handleSetCurrentTime(marker.startClipTime);
   };

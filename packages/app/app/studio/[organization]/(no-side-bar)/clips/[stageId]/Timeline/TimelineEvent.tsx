@@ -1,12 +1,13 @@
 import React from 'react';
-import { useTimelineContext } from '../context/TimelineContext';
-import { EditorEvent } from '../types';
-import useTimeline from '../../clips/[stageId]/Timeline/useTimeline';
+import { useTimelineContext } from './TimelineContext';
+import { EditorEvent } from 'streameth-reel-creator/types/constants';
+import useTimeline from './useTimeline';
+import { useEventContext } from './EventConntext';
 
-const getEventColor = (type: EditorEvent['type']) => {
+const getEventColor = (type: EditorEvent['type'], isPreviewMode: boolean) => {
   switch (type) {
     case 'media':
-      return 'bg-blue';
+      return isPreviewMode ? 'rgba(255, 191, 0, 1)' : 'rgba(200, 75, 80, 1)';
     default:
       return 'bg-gray-400';
   }
@@ -19,15 +20,16 @@ const TimelineEvent = ({
   timelineWidth: number;
   event: EditorEvent;
 }): React.ReactNode => {
+  const { isPreviewMode } = useTimelineContext();
   const {
     maxDuration,
-    selectedEvents,
-    handleEventClick,
+    selectedEvent,
+    setSelectedEvent,
     setTimelineAction,
     setInitialMousePos,
     setMovingEvent,
     setInitialEventStart,
-  } = useTimelineContext();
+  } = useEventContext();
 
   const { calculatePositionOnTimeline } = useTimeline();
   const height = 40;
@@ -41,7 +43,7 @@ const TimelineEvent = ({
     maxDuration,
     timelineWidth
   );
-  const backgroundColor = getEventColor(event.type);
+  const backgroundColor = getEventColor(event.type, isPreviewMode);
 
   const handleMoveStart = (
     eventId: string,
@@ -55,7 +57,11 @@ const TimelineEvent = ({
     setTimelineAction('move');
   };
 
-  const handleTrimStart = (eventId: string, start: number, event: React.MouseEvent) => {
+  const handleTrimStart = (
+    eventId: string,
+    start: number,
+    event: React.MouseEvent
+  ) => {
     event.stopPropagation();
     setMovingEvent(eventId);
     setInitialMousePos(event.clientX);
@@ -63,7 +69,11 @@ const TimelineEvent = ({
     setTimelineAction('trimStart');
   };
 
-  const handleTrimEnd = (eventId: string, end: number, event: React.MouseEvent) => {
+  const handleTrimEnd = (
+    eventId: string,
+    end: number,
+    event: React.MouseEvent
+  ) => {
     event.stopPropagation();
     setMovingEvent(eventId);
     setInitialMousePos(event.clientX);
@@ -71,33 +81,46 @@ const TimelineEvent = ({
     setTimelineAction('trimEnd');
   };
 
+  const handleEventSelect = (event: EditorEvent) => {
+    setSelectedEvent(event);
+  };
+
   return (
     <div
       key={event.id}
-      className="flex border-b border-t py-2 bg-opacity-5 bg-white border-black relative"
+      className="flex relative z-50"
       style={{
         height: `${height + 18}px`,
       }}
     >
       <div
-        className={`rounded-xl absolute ${backgroundColor} cursor-move ${selectedEvents.includes(event.id) ? 'ring-2 ring-white' : ''}`}
+        className={`rounded-xl absolute cursor-move ${selectedEvent?.id === event.id ? 'ring-2 ring-white' : ''}`}
         style={{
           width: `${width}px`,
           height: `${height}px`,
-          left: `${left}px`, // Ensure left position is set
+          left: `${left}px`,
+          background: isPreviewMode ? 'rgba(255, 191, 0, 0.35)' : 'rgba(200, 75, 80, 0.4)',
         }}
         onMouseDown={(e) => handleMoveStart(event.id, event.timeLineStart, e)}
-        onClick={(e) => handleEventClick(event.id, e)}
+        onClick={() => handleEventSelect(event)}
       >
         {event.type === 'media' && (
           <div
-            className="absolute left-0 top-0 w-1 h-full cursor-ew-resize"
-            onMouseDown={(e) => handleTrimStart(event.id, event.timeLineStart, e)}
+            className="absolute left-0 top-0 w-1 h-full cursor-ew-resize rounded-l-xl"
+            style={{
+              background: backgroundColor,
+            }}
+            onMouseDown={(e) =>
+              handleTrimStart(event.id, event.timeLineStart, e)
+            }
           />
         )}
         {event.type === 'media' && (
           <div
-            className="absolute right-0 top-0 w-1 h-full cursor-ew-resize rounded"
+            className="absolute right-0 top-0 w-1 h-full cursor-ew-resize rounded-r-xl"
+            style={{
+              background: backgroundColor,
+            }}
             onMouseDown={(e) => handleTrimEnd(event.id, event.timeLineEnd, e)}
           />
         )}

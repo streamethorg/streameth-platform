@@ -23,9 +23,15 @@ import { IExtendedMarker } from '@/lib/types';
 import { LuArrowLeftToLine, LuArrowRightToLine, LuPlus } from 'react-icons/lu';
 import { useMarkersContext } from './markersContext';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 const AddOrEditMarkerForm = () => {
-  const { stageId, videoRef, sessionId } = useClipPageContext();
+  const { stageId, videoRef, sessionId, metadata } = useClipPageContext();
+  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    metadata.fps
+  );
+  const { fps, duration } = metadata;
   const { organizationId } = useOrganizationContext();
 
   const {
@@ -40,8 +46,6 @@ const AddOrEditMarkerForm = () => {
   const selectedMarker = markers.find(
     (marker) => marker._id === selectedMarkerId
   );
-  const currentTime = videoRef.current?.currentTime ?? 0;
-  const maxEndTime = videoRef.current?.duration ?? 0;
   const form = useForm<z.infer<typeof markerSchema>>({
     resolver: zodResolver(markerSchema),
     defaultValues: selectedMarker
@@ -165,7 +169,7 @@ const AddOrEditMarkerForm = () => {
                               placeholder="Input start"
                               className="bg-white"
                               min={0}
-                              max={maxEndTime}
+                              max={duration}
                               onChange={(e) => {
                                 const value =
                                   e.target.value === ''
@@ -216,7 +220,7 @@ const AddOrEditMarkerForm = () => {
                                 field.onChange(value);
                               }}
                               min={form.getValues('startClipTime') + 1}
-                              max={maxEndTime}
+                              max={duration}
                             />
                           </FormControl>
                         </div>

@@ -12,7 +12,6 @@ import { IChat } from 'streameth-new-server/src/interfaces/chat.interface';
 import { IMarker } from 'streameth-new-server/src/interfaces/marker.interface';
 import { INftCollection } from 'streameth-new-server/src/interfaces/nft.collection.interface';
 import { IScheduleImporter } from 'streameth-new-server/src/interfaces/schedule-importer.interface';
-import Hls from 'hls.js';
 
 export interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -27,6 +26,14 @@ export interface IHighlight {
   start: number;
   end: number;
   title: string;
+}
+
+export interface IMetadata {
+  duration: number;
+  width: number;
+  height: number;
+  fps: number;
+  videoUrl: string;
 }
 
 export enum eSort {
@@ -287,27 +294,4 @@ export interface IExtendedMarker extends Omit<IMarker, '_id'> {
 export type TimeSettings = {
   unix: number;
   displayTime: number;
-};
-
-export type ClipPageContextType = {
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  videoRef: React.RefObject<HTMLVideoElement>;
-  dragging: string | null;
-  setDragging: React.Dispatch<React.SetStateAction<string | null>>;
-  selectedTooltip: string | null;
-  setSelectedTooltip: React.Dispatch<React.SetStateAction<string | null>>;
-  stageId?: string;
-  isCreatingClip: boolean;
-  setIsCreatingClip: React.Dispatch<React.SetStateAction<boolean>>;
-  hls: Hls | null;
-  setHls: React.Dispatch<React.SetStateAction<Hls | null>>;
-  clipUrl: string;
-  playbackStatus: PlaybackStatus | null;
-  setPlaybackStatus: React.Dispatch<
-    React.SetStateAction<PlaybackStatus | null>
-  >;
-  isInputFocused: boolean;
-  setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
-  sessionId: string;
 };

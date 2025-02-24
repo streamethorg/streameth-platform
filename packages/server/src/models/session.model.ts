@@ -1,9 +1,9 @@
 import {
-  ProcessingStatus,
   SessionType,
   eVisibilty,
   type ISessionModel,
 } from '@interfaces/session.interface';
+import { ProcessingStatus } from '@interfaces/state.interface';
 import { TranscriptionStatus } from '@interfaces/state.interface';
 import { Schema, model } from 'mongoose';
 

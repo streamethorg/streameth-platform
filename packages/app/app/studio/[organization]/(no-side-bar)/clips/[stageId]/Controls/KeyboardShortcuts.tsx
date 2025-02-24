@@ -11,9 +11,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 import { LuArrowLeft, LuArrowRight, LuArrowBigUp } from 'react-icons/lu';
-import { useTrimmControlsContext } from '../Timeline/TrimmControlsContext';
 import { useTimelineContext } from '../Timeline/TimelineContext';
 import usePlayer from '@/lib/hooks/usePlayer';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 const KeyboardShortcuts = ({
   setPlaybackRate,
@@ -29,11 +29,13 @@ const KeyboardShortcuts = ({
 }) => {
   const { videoRef, isCreatingClip, isInputFocused } = useClipPageContext();
   const { isAddingOrEditingMarker } = useMarkersContext();
-  const { setStartTime, setEndTime, startTime, endTime } =
-    useTrimmControlsContext();
-  const { videoDuration } = useTimelineContext();
 
-  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
+  const { metadata } = useClipPageContext();
+
+  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    metadata.fps
+  );
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (isAddingOrEditingMarker || isCreatingClip || isInputFocused) return;
@@ -43,27 +45,24 @@ const KeyboardShortcuts = ({
       // Playback controls
       case ' ':
       case 'k':
-        if (videoRef.current.paused) {
-          videoRef.current.play();
-        } else {
-          videoRef.current.playbackRate = 1.0;
-          setPlaybackRate(1);
-          setCurrentPlaybackRateIndex(1);
+        if (videoRef.current.isPlaying()) {
           videoRef.current.pause();
+        } else {
+          videoRef.current.play();
         }
         break;
 
-      // Trim controls
-      case 'i':
-        if (endTime > currentTime) {
-          setStartTime(currentTime);
-        }
-        break;
-      case 'o':
-        if (startTime < currentTime) {
-          setEndTime(currentTime);
-        }
-        break;
+      // // Trim controls
+      // case 'i':
+      //   if (endTime > currentTime) {
+      //     setStartTime(currentTime);
+      //   }
+      //   break;
+      // case 'o':
+      //   if (startTime < currentTime) {
+      //     setEndTime(currentTime);
+      //   }
+      //   break;
 
       // Seeking controls
       case 'ArrowLeft':
@@ -71,17 +70,15 @@ const KeyboardShortcuts = ({
         const backwardSeek = event.shiftKey ? 10 : 1 / 20;
         const newBackwardTime = Math.max(currentTime - backwardSeek, 0);
         handleSetCurrentTime(newBackwardTime);
-        videoRef.current.currentTime = newBackwardTime;
         break;
       case 'ArrowRight':
         event.preventDefault();
         const forwardSeek = event.shiftKey ? 10 : 1 / 20;
         const newForwardTime = Math.min(
           currentTime + forwardSeek,
-          videoDuration
+          metadata.duration
         );
         handleSetCurrentTime(newForwardTime);
-        videoRef.current.currentTime = newForwardTime;
         break;
 
       // Playback rate controls
@@ -90,18 +87,18 @@ const KeyboardShortcuts = ({
           currentPlaybackRateIndex + 1,
           playbackRates.length - 1
         );
-        videoRef.current.playbackRate = playbackRates[fasterIndex];
+        videoRef.current.dispatchRateChange(playbackRates[fasterIndex]);
         setCurrentPlaybackRateIndex(fasterIndex);
         setPlaybackRate(playbackRates[fasterIndex]);
         break;
       case 'l':
         const slowerIndex = Math.max(currentPlaybackRateIndex - 1, 0);
-        videoRef.current.playbackRate = playbackRates[slowerIndex];
+        videoRef.current.dispatchRateChange(playbackRates[slowerIndex]);
         setPlaybackRate(playbackRates[slowerIndex]);
         setCurrentPlaybackRateIndex(slowerIndex);
         break;
       case 'h':
-        videoRef.current.playbackRate = playbackRates[1];
+        videoRef.current.dispatchRateChange(playbackRates[1]);
         setPlaybackRate(1);
         setCurrentPlaybackRateIndex(1);
         break;
@@ -116,8 +113,6 @@ const KeyboardShortcuts = ({
     };
   }, [
     currentTime,
-    startTime,
-    endTime,
     videoRef,
     isCreatingClip,
     isAddingOrEditingMarker,

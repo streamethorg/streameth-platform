@@ -1,5 +1,6 @@
 import { videoImporterQueue } from '@utils/redis';
-import { ISession, ProcessingStatus } from '@interfaces/session.interface';
+import { ISession } from '@interfaces/session.interface';
+import { ProcessingStatus } from '@interfaces/state.interface';
 import Session from '@models/session.model';
 import * as fs from 'fs';
 import fetch from 'node-fetch';

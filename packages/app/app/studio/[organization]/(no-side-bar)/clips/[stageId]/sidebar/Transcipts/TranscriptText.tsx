@@ -1,6 +1,8 @@
 import usePlayer from '@/lib/hooks/usePlayer';
 import { useClipPageContext } from '../../ClipPageContext';
 import { useEffect, useRef } from 'react';
+import { ITranscript } from 'streameth-new-server/src/interfaces/transcribe.interface';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 // Helper function to determine if a word should be highlighted
 const isWordActive = (
@@ -11,17 +13,16 @@ const isWordActive = (
   return word.start <= currentTime && word.end >= currentTime;
 };
 
-const TranscriptText = ({
-  transcribe,
-}: {
-  transcribe: { word: string; start: number; end: number }[];
-}) => {
-  const { videoRef } = useClipPageContext();
-  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
+const TranscriptText = ({ chunks }: { chunks: ITranscript['chunks'] }) => {
+  const { videoRef, fps } = useClipPageContext();
+  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    fps
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const TIME_WINDOW = 30 * 60; // 30 minutes in seconds
 
-  const visibleWords = transcribe.filter(
+  const visibleWords = chunks.filter(
     (word) =>
       word.start >= currentTime - TIME_WINDOW &&
       word.end <= currentTime + TIME_WINDOW
@@ -59,7 +60,7 @@ const TranscriptText = ({
       ref={containerRef}
       className="whitespace-pre-wrap p-4 leading-loose h-full overflow-y-scroll"
     >
-      {transcribe.map((word, index) => (
+      {chunks.map((word, index) => (
         <span
           key={`${word.word}-${index}`}
           id={`word-${word.start}`}

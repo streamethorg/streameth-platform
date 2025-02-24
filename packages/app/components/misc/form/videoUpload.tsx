@@ -19,7 +19,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { createSessionAction } from '@/lib/actions/sessions';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/state.interface';
 import {
   SessionType,
   eVisibilty,

@@ -36,6 +36,18 @@ export enum StateType {
   editorClip = 'editorClip',
 }
 
+export enum ProcessingStatus {
+  pending = 'pending',
+  rendering = 'rendering',
+  failed = 'failed',
+  clipCreated = 'clipCreated',
+  completed = 'completed',
+  translating = 'translating',
+  generatingAudio = 'generating_audio',
+  processingVideo = 'processing_video'
+}
+
+
 export interface IState {
   _id?: string | Types.ObjectId;
   eventId?: string | Types.ObjectId;

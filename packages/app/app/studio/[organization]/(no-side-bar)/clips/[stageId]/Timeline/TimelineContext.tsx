@@ -4,14 +4,12 @@ import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { useClipPageContext } from '../ClipPageContext';
 import useTimeline from './useTimeline';
 import usePlayer from '@/lib/hooks/usePlayer';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 type TimelineContextType = {
   timelineRef: React.RefObject<HTMLDivElement>;
-  videoDuration: number;
-  setVideoDuration: React.Dispatch<React.SetStateAction<number>>;
   timelineWidth: number;
   setTimelineWidth: React.Dispatch<React.SetStateAction<number>>;
-  videoRef: React.RefObject<HTMLVideoElement>;
   pixelsPerSecond: number;
   setPixelsPerSecond: React.Dispatch<React.SetStateAction<number>>;
   playheadPosition: number;
@@ -37,13 +35,16 @@ export const TimelineProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { videoRef } = useClipPageContext();
-  const { currentTime, handleSetCurrentTime } = usePlayer(videoRef);
+  const { videoRef, metadata } = useClipPageContext();
+  const { duration, fps } = metadata;
+  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    fps
+  );
   const { calculateTimelineScale } = useTimeline();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [pixelsPerSecond, setPixelsPerSecond] = useState(10);
   const [timelineWidth, setTimelineWidth] = useState(0);
-  const [videoDuration, setVideoDuration] = useState(0);
   const [playheadPosition, setPlayheadPosition] = useState<number>(0);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [previewTimeBounds, setPreviewTimeBounds] = useState<{
@@ -52,22 +53,21 @@ export const TimelineProvider = ({
   }>({ startTime: 0, endTime: 0 });
   useEffect(() => {
     if (videoRef.current && timelineRef.current) {
-      setVideoDuration(videoRef.current.duration);
       const scale = calculateTimelineScale({
         timelineContainerWidth: timelineRef.current.offsetWidth,
-        maxLength: videoRef.current.duration,
+        maxLength: duration,
       });
       setPixelsPerSecond(scale);
-      setTimelineWidth(videoRef.current.duration * scale);
+      setTimelineWidth(duration * scale);
     }
-  }, [videoRef.current?.duration]);
+  }, [duration]);
 
   const handleTimelineClick = (event: React.MouseEvent) => {
     if (videoRef.current) {
       const timelineElement = event.currentTarget as HTMLElement;
       const timelineRect = timelineElement.getBoundingClientRect();
       const relativeClickX = event.clientX - timelineRect.left;
-      const clickTime = (relativeClickX / timelineWidth) * videoDuration;
+      const clickTime = (relativeClickX / timelineWidth) * duration;
       if (
         isPreviewMode &&
         (clickTime < previewTimeBounds.startTime ||
@@ -94,16 +94,13 @@ export const TimelineProvider = ({
   return (
     <TimelineContext.Provider
       value={{
-        videoRef,
         timelineRef,
         pixelsPerSecond,
         setPixelsPerSecond,
         timelineWidth,
-        videoDuration,
         playheadPosition,
         setPlayheadPosition,
         setTimelineWidth,
-        setVideoDuration,
         handleTimelineClick,
         isPreviewMode,
         setIsPreviewMode,

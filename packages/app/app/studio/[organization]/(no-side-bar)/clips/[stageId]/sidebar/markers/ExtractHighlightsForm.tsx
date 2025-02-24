@@ -6,12 +6,11 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { extractHighlightsAction } from '@/lib/actions/sessions';
 import { TranscriptionStatus } from 'streameth-new-server/src/interfaces/state.interface';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/state.interface';
 import Logo from '@/public/logo.png';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { fetchSession } from '@/lib/services/sessionService';
-import { fetchMarkers } from '@/lib/services/markerSevice';
 import { useMarkersContext } from './markersContext';
 import { useClipPageContext } from '../../ClipPageContext';
 const PRESET_PROMPTS = [

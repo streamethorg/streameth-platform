@@ -62,7 +62,6 @@ export const OrganizationContextProvider = ({
     throw new Error('User, organization, or organizationId is null');
   }
 
-  console.log('stagesStatus', stagesStatus);
   return (
     <OrganizationContext.Provider
       value={{

@@ -963,6 +963,84 @@
 				],
 				"type": "string"
 			},
+			"ITranscript": {
+				"properties": {
+					"status": {
+						"$ref": "#/components/schemas/TranscriptionStatus"
+					},
+					"subtitleUrl": {
+						"type": "string"
+					},
+					"chunks": {
+						"items": {
+							"properties": {
+								"word": {
+									"type": "string"
+								},
+								"end": {
+									"type": "number",
+									"format": "double"
+								},
+								"start": {
+									"type": "number",
+									"format": "double"
+								}
+							},
+							"required": [
+								"word",
+								"end",
+								"start"
+							],
+							"type": "object"
+						},
+						"type": "array"
+					},
+					"text": {
+						"type": "string"
+					},
+					"summary": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"subtitleUrl",
+					"chunks",
+					"text",
+					"summary"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ProcessingStatus": {
+				"enum": [
+					"pending",
+					"rendering",
+					"failed",
+					"clipCreated",
+					"completed",
+					"translating",
+					"generating_audio",
+					"processing_video"
+				],
+				"type": "string"
+			},
+			"IAiAnalysis": {
+				"properties": {
+					"status": {
+						"$ref": "#/components/schemas/ProcessingStatus"
+					},
+					"isVectorized": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"status",
+					"isVectorized"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStage": {
 				"properties": {
 					"_id": {
@@ -1075,53 +1153,10 @@
 						"$ref": "#/components/schemas/StageType"
 					},
 					"transcripts": {
-						"properties": {
-							"text": {
-								"type": "string"
-							},
-							"chunks": {
-								"items": {
-									"properties": {
-										"word": {
-											"type": "string"
-										},
-										"end": {
-											"type": "number",
-											"format": "double"
-										},
-										"start": {
-											"type": "number",
-											"format": "double"
-										}
-									},
-									"required": [
-										"word",
-										"end",
-										"start"
-									],
-									"type": "object"
-								},
-								"type": "array"
-							},
-							"subtitleUrl": {
-								"type": "string"
-							},
-							"lastSegmentTimestamp": {
-								"type": "number",
-								"format": "double"
-							},
-							"status": {
-								"$ref": "#/components/schemas/TranscriptionStatus"
-							}
-						},
-						"required": [
-							"text",
-							"chunks",
-							"subtitleUrl",
-							"lastSegmentTimestamp",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/ITranscript"
+					},
+					"aiAnalysis": {
+						"$ref": "#/components/schemas/IAiAnalysis"
 					},
 					"source": {
 						"properties": {
@@ -1253,53 +1288,10 @@
 						"$ref": "#/components/schemas/StageType"
 					},
 					"transcripts": {
-						"properties": {
-							"text": {
-								"type": "string"
-							},
-							"chunks": {
-								"items": {
-									"properties": {
-										"word": {
-											"type": "string"
-										},
-										"end": {
-											"type": "number",
-											"format": "double"
-										},
-										"start": {
-											"type": "number",
-											"format": "double"
-										}
-									},
-									"required": [
-										"word",
-										"end",
-										"start"
-									],
-									"type": "object"
-								},
-								"type": "array"
-							},
-							"subtitleUrl": {
-								"type": "string"
-							},
-							"lastSegmentTimestamp": {
-								"type": "number",
-								"format": "double"
-							},
-							"status": {
-								"$ref": "#/components/schemas/TranscriptionStatus"
-							}
-						},
-						"required": [
-							"text",
-							"chunks",
-							"subtitleUrl",
-							"lastSegmentTimestamp",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/ITranscript"
+					},
+					"aiAnalysis": {
+						"$ref": "#/components/schemas/IAiAnalysis"
 					},
 					"source": {
 						"properties": {
@@ -1760,19 +1752,6 @@
 				],
 				"type": "string"
 			},
-			"ProcessingStatus": {
-				"enum": [
-					"pending",
-					"rendering",
-					"failed",
-					"clipCreated",
-					"completed",
-					"translating",
-					"generating_audio",
-					"processing_video"
-				],
-				"type": "string"
-			},
 			"ISession": {
 				"properties": {
 					"_id": {
@@ -1940,67 +1919,10 @@
 						"$ref": "#/components/schemas/ProcessingStatus"
 					},
 					"aiAnalysis": {
-						"properties": {
-							"isVectorized": {
-								"type": "boolean"
-							},
-							"status": {
-								"$ref": "#/components/schemas/ProcessingStatus"
-							}
-						},
-						"required": [
-							"isVectorized",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/IAiAnalysis"
 					},
 					"transcripts": {
-						"properties": {
-							"summary": {
-								"type": "string"
-							},
-							"text": {
-								"type": "string"
-							},
-							"chunks": {
-								"items": {
-									"properties": {
-										"word": {
-											"type": "string"
-										},
-										"end": {
-											"type": "number",
-											"format": "double"
-										},
-										"start": {
-											"type": "number",
-											"format": "double"
-										}
-									},
-									"required": [
-										"word",
-										"end",
-										"start"
-									],
-									"type": "object"
-								},
-								"type": "array"
-							},
-							"subtitleUrl": {
-								"type": "string"
-							},
-							"status": {
-								"$ref": "#/components/schemas/TranscriptionStatus"
-							}
-						},
-						"required": [
-							"summary",
-							"text",
-							"chunks",
-							"subtitleUrl",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/ITranscript"
 					},
 					"pretalxSessionCode": {
 						"type": "string"
@@ -2199,67 +2121,10 @@
 						"$ref": "#/components/schemas/ProcessingStatus"
 					},
 					"aiAnalysis": {
-						"properties": {
-							"isVectorized": {
-								"type": "boolean"
-							},
-							"status": {
-								"$ref": "#/components/schemas/ProcessingStatus"
-							}
-						},
-						"required": [
-							"isVectorized",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/IAiAnalysis"
 					},
 					"transcripts": {
-						"properties": {
-							"summary": {
-								"type": "string"
-							},
-							"text": {
-								"type": "string"
-							},
-							"chunks": {
-								"items": {
-									"properties": {
-										"word": {
-											"type": "string"
-										},
-										"end": {
-											"type": "number",
-											"format": "double"
-										},
-										"start": {
-											"type": "number",
-											"format": "double"
-										}
-									},
-									"required": [
-										"word",
-										"end",
-										"start"
-									],
-									"type": "object"
-								},
-								"type": "array"
-							},
-							"subtitleUrl": {
-								"type": "string"
-							},
-							"status": {
-								"$ref": "#/components/schemas/TranscriptionStatus"
-							}
-						},
-						"required": [
-							"summary",
-							"text",
-							"chunks",
-							"subtitleUrl",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/ITranscript"
 					},
 					"pretalxSessionCode": {
 						"type": "string"
@@ -2418,67 +2283,10 @@
 						"$ref": "#/components/schemas/ProcessingStatus"
 					},
 					"aiAnalysis": {
-						"properties": {
-							"isVectorized": {
-								"type": "boolean"
-							},
-							"status": {
-								"$ref": "#/components/schemas/ProcessingStatus"
-							}
-						},
-						"required": [
-							"isVectorized",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/IAiAnalysis"
 					},
 					"transcripts": {
-						"properties": {
-							"summary": {
-								"type": "string"
-							},
-							"text": {
-								"type": "string"
-							},
-							"chunks": {
-								"items": {
-									"properties": {
-										"word": {
-											"type": "string"
-										},
-										"end": {
-											"type": "number",
-											"format": "double"
-										},
-										"start": {
-											"type": "number",
-											"format": "double"
-										}
-									},
-									"required": [
-										"word",
-										"end",
-										"start"
-									],
-									"type": "object"
-								},
-								"type": "array"
-							},
-							"subtitleUrl": {
-								"type": "string"
-							},
-							"status": {
-								"$ref": "#/components/schemas/TranscriptionStatus"
-							}
-						},
-						"required": [
-							"summary",
-							"text",
-							"chunks",
-							"subtitleUrl",
-							"status"
-						],
-						"type": "object"
+						"$ref": "#/components/schemas/ITranscript"
 					},
 					"pretalxSessionCode": {
 						"type": "string"

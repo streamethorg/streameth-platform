@@ -11,13 +11,16 @@ import { toast } from 'sonner';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
 import { useMarkersContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/markers/markersContext';
 import { useClipsSidebar } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/sidebar/clips/ClipsContext';
-import { useTrimmControlsContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/Timeline/TrimmControlsContext';
 import { useOrganizationContext } from '../context/OrganizationContext';
+import { useEventContext } from '@/app/studio/[organization]/(no-side-bar)/clips/[stageId]/Timeline/EventConntext';
+import { useRemotionPlayer } from './useRemotionPlayer';
 
 export const useCreateClip = () => {
-  const { stageId, setIsCreatingClip, videoRef, clipUrl } =
+  const { stageId, setIsCreatingClip, videoRef, metadata } =
     useClipPageContext();
-  const { startTime, endTime } = useTrimmControlsContext();
+  const { handleSetCurrentTime } = useRemotionPlayer(videoRef, metadata.fps);
+  const { getEventsBounds } = useEventContext();
+  const { minStart: startTime, maxEnd: endTime } = getEventsBounds();
   const { organizationId } = useOrganizationContext();
   const { markers, selectedMarkerId, setSelectedMarkerId } =
     useMarkersContext();
@@ -56,7 +59,7 @@ export const useCreateClip = () => {
 
   const handlePreview = () => {
     if (videoRef.current) {
-      videoRef.current.currentTime = startTime;
+      handleSetCurrentTime(startTime);
       videoRef.current.play();
       console.log('🔄 Preview started');
     }
@@ -144,7 +147,7 @@ export const useCreateClip = () => {
         end: endTime,
         sessionId: session._id,
         organizationId,
-        clipUrl: clipUrl,
+        clipUrl: metadata.videoUrl,
       };
 
       const hasEditorOptions = checkEditorOptions(values);

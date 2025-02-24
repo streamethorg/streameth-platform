@@ -1,6 +1,8 @@
 import type { Document, Types } from 'mongoose';
 import type { ISpeaker } from './speaker.interface';
-import { TranscriptionStatus } from './state.interface';
+import { ProcessingStatus } from './state.interface';
+import { ITranscript } from './transcribe.interface';
+import { IAiAnalysis } from './transcribe.interface';
 
 export enum eVisibilty {
   public = 'public',
@@ -28,17 +30,6 @@ export enum SessionType {
   clip = 'clip',
   animation = 'animation',
   editorClip = 'editorClip',
-}
-
-export enum ProcessingStatus {
-  pending = 'pending',
-  rendering = 'rendering',
-  failed = 'failed',
-  clipCreated = 'clipCreated',
-  completed = 'completed',
-  translating = 'translating',
-  generatingAudio = 'generating_audio',
-  processingVideo = 'processing_video'
 }
 
 export interface ISession {
@@ -74,21 +65,9 @@ export interface ISession {
   socials?: { name: string; date: number }[];
   talkType?: string;
   processingStatus?: ProcessingStatus;
-  aiAnalysis?: {
-    status: ProcessingStatus;
-    isVectorized: boolean;
-  };
-  transcripts?: {
-    status: TranscriptionStatus;
-    subtitleUrl: string;
-    chunks: {
-      start: number;
-      end: number;
-      word: string;
-    }[];
-    text: string;
-    summary: string;
-  };
+  aiAnalysis?: IAiAnalysis;
+  transcripts?: ITranscript;
+
   pretalxSessionCode?: string;
 }
 

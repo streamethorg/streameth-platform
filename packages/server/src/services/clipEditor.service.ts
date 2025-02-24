@@ -2,7 +2,7 @@ import { HttpException } from '@exceptions/HttpException';
 
 import ClipEditor from '@models/clip.editor.model';
 import Session from '@models/session.model';
-import { ProcessingStatus } from '@interfaces/session.interface';
+import { ProcessingStatus } from '@interfaces/state.interface';
 import { IClip } from '@interfaces/clip.interface';
 import { Livepeer } from 'livepeer';
 import SessionService from './session.service';

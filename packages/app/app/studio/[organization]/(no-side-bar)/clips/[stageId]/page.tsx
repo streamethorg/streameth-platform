@@ -1,10 +1,14 @@
 import { fetchAllSessions, fetchSession } from '@/lib/services/sessionService';
 import { fetchStage, fetchStageRecordings } from '@/lib/services/stageService';
-import { ClipsPageParams, IExtendedSession } from '@/lib/types';
+import {
+  ClipsPageParams,
+  IExtendedSession,
+  IExtendedStage,
+  IMetadata,
+} from '@/lib/types';
 import React from 'react';
 import { ClipPageProvider } from './ClipPageContext';
 import Controls from './Controls';
-import ReactHlsPlayer from './Player';
 import Timeline from './Timeline';
 import Sidebar from './sidebar';
 import TopBar from './topBar';
@@ -13,100 +17,89 @@ import { MarkersProvider } from './sidebar/markers/markersContext';
 import { ClipsSidebarProvider } from './sidebar/clips/ClipsContext';
 import { getLiveStageSrcValue } from '@/lib/utils/utils';
 import { TimelineProvider } from './Timeline/TimelineContext';
-import { TrimmControlsProvider } from './Timeline/TrimmControlsContext';
+import { TrimmControlsProvider } from './Timeline/EventConntext';
 import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
+import PlayerComponent from './Player';
+import { ParseSessionMediaAction } from '@/lib/actions/sessions';
+import {
+  ITranscript,
+  IAiAnalysis,
+} from 'streameth-new-server/src/interfaces/transcribe.interface';
+import type { Session } from 'livepeer/models/components';
+
 const fetchVideoDetails = async (
   videoType: string,
   stageId: string,
   sessionId?: string
-) => {
-  switch (videoType) {
-    case 'livestream': {
-      const liveStage = await fetchStage({ stage: stageId });
-      const streamId = liveStage?.streamSettings?.streamId;
-      if (!streamId) return null;
+): Promise<{
+  name: string;
+  sessions: IExtendedSession[];
+  transcripts: ITranscript | null;
+  aiAnalysis: IAiAnalysis | null;
+  metadata: IMetadata;
+  stageRecordings: Session[];
+  type: string;
+} | null> => {
+  try {
+    let stage: IExtendedStage | null, videoSrc, name, transcripts, aiAnalysis;
+
+    if (videoType === 'livestream') {
+      stage = await fetchStage({ stage: stageId });
+      const streamId = stage?.streamSettings?.streamId;
+      if (!streamId || !stage) return null;
+
       const stageRecordings = await fetchStageRecordings({ streamId });
-      if (!stageRecordings) return null;
-      const latestRecording = stageRecordings[0];
-      if (!latestRecording) return null;
-      const sessions =
-        (
-          await fetchAllSessions({
-            stageId: liveStage._id,
-            type: SessionType.livestream,
-          })
-        ).sessions || [];
+      if (!stageRecordings?.length) return null;
 
-      const videoSrc = getLiveStageSrcValue({
-        playbackId: latestRecording.playbackId,
-        recordingId: latestRecording.id,
+      videoSrc = getLiveStageSrcValue({
+        playbackId: stageRecordings[0].playbackId,
+        recordingId: stageRecordings[0].id,
       });
-      if (!videoSrc) return null;
-      return {
-        videoSrc,
-        name: liveStage.name,
-        transcribe: liveStage.transcripts?.chunks,
-        transcibeStatus: liveStage.transcripts?.status,
-        aiAnalysisStatus: null,
-        type: 'livepeer',
-        sessions,
-        stageRecordings,
-      };
-    }
-
-    case 'recording': {
+      name = stage.name;
+      transcripts = stage.transcripts;
+      aiAnalysis = stage.aiAnalysis;
+    } else if (videoType === 'recording') {
       const session = await fetchSession({ session: sessionId! });
-      if (
-        !session ||
-        !session.stageId ||
-        !session?.playbackId ||
-        !session?.assetId
-      )
+      if (!session?.stageId || !session?.playbackId || !session?.assetId)
         return null;
-      const stage = await fetchStage({ stage: session.stageId as string });
-      const stageRecordings = await fetchStageRecordings({
-        streamId: stage?.streamSettings?.streamId || '',
-      });
-      let sessions: IExtendedSession[] = [];
-      if (stage) {
-        sessions = (
-          await fetchAllSessions({
-            stageId: stage._id,
-            type: SessionType.livestream,
-          })
-        ).sessions;
-      }
-      const videoSrc = await getVideoUrlAction(session);
-      if (!videoSrc) return null;
-      return {
-        videoSrc,
-        name: session.name,
-        transcribe: session.transcripts?.chunks,
-        transcribeStatus: session.transcripts?.status,
-        aiAnalysisStatus: session.aiAnalysis?.status,
-        sessions,
-        type: 'livepeer',
-        stageRecordings,
-      };
-    }
 
-    case 'customUrl': {
-      const stage = await fetchStage({ stage: stageId });
-      if (!stage || !stage.source?.m3u8Url) return null;
-      return {
-        videoSrc: stage.source?.m3u8Url,
-        name: stage.name,
-        type: 'customUrl',
-        sessions: [],
-        stageRecordings: [],
-        transcribe: [],
-        transcribeStatus: null,
-        aiAnalysisStatus: null,
-      };
-    }
-
-    default:
+      stage = await fetchStage({ stage: session.stageId as string });
+      videoSrc = await getVideoUrlAction(session);
+      name = session.name;
+      transcripts = session.transcripts;
+      aiAnalysis = session.aiAnalysis;
+    } else {
       return null;
+    }
+
+    if (!videoSrc || !stage) return null;
+
+    const stageRecordings = await fetchStageRecordings({
+      streamId: stage.streamSettings?.streamId || '',
+    });
+
+    const sessions =
+      (
+        await fetchAllSessions({
+          stageId: stage._id,
+          type: SessionType.livestream,
+        })
+      ).sessions || [];
+
+    const metadata = await ParseSessionMediaAction({ videoUrl: videoSrc });
+
+    return {
+      name,
+      transcripts: transcripts || null,
+      aiAnalysis: aiAnalysis || null,
+      sessions,
+      type: 'livepeer',
+      stageRecordings,
+      metadata,
+    };
+  } catch (error) {
+    console.error('Error fetching video details:', error);
+    return null;
   }
 };
 
@@ -119,10 +112,13 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
     return <div>Video source not found</div>;
   }
 
+  const { metadata, name, sessions, stageRecordings, transcripts, aiAnalysis } =
+    videoDetails;
+
   return (
     <ClipPageProvider
+      metadata={metadata}
       stageId={stageId}
-      clipUrl={videoDetails.videoSrc}
       sessionId={sessionId}
     >
       <TimelineProvider>
@@ -132,28 +128,21 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
               <div className="flex flex-row w-full h-full border-t border-gray-200 overflow-hidden">
                 <div className="flex h-full w-[calc(100%-400px)] flex-col">
                   <TopBar
-                    stageRecordings={videoDetails.stageRecordings}
-                    allSessions={videoDetails.sessions}
-                    name={videoDetails.name}
+                    stageRecordings={stageRecordings}
+                    allSessions={sessions}
+                    name={name}
                     organizationId={organizationId}
                     stageId={stageId}
                     sessionId={sessionId}
                   />
-                  <ReactHlsPlayer
-                    src={videoDetails.videoSrc}
-                    type={videoDetails.type}
-                  />
+                  <PlayerComponent />
                   <Controls />
                   <div className="w-full p-2 bg-white">
                     <Timeline />
                   </div>
                 </div>
                 <div className="flex w-[400px] h-full">
-                  <Sidebar
-                    transcribe={videoDetails.transcribe || []}
-                    transcribeStatus={videoDetails.transcribeStatus ?? null}
-                    aiAnalysisStatus={videoDetails.aiAnalysisStatus ?? null}
-                  />
+                  <Sidebar transcripts={transcripts} aiAnalysis={aiAnalysis} />
                 </div>
               </div>
             </TrimmControlsProvider>

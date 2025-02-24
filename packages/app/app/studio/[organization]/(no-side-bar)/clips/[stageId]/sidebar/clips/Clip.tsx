@@ -5,7 +5,7 @@ import { fetchSessionRenderingProgress } from '@/lib/services/sessionService';
 import { IExtendedSession } from '@/lib/types';
 import { formatDate } from '@/lib/utils/time';
 import { useEffect, useState } from 'react';
-import { ProcessingStatus } from 'streameth-new-server/src/interfaces/session.interface';
+import { ProcessingStatus } from 'streameth-new-server/src/interfaces/state.interface';
 import Preview from './Preview';
 
 // Processing Card Component
