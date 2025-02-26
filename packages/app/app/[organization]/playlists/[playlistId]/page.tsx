@@ -54,6 +54,8 @@ export default async function PlaylistPage({
   params: { organization: string; playlistId: string };
   searchParams: { video?: string };
 }) {
+  console.log('🚀 PlaylistPage: Beginning to render for organization', params.organization);
+  
   const playlist = await fetchPlaylist({
     organizationId: params.organization,
     playlistId: params.playlistId,
@@ -108,6 +110,10 @@ export default async function PlaylistPage({
     // No video specified, use the first one
     currentVideo = sessions[0];
   }
+
+  console.log('🎬 PlaylistPage: Will display current video:', currentVideo.name);
+  console.log('🏢 PlaylistPage: Will render organization videos section with organizationId:', params.organization);
+  console.log('🚫 PlaylistPage: Excluding sessionId from organization videos:', currentVideo._id.toString());
 
   return (
     <div className="mx-auto w-full max-w-7xl space-y-6 md:p-4">

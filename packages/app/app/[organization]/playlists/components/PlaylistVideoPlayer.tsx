@@ -8,8 +8,9 @@ import Image from 'next/image';
 import { formatDate } from '@/lib/utils/time';
 import { FileQuestion, Play } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { PlayerWithControls } from '@/components/ui/Player';
+import { Src } from '@livepeer/react';
 
 interface PlaylistVideoPlayerProps {
   playlist: IPlaylist;
@@ -19,6 +20,7 @@ interface PlaylistVideoPlayerProps {
   organizationName: string;
   organizationLogo: string;
   organizationId: string;
+  playerSrc: Src[];
 }
 
 export default function PlaylistVideoPlayer({
@@ -29,9 +31,9 @@ export default function PlaylistVideoPlayer({
   organizationName,
   organizationLogo,
   organizationId,
+  playerSrc,
 }: PlaylistVideoPlayerProps) {
   const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
   
   // Handle click on a playlist item
   const handleVideoSelect = (videoId: string) => {
@@ -40,7 +42,7 @@ export default function PlaylistVideoPlayer({
       return;
     }
     
-    // Use direct navigation instead of useSearchParams
+    // Use direct navigation
     router.push(`/${organizationId}/playlists/${playlist._id}?video=${videoId}`, 
       { scroll: false });
   };
@@ -51,24 +53,13 @@ export default function PlaylistVideoPlayer({
       <div className="w-full lg:w-8/12 flex-shrink-0 flex flex-col">
         {/* Video display */}
         <div className="flex-1 flex flex-col">
-          {/* Simple video element instead of PlayerWithControls */}
+          {/* Use PlayerWithControls instead of custom video element */}
           <div className="aspect-video bg-black rounded-t-lg overflow-hidden">
-            {error ? (
-              <div className="flex items-center justify-center h-full text-white">
-                <p>{error}</p>
-              </div>
-            ) : (
-              <video
-                className="w-full h-full object-contain"
-                controls
-                autoPlay={false}
-                onError={() => setError("Failed to load video")}
-                poster={currentVideo.videoUrl || ""}
-              >
-                <source src={videoUrl} type="application/vnd.apple.mpegurl" />
-                Your browser does not support the video tag.
-              </video>
-            )}
+            <PlayerWithControls
+              src={playerSrc}
+              name={currentVideo.name}
+              thumbnail={currentVideo.coverImage}
+            />
           </div>
 
           <div className="p-4 bg-white rounded-b-lg flex-1">
@@ -140,11 +131,20 @@ export default function PlaylistVideoPlayer({
                 )}
                 onClick={() => handleVideoSelect(session._id.toString())}
               >
-                <div className="relative min-w-[120px] w-[120px] aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                  {/* Simple thumbnail display */}
-                  <div className="w-full h-full flex items-center justify-center">
-                    <FileQuestion className="text-gray-400" size={24} />
-                  </div>
+                <div className="relative min-w-[120px] w-[120px] aspect-video rounded-lg overflow-hidden">
+                  {/* Display thumbnail image or fallback */}
+                  {session.coverImage ? (
+                    <Image
+                      src={session.coverImage}
+                      alt={session.name || "Video thumbnail"}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                      <FileQuestion className="text-gray-400" size={24} />
+                    </div>
+                  )}
                   {currentVideo._id.toString() === session._id.toString() && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                       <Play className="text-white" size={24} fill="white" />
