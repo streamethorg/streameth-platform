@@ -17,14 +17,14 @@ const VideosTab = async ({ params, searchParams }: VideosTabProps) => {
   });
 
   return (
-    <div className="flex flex-col w-full h-full overflow-hidden">
-      <div className="mb-4 flex justify-between items-center">
+    <div className="flex flex-col w-full h-full">
+      <div className="flex">
         <div>
           <LibraryFilter stages={stages} />
         </div>
         {/* Pagination will be rendered by Library in absolute position */}
       </div>
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div className="flex-1 min-h-0">
         <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
           <Library params={params} searchParams={searchParams} />
         </Suspense>
