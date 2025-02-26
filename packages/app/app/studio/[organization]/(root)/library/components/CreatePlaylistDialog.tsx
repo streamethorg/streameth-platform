@@ -105,7 +105,7 @@ export function CreatePlaylistDialog({ playlist, trigger }: CreatePlaylistDialog
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {trigger || (
-          <Button variant="outline" className="gap-2">
+          <Button variant="outlinePrimary" className="gap-2">
             <PlusIcon className="h-4 w-4" />
             Create Playlist
           </Button>

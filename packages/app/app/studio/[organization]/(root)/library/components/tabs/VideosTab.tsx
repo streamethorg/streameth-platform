@@ -13,7 +13,7 @@ interface VideosTabProps {
 
 const VideosTab = async ({ params, searchParams }: VideosTabProps) => {
   return (
-    <>
+    <div className="flex flex-col w-full h-full relative">
       <div className="px-4 mb-4">
         <Suspense
           fallback={
@@ -26,7 +26,7 @@ const VideosTab = async ({ params, searchParams }: VideosTabProps) => {
       <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
         <Library params={params} searchParams={searchParams} />
       </Suspense>
-    </>
+    </div>
   );
 };
 

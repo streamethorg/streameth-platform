@@ -29,7 +29,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useState } from 'react';
-
+import EmptyFolder from '@/lib/svg/EmptyFolder';
 interface PlaylistTableProps {
   playlists: Array<IPlaylist & { createdAt: string }>;
 }
@@ -38,7 +38,9 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
   const params = useParams();
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
-  const [playlistToDelete, setPlaylistToDelete] = useState<IPlaylist | null>(null);
+  const [playlistToDelete, setPlaylistToDelete] = useState<IPlaylist | null>(
+    null
+  );
 
   const handleDelete = async () => {
     if (!playlistToDelete?._id) return;
@@ -52,7 +54,8 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
       toast.success('Playlist deleted successfully');
       router.refresh();
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to delete playlist';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to delete playlist';
       toast.error(errorMessage);
     } finally {
       setIsDeleting(false);
@@ -62,8 +65,16 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
 
   if (!playlists || playlists.length === 0) {
     return (
-      <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)] flex items-center justify-center">
-        <p className="text-muted-foreground">No playlists created yet</p>
+      <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
+        <div className="flex h-full flex-col items-center justify-center space-y-6 bg-white p-4 rounded-xl">
+          <EmptyFolder />
+          <div className="flex flex-col items-center">
+            <p className="text-3xl font-bold">No playlists here</p>
+            <p className="text-xl text-gray-500">
+              Create your first playlist to get started!
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -90,7 +101,9 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
                       <Thumbnail />
                     </div>
                     <div className="flex flex-col">
-                      <Link href={`/studio/${params.organization}/library/playlists/${playlist._id}`}>
+                      <Link
+                        href={`/studio/${params.organization}/library/playlists/${playlist._id}`}
+                      >
                         <span className="hover:underline line-clamp-2">
                           {playlist.name}
                         </span>
@@ -104,15 +117,23 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  {playlist.sessions.length} video{playlist.sessions.length !== 1 ? 's' : ''}
+                  {playlist.sessions.length} video
+                  {playlist.sessions.length !== 1 ? 's' : ''}
                 </TableCell>
                 <TableCell>
-                  <span className={playlist.isPublic ? 'text-green-500' : 'text-yellow-500'}>
+                  <span
+                    className={
+                      playlist.isPublic ? 'text-green-500' : 'text-yellow-500'
+                    }
+                  >
                     {playlist.isPublic ? 'Public' : 'Private'}
                   </span>
                 </TableCell>
                 <TableCell>
-                  {formatDate(new Date(playlist.createdAt), 'ddd. MMM. D, YYYY')}
+                  {formatDate(
+                    new Date(playlist.createdAt),
+                    'ddd. MMM. D, YYYY'
+                  )}
                 </TableCell>
                 <TableCell className="w-[220px]">
                   <div className="flex justify-between items-center gap-2 relative">
@@ -151,13 +172,16 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
         </Table>
       </div>
 
-      <AlertDialog open={!!playlistToDelete} onOpenChange={() => setPlaylistToDelete(null)}>
+      <AlertDialog
+        open={!!playlistToDelete}
+        onOpenChange={() => setPlaylistToDelete(null)}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the playlist "{playlistToDelete?.name}".
-              This action cannot be undone.
+              This will permanently delete the playlist &quot;
+              {playlistToDelete?.name}&quot;. This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -228,4 +252,4 @@ export const PlaylistTableSkeleton = () => {
   );
 };
 
-export default PlaylistTable; 
+export default PlaylistTable;
