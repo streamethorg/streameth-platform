@@ -37,12 +37,12 @@ const LibraryPage = async ({
             <p className="text-lg font-bold">Playlists</p>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="videos" className="flex-1 overflow-hidden min-h-0">
+        <TabsContent value="videos" className="flex-1 overflow-hidden min-h-0 pb-6">
           <Suspense fallback={<TableSkeleton />}>
             <VideosTab params={params} searchParams={searchParams} />
           </Suspense>
         </TabsContent>
-        <TabsContent value="playlists" className="flex-1 overflow-hidden min-h-0">
+        <TabsContent value="playlists" className="flex-1 overflow-hidden min-h-0 pb-6">
           <Suspense fallback={<PlaylistTableSkeleton />}>
             <PlaylistsTab organizationId={params.organization} />
           </Suspense>

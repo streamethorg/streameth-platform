@@ -65,7 +65,7 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
 
   if (!playlists || playlists.length === 0) {
     return (
-      <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
+      <div className="bg-white rounded-xl mx-0 my-2 border h-[calc(100%-90px)]">
         <div className="flex h-full flex-col items-center justify-center space-y-6 bg-white p-4 rounded-xl">
           <EmptyFolder />
           <div className="flex flex-col items-center">
@@ -81,7 +81,7 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
 
   return (
     <>
-      <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
+      <div className="bg-white rounded-xl mx-0 my-2 border h-[calc(100%-90px)]">
         <Table className="bg-white">
           <TableHeader className="sticky top-0 z-10 bg-white rounded-t-xl">
             <TableRow className="hover:bg-white rounded-t-xl">
@@ -206,7 +206,7 @@ const PlaylistTable = ({ playlists }: PlaylistTableProps) => {
 
 export const PlaylistTableSkeleton = () => {
   return (
-    <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
+    <div className="bg-white rounded-xl mx-0 my-2 border h-[calc(100%-90px)]">
       <Table className="bg-white">
         <TableHeader className="sticky top-0 z-10 bg-white rounded-t-xl">
           <TableRow className="hover:bg-white rounded-t-xl">
