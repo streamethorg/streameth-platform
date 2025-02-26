@@ -12,30 +12,25 @@ interface VideosTabProps {
 }
 
 const VideosTab = async ({ params, searchParams }: VideosTabProps) => {
-  return (
-    <div className="flex flex-col w-full h-full relative">
-      <div className="px-4 mb-4">
-        <Suspense
-          fallback={
-            <div className="w-full h-full bg-gray-100 animate-pulse" />
-          }
-        >
-          <Filters organizationId={params.organization} />
-        </Suspense>
-      </div>
-      <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
-        <Library params={params} searchParams={searchParams} />
-      </Suspense>
-    </div>
-  );
-};
-
-const Filters = async ({ organizationId }: { organizationId: string }) => {
   const stages = await fetchOrganizationStages({
-    organizationId: organizationId,
+    organizationId: params.organization,
   });
 
-  return <LibraryFilter stages={stages} />;
+  return (
+    <div className="flex flex-col w-full h-full overflow-hidden">
+      <div className="mb-4 flex justify-between items-center">
+        <div>
+          <LibraryFilter stages={stages} />
+        </div>
+        {/* Pagination will be rendered by Library in absolute position */}
+      </div>
+      <div className="flex-1 min-h-0 overflow-hidden">
+        <Suspense fallback={<TableSkeleton />} key={JSON.stringify(searchParams)}>
+          <Library params={params} searchParams={searchParams} />
+        </Suspense>
+      </div>
+    </div>
+  );
 };
 
 export default VideosTab; 

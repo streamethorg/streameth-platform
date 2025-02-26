@@ -27,9 +27,9 @@ const LibraryPage = async ({
   }
 
   return (
-    <div className="flex flex-col w-full h-full relative mt-2">
-      <Tabs defaultValue={searchParams.tab || 'videos'} className="flex-1">
-        <TabsList className="ml-4 mb-4">
+    <div className="flex flex-col w-full h-full overflow-hidden relative mt-2 px-4">
+      <Tabs defaultValue={searchParams.tab || 'videos'} className="flex-1 flex flex-col overflow-hidden">
+        <TabsList className="mb-4 flex-shrink-0 justify-start">
           <TabsTrigger value="videos">
             <p className="text-lg font-bold">Videos</p>
           </TabsTrigger>
@@ -37,12 +37,12 @@ const LibraryPage = async ({
             <p className="text-lg font-bold">Playlists</p>
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="videos" className="flex-1">
+        <TabsContent value="videos" className="flex-1 overflow-hidden min-h-0">
           <Suspense fallback={<TableSkeleton />}>
             <VideosTab params={params} searchParams={searchParams} />
           </Suspense>
         </TabsContent>
-        <TabsContent value="playlists" className="flex-1">
+        <TabsContent value="playlists" className="flex-1 overflow-hidden min-h-0">
           <Suspense fallback={<PlaylistTableSkeleton />}>
             <PlaylistsTab organizationId={params.organization} />
           </Suspense>
