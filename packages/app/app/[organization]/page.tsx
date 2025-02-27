@@ -1,11 +1,7 @@
-import NotFound from '@/not-found';
 import { Metadata, ResolvingMetadata } from 'next';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { ChannelPageParams } from '@/lib/types';
-import ChannelShareIcons from './components/ChannelShareIcons';
-import Image from 'next/image';
 import { Suspense } from 'react';
-import StreamethLogoWhite from '@/lib/svg/StreamethLogoWhite';
 import UpcomingStreams, {
   UpcomingStreamsLoading,
 } from './components/UpcomingStreams';
@@ -38,7 +34,6 @@ const OrganizationHome = async ({
           <Suspense fallback={<UpcomingStreamsLoading />}>
             <UpcomingStreams
               organizationId={params.organization}
-              organizationSlug={params.organization}
               currentStreamId={searchParams.streamId}
             />
           </Suspense>
@@ -68,12 +63,14 @@ export async function generateMetadata(
   }
 
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationId: params.organization,
   });
+
 
   if (!organization) {
     return generalMetadata;
   }
+
 
   const allStreams = (
     await fetchOrganizationStages({

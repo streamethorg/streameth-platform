@@ -14,7 +14,7 @@ const CreateNFTModal = async ({
   type: string;
 }) => {
   const organizationId = (
-    await fetchOrganization({ organizationSlug: organization })
+    await fetchOrganization({ organizationId: organization })
   )?._id;
   const videos = (
     await fetchAllSessions({

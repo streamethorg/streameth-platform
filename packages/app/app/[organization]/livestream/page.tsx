@@ -41,7 +41,6 @@ export default async function Livestream({
   params,
   searchParams,
 }: OrganizationPageProps) {
-
   if (!searchParams.stage) return notFound();
 
   const stage = await fetchStage({
@@ -92,7 +91,7 @@ export async function generateMetadata({
   });
 
   const organization = await fetchOrganization({
-    organizationSlug: params?.organization,
+    organizationId: params?.organization,
   });
 
   if (!stage || !organization) return generalMetadata;

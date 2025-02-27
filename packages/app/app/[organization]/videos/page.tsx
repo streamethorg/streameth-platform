@@ -24,7 +24,7 @@ export default async function ArchivePage({
   }
 
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationId: params.organization,
   });
 
   if (!organization) {
@@ -97,7 +97,7 @@ export async function generateMetadata(
   }
 
   const organization = await fetchOrganization({
-    organizationSlug: params.organization,
+    organizationId: params.organization,
   });
 
   if (!organization) {

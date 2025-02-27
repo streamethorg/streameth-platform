@@ -31,9 +31,12 @@ export default class StageService {
     // Check if organization has reached their stage limit
     const organization = await Organization.findById(data.organizationId);
     if (!organization) throw new HttpException(404, 'Organization not found');
-    
+
     if (organization.currentStages >= organization.paidStages) {
-      throw new HttpException(403, 'Stage limit reached. Please upgrade your subscription to create more stages.');
+      throw new HttpException(
+        403,
+        'Stage limit reached. Please upgrade your subscription to create more stages.',
+      );
     }
 
     const eventId =
@@ -44,10 +47,9 @@ export default class StageService {
     console.log('stream', stream);
 
     // Increment currentStages for the organization
-    await Organization.findByIdAndUpdate(
-      data.organizationId,
-      { $inc: { currentStages: 1 } }
-    );
+    await Organization.findByIdAndUpdate(data.organizationId, {
+      $inc: { currentStages: 1 },
+    });
 
     return this.controller.store.create(
       data.name,
@@ -102,23 +104,56 @@ export default class StageService {
     fromDate?: string, // unix timestamp
     untilDate?: string, // unix timestamp
   ): Promise<Array<IStage>> {
-    if (fromDate) {
-      return await this.controller.store.findAll({
-        organizationId: organizationId,
-        createdAt: { $gte: new Date(Number(fromDate)) },
-      });
+    try {
+      const organization = await Organization.findById(organizationId);
+      if (!organization) throw new HttpException(404, 'Organization not found');
+    } catch (error) {
+      return [];
     }
 
-    if (untilDate) {
+    try {
+      // Validate organizationId
+      if (!organizationId) {
+        throw new HttpException(400, 'Organization ID is required');
+      }
+
+      // Validate date formats if provided
+      if (fromDate && isNaN(Number(fromDate))) {
+        throw new HttpException(
+          400,
+          'Invalid fromDate format. Expected unix timestamp',
+        );
+      }
+      if (untilDate && isNaN(Number(untilDate))) {
+        throw new HttpException(
+          400,
+          'Invalid untilDate format. Expected unix timestamp',
+        );
+      }
+
+      if (fromDate) {
+        return await this.controller.store.findAll({
+          organizationId: organizationId,
+          createdAt: { $gte: new Date(Number(fromDate)) },
+        });
+      }
+
+      if (untilDate) {
+        return await this.controller.store.findAll({
+          organizationId: organizationId,
+          createdAt: { $lt: new Date(Number(untilDate)) },
+        });
+      }
+
       return await this.controller.store.findAll({
         organizationId: organizationId,
-        createdAt: { $lt: new Date(Number(untilDate)) },
       });
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(500, 'Error fetching stages for organization');
     }
-
-    return await this.controller.store.findAll({
-      organizationId: organizationId,
-    });
   }
 
   async deleteOne(stageId: string): Promise<void> {
@@ -128,10 +163,9 @@ export default class StageService {
     // Get organization and only decrement if currentStages > 0
     const organization = await Organization.findById(stage.organizationId);
     if (organization && organization.currentStages > 0) {
-      await Organization.findByIdAndUpdate(
-        stage.organizationId,
-        { $inc: { currentStages: -1 } }
-      );
+      await Organization.findByIdAndUpdate(stage.organizationId, {
+        $inc: { currentStages: -1 },
+      });
     }
 
     return await this.controller.store.delete(stageId);
@@ -151,14 +185,15 @@ export default class StageService {
 
     await stage.updateOne(
       {
-        'stageSettings.transcripts.status': !stream.isActive ? 'in-queue' : undefined,
+        'stageSettings.transcripts.status': !stream.isActive
+          ? 'in-queue'
+          : undefined,
         'streamSettings.isActive': stream.isActive,
         'streamSettings.isHealthy': stream.isHealthy ?? false,
       },
       { upsert: true },
     );
   }
-
 
   async createMetadata(stageId: string) {
     let stage = await Stage.findById(stageId);
@@ -213,7 +248,4 @@ export default class StageService {
     });
     return stream;
   }
-
-
 }
-
