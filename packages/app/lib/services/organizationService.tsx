@@ -12,7 +12,13 @@ export async function fetchOrganization({
     if (!organizationId) {
       return null;
     }
-    const response = await fetch(`${apiUrl()}/organizations/${organizationId}`);
+    const response = await fetch(`${apiUrl()}/organizations/${organizationId}`, {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: { tags: [`organizations-${organizationId}`] },
+    });
     const data = (await response.json()).data;
 
     return data;
