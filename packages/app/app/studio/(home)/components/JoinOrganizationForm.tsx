@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -26,10 +26,8 @@ const JoinOrganizationSchema = z.object({
 export default function JoinOrganizationForm() {
   const router = useRouter();
   const { user } = useUserContext();
-  if (!user) throw new Error('User not found');
-  const { email } = user;
   const [isLoading, setIsLoading] = useState(false);
-
+  
   const form = useForm<z.infer<typeof JoinOrganizationSchema>>({
     resolver: zodResolver(JoinOrganizationSchema),
     defaultValues: {
@@ -38,11 +36,15 @@ export default function JoinOrganizationForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof JoinOrganizationSchema>) => {
+    if (!user || !user.email) {
+      return; // No submission if no user
+    }
+    
     setIsLoading(true);
     try {
       const organization = await joinOrganizationAction({
         invitationCode: values.invitationCode,
-        email: email!,
+        email: user.email,
       });
       toast.success('Successfully joined organization');
       router.push(`/studio/${organization._id}`);

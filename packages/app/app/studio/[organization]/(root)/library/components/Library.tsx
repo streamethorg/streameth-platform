@@ -60,45 +60,47 @@ const Library = async ({
   return (
     <>
       {!sortedSessions || sortedSessions.length === 0 ? (
-        <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
+        <div className="bg-white rounded-xl mx-0 my-2 border h-[calc(100%-90px)]">
           <EmptyLibrary />
         </div>
       ) : (
-        <>
-          <div className="absolute top-0 right-0">
+        <div className="flex flex-col h-full overflow-hidden relative">
+          <div className="bg-white rounded-xl mx-0 my-2 border h-full flex flex-col overflow-hidden">
+            <div className="overflow-auto flex-1 min-h-0">
+              <Table className="bg-white">
+                <TableHeader className="sticky top-0 z-10 bg-white rounded-t-xl">
+                  <TableRow className="hover:bg-white rounded-t-xl">
+                    <TableHead className="cursor-pointer">
+                      <TableSort title="Title" sortBy="name" />
+                    </TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Duration</TableHead>
+                    <TableHead className="cursor-pointer">
+                      <TableSort title="Created at" sortBy="date" />
+                    </TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {sessions.sessions.map((item) => (
+                    <TableRow key={item._id}>
+                      <Suspense
+                        fallback={<TableCellsSkeleton />}
+                        key={JSON.stringify(searchParams)}
+                      >
+                        <TableCells item={item} />
+                      </Suspense>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+          <div className="absolute top-[-48px] right-0">
             <Pagination {...sessions.pagination} />
           </div>
-          <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
-            <Table className="bg-white">
-              <TableHeader className="sticky top-0 z-10 bg-white rounded-t-xl">
-                <TableRow className="hover:bg-white rounded-t-xl">
-                  <TableHead className="cursor-pointer">
-                    <TableSort title="Title" sortBy="name" />
-                  </TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Duration</TableHead>
-                  <TableHead className="cursor-pointer">
-                    <TableSort title="Created at" sortBy="date" />
-                  </TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody className="overflow-auto">
-                {sessions.sessions.map((item) => (
-                  <TableRow key={item._id}>
-                    <Suspense
-                      fallback={<TableCellsSkeleton />}
-                      key={JSON.stringify(searchParams)}
-                    >
-                      <TableCells item={item} />
-                    </Suspense>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </>
+        </div>
       )}
     </>
   );
@@ -149,26 +151,33 @@ const TableCellsSkeleton = () => {
 
 export const TableSkeleton = () => {
   return (
-    <div className="bg-white rounded-xl mx-4 my-2 border h-[calc(100%-90px)]">
-      <Table className="bg-white">
-        <TableHeader className="sticky top-0 z-10 bg-white rounded-t-xl">
-          <TableRow className="hover:bg-white rounded-t-xl">
-            <TableHead>Title</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Duration</TableHead>
-            <TableHead>Created at</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="overflow-auto">
-          {[...Array(20)].map((_, index) => (
-            <TableRow key={index}>
-              <TableCellsSkeleton />
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <div className="flex flex-col h-full overflow-hidden relative">
+      <div className="bg-white rounded-xl mx-0 my-2 border h-full flex flex-col overflow-hidden">
+        <div className="overflow-auto flex-1 min-h-0">
+          <Table className="bg-white">
+            <TableHeader className="sticky top-0 z-10 bg-white rounded-t-xl">
+              <TableRow className="hover:bg-white rounded-t-xl">
+                <TableHead>Title</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Duration</TableHead>
+                <TableHead>Created at</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {[...Array(20)].map((_, index) => (
+                <TableRow key={index}>
+                  <TableCellsSkeleton />
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+      <div className="absolute top-[-48px] right-0">
+        <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
+      </div>
     </div>
   );
 };
