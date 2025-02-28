@@ -32,28 +32,7 @@ const CreateOrganization = () => {
     };
   }, [isLoading]);
   
-  // Show loading state if we're explicitly in a loading state
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)] space-y-4">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        {showTimeout && (
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">Loading is taking longer than expected</p>
-            <button 
-              onClick={() => window.location.reload()} 
-              className="text-primary hover:underline text-sm"
-            >
-              Refresh the page
-            </button>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // If the page is rendered within an iframe or popup, it might cause memory issues
-  // This helps detect that scenario
+  // Memory usage monitoring - moved BEFORE conditional return to follow React Hooks rules
   useEffect(() => {
     const checkMemoryUsage = () => {
       if (performance && 'memory' in performance) {
@@ -74,6 +53,26 @@ const CreateOrganization = () => {
       clearInterval(intervalId);
     };
   }, []);
+  
+  // Show loading state if we're explicitly in a loading state
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)] space-y-4">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        {showTimeout && (
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-2">Loading is taking longer than expected</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="text-primary hover:underline text-sm"
+            >
+              Refresh the page
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   const renderStep1 = () => (
     <Card className="flex flex-col">
