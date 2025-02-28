@@ -1,12 +1,18 @@
 import Support from '@/components/misc/Support';
 import { fetchUserAction } from '@/lib/actions/users';
 import { redirect } from 'next/navigation';
+
 const StudioLayout = async (props: { children: React.ReactNode }) => {
+  console.log('🚀 [StudioLayout] Fetching user data...');
+  const startTime = Date.now();
   
   const user = await fetchUserAction();
+  
+  console.log(`⏱️ [StudioLayout] User data fetch complete in ${Date.now() - startTime}ms:`, user ? '✅ User found' : '❌ User not found');
 
   if (!user) {
-    return redirect('/login');
+    console.log('🔄 [StudioLayout] Redirecting to login page');
+    return redirect('/auth/login');
   }
 
   return (
