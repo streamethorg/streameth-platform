@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,10 +7,46 @@ import { Button } from '@/components/ui/button';
 import JoinOrganizationForm from './components/JoinOrganizationForm';
 import CreateOrganizationForm from './components/CreateOrganizationForm';
 import { useUserContext } from '@/lib/context/UserContext';
+import { Loader2 } from 'lucide-react';
 
 const Studio = () => {
-  const { user } = useUserContext();
+  const { user, isLoading } = useUserContext();
   const organizations = user?.organizations || null;
+  
+  // Add a timeout to prevent getting stuck in the loading state forever
+  const [showTimeout, setShowTimeout] = useState(false);
+  
+  useEffect(() => {
+    // If loading takes more than 3 seconds, provide a way to refresh
+    const timeoutId = setTimeout(() => {
+      if (isLoading) {
+        setShowTimeout(true);
+      }
+    }, 3000);
+    
+    return () => clearTimeout(timeoutId);
+  }, [isLoading]);
+  
+  // Show loading state while data is being fetched
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)] space-y-4">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        {showTimeout && (
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-2">Loading is taking longer than expected</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="text-primary hover:underline text-sm"
+            >
+              Refresh the page
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
   return (
     <div className="flex h-full flex-col">
       <div className="m-auto flex h-full w-full max-w-4xl flex-grow flex-col overflow-auto bg-background p-2">
