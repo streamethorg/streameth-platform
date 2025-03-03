@@ -64,7 +64,7 @@ const Library = async ({
           <EmptyLibrary />
         </div>
       ) : (
-        <div className="flex flex-col h-full overflow-hidden relative">
+        <div className="flex flex-col h-full ">
           <div className="bg-white rounded-xl mx-0 my-2 border h-full flex flex-col overflow-hidden">
             <div className="overflow-auto flex-1 min-h-0">
               <Table className="bg-white">
@@ -97,7 +97,7 @@ const Library = async ({
               </Table>
             </div>
           </div>
-          <div className="absolute top-[-48px] right-0">
+          <div className="absolute top-[-32px] right-0">
             <Pagination {...sessions.pagination} />
           </div>
         </div>
