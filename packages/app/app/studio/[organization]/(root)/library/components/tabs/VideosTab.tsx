@@ -17,7 +17,7 @@ const VideosTab = async ({ params, searchParams }: VideosTabProps) => {
   });
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full h-full relative">
       <div className="flex">
         <div>
           <LibraryFilter stages={stages} />
