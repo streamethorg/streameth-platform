@@ -4,6 +4,8 @@ import {
   useCurrentFrame,
   useVideoConfig,
   Sequence,
+  OffthreadVideo
+  
 } from "remotion";
 import Captions from "./Captions";
 import { EditorProps, EditorEvent, Transcript } from "@/types/constants";
@@ -13,14 +15,18 @@ const MediaEventComponent: React.FC<{
   editorProps: EditorProps;
 }> = ({ event, editorProps }) => {
   const { fps } = useVideoConfig();
-  if (!event.url || event.start === undefined || event.end === undefined || !event.duration) {
+  if (
+    !event.url ||
+    event.start === undefined ||
+    event.end === undefined ||
+    !event.duration
+  ) {
     return null;
   }
   const startFrame = Math.round(event.timeLineStart * fps);
   const endFrame = Math.round(event.timeLineEnd * fps);
 
   const isVertical = editorProps.selectedAspectRatio === "9:16";
-
   return (
     <Sequence from={startFrame} durationInFrames={endFrame - startFrame}>
       <AbsoluteFill>
@@ -97,9 +103,23 @@ const CaptionsEventComponent: React.FC<{
 
 const Editor: React.FC<EditorProps> = ({ events, ...props }) => {
   const editorProps = { ...props, events };
+
+  // Calculate timeline positions dynamically
+  let currentTimelinePosition = 0;
+  const eventsWithTimeline = events.map((event) => {
+    const duration = event.end - event.start;
+    const timelineStart = currentTimelinePosition;
+    currentTimelinePosition += duration;
+    return {
+      ...event,
+      timeLineStart: timelineStart,
+      timeLineEnd: currentTimelinePosition,
+    };
+  });
+
   return (
     <AbsoluteFill className="w-full bg-black">
-      {events.map((event, index) => {
+      {eventsWithTimeline.map((event, index) => {
         switch (event.type) {
           case "media":
             return (

@@ -34,15 +34,16 @@ const TimelineEvent = ({
   const { calculatePositionOnTimeline } = useTimeline();
   const height = 40;
   const left = calculatePositionOnTimeline(
-    event.timeLineStart,
+    event.start,
     maxDuration,
     timelineWidth
   );
   const width = calculatePositionOnTimeline(
-    event.timeLineEnd - event.timeLineStart,
+    event.end - event.start,
     maxDuration,
     timelineWidth
   );
+  
   const backgroundColor = getEventColor(event.type, isPreviewMode);
 
   const handleMoveStart = (
@@ -101,7 +102,7 @@ const TimelineEvent = ({
           left: `${left}px`,
           background: isPreviewMode ? 'rgba(255, 191, 0, 0.35)' : 'rgba(200, 75, 80, 0.4)',
         }}
-        onMouseDown={(e) => handleMoveStart(event.id, event.timeLineStart, e)}
+        onMouseDown={(e) => handleMoveStart(event.id, event.start, e)}
         onClick={() => handleEventSelect(event)}
       >
         {event.type === 'media' && (
@@ -111,7 +112,7 @@ const TimelineEvent = ({
               background: backgroundColor,
             }}
             onMouseDown={(e) =>
-              handleTrimStart(event.id, event.timeLineStart, e)
+              handleTrimStart(event.id, event.start, e)
             }
           />
         )}
@@ -121,7 +122,7 @@ const TimelineEvent = ({
             style={{
               background: backgroundColor,
             }}
-            onMouseDown={(e) => handleTrimEnd(event.id, event.timeLineEnd, e)}
+            onMouseDown={(e) => handleTrimEnd(event.id, event.end, e)}
           />
         )}
       </div>

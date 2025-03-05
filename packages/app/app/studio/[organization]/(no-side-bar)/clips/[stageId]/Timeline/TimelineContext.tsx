@@ -3,7 +3,6 @@
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { useClipPageContext } from '../ClipPageContext';
 import useTimeline from './useTimeline';
-import usePlayer from '@/lib/hooks/usePlayer';
 import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 type TimelineContextType = {
@@ -68,28 +67,14 @@ export const TimelineProvider = ({
       const timelineRect = timelineElement.getBoundingClientRect();
       const relativeClickX = event.clientX - timelineRect.left;
       const clickTime = (relativeClickX / timelineWidth) * duration;
-      if (
-        isPreviewMode &&
-        (clickTime < previewTimeBounds.startTime ||
-          clickTime > previewTimeBounds.endTime)
-      ) {
-        return;
-      }
+      // if (!isTimeInEventRange(clickTime)) {
+      //   return;
+      // }
       handleSetCurrentTime(clickTime);
       setPlayheadPosition(clickTime);
     }
   };
 
-  useEffect(() => {
-    if (isPreviewMode) {
-      if (currentTime >= previewTimeBounds.endTime) {
-        handleSetCurrentTime(previewTimeBounds.startTime);
-      }
-      if (currentTime < previewTimeBounds.startTime) {
-        handleSetCurrentTime(previewTimeBounds.startTime + 0.1);
-      }
-    }
-  }, [currentTime, isPreviewMode, previewTimeBounds]);
 
   return (
     <TimelineContext.Provider

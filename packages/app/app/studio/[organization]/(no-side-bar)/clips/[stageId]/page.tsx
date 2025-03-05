@@ -72,16 +72,16 @@ const fetchVideoDetails = async (
       return null;
     }
 
-    if (!videoSrc || !stage) return null;
+    if (!videoSrc) return null;
 
     const stageRecordings = await fetchStageRecordings({
-      streamId: stage.streamSettings?.streamId || '',
+      streamId: stage?.streamSettings?.streamId || '',
     });
 
     const sessions =
       (
         await fetchAllSessions({
-          stageId: stage._id,
+          stageId: stage?._id || '',
           type: SessionType.livestream,
         })
       ).sessions || [];
@@ -115,6 +115,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { metadata, name, sessions, stageRecordings, transcripts, aiAnalysis } =
     videoDetails;
 
+  console.log('metadata', metadata);
   return (
     <ClipPageProvider
       metadata={metadata}

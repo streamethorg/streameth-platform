@@ -7,9 +7,7 @@ import {
   useCallback,
   useEffect,
 } from 'react';
-import useTimeline from './useTimeline';
 import { useTimelineContext } from './TimelineContext';
-import usePlayer from '@/lib/hooks/usePlayer';
 import { EditorEvent } from 'streameth-reel-creator/types/constants';
 import { useClipPageContext } from '../ClipPageContext';
 
@@ -30,6 +28,8 @@ interface EventContextType {
   setMaxDuration: (duration: number) => void;
   setSelectedEvent: (event: EditorEvent | null) => void;
   getEventsBounds: () => { minStart: number; maxEnd: number };
+  getEventsDuration: () => number;
+  isTimeInEventRange: (time: number) => boolean;
 }
 
 export const EventContext = createContext<EventContextType | null>(null);
@@ -42,10 +42,9 @@ export const TrimmControlsProvider = ({
   children: React.ReactNode;
 }) => {
   const {
-    timelineWidth,
-    isPreviewMode,
     timelineRef,
     pixelsPerSecond,
+    
   } = useTimelineContext();
 
   const { videoRef, metadata } = useClipPageContext();
@@ -66,17 +65,16 @@ export const TrimmControlsProvider = ({
           id: 'start',
           label: 'Start',
           type: 'media',
-          url: '',
+          url: metadata.videoUrl,
           start: 0,
           end: duration,
-          timeLineStart: 0,
-          timeLineEnd: duration,
           duration: duration,
         },
       ]);
       setMaxDuration(duration);
     }
   }, [duration]);
+
 
   const addEvent = (event: EditorEvent) => {
     setEvents((prevEvents) =>
@@ -111,7 +109,7 @@ export const TrimmControlsProvider = ({
       switch (timelineAction) {
         case 'move':
           if (!activeEvent) return;
-          const duration = activeEvent.timeLineEnd - activeEvent.timeLineStart;
+          const duration = activeEvent.end - activeEvent.start;
           const newStartMove = Math.max(0, initialEventStart + timeDelta);
           const newEndMove = newStartMove + duration;
 
@@ -120,8 +118,8 @@ export const TrimmControlsProvider = ({
               event.id === movingEvent
                 ? {
                     ...event,
-                    timeLineStart: newStartMove,
-                    timeLineEnd: newEndMove,
+                    start: newStartMove,
+                    end: newEndMove,
                   }
                 : event
             )
@@ -131,16 +129,15 @@ export const TrimmControlsProvider = ({
         case 'trimStart':
           if (!activeEvent) return;
           const newStart = Math.max(0, initialEventStart + timeDelta);
-          if (newStart > activeEvent.timeLineEnd) return;
+          if (newStart > activeEvent.end) return;
           updateEvents(
             events.map((event) =>
               event.id === movingEvent &&
-              event.timeLineEnd - newStart < maxDuration
+              event.end - newStart < maxDuration
                 ? {
                     ...event,
-                    timeLineStart: newStart,
                     start: newStart,
-                    timeLineEnd: event.timeLineEnd,
+                    end: event.end,
                   }
                 : event
             )
@@ -150,14 +147,14 @@ export const TrimmControlsProvider = ({
         case 'trimEnd':
           if (!activeEvent) return;
           const newEnd = Math.min(maxDuration, initialEventStart + timeDelta);
-          if (newEnd < activeEvent.timeLineStart) return;
+          if (newEnd < activeEvent.start) return;
           updateEvents(
             events.map((event) =>
               event.id === movingEvent &&
-              newEnd - event.timeLineStart < maxDuration
+              newEnd - event.start < maxDuration
                 ? {
                     ...event,
-                    timeLineEnd: newEnd,
+                    end: newEnd,
                   }
                 : event
             )
@@ -179,9 +176,21 @@ export const TrimmControlsProvider = ({
 
   const getEventsBounds = () => {
     // get min start and max end of all events
-    const minStart = Math.min(...events.map((event) => event.timeLineStart));
-    const maxEnd = Math.max(...events.map((event) => event.timeLineEnd));
+    const minStart = Math.min(...events.map((event) => event.start));
+    const maxEnd = Math.max(...events.map((event) => event.end));
     return { minStart, maxEnd };
+  };
+
+  const getEventsDuration = () => {
+    const minStart = getEventsBounds().minStart;
+    const maxEnd = getEventsBounds().maxEnd;
+    console.log('minStart', minStart, 'maxEnd', maxEnd, 'duration', maxEnd - minStart);
+    const duration = maxEnd - minStart;
+    return Math.max(1, Math.round(duration ));
+  };
+
+  const isTimeInEventRange = (time: number) => {
+    return events.some((event) => time >= event.start && time <= event.end);
   };
 
   return (
@@ -203,6 +212,8 @@ export const TrimmControlsProvider = ({
         setSelectedEvent,
         selectedEvent,
         getEventsBounds,
+        getEventsDuration,
+        isTimeInEventRange,
       }}
     >
       {children}

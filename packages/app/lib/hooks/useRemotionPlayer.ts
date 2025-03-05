@@ -28,8 +28,8 @@ export const useRemotionPlayer = (
     () => 0,
   );
 
-  const handleSetCurrentTime = useCallback((frame: number) => {
-    ref.current?.dispatchSeek(frame);
+  const handleSetCurrentTime = useCallback((time: number) => {
+    ref.current?.seekTo(time * fps);
   }, [ref]);
  
   return {

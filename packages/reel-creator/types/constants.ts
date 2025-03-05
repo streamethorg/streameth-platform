@@ -66,8 +66,6 @@ export interface EditorEvent {
   transcript?: Transcript;
   start: number;
   end: number;
-  timeLineStart: number;
-  timeLineEnd: number;
 }
 
 // export interface TextEvent extends Event {

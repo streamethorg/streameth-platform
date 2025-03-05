@@ -3,8 +3,7 @@ import useTimeline from './useTimeline';
 import { useTimelineContext } from './TimelineContext';
 import { useClipPageContext } from '../ClipPageContext';
 import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
-
-
+import { useEventContext } from './EventConntext';
 const Playhead = () => {
   const [draggingPlayhead, setDraggingPlayhead] = useState(false);
   const [initialMousePos, setInitialMousePos] = useState(0);
@@ -13,9 +12,8 @@ const Playhead = () => {
     timelineWidth,
     setPlayheadPosition,
     playheadPosition,
-    isPreviewMode,
-    previewTimeBounds,
   } = useTimelineContext();
+  const { isTimeInEventRange, getEventsBounds } = useEventContext();
   const { metadata } = useClipPageContext();
   const { calculateTimeFromPosition, calculatePositionOnTimeline } =
     useTimeline();
@@ -31,6 +29,10 @@ const Playhead = () => {
   };
 
   useEffect(() => {
+    if (!isTimeInEventRange(currentTime)) {
+      handleSetCurrentTime(getEventsBounds().minStart + 0.1);
+      setPlayheadPosition(getEventsBounds().minStart + 0.1);
+    }
     setPlayheadPosition(currentTime);
   }, [currentTime]);
 
@@ -51,13 +53,8 @@ const Playhead = () => {
           timelineWidth,
           initialEventStart
         );
-        if (isPreviewMode) {
-          if (
-            newTime < previewTimeBounds.startTime ||
-            newTime > previewTimeBounds.endTime
-          ) {
-            return;
-          }
+        if (!isTimeInEventRange(newTime)) {
+          return;
         }
         handleSetPlayheadPosition(newTime);
       }

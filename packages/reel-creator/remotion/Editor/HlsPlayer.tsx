@@ -2,21 +2,21 @@ import Hls from "hls.js";
 import React, { useEffect, useRef } from "react";
 import { AbsoluteFill, RemotionVideoProps, Video } from "remotion";
 
-export const HlsVideo: React.FC<RemotionVideoProps> = ({
-  src,
-  muted,
-  style,
-  className,
-  startFrom,
-  endAt,
-}) => {
+interface HlsVideoProps extends RemotionVideoProps {
+  startFrom?: number;
+  endAt?: number;
+}
+
+export const HlsVideo: React.FC<
+  RemotionVideoProps & { startFrom?: number; endAt?: number }
+> = ({ src, muted, style, className, startFrom, endAt }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!src) {
       throw new Error("src is required");
     }
-
+    console.log("startFrom", startFrom, src);
     const hls = new Hls({
       startLevel: 4,
       maxBufferLength: 5,
@@ -33,15 +33,19 @@ export const HlsVideo: React.FC<RemotionVideoProps> = ({
     return () => {
       hls.destroy();
     };
-  }, [src]);
+  }, [src, startFrom]);
 
   return (
     <Video
+      startFrom={startFrom}
       ref={videoRef}
       src={src}
       muted={muted}
       style={style}
       className={className}
+      onError={(e) => {
+        console.log("error", e.message);
+      }}
     />
   );
 };

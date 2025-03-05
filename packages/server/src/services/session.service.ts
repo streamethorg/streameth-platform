@@ -5,7 +5,6 @@ import { RecordingSessionPayload } from '@interfaces/livepeer.webhook.interface'
 import {
   eVisibilty,
   ISession,
-  ProcessingStatus,
   SessionType,
 } from '@interfaces/session.interface';
 import {
@@ -38,7 +37,7 @@ import { Types } from 'mongoose';
 import MarkerService from './marker.service';
 import youtubedl from 'youtube-dl-exec';
 import { getSourceType } from '@utils/util';
-
+import { ProcessingStatus } from '@interfaces/state.interface';
 export default class SessionService {
   private path: string;
   private controller: BaseController<ISession>;

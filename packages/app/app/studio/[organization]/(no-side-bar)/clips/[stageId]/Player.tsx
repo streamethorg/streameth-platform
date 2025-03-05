@@ -11,16 +11,7 @@ const PlayerComponent: React.FC = () => {
   const { fps } = metadata;
   const { enabled, linesPerPage, position, font, color } =
     captionsOptions || {};
-
-  const { events } = useEventContext();
-
-  const getVideoDurationInFrames = () => {
-    const maxEndTime = Math.max(
-      ...events.map((event) => event.timeLineEnd ?? 0)
-    );
-
-    return Math.max(1, Math.round(maxEndTime * fps));
-  };
+  const { getEventsDuration } = useEventContext();
 
   const getCompositionDimensions = () => {
     switch (aspectRatio) {
@@ -42,7 +33,15 @@ const PlayerComponent: React.FC = () => {
         component={Editor}
         inputProps={{
           frameRate: fps,
-          events,
+          events:[{
+            id: 'start',
+            label: 'Start',
+            type: 'media',
+            url: metadata.videoUrl,
+            start: 0,
+            end: metadata.duration,
+            duration: metadata.duration,
+          }],
           aspectRatio,
           enabled,
           linesPerPage,
@@ -54,12 +53,12 @@ const PlayerComponent: React.FC = () => {
           width: '100%',
           height: '100%',
         }}
-        durationInFrames={getVideoDurationInFrames()}
+        durationInFrames={metadata.duration * fps}
         fps={fps}
         compositionHeight={getCompositionDimensions().height}
         compositionWidth={getCompositionDimensions().width}
         spaceKeyToPlayOrPause
-        controls={false}
+        controls={true}
       />
     </div>
   );
