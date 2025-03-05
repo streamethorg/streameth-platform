@@ -255,7 +255,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
     if (code === 'file-too-large') {
       setError(
         `File is too large. Max size is ${
-          props.maxSize ? props.maxSize / 1024 / 1024 + 'MB.' : '8GB.'
+          props.maxSize ? props.maxSize / 1024 / 1024 + 'MB.' : '10GB.'
         }`
       );
     } else {
@@ -352,7 +352,7 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
               <p>
                 Maximum video file size is{' '}
                 {`${
-                  props?.maxSize ? props?.maxSize / 1024 / 1024 + 'MB' : '8GB'
+                  props?.maxSize ? props?.maxSize / 1024 / 1024 + 'MB' : '10GB'
                 }`}
                 . Best resolution is 1920 x 1080.
               </p>
