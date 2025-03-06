@@ -29,33 +29,34 @@ const MediaEventComponent: React.FC<{
   const startFrame = Math.round(timeLineStart * fps);
   const endFrame = Math.round(timeLineEnd * fps);
 
-  const isVertical = editorProps.selectedAspectRatio === "9:16";
+  const isVertical = editorProps.aspectRatio === "9:16";
+  const isSquare = editorProps.aspectRatio === "1:1";
+  const isHorizontal = editorProps.aspectRatio === "16:9";
+  console.log(editorProps.aspectRatio);
   return (
     <Sequence from={startFrame} durationInFrames={endFrame - startFrame}>
       <AbsoluteFill>
-        {isVertical ? (
-          <HlsVideo
-            muted
-            style={{ height: "100%", width: "100%" }}
-            src={event.url}
-            className="object-cover z-1 blur-lg"
-            startFrom={event.start * fps}
-            endAt={event.duration * fps}
-          />
+        {isVertical || isSquare ? (
+          <>
+            <HlsVideo
+              muted
+              style={{ height: "100%", width: "100%" }}
+              src={event.url}
+              className="object-cover"
+              startFrom={event.start * fps}
+              endAt={event.duration * fps}
+            />
+            {isSquare && (
+              <div className="absolute inset-0 bg-black opacity-50" />
+            )}
+          </>
         ) : null}
       </AbsoluteFill>
       <AbsoluteFill className="z-10">
-        {isVertical ? (
+        {(isHorizontal || isSquare) && (
           <HlsVideo
             src={event.url}
-            className="my-auto z-10"
-            startFrom={event.start * fps}
-            endAt={event.duration * fps}
-          />
-        ) : (
-          <HlsVideo
-            src={event.url}
-            className="my-auto"
+            className="my-auto z-20 blur-lg"
             startFrom={event.start * fps}
             endAt={event.duration * fps}
           />
@@ -90,13 +91,11 @@ const CaptionsEventComponent: React.FC<{
     return null;
   }
   if (frame < startFrame || frame > endFrame) return null;
-  console.log(
-    editorProps.captionOptions
-  );
+  console.log(editorProps.captionOptions);
   return (
     <AbsoluteFill>
       <Captions
-        isVertical={editorProps.selectedAspectRatio === "9:16"}
+        isVertical={editorProps.aspectRatio === "9:16"}
         startAt={start}
         frameRate={fps}
         transcription={transcript}

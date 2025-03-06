@@ -83,7 +83,7 @@ export interface EditorEvent {
 export type EditorProps = {
   frameRate: number;
   events: EditorEvent[];
-  selectedAspectRatio: string;
+  aspectRatio: string;
   captionOptions: ICaptionOptions;
 };
 
@@ -129,18 +129,25 @@ export const defaultMyCompProps: EditorProps = {
       label: "main",
       type: "media",
       url: "https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/7712t3kcqrigwv6r/video/download.mp4",
+      start: 0,
+      end: 10,
     },
     {
       id: "intro",
       label: "animation",
       type: "media",
       url: "https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/2febrk220b4e9ix0/video/download.mp4",
+      start: 0,
+      end: 10,
     },
   ],
-  selectedAspectRatio: "16:9",
-  captionEnabled: true,
-  captionPosition: "bottom",
-  captionLinesPerPage: "2",
-  captionFont: "Arial",
-  captionColor: "#000",
+  aspectRatio: "16:9",
+  captionOptions: {
+    enabled: true,
+    position: "bottom",
+    font: "Arial",
+    color: "#000",
+    size: 24,
+    baseColor: "#000",
+  },
 };

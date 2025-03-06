@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Player } from '@remotion/player';
 import Editor from 'streameth-reel-creator/remotion/Editor/Editor';
 import { useClipPageContext } from './ClipPageContext';
@@ -14,15 +14,14 @@ const PlayerComponent: React.FC = () => {
     switch (aspectRatio) {
       case '16:9':
         return { width: 1920, height: 1080 };
+      case '1:1':
+        return { width: 1080, height: 1920 };
       case '9:16':
         return { width: 1080, height: 1920 };
-      case '1:1':
-        return { width: 1920, height: 1080 };
       default:
         return { width: 1920, height: 1080 };
     }
   };
-
 
   return (
     <div className="bg-black flex-col flex items-center w-full h-full justify-center text-white relative">

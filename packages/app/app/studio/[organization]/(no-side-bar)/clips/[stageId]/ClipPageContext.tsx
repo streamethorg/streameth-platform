@@ -25,12 +25,10 @@ export type ClipPageContextType = {
   isInputFocused: boolean;
   setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
   sessionId: string;
-  aspectRatio: string | null;
-  setAspectRatio: React.Dispatch<React.SetStateAction<string | null>>;
-  captionsOptions: ICaptionOptions | null;
-  setCaptionsOptions: React.Dispatch<
-    React.SetStateAction<ICaptionOptions | null>
-  >;
+  aspectRatio: string;
+  setAspectRatio: React.Dispatch<React.SetStateAction<string>>;
+  captionsOptions: ICaptionOptions;
+  setCaptionsOptions: React.Dispatch<React.SetStateAction<ICaptionOptions>>;
   metadata: IMetadata;
   selection: {
     x: number;
@@ -73,9 +71,16 @@ export const ClipPageProvider = ({
   const [playbackStatus, setPlaybackStatus] = useState<PlaybackStatus | null>(
     null
   );
-  const [aspectRatio, setAspectRatio] = useState<string | null>('16:9');
+  const [aspectRatio, setAspectRatio] = useState<string>('16:9');
   const [captionsOptions, setCaptionsOptions] =
-    useState<ICaptionOptions | null>(null);
+    useState<ICaptionOptions>({
+      enabled: false,
+      position: 'middle',
+      color: '#ffffff',
+      baseColor: '#000000',
+      size: 75,
+      font: 'Arial',
+    });
 
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [transcript, setTranscript] = useState<ITranscript | null>(

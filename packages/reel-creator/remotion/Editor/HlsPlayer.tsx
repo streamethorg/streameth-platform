@@ -42,7 +42,7 @@ export const HlsVideo: React.FC<
       src={src}
       muted={muted}
       style={style}
-      className={className}
+      className={className }
       onError={(e) => {
         console.log("error", e.message);
       }}

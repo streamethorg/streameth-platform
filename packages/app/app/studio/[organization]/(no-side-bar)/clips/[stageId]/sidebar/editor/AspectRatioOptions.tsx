@@ -4,15 +4,12 @@ import { Label } from '@/components/ui/label';
 import { SmartphoneIcon, SquareIcon, TvIcon } from 'lucide-react';
 
 const AspectRatioOptions = () => {
-  const { setAspectRatio } = useClipPageContext();
-  const [selectedAspectRatio, setSelectedAspectRatio] = useState('16:9');
+  const { setAspectRatio, aspectRatio } = useClipPageContext();
 
-  useEffect(() => {
-    setAspectRatio(selectedAspectRatio);
-  }, [selectedAspectRatio, setAspectRatio]);
+
 
   const handleAspectRatioSelect = (ratio: string) => {
-    setSelectedAspectRatio(ratio);
+    setAspectRatio(ratio);
   };
 
   return (
@@ -25,7 +22,7 @@ const AspectRatioOptions = () => {
         {/* 1:1 Square Format */}
         <div
           className={`flex flex-col items-center justify-center px-3 py-2 hover:bg-gray-100 transition-colors ${
-            selectedAspectRatio === '1:1'
+            aspectRatio === '1:1'
               ? 'text-gray-900 bg-gray-100'
               : 'text-gray-400'
           }`}
@@ -38,7 +35,7 @@ const AspectRatioOptions = () => {
         {/* 16:9 Landscape Format */}
         <div
           className={`flex flex-col items-center justify-center px-3 py-2 hover:bg-gray-100 transition-colors ${
-            selectedAspectRatio === '16:9'
+            aspectRatio === '16:9'
               ? 'text-gray-900 bg-gray-100'
               : 'text-gray-400'
           }`}
@@ -51,7 +48,7 @@ const AspectRatioOptions = () => {
         {/* 9:16 Portrait Format */}
         <div
           className={`flex flex-col items-center justify-center px-3 py-2 hover:bg-gray-100 transition-colors ${
-            selectedAspectRatio === '9:16'
+            aspectRatio === '9:16'
               ? 'text-gray-900 bg-gray-100'
               : 'text-gray-400'
           }`}

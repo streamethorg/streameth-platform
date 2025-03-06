@@ -38,15 +38,7 @@ type CaptionOptionsAction =
   | { type: 'SET_SIZE'; payload: number }
   | { type: 'SET_BASE_COLOR'; payload: string };
 
-// Initial state
-const initialCaptionOptions: ICaptionOptions = {
-  enabled: false,
-  position: 'top',
-  font: 'Arial',
-  color: '#6C757D',
-  baseColor: '#000000',
-  size: 24,
-};
+
 
 // Reducer function
 const captionOptionsReducer = (
@@ -75,12 +67,12 @@ const captionOptionsReducer = (
 };
 
 const CaptionOptions = () => {
-  const { setCaptionsOptions } = useClipPageContext();
+  const { setCaptionsOptions, captionsOptions } = useClipPageContext();
 
   // Replace multiple useState calls with useReducer
   const [captionOptions, dispatch] = useReducer(
     captionOptionsReducer,
-    initialCaptionOptions
+    captionsOptions
   );
 
   // Update the parent context whenever our local state changes
