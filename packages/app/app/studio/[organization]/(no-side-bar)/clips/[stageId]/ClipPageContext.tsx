@@ -2,8 +2,12 @@
 import React, { createContext, useContext, useState, useRef } from 'react';
 import { IMetadata, PlaybackStatus } from '@/lib/types';
 import { PlayerRef } from '@remotion/player';
+import { ITranscript } from 'streameth-new-server/src/interfaces/transcribe.interface';
+import { ICaptionOptions } from 'streameth-reel-creator/types/constants';
 
 export type ClipPageContextType = {
+  transcript: ITranscript | null;
+  setTranscript: React.Dispatch<React.SetStateAction<ITranscript | null>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   videoRef: React.RefObject<PlayerRef>;
@@ -23,23 +27,25 @@ export type ClipPageContextType = {
   sessionId: string;
   aspectRatio: string | null;
   setAspectRatio: React.Dispatch<React.SetStateAction<string | null>>;
-  captionsOptions: {
-    enabled: boolean;
-    linesPerPage: string;
-    position: string;
-    font: string;
-    color: string;
-  } | null;
+  captionsOptions: ICaptionOptions | null;
   setCaptionsOptions: React.Dispatch<
-    React.SetStateAction<{
-      enabled: boolean;
-      linesPerPage: string;
-      position: string;
-      font: string;
-      color: string;
-    } | null>
+    React.SetStateAction<ICaptionOptions | null>
   >;
   metadata: IMetadata;
+  selection: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+  setSelection: React.Dispatch<
+    React.SetStateAction<{
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+    }>
+  >;
 };
 
 const ClipPageContext = createContext<ClipPageContextType | null>(null);
@@ -51,11 +57,13 @@ export const ClipPageProvider = ({
   stageId,
   sessionId,
   metadata,
+  transcript: initialTranscript,
 }: {
   children: React.ReactNode;
   stageId: string;
   sessionId: string;
   metadata: IMetadata;
+  transcript: ITranscript | null;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const videoRef = useRef<PlayerRef>(null);
@@ -66,15 +74,19 @@ export const ClipPageProvider = ({
     null
   );
   const [aspectRatio, setAspectRatio] = useState<string | null>('16:9');
-  const [captionsOptions, setCaptionsOptions] = useState<{
-    enabled: boolean;
-    linesPerPage: string;
-    position: string;
-    font: string;
-    color: string;
-  } | null>(null);
+  const [captionsOptions, setCaptionsOptions] =
+    useState<ICaptionOptions | null>(null);
 
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
+  const [transcript, setTranscript] = useState<ITranscript | null>(
+    initialTranscript
+  );
+  const [selection, setSelection] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
   return (
     <ClipPageContext.Provider
       value={{
@@ -98,6 +110,10 @@ export const ClipPageProvider = ({
         captionsOptions,
         setCaptionsOptions,
         metadata,
+        transcript,
+        setTranscript,
+        selection,
+        setSelection,
       }}
     >
       {children}

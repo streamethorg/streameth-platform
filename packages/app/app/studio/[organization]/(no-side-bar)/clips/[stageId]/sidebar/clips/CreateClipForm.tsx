@@ -16,65 +16,26 @@ import { Textarea } from '@/components/ui/textarea';
 import {
   LuRotateCcw,
   LuScissorsLineDashed,
-  LuSmartphone,
-  LuSubtitles,
-  LuEye,
 } from 'react-icons/lu';
-import { Label } from '@/components/ui/label';
 
 import { formatClipTime } from '@/lib/utils/time';
 import { useClipPageContext } from '../../ClipPageContext';
-import { IExtendedSession } from '@/lib/types';
-import SelectAnimation from '../../topBar/SelectAnimation';
 import Combobox from '@/components/ui/combo-box';
 import { useMarkersContext } from '../markers/markersContext';
-import { SessionType } from 'streameth-new-server/src/interfaces/session.interface';
-import { fetchAllSessions } from '@/lib/services/sessionService';
 import { useCreateClip } from '@/lib/hooks/useCreateClip';
-import useClickOutside from '@/lib/hooks/useClickOutside';
-import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import { useEventContext } from '../../Timeline/EventConntext';
 const CreateClipForm = () => {
   const { handleCreateClip, form, isCreateClip, handleClearMarker } =
     useCreateClip();
-  const { organizationId } = useOrganizationContext();
 
-  const { isLoading, setIsCreatingClip } = useClipPageContext();
+  const { isLoading, setIsCreatingClip } =
+    useClipPageContext();
 
   const { getEventsBounds } = useEventContext();
   const { minStart, maxEnd } = getEventsBounds();
 
   const { markers, selectedMarkerId, setSelectedMarkerId } =
     useMarkersContext();
-
-  const [animations, setAnimations] = useState<IExtendedSession[]>([]);
-
-  useEffect(() => {
-    const fetchAnimations = async () => {
-      const animations = await fetchAllSessions({
-        type: SessionType.animation,
-        organizationId: organizationId,
-      });
-      setAnimations(animations.sessions);
-    };
-    fetchAnimations();
-  }, [organizationId]);
-
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const colorPickerRef = useRef<HTMLDivElement>(null);
-  useClickOutside(colorPickerRef, () => setShowColorPicker(false));
-
-  const colorPresets = [
-    '#6C757D',
-    '#FFA07A',
-    '#20C997',
-    '#FFC107',
-    '#0D6EFD',
-    '#DC3545',
-    '#198754',
-    '#0DCAF0',
-    '#6F42C1',
-  ];
 
   return (
     <Form {...form}>
@@ -163,147 +124,12 @@ const CreateClipForm = () => {
           {/* Time Display */}
           <div className="grid grid-cols-2 gap-x-2">
             <div className="flex gap-1 items-center">
-              <FormLabel>Start:</FormLabel>
-              <p className="text-sm">{formatClipTime(minStart)}</p>
-            </div>
-            <div className="flex gap-1 items-center">
-              <FormLabel>End:</FormLabel>
-              <p className="text-sm">{formatClipTime(maxEnd)}</p>
+              <FormLabel>Clip duration:</FormLabel>
+              <p className="text-sm">{formatClipTime(maxEnd - minStart)}</p>
             </div>
           </div>
 
           <div className="border-t border-gray-200"></div>
-
-          {/* Controls */}
-          <div className="flex flex-row w-full items-center space-x-4">
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="captionEnabled"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col gap-2">
-                      <FormControl>
-                        <div className="flex flex-col items-center">
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                field.onChange(!field.value);
-                                if (!field.value) {
-                                  setShowColorPicker(true);
-                                }
-                              }}
-                              onDoubleClick={() => {
-                                if (field.value) {
-                                  setShowColorPicker(!showColorPicker);
-                                }
-                              }}
-                              className={`p-2 rounded hover:bg-gray-100 transition-colors ${
-                                field.value ? 'text-gray-900' : 'text-gray-400'
-                              }`}
-                            >
-                              <LuSubtitles size={20} />
-                            </button>
-                            {field.value && form.watch('captionColor') && (
-                              <div
-                                className="w-4 h-4 rounded-md border border-gray-200"
-                                style={{
-                                  backgroundColor: form.watch('captionColor'),
-                                }}
-                              />
-                            )}
-                          </div>
-                          <Label className="text-xs">Captions</Label>
-                        </div>
-                      </FormControl>
-                    </div>
-                    {field.value && showColorPicker && (
-                      <div
-                        ref={colorPickerRef}
-                        className="absolute mt-2 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-10"
-                      >
-                        <Label className="text-sm mb-2">Text Color</Label>
-                        <div className="grid grid-cols-5 gap-2">
-                          {colorPresets.map((color) => (
-                            <Button
-                              key={color}
-                              variant="outline"
-                              className="w-8 h-8 p-0"
-                              style={{ backgroundColor: color }}
-                              onClick={() => {
-                                form.setValue('captionColor', color);
-                                setShowColorPicker(false);
-                              }}
-                              type="button"
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="selectedAspectRatio"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex flex-col gap-2">
-                    <FormControl>
-                      <div className="flex flex-col items-center space-x-1">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            field.onChange(
-                              field.value === '16:9' ? '9:16' : '16:9'
-                            )
-                          }
-                          className={`p-2 rounded hover:bg-gray-100 transition-colors ${
-                            field.value === '9:16'
-                              ? 'text-gray-900'
-                              : 'text-gray-400'
-                          }`}
-                        >
-                          <LuSmartphone size={20} />
-                        </button>
-                        <Label
-                          htmlFor="aspect-ratio-switch"
-                          className="text-xs"
-                        >
-                          9:16 Format
-                        </Label>
-                      </div>
-                    </FormControl>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          {/* Animation Fields */}
-          <div className="grid grid-cols-2 gap-x-2">
-            {/* Left column */}
-            <SelectAnimation
-              animations={animations}
-              form={form}
-              name="introAnimation"
-              label="Intro animation"
-              organizationId={organizationId}
-            />
-            {/* Right column */}
-            <SelectAnimation
-              animations={animations}
-              form={form}
-              name="outroAnimation"
-              label="Outro animation"
-              organizationId={organizationId}
-            />
-          </div>
         </CardContent>
 
         {/* Footer */}

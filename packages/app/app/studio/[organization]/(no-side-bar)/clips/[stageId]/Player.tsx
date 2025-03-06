@@ -1,17 +1,17 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Player } from '@remotion/player';
 import Editor from 'streameth-reel-creator/remotion/Editor/Editor';
-import { useEventContext } from './Timeline/EventConntext';
 import { useClipPageContext } from './ClipPageContext';
+import SelectionOverlay from './SelectionOverlay';
 
 const PlayerComponent: React.FC = () => {
-  const { aspectRatio, captionsOptions, videoRef, metadata } =
+  const { aspectRatio, captionsOptions, videoRef, metadata, transcript } =
     useClipPageContext();
   const { fps } = metadata;
-  const { enabled, linesPerPage, position, font, color } =
+  const { enabled, position, font, color } =
     captionsOptions || {};
-  const { getEventsDuration } = useEventContext();
+
 
   const getCompositionDimensions = () => {
     switch (aspectRatio) {
@@ -26,28 +26,35 @@ const PlayerComponent: React.FC = () => {
     }
   };
 
+
   return (
     <div className="bg-black flex-col flex items-center w-full h-full justify-center text-white relative">
+      {/* Add the selection overlay */}
+      <SelectionOverlay />
+
       <Player
         ref={videoRef}
         component={Editor}
         inputProps={{
           frameRate: fps,
-          events:[{
-            id: 'start',
-            label: 'Start',
-            type: 'media',
-            url: metadata.videoUrl,
-            start: 0,
-            end: metadata.duration,
-            duration: metadata.duration,
-          }],
+          events: [
+            {
+              id: 'start',
+              label: 'Start',
+              type: 'media',
+              url: metadata.videoUrl,
+              start: 0,
+              end: metadata.duration,
+              duration: metadata.duration,
+              transcript: transcript,
+            },
+          ],
           aspectRatio,
-          enabled,
-          linesPerPage,
+          captionEnabled: enabled,
+
           position,
           font,
-          color,
+          captionColor: color,
         }}
         style={{
           width: '100%',

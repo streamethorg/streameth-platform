@@ -115,9 +115,9 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
   const { metadata, name, sessions, stageRecordings, transcripts, aiAnalysis } =
     videoDetails;
 
-  console.log('metadata', metadata);
   return (
     <ClipPageProvider
+      transcript={transcripts}
       metadata={metadata}
       stageId={stageId}
       sessionId={sessionId}
@@ -143,7 +143,7 @@ const ClipsConfig = async ({ params, searchParams }: ClipsPageParams) => {
                   </div>
                 </div>
                 <div className="flex w-[400px] h-full">
-                  <Sidebar transcripts={transcripts} aiAnalysis={aiAnalysis} />
+                  <Sidebar aiAnalysis={aiAnalysis} />
                 </div>
               </div>
             </TrimmControlsProvider>

@@ -1,16 +1,15 @@
 import React, { useMemo } from "react";
 import { useCurrentFrame } from "remotion";
 import nlp from "compromise";
-
+import { ITranscript } from 'streameth-new-server/src/interfaces/transcribe.interface';
 type Word = { word: string; start: number; end: number };
 
 type CaptionsProps = {
   isVertical: boolean;
   transcription: {
     text: string;
-    words: Word[];
+    words: ITranscript["chunks"];
   };
-  captionEnabled: boolean;
   captionPosition: string;
   captionFont: string;
   captionColor: string;
@@ -21,7 +20,6 @@ type CaptionsProps = {
 const Captions: React.FC<CaptionsProps> = ({
   isVertical,
   transcription,
-  captionEnabled,
   captionPosition,
   captionFont,
   captionColor,
@@ -94,19 +92,14 @@ const Captions: React.FC<CaptionsProps> = ({
     }
   }
 
-  // Step 3: Find the current caption and the corresponding word group
   const currentCaptionIndex = captionWordGroups.findIndex((wordGroup) => {
     const firstWord = wordGroup[0];
     const lastWord = wordGroup[wordGroup.length - 1];
     return currentTime >= firstWord.start && currentTime <= lastWord.end;
   });
 
-  const currentCaption = refinedCaptions[currentCaptionIndex] || "";
   const wordsToDisplay = captionWordGroups[currentCaptionIndex] || [];
 
-  if (!captionEnabled) {
-    return null;
-  }
 
   if (isVertical) {
     return (

@@ -11,15 +11,18 @@ import {
 const ColorPicker = ({
   color,
   onChange,
+  className,
 }: {
   color: string | undefined;
   onChange: (color: string) => void;
+  className?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <Popover>
       <PopoverTrigger>
         <Input
+          className={className}
           style={{
             backgroundColor: color,
           }}

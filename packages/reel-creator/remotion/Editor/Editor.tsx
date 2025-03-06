@@ -4,12 +4,13 @@ import {
   useCurrentFrame,
   useVideoConfig,
   Sequence,
-  OffthreadVideo
-  
+  OffthreadVideo,
 } from "remotion";
 import Captions from "./Captions";
 import { EditorProps, EditorEvent, Transcript } from "@/types/constants";
 import { HlsVideo } from "./HlsPlayer";
+import { ITranscript } from "streameth-new-server/src/interfaces/transcribe.interface";
+
 const MediaEventComponent: React.FC<{
   event: EditorEvent;
   editorProps: EditorProps;
@@ -61,8 +62,8 @@ const MediaEventComponent: React.FC<{
       {event.transcript && (
         <AbsoluteFill className="z-20">
           <CaptionsEventComponent
-            start={event.start ? event.start : 0}
-            end={event.end ? event.end : event.transcript.duration}
+            start={event.start}
+            end={event.end}
             transcript={event.transcript}
             editorProps={editorProps}
           />
@@ -73,7 +74,7 @@ const MediaEventComponent: React.FC<{
 };
 
 const CaptionsEventComponent: React.FC<{
-  transcript: Transcript;
+  transcript: ITranscript;
   start: number;
   end: number;
   editorProps: EditorProps;
@@ -83,16 +84,26 @@ const CaptionsEventComponent: React.FC<{
   const startFrame = Math.round(start * fps);
   const endFrame = Math.round(end * fps);
 
+  if (!editorProps.captionEnabled) {
+    return null;
+  }
   if (frame < startFrame || frame > endFrame) return null;
-
+  console.log(
+    editorProps.captionEnabled,
+    editorProps.captionPosition,
+    editorProps.captionFont,
+    editorProps.captionColor
+  );
   return (
     <AbsoluteFill>
       <Captions
         isVertical={editorProps.selectedAspectRatio === "9:16"}
         startAt={start}
         frameRate={fps}
-        transcription={transcript}
-        captionEnabled={editorProps.captionEnabled}
+        transcription={{
+          text: transcript.text,
+          words: transcript.chunks,
+        }}
         captionPosition={editorProps.captionPosition}
         captionFont={editorProps.captionFont}
         captionColor={editorProps.captionColor}
