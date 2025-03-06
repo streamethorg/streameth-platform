@@ -9,9 +9,6 @@ const PlayerComponent: React.FC = () => {
   const { aspectRatio, captionsOptions, videoRef, metadata, transcript } =
     useClipPageContext();
   const { fps } = metadata;
-  const { enabled, position, font, color } =
-    captionsOptions || {};
-
 
   const getCompositionDimensions = () => {
     switch (aspectRatio) {
@@ -50,11 +47,7 @@ const PlayerComponent: React.FC = () => {
             },
           ],
           aspectRatio,
-          captionEnabled: enabled,
-
-          position,
-          font,
-          captionColor: color,
+          captionOptions: captionsOptions,
         }}
         style={{
           width: '100%',

@@ -1,33 +1,25 @@
 import React, { useMemo } from "react";
 import { useCurrentFrame } from "remotion";
 import nlp from "compromise";
-import { ITranscript } from 'streameth-new-server/src/interfaces/transcribe.interface';
+import { ITranscript } from "streameth-new-server/src/interfaces/transcribe.interface";
+import { ICaptionOptions } from "@/types/constants";
 type Word = { word: string; start: number; end: number };
 
-type CaptionsProps = {
+const Captions: React.FC<{
   isVertical: boolean;
-  transcription: {
-    text: string;
-    words: ITranscript["chunks"];
-  };
-  captionPosition: string;
-  captionFont: string;
-  captionColor: string;
-  frameRate: number;
+  transcription: ITranscript;
+  captionOptions: ICaptionOptions;
   startAt: number;
-};
-
-const Captions: React.FC<CaptionsProps> = ({
-  isVertical,
-  transcription,
-  captionPosition,
-  captionFont,
-  captionColor,
-  frameRate,
-  startAt,
-}) => {
+  frameRate: number;
+}> = ({ isVertical, transcription, captionOptions, startAt, frameRate }) => {
   const frame = useCurrentFrame();
   const currentTime = frame / frameRate + startAt;
+
+  const { enabled, position, font, color, baseColor, size } = captionOptions;
+
+  // Position determines if captions are at top, middle or bottom of the screen
+  const captionPosition =
+    position === "top" ? "top" : position === "middle" ? "middle" : "bottom";
 
   // Memoized NLP processing to split sentences into shorter, more suitable TikTok-like captions
   const { refinedCaptions, captionWordGroups } = useMemo(() => {
@@ -59,8 +51,8 @@ const Captions: React.FC<CaptionsProps> = ({
       const lineWords: Word[] = [];
 
       sentenceWords.forEach(() => {
-        if (wordPointer < transcription.words.length) {
-          lineWords.push(transcription.words[wordPointer]);
+        if (wordPointer < transcription.chunks.length) {
+          lineWords.push(transcription.chunks[wordPointer]);
           wordPointer++;
         }
       });
@@ -74,14 +66,14 @@ const Captions: React.FC<CaptionsProps> = ({
   }, [transcription]);
 
   // Find the current word index based on time
-  let currentWordIndex = transcription.words.findIndex(
+  let currentWordIndex = transcription.chunks.findIndex(
     (word) => word.start <= currentTime && word.end >= currentTime
   );
 
   if (currentWordIndex === -1) {
     // If no current word, find the last word before the current time
-    for (let i = transcription.words.length - 1; i >= 0; i--) {
-      if (transcription.words[i].end <= currentTime) {
+    for (let i = transcription.chunks.length - 1; i >= 0; i--) {
+      if (transcription.chunks[i].end <= currentTime) {
         currentWordIndex = i;
         break;
       }
@@ -100,15 +92,24 @@ const Captions: React.FC<CaptionsProps> = ({
 
   const wordsToDisplay = captionWordGroups[currentCaptionIndex] || [];
 
-
   if (isVertical) {
     return (
       <div
-        className={`z-20 captions ${captionPosition} absolute w-full text-center p-2 rounded`}
+        className={`z-20 captions absolute w-full text-center p-2 rounded`}
         style={{
-          fontFamily: captionFont,
-          top: '20%', // Position in the middle of the top half
-          transform: 'translateY(-50%)', // Center vertically
+          fontFamily: font,
+          [captionPosition === "middle" ? "top" : captionPosition]:
+            captionPosition === "top"
+              ? "20%"
+              : captionPosition === "middle"
+                ? "50%"
+                : "5%",
+          transform:
+            captionPosition === "top"
+              ? "translateY(-50%)"
+              : captionPosition === "middle"
+                ? "translateY(-50%)"
+                : "translateY(0)",
         }}
       >
         {wordsToDisplay.map((word, index) => (
@@ -122,9 +123,9 @@ const Captions: React.FC<CaptionsProps> = ({
             style={{
               color:
                 word.start <= currentTime && word.end >= currentTime
-                  ? captionColor
-                  : "white",
-              fontSize: "75px",
+                  ? color
+                  : baseColor,
+              fontSize: `${size}px`,
             }}
           >
             {word.word}
@@ -136,11 +137,17 @@ const Captions: React.FC<CaptionsProps> = ({
 
   return (
     <div
-      className={`z-20 captions ${captionPosition} absolute w-full text-center bg-opacity-50 p-2 rounded`}
+      className={`z-20 captions absolute w-full text-center bg-opacity-50 p-2 rounded`}
       style={{
-        fontFamily: captionFont,
-        bottom: '5%', // Add margin from the bottom
-        transform: 'translateY(0)', // Ensure it stays at the bottom
+        fontFamily: font,
+        [captionPosition === "middle" ? "top" : captionPosition]:
+          captionPosition === "top"
+            ? "5%"
+            : captionPosition === "middle"
+              ? "50%"
+              : "5%",
+        transform:
+          captionPosition === "middle" ? "translateY(-50%)" : "translateY(0)",
       }}
     >
       {wordsToDisplay.map((word, index) => (
@@ -154,9 +161,9 @@ const Captions: React.FC<CaptionsProps> = ({
           style={{
             color:
               word.start <= currentTime && word.end >= currentTime
-                ? captionColor
-                : "white",
-            fontSize: "50px",
+                ? color
+                : baseColor,
+            fontSize: `${size}px`,
           }}
         >
           {word.word}

@@ -14,7 +14,9 @@ import { ITranscript } from "streameth-new-server/src/interfaces/transcribe.inte
 const MediaEventComponent: React.FC<{
   event: EditorEvent;
   editorProps: EditorProps;
-}> = ({ event, editorProps }) => {
+  timeLineStart: number;
+  timeLineEnd: number;
+}> = ({ event, editorProps, timeLineStart, timeLineEnd }) => {
   const { fps } = useVideoConfig();
   if (
     !event.url ||
@@ -24,8 +26,8 @@ const MediaEventComponent: React.FC<{
   ) {
     return null;
   }
-  const startFrame = Math.round(event.timeLineStart * fps);
-  const endFrame = Math.round(event.timeLineEnd * fps);
+  const startFrame = Math.round(timeLineStart * fps);
+  const endFrame = Math.round(timeLineEnd * fps);
 
   const isVertical = editorProps.selectedAspectRatio === "9:16";
   return (
@@ -84,15 +86,12 @@ const CaptionsEventComponent: React.FC<{
   const startFrame = Math.round(start * fps);
   const endFrame = Math.round(end * fps);
 
-  if (!editorProps.captionEnabled) {
+  if (!editorProps.captionOptions.enabled) {
     return null;
   }
   if (frame < startFrame || frame > endFrame) return null;
   console.log(
-    editorProps.captionEnabled,
-    editorProps.captionPosition,
-    editorProps.captionFont,
-    editorProps.captionColor
+    editorProps.captionOptions
   );
   return (
     <AbsoluteFill>
@@ -100,13 +99,8 @@ const CaptionsEventComponent: React.FC<{
         isVertical={editorProps.selectedAspectRatio === "9:16"}
         startAt={start}
         frameRate={fps}
-        transcription={{
-          text: transcript.text,
-          words: transcript.chunks,
-        }}
-        captionPosition={editorProps.captionPosition}
-        captionFont={editorProps.captionFont}
-        captionColor={editorProps.captionColor}
+        transcription={transcript}
+        captionOptions={editorProps.captionOptions}
       />
     </AbsoluteFill>
   );
@@ -138,6 +132,8 @@ const Editor: React.FC<EditorProps> = ({ events, ...props }) => {
                 key={index}
                 event={event}
                 editorProps={editorProps}
+                timeLineStart={event.timeLineStart}
+                timeLineEnd={event.timeLineEnd}
               />
             );
           default:
