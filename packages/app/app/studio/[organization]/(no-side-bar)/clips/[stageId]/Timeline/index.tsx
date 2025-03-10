@@ -6,16 +6,40 @@ import { useMarkersContext } from '../sidebar/markers/markersContext';
 import { useTimelineContext } from './TimelineContext';
 import TimelineMarker from '../sidebar/markers/TimelineMarker';
 import useTimeline from './useTimeline';
-import TimelineEvent from './TimelineEvent';
-import { useEventContext } from './EventConntext';
+
 import { useClipPageContext } from '../ClipPageContext';
+
 const Timeline = () => {
-
-  const { timelineRef, timelineWidth, handleTimelineClick, isPreviewMode } =
-    useTimelineContext();
-  const { events } = useEventContext();
-
+  const {
+    timelineRef,
+    handleTimelineClick,
+    isPreviewMode,
+    setPlayHeadEvent,
+    setInitialEventStart,
+    timelineWidth,
+    playHeadEvent,
+  } = useTimelineContext();
+  const { calculateTimeFromPosition } = useTimeline(timelineRef);
+  const { videoRef, metadata } = useClipPageContext();
   const { markers } = useMarkersContext();
+
+  const handlePlayheadMouseEnter = (e: React.MouseEvent) => {
+    if (playHeadEvent === 'drag') {
+      return;
+    }
+    e.stopPropagation();
+    setPlayHeadEvent('hover');
+    setInitialEventStart(
+      calculateTimeFromPosition(e.clientX, metadata.duration)
+    );
+  };
+
+  const handlePlayheadMouseLeave = () => {
+    if (playHeadEvent === 'drag') {
+      return;
+    }
+    setPlayHeadEvent(null);
+  };
 
   return (
     <div
@@ -26,27 +50,22 @@ const Timeline = () => {
     >
       {timelineWidth ? (
         <div
-          className="h-[100px] relative"
+          className="h-[150px] relative"
           style={{ width: `${timelineWidth}px` }}
         >
+          <Playhead />
+          <div
+            onClick={handleTimelineClick}
+            onMouseEnter={handlePlayheadMouseEnter}
+            onMouseLeave={handlePlayheadMouseLeave}
+            className="absolute top-0 left-0 w-full h-[20px] z-[20]"
+          >
+            <TimelineDrawing />
+          </div>
           {markers &&
             markers.map((marker) => {
               return <TimelineMarker key={marker._id} marker={marker} />;
             })}
-          <Playhead />
-          <div
-            onClick={handleTimelineClick}
-            className="absolute top-0 left-0 w-full h-full z-[20]"
-          >
-            <TimelineDrawing />
-          </div>
-          {events.map((event) => (
-            <TimelineEvent
-              key={event.id}
-              event={event}
-              timelineWidth={timelineWidth}
-            />
-          ))}
         </div>
       ) : (
         <div className="h-[100px] relative">
@@ -61,11 +80,11 @@ export default Timeline;
 
 const TimelineDrawing = () => {
   const {
-    timelineWidth,
     pixelsPerSecond: scale,
+    timelineRef,
   } = useTimelineContext();
   const { metadata } = useClipPageContext();
-  const { calculatePositionOnTimeline } = useTimeline();
+  const { calculatePositionOnTimeline } = useTimeline(timelineRef);
   // Function to calculate intervals based on scale
   const calculateIntervals = (scale: number) => {
     if (scale >= 10) return { major: 10, minor: 3 };
@@ -86,30 +105,19 @@ const TimelineDrawing = () => {
     const position = calculatePositionOnTimeline(
       i,
       metadata.duration,
-      timelineWidth
     );
 
     if (i % majorInterval === 0) {
       markers.push(
         <div
           key={i}
-          className="absolute h-full top-6"
+          className="absolute h-full top-0"
           style={{ left: `${position}px` }}
         >
-          <div className="absolute bottom-0 left-0 transform -translate-x-1/2 text-xs text-gray-400">
+          <div className="absolute top-0 left-0 transform -translate-x-1/2 text-xs text-gray-400">
             {formatTime(i)}
           </div>
-          <div className="absolute h-[calc(100%-17px)] border-l border-gray-600"></div>
-        </div>
-      );
-    } else {
-      markers.push(
-        <div
-          key={i}
-          className="absolute h-full"
-          style={{ left: `${position}px` }}
-        >
-          <div className="absolute top-6 h-1/2 border-l border-gray-600"></div>
+          <div className="absolute h-[calc(10px)] top-4 border-l-2 border-gray-400"></div>
         </div>
       );
     }

@@ -23,6 +23,10 @@ type TimelineContextType = {
   setPreviewTimeBounds: React.Dispatch<
     React.SetStateAction<{ startTime: number; endTime: number }>
   >;
+  playHeadEvent: 'drag' | 'hover' | null;
+  setPlayHeadEvent: React.Dispatch<React.SetStateAction<'drag' | 'hover' | null>>;
+  initialEventStart: number;
+  setInitialEventStart: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TimelineContext = createContext<TimelineContextType | null>(null);
@@ -40,12 +44,14 @@ export const TimelineProvider = ({
     videoRef,
     fps
   );
-  const { calculateTimelineScale } = useTimeline();
   const timelineRef = useRef<HTMLDivElement>(null);
+  const { calculateTimelineScale, calculateTimeFromPosition } = useTimeline(timelineRef);
   const [pixelsPerSecond, setPixelsPerSecond] = useState(10);
   const [timelineWidth, setTimelineWidth] = useState(0);
   const [playheadPosition, setPlayheadPosition] = useState<number>(0);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [playHeadEvent, setPlayHeadEvent] = useState<'drag' | 'hover' | null>(null);
+  const [initialEventStart, setInitialEventStart] = useState(0);
   const [previewTimeBounds, setPreviewTimeBounds] = useState<{
     startTime: number;
     endTime: number;
@@ -62,19 +68,10 @@ export const TimelineProvider = ({
   }, [duration]);
 
   const handleTimelineClick = (event: React.MouseEvent) => {
-    if (videoRef.current) {
-      const timelineElement = event.currentTarget as HTMLElement;
-      const timelineRect = timelineElement.getBoundingClientRect();
-      const relativeClickX = event.clientX - timelineRect.left;
-      const clickTime = (relativeClickX / timelineWidth) * duration;
-      // if (!isTimeInEventRange(clickTime)) {
-      //   return;
-      // }
-      handleSetCurrentTime(clickTime);
-      setPlayheadPosition(clickTime);
-    }
+    const clickTime = calculateTimeFromPosition(event.clientX, duration);
+    handleSetCurrentTime(clickTime);
+    setPlayheadPosition(clickTime);
   };
-
 
   return (
     <TimelineContext.Provider
@@ -91,6 +88,10 @@ export const TimelineProvider = ({
         setIsPreviewMode,
         previewTimeBounds,
         setPreviewTimeBounds,
+        playHeadEvent,
+        setPlayHeadEvent,
+        initialEventStart,
+        setInitialEventStart,
       }}
     >
       {children}

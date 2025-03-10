@@ -20,7 +20,7 @@ const ZoomControls = () => {
   } = useTimelineContext();
   const { duration } = metadata;
 
-  const { calculateTimelineScale } = useTimeline();
+  const { calculateTimelineScale } = useTimeline(timelineRef);
   const [isFit, setIsFit] = useState(false);
 
   const isMaxZoom = pixelsPerSecond >= 10;

@@ -7,10 +7,10 @@ import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
   const { metadata, videoRef } = useClipPageContext();
-  const { isPreviewMode, timelineWidth } = useTimelineContext();
+  const { isPreviewMode, timelineWidth, timelineRef } = useTimelineContext();
   const { handleSetCurrentTime } = useRemotionPlayer(videoRef, metadata.fps);
   const { selectedMarkerId, setSelectedMarkerId } = useMarkersContext();
-  const { calculatePositionOnTimeline } = useTimeline();
+  const { calculatePositionOnTimeline } = useTimeline(timelineRef);
 
   if (
     marker.startClipTime > metadata.duration ||
@@ -30,14 +30,13 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
 
   const position = calculatePositionOnTimeline(
     marker.startClipTime,
-    metadata.duration,
-    timelineWidth
+    metadata.duration
   );
 
   return (
     <div
       key={marker._id}
-      className={`absolute h-[20px] border bg-opacity-20 rounded z-[21]`}
+      className={`absolute top-8 h-[20px] border bg-opacity-20 rounded z-[21]`}
       onClick={() => handleMarkerClick(marker)}
       style={{
         backgroundColor: isPreviewMode ? 'gray' : marker.color,

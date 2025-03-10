@@ -6,7 +6,6 @@ import { connect } from 'mongoose';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import StorageService from '@utils/s3';
-import { ProcessingStatus } from '@interfaces/session.interface';
 import Session from '@models/session.model';
 import { createAssetFromUrl } from '@utils/livepeer';
 import { transcribeAudio as transcribeAudioSession } from '@workers/session-transcriptions';
@@ -16,6 +15,7 @@ import fetch from 'node-fetch';
 import ClipEditor from '@models/clip.editor.model';
 import { createReadStream } from 'fs';
 import { stat } from 'fs/promises';
+import { ProcessingStatus } from '@interfaces/state.interface';
 
 interface Segment {
   duration: number;

@@ -32,7 +32,6 @@ const MediaEventComponent: React.FC<{
   const isVertical = editorProps.aspectRatio === "9:16";
   const isSquare = editorProps.aspectRatio === "1:1";
   const isHorizontal = editorProps.aspectRatio === "16:9";
-  console.log(editorProps.aspectRatio);
   return (
     <Sequence from={startFrame} durationInFrames={endFrame - startFrame}>
       <AbsoluteFill>
