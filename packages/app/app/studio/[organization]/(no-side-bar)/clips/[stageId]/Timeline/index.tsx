@@ -8,6 +8,9 @@ import TimelineMarker from '../sidebar/markers/TimelineMarker';
 import useTimeline from './useTimeline';
 
 import { useClipPageContext } from '../ClipPageContext';
+import { useEventContext } from './EventConntext';
+import TimelineEvent from './TimelineEvent';
+import Waveform from './Waveform';
 
 const Timeline = () => {
   const {
@@ -20,6 +23,7 @@ const Timeline = () => {
     playHeadEvent,
   } = useTimelineContext();
   const { calculateTimeFromPosition } = useTimeline(timelineRef);
+  const { events } = useEventContext();
   const { videoRef, metadata } = useClipPageContext();
   const { markers } = useMarkersContext();
 
@@ -66,6 +70,13 @@ const Timeline = () => {
             markers.map((marker) => {
               return <TimelineMarker key={marker._id} marker={marker} />;
             })}
+          <div className="absolute top-[60px] left-0 w-full h-[50px] z-[20]">
+            {events &&
+              events.map((event) => {
+                return <TimelineEvent key={event.id} event={event} />;
+              })}
+            <Waveform />
+          </div>
         </div>
       ) : (
         <div className="h-[100px] relative">
@@ -79,10 +90,7 @@ const Timeline = () => {
 export default Timeline;
 
 const TimelineDrawing = () => {
-  const {
-    pixelsPerSecond: scale,
-    timelineRef,
-  } = useTimelineContext();
+  const { pixelsPerSecond: scale, timelineRef } = useTimelineContext();
   const { metadata } = useClipPageContext();
   const { calculatePositionOnTimeline } = useTimeline(timelineRef);
   // Function to calculate intervals based on scale
@@ -102,10 +110,7 @@ const TimelineDrawing = () => {
 
   const markers = [];
   for (let i = 0; i <= metadata.duration; i += minorInterval) {
-    const position = calculatePositionOnTimeline(
-      i,
-      metadata.duration,
-    );
+    const position = calculatePositionOnTimeline(i, metadata.duration);
 
     if (i % majorInterval === 0) {
       markers.push(

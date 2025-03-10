@@ -13,14 +13,8 @@ const getEventColor = (type: EditorEvent['type'], isPreviewMode: boolean) => {
   }
 };
 
-const TimelineEvent = ({
-  timelineWidth,
-  event,
-}: {
-  timelineWidth: number;
-  event: EditorEvent;
-}): React.ReactNode => {
-  const { isPreviewMode } = useTimelineContext();
+const TimelineEvent = ({ event }: { event: EditorEvent }): React.ReactNode => {
+  const { isPreviewMode, timelineRef } = useTimelineContext();
   const {
     maxDuration,
     selectedEvent,
@@ -31,19 +25,14 @@ const TimelineEvent = ({
     setInitialEventStart,
   } = useEventContext();
 
-  const { calculatePositionOnTimeline } = useTimeline();
-  const height = 40;
-  const left = calculatePositionOnTimeline(
-    event.start,
-    maxDuration,
-    timelineWidth
-  );
+  const { calculatePositionOnTimeline } = useTimeline(timelineRef);
+  const height = 50;
+  const left = calculatePositionOnTimeline(event.start, maxDuration);
   const width = calculatePositionOnTimeline(
     event.end - event.start,
-    maxDuration,
-    timelineWidth
+    maxDuration
   );
-  
+
   const backgroundColor = getEventColor(event.type, isPreviewMode);
 
   const handleMoveStart = (
@@ -91,7 +80,7 @@ const TimelineEvent = ({
       key={event.id}
       className="flex relative z-50"
       style={{
-        height: `${height + 18}px`,
+        height: `${height + 20}px`,
       }}
     >
       <div
@@ -100,7 +89,9 @@ const TimelineEvent = ({
           width: `${width}px`,
           height: `${height}px`,
           left: `${left}px`,
-          background: isPreviewMode ? 'rgba(255, 191, 0, 0.35)' : 'rgba(200, 75, 80, 0.4)',
+          background: isPreviewMode
+            ? 'rgba(255, 191, 0, 0.35)'
+            : 'rgba(200, 75, 80, 0.4)',
         }}
         onMouseDown={(e) => handleMoveStart(event.id, event.start, e)}
         onClick={() => handleEventSelect(event)}
@@ -111,9 +102,7 @@ const TimelineEvent = ({
             style={{
               background: backgroundColor,
             }}
-            onMouseDown={(e) =>
-              handleTrimStart(event.id, event.start, e)
-            }
+            onMouseDown={(e) => handleTrimStart(event.id, event.start, e)}
           />
         )}
         {event.type === 'media' && (

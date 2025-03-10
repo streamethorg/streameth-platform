@@ -294,21 +294,50 @@ export const ParseSessionMediaAction = async ({
     throw new Error('Video URL not found');
   }
 
-  // const metadata = await parseMedia({
-  //   src: videoUrl,
-  //   fields: {
-  //     durationInSeconds: true,
-  //     dimensions: true,
-  //     fps: true,
-  //   },
-  // });
+  const metadata = await parseMedia({
+    src: videoUrl,
+    fields: {
+      durationInSeconds: true,
+      dimensions: true,
+      fps: true,
+    },
+    selectM3uStream: ({streams}) => {
+      for (const stream of streams) {
+        console.log(stream.resolution); // {width: 1920, height: 1080}
+        console.log(stream.bandwidth); // 4400000
+        console.log(stream.src); // "https://test-streams.mux.dev/x36xhzz/193039199_mp4_h264_aac_hd_7.m3u8"
+        console.log(stream.averageBandwidth); // null
+        console.log(stream.codecs); // ["avc1.640028", "mp4a.40.2"]
+        console.log(stream.associatedPlaylists); // See below
+      }
+   
+      return streams[0].id;
+    },
+  });
 
-  // console.log('metadata', metadata);
+  // extract one frame for each 5 segments
+  const frames = await extractFrames({
+    src: videoUrl,
+    framesPerSecond: metadata.fps / 5,
+  });
+
   return {
-    fps:  30,
-    duration: 2000,
-    width: 1080,
-    height: 1920,
+    fps: metadata.fps || 30,
+    duration: metadata.durationInSeconds || 0,
+    width: metadata.dimensions?.width || 0,
+    height: metadata.dimensions?.height || 0,
     videoUrl,
   };
+};
+
+const extractFrames = async ({
+  src,
+  framesPerSecond,
+}: {
+  src: string;
+  framesPerSecond: number;
+}) => {
+
+
+  
 };

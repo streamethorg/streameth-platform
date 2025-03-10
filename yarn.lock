@@ -6310,6 +6310,11 @@
   resolved "https://registry.yarnpkg.com/@remotion/media-parser/-/media-parser-4.0.251.tgz#a3f2c7b951e7fd533b75fef9b2f1752e228e4060"
   integrity sha512-bQz0eKNMHGzvPwwYu6KHGpzk8legpsTobfXbEz0X5oD4VKFbahhHLQ+TOdzpAxI19St/hGJ9PHU4MTYliYtNkw==
 
+"@remotion/media-parser@4.0.273":
+  version "4.0.273"
+  resolved "https://registry.yarnpkg.com/@remotion/media-parser/-/media-parser-4.0.273.tgz#be04b312329061b6c4748d4e1a1321a31f758f66"
+  integrity sha512-cxlkoKFDkSv+mO+BTEA48MS6/W5JHINk2WqfrcQ+nKe47pV3kYGiZf1i51VjggCUoT8HzHajqPWcswNXr7w7sQ==
+
 "@remotion/media-utils@4.0.251":
   version "4.0.251"
   resolved "https://registry.yarnpkg.com/@remotion/media-utils/-/media-utils-4.0.251.tgz#4e8bebf2138b14cdc72f4263b38b691ed763b70a"
