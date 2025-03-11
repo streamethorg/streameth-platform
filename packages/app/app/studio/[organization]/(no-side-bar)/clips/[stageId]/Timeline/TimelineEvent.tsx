@@ -3,7 +3,7 @@ import { useTimelineContext } from './TimelineContext';
 import { EditorEvent } from 'streameth-reel-creator/types/constants';
 import useTimeline from './useTimeline';
 import { useEventContext } from './EventConntext';
-
+import { UnfoldHorizontal } from 'lucide-react';
 const getEventColor = (type: EditorEvent['type'], isPreviewMode: boolean) => {
   switch (type) {
     case 'media':
@@ -58,6 +58,7 @@ const TimelineEvent = ({ event }: { event: EditorEvent }): React.ReactNode => {
     setInitialMousePos(event.clientX);
     setInitialEventStart(start);
     setTimelineAction('trimStart');
+    
   };
 
   const handleTrimEnd = (
@@ -85,35 +86,38 @@ const TimelineEvent = ({ event }: { event: EditorEvent }): React.ReactNode => {
       }}
     >
       <div
-        className={`rounded-xl absolute cursor-move ${selectedEvent?.id === event.id ? 'ring-2 ring-white' : ''}`}
+        className={`rounded-xl absolute cursor-move ${selectedEvent?.id === event.id ? `border-2 border-[${backgroundColor}]` : ''}`}
         style={{
           width: `${width}px`,
           height: `${height}px`,
           left: `${left}px`,
-          background: isPreviewMode
-            ? 'rgba(255, 191, 0, 0.35)'
-            : 'rgba(200, 75, 80, 0.4)',
+          borderWidth: '2px',
+          borderColor: backgroundColor,
         }}
         onMouseDown={(e) => handleMoveStart(event.id, event.start, e)}
         onClick={() => handleEventSelect(event)}
       >
         {event.type === 'media' && (
           <div
-            className="absolute left-0 top-0 w-1 h-full cursor-ew-resize rounded-l-xl"
-            style={{
-              background: backgroundColor,
-            }}
+            className={`absolute left-0 top-0 h-full cursor-ew-resize rounded-l-md flex items-center justify-center`}
             onMouseDown={(e) => handleTrimStart(event.id, event.start, e)}
-          />
+            style={{
+              backgroundColor: 'rgba(200, 75, 80, 0.8)',
+            }}
+          >
+            <UnfoldHorizontal size={15} className="text-white" />
+          </div>
         )}
         {event.type === 'media' && (
           <div
-            className="absolute right-0 top-0 w-1 h-full cursor-ew-resize rounded-r-xl"
+            className="absolute right-0 top-0 h-full cursor-ew-resize rounded-r-md flex items-center justify-center"
             style={{
-              background: backgroundColor,
+              backgroundColor: 'rgba(200, 75, 80, 0.8)',
             }}
             onMouseDown={(e) => handleTrimEnd(event.id, event.end, e)}
-          />
+          >
+            <UnfoldHorizontal size={15} className="text-white" />
+          </div>
         )}
       </div>
     </div>

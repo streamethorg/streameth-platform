@@ -7,10 +7,9 @@ import { Button } from '@/components/ui/button';
 import KeyboardShortcuts from './KeyboardShortcuts';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 import ZoomControls from './ZoomControls';
-import { useTimelineContext } from '../Timeline/TimelineContext';
-import { useEventContext } from '../Timeline/EventConntext';
 import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
-import SplitVideo from './SplitVideo';
+import SplitEvent from './SplitEvent';
+import DeleteEvent from './DeleteEvent';
 
 const Controls = () => {
   const { videoRef, isCreatingClip, metadata } = useClipPageContext();
@@ -93,8 +92,9 @@ const Controls = () => {
       </div>
       <div className="space-x-2 flex items-center self-end">
         <ZoomControls />
+        <SplitEvent />
+        <DeleteEvent />
       </div>
-      <SplitVideo />
     </div>
   );
 };

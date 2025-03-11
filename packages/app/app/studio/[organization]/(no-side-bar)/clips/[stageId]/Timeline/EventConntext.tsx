@@ -10,6 +10,7 @@ import {
 import { useTimelineContext } from './TimelineContext';
 import { EditorEvent } from 'streameth-reel-creator/types/constants';
 import { useClipPageContext } from '../ClipPageContext';
+import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
 
 interface EventContextType {
   timelineAction: string | null;
@@ -47,6 +48,10 @@ export const TrimmControlsProvider = ({
   const { timelineRef, pixelsPerSecond } = useTimelineContext();
 
   const { videoRef, metadata } = useClipPageContext();
+  const { handleSetCurrentTime } = useRemotionPlayer(
+    videoRef,
+    metadata.fps
+  );
   const { duration } = metadata;
 
   const [timelineAction, setTimelineAction] = useState<string | null>(null);
@@ -141,7 +146,7 @@ export const TrimmControlsProvider = ({
           const duration = activeEvent.end - activeEvent.start;
           const newStartMove = Math.max(0, initialEventStart + timeDelta);
           const newEndMove = newStartMove + duration;
-
+          if (newStartMove < 0 || newEndMove > maxDuration) return;
           updateEvents(
             events.map((event) =>
               event.id === movingEvent
@@ -153,6 +158,7 @@ export const TrimmControlsProvider = ({
                 : event
             )
           );
+          handleSetCurrentTime(newStartMove);
           break;
 
         case 'trimStart':
@@ -170,6 +176,7 @@ export const TrimmControlsProvider = ({
                 : event
             )
           );
+          handleSetCurrentTime(newStart);
           break;
 
         case 'trimEnd':
@@ -186,6 +193,7 @@ export const TrimmControlsProvider = ({
                 : event
             )
           );
+          handleSetCurrentTime(newEnd);
           break;
       }
     },

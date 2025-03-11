@@ -117,17 +117,18 @@ const ZoomControls = () => {
   }, [keyboardShortcuts]);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center">
       <HoverCard>
         <HoverCardTrigger asChild>
-          <button
+          <Button
+            size="icon"
             onClick={handleZoomOut}
-            className="p-1 rounded hover:bg-gray-200 disabled:opacity-50"
+            variant="ghost"
             aria-label="Zoom out -"
             disabled={isMinZoom || isFit}
           >
-            <ZoomOutIcon size={22} />
-          </button>
+            <ZoomOutIcon size={22} className="text-primary" />
+          </Button>
         </HoverCardTrigger>
         <HoverCardContent className="text-xs w-fit px-2 py-1 rounded-lg">
           <p>
@@ -145,7 +146,6 @@ const ZoomControls = () => {
       <HoverCard>
         <HoverCardTrigger asChild>
           <Button
-            className="disabled:pointer-events-auto"
             onClick={handleFit}
             disabled={isFit}
             variant={'ghost'}
@@ -169,14 +169,15 @@ const ZoomControls = () => {
 
       <HoverCard>
         <HoverCardTrigger asChild>
-          <button
+          <Button
             onClick={handleZoomIn}
-            className="p-1 rounded hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            size="icon"
+            variant="ghost"
             aria-label="Zoom in +"
             disabled={isMaxZoom}
           >
-            <ZoomInIcon size={22} />
-          </button>
+            <ZoomInIcon size={22} className="text-primary" />
+          </Button>
         </HoverCardTrigger>
         <HoverCardContent className="text-xs w-fit px-2 py-1 rounded-lg">
           <p>
