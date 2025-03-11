@@ -22,18 +22,22 @@ export const getVideoUrlAction = async (
   session: IExtendedSession
 ): Promise<string | null> => {
   try {
-    if (session.playback?.videoUrl) {
-      return session.playback.videoUrl;
-    }
     if (session.assetId) {
       const asset = await fetchAsset({ assetId: session.assetId });
       if (asset?.playbackUrl) {
         return asset.playbackUrl;
       }
-    } else {
+    }
+
+    if (session.playback?.videoUrl) {
+      return session.playback.videoUrl;
+    }
+
+    if (session.playbackId) {
       return `https://vod-cdn.lp-playback.studio/raw/jxf4iblf6wlsyor6526t4tcmtmqa/catalyst-vod-com/hls/${session.playbackId}/index.m3u8`;
     }
 
+    console.log('no asset or playbackId');
     return null;
   } catch (e) {
     console.error('Error fetching asset or building URL');
