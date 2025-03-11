@@ -1,34 +1,36 @@
-const useTimeline = (timelineRef: React.RefObject<HTMLDivElement>) => {
-  const timelineWidth = timelineRef.current?.clientWidth;
-
+const useTimeline = (
+  timelineRef: React.RefObject<HTMLDivElement>,
+) => {
   const getRelativePosition = (position: number) => {
     const timelineRect = timelineRef.current?.getBoundingClientRect();
     if (!timelineRect) return 0;
     return position - timelineRect.left;
   };
 
-  const calculatePositionOnTimeline = (time: number, maxTime: number) => {
+  const calculatePositionOnTimeline = (time: number, maxTime: number, timelineWidth: number) => {
     if (!timelineWidth) return 0;
     return (time / maxTime) * timelineWidth;
   };
 
-  const calculateTimeFromPosition = (position: number, maxTime: number) => {
+  const calculateTimeFromPosition = (position: number, maxTime: number, timelineWidth: number) => {
     if (!timelineWidth) return 0;
-    const relativePosition = getRelativePosition(position);
-    return (relativePosition / timelineWidth) * maxTime;
+    // const relativePosition = getRelativePosition(position);
+    return (position / timelineWidth) * maxTime;
   };
 
   const calculateTimeFromPositionDelta = (
     toPosition: number,
     maxTime: number,
-    initialEventStart: number
+    initialEventStart: number,
+    timelineWidth: number
   ) => {
     const fromPosition = calculatePositionOnTimeline(
       initialEventStart,
-      maxTime
+      maxTime,
+      timelineWidth
     );
     const mouseDelta = toPosition - fromPosition;
-    const timeDelta = calculateTimeFromPosition(mouseDelta, maxTime);
+    const timeDelta = calculateTimeFromPosition(mouseDelta, maxTime, timelineWidth);
     return Math.max(0, Math.min(maxTime, initialEventStart + timeDelta));
   };
 

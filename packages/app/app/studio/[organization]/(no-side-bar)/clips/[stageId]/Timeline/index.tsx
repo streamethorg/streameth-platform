@@ -33,8 +33,9 @@ const Timeline = () => {
     }
     e.stopPropagation();
     setPlayHeadEvent('hover');
+    const pos = e.currentTarget.getBoundingClientRect().left;
     setInitialEventStart(
-      calculateTimeFromPosition(e.clientX, metadata.duration)
+      calculateTimeFromPosition(e.clientX - pos, metadata.duration, timelineWidth)
     );
   };
 
@@ -71,10 +72,12 @@ const Timeline = () => {
               return <TimelineMarker key={marker._id} marker={marker} />;
             })}
           <div className="absolute top-[60px] left-0 w-full h-[50px] z-[20]">
-            {events &&
-              events.map((event) => {
-                return <TimelineEvent key={event.id} event={event} />;
-              })}
+            <div className="flex items-center">
+              {events &&
+                events.map((event) => {
+                  return <TimelineEvent key={event.id} event={event} />;
+                })}
+            </div>
             <Waveform />
           </div>
         </div>
@@ -90,7 +93,11 @@ const Timeline = () => {
 export default Timeline;
 
 const TimelineDrawing = () => {
-  const { pixelsPerSecond: scale, timelineRef } = useTimelineContext();
+  const {
+    pixelsPerSecond: scale,
+    timelineRef,
+    timelineWidth,
+  } = useTimelineContext();
   const { metadata } = useClipPageContext();
   const { calculatePositionOnTimeline } = useTimeline(timelineRef);
   // Function to calculate intervals based on scale
@@ -110,7 +117,7 @@ const TimelineDrawing = () => {
 
   const markers = [];
   for (let i = 0; i <= metadata.duration; i += minorInterval) {
-    const position = calculatePositionOnTimeline(i, metadata.duration);
+    const position = calculatePositionOnTimeline(i, metadata.duration, timelineWidth);
 
     if (i % majorInterval === 0) {
       markers.push(

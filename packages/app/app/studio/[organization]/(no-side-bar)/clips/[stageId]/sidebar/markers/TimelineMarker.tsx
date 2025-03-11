@@ -30,7 +30,8 @@ const TimelineMarker = ({ marker }: { marker: IExtendedMarker }) => {
 
   const position = calculatePositionOnTimeline(
     marker.startClipTime,
-    metadata.duration
+    metadata.duration,
+    timelineWidth
   );
 
   return (

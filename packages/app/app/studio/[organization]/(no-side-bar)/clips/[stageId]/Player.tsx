@@ -52,12 +52,11 @@ const PlayerComponent: React.FC = () => {
           width: '100%',
           height: '100%',
         }}
-        durationInFrames={metadata.duration * fps}
+        durationInFrames={Math.round(metadata.duration * fps)}
         fps={fps}
         compositionHeight={getCompositionDimensions().height}
         compositionWidth={getCompositionDimensions().width}
-        spaceKeyToPlayOrPause
-        controls={true}
+        controls={false}
       />
     </div>
   );

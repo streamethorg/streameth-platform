@@ -10,6 +10,7 @@ import ZoomControls from './ZoomControls';
 import { useTimelineContext } from '../Timeline/TimelineContext';
 import { useEventContext } from '../Timeline/EventConntext';
 import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
+import SplitVideo from './SplitVideo';
 
 const Controls = () => {
   const { videoRef, isCreatingClip, metadata } = useClipPageContext();
@@ -21,14 +22,10 @@ const Controls = () => {
     setSelectedMarkerId,
   } = useMarkersContext();
 
-  const {
-    isPreviewMode,
-    setIsPreviewMode,
-    setPreviewTimeBounds,
-  } = useTimelineContext();
-  const { currentTime } = useRemotionPlayer(videoRef, metadata.fps);
-  const { getEventsBounds } = useEventContext();
-  const { minStart, maxEnd } = getEventsBounds();
+  const { currentTime, isPlaying, handlePlay, handlePause } = useRemotionPlayer(
+    videoRef,
+    metadata.fps
+  );
   const [playbackRate, setPlaybackRate] = useState(1);
   const currentPlaybackRateIndexRef = useRef(1);
 
@@ -38,17 +35,6 @@ const Controls = () => {
   const isDisabled =
     isImportingMarkers || isCreatingClip || isAddingOrEditingMarker;
 
-  const handlePreviewMode = () => {
-    if (isPreviewMode) {
-      setIsPreviewMode(false);
-      return;
-    }
-    setPreviewTimeBounds({
-      startTime: minStart,
-      endTime: maxEnd,
-    });
-    setIsPreviewMode(true);
-  };
   return (
     <div className="bg-white flex flex-row w-full border-b items-center border-t p-2 gap-4">
       <Button
@@ -90,13 +76,13 @@ const Controls = () => {
             ))}
           </select>
         </label>
-        {videoRef.current?.isPlaying() ? (
-          <button onClick={() => videoRef.current?.play()}>
-            <PlayIcon size={22} className="text-primary" />
+        {isPlaying ? (
+          <button onClick={handlePause}>
+            <PauseIcon size={22} className="text-primary" />
           </button>
         ) : (
-          <button onClick={() => videoRef.current?.pause()}>
-            <PauseIcon size={22} className="text-primary" />
+          <button onClick={handlePlay}>
+            <PlayIcon size={22} className="text-primary" />
           </button>
         )}
 
@@ -107,25 +93,8 @@ const Controls = () => {
       </div>
       <div className="space-x-2 flex items-center self-end">
         <ZoomControls />
-
-        <div className="hidden xl:flex space-x-2">
-          <Button variant={'ghost'} onClick={handlePreviewMode} type="button">
-            <EyeIcon
-              size={22}
-              className={`mr-2 ${
-                isPreviewMode ? 'text-primary animate-pulse' : 'text-primary'
-              }`}
-            />
-            <p
-              className={` ${
-                isPreviewMode ? 'text-primary animate-pulse' : 'text-primary'
-              }`}
-            >
-              Preview
-            </p>
-          </Button>
-        </div>
       </div>
+      <SplitVideo />
     </div>
   );
 };

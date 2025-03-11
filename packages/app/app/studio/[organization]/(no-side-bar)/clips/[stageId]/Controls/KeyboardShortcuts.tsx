@@ -11,9 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useMarkersContext } from '../sidebar/markers/markersContext';
 import { LuArrowLeft, LuArrowRight, LuArrowBigUp } from 'react-icons/lu';
-import { useTimelineContext } from '../Timeline/TimelineContext';
-import usePlayer from '@/lib/hooks/usePlayer';
 import { useRemotionPlayer } from '@/lib/hooks/useRemotionPlayer';
+import { useEventContext } from '../Timeline/EventConntext';
 
 const KeyboardShortcuts = ({
   setPlaybackRate,
@@ -32,37 +31,52 @@ const KeyboardShortcuts = ({
 
   const { metadata } = useClipPageContext();
 
-  const { currentTime, handleSetCurrentTime } = useRemotionPlayer(
+  const { currentTime, handleSetCurrentTime, isPlaying, handlePlay, handlePause } = useRemotionPlayer(
     videoRef,
     metadata.fps
   );
 
+  const { events, findEventByTime, updateEvents } = useEventContext();
   const handleKeyDown = (event: KeyboardEvent) => {
     if (isAddingOrEditingMarker || isCreatingClip || isInputFocused) return;
     if (!videoRef.current) return;
-
+    const eventData = findEventByTime(currentTime);
     switch (event.key) {
       // Playback controls
       case ' ':
       case 'k':
+        console.log('isPlaying', isPlaying);
         if (videoRef.current.isPlaying()) {
-          videoRef.current.pause();
+          handlePause();
         } else {
-          videoRef.current.play();
+          handlePlay();
         }
         break;
 
-      // // Trim controls
-      // case 'i':
-      //   if (endTime > currentTime) {
-      //     setStartTime(currentTime);
-      //   }
-      //   break;
-      // case 'o':
-      //   if (startTime < currentTime) {
-      //     setEndTime(currentTime);
-      //   }
-      //   break;
+      // Trim controls
+      case 'i':
+        // find the event that contains the currentTime
+        
+        if (eventData && (currentTime > eventData.start)) {
+          updateEvents([
+            {
+              ...eventData,
+              start: currentTime,
+            },
+          ]);
+        }
+        break;
+      case 'o':
+        // find the event that contains the currentTime
+        if (eventData && (currentTime < eventData.end)) {
+          updateEvents([
+            {
+              ...eventData,
+              end: currentTime,
+            },
+          ]);
+        }
+        break;
 
       // Seeking controls
       case 'ArrowLeft':

@@ -11,6 +11,7 @@ const Playhead = () => {
     playHeadEvent,
     initialEventStart,
     timelineRef,
+    timelineWidth,
     setPlayHeadEvent,
     setInitialEventStart,
   } = useTimelineContext();
@@ -34,19 +35,25 @@ const Playhead = () => {
 
   useEffect(() => {
     if (!isTimeInEventRange(currentTime)) {
-      handleSetCurrentTime(getEventsBounds().minStart + 0.1);
-      setPlayheadPosition(getEventsBounds().minStart + 0.1);
+      handleSetCurrentTime(getEventsBounds(currentTime).minStart + 0.1);
+      setPlayheadPosition(getEventsBounds(currentTime).minStart + 0.1);
     }
     setPlayheadPosition(currentTime);
   }, [currentTime]);
 
   const handlePlayheadMouseMove = useCallback(
     (e: MouseEvent) => {
+      if (!timelineRef.current) return;
+      const timelineRect = timelineRef.current.getBoundingClientRect();
+      const scrollLeft = timelineRef.current.scrollLeft || 0;
+      const pos = timelineRect.left;
+
       if (playHeadEvent === 'drag') {
         const newTime = calculateTimeFromPositionDelta(
-          e.clientX,
+          e.clientX - pos + scrollLeft,
           metadata.duration,
-          initialEventStart
+          initialEventStart,
+          timelineWidth
         );
         if (!isTimeInEventRange(newTime)) {
           return;
@@ -54,18 +61,32 @@ const Playhead = () => {
         handleSetPlayheadPosition(newTime);
       }
       if (playHeadEvent === 'hover') {
-        const newTime = calculateTimeFromPosition(e.clientX, metadata.duration);
+        const newTime = calculateTimeFromPosition(
+          e.clientX - pos + scrollLeft,
+          metadata.duration,
+          timelineWidth
+        );
         setHoverPosition(newTime);
       }
     },
-    [playHeadEvent, initialEventStart, metadata.duration]
+    [playHeadEvent, initialEventStart, metadata.duration, timelineWidth]
   );
 
   const handlePlayheadMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
     setPlayHeadEvent('drag');
+    if (!timelineRef.current) return;
+
+    const timelineRect = timelineRef.current.getBoundingClientRect();
+    const scrollLeft = timelineRef.current.scrollLeft || 0;
+    const pos = timelineRect.left;
+
     setInitialEventStart(
-      calculateTimeFromPosition(e.clientX, metadata.duration)
+      calculateTimeFromPosition(
+        e.clientX - pos + scrollLeft,
+        metadata.duration,
+        timelineWidth
+      )
     );
   };
 
@@ -96,14 +117,15 @@ const Playhead = () => {
         style={{
           left: `${calculatePositionOnTimeline(
             playheadPosition,
-            metadata.duration
+            metadata.duration,
+            timelineWidth
           )}px`,
         }}
         onMouseDown={handlePlayheadMouseDown}
         onMouseUp={handlePlayheadMouseUp}
       >
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gray-600 rounded-b-xl" />
-      </div> 
+      </div>
       {playHeadEvent === 'hover' && hoverPosition !== null && (
         <div
           id="playhead-hover-handle"
@@ -111,7 +133,8 @@ const Playhead = () => {
           style={{
             left: `${calculatePositionOnTimeline(
               hoverPosition,
-              metadata.duration
+              metadata.duration,
+              timelineWidth
             )}px`,
           }}
         >

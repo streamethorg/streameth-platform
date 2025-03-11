@@ -27,9 +27,12 @@ interface EventContextType {
   setInitialEventStart: (start: number) => void;
   setMaxDuration: (duration: number) => void;
   setSelectedEvent: (event: EditorEvent | null) => void;
-  getEventsBounds: () => { minStart: number; maxEnd: number };
+  getEventsBounds: (currentTime?: number) => { minStart: number; maxEnd: number };
   getEventsDuration: () => number;
   isTimeInEventRange: (time: number) => boolean;
+  splitEvent: (time: number) => void;
+  findEventByTime: (time: number) => EditorEvent | undefined;
+  updateEvents: (events: EditorEvent[]) => void;
 }
 
 export const EventContext = createContext<EventContextType | null>(null);
@@ -41,14 +44,10 @@ export const TrimmControlsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const {
-    timelineRef,
-    pixelsPerSecond,
-    
-  } = useTimelineContext();
+  const { timelineRef, pixelsPerSecond } = useTimelineContext();
 
   const { videoRef, metadata } = useClipPageContext();
-  const { duration, fps } = metadata;
+  const { duration } = metadata;
 
   const [timelineAction, setTimelineAction] = useState<string | null>(null);
   const [movingEvent, setMovingEvent] = useState<string | null>(null);
@@ -75,6 +74,36 @@ export const TrimmControlsProvider = ({
     }
   }, [duration]);
 
+  const splitEvent = (time: number) => {
+    // find the event that contains the time, then split it into two events
+    const event = events.find(
+      (event) => time >= event.start && time <= event.end
+    );
+    if (!event) return;
+
+    // Create two new events from the split
+    const firstHalf: EditorEvent = {
+      ...event,
+      id: event.id + '-1',
+      end: time,
+      duration: time - event.start,
+    };
+
+    const secondHalf: EditorEvent = {
+      ...event,
+      id: event.id + '-2',
+      start: time,
+      duration: event.end - time,
+    };
+
+    // Replace the original event with the two new split events
+    setEvents((prevEvents) =>
+      prevEvents
+        .filter((e) => e.id !== event.id)
+        .concat([firstHalf, secondHalf])
+        .sort((a, b) => a.start - b.start)
+    );
+  };
 
   const addEvent = (event: EditorEvent) => {
     setEvents((prevEvents) =>
@@ -132,8 +161,7 @@ export const TrimmControlsProvider = ({
           if (newStart > activeEvent.end) return;
           updateEvents(
             events.map((event) =>
-              event.id === movingEvent &&
-              event.end - newStart < maxDuration
+              event.id === movingEvent && event.end - newStart < maxDuration
                 ? {
                     ...event,
                     start: newStart,
@@ -150,8 +178,7 @@ export const TrimmControlsProvider = ({
           if (newEnd < activeEvent.start) return;
           updateEvents(
             events.map((event) =>
-              event.id === movingEvent &&
-              newEnd - event.start < maxDuration
+              event.id === movingEvent && newEnd - event.start < maxDuration
                 ? {
                     ...event,
                     end: newEnd,
@@ -174,7 +201,14 @@ export const TrimmControlsProvider = ({
     };
   }, [handleMouseMove, handleMouseUp]);
 
-  const getEventsBounds = () => {
+  const getEventsBounds = (currentTime?: number) => {
+    // find the event where start > currentTime
+    if (currentTime !== undefined) {
+      const event = events.find((event) => event.start > currentTime);
+      if (event) {
+        return { minStart: event.start, maxEnd: event.end };
+      }
+    }
     // get min start and max end of all events
     const minStart = Math.min(...events.map((event) => event.start));
     const maxEnd = Math.max(...events.map((event) => event.end));
@@ -184,13 +218,24 @@ export const TrimmControlsProvider = ({
   const getEventsDuration = () => {
     const minStart = getEventsBounds().minStart;
     const maxEnd = getEventsBounds().maxEnd;
-    console.log('minStart', minStart, 'maxEnd', maxEnd, 'duration', maxEnd - minStart);
+    console.log(
+      'minStart',
+      minStart,
+      'maxEnd',
+      maxEnd,
+      'duration',
+      maxEnd - minStart
+    );
     const duration = maxEnd - minStart;
-    return Math.max(1, Math.round(duration ));
+    return Math.max(1, Math.round(duration));
   };
 
   const isTimeInEventRange = (time: number) => {
     return events.some((event) => time >= event.start && time <= event.end);
+  };
+
+  const findEventByTime = (time: number) => {
+    return events.find((event) => time >= event.start && time <= event.end);
   };
 
   return (
@@ -214,6 +259,9 @@ export const TrimmControlsProvider = ({
         getEventsBounds,
         getEventsDuration,
         isTimeInEventRange,
+        splitEvent,
+        findEventByTime,
+        updateEvents,
       }}
     >
       {children}

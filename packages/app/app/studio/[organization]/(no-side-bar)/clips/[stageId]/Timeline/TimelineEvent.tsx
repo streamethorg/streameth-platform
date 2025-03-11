@@ -14,7 +14,7 @@ const getEventColor = (type: EditorEvent['type'], isPreviewMode: boolean) => {
 };
 
 const TimelineEvent = ({ event }: { event: EditorEvent }): React.ReactNode => {
-  const { isPreviewMode, timelineRef } = useTimelineContext();
+  const { isPreviewMode, timelineRef, timelineWidth } = useTimelineContext();
   const {
     maxDuration,
     selectedEvent,
@@ -27,10 +27,11 @@ const TimelineEvent = ({ event }: { event: EditorEvent }): React.ReactNode => {
 
   const { calculatePositionOnTimeline } = useTimeline(timelineRef);
   const height = 50;
-  const left = calculatePositionOnTimeline(event.start, maxDuration);
+  const left = calculatePositionOnTimeline(event.start, maxDuration, timelineWidth);
   const width = calculatePositionOnTimeline(
     event.end - event.start,
-    maxDuration
+    maxDuration,
+    timelineWidth
   );
 
   const backgroundColor = getEventColor(event.type, isPreviewMode);

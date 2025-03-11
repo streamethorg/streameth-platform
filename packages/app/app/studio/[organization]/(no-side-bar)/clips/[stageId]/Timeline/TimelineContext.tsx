@@ -24,7 +24,9 @@ type TimelineContextType = {
     React.SetStateAction<{ startTime: number; endTime: number }>
   >;
   playHeadEvent: 'drag' | 'hover' | null;
-  setPlayHeadEvent: React.Dispatch<React.SetStateAction<'drag' | 'hover' | null>>;
+  setPlayHeadEvent: React.Dispatch<
+    React.SetStateAction<'drag' | 'hover' | null>
+  >;
   initialEventStart: number;
   setInitialEventStart: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -45,12 +47,17 @@ export const TimelineProvider = ({
     fps
   );
   const timelineRef = useRef<HTMLDivElement>(null);
-  const { calculateTimelineScale, calculateTimeFromPosition } = useTimeline(timelineRef);
+
   const [pixelsPerSecond, setPixelsPerSecond] = useState(10);
   const [timelineWidth, setTimelineWidth] = useState(0);
+  const { calculateTimelineScale, calculateTimeFromPosition } = useTimeline(
+    timelineRef
+  );
   const [playheadPosition, setPlayheadPosition] = useState<number>(0);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
-  const [playHeadEvent, setPlayHeadEvent] = useState<'drag' | 'hover' | null>(null);
+  const [playHeadEvent, setPlayHeadEvent] = useState<'drag' | 'hover' | null>(
+    null
+  );
   const [initialEventStart, setInitialEventStart] = useState(0);
   const [previewTimeBounds, setPreviewTimeBounds] = useState<{
     startTime: number;
@@ -68,7 +75,12 @@ export const TimelineProvider = ({
   }, [duration]);
 
   const handleTimelineClick = (event: React.MouseEvent) => {
-    const clickTime = calculateTimeFromPosition(event.clientX, duration);
+    const pos = event.currentTarget.getBoundingClientRect().left;
+    const clickTime = calculateTimeFromPosition(
+      event.clientX - pos,
+      duration,
+      timelineWidth
+    );
     handleSetCurrentTime(clickTime);
     setPlayheadPosition(clickTime);
   };

@@ -9,33 +9,14 @@ const WaveformFromHLS = ({
   barColor = '#3b82f6',
 }) => {
   const { metadata } = useClipPageContext();
-  const { timelineRef } = useTimelineContext();
+  const { timelineRef, timelineWidth } = useTimelineContext();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [width, setWidth] = useState(800); // Default width
+  const [width, setWidth] = useState(timelineWidth); // Default width
 
-  // Update width based on timelineRef
+  // Update width when timeline width changes
   useEffect(() => {
-    if (!timelineRef.current) return;
-
-    const updateWidth = () => {
-      if (timelineRef.current) {
-        setWidth(timelineRef.current.clientWidth);
-      }
-    };
-
-    // Set initial width
-    updateWidth();
-
-    // Update width on resize
-    const resizeObserver = new ResizeObserver(updateWidth);
-    resizeObserver.observe(timelineRef.current);
-
-    return () => {
-      if (timelineRef.current) {
-        resizeObserver.unobserve(timelineRef.current);
-      }
-    };
-  }, [timelineRef]);
+    setWidth(timelineWidth);
+  }, [timelineWidth]);
 
   // Generate fake waveform data
   useEffect(() => {
@@ -69,10 +50,15 @@ const WaveformFromHLS = ({
       // Set the drawing style
       ctx.fillStyle = barColor;
 
+      // Set fixed bar height instead of scaling with amplitude
+      const fixedBarHeight = height * 0.3; // 50% of the canvas height
+      const accentBarHeight = height * 0.7; // 70% of the canvas height for every 10th bar
+
       // Draw each bar of the waveform
       data.forEach((amplitude, index) => {
         const x = index * (barWidth + barGap);
-        const barHeight = Math.max(2, amplitude * height);
+        const isAccentBar = index % 10 === 0;
+        const barHeight = isAccentBar ? accentBarHeight : fixedBarHeight;
         const y = (height - barHeight) / 2;
 
         ctx.fillRect(x, y, barWidth, barHeight);
@@ -86,10 +72,10 @@ const WaveformFromHLS = ({
 
   return (
     <div className="w-full h-full absolute top-0 left-0">
-      <canvas 
-        ref={canvasRef} 
-        width={width} 
-        height={height} 
+      <canvas
+        ref={canvasRef}
+        width={width}
+        height={height}
         className="w-full"
       />
     </div>

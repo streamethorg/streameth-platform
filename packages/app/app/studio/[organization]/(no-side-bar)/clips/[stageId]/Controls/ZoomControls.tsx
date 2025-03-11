@@ -17,6 +17,7 @@ const ZoomControls = () => {
     timelineRef,
     setTimelineWidth,
     playheadPosition,
+    timelineWidth,
   } = useTimelineContext();
   const { duration } = metadata;
 
