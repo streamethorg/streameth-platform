@@ -49,9 +49,19 @@ export const ActiveSubscriptionView = ({
           onDecrementStages={() => handleCounter('stages', 'decrement')}
           onSubscribe={() => handleSubscribe('price_basic_monthly')}
         />
+      </div>
+      
+      <div className="max-w-4xl mx-auto mt-12">
+        {daysLeft <= 2 && (
+          <div className="p-4 bg-amber-50 rounded-lg flex items-center gap-2 mb-4">
+            <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0" />
+            <span className="text-amber-600">Your subscription will expire soon.</span>
+          </div>
+        )}
+        
         {stagesStatus.isOverLimit && (
           <div className="p-4 bg-red-100 rounded-lg flex items-center gap-2">
-            <AlertCircle className="h-5 w-5 text-red-600" />
+            <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
             <p className="text-red-600">
               You are using all your paid stages ({stagesStatus.currentStages} of{' '}
               {stagesStatus.paidStages}). Add more stages to create new ones.

@@ -19,17 +19,16 @@ export default function PaymentsPage() {
     return <NewSubscriptionView organizationId={organizationId} />;
   }
 
-  // If subscription is active
-  if (subscriptionStatus.isActive) {
-    // If subscription has expired, show expired notice + pricing tiers
-    if (subscriptionStatus.hasExpired) {
-      return <ExpiredSubscriptionView 
-        organizationId={organizationId}
-        stagesStatus={stagesStatus}
-      />;
-    }
+  // If subscription has expired, show expired notice + pricing tiers
+  if (subscriptionStatus.hasExpired) {
+    return <ExpiredSubscriptionView 
+      organizationId={organizationId}
+      stagesStatus={stagesStatus}
+    />;
+  }
 
-    // Active subscription - show current status + add resources card
+  // If subscription is active - show current status + add resources card
+  if (subscriptionStatus.isActive) {
     return <ActiveSubscriptionView 
       organization={organization}
       organizationId={organizationId}

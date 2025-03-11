@@ -1,4 +1,4 @@
-import { PricingTiers } from './PricingTiers';
+import { PricingTabs } from './PricingTabs';
 import { usePayment } from '@/lib/hooks/usePayment';
 
 interface NewSubscriptionViewProps {
@@ -17,7 +17,7 @@ export const NewSubscriptionView = ({ organizationId }: NewSubscriptionViewProps
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <PricingTiers
+      <PricingTabs
         streamingDays={streamingDays}
         numberOfStages={numberOfStages}
         loading={loading}

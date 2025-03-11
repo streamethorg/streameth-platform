@@ -1,7 +1,5 @@
-import { AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { IExtendedOrganization } from '@/lib/types';
-
 
 export function ActiveSubscriptionCard({
   organization,
@@ -38,13 +36,6 @@ export function ActiveSubscriptionCard({
             {expiryDate.toLocaleDateString()} ({daysLeft} days left)
           </span>
         </div>
-
-        {daysLeft <= 2 && (
-          <div className="flex items-center gap-2 text-amber-600 mt-4 p-3 bg-amber-50 rounded-lg">
-            <AlertCircle className="h-5 w-5 flex-shrink-0" />
-            <span className="text-sm">Your subscription will expire soon.</span>
-          </div>
-        )}
       </div>
     </Card>
   );

@@ -1,5 +1,5 @@
 import { ExpiredSubscriptionCard } from './ExpiredSubscriptionCard';
-import { PricingTiers } from './PricingTiers';
+import { PricingTabs } from './PricingTabs';
 import { usePayment } from '@/lib/hooks/usePayment';
 
 interface ExpiredSubscriptionViewProps {
@@ -24,19 +24,7 @@ export const ExpiredSubscriptionView = ({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto">
-        <ExpiredSubscriptionCard />
-        {stagesStatus.currentStages > 0 && (
-          <div className="mt-4 p-4 bg-amber-50 rounded-lg">
-            <p className="text-amber-600">
-              You have {stagesStatus.currentStages} existing stage
-              {stagesStatus.currentStages > 1 ? 's' : ''}. Make sure to purchase enough
-              stages in your new subscription.
-            </p>
-          </div>
-        )}
-      </div>
-      <PricingTiers
+      <PricingTabs
         streamingDays={streamingDays}
         numberOfStages={numberOfStages}
         loading={loading}
@@ -47,6 +35,20 @@ export const ExpiredSubscriptionView = ({
         onDecrementStages={() => handleCounter('stages', 'decrement')}
         onSubscribe={handleSubscribe}
       />
+      
+      <div className="max-w-4xl mx-auto mt-12">
+        <ExpiredSubscriptionCard />
+        
+        {stagesStatus.currentStages > 0 && (
+          <div className="mt-4 p-4 bg-amber-50 rounded-lg">
+            <p className="text-amber-600">
+              You have {stagesStatus.currentStages} existing stage
+              {stagesStatus.currentStages > 1 ? 's' : ''}. Make sure to purchase enough
+              stages in your new subscription.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }; 
