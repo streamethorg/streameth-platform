@@ -3,6 +3,7 @@
 import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import Footer from '@/components/Layout/Footer';
 import { fetchOrganization } from '@/lib/services/organizationService';
+import { fetchStages } from '@/lib/services/stageService';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react';
 import { OrganizationContextProvider } from '@/lib/context/OrganizationContext';
@@ -39,6 +40,16 @@ const Layout = async ({
     return notFound();
   }
 
+  const stages = await fetchStages({
+    organizationId: params.organization,
+  });
+
+  const stagesStatus = {
+    currentStages: stages.length || 0,
+    paidStages: Infinity,
+    isOverLimit: false,
+  };
+
   return (
     <OrganizationContextProvider
       organization={organization}
@@ -54,11 +65,7 @@ const Layout = async ({
         isFailed: false,
         hasAvailableStages: false,
       }}
-      stagesStatus={{
-        currentStages: 0,
-        paidStages: 0,
-        isOverLimit: false,
-      }}
+      stagesStatus={stagesStatus}
     >
       <div className="mx-auto flex min-h-[100vh] w-full flex-col bg-white">
         <HomePageNavbar

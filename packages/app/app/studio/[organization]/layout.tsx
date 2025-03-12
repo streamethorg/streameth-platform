@@ -40,7 +40,7 @@ const calculateOrganizationStatus = (
     isFailed: organization.subscriptionStatus === 'unpaid' || organization.subscriptionStatus === 'canceled',
     daysLeft,
     hasExpired,
-    hasAvailableStages: isFree || isSubscriptionActive,
+    hasAvailableStages: true, // Always true since we no longer limit stages
   };
 };
 
@@ -83,17 +83,15 @@ const Layout = async ({
   const isFree = currentOrganization.subscriptionTier === 'free';
   const canUseFeatures = isFree || (status.isActive && !status.hasExpired);
   
-  const canCreateStages = canUseFeatures && status.hasAvailableStages;
+  // Only check if they have livestreaming enabled based on tier
+  const hasLivestreaming = currentOrganization.subscriptionTier !== 'free';
+  const canCreateStages = canUseFeatures && hasLivestreaming;
   
-  // Use subscription tier to determine max stages instead
-  const maxStages = currentOrganization.subscriptionTier === 'free' ? 1 : 
-                   currentOrganization.subscriptionTier === 'creator' ? 2 :
-                   currentOrganization.subscriptionTier === 'pro' ? 5 : 10; // studio tier
-  
+  // We're keeping the stagesStatus structure but removing limits
   const stagesStatus = {
     currentStages: stages.length || 0,
-    paidStages: maxStages, // Use calculated value instead of removed field
-    isOverLimit: stages.length >= maxStages, // Compare with calculated max
+    paidStages: Infinity, // Unlimited stages now
+    isOverLimit: false, // Never over limit
   };
 
   return (

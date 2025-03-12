@@ -148,7 +148,7 @@ export const ActiveSubscriptionView = ({
             {stagesStatus.isOverLimit && (
               <div className="flex items-center text-amber-700">
                 <AlertCircle className="h-4 w-4 mr-2 flex-shrink-0" />
-                <span>All livestream slots used ({stagesStatus.currentStages}/{stagesStatus.paidStages})</span>
+                <span>Unlimited livestream stages available ({stagesStatus.currentStages} created)</span>
               </div>
             )}
           </div>

@@ -15,7 +15,9 @@ export interface SubscriptionStatus {
 
 export interface StagesStatus {
   currentStages: number;
+  // We keep paidStages for backward compatibility but it's now always Infinity
   paidStages: number;
+  // We keep isOverLimit for backward compatibility but it's now always false
   isOverLimit: boolean;
 }
 

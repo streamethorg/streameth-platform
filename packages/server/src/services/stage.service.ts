@@ -28,15 +28,13 @@ export default class StageService {
   }
 
   async create(data: IStage): Promise<IStage> {
-    // Check if organization has reached their stage limit
+    // Check if organization exists
     const organization = await Organization.findById(data.organizationId);
     if (!organization) throw new HttpException(404, 'Organization not found');
 
-    if (organization.currentStages >= organization.paidStages) {
-      throw new HttpException(
-        403,
-        'Stage limit reached. Please upgrade your subscription to create more stages.',
-      );
+    // Check if the organization has livestreaming enabled
+    if (!organization.isLivestreamingEnabled) {
+      throw new HttpException(403, 'Livestreaming is not enabled for this organization. Please upgrade your subscription to create stages.');
     }
 
     const eventId =
@@ -46,10 +44,7 @@ export default class StageService {
     const stream = await createStream(data.name);
     console.log('stream', stream);
 
-    // Increment currentStages for the organization
-    await Organization.findByIdAndUpdate(data.organizationId, {
-      $inc: { currentStages: 1 },
-    });
+    // Note: We no longer track or limit the number of stages
 
     return this.controller.store.create(
       data.name,

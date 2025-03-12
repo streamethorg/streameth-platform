@@ -1,7 +1,7 @@
 import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization, IOrganizationUpdate, ISocials, PaymentStatus, SubscriptionTier, SubscriptionStatus } from '@interfaces/organization.interface';
+import { IOrganization, IOrganizationUpdate, ISocials, SubscriptionTier, SubscriptionStatus } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
@@ -30,11 +30,9 @@ export default class OrganizationService {
     // Also include free tier defaults
     const orgData = {
       ...data,
-      paymentStatus: 'none' as PaymentStatus,
-      expirationDate: new Date(0), // Set to Unix epoch to ensure features are locked
-      paidStages: 0,
-      currentStages: 0,
-      streamingDays: 0,
+      // We no longer track stages, this is kept as comment for reference
+      // paidStages: 0,
+      // currentStages: 0,
       invitationCode: this.generateInvitationCode(),
       
       // Free tier defaults
@@ -42,9 +40,9 @@ export default class OrganizationService {
       subscriptionStatus: 'active' as SubscriptionStatus,
       maxVideoLibrarySize: 5,
       maxSeats: 1,
+      isLivestreamingEnabled: false,
       isMultistreamEnabled: false,
       isCustomChannelEnabled: false,
-      isWhiteLabelEnabled: false,
       hasPrioritySupport: false,
     };
 
@@ -128,10 +126,7 @@ export default class OrganizationService {
       throw new HttpException(404, 'Organization not found');
     }
 
-    // Prevent currentStages from going below zero
-    if (typeof organizationUpdate.currentStages === 'number') {
-      organizationUpdate.currentStages = Math.max(0, organizationUpdate.currentStages);
-    }
+    // We no longer track currentStages, this comment stays here for historical reference
 
     // Update using the Organization model directly
     const updatedOrg = await Organization.findByIdAndUpdate(
