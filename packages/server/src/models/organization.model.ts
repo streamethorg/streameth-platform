@@ -37,6 +37,20 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     isCustomChannelEnabled: { type: Boolean, default: false },
     isWhiteLabelEnabled: { type: Boolean, default: false },
     hasPrioritySupport: { type: Boolean, default: false },
+    
+    // Invoice information
+    latestInvoice: {
+      id: { type: String },
+      number: { type: String },
+      hostedInvoiceUrl: { type: String },
+      invoicePdf: { type: String },
+      total: { type: Number },
+      currency: { type: String },
+      status: { type: String },
+      paidAt: { type: Number },
+      receiptNumber: { type: String },
+      createdAt: { type: Number }
+    }
   },
   {
     timestamps: true,

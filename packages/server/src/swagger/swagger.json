@@ -48,15 +48,76 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"PaymentStatus": {
+			"SubscriptionTier": {
 				"type": "string",
 				"enum": [
-					"none",
-					"pending",
-					"processing",
-					"active",
-					"failed"
+					"free",
+					"creator",
+					"pro",
+					"studio",
+					"none"
 				]
+			},
+			"SubscriptionStatus": {
+				"type": "string",
+				"enum": [
+					"active",
+					"past_due",
+					"canceled",
+					"unpaid",
+					"trialing",
+					"none"
+				]
+			},
+			"InvoiceData": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"number": {
+						"type": "string"
+					},
+					"hostedInvoiceUrl": {
+						"type": "string"
+					},
+					"invoicePdf": {
+						"type": "string"
+					},
+					"total": {
+						"type": "number",
+						"format": "double"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"paidAt": {
+						"type": "number",
+						"format": "double"
+					},
+					"receiptNumber": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"number",
+					"hostedInvoiceUrl",
+					"invoicePdf",
+					"total",
+					"currency",
+					"status",
+					"paidAt",
+					"createdAt"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"IOrganization": {
 				"properties": {
@@ -105,44 +166,45 @@
 						},
 						"type": "array"
 					},
-					"paymentStatus": {
-						"$ref": "#/components/schemas/PaymentStatus"
-					},
 					"customerId": {
 						"type": "string"
 					},
-					"streamingDays": {
-						"type": "number",
-						"format": "double"
+					"subscriptionTier": {
+						"$ref": "#/components/schemas/SubscriptionTier"
 					},
-					"paidStages": {
-						"type": "number",
-						"format": "double"
+					"subscriptionStatus": {
+						"$ref": "#/components/schemas/SubscriptionStatus"
 					},
-					"currentStages": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentAmount": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentDate": {
+					"subscriptionPeriodEnd": {
 						"type": "string",
 						"format": "date-time"
 					},
-					"lastPaymentError": {
-						"type": "string"
+					"maxVideoLibrarySize": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastPaymentIntentId": {
-						"type": "string"
+					"currentVideoCount": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastCheckoutSessionId": {
-						"type": "string"
+					"maxSeats": {
+						"type": "number",
+						"format": "double"
 					},
-					"expirationDate": {
-						"type": "string",
-						"format": "date-time"
+					"isMultistreamEnabled": {
+						"type": "boolean"
+					},
+					"isCustomChannelEnabled": {
+						"type": "boolean"
+					},
+					"isWhiteLabelEnabled": {
+						"type": "boolean"
+					},
+					"hasPrioritySupport": {
+						"type": "boolean"
+					},
+					"latestInvoice": {
+						"$ref": "#/components/schemas/InvoiceData"
 					}
 				},
 				"required": [
@@ -304,28 +366,37 @@
 				"additionalProperties": false
 			},
 			"CreateCheckoutSessionDto": {
+				"description": "Data transfer object for creating a Stripe checkout session",
 				"properties": {
 					"organizationId": {
-						"type": "string"
+						"type": "string",
+						"description": "The organization's ID (required)"
 					},
 					"totalPrice": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "The monthly subscription price (required)"
+					},
+					"tier": {
+						"type": "string",
+						"description": "Optional subscription tier identifier"
 					},
 					"streamingDays": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Legacy parameters - kept for backwards compatibility but not used",
+						"deprecated": true
 					},
 					"numberOfStages": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Legacy parameters - kept for backwards compatibility but not used",
+						"deprecated": true
 					}
 				},
 				"required": [
 					"organizationId",
-					"totalPrice",
-					"streamingDays",
-					"numberOfStages"
+					"totalPrice"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -3165,44 +3236,45 @@
 					"invitationCode": {
 						"type": "string"
 					},
-					"paymentStatus": {
-						"$ref": "#/components/schemas/PaymentStatus"
-					},
 					"customerId": {
 						"type": "string"
 					},
-					"streamingDays": {
-						"type": "number",
-						"format": "double"
+					"subscriptionTier": {
+						"$ref": "#/components/schemas/SubscriptionTier"
 					},
-					"paidStages": {
-						"type": "number",
-						"format": "double"
+					"subscriptionStatus": {
+						"$ref": "#/components/schemas/SubscriptionStatus"
 					},
-					"currentStages": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentAmount": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentDate": {
+					"subscriptionPeriodEnd": {
 						"type": "string",
 						"format": "date-time"
 					},
-					"lastPaymentError": {
-						"type": "string"
+					"maxVideoLibrarySize": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastPaymentIntentId": {
-						"type": "string"
+					"currentVideoCount": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastCheckoutSessionId": {
-						"type": "string"
+					"maxSeats": {
+						"type": "number",
+						"format": "double"
 					},
-					"expirationDate": {
-						"type": "string",
-						"format": "date-time"
+					"isMultistreamEnabled": {
+						"type": "boolean"
+					},
+					"isCustomChannelEnabled": {
+						"type": "boolean"
+					},
+					"isWhiteLabelEnabled": {
+						"type": "boolean"
+					},
+					"hasPrioritySupport": {
+						"type": "boolean"
+					},
+					"latestInvoice": {
+						"$ref": "#/components/schemas/InvoiceData"
 					}
 				},
 				"required": [
@@ -3257,44 +3329,45 @@
 					"invitationCode": {
 						"type": "string"
 					},
-					"paymentStatus": {
-						"$ref": "#/components/schemas/PaymentStatus"
-					},
 					"customerId": {
 						"type": "string"
 					},
-					"streamingDays": {
-						"type": "number",
-						"format": "double"
+					"subscriptionTier": {
+						"$ref": "#/components/schemas/SubscriptionTier"
 					},
-					"paidStages": {
-						"type": "number",
-						"format": "double"
+					"subscriptionStatus": {
+						"$ref": "#/components/schemas/SubscriptionStatus"
 					},
-					"currentStages": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentAmount": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentDate": {
+					"subscriptionPeriodEnd": {
 						"type": "string",
 						"format": "date-time"
 					},
-					"lastPaymentError": {
-						"type": "string"
+					"maxVideoLibrarySize": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastPaymentIntentId": {
-						"type": "string"
+					"currentVideoCount": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastCheckoutSessionId": {
-						"type": "string"
+					"maxSeats": {
+						"type": "number",
+						"format": "double"
 					},
-					"expirationDate": {
-						"type": "string",
-						"format": "date-time"
+					"isMultistreamEnabled": {
+						"type": "boolean"
+					},
+					"isCustomChannelEnabled": {
+						"type": "boolean"
+					},
+					"isWhiteLabelEnabled": {
+						"type": "boolean"
+					},
+					"hasPrioritySupport": {
+						"type": "boolean"
+					},
+					"latestInvoice": {
+						"$ref": "#/components/schemas/InvoiceData"
 					}
 				},
 				"required": [
@@ -6942,6 +7015,44 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/organizations/subscription/free/{organizationId}": {
+			"post": {
+				"operationId": "ActivateFreeTier",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IOrganization_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Activate free tier for organization",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/organizations/join": {

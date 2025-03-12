@@ -1,6 +1,7 @@
 'use client';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 import CopyString from '@/components/misc/CopyString';
+import { Button } from '@/components/ui/button';
 
 const InviteCode = () => {
   const { organization } = useOrganizationContext();
@@ -12,10 +13,19 @@ const InviteCode = () => {
   
   if (!canUseInviteCode) {
     return (
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-medium text-amber-600">
-          Upgrade to Pro or Studio for team collaboration
-        </span>
+      <div className="flex flex-col gap-2 border rounded-md p-2">
+        <div className="flex items-center gap-2">
+
+          <span className="text-sm font-medium text-amber-600">
+            Team collaboration requires Pro or Studio plan
+          </span>
+        </div>
+        <Button 
+          variant="outline"
+          className="text-sm font-medium text-blue-600 hover:text-blue-800"
+        >
+          Upgrade plan
+        </Button>
       </div>
     );
   }

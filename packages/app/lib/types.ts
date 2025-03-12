@@ -181,6 +181,18 @@ export interface IExtendedOrganization
   isCustomChannelEnabled?: boolean;
   isWhiteLabelEnabled?: boolean;
   hasPrioritySupport?: boolean;
+  latestInvoice?: {
+    id: string;
+    number: string;
+    hostedInvoiceUrl: string;
+    invoicePdf: string;
+    total: number;
+    currency: string;
+    status: string;
+    paidAt: number;
+    receiptNumber?: string;
+    createdAt: number;
+  };
 }
 export interface IExtendedSession
   extends Omit<ISession, '_id' | 'nftCollections'> {

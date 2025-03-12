@@ -14,6 +14,19 @@ export interface ISocials {
 export type SubscriptionTier = 'free' | 'creator' | 'pro' | 'studio' | 'none';
 export type SubscriptionStatus = 'active' | 'past_due' | 'canceled' | 'unpaid' | 'trialing' | 'none';
 
+export interface InvoiceData {
+  id: string;
+  number: string;
+  hostedInvoiceUrl: string;
+  invoicePdf: string;
+  total: number;
+  currency: string;
+  status: string;
+  paidAt: number;
+  receiptNumber?: string;
+  createdAt: number;
+}
+
 export interface IOrganization {
   _id?: Types.ObjectId;
   name: string;
@@ -40,6 +53,7 @@ export interface IOrganization {
   isCustomChannelEnabled?: boolean;
   isWhiteLabelEnabled?: boolean;
   hasPrioritySupport?: boolean;
+  latestInvoice?: InvoiceData;
 }
 
 export type IOrganizationUpdate = Partial<IOrganization>;

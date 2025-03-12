@@ -693,4 +693,91 @@ export default class StripeService {
             console.error('❌ Error in subscription diagnostics', error);
         }
     }
+
+    // Add a method to handle successful invoice payments
+    async handleInvoicePaymentSucceeded(invoice: any): Promise<void> {
+        try {
+            console.log('⚙️ Processing invoice payment succeeded event', { invoiceId: invoice.id });
+            
+            // Check if this is a subscription invoice with the right metadata
+            if (!invoice.subscription || !invoice.subscription_details?.metadata?.organizationId) {
+                console.log('⏩ Skipping invoice - not related to a subscription with organization metadata');
+                return;
+            }
+            
+            const organizationId = invoice.subscription_details.metadata.organizationId;
+            
+            // Get the related organization
+            const organization = await this.organizationService.get(organizationId);
+            if (!organization) {
+                console.error('❌ Organization not found', { organizationId });
+                return;
+            }
+            
+            // Extract invoice information
+            const invoiceData = {
+                id: invoice.id,
+                number: invoice.number,
+                hostedInvoiceUrl: invoice.hosted_invoice_url,
+                invoicePdf: invoice.invoice_pdf,
+                total: invoice.total,
+                currency: invoice.currency,
+                status: invoice.status,
+                paidAt: invoice.status_transitions.paid_at,
+                receiptNumber: invoice.receipt_number,
+                createdAt: invoice.created
+            };
+            
+            // Update organization with latest invoice data
+            await Organization.updateOne(
+                { _id: organizationId },
+                {
+                    $set: {
+                        latestInvoice: invoiceData
+                    }
+                }
+            );
+            
+            console.log('✅ Updated organization with latest invoice data', { 
+                organizationId, 
+                invoiceId: invoice.id 
+            });
+        } catch (error) {
+            console.error('❌ Failed to process invoice payment succeeded event', error);
+        }
+    }
+
+    // Update the webhookStripe method to handle invoice events
+    async webhookStripe(event: any): Promise<void> {
+        try {
+            console.log('🎯 Processing Stripe webhook event:', event.type);
+
+            switch (event.type) {
+                case 'customer.subscription.created':
+                    await this.handleSubscriptionCreated(event.data.object);
+                    break;
+                case 'customer.subscription.updated':
+                    await this.handleSubscriptionUpdated(event.data.object);
+                    break;
+                case 'customer.subscription.deleted':
+                    await this.handleSubscriptionCanceled(event.data.object);
+                    break;
+                case 'checkout.session.completed':
+                    await this.handleCheckoutCompleted(event.data.object);
+                    break;
+                case 'invoice.payment_succeeded':
+                    await this.handleInvoicePaymentSucceeded(event.data.object);
+                    break;
+                case 'invoice.payment_failed':
+                    await this.handleSubscriptionPaymentFailed(event.data.object);
+                    break;
+                // ... other cases ...
+                default:
+                    console.log(`⏩ Unhandled event type: ${event.type}`);
+            }
+        } catch (error) {
+            console.error('❌ Error processing webhook event:', error);
+            throw error;
+        }
+    }
 }

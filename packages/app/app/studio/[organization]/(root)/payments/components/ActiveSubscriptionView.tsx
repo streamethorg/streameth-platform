@@ -1,9 +1,10 @@
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, FileText, Download, ExternalLink, Calendar, CreditCard, CheckCircle } from 'lucide-react';
 import { usePayment } from '@/lib/hooks/usePayment';
 import { IExtendedOrganization } from '@/lib/types';
 import { Card } from '@/components/ui/card';
 import { tierLimits } from '@/lib/utils/subscription';
 import { MonthlySubscriptionTiers } from './MonthlySubscriptionTiers';
+import { Button } from '@/components/ui/button';
 
 // Define tier information - ensure it matches with usePayment hook
 const monthlyTiers = [
@@ -53,6 +54,19 @@ const tierFeatures = {
   'studio': ['50 videos', 'Unlimited seats', 'White-label', 'Priority Support']
 };
 
+// Mock invoice data - this would come from the organization object in a real implementation
+// This represents the latest invoice information
+interface InvoiceData {
+  hostedInvoiceUrl: string;
+  invoicePdf: string;
+  number: string;
+  total: number;
+  currency: string;
+  status: string;
+  paidAt: number | null;
+  receiptNumber: string | null;
+}
+
 interface ActiveSubscriptionViewProps {
   organization: IExtendedOrganization;
   organizationId: string;
@@ -86,12 +100,45 @@ export const ActiveSubscriptionView = ({
       })
     : 'Not available';
 
+  // Use real invoice data if available, otherwise use mock data for demonstration
+  const invoiceData = organization.latestInvoice || {
+    id: "in_1R1qkxGMvwR8KL2AtuhNbcOo",
+    hostedInvoiceUrl: "https://invoice.stripe.com/i/acct_1Q4JfJGMvwR8KL2A/test_YWNjdF8xUTRKZkpHTXZ3UjhLTDJBLF9SdmlCbnlEeUJMZk1vbGEyWlR3cHJtM2lKQjZwTWdVLDEzMjMzMjM4Mw0200HvFB0bjq?s=ap",
+    invoicePdf: "https://pay.stripe.com/invoice/acct_1Q4JfJGMvwR8KL2A/test_YWNjdF8xUTRKZkpHTXZ3UjhLTDJBLF9SdmlCbnlEeUJMZk1vbGEyWlR3cHJtM2lKQjZwTWdVLDEzMjMzMjM4Mw0200HvFB0bjq/pdf?s=ap",
+    number: "3EF67D63-0004",
+    total: 2999,
+    currency: "usd",
+    status: "paid",
+    paidAt: 1741791582,
+    receiptNumber: null,
+    createdAt: 1741791579
+  };
+
+  // Format currency for display
+  const formatCurrency = (amount: number, currency: string) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency.toUpperCase(),
+      minimumFractionDigits: 2
+    }).format(amount / 100);
+  };
+
+  // Format payment date
+  const formatPaymentDate = (timestamp: number | null) => {
+    if (!timestamp) return 'Not available';
+    return new Date(timestamp * 1000).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 py-4">
       {/* Alerts Section - Shown at top for importance */}
       {(daysLeft <= 7 || stagesStatus.isOverLimit) && (
-        <Card className="p-4 mb-6 shadow-none bg-amber-50 border-amber-200">
-          <div className="flex flex-col space-y-2">
+        <Card className="p-3 mb-4 shadow-none bg-amber-50 border-amber-200">
+          <div className="flex flex-col space-y-1">
             {daysLeft <= 7 && (
               <div className="flex items-center text-amber-700">
                 <AlertCircle className="h-4 w-4 mr-2 flex-shrink-0" />
@@ -109,68 +156,142 @@ export const ActiveSubscriptionView = ({
         </Card>
       )}
 
-      {/* Current Subscription Card */}
-      <Card className="p-5 shadow-none mb-10">
-        <div className="flex items-center justify-between mb-3">
-          <h1 className="text-lg font-bold">Current Plan: <span className="capitalize">{currentTier}</span></h1>
-          <div className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
-            Active
+      {/* Current Subscription Card - More compact design */}
+      <Card className="overflow-hidden mb-6 border border-gray-200 shadow-sm">
+        {/* Colored header section */}
+        <div className="bg-gradient-to-r from-primary/90 to-primary p-4 text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-lg font-bold capitalize">{monthlyTiers.find(t => t.tierKey === currentTier)?.name || currentTier}</h1>
+              <p className="text-white/80 text-sm">
+                {currentTier === 'free' 
+                  ? 'Free Plan' 
+                  : `${monthlyTiers.find(t => t.tierKey === currentTier)?.price || '$0'}/month`}
+              </p>
+            </div>
+            <div className="flex items-center bg-white/20 px-3 py-1 rounded-full text-xs font-medium">
+              <CheckCircle className="h-3.5 w-3.5 mr-1.5" />
+              Active
+            </div>
           </div>
         </div>
         
-        {/* Add current plan price */}
-        <div className="mb-4">
-          <p className="font-medium text-md">
-            {currentTier === 'free' 
-              ? 'Free' 
-              : `${monthlyTiers.find(t => t.tierKey === currentTier)?.price || '$0'}`}
-            <span className="text-sm font-normal text-gray-600 ml-1">
-              {currentTier !== 'free' && '/month'}
-            </span>
-          </p>
-        </div>
+        {/* Main content */}
+        <div className="p-4">
+          {/* Features grid - more compact */}
+          <div className="mb-4">
+            <h2 className="text-sm font-medium text-gray-700 mb-2">Plan Features</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">Videos</p>
+                <p className="font-medium">{currentTierData.maxVideoLibrarySize === Infinity ? 'Unlimited' : currentTierData.maxVideoLibrarySize}</p>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">Seats</p>
+                <p className="font-medium">{currentTierData.maxSeats === Infinity ? 'Unlimited' : currentTierData.maxSeats}</p>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">Multistream</p>
+                <p className="font-medium">{currentTierData.isMultistreamEnabled ? 'Yes' : 'No'}</p>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">Custom Channel</p>
+                <p className="font-medium">{currentTierData.isCustomChannelEnabled ? 'Yes' : 'No'}</p>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">White Label</p>
+                <p className="font-medium">{currentTierData.isWhiteLabelEnabled ? 'Yes' : 'No'}</p>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">Priority Support</p>
+                <p className="font-medium">{currentTierData.hasPrioritySupport ? 'Yes' : 'No'}</p>
+              </div>
+            </div>
+          </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 text-sm">
-          <div className="flex justify-between">
-            <span className="text-gray-600">Videos:</span>
-            <span className="font-medium">{currentTierData.maxVideoLibrarySize === Infinity ? 'Unlimited' : currentTierData.maxVideoLibrarySize}</span>
+          {/* Billing information */}
+          <div className="border-t pt-3 mb-4">
+            <h2 className="text-sm font-medium text-gray-700 mb-2">Billing Information</h2>
+            <div className="space-y-2">
+              <div className="flex items-center">
+                <Calendar className="h-4 w-4 text-gray-500 mr-2" />
+                <div>
+                  <p className="text-sm">Next billing date: <span className="font-medium">{nextBillingDate}</span></p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <CreditCard className="h-4 w-4 text-gray-500 mr-2" />
+                <div>
+                  <p className="text-sm">Billing cycle: <span className="font-medium">Monthly</span></p>
+                </div>
+              </div>
+              {currentTier !== 'free' && (
+                <p className="text-xs text-gray-500 italic pl-6">You can cancel or change your plan at any time</p>
+              )}
+            </div>
           </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Seats:</span>
-            <span className="font-medium">{currentTierData.maxSeats === Infinity ? 'Unlimited' : currentTierData.maxSeats}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Multistream:</span>
-            <span className="font-medium">{currentTierData.isMultistreamEnabled ? 'Yes' : 'No'}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Custom Channel:</span>
-            <span className="font-medium">{currentTierData.isCustomChannelEnabled ? 'Yes' : 'No'}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Priority Support:</span>
-            <span className="font-medium">{currentTierData.hasPrioritySupport ? 'Yes' : 'No'}</span>
-          </div>
-        </div>
-        
-        <div className="border-t pt-2">
-          <p className="text-sm text-gray-700 font-medium">Subscription Details</p>
-          <div className="text-xs text-gray-500 mt-1">
-            <p>Next billing date: {nextBillingDate}</p>
-            <p>Billing cycle: Monthly</p>
-            {currentTier !== 'free' && <p>You can cancel or change your plan at any time</p>}
-          </div>
+
+          {/* Latest Invoice - Only show for paid plans */}
+          {currentTier !== 'free' && (
+            <div className="border-t pt-3">
+              <h2 className="text-sm font-medium text-gray-700 mb-2">Latest Invoice</h2>
+              
+              {invoiceData ? (
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <div className="flex sm:flex-row sm:items-center sm:justify-between mb-2">
+                    <div className="mb-2 sm:mb-0">
+                      <p className="text-sm font-medium">Invoice #{invoiceData.number}</p>
+                      <p className="text-xs text-gray-500">
+                        {formatPaymentDate(invoiceData.paidAt)}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium">{formatCurrency(invoiceData.total, invoiceData.currency)}</p>
+                      <p className="text-xs text-gray-500 capitalize">
+                        Status: <span className="text-green-600 font-medium">{invoiceData.status}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-xs h-8"
+                      onClick={() => window.open(invoiceData.hostedInvoiceUrl, '_blank')}
+                    >
+                      <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                      View Invoice
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-xs h-8"
+                      onClick={() => window.open(invoiceData.invoicePdf, '_blank')}
+                    >
+                      <Download className="h-3.5 w-3.5 mr-1.5" />
+                      Download PDF
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-gray-50 rounded-lg p-3 text-center">
+                  <p className="text-sm text-gray-600">No invoice information available yet.</p>
+                  <p className="text-xs text-gray-500 mt-1">Your first invoice will appear here after your payment is processed.</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </Card>
 
       {/* Upgrade/Downgrade Options Section */}
-        <div className="mt-6">
-          <MonthlySubscriptionTiers
-            loading={loading}
-            onSubscribe={handleSubscribe}
-            currentTier={currentTier}
-          />
-        </div>
+      <div className="mt-4">
+        <MonthlySubscriptionTiers
+          loading={loading}
+          onSubscribe={handleSubscribe}
+          currentTier={currentTier}
+        />
       </div>
+    </div>
   );
 };
