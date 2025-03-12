@@ -19,6 +19,7 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import InviteCode from './components/InviteCode';
+import AddTeamMembersWrapper from './components/AddTeamMembersWrapper';
 
 const Settings = async ({ params }: { params: studioPageParams['params'] }) => {
   const members = await fetchOrganizationMembers({
@@ -40,8 +41,10 @@ const Settings = async ({ params }: { params: studioPageParams['params'] }) => {
               <InviteCode />
             </div>
           </CardHeader>
-          <CardContent className="p-0 md:p-0 lg:p-0 flex-1 overflow-auto">
-            <div className="h-full overflow-auto">
+          <CardContent className="p-6 md:p-6 lg:p-6 flex-1 overflow-auto">
+            <AddTeamMembersWrapper />
+            
+            <div className="mt-6 h-full overflow-auto">
               <Table className="w-full">
                 <TableHeader className="sticky top-0 z-10 border-separate bg-gray-100">
                   <TableRow className="hover:bg-whiterounded-t-xl border-b">

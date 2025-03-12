@@ -43,23 +43,23 @@ export default class StripeService {
             hasPrioritySupport: false
         },
         creator: {
-            maxVideoLibrarySize: 50,
-            maxSeats: 2,
+            maxVideoLibrarySize: 10,
+            maxSeats: 1,
             isMultistreamEnabled: false,
             isCustomChannelEnabled: false,
             isWhiteLabelEnabled: false,
             hasPrioritySupport: false
         },
         pro: {
-            maxVideoLibrarySize: 100,
-            maxSeats: 5,
+            maxVideoLibrarySize: 25,
+            maxSeats: -1, // -1 denotes unlimited in metadata
             isMultistreamEnabled: true,
             isCustomChannelEnabled: true,
             isWhiteLabelEnabled: false,
             hasPrioritySupport: false
         },
         studio: {
-            maxVideoLibrarySize: -1, // -1 denotes unlimited in metadata
+            maxVideoLibrarySize: 50,
             maxSeats: -1, // -1 denotes unlimited in metadata
             isMultistreamEnabled: true,
             isCustomChannelEnabled: true,

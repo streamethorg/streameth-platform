@@ -7,9 +7,9 @@ const allFeatures = [
     id: 'video_library',
     label: (tier: number) => {
       if (tier === 0) return 'Up to 5 videos in library';
-      if (tier === 1) return 'Up to 50 videos in library';
-      if (tier === 2) return 'Up to 100 videos in library';
-      return 'Unlimited videos in library';
+      if (tier === 1) return 'Up to 10 videos in library';
+      if (tier === 2) return 'Up to 25 videos in library';
+      return 'Up to 50 videos in library';
     }
   },
   {
@@ -25,8 +25,7 @@ const allFeatures = [
     id: 'seats',
     label: (tier: number) => {
       if (tier === 0) return '1 seat';
-      if (tier === 1) return '2 seats';
-      if (tier === 2) return '5 seats';
+      if (tier === 1) return '1 seat';
       return 'Unlimited seats';
     }
   },
@@ -67,7 +66,7 @@ const monthlyTiers = [
     price: '$14.99',
     description: 'For content creators and streamers',
     priceId: 'price_creator_monthly',
-    highlight: true,
+    highlight: false,
     tierIndex: 1,
     tierKey: 'creator'
   },
@@ -76,7 +75,7 @@ const monthlyTiers = [
     price: '$29.99',
     description: 'For professional content creators',
     priceId: 'price_pro_monthly',
-    highlight: false,
+    highlight: true,
     tierIndex: 2,
     tierKey: 'pro'
   },
