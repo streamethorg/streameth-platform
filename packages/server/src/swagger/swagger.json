@@ -191,13 +191,13 @@
 						"type": "number",
 						"format": "double"
 					},
+					"isLivestreamingEnabled": {
+						"type": "boolean"
+					},
 					"isMultistreamEnabled": {
 						"type": "boolean"
 					},
 					"isCustomChannelEnabled": {
-						"type": "boolean"
-					},
-					"isWhiteLabelEnabled": {
 						"type": "boolean"
 					},
 					"hasPrioritySupport": {
@@ -3261,13 +3261,13 @@
 						"type": "number",
 						"format": "double"
 					},
+					"isLivestreamingEnabled": {
+						"type": "boolean"
+					},
 					"isMultistreamEnabled": {
 						"type": "boolean"
 					},
 					"isCustomChannelEnabled": {
-						"type": "boolean"
-					},
-					"isWhiteLabelEnabled": {
 						"type": "boolean"
 					},
 					"hasPrioritySupport": {
@@ -3354,13 +3354,13 @@
 						"type": "number",
 						"format": "double"
 					},
+					"isLivestreamingEnabled": {
+						"type": "boolean"
+					},
 					"isMultistreamEnabled": {
 						"type": "boolean"
 					},
 					"isCustomChannelEnabled": {
-						"type": "boolean"
-					},
-					"isWhiteLabelEnabled": {
 						"type": "boolean"
 					},
 					"hasPrioritySupport": {

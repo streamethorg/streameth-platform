@@ -14,13 +14,14 @@ const allFeatures = [
   },
   {
     id: 'livestreaming',
-    label: (tier: number) => {
-      if (tier === 0) return 'Livestreaming';
-      return 'Multistreaming';
-    },
+    label: () => 'Livestreaming',
     available: [false, true, true, true]
   },
-
+  {
+    id: 'multistreaming',
+    label: () => 'Multistreaming',
+    available: [false, false, true, true]
+  },
   {
     id: 'seats',
     label: (tier: number) => {
@@ -38,11 +39,6 @@ const allFeatures = [
     id: 'custom_channel',
     label: () => 'Custom channel page',
     available: [false, false, true, true]
-  },
-  {
-    id: 'white_label',
-    label: () => 'White-label options',
-    available: [false, false, false, true]
   },
   {
     id: 'priority_support',
@@ -193,7 +189,9 @@ export function MonthlySubscriptionTiers({
                         <X className="h-4 w-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
                       )}
                       <span className={`text-sm ${isAvailable ? 'text-gray-700' : 'text-gray-400'}`}>
-                        {feature.label(tier.tierIndex)}
+                        {typeof feature.label === 'function' 
+                          ? feature.label(tier.tierIndex) 
+                          : feature.label}
                       </span>
                     </li>
                   );

@@ -1,7 +1,7 @@
 import { IExtendedOrganization } from '../types';
 
 // Define proper types for tier limits
-type BooleanFeatures = 'isMultistreamEnabled' | 'isCustomChannelEnabled' | 'isWhiteLabelEnabled' | 'hasPrioritySupport';
+type BooleanFeatures = 'isLivestreamingEnabled' | 'isMultistreamEnabled' | 'isCustomChannelEnabled' | 'hasPrioritySupport';
 type NumericFeatures = 'maxVideoLibrarySize' | 'maxSeats';
 type TierFeatures = BooleanFeatures | NumericFeatures;
 
@@ -12,41 +12,41 @@ export const tierLimits = {
   free: {
     maxVideoLibrarySize: 5,
     maxSeats: 1,
+    isLivestreamingEnabled: false,
     isMultistreamEnabled: false,
     isCustomChannelEnabled: false,
-    isWhiteLabelEnabled: false,
     hasPrioritySupport: false,
   },
   creator: {
     maxVideoLibrarySize: 10,
     maxSeats: 1,
+    isLivestreamingEnabled: true,
     isMultistreamEnabled: false,
     isCustomChannelEnabled: false,
-    isWhiteLabelEnabled: false,
     hasPrioritySupport: false,
   },
   pro: {
     maxVideoLibrarySize: 25,
     maxSeats: Infinity,
+    isLivestreamingEnabled: true,
     isMultistreamEnabled: true,
     isCustomChannelEnabled: true,
-    isWhiteLabelEnabled: false,
     hasPrioritySupport: false,
   },
   studio: {
     maxVideoLibrarySize: 50,
     maxSeats: Infinity,
+    isLivestreamingEnabled: true,
     isMultistreamEnabled: true,
     isCustomChannelEnabled: true,
-    isWhiteLabelEnabled: true,
     hasPrioritySupport: true,
   },
   none: {
     maxVideoLibrarySize: 0,
     maxSeats: 0,
+    isLivestreamingEnabled: false,
     isMultistreamEnabled: false,
     isCustomChannelEnabled: false,
-    isWhiteLabelEnabled: false,
     hasPrioritySupport: false,
   },
 };

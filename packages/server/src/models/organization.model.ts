@@ -33,9 +33,9 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     maxVideoLibrarySize: { type: Number, default: 5 }, // Free tier default
     currentVideoCount: { type: Number, default: 0 }, // Current videos in library
     maxSeats: { type: Number, default: 1 }, // Free tier default
-    isMultistreamEnabled: { type: Boolean, default: false },
+    isLivestreamingEnabled: { type: Boolean, default: false }, // Livestreaming (single stream)
+    isMultistreamEnabled: { type: Boolean, default: false }, // Multistreaming (to multiple platforms)
     isCustomChannelEnabled: { type: Boolean, default: false },
-    isWhiteLabelEnabled: { type: Boolean, default: false },
     hasPrioritySupport: { type: Boolean, default: false },
     
     // Invoice information

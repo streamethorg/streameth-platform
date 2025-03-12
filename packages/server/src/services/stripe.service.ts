@@ -37,33 +37,33 @@ export default class StripeService {
         free: {
             maxVideoLibrarySize: 5,
             maxSeats: 1,
+            isLivestreamingEnabled: false,
             isMultistreamEnabled: false,
             isCustomChannelEnabled: false,
-            isWhiteLabelEnabled: false,
             hasPrioritySupport: false
         },
         creator: {
             maxVideoLibrarySize: 10,
             maxSeats: 1,
+            isLivestreamingEnabled: true,
             isMultistreamEnabled: false,
             isCustomChannelEnabled: false,
-            isWhiteLabelEnabled: false,
             hasPrioritySupport: false
         },
         pro: {
             maxVideoLibrarySize: 25,
             maxSeats: -1, // -1 denotes unlimited in metadata
+            isLivestreamingEnabled: true,
             isMultistreamEnabled: true,
             isCustomChannelEnabled: true,
-            isWhiteLabelEnabled: false,
             hasPrioritySupport: false
         },
         studio: {
             maxVideoLibrarySize: 50,
             maxSeats: -1, // -1 denotes unlimited in metadata
+            isLivestreamingEnabled: true,
             isMultistreamEnabled: true,
             isCustomChannelEnabled: true,
-            isWhiteLabelEnabled: true,
             hasPrioritySupport: true
         }
     };
@@ -101,18 +101,16 @@ export default class StripeService {
                 productDescription = tierProduct.description;
             }
             
-            // Prepare metadata with feature details
-            const metadataWithFeatures = {
-                organizationId: organization._id.toString(),
-                organizationSlug: data.organizationId,
-                tier: tier,
-                // Add feature details to metadata
-                maxVideoLibrarySize: tierFeatures ? String(tierFeatures.maxVideoLibrarySize) : '0',
-                maxSeats: tierFeatures ? String(tierFeatures.maxSeats) : '0',
-                isMultistreamEnabled: tierFeatures ? String(tierFeatures.isMultistreamEnabled) : 'false',
-                isCustomChannelEnabled: tierFeatures ? String(tierFeatures.isCustomChannelEnabled) : 'false',
-                isWhiteLabelEnabled: tierFeatures ? String(tierFeatures.isWhiteLabelEnabled) : 'false',
-                hasPrioritySupport: tierFeatures ? String(tierFeatures.hasPrioritySupport) : 'false',
+            // Add all feature metadata to the session
+            const metadata = {
+                organizationId: data.organizationId,
+                tier,
+                maxVideoLibrarySize: tierFeatures.maxVideoLibrarySize.toString(),
+                maxSeats: tierFeatures.maxSeats.toString(),
+                isLivestreamingEnabled: tierFeatures.isLivestreamingEnabled.toString(),
+                isMultistreamEnabled: tierFeatures.isMultistreamEnabled.toString(),
+                isCustomChannelEnabled: tierFeatures.isCustomChannelEnabled.toString(),
+                hasPrioritySupport: tierFeatures.hasPrioritySupport.toString(),
             };
 
             // Create a subscription-based checkout session
@@ -138,9 +136,9 @@ export default class StripeService {
                 allow_promotion_codes: true,
                 success_url: `${config.frontendUrl}/studio/${data.organizationId}/payments?success=true`,
                 cancel_url: `${config.frontendUrl}/studio/${data.organizationId}/payments?canceled=true`,
-                metadata: metadataWithFeatures,
+                metadata: metadata,
                 subscription_data: {
-                    metadata: metadataWithFeatures,
+                    metadata: metadata,
                 },
             });
 
@@ -221,14 +219,14 @@ export default class StripeService {
                 parseInt(subscription.metadata.maxSeats, 10) : 
                 tierFeatures.maxSeats;
                 
+            const isLivestreamingEnabled = subscription.metadata.isLivestreamingEnabled === 'true' || 
+                tierFeatures.isLivestreamingEnabled;
+                
             const isMultistreamEnabled = subscription.metadata.isMultistreamEnabled === 'true' || 
                 tierFeatures.isMultistreamEnabled;
                 
             const isCustomChannelEnabled = subscription.metadata.isCustomChannelEnabled === 'true' || 
                 tierFeatures.isCustomChannelEnabled;
-                
-            const isWhiteLabelEnabled = subscription.metadata.isWhiteLabelEnabled === 'true' || 
-                tierFeatures.isWhiteLabelEnabled;
                 
             const hasPrioritySupport = subscription.metadata.hasPrioritySupport === 'true' || 
                 tierFeatures.hasPrioritySupport;
@@ -248,9 +246,9 @@ export default class StripeService {
                         // Set feature details from metadata
                         maxVideoLibrarySize: finalMaxVideoLibrarySize,
                         maxSeats: finalMaxSeats,
+                        isLivestreamingEnabled,
                         isMultistreamEnabled,
                         isCustomChannelEnabled,
-                        isWhiteLabelEnabled,
                         hasPrioritySupport,
                     }
                 }
@@ -263,9 +261,9 @@ export default class StripeService {
                 features: {
                     maxVideoLibrarySize: finalMaxVideoLibrarySize,
                     maxSeats: finalMaxSeats,
+                    isLivestreamingEnabled,
                     isMultistreamEnabled,
                     isCustomChannelEnabled,
-                    isWhiteLabelEnabled,
                     hasPrioritySupport,
                 }
             });
@@ -295,14 +293,14 @@ export default class StripeService {
                 parseInt(subscription.metadata.maxSeats, 10) : 
                 tierFeatures.maxSeats;
                 
+            const isLivestreamingEnabled = subscription.metadata.isLivestreamingEnabled === 'true' || 
+                tierFeatures.isLivestreamingEnabled;
+                
             const isMultistreamEnabled = subscription.metadata.isMultistreamEnabled === 'true' || 
                 tierFeatures.isMultistreamEnabled;
                 
             const isCustomChannelEnabled = subscription.metadata.isCustomChannelEnabled === 'true' || 
                 tierFeatures.isCustomChannelEnabled;
-                
-            const isWhiteLabelEnabled = subscription.metadata.isWhiteLabelEnabled === 'true' || 
-                tierFeatures.isWhiteLabelEnabled;
                 
             const hasPrioritySupport = subscription.metadata.hasPrioritySupport === 'true' || 
                 tierFeatures.hasPrioritySupport;
@@ -311,19 +309,26 @@ export default class StripeService {
             const finalMaxVideoLibrarySize = maxVideoLibrarySize === -1 ? Infinity : maxVideoLibrarySize;
             const finalMaxSeats = maxSeats === -1 ? Infinity : maxSeats;
 
+            // Get the period end date, handling the case of cancelled subscriptions
+            const currentPeriodEnd = subscription.current_period_end;
+            const periodEnd = status === 'canceled' 
+                ? new Date(currentPeriodEnd * 1000) // For cancelled subscriptions, use the current period end
+                : new Date(currentPeriodEnd * 1000); // For active subscriptions, also use current period end
+
             await Organization.updateOne(
                 { _id: organization._id },
                 {
                     $set: {
-                        subscriptionStatus: status,
                         subscriptionTier: tier,
-                        subscriptionPeriodEnd: new Date(subscription.current_period_end * 1000),
+                        subscriptionStatus: status,
+                        subscriptionPeriodEnd: periodEnd,
+                        customerId: subscription.customer,
                         // Set feature details from metadata
                         maxVideoLibrarySize: finalMaxVideoLibrarySize,
                         maxSeats: finalMaxSeats,
+                        isLivestreamingEnabled,
                         isMultistreamEnabled,
                         isCustomChannelEnabled,
-                        isWhiteLabelEnabled,
                         hasPrioritySupport,
                     }
                 }
@@ -337,9 +342,9 @@ export default class StripeService {
                 features: {
                     maxVideoLibrarySize: finalMaxVideoLibrarySize,
                     maxSeats: finalMaxSeats,
+                    isLivestreamingEnabled,
                     isMultistreamEnabled,
                     isCustomChannelEnabled,
-                    isWhiteLabelEnabled,
                     hasPrioritySupport,
                 }
             });
@@ -551,7 +556,6 @@ export default class StripeService {
                 maxSeats: String(tierFeatures.maxSeats),
                 isMultistreamEnabled: String(tierFeatures.isMultistreamEnabled),
                 isCustomChannelEnabled: String(tierFeatures.isCustomChannelEnabled),
-                isWhiteLabelEnabled: String(tierFeatures.isWhiteLabelEnabled),
                 hasPrioritySupport: String(tierFeatures.hasPrioritySupport),
             };
             
@@ -588,7 +592,6 @@ export default class StripeService {
                         maxSeats: finalMaxSeats,
                         isMultistreamEnabled: tierFeatures.isMultistreamEnabled,
                         isCustomChannelEnabled: tierFeatures.isCustomChannelEnabled,
-                        isWhiteLabelEnabled: tierFeatures.isWhiteLabelEnabled,
                         hasPrioritySupport: tierFeatures.hasPrioritySupport,
                     }
                 }
@@ -604,7 +607,6 @@ export default class StripeService {
                     maxSeats: finalMaxSeats,
                     isMultistreamEnabled: tierFeatures.isMultistreamEnabled,
                     isCustomChannelEnabled: tierFeatures.isCustomChannelEnabled,
-                    isWhiteLabelEnabled: tierFeatures.isWhiteLabelEnabled,
                     hasPrioritySupport: tierFeatures.hasPrioritySupport,
                 }
             });

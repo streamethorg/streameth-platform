@@ -177,9 +177,9 @@ export interface IExtendedOrganization
   maxVideoLibrarySize?: number;
   currentVideoCount?: number;
   maxSeats?: number;
+  isLivestreamingEnabled?: boolean;
   isMultistreamEnabled?: boolean;
   isCustomChannelEnabled?: boolean;
-  isWhiteLabelEnabled?: boolean;
   hasPrioritySupport?: boolean;
   latestInvoice?: {
     id: string;

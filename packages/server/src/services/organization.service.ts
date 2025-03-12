@@ -75,9 +75,9 @@ export default class OrganizationService {
       subscriptionStatus: 'active' as SubscriptionStatus,
       maxVideoLibrarySize: 5,
       maxSeats: 1,
+      isLivestreamingEnabled: false, // Free tier has no livestreaming
       isMultistreamEnabled: false,
       isCustomChannelEnabled: false,
-      isWhiteLabelEnabled: false,
       hasPrioritySupport: false
     };
     

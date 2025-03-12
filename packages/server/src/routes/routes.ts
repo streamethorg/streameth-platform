@@ -119,9 +119,9 @@ const models: TsoaRoute.Models = {
             "maxVideoLibrarySize": {"dataType":"double"},
             "currentVideoCount": {"dataType":"double"},
             "maxSeats": {"dataType":"double"},
+            "isLivestreamingEnabled": {"dataType":"boolean"},
             "isMultistreamEnabled": {"dataType":"boolean"},
             "isCustomChannelEnabled": {"dataType":"boolean"},
-            "isWhiteLabelEnabled": {"dataType":"boolean"},
             "hasPrioritySupport": {"dataType":"boolean"},
             "latestInvoice": {"ref":"InvoiceData"},
         },
@@ -984,7 +984,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"invitationCode":{"dataType":"string"},"customerId":{"dataType":"string"},"subscriptionTier":{"ref":"SubscriptionTier"},"subscriptionStatus":{"ref":"SubscriptionStatus"},"subscriptionPeriodEnd":{"dataType":"datetime"},"maxVideoLibrarySize":{"dataType":"double"},"currentVideoCount":{"dataType":"double"},"maxSeats":{"dataType":"double"},"isMultistreamEnabled":{"dataType":"boolean"},"isCustomChannelEnabled":{"dataType":"boolean"},"isWhiteLabelEnabled":{"dataType":"boolean"},"hasPrioritySupport":{"dataType":"boolean"},"latestInvoice":{"ref":"InvoiceData"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"invitationCode":{"dataType":"string"},"customerId":{"dataType":"string"},"subscriptionTier":{"ref":"SubscriptionTier"},"subscriptionStatus":{"ref":"SubscriptionStatus"},"subscriptionPeriodEnd":{"dataType":"datetime"},"maxVideoLibrarySize":{"dataType":"double"},"currentVideoCount":{"dataType":"double"},"maxSeats":{"dataType":"double"},"isLivestreamingEnabled":{"dataType":"boolean"},"isMultistreamEnabled":{"dataType":"boolean"},"isCustomChannelEnabled":{"dataType":"boolean"},"hasPrioritySupport":{"dataType":"boolean"},"latestInvoice":{"ref":"InvoiceData"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -1010,9 +1010,9 @@ const models: TsoaRoute.Models = {
             "maxVideoLibrarySize": {"dataType":"double"},
             "currentVideoCount": {"dataType":"double"},
             "maxSeats": {"dataType":"double"},
+            "isLivestreamingEnabled": {"dataType":"boolean"},
             "isMultistreamEnabled": {"dataType":"boolean"},
             "isCustomChannelEnabled": {"dataType":"boolean"},
-            "isWhiteLabelEnabled": {"dataType":"boolean"},
             "hasPrioritySupport": {"dataType":"boolean"},
             "latestInvoice": {"ref":"InvoiceData"},
         },

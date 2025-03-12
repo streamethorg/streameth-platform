@@ -50,12 +50,11 @@ const monthlyTiers = [
 const tierFeatures = {
   'free': ['5 videos', '1 seat', 'AI Clipping', 'No livestreaming'],
   'creator': ['10 videos', '1 seat', 'Livestreaming', 'AI Clipping'],
-  'pro': ['25 videos', 'Unlimited seats', 'Multistreaming', 'Custom Channel'],
-  'studio': ['50 videos', 'Unlimited seats', 'White-label', 'Priority Support']
+  'pro': ['25 videos', 'Unlimited seats', 'Livestreaming', 'Multistreaming', 'Custom Channel'],
+  'studio': ['50 videos', 'Unlimited seats', 'Livestreaming', 'Multistreaming', 'Custom Channel', 'Priority Support']
 };
 
-// Mock invoice data - this would come from the organization object in a real implementation
-// This represents the latest invoice information
+// Invoice interface definition
 interface InvoiceData {
   hostedInvoiceUrl: string;
   invoicePdf: string;
@@ -136,10 +135,10 @@ export const ActiveSubscriptionView = ({
   return (
     <div className="container mx-auto px-4 py-4">
       {/* Alerts Section - Shown at top for importance */}
-      {(daysLeft <= 7 || stagesStatus.isOverLimit) && (
+      {((currentTier !== 'free' && daysLeft <= 7) || stagesStatus.isOverLimit) && (
         <Card className="p-3 mb-4 shadow-none bg-amber-50 border-amber-200">
           <div className="flex flex-col space-y-1">
-            {daysLeft <= 7 && (
+            {currentTier !== 'free' && daysLeft <= 7 && (
               <div className="flex items-center text-amber-700">
                 <AlertCircle className="h-4 w-4 mr-2 flex-shrink-0" />
                 <span>Your subscription will renew on {nextBillingDate} ({daysLeft} days from now)</span>
@@ -191,16 +190,16 @@ export const ActiveSubscriptionView = ({
                 <p className="font-medium">{currentTierData.maxSeats === Infinity ? 'Unlimited' : currentTierData.maxSeats}</p>
               </div>
               <div className="bg-gray-50 p-2 rounded-lg">
-                <p className="text-xs text-gray-500 mb-1">Multistream</p>
+                <p className="text-xs text-gray-500 mb-1">Livestreaming</p>
+                <p className="font-medium">{currentTierData.isLivestreamingEnabled ? 'Yes' : 'No'}</p>
+              </div>
+              <div className="bg-gray-50 p-2 rounded-lg">
+                <p className="text-xs text-gray-500 mb-1">Multistreaming</p>
                 <p className="font-medium">{currentTierData.isMultistreamEnabled ? 'Yes' : 'No'}</p>
               </div>
               <div className="bg-gray-50 p-2 rounded-lg">
                 <p className="text-xs text-gray-500 mb-1">Custom Channel</p>
                 <p className="font-medium">{currentTierData.isCustomChannelEnabled ? 'Yes' : 'No'}</p>
-              </div>
-              <div className="bg-gray-50 p-2 rounded-lg">
-                <p className="text-xs text-gray-500 mb-1">White Label</p>
-                <p className="font-medium">{currentTierData.isWhiteLabelEnabled ? 'Yes' : 'No'}</p>
               </div>
               <div className="bg-gray-50 p-2 rounded-lg">
                 <p className="text-xs text-gray-500 mb-1">Priority Support</p>
@@ -209,76 +208,79 @@ export const ActiveSubscriptionView = ({
             </div>
           </div>
 
-          {/* Billing information */}
-          <div className="border-t pt-3 mb-4">
-            <h2 className="text-sm font-medium text-gray-700 mb-2">Billing Information</h2>
-            <div className="space-y-2">
-              <div className="flex items-center">
-                <Calendar className="h-4 w-4 text-gray-500 mr-2" />
-                <div>
-                  <p className="text-sm">Next billing date: <span className="font-medium">{nextBillingDate}</span></p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <CreditCard className="h-4 w-4 text-gray-500 mr-2" />
-                <div>
-                  <p className="text-sm">Billing cycle: <span className="font-medium">Monthly</span></p>
-                </div>
-              </div>
-              {currentTier !== 'free' && (
-                <p className="text-xs text-gray-500 italic pl-6">You can cancel or change your plan at any time</p>
-              )}
-            </div>
-          </div>
-
-          {/* Latest Invoice - Only show for paid plans */}
+          {/* Billing information and Invoice - only show for paid tiers */}
           {currentTier !== 'free' && (
             <div className="border-t pt-3">
-              <h2 className="text-sm font-medium text-gray-700 mb-2">Latest Invoice</h2>
-              
-              {invoiceData ? (
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <div className="flex sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <div className="mb-2 sm:mb-0">
-                      <p className="text-sm font-medium">Invoice #{invoiceData.number}</p>
-                      <p className="text-xs text-gray-500">
-                        {formatPaymentDate(invoiceData.paidAt)}
-                      </p>
+              <div className="flex flex-col sm:flex-row">
+                {/* Billing information - left side */}
+                <div className="sm:w-1/2 sm:pr-4">
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <Calendar className="h-4 w-4 text-gray-500 mr-2" />
+                      <div>
+                        <p className="text-sm">Next billing date: <span className="font-medium">{nextBillingDate}</span></p>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium">{formatCurrency(invoiceData.total, invoiceData.currency)}</p>
-                      <p className="text-xs text-gray-500 capitalize">
-                        Status: <span className="text-green-600 font-medium">{invoiceData.status}</span>
-                      </p>
+                    <div className="flex items-center">
+                      <CreditCard className="h-4 w-4 text-gray-500 mr-2" />
+                      <div>
+                        <p className="text-sm">Billing cycle: <span className="font-medium">Monthly</span></p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="text-xs h-8"
-                      onClick={() => window.open(invoiceData.hostedInvoiceUrl, '_blank')}
-                    >
-                      <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
-                      View Invoice
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="text-xs h-8"
-                      onClick={() => window.open(invoiceData.invoicePdf, '_blank')}
-                    >
-                      <Download className="h-3.5 w-3.5 mr-1.5" />
-                      Download PDF
-                    </Button>
+                    <p className="text-xs text-gray-500 italic pl-6">You can cancel or change your plan at any time</p>
                   </div>
                 </div>
-              ) : (
-                <div className="bg-gray-50 rounded-lg p-3 text-center">
-                  <p className="text-sm text-gray-600">No invoice information available yet.</p>
-                  <p className="text-xs text-gray-500 mt-1">Your first invoice will appear here after your payment is processed.</p>
+                
+                {/* Vertical separator - only visible on sm screens and up */}
+                <div className="hidden sm:block sm:w-px sm:bg-gray-200 sm:mx-4 sm:self-stretch"></div>
+                
+                {/* Latest Invoice - right side */}
+                <div className="sm:w-1/2 sm:pl-4 mt-4 sm:mt-0">
+                  {invoiceData ? (
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                        <div className="mb-2 sm:mb-0">
+                          <p className="text-sm font-medium">Invoice #{invoiceData.number}</p>
+                          <p className="text-xs text-gray-500">
+                            {formatPaymentDate(invoiceData.paidAt)}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-medium">{formatCurrency(invoiceData.total, invoiceData.currency)}</p>
+                          <p className="text-xs text-gray-500 capitalize">
+                            Status: <span className="text-green-600 font-medium">{invoiceData.status}</span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="text-xs h-7"
+                          onClick={() => window.open(invoiceData.hostedInvoiceUrl, '_blank')}
+                        >
+                          <ExternalLink className="h-3.5 w-3.5 mr-1" />
+                          View Invoice
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="text-xs h-7"
+                          onClick={() => window.open(invoiceData.invoicePdf, '_blank')}
+                        >
+                          <Download className="h-3.5 w-3.5 mr-1" />
+                          Download PDF
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-gray-50 rounded-lg p-3 text-center">
+                      <p className="text-sm text-gray-600">No invoice information available yet.</p>
+                      <p className="text-xs text-gray-500 mt-1">Your first invoice will appear here after your payment is processed.</p>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           )}
         </div>
