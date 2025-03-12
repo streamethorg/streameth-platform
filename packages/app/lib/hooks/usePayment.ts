@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { acceptPayment } from '@/lib/services/stripeService';
+import { acceptPayment, createCustomerPortalSession } from '@/lib/services/stripeService';
 import { activateFreeTierAction } from '../actions/organizations';
 
 interface UsePaymentProps {
@@ -75,44 +75,59 @@ export const usePayment = ({ organizationId }: UsePaymentProps) => {
   };
 
   const handleSubscribe = async (priceId: string) => {
-    if (priceId === 'contact_sales') {
-      toast.info('Please contact sales for enterprise pricing');
-      return;
-    }
-
-    // Handle free tier separately
-    if (priceId === 'price_free_monthly') {
-      return handleFreeTier();
-    }
-
-    setLoading(true);
     try {
-      // Map price IDs to actual pricing tiers
-      const tierMap: Record<string, string> = {
-        'price_creator_monthly': 'creator',
-        'price_pro_monthly': 'pro',
-        'price_studio_monthly': 'studio'
-      };
-      
-      // Find which tier this price ID belongs to
-      const tier = tierMap[priceId] || 'creator';
-      
-      // Get the price for this tier
-      const price = tierPrices[tier as keyof typeof tierPrices];
-      
-      console.log(`Initiating subscription for ${tier} tier at $${price}/month`);
-      
-      // Use the acceptPayment function, now passing the tier explicitly
-      const checkoutUrl = await acceptPayment(
-        organizationId,
-        price,
-        tier // Pass the tier explicitly
-      );
+      setLoading(true);
 
-      window.location.href = checkoutUrl;
+      if (priceId === 'price_free_monthly') {
+        // Free tier activation is handled differently - through server action
+        try {
+          await activateFreeTierAction({ organizationId });
+          toast.success('Free tier activated successfully!');
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        } catch (error) {
+          toast.error('Failed to activate free tier. Please try again.');
+        }
+      } else {
+        // Handle paid tier subscription through Stripe
+        let tier = 'creator';
+        let price = 14.99;
+        
+        // Set pricing based on the selected tier
+        if (priceId === 'price_pro_monthly') {
+          tier = 'pro';
+          price = 29.99;
+        } else if (priceId === 'price_studio_monthly') {
+          tier = 'studio';
+          price = 79.99;
+        }
+        
+        // Create checkout session and redirect to Stripe
+        const checkoutUrl = await acceptPayment(organizationId, price, tier);
+        window.location.href = checkoutUrl;
+      }
     } catch (error) {
-      console.error('❌ Subscription error:', error);
+      console.error('Subscription error:', error);
       toast.error('Failed to process subscription. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleManageSubscription = async () => {
+    try {
+      setLoading(true);
+      
+      // Get the current URL to use as the return URL
+      const returnUrl = `${window.location.origin}/studio/${organizationId}/payments`;
+      
+      // Create a portal session and redirect to Stripe
+      const portalUrl = await createCustomerPortalSession(organizationId, returnUrl);
+      window.location.href = portalUrl;
+    } catch (error) {
+      console.error('Manage subscription error:', error);
+      toast.error('Failed to open subscription management portal. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -126,5 +141,6 @@ export const usePayment = ({ organizationId }: UsePaymentProps) => {
     handleCounter,
     handleSubscribe,
     handleFreeTier,
+    handleManageSubscription
   };
 }; 

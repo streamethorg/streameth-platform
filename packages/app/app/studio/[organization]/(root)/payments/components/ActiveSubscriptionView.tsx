@@ -1,4 +1,4 @@
-import { AlertCircle, FileText, Download, ExternalLink, Calendar, CreditCard, CheckCircle } from 'lucide-react';
+import { AlertCircle, FileText, Download, ExternalLink, Calendar, CreditCard, CheckCircle, Settings } from 'lucide-react';
 import { usePayment } from '@/lib/hooks/usePayment';
 import { IExtendedOrganization } from '@/lib/types';
 import { Card } from '@/components/ui/card';
@@ -83,7 +83,7 @@ export const ActiveSubscriptionView = ({
   daysLeft,
   stagesStatus,
 }: ActiveSubscriptionViewProps) => {
-  const { loading, handleSubscribe } = usePayment({ organizationId });
+  const { loading, handleSubscribe, handleManageSubscription } = usePayment({ organizationId });
   const currentTier = organization.subscriptionTier || 'free';
   const currentTierIndex = monthlyTiers.findIndex(t => t.tierKey === currentTier);
   
@@ -227,7 +227,16 @@ export const ActiveSubscriptionView = ({
                         <p className="text-sm">Billing cycle: <span className="font-medium">Monthly</span></p>
                       </div>
                     </div>
-                    <p className="text-xs text-gray-500 italic pl-6">You can cancel or change your plan at any time</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-xs h-7 mt-2"
+                      onClick={handleManageSubscription}
+                      disabled={loading || !organization.customerId}
+                    >
+                      <Settings className="h-3.5 w-3.5 mr-1" />
+                      Manage Subscription
+                    </Button>
                   </div>
                 </div>
                 

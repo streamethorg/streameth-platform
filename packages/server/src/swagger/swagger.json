@@ -401,6 +401,25 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"CreatePortalSessionDto": {
+				"description": "Data transfer object for creating a Stripe customer portal session",
+				"properties": {
+					"organizationId": {
+						"type": "string",
+						"description": "The organization's ID (required)"
+					},
+					"returnUrl": {
+						"type": "string",
+						"description": "The URL to return to after the customer completes the portal flow (required)"
+					}
+				},
+				"required": [
+					"organizationId",
+					"returnUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"CreateMultiStreamDto": {
 				"properties": {
 					"name": {
@@ -5022,6 +5041,38 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/CreateCheckoutSessionDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/stripe/create-portal-session": {
+			"post": {
+				"operationId": "CreatePortalSession",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stripe"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePortalSessionDto"
 							}
 						}
 					}

@@ -782,4 +782,32 @@ export default class StripeService {
             throw error;
         }
     }
+
+    /**
+     * Creates a customer portal session for managing subscriptions
+     * 
+     * @param customerId The Stripe customer ID
+     * @param returnUrl The URL to redirect to after the portal session
+     * @returns The URL to the customer portal session
+     */
+    async createCustomerPortalSession(customerId: string, returnUrl: string): Promise<{ url: string }> {
+        try {
+            if (!customerId) {
+                throw new Error('Customer ID is required to create a portal session');
+            }
+
+            console.log('🔄 Creating customer portal session', { customerId, returnUrl });
+            
+            const session = await this.stripe.billingPortal.sessions.create({
+                customer: customerId,
+                return_url: returnUrl,
+            });
+            
+            console.log('✅ Customer portal session created successfully');
+            return { url: session.url };
+        } catch (error) {
+            console.error('❌ Failed to create customer portal session', error);
+            throw error;
+        }
+    }
 }

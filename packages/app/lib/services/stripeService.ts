@@ -4,6 +4,10 @@ interface StripeCheckoutResponse {
   url: string;
 }
 
+interface StripePortalResponse {
+  url: string;
+}
+
 /**
  * Creates a Stripe subscription checkout session
  * 
@@ -51,5 +55,49 @@ export async function acceptPayment(
   } catch (error) {
     console.error('💥 Subscription process error:', error);
     throw new Error('Failed to process subscription. Please try again later.');
+  }
+}
+
+/**
+ * Creates a Stripe customer portal session for managing subscriptions
+ * 
+ * @param organizationId The ID of the organization
+ * @param returnUrl The URL to return to after the portal session
+ * @returns The portal URL to redirect the user to
+ */
+export async function createCustomerPortalSession(
+  organizationId: string,
+  returnUrl: string
+): Promise<string> {
+  console.log('🔄 Creating customer portal session...', {
+    organizationId,
+    returnUrl
+  });
+
+  try {
+    const response = await fetch(`${apiUrl()}/stripe/create-portal-session`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        organizationId,
+        returnUrl,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ Customer portal creation failed:', response.statusText, errorText);
+      throw new Error(`Customer portal creation failed: ${response.statusText}`);
+    }
+
+    const data = (await response.json()) as { data: StripePortalResponse };
+    console.log('✅ Customer portal session created successfully');
+
+    return data.data.url;
+  } catch (error) {
+    console.error('💥 Customer portal creation error:', error);
+    throw new Error('Failed to create customer portal. Please try again later.');
   }
 }
