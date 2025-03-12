@@ -59,6 +59,9 @@ const CreateLivestreamModal = ({
   const { canUseFeatures, subscriptionStatus, organization } =
     useOrganizationContext();
 
+  // Check if livestreaming is available in this tier
+  const isLivestreamFeatureAvailable = organization?.subscriptionTier !== 'free'; 
+
   const handleClick = (e: React.MouseEvent) => {
     setOpen(true);
   };
@@ -134,10 +137,11 @@ const CreateLivestreamModal = ({
       });
   }
 
-  if (!canUseFeatures && !subscriptionStatus.hasAvailableStages) {
+  // Use FeatureButton for free tier or when features are not available
+  if (!isLivestreamFeatureAvailable || !canUseFeatures) {
     return (
       <FeatureButton
-        variant="primary"
+        variant={variant}
         className="flex items-center gap-2"
         forceLockedState={true}
       >

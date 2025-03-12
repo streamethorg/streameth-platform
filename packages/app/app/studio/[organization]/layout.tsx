@@ -16,8 +16,8 @@ const calculateOrganizationStatus = (
   let daysLeft = 0;
   let hasExpired = true;
 
-  if (organization.expirationDate) {
-    const expiryDate = new Date(organization.expirationDate);
+  if (organization.subscriptionPeriodEnd) {
+    const expiryDate = new Date(organization.subscriptionPeriodEnd);
     const now = new Date();
     daysLeft = Math.ceil(
       (expiryDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
@@ -25,17 +25,22 @@ const calculateOrganizationStatus = (
     hasExpired = daysLeft <= 0;
   }
 
+  const isSubscriptionActive = organization.subscriptionStatus === 'active';
+  const isFree = organization.subscriptionTier === 'free';
+  
+  // Free tier never expires
+  if (isFree) {
+    hasExpired = false;
+  }
+
   return {
-    isActive: organization.paymentStatus === 'active',
-    isProcessing: organization.paymentStatus === 'processing',
-    isPending: organization.paymentStatus === 'pending',
-    isFailed: organization.paymentStatus === 'failed',
+    isActive: isSubscriptionActive || isFree,
+    isProcessing: organization.subscriptionStatus === 'past_due',
+    isPending: organization.subscriptionStatus === 'trialing',
+    isFailed: organization.subscriptionStatus === 'unpaid' || organization.subscriptionStatus === 'canceled',
     daysLeft,
     hasExpired,
-    hasAvailableStages:
-      typeof organization.currentStages === 'undefined' ||
-      typeof organization.paidStages === 'undefined' ||
-      organization.currentStages < organization.paidStages,
+    hasAvailableStages: isFree || isSubscriptionActive,
   };
 };
 
@@ -73,14 +78,22 @@ const Layout = async ({
   }
 
   const status = calculateOrganizationStatus(currentOrganization);
-  const canUseFeatures = status.isActive && !status.hasExpired;
+  
+  // Fix: ensure free tier can always use features, regardless of expiry
+  const isFree = currentOrganization.subscriptionTier === 'free';
+  const canUseFeatures = isFree || (status.isActive && !status.hasExpired);
+  
   const canCreateStages = canUseFeatures && status.hasAvailableStages;
+  
+  // Use subscription tier to determine max stages instead
+  const maxStages = currentOrganization.subscriptionTier === 'free' ? 1 : 
+                   currentOrganization.subscriptionTier === 'creator' ? 2 :
+                   currentOrganization.subscriptionTier === 'pro' ? 5 : 10; // studio tier
+  
   const stagesStatus = {
     currentStages: stages.length || 0,
-    paidStages: currentOrganization.paidStages || 0,
-    isOverLimit:
-      stages.length >= (currentOrganization.paidStages || 0) &&
-      currentOrganization.paidStages !== undefined,
+    paidStages: maxStages, // Use calculated value instead of removed field
+    isOverLimit: stages.length >= maxStages, // Compare with calculated max
   };
 
   return (

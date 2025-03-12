@@ -1,7 +1,7 @@
 import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization, IOrganizationUpdate, ISocials, PaymentStatus } from '@interfaces/organization.interface';
+import { IOrganization, IOrganizationUpdate, ISocials, PaymentStatus, SubscriptionTier, SubscriptionStatus } from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
 import User from '@models/user.model';
@@ -27,6 +27,7 @@ export default class OrganizationService {
     if (findOrg) throw new HttpException(409, 'Organization already exists');
 
     // Set default payment status and expiration date for new organizations
+    // Also include free tier defaults
     const orgData = {
       ...data,
       paymentStatus: 'none' as PaymentStatus,
@@ -35,6 +36,16 @@ export default class OrganizationService {
       currentStages: 0,
       streamingDays: 0,
       invitationCode: this.generateInvitationCode(),
+      
+      // Free tier defaults
+      subscriptionTier: 'free' as SubscriptionTier,
+      subscriptionStatus: 'active' as SubscriptionStatus,
+      maxVideoLibrarySize: 5,
+      maxSeats: 1,
+      isMultistreamEnabled: false,
+      isCustomChannelEnabled: false,
+      isWhiteLabelEnabled: false,
+      hasPrioritySupport: false,
     };
 
     const createOrg = await this.controller.store.create(
@@ -49,6 +60,39 @@ export default class OrganizationService {
       { $addToSet: { organizations: createOrg._id } },
     );
     return createOrg;
+  }
+
+  async activateFreeTier(organizationId: string): Promise<IOrganization> {
+    const org = await this.get(organizationId);
+    
+    if (!org) {
+      throw new HttpException(404, 'Organization not found');
+    }
+    
+    // Set free tier values without affecting one-off subscription data
+    const updateData = {
+      subscriptionTier: 'free' as SubscriptionTier,
+      subscriptionStatus: 'active' as SubscriptionStatus,
+      maxVideoLibrarySize: 5,
+      maxSeats: 1,
+      isMultistreamEnabled: false,
+      isCustomChannelEnabled: false,
+      isWhiteLabelEnabled: false,
+      hasPrioritySupport: false
+    };
+    
+    // Update using the Organization model directly
+    const updatedOrg = await Organization.findByIdAndUpdate(
+      organizationId,
+      { $set: updateData },
+      { new: true }
+    );
+
+    if (!updatedOrg) {
+      throw new HttpException(404, 'Failed to update organization');
+    }
+
+    return updatedOrg;
   }
 
   async joinOrganization(invitationCode: string, userEmail: string): Promise<IOrganization> {

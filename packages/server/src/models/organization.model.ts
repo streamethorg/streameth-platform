@@ -24,17 +24,19 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
         channelId: { type: String, default: '' },
       },
     ],
-    paymentStatus: { type: String, enum: ['none', 'pending', 'processing', 'active', 'failed'], default: 'none' },
     customerId: { type: String },
-    streamingDays: { type: Number },
-    paidStages: { type: Number, default: 0 },
-    currentStages: { type: Number, default: 0 },
-    lastPaymentAmount: { type: Number },
-    lastPaymentDate: { type: Date },
-    lastPaymentError: { type: String },
-    lastPaymentIntentId: { type: String },
-    lastCheckoutSessionId: { type: String },
-    expirationDate: { type: Date },
+    
+    // Subscription tier fields
+    subscriptionTier: { type: String, enum: ['free', 'creator', 'pro', 'studio', 'none'], default: 'free' },
+    subscriptionStatus: { type: String, enum: ['active', 'past_due', 'canceled', 'unpaid', 'trialing', 'none'], default: 'none' },
+    subscriptionPeriodEnd: { type: Date },
+    maxVideoLibrarySize: { type: Number, default: 5 }, // Free tier default
+    currentVideoCount: { type: Number, default: 0 }, // Current videos in library
+    maxSeats: { type: Number, default: 1 }, // Free tier default
+    isMultistreamEnabled: { type: Boolean, default: false },
+    isCustomChannelEnabled: { type: Boolean, default: false },
+    isWhiteLabelEnabled: { type: Boolean, default: false },
+    hasPrioritySupport: { type: Boolean, default: false },
   },
   {
     timestamps: true,

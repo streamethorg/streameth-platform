@@ -11,16 +11,18 @@ export default function PaymentsPage() {
     organizationId, 
     subscriptionStatus, 
     stagesStatus,
-    daysLeft 
+    daysLeft,
+    subscriptionTier
   } = useOrganizationContext();
 
-  // If never had a subscription, show pricing tiers
-  if (organization.paymentStatus === 'none' && !organization.expirationDate) {
+  // If never had a subscription or has free tier, show pricing tiers
+  if (organization.subscriptionStatus === 'none' || 
+      (organization.subscriptionTier === 'free' && organization.subscriptionStatus !== 'active')) {
     return <NewSubscriptionView organizationId={organizationId} />;
   }
 
   // If subscription has expired, show expired notice + pricing tiers
-  if (subscriptionStatus.hasExpired) {
+  if (subscriptionStatus.hasExpired || subscriptionStatus.isFailed) {
     return <ExpiredSubscriptionView 
       organizationId={organizationId}
       stagesStatus={stagesStatus}

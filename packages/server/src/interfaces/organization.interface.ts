@@ -11,7 +11,8 @@ export interface ISocials {
   channelId?: string;
 }
 
-export type PaymentStatus = 'none' | 'pending' | 'processing' | 'active' | 'failed';
+export type SubscriptionTier = 'free' | 'creator' | 'pro' | 'studio' | 'none';
+export type SubscriptionStatus = 'active' | 'past_due' | 'canceled' | 'unpaid' | 'trialing' | 'none';
 
 export interface IOrganization {
   _id?: Types.ObjectId;
@@ -28,18 +29,17 @@ export interface IOrganization {
   address?: string;
   invitationCode?: string;
   socials?: ISocials[];
-  // Payment related fields
-  paymentStatus?: PaymentStatus;
   customerId?: string;
-  streamingDays?: number;
-  paidStages?: number;
-  currentStages?: number;
-  lastPaymentAmount?: number;
-  lastPaymentDate?: Date;
-  lastPaymentError?: string;
-  lastPaymentIntentId?: string;
-  lastCheckoutSessionId?: string;
-  expirationDate?: Date; // When the streaming access expires
+  subscriptionTier?: SubscriptionTier;
+  subscriptionStatus?: SubscriptionStatus;
+  subscriptionPeriodEnd?: Date;
+  maxVideoLibrarySize?: number;
+  currentVideoCount?: number;
+  maxSeats?: number;
+  isMultistreamEnabled?: boolean;
+  isCustomChannelEnabled?: boolean;
+  isWhiteLabelEnabled?: boolean;
+  hasPrioritySupport?: boolean;
 }
 
 export type IOrganizationUpdate = Partial<IOrganization>;

@@ -28,6 +28,33 @@ export async function fetchOrganization({
   }
 }
 
+export async function activateFreeTier({
+  organizationId,
+}: {
+  organizationId: string;
+}): Promise<IExtendedOrganization> {
+  try {
+    const response = await fetchClient(
+      `${apiUrl()}/organizations/subscription/free/${organizationId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.ok) {
+      return (await response.json()).data;
+    } else {
+      throw await response.json();
+    }
+  } catch (e) {
+    console.error('Unexpected error activating free tier:', e);
+    throw e;
+  }
+}
+
 export async function fetchOrganizations(): Promise<IExtendedOrganization[]> {
   try {
     const response = await fetchClient(`${apiUrl()}/organizations`, {

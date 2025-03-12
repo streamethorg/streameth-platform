@@ -1,6 +1,8 @@
 import {
   IOrganization,
   ISocials,
+  SubscriptionTier,
+  SubscriptionStatus,
 } from 'streameth-new-server/src/interfaces/organization.interface';
 import { IEvent } from 'streameth-new-server/src/interfaces/event.interface';
 import { ISession } from 'streameth-new-server/src/interfaces/session.interface';
@@ -169,6 +171,16 @@ export interface IExtendedOrganization
   extends Omit<IOrganization, '_id' | 'socials'> {
   _id: string;
   socials?: IExtendedSocials[];
+  subscriptionTier?: SubscriptionTier;
+  subscriptionStatus?: SubscriptionStatus;
+  subscriptionPeriodEnd?: Date;
+  maxVideoLibrarySize?: number;
+  currentVideoCount?: number;
+  maxSeats?: number;
+  isMultistreamEnabled?: boolean;
+  isCustomChannelEnabled?: boolean;
+  isWhiteLabelEnabled?: boolean;
+  hasPrioritySupport?: boolean;
 }
 export interface IExtendedSession
   extends Omit<ISession, '_id' | 'nftCollections'> {
