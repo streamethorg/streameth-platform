@@ -12,7 +12,7 @@ export interface ISocials {
 }
 
 export type SubscriptionTier = 'free' | 'creator' | 'pro' | 'studio' | 'none';
-export type SubscriptionStatus = 'active' | 'past_due' | 'canceled' | 'unpaid' | 'trialing' | 'none';
+export type SubscriptionStatus = 'active' | 'past_due' | 'canceled' | 'unpaid' | 'trialing' | 'none' | 'canceling';
 
 export interface InvoiceData {
   id: string;

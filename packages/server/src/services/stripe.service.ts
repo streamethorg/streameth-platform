@@ -278,42 +278,35 @@ export default class StripeService {
             const organization = await this.getOrganizationFromMetadata(subscription.metadata);
             if (!organization) return;
 
-            const status = subscription.status;
-            const tier = subscription.metadata.tier || organization.subscriptionTier || 'free';
-            
-            // Parse feature details from metadata or use defaults based on tier
-            const tierFeatures = this.TIER_FEATURES[tier as keyof typeof this.TIER_FEATURES] || this.TIER_FEATURES.free;
-            
-            // Parse metadata values, using tier defaults if metadata doesn't have them
-            const maxVideoLibrarySize = subscription.metadata.maxVideoLibrarySize ? 
-                parseInt(subscription.metadata.maxVideoLibrarySize, 10) : 
-                tierFeatures.maxVideoLibrarySize;
-                
-            const maxSeats = subscription.metadata.maxSeats ? 
-                parseInt(subscription.metadata.maxSeats, 10) : 
-                tierFeatures.maxSeats;
-                
-            const isLivestreamingEnabled = subscription.metadata.isLivestreamingEnabled === 'true' || 
-                tierFeatures.isLivestreamingEnabled;
-                
-            const isMultistreamEnabled = subscription.metadata.isMultistreamEnabled === 'true' || 
-                tierFeatures.isMultistreamEnabled;
-                
-            const isCustomChannelEnabled = subscription.metadata.isCustomChannelEnabled === 'true' || 
-                tierFeatures.isCustomChannelEnabled;
-                
-            const hasPrioritySupport = subscription.metadata.hasPrioritySupport === 'true' || 
-                tierFeatures.hasPrioritySupport;
+            // Extract features from metadata
+            const tier = subscription.metadata.tier || 'free';
+            const maxVideoLibrarySize = Number(subscription.metadata.maxVideoLibrarySize || 0);
+            const maxSeats = Number(subscription.metadata.maxSeats || 1);
+            const isLivestreamingEnabled = subscription.metadata.isLivestreamingEnabled === 'true';
+            const isMultistreamEnabled = subscription.metadata.isMultistreamEnabled === 'true';
+            const isCustomChannelEnabled = subscription.metadata.isCustomChannelEnabled === 'true';
+            const hasPrioritySupport = subscription.metadata.hasPrioritySupport === 'true';
 
-            // Convert -1 to Infinity for unlimited values
+            // Convert unlimited values
             const finalMaxVideoLibrarySize = maxVideoLibrarySize === -1 ? Infinity : maxVideoLibrarySize;
             const finalMaxSeats = maxSeats === -1 ? Infinity : maxSeats;
+            
+            // Get subscription status from Stripe
+            let status = subscription.status;
+            
+            // Check if subscription is marked to be canceled at the end of the period
+            // but is still active (cancel_at_period_end = true)
+            const isCancelingAtPeriodEnd = subscription.cancel_at_period_end === true && 
+                                          subscription.canceled_at !== null;
+                                          
+            // If subscription is canceling at period end but still active, mark as "canceling"
+            if (isCancelingAtPeriodEnd && status === 'active') {
+                status = 'canceling'; // Custom status for our application
+            }
 
             // Get the period end date, handling the case of cancelled subscriptions
             const currentPeriodEnd = subscription.current_period_end;
-            const periodEnd = status === 'canceled' 
-                ? new Date(currentPeriodEnd * 1000) // For cancelled subscriptions, use the current period end
-                : new Date(currentPeriodEnd * 1000); // For active subscriptions, also use current period end
+            const periodEnd = new Date(currentPeriodEnd * 1000);
 
             await Organization.updateOne(
                 { _id: organization._id },
@@ -338,6 +331,7 @@ export default class StripeService {
                 organizationId: organization._id,
                 status,
                 tier,
+                cancelAtPeriodEnd: subscription.cancel_at_period_end,
                 subscriptionId: subscription.id,
                 features: {
                     maxVideoLibrarySize: finalMaxVideoLibrarySize,

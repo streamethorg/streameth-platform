@@ -28,7 +28,7 @@ const OrganizationSchema = new Schema<IOrganizationModel>(
     
     // Subscription tier fields
     subscriptionTier: { type: String, enum: ['free', 'creator', 'pro', 'studio', 'none'], default: 'free' },
-    subscriptionStatus: { type: String, enum: ['active', 'past_due', 'canceled', 'unpaid', 'trialing', 'none'], default: 'none' },
+    subscriptionStatus: { type: String, enum: ['active', 'past_due', 'canceled', 'unpaid', 'trialing', 'none', 'canceling'], default: 'none' },
     subscriptionPeriodEnd: { type: Date },
     maxVideoLibrarySize: { type: Number, default: 5 }, // Free tier default
     currentVideoCount: { type: Number, default: 0 }, // Current videos in library
