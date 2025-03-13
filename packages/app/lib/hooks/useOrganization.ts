@@ -7,11 +7,16 @@ interface Organization {
   _id: string;
   name: string;
   slug: string;
-  paymentStatus?: 'none' | 'pending' | 'processing' | 'active' | 'failed';
-  streamingDays?: number;
-  currentStages?: number;
-  paidStages?: number;
-  expirationDate?: Date;
+  subscriptionTier?: string;
+  subscriptionStatus?: string;
+  subscriptionPeriodEnd?: Date;
+  maxVideoLibrarySize?: number;
+  currentVideoCount?: number;
+  maxSeats?: number;
+  isMultistreamEnabled?: boolean;
+  isCustomChannelEnabled?: boolean;
+  isWhiteLabelEnabled?: boolean;
+  hasPrioritySupport?: boolean;
 }
 
 export const useOrganization = (organizationId: string) => {

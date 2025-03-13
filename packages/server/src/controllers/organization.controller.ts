@@ -37,6 +37,19 @@ export class OrganizationController extends Controller {
   }
 
   /**
+   * @summary Activate free tier for organization
+   */
+  @Security('jwt', ['org'])
+  @SuccessResponse('200')
+  @Post('/subscription/free/{organizationId}')
+  async activateFreeTier(
+    @Path() organizationId: string,
+  ): Promise<IStandardResponse<IOrganization>> {
+    const org = await this.organizationService.activateFreeTier(organizationId);
+    return SendApiResponse('free tier activated', org);
+  }
+
+  /**
    * @summary Join organization with invitation code
    */
   @Security('jwt')

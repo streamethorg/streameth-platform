@@ -65,6 +65,33 @@ export default class SessionService {
       eventId = event._id;
       eventSlug = event.slug;
     }
+
+    // Check if we need to verify video count limits
+    // Only apply this check for actual video uploads, not other types of sessions
+    if (data.type === SessionType.video && data.organizationId) {
+      // Get the organization to check video library limits
+      const organization = await Organization.findById(data.organizationId);
+      if (!organization) {
+        throw new HttpException(404, 'Organization not found');
+      }
+
+      // Check if the organization has reached its video library limit
+      if (
+        organization.subscriptionStatus === 'active' && 
+        organization.maxVideoLibrarySize !== undefined && 
+        organization.currentVideoCount !== undefined &&
+        organization.currentVideoCount >= organization.maxVideoLibrarySize
+      ) {
+        throw new HttpException(403, 'Video library limit reached for this subscription tier. Please upgrade your subscription.');
+      }
+
+      // Increment the video count for the organization
+      await Organization.findByIdAndUpdate(
+        data.organizationId,
+        { $inc: { currentVideoCount: 1 } }
+      );
+    }
+
     return this.controller.store.create(
       data.name,
       {
@@ -206,7 +233,18 @@ export default class SessionService {
   }
 
   async deleteOne(sessionId: string): Promise<void> {
-    await this.get(sessionId);
+    const session = await this.get(sessionId);
+    
+    // Decrement the video count for the organization if this is a video session
+    if (session.type === SessionType.video && session.organizationId) {
+      await Organization.findByIdAndUpdate(
+        session.organizationId,
+        { $inc: { currentVideoCount: -1 } },
+        // Ensure count doesn't go below 0
+        { new: true, runValidators: true }
+      );
+    }
+    
     return await this.controller.store.delete(sessionId);
   }
 
@@ -460,6 +498,25 @@ export default class SessionService {
   }): Promise<ISession> {
     console.log('importVideoFromUrl', d);
     try {
+      // Check if we need to verify video count limits
+      if (d.organizationId) {
+        // Get the organization to check video library limits
+        const organization = await Organization.findById(d.organizationId);
+        if (!organization) {
+          throw new HttpException(404, 'Organization not found');
+        }
+
+        // Check if the organization has reached its video library limit
+        if (
+          organization.subscriptionStatus === 'active' && 
+          organization.maxVideoLibrarySize !== undefined && 
+          organization.currentVideoCount !== undefined &&
+          organization.currentVideoCount >= organization.maxVideoLibrarySize
+        ) {
+          throw new HttpException(403, 'Video library limit reached for this subscription tier. Please upgrade your subscription.');
+        }
+      }
+
       const source = getSourceType(d.url);
       if (source.type === 'youtube' || source.type === 'twitter') {
         // First get video info
@@ -499,17 +556,26 @@ export default class SessionService {
 
         // call video importer queue
         const queue = await videoImporterQueue();
-        await queue.add({
-          session,
-          videoUrl: d.url,
-          uploadUrl: asset.url,
+        await queue.add('import-video', {
+          url: d.url,
+          organizationId: d.organizationId,
+          sessionName: d.name || output.title,
+          source: source,
         });
+
+        // Once we queue the job, increment the organization's video count
+        await Organization.findByIdAndUpdate(
+          d.organizationId,
+          { $inc: { currentVideoCount: 1 } }
+        );
+
         return session;
+      } else {
+        throw new HttpException(400, 'Unsupported source type');
       }
-      throw new HttpException(400, 'Unsupported video source');
     } catch (e) {
-      console.error('Error importing video:', e);
-      throw new HttpException(400, 'Error downloading video');
+      console.error('Error importing video from URL:', e);
+      throw new HttpException(500, `Error importing video: ${e.message}`);
     }
   }
 

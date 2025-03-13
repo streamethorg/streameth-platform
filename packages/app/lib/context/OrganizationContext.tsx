@@ -15,7 +15,9 @@ export interface SubscriptionStatus {
 
 export interface StagesStatus {
   currentStages: number;
+  // We keep paidStages for backward compatibility but it's now always Infinity
   paidStages: number;
+  // We keep isOverLimit for backward compatibility but it's now always false
   isOverLimit: boolean;
 }
 
@@ -27,6 +29,7 @@ type OrganizationContextType = {
   canCreateStages: boolean;
   subscriptionStatus: SubscriptionStatus;
   stagesStatus: StagesStatus;
+  subscriptionTier: string;
 };
 
 export const useOrganizationContext = () => {
@@ -57,6 +60,7 @@ export const OrganizationContextProvider = ({
   stagesStatus: StagesStatus;
 }) => {
   const organizationId = organization?._id.toString();
+  const subscriptionTier = organization?.subscriptionTier || 'none';
   
   if ( !organization || !organizationId) {
     throw new Error('User, organization, or organizationId is null');
@@ -73,6 +77,7 @@ export const OrganizationContextProvider = ({
         canCreateStages,
         subscriptionStatus,
         stagesStatus,
+        subscriptionTier,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { fetchStage } from '@/lib/services/stageService';
 import { IExtendedOrganization, IExtendedStage } from '@/lib/types';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { LuArrowRight, LuScissorsLineDashed } from 'react-icons/lu';
 import EditLivestream from '../../components/EditLivestream';
@@ -14,9 +14,17 @@ import StreamHealth from './StreamHealth';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const StageControls = ({ stream }: { stream: IExtendedStage }) => {
-  const { organizationId } = useOrganizationContext();
+  const { organizationId, organization } = useOrganizationContext();
   const [isLive, setIsLive] = useState(stream?.streamSettings?.isActive);
   const streamKey = stream?.streamSettings?.streamKey;
+
+  // Check if user is on free tier - they shouldn't have access to this page
+  const isFree = organization?.subscriptionTier === 'free';
+  
+  // If free tier, redirect to livestreams page with blocked access parameter
+  if (isFree) {
+    redirect(`/studio/${organizationId}/livestreams?blockedAccess=true`);
+  }
 
   const checkIsLive = async () => {
     try {
