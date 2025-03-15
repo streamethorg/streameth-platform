@@ -15,14 +15,30 @@ const UpcomingStreams = async ({
     organizationId,
   });
 
+  console.log(livestreams);
   livestreams = livestreams.filter((livestream) => {
     // filter by streams in the future or happening today
-    return livestream._id !== currentStreamId;
+    const streamDate = new Date(livestream.streamDate as string);
+    const today = new Date();
+
+    // Compare only the date parts (year, month, day)
+    const streamDateOnly = new Date(
+      streamDate.getFullYear(),
+      streamDate.getMonth(),
+      streamDate.getDate()
+    );
+    const todayOnly = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    return livestream._id !== currentStreamId && streamDateOnly >= todayOnly;
   });
 
-  livestreams = livestreams.filter((livestream) => {
-    return livestream.published;
-  });
+  // livestreams = livestreams.filter((livestream) => {
+  //   return livestream.published;
+  // });
 
   return (
     <>

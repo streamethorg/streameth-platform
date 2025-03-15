@@ -38,7 +38,7 @@ export async function fetchOrganizationStages({
   const response = await fetch(
     `${apiUrl()}/stages/organization/${organizationId}?${fromDateQuery}${untilDateQuery}`,
     {
-      cache: 'force-cache',
+      cache: 'no-cache',
       next: {
         tags: [`stages-${organizationId}`],
       },
