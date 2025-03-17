@@ -67,7 +67,7 @@ const StageControls = ({ stream }: { stream: IExtendedStage }) => {
             />
 
             <Link
-              href={`/studio/${organizationId}/livestream?stage=${stream._id}`}
+              href={`/${organizationId}/livestream?stage=${stream._id}`}
               target="_blank"
             >
               <Button variant="outline">
