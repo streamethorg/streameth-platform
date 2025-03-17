@@ -9,14 +9,19 @@ import {
   LuShare2,
   LuBookOpen,
   LuDollarSign,
+  LuLock,
 } from 'react-icons/lu';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
+import { canUseFeature } from '@/lib/utils/subscription';
 
 const SidebarMenu = ({}) => {
   const { organization, organizationId, daysLeft } = useOrganizationContext();
+
+  // Check if custom channel feature is enabled
+  const canAccessChannel = canUseFeature(organization, 'isCustomChannelEnabled');
 
   const navigationItems = [
     {
@@ -77,8 +82,17 @@ const SidebarMenu = ({}) => {
               <Link href={`/studio/${organizationId}/settings`}>Settings</Link>
             </Button>
 
-            <Button variant={'outline'} size={'sm'}>
-              <Link href={`/${organizationId}`}>Channel </Link>
+            <Button variant={'outline'} size={'sm'} 
+              onClick={(e) => {
+                if (!canAccessChannel) {
+                  e.preventDefault();
+                  window.location.href = `/studio/${organizationId}/payments`;
+                }
+              }}
+              className={!canAccessChannel ? 'opacity-60' : ''}
+            >
+              {!canAccessChannel && <LuLock className="w-4 h-4 mr-1" />}
+              <Link href={canAccessChannel ? `/${organizationId}` : '#'}>Channel</Link>
             </Button>
           </div>
         </div>
