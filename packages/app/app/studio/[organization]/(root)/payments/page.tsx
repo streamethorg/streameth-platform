@@ -25,7 +25,7 @@ export default function PaymentsPage() {
           <NewSubscriptionView organizationId={organizationId} />
         )}
 
-        {/* If subscription has expired, show expired notice + pricing tiers */}
+        {/* If subscription has expired or failed, show expired notice + pricing tiers */}
         {(subscriptionStatus.hasExpired || subscriptionStatus.isFailed) && (
           <ExpiredSubscriptionView 
             organizationId={organizationId}
@@ -50,6 +50,8 @@ export default function PaymentsPage() {
           <ExpiredSubscriptionView 
             organizationId={organizationId}
             stagesStatus={stagesStatus}
+            isCancelled={organization.subscriptionStatus === 'canceling'}
+            subscriptionEndDate={organization.subscriptionPeriodEnd ? new Date(organization.subscriptionPeriodEnd) : undefined}
           />
         )}
       </div>

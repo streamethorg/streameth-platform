@@ -301,6 +301,7 @@ export const ActiveSubscriptionView = ({
           loading={loading}
           onSubscribe={handleSubscribe}
           currentTier={currentTier}
+          showOnlyUpgradeOptions={organization.subscriptionStatus === 'active' && currentTier !== 'free'}
         />
       </div>
     </div>

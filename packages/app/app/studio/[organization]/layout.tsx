@@ -10,6 +10,8 @@ import {
 } from '@/lib/context/OrganizationContext';
 import { fetchStages } from '@/lib/services/stageService';
 import { fetchUser } from '@/lib/services/userService';
+import { canUseFeature } from '@/lib/utils/subscription';
+
 const calculateOrganizationStatus = (
   organization: IExtendedOrganization
 ): SubscriptionStatus => {
@@ -79,13 +81,16 @@ const Layout = async ({
 
   const status = calculateOrganizationStatus(currentOrganization);
   
-  // Fix: ensure free tier can always use features, regardless of expiry
-  const isFree = currentOrganization.subscriptionTier === 'free';
-  const canUseFeatures = isFree || (status.isActive && !status.hasExpired);
+  // Allow features based on subscription status:
+  // 1. Free tier always has access to its basic features
+  // 2. Paid tiers have access during active, canceling, or trial periods
+  const canUseFeatures = currentOrganization.subscriptionTier === 'free' || 
+    (currentOrganization.subscriptionStatus === 'active' || 
+     currentOrganization.subscriptionStatus === 'canceling' || 
+     currentOrganization.subscriptionStatus === 'trialing');
   
-  // Only check if they have livestreaming enabled based on tier
-  const hasLivestreaming = currentOrganization.subscriptionTier !== 'free';
-  const canCreateStages = canUseFeatures && hasLivestreaming;
+  // Check if they can create stages based on tier and subscription status
+  const canCreateStages = canUseFeature(currentOrganization, 'isLivestreamingEnabled');
   
   // We're keeping the stagesStatus structure but removing limits
   const stagesStatus = {
