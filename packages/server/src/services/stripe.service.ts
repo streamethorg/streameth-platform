@@ -13,19 +13,19 @@ export default class StripeService {
     // Product and price ID mapping - these should match your actual Stripe product/price IDs
     private readonly PRODUCTS = {
         creator: {
-            id: 'prod_Rvhmoh3yOBq0Xv', // Creator product ID
+            id: 'prod_Rw1te1XXeUc9Ui', // Creator product ID
             priceId: 'price_creator_monthly',
             name: 'Creator Plan',
             description: 'Enhanced features for creators with more uploads'
         },
         pro: {
-            id: 'prod_Rvi08nhJDNught', // Content Pro product ID
+            id: 'prod_Rw1t3ztFF4JGNY', // Content Pro product ID
             priceId: 'price_pro_monthly',
             name: 'Pro Plan',
             description: 'Professional features with multistream support'
         },
         studio: {
-            id: 'prod_Rvi05cDVcwxs1g', // Studio product ID
+            id: 'prod_Rw1tTg4eMPjGr1', // Studio product ID
             priceId: 'price_studio_monthly',
             name: 'Studio Plan',
             description: 'Enterprise features with unlimited uploads and priority support'
