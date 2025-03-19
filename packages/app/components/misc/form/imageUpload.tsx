@@ -5,6 +5,7 @@ import React, {
   useState,
   forwardRef,
   useImperativeHandle,
+  useEffect,
 } from 'react';
 import Image from 'next/image';
 import { X, Image as ImageLogo } from 'lucide-react';
@@ -117,6 +118,16 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    // Clean up object URLs to prevent memory leaks
+    useEffect(() => {
+      return () => {
+        // Revoke any object URLs we might have created to prevent memory leaks
+        if (preview && preview.startsWith('blob:')) {
+          URL.revokeObjectURL(preview);
+        }
+      };
+    }, [preview]);
+
     const validateImage = useCallback(
       (file: File): Promise<boolean> => {
         return new Promise((resolve) => {
@@ -205,6 +216,11 @@ const ImageUpload = forwardRef<HTMLInputElement, ImageUploadProps>(
     const onDrop = useCallback(
       async (acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
+          // Revoke previous blob URL if it exists
+          if (preview && preview.startsWith('blob:')) {
+            URL.revokeObjectURL(preview);
+          }
+          
           const file = resize
             ? await resizeImage(acceptedFiles[0], {
                 width: resizeDimensions?.width ?? 1280,

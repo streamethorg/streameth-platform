@@ -48,15 +48,77 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"PaymentStatus": {
+			"SubscriptionTier": {
 				"type": "string",
 				"enum": [
-					"none",
-					"pending",
-					"processing",
-					"active",
-					"failed"
+					"free",
+					"creator",
+					"pro",
+					"studio",
+					"none"
 				]
+			},
+			"SubscriptionStatus": {
+				"type": "string",
+				"enum": [
+					"active",
+					"past_due",
+					"canceled",
+					"unpaid",
+					"trialing",
+					"none",
+					"canceling"
+				]
+			},
+			"InvoiceData": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"number": {
+						"type": "string"
+					},
+					"hostedInvoiceUrl": {
+						"type": "string"
+					},
+					"invoicePdf": {
+						"type": "string"
+					},
+					"total": {
+						"type": "number",
+						"format": "double"
+					},
+					"currency": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"paidAt": {
+						"type": "number",
+						"format": "double"
+					},
+					"receiptNumber": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"id",
+					"number",
+					"hostedInvoiceUrl",
+					"invoicePdf",
+					"total",
+					"currency",
+					"status",
+					"paidAt",
+					"createdAt"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"IOrganization": {
 				"properties": {
@@ -105,44 +167,45 @@
 						},
 						"type": "array"
 					},
-					"paymentStatus": {
-						"$ref": "#/components/schemas/PaymentStatus"
-					},
 					"customerId": {
 						"type": "string"
 					},
-					"streamingDays": {
-						"type": "number",
-						"format": "double"
+					"subscriptionTier": {
+						"$ref": "#/components/schemas/SubscriptionTier"
 					},
-					"paidStages": {
-						"type": "number",
-						"format": "double"
+					"subscriptionStatus": {
+						"$ref": "#/components/schemas/SubscriptionStatus"
 					},
-					"currentStages": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentAmount": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentDate": {
+					"subscriptionPeriodEnd": {
 						"type": "string",
 						"format": "date-time"
 					},
-					"lastPaymentError": {
-						"type": "string"
+					"maxVideoLibrarySize": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastPaymentIntentId": {
-						"type": "string"
+					"currentVideoCount": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastCheckoutSessionId": {
-						"type": "string"
+					"maxSeats": {
+						"type": "number",
+						"format": "double"
 					},
-					"expirationDate": {
-						"type": "string",
-						"format": "date-time"
+					"isLivestreamingEnabled": {
+						"type": "boolean"
+					},
+					"isMultistreamEnabled": {
+						"type": "boolean"
+					},
+					"isCustomChannelEnabled": {
+						"type": "boolean"
+					},
+					"hasPrioritySupport": {
+						"type": "boolean"
+					},
+					"latestInvoice": {
+						"$ref": "#/components/schemas/InvoiceData"
 					}
 				},
 				"required": [
@@ -304,28 +367,56 @@
 				"additionalProperties": false
 			},
 			"CreateCheckoutSessionDto": {
+				"description": "Data transfer object for creating a Stripe checkout session",
 				"properties": {
 					"organizationId": {
-						"type": "string"
+						"type": "string",
+						"description": "The organization's ID (required)"
 					},
 					"totalPrice": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "The monthly subscription price (required)"
+					},
+					"tier": {
+						"type": "string",
+						"description": "Optional subscription tier identifier"
 					},
 					"streamingDays": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Legacy parameters - kept for backwards compatibility but not used",
+						"deprecated": true
 					},
 					"numberOfStages": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Legacy parameters - kept for backwards compatibility but not used",
+						"deprecated": true
 					}
 				},
 				"required": [
 					"organizationId",
-					"totalPrice",
-					"streamingDays",
-					"numberOfStages"
+					"totalPrice"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreatePortalSessionDto": {
+				"description": "Data transfer object for creating a Stripe customer portal session",
+				"properties": {
+					"organizationId": {
+						"type": "string",
+						"description": "The organization's ID (required)"
+					},
+					"returnUrl": {
+						"type": "string",
+						"description": "The URL to return to after the customer completes the portal flow (required)"
+					}
+				},
+				"required": [
+					"organizationId",
+					"returnUrl"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -2790,6 +2881,126 @@
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
+			"IPlaylist": {
+				"properties": {
+					"_id": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"organizationId": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"sessions": {
+						"items": {
+							"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+						},
+						"type": "array"
+					},
+					"isPublic": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"organizationId",
+					"name",
+					"sessions",
+					"isPublic"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_IPlaylist_": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IPlaylist"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreatePlaylistDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"sessions": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"isPublic": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"name",
+					"sessions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdatePlaylistDto": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"sessions": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"isPublic": {
+						"type": "boolean"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IStandardResponse_Array_IPlaylist__": {
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IPlaylist"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"IStandardResponse_IOrganization_": {
 				"properties": {
 					"status": {
@@ -2853,44 +3064,45 @@
 					"invitationCode": {
 						"type": "string"
 					},
-					"paymentStatus": {
-						"$ref": "#/components/schemas/PaymentStatus"
-					},
 					"customerId": {
 						"type": "string"
 					},
-					"streamingDays": {
-						"type": "number",
-						"format": "double"
+					"subscriptionTier": {
+						"$ref": "#/components/schemas/SubscriptionTier"
 					},
-					"paidStages": {
-						"type": "number",
-						"format": "double"
+					"subscriptionStatus": {
+						"$ref": "#/components/schemas/SubscriptionStatus"
 					},
-					"currentStages": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentAmount": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentDate": {
+					"subscriptionPeriodEnd": {
 						"type": "string",
 						"format": "date-time"
 					},
-					"lastPaymentError": {
-						"type": "string"
+					"maxVideoLibrarySize": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastPaymentIntentId": {
-						"type": "string"
+					"currentVideoCount": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastCheckoutSessionId": {
-						"type": "string"
+					"maxSeats": {
+						"type": "number",
+						"format": "double"
 					},
-					"expirationDate": {
-						"type": "string",
-						"format": "date-time"
+					"isLivestreamingEnabled": {
+						"type": "boolean"
+					},
+					"isMultistreamEnabled": {
+						"type": "boolean"
+					},
+					"isCustomChannelEnabled": {
+						"type": "boolean"
+					},
+					"hasPrioritySupport": {
+						"type": "boolean"
+					},
+					"latestInvoice": {
+						"$ref": "#/components/schemas/InvoiceData"
 					}
 				},
 				"required": [
@@ -2945,44 +3157,45 @@
 					"invitationCode": {
 						"type": "string"
 					},
-					"paymentStatus": {
-						"$ref": "#/components/schemas/PaymentStatus"
-					},
 					"customerId": {
 						"type": "string"
 					},
-					"streamingDays": {
-						"type": "number",
-						"format": "double"
+					"subscriptionTier": {
+						"$ref": "#/components/schemas/SubscriptionTier"
 					},
-					"paidStages": {
-						"type": "number",
-						"format": "double"
+					"subscriptionStatus": {
+						"$ref": "#/components/schemas/SubscriptionStatus"
 					},
-					"currentStages": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentAmount": {
-						"type": "number",
-						"format": "double"
-					},
-					"lastPaymentDate": {
+					"subscriptionPeriodEnd": {
 						"type": "string",
 						"format": "date-time"
 					},
-					"lastPaymentError": {
-						"type": "string"
+					"maxVideoLibrarySize": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastPaymentIntentId": {
-						"type": "string"
+					"currentVideoCount": {
+						"type": "number",
+						"format": "double"
 					},
-					"lastCheckoutSessionId": {
-						"type": "string"
+					"maxSeats": {
+						"type": "number",
+						"format": "double"
 					},
-					"expirationDate": {
-						"type": "string",
-						"format": "date-time"
+					"isLivestreamingEnabled": {
+						"type": "boolean"
+					},
+					"isMultistreamEnabled": {
+						"type": "boolean"
+					},
+					"isCustomChannelEnabled": {
+						"type": "boolean"
+					},
+					"hasPrioritySupport": {
+						"type": "boolean"
+					},
+					"latestInvoice": {
+						"$ref": "#/components/schemas/InvoiceData"
 					}
 				},
 				"required": [
@@ -4637,6 +4850,38 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/CreateCheckoutSessionDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/stripe/create-portal-session": {
+			"post": {
+				"operationId": "CreatePortalSession",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_any_"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Stripe"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePortalSessionDto"
 							}
 						}
 					}
@@ -6408,6 +6653,204 @@
 				}
 			}
 		},
+		"/playlists/{organizationId}": {
+			"post": {
+				"operationId": "CreatePlaylist",
+				"responses": {
+					"201": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IPlaylist_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Create playlist",
+				"tags": [
+					"Playlist"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePlaylistDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetOrganizationPlaylists",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_Array_IPlaylist__"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get all playlists for organization",
+				"tags": [
+					"Playlist"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/playlists/{organizationId}/{playlistId}": {
+			"put": {
+				"operationId": "UpdatePlaylist",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IPlaylist_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Update playlist",
+				"tags": [
+					"Playlist"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "playlistId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdatePlaylistDto"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetPlaylist",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IPlaylist_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Get playlist by id",
+				"tags": [
+					"Playlist"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "playlistId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeletePlaylist",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_void_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Delete playlist",
+				"tags": [
+					"Playlist"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "playlistId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
 		"/organizations": {
 			"post": {
 				"operationId": "CreateOrganization",
@@ -6464,6 +6907,44 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/organizations/subscription/free/{organizationId}": {
+			"post": {
+				"operationId": "ActivateFreeTier",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IStandardResponse_IOrganization_"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Activate free tier for organization",
+				"tags": [
+					"Organization"
+				],
+				"security": [
+					{
+						"jwt": [
+							"org"
+						]
+					}
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "organizationId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		},
 		"/organizations/join": {

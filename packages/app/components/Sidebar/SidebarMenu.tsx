@@ -89,13 +89,16 @@ const SidebarMenu = ({}) => {
             text={item.text}
             icon={item.icon}
             badge={
-              item.text === 'Subscription' &&
-              organization?.paymentStatus === 'active' &&
-              daysLeft &&
-              daysLeft > 0
+              item.text === 'Subscription' && 
+              (((organization?.subscriptionStatus || '') === 'active' && daysLeft && daysLeft > 0) ||
+               ((organization?.subscriptionStatus || '') === 'canceling'))
                 ? {
-                    text: daysLeft === 1 ? '1 day left' : 'Active',
-                    variant: daysLeft === 1 ? 'warning' : 'success',
+                    text: ((organization?.subscriptionStatus || '') === 'canceling')
+                          ? 'Ending soon' 
+                          : (daysLeft === 1 ? '1 day left' : 'Active'),
+                    variant: ((organization?.subscriptionStatus || '') === 'canceling')
+                             ? 'warning' 
+                             : (daysLeft === 1 ? 'warning' : 'success'),
                   }
                 : undefined
             }

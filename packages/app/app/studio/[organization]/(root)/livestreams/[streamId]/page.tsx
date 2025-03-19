@@ -7,9 +7,23 @@ import StreamHeader from './components/StreamHeader';
 import NotFound from '@/app/not-found';
 import StageControls from './components/StageControls';
 import Sidebar from './components/Sidebar';
+import { fetchOrganization } from '@/lib/services/organizationService';
+import { redirect } from 'next/navigation';
 
 const Livestream = async ({ params }: LivestreamPageParams) => {
   if (!params.streamId) return NotFound();
+
+  // Check if the organization has livestreaming permission (not on free tier)
+  const organization = await fetchOrganization({
+    organizationId: params.organization,
+  });
+
+  // Free tier users cannot access livestreaming features
+  const isFree = organization?.subscriptionTier === 'free';
+  if (isFree) {
+    // Redirect to the livestreams list page with a URL parameter to show an upgrade message
+    return redirect(`/studio/${params.organization}/livestreams?blockedAccess=true`);
+  }
 
   const stream = await fetchStage({ stage: params.streamId });
   

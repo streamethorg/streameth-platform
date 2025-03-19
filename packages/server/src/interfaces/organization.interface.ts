@@ -11,7 +11,21 @@ export interface ISocials {
   channelId?: string;
 }
 
-export type PaymentStatus = 'none' | 'pending' | 'processing' | 'active' | 'failed';
+export type SubscriptionTier = 'free' | 'creator' | 'pro' | 'studio' | 'none';
+export type SubscriptionStatus = 'active' | 'past_due' | 'canceled' | 'unpaid' | 'trialing' | 'none' | 'canceling';
+
+export interface InvoiceData {
+  id: string;
+  number: string;
+  hostedInvoiceUrl: string;
+  invoicePdf: string;
+  total: number;
+  currency: string;
+  status: string;
+  paidAt: number;
+  receiptNumber?: string;
+  createdAt: number;
+}
 
 export interface IOrganization {
   _id?: Types.ObjectId;
@@ -28,18 +42,18 @@ export interface IOrganization {
   address?: string;
   invitationCode?: string;
   socials?: ISocials[];
-  // Payment related fields
-  paymentStatus?: PaymentStatus;
   customerId?: string;
-  streamingDays?: number;
-  paidStages?: number;
-  currentStages?: number;
-  lastPaymentAmount?: number;
-  lastPaymentDate?: Date;
-  lastPaymentError?: string;
-  lastPaymentIntentId?: string;
-  lastCheckoutSessionId?: string;
-  expirationDate?: Date; // When the streaming access expires
+  subscriptionTier?: SubscriptionTier;
+  subscriptionStatus?: SubscriptionStatus;
+  subscriptionPeriodEnd?: Date;
+  maxVideoLibrarySize?: number;
+  currentVideoCount?: number;
+  maxSeats?: number;
+  isLivestreamingEnabled?: boolean;
+  isMultistreamEnabled?: boolean;
+  isCustomChannelEnabled?: boolean;
+  hasPrioritySupport?: boolean;
+  latestInvoice?: InvoiceData;
 }
 
 export type IOrganizationUpdate = Partial<IOrganization>;

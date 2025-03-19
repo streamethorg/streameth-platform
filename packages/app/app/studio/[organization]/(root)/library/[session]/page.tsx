@@ -26,7 +26,7 @@ const EditSession = async ({ params }: studioPageParams) => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-row w-full p-4 space-x-4 max-w-screen-xl overflow-scroll">
+      <div className="flex flex-row w-full p-4 space-x-4 max-w-screen-xl overflow-auto">
         {/* Left Column - Video Details (2/3 width) */}
         <div className="w-2/3 bg-white rounded-xl p-4 border">
           <EditSessionForm

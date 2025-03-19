@@ -114,7 +114,7 @@ const ThumbnailSection = ({
                   </>
                 ) : (
                   <>
-                    <Image className="w-4 h-4" />
+                    <Image className="w-4 h-4" aria-label="Generate thumbnail" />
                     Generate thumbnail
                   </>
                 )}

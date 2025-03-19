@@ -10,13 +10,10 @@ import {
   createStream,
   deleteStream,
   getStreamInfo,
-  createAssetFromUrl,
 } from '@utils/livepeer';
 import { refreshAccessToken } from '@utils/oauth';
-import { getSourceType } from '@utils/util';
 import { createYoutubeLiveStream } from '@utils/youtube';
 import { Types } from 'mongoose';
-import youtubedl from 'youtube-dl-exec';
 import { stageTranscriptionsQueue } from '@utils/redis';
 
 export default class StageService {
@@ -28,15 +25,13 @@ export default class StageService {
   }
 
   async create(data: IStage): Promise<IStage> {
-    // Check if organization has reached their stage limit
+    // Check if organization exists
     const organization = await Organization.findById(data.organizationId);
     if (!organization) throw new HttpException(404, 'Organization not found');
 
-    if (organization.currentStages >= organization.paidStages) {
-      throw new HttpException(
-        403,
-        'Stage limit reached. Please upgrade your subscription to create more stages.',
-      );
+    // Check if the organization has livestreaming enabled
+    if (!organization.isLivestreamingEnabled) {
+      throw new HttpException(403, 'Livestreaming is not enabled for this organization. Please upgrade your subscription to create stages.');
     }
 
     const eventId =
@@ -45,11 +40,6 @@ export default class StageService {
         : data.eventId;
     const stream = await createStream(data.name);
     console.log('stream', stream);
-
-    // Increment currentStages for the organization
-    await Organization.findByIdAndUpdate(data.organizationId, {
-      $inc: { currentStages: 1 },
-    });
 
     return this.controller.store.create(
       data.name,
@@ -160,14 +150,7 @@ export default class StageService {
     const stage = await this.get(stageId);
     await deleteStream(stage.streamSettings.streamId);
 
-    // Get organization and only decrement if currentStages > 0
-    const organization = await Organization.findById(stage.organizationId);
-    if (organization && organization.currentStages > 0) {
-      await Organization.findByIdAndUpdate(stage.organizationId, {
-        $inc: { currentStages: -1 },
-      });
-    }
-
+    // Delete the stage directly now that we don't track stage counts
     return await this.controller.store.delete(stageId);
   }
 

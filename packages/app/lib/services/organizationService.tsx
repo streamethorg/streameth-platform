@@ -12,13 +12,46 @@ export async function fetchOrganization({
     if (!organizationId) {
       return null;
     }
-    const response = await fetch(`${apiUrl()}/organizations/${organizationId}`);
+    const response = await fetch(`${apiUrl()}/organizations/${organizationId}`, {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: { tags: [`organizations-${organizationId}`] },
+    });
     const data = (await response.json()).data;
 
     return data;
   } catch (e) {
     console.log(e);
     return null;
+  }
+}
+
+export async function activateFreeTier({
+  organizationId,
+}: {
+  organizationId: string;
+}): Promise<IExtendedOrganization> {
+  try {
+    const response = await fetchClient(
+      `${apiUrl()}/organizations/subscription/free/${organizationId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.ok) {
+      return (await response.json()).data;
+    } else {
+      throw await response.json();
+    }
+  } catch (e) {
+    console.error('Unexpected error activating free tier:', e);
+    throw e;
   }
 }
 

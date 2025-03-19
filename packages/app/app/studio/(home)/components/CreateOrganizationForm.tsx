@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -26,6 +26,7 @@ import ImageUpload from '@/components/misc/form/imageUpload';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/lib/context/UserContext';
 import { IExtendedOrganization } from '@/lib/types';
+
 interface CreateOrganizationFormProps {
   disableName?: boolean;
   organization?: IExtendedOrganization;
@@ -36,12 +37,13 @@ export default function CreateOrganizationForm({
   organization,
 }: CreateOrganizationFormProps) {
   const { user } = useUserContext();
-  if (!user) throw new Error('User not found');
-  const { email } = user;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
-
+  
+  // Get the email safely
+  const userEmail = user?.email || '';
+  
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
@@ -50,11 +52,22 @@ export default function CreateOrganizationForm({
       logo: organization?.logo || '',
       email: organization?.email || '',
       description: organization?.description || '',
-      address: email,
+      address: userEmail,
     },
   });
+  
+  // Update form values when user becomes available
+  useEffect(() => {
+    if (user?.email) {
+      form.setValue('address', user.email);
+    }
+  }, [user, form]);
 
   function onSubmit(values: z.infer<typeof organizationSchema>) {
+    if (!user) {
+      return; // No submission if no user
+    }
+    
     setIsLoading(true);
     setNameError(null);
 

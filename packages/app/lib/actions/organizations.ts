@@ -1,5 +1,6 @@
 'use server';
 import {
+  activateFreeTier,
   addOrganizationMember,
   createOrganization,
   deleteDestination,
@@ -26,6 +27,26 @@ export const createOrganizationAction = async ({
     throw new Error('Error creating organization');
   }
   return response;
+};
+
+export const activateFreeTierAction = async ({
+  organizationId,
+}: {
+  organizationId: string;
+}) => {
+  try {
+    const response = await activateFreeTier({
+      organizationId,
+    });
+    revalidateTag(`organizations-${organizationId}`);
+    if (!response) {
+      throw new Error('Error activating free tier');
+    }
+    return response;
+  } catch (error) {
+    console.error('Error activating free tier:', error);
+    throw error;
+  }
 };
 
 export const joinOrganizationAction = async ({

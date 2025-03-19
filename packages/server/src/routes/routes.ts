@@ -21,6 +21,8 @@ import { SessionController } from './../controllers/session.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ScheduleImporterController } from './../controllers/schedule-import.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { PlaylistController } from './../controllers/playlist.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { OrganizationController } from './../controllers/organization.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { NftCollectionRouter } from './../controllers/nft.controller';
@@ -66,9 +68,31 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "PaymentStatus": {
+    "SubscriptionTier": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["none"]},{"dataType":"enum","enums":["pending"]},{"dataType":"enum","enums":["processing"]},{"dataType":"enum","enums":["active"]},{"dataType":"enum","enums":["failed"]}],"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["free"]},{"dataType":"enum","enums":["creator"]},{"dataType":"enum","enums":["pro"]},{"dataType":"enum","enums":["studio"]},{"dataType":"enum","enums":["none"]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "SubscriptionStatus": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["active"]},{"dataType":"enum","enums":["past_due"]},{"dataType":"enum","enums":["canceled"]},{"dataType":"enum","enums":["unpaid"]},{"dataType":"enum","enums":["trialing"]},{"dataType":"enum","enums":["none"]},{"dataType":"enum","enums":["canceling"]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "InvoiceData": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","required":true},
+            "number": {"dataType":"string","required":true},
+            "hostedInvoiceUrl": {"dataType":"string","required":true},
+            "invoicePdf": {"dataType":"string","required":true},
+            "total": {"dataType":"double","required":true},
+            "currency": {"dataType":"string","required":true},
+            "status": {"dataType":"string","required":true},
+            "paidAt": {"dataType":"double","required":true},
+            "receiptNumber": {"dataType":"string"},
+            "createdAt": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IOrganization": {
@@ -88,17 +112,18 @@ const models: TsoaRoute.Models = {
             "address": {"dataType":"string"},
             "invitationCode": {"dataType":"string"},
             "socials": {"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},
-            "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
-            "streamingDays": {"dataType":"double"},
-            "paidStages": {"dataType":"double"},
-            "currentStages": {"dataType":"double"},
-            "lastPaymentAmount": {"dataType":"double"},
-            "lastPaymentDate": {"dataType":"datetime"},
-            "lastPaymentError": {"dataType":"string"},
-            "lastPaymentIntentId": {"dataType":"string"},
-            "lastCheckoutSessionId": {"dataType":"string"},
-            "expirationDate": {"dataType":"datetime"},
+            "subscriptionTier": {"ref":"SubscriptionTier"},
+            "subscriptionStatus": {"ref":"SubscriptionStatus"},
+            "subscriptionPeriodEnd": {"dataType":"datetime"},
+            "maxVideoLibrarySize": {"dataType":"double"},
+            "currentVideoCount": {"dataType":"double"},
+            "maxSeats": {"dataType":"double"},
+            "isLivestreamingEnabled": {"dataType":"boolean"},
+            "isMultistreamEnabled": {"dataType":"boolean"},
+            "isCustomChannelEnabled": {"dataType":"boolean"},
+            "hasPrioritySupport": {"dataType":"boolean"},
+            "latestInvoice": {"ref":"InvoiceData"},
         },
         "additionalProperties": false,
     },
@@ -187,8 +212,18 @@ const models: TsoaRoute.Models = {
         "properties": {
             "organizationId": {"dataType":"string","required":true},
             "totalPrice": {"dataType":"double","required":true},
-            "streamingDays": {"dataType":"double","required":true},
-            "numberOfStages": {"dataType":"double","required":true},
+            "tier": {"dataType":"string"},
+            "streamingDays": {"dataType":"double"},
+            "numberOfStages": {"dataType":"double"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreatePortalSessionDto": {
+        "dataType": "refObject",
+        "properties": {
+            "organizationId": {"dataType":"string","required":true},
+            "returnUrl": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -914,6 +949,61 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"organizationId":{"dataType":"string","required":true},"stageId":{"dataType":"string","required":true},"type":{"ref":"ImportType","required":true},"url":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IPlaylist": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"ref":"mongoose.Types.ObjectId"},
+            "organizationId": {"ref":"mongoose.Types.ObjectId","required":true},
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "sessions": {"dataType":"array","array":{"dataType":"refAlias","ref":"mongoose.Types.ObjectId"},"required":true},
+            "isPublic": {"dataType":"boolean","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_IPlaylist_": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"ref":"IPlaylist"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CreatePlaylistDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "sessions": {"dataType":"array","array":{"dataType":"string"},"required":true},
+            "isPublic": {"dataType":"boolean"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UpdatePlaylistDto": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string"},
+            "description": {"dataType":"string"},
+            "sessions": {"dataType":"array","array":{"dataType":"string"}},
+            "isPublic": {"dataType":"boolean"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IStandardResponse_Array_IPlaylist__": {
+        "dataType": "refObject",
+        "properties": {
+            "status": {"dataType":"string","required":true},
+            "message": {"dataType":"string","required":true},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IPlaylist"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IStandardResponse_IOrganization_": {
         "dataType": "refObject",
         "properties": {
@@ -926,7 +1016,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_IOrganization.Exclude_keyofIOrganization._id__": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"invitationCode":{"dataType":"string"},"paymentStatus":{"ref":"PaymentStatus"},"customerId":{"dataType":"string"},"streamingDays":{"dataType":"double"},"paidStages":{"dataType":"double"},"currentStages":{"dataType":"double"},"lastPaymentAmount":{"dataType":"double"},"lastPaymentDate":{"dataType":"datetime"},"lastPaymentError":{"dataType":"string"},"lastPaymentIntentId":{"dataType":"string"},"lastCheckoutSessionId":{"dataType":"string"},"expirationDate":{"dataType":"datetime"}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"bio":{"dataType":"string"},"slug":{"dataType":"string"},"description":{"dataType":"string"},"socials":{"dataType":"array","array":{"dataType":"refObject","ref":"ISocials"}},"url":{"dataType":"string"},"email":{"dataType":"string","required":true},"logo":{"dataType":"string","required":true},"location":{"dataType":"string"},"accentColor":{"dataType":"string"},"banner":{"dataType":"string"},"address":{"dataType":"string"},"invitationCode":{"dataType":"string"},"customerId":{"dataType":"string"},"subscriptionTier":{"ref":"SubscriptionTier"},"subscriptionStatus":{"ref":"SubscriptionStatus"},"subscriptionPeriodEnd":{"dataType":"datetime"},"maxVideoLibrarySize":{"dataType":"double"},"currentVideoCount":{"dataType":"double"},"maxSeats":{"dataType":"double"},"isLivestreamingEnabled":{"dataType":"boolean"},"isMultistreamEnabled":{"dataType":"boolean"},"isCustomChannelEnabled":{"dataType":"boolean"},"hasPrioritySupport":{"dataType":"boolean"},"latestInvoice":{"ref":"InvoiceData"}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CreateOrganizationDto": {
@@ -945,17 +1035,18 @@ const models: TsoaRoute.Models = {
             "banner": {"dataType":"string"},
             "address": {"dataType":"string","required":true},
             "invitationCode": {"dataType":"string"},
-            "paymentStatus": {"ref":"PaymentStatus"},
             "customerId": {"dataType":"string"},
-            "streamingDays": {"dataType":"double"},
-            "paidStages": {"dataType":"double"},
-            "currentStages": {"dataType":"double"},
-            "lastPaymentAmount": {"dataType":"double"},
-            "lastPaymentDate": {"dataType":"datetime"},
-            "lastPaymentError": {"dataType":"string"},
-            "lastPaymentIntentId": {"dataType":"string"},
-            "lastCheckoutSessionId": {"dataType":"string"},
-            "expirationDate": {"dataType":"datetime"},
+            "subscriptionTier": {"ref":"SubscriptionTier"},
+            "subscriptionStatus": {"ref":"SubscriptionStatus"},
+            "subscriptionPeriodEnd": {"dataType":"datetime"},
+            "maxVideoLibrarySize": {"dataType":"double"},
+            "currentVideoCount": {"dataType":"double"},
+            "maxSeats": {"dataType":"double"},
+            "isLivestreamingEnabled": {"dataType":"boolean"},
+            "isMultistreamEnabled": {"dataType":"boolean"},
+            "isCustomChannelEnabled": {"dataType":"boolean"},
+            "hasPrioritySupport": {"dataType":"boolean"},
+            "latestInvoice": {"ref":"InvoiceData"},
         },
         "additionalProperties": false,
     },
@@ -1574,6 +1665,36 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
 
               await templateService.apiHandler({
                 methodName: 'createCheckoutSession',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/stripe/create-portal-session',
+            ...(fetchMiddlewares<RequestHandler>(StripeController)),
+            ...(fetchMiddlewares<RequestHandler>(StripeController.prototype.createPortalSession)),
+
+            async function StripeController_createPortalSession(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    body: {"in":"body","name":"body","required":true,"ref":"CreatePortalSessionDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new StripeController();
+
+              await templateService.apiHandler({
+                methodName: 'createPortalSession',
                 controller,
                 response,
                 next,
@@ -2950,6 +3071,161 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/playlists/:organizationId',
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController)),
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController.prototype.createPlaylist)),
+
+            async function PlaylistController_createPlaylist(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"ref":"CreatePlaylistDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PlaylistController();
+
+              await templateService.apiHandler({
+                methodName: 'createPlaylist',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/playlists/:organizationId/:playlistId',
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController)),
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController.prototype.updatePlaylist)),
+
+            async function PlaylistController_updatePlaylist(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+                    playlistId: {"in":"path","name":"playlistId","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"ref":"UpdatePlaylistDto"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PlaylistController();
+
+              await templateService.apiHandler({
+                methodName: 'updatePlaylist',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/playlists/:organizationId/:playlistId',
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController)),
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController.prototype.getPlaylist)),
+
+            async function PlaylistController_getPlaylist(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+                    playlistId: {"in":"path","name":"playlistId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PlaylistController();
+
+              await templateService.apiHandler({
+                methodName: 'getPlaylist',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/playlists/:organizationId',
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController)),
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController.prototype.getOrganizationPlaylists)),
+
+            async function PlaylistController_getOrganizationPlaylists(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PlaylistController();
+
+              await templateService.apiHandler({
+                methodName: 'getOrganizationPlaylists',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/playlists/:organizationId/:playlistId',
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController)),
+            ...(fetchMiddlewares<RequestHandler>(PlaylistController.prototype.deletePlaylist)),
+
+            async function PlaylistController_deletePlaylist(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+                    playlistId: {"in":"path","name":"playlistId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PlaylistController();
+
+              await templateService.apiHandler({
+                methodName: 'deletePlaylist',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/organizations',
             authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
@@ -2975,6 +3251,37 @@ export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof mult
                 next,
                 validatedArgs,
                 successStatus: 201,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/organizations/subscription/free/:organizationId',
+            authenticateMiddleware([{"jwt":["org"]}]),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController)),
+            ...(fetchMiddlewares<RequestHandler>(OrganizationController.prototype.activateFreeTier)),
+
+            async function OrganizationController_activateFreeTier(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    organizationId: {"in":"path","name":"organizationId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new OrganizationController();
+
+              await templateService.apiHandler({
+                methodName: 'activateFreeTier',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);

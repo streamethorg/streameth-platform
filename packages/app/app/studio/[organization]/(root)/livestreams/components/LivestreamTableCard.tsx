@@ -17,15 +17,20 @@ import { IExtendedStage } from '@/lib/types';
 import { useOrganizationContext } from '@/lib/context/OrganizationContext';
 
 const LivestreamTableCard = ({ stream }: { stream: IExtendedStage }) => {
-  const { stagesStatus, subscriptionStatus, organizationId } = useOrganizationContext();
+  const { stagesStatus, subscriptionStatus, organization, organizationId } = useOrganizationContext();
   const { isOverLimit } = stagesStatus;
-  const isLocked = isOverLimit || subscriptionStatus.hasExpired;
+  
+  // Check if the user is on free tier - they can't access livestreams
+  const isFree = organization?.subscriptionTier === 'free';
+  
+  // Either free tier, over limit, or expired subscription locks access
+  const isLocked = isFree || isOverLimit || subscriptionStatus.hasExpired;
 
   return (
     <div key={stream._id} className="flex flex-col rounded-2xl border bg-white">
       <div className="relative w-full">
         {stream.streamSettings?.isActive &&
-        stream.streamSettings?.playbackId ? (
+        stream.streamSettings?.playbackId && !isLocked ? (
           <PlayerWithControls
             thumbnail={stream.thumbnail}
             name={stream.name}
