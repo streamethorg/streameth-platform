@@ -125,7 +125,11 @@ export function MonthlySubscriptionTiers({
   }
   
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+    <div className={`grid grid-cols-1 ${
+      tiersToShow.length === 1 ? 'md:grid-cols-1 max-w-lg' :
+      tiersToShow.length === 2 ? 'md:grid-cols-2 max-w-3xl' :
+      tiersToShow.length === 3 ? 'md:grid-cols-3 max-w-5xl' : 'md:grid-cols-2 lg:grid-cols-4 max-w-6xl'
+    } gap-4 mx-auto place-content-center`}>
       {tiersToShow.map((tier) => {
         // Sort features - available ones first, unavailable ones last
         const sortedFeatures = [...allFeatures].sort((a, b) => {

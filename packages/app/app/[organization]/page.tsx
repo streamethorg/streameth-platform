@@ -22,8 +22,8 @@ const OrganizationHome = async ({
   return (
     <div className="mx-auto w-full max-w-7xl space-y-4 md:p-4">
       <ChannelBanner />
-      <Tabs defaultValue="videos">
-        <TabsList>
+      <Tabs defaultValue="videos" className="w-full">
+        <TabsList className="overflow-x-scroll w-full justify-start">
           <TabsTrigger value="livestreams">
             <h1 className="text-xl font-bold">Upcoming Streams</h1>
           </TabsTrigger>

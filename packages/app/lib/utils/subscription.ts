@@ -58,16 +58,55 @@ export function canUseFeature(
   organization: IExtendedOrganization,
   feature: BooleanFeatures
 ): boolean {
-  // Handle subscription tier checks
   const tier = organization?.subscriptionTier || 'none';
   const subscriptionStatus = organization?.subscriptionStatus || 'none';
   
-  // Only check subscription if status is active
-  if (subscriptionStatus === 'active') {
+  // Free tier always has access to its basic features
+  if (tier === 'free') {
+    return tierLimits.free[feature];
+  }
+  
+  // Allow feature access if:
+  // 1. Subscription is active
+  // 2. Subscription is canceling (they keep access until period end)
+  // 3. Subscription is in trial
+  if (subscriptionStatus === 'active' || 
+      subscriptionStatus === 'canceling' || 
+      subscriptionStatus === 'trialing') {
     return tierLimits[tier as keyof typeof tierLimits][feature];
   }
   
-  return false;
+  // For all other statuses (expired, failed, etc), revert to free tier features
+  return tierLimits.free[feature];
+}
+
+/**
+ * Check if the organization can use quantity-based features (e.g. video uploads)
+ * This is separate from feature flags as quantities should be enforced differently
+ */
+export function canUseQuantityFeature(
+  organization: IExtendedOrganization,
+  currentQuantity: number,
+  featureKey: 'maxVideoLibrarySize' | 'maxSeats'
+): boolean {
+  const tier = organization?.subscriptionTier || 'none';
+  const subscriptionStatus = organization?.subscriptionStatus || 'none';
+  
+  // Get the limit based on current tier
+  let limit = tierLimits[tier as keyof typeof tierLimits][featureKey];
+  
+  // If subscription is not active/canceling/trialing, use free tier limits
+  if (subscriptionStatus !== 'active' && 
+      subscriptionStatus !== 'canceling' && 
+      subscriptionStatus !== 'trialing') {
+    limit = tierLimits.free[featureKey];
+  }
+  
+  // Infinity means no limit
+  if (limit === Infinity) return true;
+  
+  // Check if current quantity is under the limit
+  return currentQuantity < limit;
 }
 
 /**
@@ -102,45 +141,51 @@ export function canUploadMoreVideos(organization: IExtendedOrganization): {
   const subscriptionStatus = organization?.subscriptionStatus || 'none';
   const currentCount = organization?.currentVideoCount || 0;
   
-  // Debug logging
-  console.log('Video upload check:', {
-    tier,
-    subscriptionStatus,
-    currentCount,
-    maxSize: tierLimits[tier as keyof typeof tierLimits]?.maxVideoLibrarySize || 0
-  });
+  // Get the limit based on current tier
+  let limit = tierLimits[tier as keyof typeof tierLimits].maxVideoLibrarySize;
   
-  // Apply limit based on subscription status and tier
-  if (subscriptionStatus === 'active' || tier === 'free') {
-    const maxVideos = tierLimits[tier as keyof typeof tierLimits].maxVideoLibrarySize;
-    const remaining = maxVideos - currentCount;
-    
-    if (remaining <= 0) {
-      return { 
-        canUpload: false, 
-        remaining: 0,
-        message: `You've reached the video limit (${maxVideos}) for your ${tier} subscription. Please upgrade to add more videos.`
-      };
-    }
-    
-    if (remaining <= 2) {
-      return { 
-        canUpload: true, 
-        remaining,
-        message: `You can upload ${remaining} more video${remaining === 1 ? '' : 's'} with your current ${tier} subscription.`
-      };
-    }
-    
-    return { 
-      canUpload: true, 
-      remaining
+  // If subscription is not active/canceling/trialing, use free tier limits
+  // UNLESS they are already on the free tier
+  if (tier !== 'free' && 
+      subscriptionStatus !== 'active' && 
+      subscriptionStatus !== 'canceling' && 
+      subscriptionStatus !== 'trialing') {
+    limit = tierLimits.free.maxVideoLibrarySize;
+  }
+  
+  // Infinity means no limit
+  if (limit === Infinity) {
+    return {
+      canUpload: true,
+      remaining: Infinity
     };
   }
   
-  return { 
-    canUpload: false, 
-    remaining: 0,
-    message: 'Your subscription is not active. Please subscribe to upload videos.'
+  const remaining = limit - currentCount;
+  const canUpload = remaining > 0;
+  
+  // Generate appropriate message based on status
+  let message;
+  if (canUpload) {
+    if (remaining <= 3) { // Warn when close to limit
+      message = `You have ${remaining} video upload${remaining === 1 ? '' : 's'} remaining in your ${tier} tier.`;
+    }
+  } else {
+    if (tier === 'free') {
+      message = "You've reached the upload limit for the free tier. Upgrade your subscription to upload more videos.";
+    } else if (subscriptionStatus === 'active' || subscriptionStatus === 'trialing') {
+      message = `You've reached the upload limit for the ${tier} tier. Upgrade your subscription to upload more videos.`;
+    } else if (subscriptionStatus === 'canceling') {
+      message = `You've reached your upload limit. Your subscription will revert to the free tier at the end of your billing period.`;
+    } else {
+      message = `You've reached your upload limit. Please renew your subscription to upload more videos.`;
+    }
+  }
+  
+  return {
+    canUpload,
+    remaining,
+    message
   };
 }
 

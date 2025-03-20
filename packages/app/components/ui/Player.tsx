@@ -20,7 +20,7 @@ import { useRef } from 'react';
 import mux from 'mux-embed';
 import Image from 'next/image';
 import { Src } from '@livepeer/react';
-import LogoDark from '@/public/logo_dark.png';
+import LivepeerLogo from '@/public/livepeer.svg';
 import Link from 'next/link';
 import {
   MdOutlineClosedCaption,
@@ -228,26 +228,28 @@ export function PlayerWithControls(props: {
 
             <div className="flex items-center justify-end gap-2.5 sm:flex-1 md:flex-[1.5]">
               <Link
-                href={'https://streameth.org'}
+                href={'https://livepeer.org'}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <div className="hidden flex-row items-center justify-center space-x-2 rounded-xl border bg-white p-1 shadow md:flex">
+                <div className="hidden items-center justify-center rounded-md border bg-white px-1 pb-[3px] shadow md:flex">
                   <Image
-                    src={LogoDark}
-                    width={120}
-                    height={23}
-                    className=""
-                    alt="StreamETH Logo"
+                    src={LivepeerLogo}
+                    width={80}
+                    height={14}
+                    className="object-contain"
+                    alt="Livepeer Logo"
+                    priority
                   />
                 </div>
-                <div className="flex flex-row items-center justify-center space-x-2 rounded border bg-white p-[0.8px] shadow md:hidden">
+                <div className="flex items-center justify-center rounded border bg-white px-1 pb-[3px] shadow md:hidden">
                   <Image
-                    src={LogoDark}
-                    width={80}
-                    height={13}
-                    className=""
-                    alt="StreamETH Logo"
+                    src={LivepeerLogo}
+                    width={60}
+                    height={11}
+                    className="object-contain"
+                    alt="Livepeer Logo"
+                    priority
                   />
                 </div>
               </Link>

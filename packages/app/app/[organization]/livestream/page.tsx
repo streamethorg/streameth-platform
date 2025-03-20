@@ -5,14 +5,16 @@ import {
   IExtendedStage,
   OrganizationPageProps,
 } from '@/lib/types';
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { generalMetadata, livestreamMetadata } from '@/lib/utils/metadata';
 import { fetchOrganization } from '@/lib/services/organizationService';
 import { Suspense } from 'react';
-import WatchGrid from '../components/WatchGrid';
 import { fetchStage } from '@/lib/services/stageService';
 import Player from './components/Player';
+import ArchiveVideoSkeleton from './components/ArchiveVideosSkeleton';
+import ArchiveVideos from '../videos/components/ArchiveVideos';
 
 const Loading = () => {
   return (
@@ -61,20 +63,29 @@ export default async function Livestream({
             video={stage as IExtendedStage}
           />
         </div>
-        <div className="px-4 md:px-0">
-          <div className="md:hidden">
-            <WatchGrid
+        <div className="flex items-center justify-between pb-4">
+          <h1 className="text-2xl font-bold">More videos</h1>
+          <Link href={`/${params.organization}`}>
+            <h3 className="text-sm hover:underline">See more videos</h3>
+          </Link>
+        </div>
+        <div className="md:hidden">
+          <Suspense fallback={<ArchiveVideoSkeleton />}>
+            <ArchiveVideos
               organizationId={params.organization}
               organizationSlug={params.organization}
+              gridLength={4}
             />
-          </div>
-          <div className="hidden md:block">
-            <WatchGrid
+          </Suspense>
+        </div>
+        <div className="hidden md:block">
+          <Suspense fallback={<ArchiveVideoSkeleton />}>
+            <ArchiveVideos
               organizationId={params.organization}
               organizationSlug={params.organization}
-              gridLength={6}
+              gridLength={8}
             />
-          </div>
+          </Suspense>
         </div>
       </div>
     </Suspense>

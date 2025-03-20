@@ -15,13 +15,40 @@ const LivestreamTable = async ({
   fromDate?: string;
   untilDate?: string;
 }) => {
-  const streams = await fetchOrganizationStages({
+  let livestreams = await fetchOrganizationStages({
     organizationId: organizationId,
-    fromDate,
-    untilDate,
   });
 
-  if (streams.length === 0) {
+  livestreams = livestreams.filter((livestream) => {
+    // filter by streams in the future or happening today
+    const streamDate = new Date(livestream.streamDate as string);
+    const today = new Date();
+
+    // Compare only the date parts (year, month, day)
+    const streamDateOnly = new Date(
+      streamDate.getFullYear(),
+      streamDate.getMonth(),
+      streamDate.getDate()
+    );
+    const todayOnly = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    if (fromDate) {
+      if (livestream.streamSettings?.isActive) {
+        return true;
+      }
+      return streamDateOnly >= todayOnly;
+    }
+    if (untilDate) {
+      return streamDateOnly < todayOnly;
+    }
+    return true;
+  });
+
+  if (livestreams.length === 0) {
     return (
       <div className="flex h-96 w-full flex-col items-center justify-center gap-4 rounded-xl border bg-white">
         <EmptyFolder />
@@ -39,8 +66,8 @@ const LivestreamTable = async ({
     <div className="flex flex-col gap-4 w-full">
       <SubscriptionAlert />
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {streams.map((stream, index) => (
-          <LivestreamTableCard stream={stream} key={index} />
+        {livestreams.map((livestream, index) => (
+          <LivestreamTableCard stream={livestream} key={index} />
         ))}
       </div>
     </div>
