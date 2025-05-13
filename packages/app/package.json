@@ -8,8 +8,6 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "check-types": "tsc --noEmit --incremental",
-    "test:ui": "dotenvx run -f test.env -- playwright test --ui",
-    "test": "dotenvx run -f test.env -- playwright test",
     "prettier:fix": "prettier --write './app' './components' './lib' ./tests",
     "prettier:check": "prettier --check './app' './components' './lib' ./tests/"
   },
@@ -96,8 +94,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@dotenvx/dotenvx": "^1.0.1",
-    "@playwright/test": "^1.46.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/fuzzy-search": "^2.1.5",
     "@types/lodash": "^4.17.7",
