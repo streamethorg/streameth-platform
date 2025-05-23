@@ -6,11 +6,6 @@ let nextConfig = {
   redirects: async () => [
     {
       source: '/',
-      destination: 'https://info.streameth.org',
-      permanent: true,
-    },
-    {
-      source: '/',
       has: [
         {
           type: 'host',
@@ -95,6 +90,11 @@ let nextConfig = {
         },
       ],
       destination: 'https://launch.scroll.io/scroll',
+      permanent: true,
+    },
+    {
+      source: '/',
+      destination: 'https://info.streameth.org',
       permanent: true,
     },
   ],
