@@ -4,7 +4,9 @@ import { Metadata, ResolvingMetadata } from "next";
 import { fetchOrganization } from "@/lib/services/organizationService";
 import { ChannelPageParams } from "@/lib/types";
 import { Suspense } from "react";
-import LiveStreams, { LiveStreamsLoading } from "./components/UpcomingStreams";
+import UpcomingStreams, {
+	UpcomingStreamsLoading,
+} from "./components/UpcomingStreams";
 import { fetchOrganizationStages } from "@/lib/services/stageService";
 import { livestreamMetadata, generalMetadata } from "@/lib/utils/metadata";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -45,8 +47,8 @@ const OrganizationHome = async ({
 					</TabsTrigger>
 				</TabsList>
 				<TabsContent value="livestreams" className="px-4 md:px-0">
-					<Suspense fallback={<LiveStreamsLoading />}>
-						<LiveStreams
+					<Suspense fallback={<UpcomingStreamsLoading />}>
+						<UpcomingStreams
 							organizationId={params.organization}
 							currentStreamId={searchParams.streamId}
 						/>

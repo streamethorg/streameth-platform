@@ -4,7 +4,7 @@ import React from "react";
 import { VideoCardSkeletonMobile } from "@/components/misc/VideoCard/VideoCardSkeleton";
 import { Podcast } from "lucide-react";
 
-const LiveStreams = async ({
+const UpcomingStreams = async ({
 	organizationId,
 	currentStreamId,
 }: {
@@ -63,9 +63,9 @@ const LiveStreams = async ({
 	);
 };
 
-export default LiveStreams;
+export default UpcomingStreams;
 
-export const LiveStreamsLoading = () => (
+export const UpcomingStreamsLoading = () => (
 	<>
 		<div className="w-1/4 h-6 bg-gray-300 rounded md:hidden"></div>
 		<div className="grid grid-rows-3 gap-4 m-5 md:hidden md:grid-cols-3 md:m-0">
