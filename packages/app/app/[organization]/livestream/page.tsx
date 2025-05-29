@@ -1,7 +1,6 @@
 "use server";
 import SessionInfoBox from "@/components/sessions/SessionInfoBox";
 import { IExtendedStage, OrganizationPageProps } from "@/lib/types";
-import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { generalMetadata, livestreamMetadata } from "@/lib/utils/metadata";
@@ -9,9 +8,9 @@ import { fetchOrganization } from "@/lib/services/organizationService";
 import { Suspense } from "react";
 import { fetchStage } from "@/lib/services/stageService";
 import Player from "./components/Player";
-import ArchiveVideoSkeleton from "./components/ArchiveVideosSkeleton";
-import ArchiveVideos from "../videos/components/ArchiveVideos";
-import LiveStreams, { LiveStreamsLoading } from "../components/UpcomingStreams";
+import UpcomingStreams, {
+	UpcomingStreamsLoading,
+} from "../components/UpcomingStreams";
 
 const Loading = () => {
 	return (
@@ -64,8 +63,8 @@ export default async function Livestream({
 					<div className="flex justify-between items-center pb-4">
 						<h1 className="text-2xl font-bold">More streams</h1>
 					</div>
-					<Suspense fallback={<LiveStreamsLoading />}>
-						<LiveStreams
+					<Suspense fallback={<UpcomingStreamsLoading />}>
+						<UpcomingStreams
 							organizationId={params.organization}
 							currentStreamId={searchParams.stage}
 						/>
