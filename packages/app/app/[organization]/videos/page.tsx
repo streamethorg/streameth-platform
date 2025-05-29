@@ -1,110 +1,114 @@
 import {
-  ChannelPageParams,
-  IExtendedEvent,
-  OrganizationPageProps,
-} from '@/lib/types';
-import { Metadata, ResolvingMetadata } from 'next';
-import { fetchEvents } from '@/lib/services/eventService';
-import { Suspense } from 'react';
-import ArchiveVideos from './components/ArchiveVideos';
-import ArchiveVideoSkeleton from '../livestream/components/ArchiveVideosSkeleton';
-import Image from 'next/image';
-import { fetchOrganization } from '@/lib/services/organizationService';
-import { notFound } from 'next/navigation';
-import EventSelect from './components/eventSelect';
-import { fetchAllSessions } from '@/lib/services/sessionService';
-import { generalMetadata, organizationMetadata } from '@/lib/utils/metadata';
+	ChannelPageParams,
+	IExtendedEvent,
+	OrganizationPageProps,
+} from "@/lib/types";
+import { Metadata } from "next";
+import { fetchEvents } from "@/lib/services/eventService";
+import { Suspense } from "react";
+import ArchiveVideos from "./components/ArchiveVideos";
+import ArchiveVideoSkeleton from "../livestream/components/ArchiveVideosSkeleton";
+import Image from "next/image";
+import { fetchOrganization } from "@/lib/services/organizationService";
+import { notFound } from "next/navigation";
+import EventSelect from "./components/eventSelect";
+import { fetchAllSessions } from "@/lib/services/sessionService";
+import { generalMetadata, organizationMetadata } from "@/lib/utils/metadata";
 
 export default async function ArchivePage({
-  params,
-  searchParams,
+	params: paramsPromise,
+	searchParams: searchParamsPromise,
 }: OrganizationPageProps) {
-  if (!params.organization) {
-    return notFound();
-  }
+	const params = await paramsPromise;
+	const searchParams = await searchParamsPromise;
 
-  const organization = await fetchOrganization({
-    organizationId: params.organization,
-  });
+	if (!params.organization) {
+		return notFound();
+	}
 
-  if (!organization) {
-    return notFound();
-  }
+	const organization = await fetchOrganization({
+		organizationId: params.organization,
+	});
 
-  const events = await fetchEvents({
-    organizationId: organization?._id,
-  });
+	if (!organization) {
+		return notFound();
+	}
 
-  const results = await Promise.all(
-    events.map(async (event) => {
-      const sessions = (
-        await fetchAllSessions({
-          event: event._id.toString(),
-          onlyVideos: true,
-          published: 'public',
-        })
-      ).sessions;
+	const events = await fetchEvents({
+		organizationId: organization?._id,
+	});
 
-      return sessions.length > 0 ? event : undefined;
-    })
-  );
+	const results = await Promise.all(
+		events.map(async (event) => {
+			const sessions = (
+				await fetchAllSessions({
+					event: event._id.toString(),
+					onlyVideos: true,
+					published: "public",
+				})
+			).sessions;
 
-  const eventsWithVideos = results.filter((event) => event !== undefined);
+			return sessions.length > 0 ? event : undefined;
+		}),
+	);
 
-  return (
-    <div className="flex h-full w-full flex-col">
-      {organization.banner && (
-        <div className="relative hidden aspect-video h-full max-h-[200px] w-full md:block">
-          <Image
-            src={organization.banner}
-            alt="banner"
-            quality={100}
-            objectFit="cover"
-            fill
-            priority
-          />
-        </div>
-      )}
-      <div className="m-auto h-full w-full max-w-7xl p-4">
-        <div className="mb-4 flex w-full flex-row items-center justify-between space-x-2">
-          <div className="w-full text-lg font-bold">
-            {searchParams.searchQuery ? 'Search results' : 'All videos'}
-          </div>
-          <div>
-            <EventSelect events={eventsWithVideos as IExtendedEvent[]} />
-          </div>
-        </div>
-        <Suspense fallback={<ArchiveVideoSkeleton />}>
-          <ArchiveVideos
-            organizationId={organization._id}
-            organizationSlug={params.organization}
-            searchQuery={searchParams.searchQuery}
-            page={Number(searchParams.page) || 1}
-            gridLength={12}
-          />
-        </Suspense>
-      </div>
-    </div>
-  );
+	const eventsWithVideos = results.filter((event) => event !== undefined);
+
+	return (
+		<div className="flex flex-col w-full h-full">
+			{organization.banner && (
+				<div className="hidden relative w-full h-full md:block aspect-video max-h-[200px]">
+					<Image
+						src={organization.banner}
+						alt="banner"
+						quality={100}
+						objectFit="cover"
+						fill
+						priority
+					/>
+				</div>
+			)}
+			<div className="p-4 m-auto w-full max-w-7xl h-full">
+				<div className="flex flex-row justify-between items-center mb-4 space-x-2 w-full">
+					<div className="w-full text-lg font-bold">
+						{searchParams.searchQuery ? "Search results" : "All videos"}
+					</div>
+					<div>
+						<EventSelect events={eventsWithVideos as IExtendedEvent[]} />
+					</div>
+				</div>
+				<Suspense fallback={<ArchiveVideoSkeleton />}>
+					<ArchiveVideos
+						organizationId={organization._id}
+						organizationSlug={params.organization}
+						searchQuery={searchParams.searchQuery}
+						page={Number(searchParams.page) || 1}
+						gridLength={12}
+					/>
+				</Suspense>
+			</div>
+		</div>
+	);
 }
 
-export async function generateMetadata(
-  { params }: ChannelPageParams,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  if (!params.organization) {
-    return generalMetadata;
-  }
+export async function generateMetadata({
+	params: paramsPromise,
+}: ChannelPageParams): Promise<Metadata> {
+	const params = await paramsPromise;
 
-  const organization = await fetchOrganization({
-    organizationId: params.organization,
-  });
+	if (!params.organization) {
+		return generalMetadata;
+	}
 
-  if (!organization) {
-    return generalMetadata;
-  }
+	const organization = await fetchOrganization({
+		organizationId: params.organization,
+	});
 
-  return organizationMetadata({
-    organization,
-  });
+	if (!organization) {
+		return generalMetadata;
+	}
+
+	return organizationMetadata({
+		organization,
+	});
 }

@@ -1,50 +1,60 @@
-import { SearchPageProps } from '@/lib/types';
-import { fetchOrganization } from '@/lib/services/organizationService';
-import { fetchEvent } from '@/lib/services/eventService';
-import { redirect } from 'next/navigation';
-import { generalMetadata, archiveMetadata } from '@/lib/utils/metadata';
-import { Metadata } from 'next';
+"use server";
 
-export default async function ArchivePage({ searchParams }: SearchPageProps) {
-  if (searchParams.organization) {
-    const organization = await fetchOrganization({
-      organizationId: searchParams.organization,
-    });
+import { SearchPageProps } from "@/lib/types";
+import { fetchOrganization } from "@/lib/services/organizationService";
+import { fetchEvent } from "@/lib/services/eventService";
+import { redirect } from "next/navigation";
+import { generalMetadata, archiveMetadata } from "@/lib/utils/metadata";
+import { Metadata } from "next";
 
-    if (!organization) {
-      return redirect('/404');
-    }
+const ArchivePage = async ({
+	searchParams: searchParamsPromise,
+}: SearchPageProps) => {
+	const searchParams = await searchParamsPromise;
 
-    return redirect(`/${organization._id}/videos`);
-  }
+	if (searchParams.organization) {
+		const organization = await fetchOrganization({
+			organizationId: searchParams.organization,
+		});
 
-  if (searchParams.event) {
-    const event = await fetchEvent({
-      eventSlug: searchParams.event,
-    });
+		if (!organization) {
+			return redirect("/404");
+		}
 
-    const organization = await fetchOrganization({
-      organizationId: event?.organizationId as string,
-    });
+		return redirect(`/${organization._id}/videos`);
+	}
 
-    if (!event || !organization) {
-      return redirect('/404');
-    }
+	if (searchParams.event) {
+		const event = await fetchEvent({
+			eventSlug: searchParams.event,
+		});
 
-    return redirect(`/${organization._id}/videos`);
-  }
+		const organization = await fetchOrganization({
+			organizationId: event?.organizationId as string,
+		});
 
-  return <>Page moved</>;
-}
+		if (!event || !organization) {
+			return redirect("/404");
+		}
+
+		return redirect(`/${organization._id}/videos`);
+	}
+
+	return <>Page moved</>;
+};
 
 export async function generateMetadata({
-  searchParams,
+	searchParams: searchParamsPromise,
 }: SearchPageProps): Promise<Metadata> {
-  if (!searchParams.event) return generalMetadata;
-  const event = await fetchEvent({
-    eventSlug: searchParams.event,
-  });
+	const searchParams = await searchParamsPromise;
 
-  if (!event) return generalMetadata;
-  return archiveMetadata({ event });
+	if (!searchParams.event) return generalMetadata;
+	const event = await fetchEvent({
+		eventSlug: searchParams.event,
+	});
+
+	if (!event) return generalMetadata;
+	return archiveMetadata({ event });
 }
+
+export default ArchivePage;

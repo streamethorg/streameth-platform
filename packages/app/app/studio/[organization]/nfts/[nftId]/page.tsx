@@ -1,46 +1,48 @@
-import { fetchNFTCollection } from '@/lib/services/nftCollectionService';
-import { nftPageParams } from '@/lib/types';
-import { LuArrowLeft } from 'react-icons/lu';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import React from 'react';
-import ContractDetails from './components/ContractDetails';
-import CopyText from '@/components/misc/CopyText';
-import TitleTextItem from '@/components/ui/TitleTextItem';
+import { fetchNFTCollection } from "@/lib/services/nftCollectionService";
+import { nftPageParams } from "@/lib/types";
+import { LuArrowLeft } from "react-icons/lu";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import React from "react";
+import ContractDetails from "./components/ContractDetails";
+import CopyText from "@/components/misc/CopyText";
+import TitleTextItem from "@/components/ui/TitleTextItem";
 
-const page = async ({ params }: nftPageParams) => {
-  if (!params.nftId) return notFound();
+const page = async ({ params: paramsPromise }: nftPageParams) => {
+	const params = await paramsPromise;
 
-  const collection = await fetchNFTCollection({
-    collectionId: params.nftId,
-  });
-  if (!collection) return notFound();
+	if (!params.nftId) return notFound();
 
-  return (
-    <div className="mx-6 h-full p-2">
-      <Link href={`/studio/${params.organization}/library`}>
-        <div className="my-4 flex items-center justify-start space-x-4">
-          <LuArrowLeft />
-          <p>Back to collections</p>
-        </div>
-      </Link>
+	const collection = await fetchNFTCollection({
+		collectionId: params.nftId,
+	});
+	if (!collection) return notFound();
 
-      <div className="flex flex-col overflow-auto rounded-xl border bg-white p-4">
-        <h3 className="mb-3 text-lg font-bold">Collection Details</h3>
+	return (
+		<div className="p-2 mx-6 h-full">
+			<Link href={`/studio/${params.organization}/library`}>
+				<div className="flex justify-start items-center my-4 space-x-4">
+					<LuArrowLeft />
+					<p>Back to collections</p>
+				</div>
+			</Link>
 
-        <CopyText
-          width="600px"
-          label="Contract Address:"
-          text={collection.contractAddress}
-        />
+			<div className="flex overflow-auto flex-col p-4 bg-white rounded-xl border">
+				<h3 className="mb-3 text-lg font-bold">Collection Details</h3>
 
-        <TitleTextItem title="Type:" text={collection.type} />
-        <TitleTextItem title="Total Items:" text={collection.videos?.length} />
+				<CopyText
+					width="600px"
+					label="Contract Address:"
+					text={collection.contractAddress}
+				/>
 
-        <ContractDetails contractAddress={collection.contractAddress} />
-      </div>
-    </div>
-  );
+				<TitleTextItem title="Type:" text={collection.type} />
+				<TitleTextItem title="Total Items:" text={collection.videos?.length} />
+
+				<ContractDetails contractAddress={collection.contractAddress} />
+			</div>
+		</div>
+	);
 };
 
 export default page;
