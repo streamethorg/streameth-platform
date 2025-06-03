@@ -1,6 +1,6 @@
 "use server";
 
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { fetchOrganization } from "@/lib/services/organizationService";
 import { ChannelPageParams } from "@/lib/types";
 import { Suspense } from "react";
@@ -22,8 +22,11 @@ const OrganizationHome = async ({
 	params,
 	searchParams,
 }: ChannelPageParams) => {
+	const { organization } = await params;
+	const { streamId, search, page } = await searchParams;
+
 	const streams = await fetchOrganizationStages({
-		organizationId: params.organization,
+		organizationId: organization,
 	});
 	const defaultTabValue = streams.length > 0 ? "livestreams" : "videos";
 
@@ -47,30 +50,27 @@ const OrganizationHome = async ({
 					</TabsTrigger>
 				</TabsList>
 				<TabsContent value="livestreams" className="px-4 md:px-0">
-					<Suspense fallback={<UpcomingStreamsLoading />}>
-						<UpcomingStreams
-							organizationId={params.organization}
-							currentStreamId={searchParams.streamId}
+					<Suspense fallback={<LiveStreamsLoading />}>
+						<LiveStreams
+							organizationId={organization}
+							currentStreamId={streamId}
 						/>
 					</Suspense>
 				</TabsContent>
 				<TabsContent value="videos" className="px-4 md:px-0">
 					<Suspense fallback={<ArchiveVideoSkeleton />}>
 						<ArchiveVideos
-							organizationId={params.organization}
-							organizationSlug={params.organization}
-							searchQuery={searchParams.search}
+							organizationId={organization}
+							organizationSlug={organization}
+							searchQuery={search}
 							gridLength={12}
-							page={Number(searchParams.page) || 1}
+							page={Number(page) || 1}
 						/>
 					</Suspense>
 				</TabsContent>
 				<TabsContent value="playlists" className="px-4 md:px-0">
 					<Suspense fallback={<PlaylistSkeleton />}>
-						<ArchivePlaylists
-							organizationId={params.organization}
-							gridLength={12}
-						/>
+						<ArchivePlaylists organizationId={organization} gridLength={12} />
 					</Suspense>
 				</TabsContent>
 			</Tabs>
@@ -78,10 +78,11 @@ const OrganizationHome = async ({
 	);
 };
 
-export async function generateMetadata(
-	{ params }: ChannelPageParams,
-	parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+	params: paramsPromise,
+}: ChannelPageParams): Promise<Metadata> {
+	const params = await paramsPromise;
+
 	if (!params.organization) {
 		return generalMetadata;
 	}

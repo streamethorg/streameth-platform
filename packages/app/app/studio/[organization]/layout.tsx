@@ -1,9 +1,7 @@
-import { studioPageParams } from "@/lib/types";
-import React from "react";
 import Support from "@/components/misc/Support";
 import { fetchOrganization } from "@/lib/services/organizationService";
 import { redirect } from "next/navigation";
-import { IExtendedOrganization } from "@/lib/types";
+import { IExtendedOrganization, StudioPageParams } from "@/lib/types";
 import {
 	OrganizationContextProvider,
 	SubscriptionStatus,
@@ -29,7 +27,6 @@ const calculateOrganizationStatus = (
 
 	const isSubscriptionActive = organization.subscriptionStatus === "active";
 	const isFree = organization.subscriptionTier === "free";
-
 	// Free tier never expires
 	if (isFree) {
 		hasExpired = false;
@@ -53,10 +50,11 @@ const Layout = async ({
 	params,
 }: {
 	children: React.ReactNode;
-	params: studioPageParams["params"];
+	params: StudioPageParams["params"];
 }) => {
+	const { organization } = await params;
 	const currentOrganization = await fetchOrganization({
-		organizationId: params.organization,
+		organizationId: organization,
 	});
 
 	const user = await fetchUser();
@@ -74,7 +72,7 @@ const Layout = async ({
 	}
 
 	const stages = await fetchStages({
-		organizationId: params.organization,
+		organizationId: organization,
 	});
 
 	if (!currentOrganization) {
@@ -89,7 +87,7 @@ const Layout = async ({
 	const canUseFeatures =
 		currentOrganization.subscriptionTier === "free" ||
 		currentOrganization.subscriptionStatus === "active" ||
-			currentOrganization.subscriptionStatus === "canceling" ||
+		currentOrganization.subscriptionStatus === "canceling" ||
 		currentOrganization.subscriptionStatus === "trialing";
 
 	// Check if they can create stages based on tier and subscription status

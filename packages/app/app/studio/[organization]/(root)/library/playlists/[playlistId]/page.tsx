@@ -1,36 +1,39 @@
-'use server';
+"use server";
 
-import { fetchPlaylist } from '@/lib/services/playlistService';
-import { fetchSession } from '@/lib/services/sessionService';
-import { notFound } from 'next/navigation';
-import PlaylistDetail from './components/PlaylistDetail';
+import { fetchPlaylist } from "@/lib/services/playlistService";
+import { fetchSession } from "@/lib/services/sessionService";
+import { notFound } from "next/navigation";
+import PlaylistDetail from "./components/PlaylistDetail";
 
 const PlaylistDetailPage = async ({
-  params,
+	params: paramsPromise,
 }: {
-  params: { organization: string; playlistId: string };
+	params: Promise<{ organization: string; playlistId: string }>;
 }) => {
-  // Fetch the playlist with its sessions
-  const playlist = await fetchPlaylist({
-    organizationId: params.organization,
-    playlistId: params.playlistId,
-  }).catch(() => null);
+	const params = await paramsPromise;
 
-  if (!playlist) {
-    notFound();
-  }
+	const playlist = await fetchPlaylist({
+		organizationId: params.organization,
+		playlistId: params.playlistId,
+	}).catch(() => null);
 
-  // Fetch each session in the playlist
-  const sessionsPromises = playlist.sessions.map(id => 
-    fetchSession({ session: id.toString() })
-  );
-  const sessions = (await Promise.all(sessionsPromises)).filter((session): session is NonNullable<typeof session> => session !== null);
+	if (!playlist) {
+		notFound();
+	}
 
-  return (
-    <div className="w-full h-full">
-      <PlaylistDetail playlist={playlist} sessions={sessions} />
-    </div>
-  );
+	const sessionsPromises = playlist.sessions.map((id) =>
+		fetchSession({ session: id.toString() }),
+	);
+	const sessions = (await Promise.all(sessionsPromises)).filter(
+		(session): session is NonNullable<typeof session> => session !== null,
+	);
+
+	return (
+		<div className="w-full h-full">
+			<PlaylistDetail playlist={playlist} sessions={sessions} />
+		</div>
+	);
 };
 
-export default PlaylistDetailPage; 
+export default PlaylistDetailPage;
+
