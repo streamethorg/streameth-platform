@@ -50,8 +50,8 @@ const OrganizationHome = async ({
 					</TabsTrigger>
 				</TabsList>
 				<TabsContent value="livestreams" className="px-4 md:px-0">
-					<Suspense fallback={<LiveStreamsLoading />}>
-						<LiveStreams
+					<Suspense fallback={<UpcomingStreamsLoading />}>
+						<UpcomingStreams
 							organizationId={organization}
 							currentStreamId={streamId}
 						/>
