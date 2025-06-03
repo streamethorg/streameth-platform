@@ -63,7 +63,7 @@
     "lucide-react": "^0.453.0",
     "moment-timezone": "^0.5.46",
     "mux-embed": "^5.3.3",
-    "next": "15.3.2",
+    "next": "15.2.4",
     "next-auth": "^5.0.0-beta.28",
     "next-themes": "^0.2.1",
     "pino-pretty": "^10.3.1",
