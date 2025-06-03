@@ -50,45 +50,45 @@ export default async function Livestream({
 
 	if (!stage?._id || !stage.streamSettings?.streamId) return notFound();
 
-  return (
-    <Suspense key={stage._id} fallback={<Loading />}>
-      <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-4 md:mt-4 md:px-4">
-        <Player stage={stage} />
-        <div className="w-full px-4 md:p-0">
-          <SessionInfoBox
-            name={stage.name}
-            description={stage.description ?? ''}
-            date={stage.streamDate as string}
-            video={stage as IExtendedStage}
-          />
-        </div>
-        <div className="flex items-center justify-between pb-4">
-          <h1 className="text-2xl font-bold">More videos</h1>
-          <Link href={`/${params.organization}`}>
-            <h3 className="text-sm hover:underline">See more videos</h3>
-          </Link>
-        </div>
-        <div className="md:hidden">
-          <Suspense fallback={<ArchiveVideoSkeleton />}>
-            <ArchiveVideos
-              organizationId={params.organization}
-              organizationSlug={params.organization}
-              gridLength={4}
-            />
-          </Suspense>
-        </div>
-        <div className="hidden md:block">
-          <Suspense fallback={<ArchiveVideoSkeleton />}>
-            <ArchiveVideos
-              organizationId={params.organization}
-              organizationSlug={params.organization}
-              gridLength={8}
-            />
-          </Suspense>
-        </div>
-      </div>
-    </Suspense>
-  );
+	return (
+		<Suspense key={stage._id} fallback={<Loading />}>
+			<div className="flex flex-col gap-4 mx-auto w-full max-w-7xl h-full md:px-4 md:mt-4">
+				<Player stage={stage} />
+				<div className="px-4 w-full md:p-0">
+					<SessionInfoBox
+						name={stage.name}
+						description={stage.description ?? ""}
+						date={stage.streamDate as string}
+						video={stage as IExtendedStage}
+					/>
+				</div>
+				<div className="flex justify-between items-center pb-4">
+					<h1 className="text-2xl font-bold">More videos</h1>
+					<Link href={`/${organization}`}>
+						<h3 className="text-sm hover:underline">See more videos</h3>
+					</Link>
+				</div>
+				<div className="md:hidden">
+					<Suspense fallback={<ArchiveVideoSkeleton />}>
+						<ArchiveVideos
+							organizationId={organization}
+							organizationSlug={organization}
+							gridLength={4}
+						/>
+					</Suspense>
+				</div>
+				<div className="hidden md:block">
+					<Suspense fallback={<ArchiveVideoSkeleton />}>
+						<ArchiveVideos
+							organizationId={organization}
+							organizationSlug={organization}
+							gridLength={8}
+						/>
+					</Suspense>
+				</div>
+			</div>
+		</Suspense>
+	);
 }
 
 export async function generateMetadata({
