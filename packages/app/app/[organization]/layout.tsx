@@ -12,10 +12,10 @@ const Layout = async ({
 	params,
 	children,
 }: {
-	params: { organization: string };
+	params: Promise<{ organization: string }>;
 	children: React.ReactNode;
 }) => {
-	const org = params.organization;
+	const { organization: org } = await params;
 	const pages = [
 		{
 			name: "Home",
@@ -30,10 +30,10 @@ const Layout = async ({
 	];
 
 	const organization = await fetchOrganization({
-		organizationId: params.organization,
+		organizationId: org,
 	});
 
-	if (params.organization === organization?.slug) {
+	if (org === organization?.slug) {
 		redirect(`/${organization?._id}`);
 	}
 
@@ -42,7 +42,7 @@ const Layout = async ({
 	}
 
 	const stages = await fetchStages({
-		organizationId: params.organization,
+		organizationId: org,
 	});
 
 	const stagesStatus = {

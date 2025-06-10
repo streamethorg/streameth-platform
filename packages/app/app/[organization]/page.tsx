@@ -93,17 +93,27 @@ export async function generateMetadata({
 		return generalMetadata;
 	}
 
-	const allStreams = (
-		await fetchOrganizationStages({
-			organizationId: organization._id,
-		})
-	).filter((stream) => stream.published);
+	const allStreams = await fetchOrganizationStages({
+		organizationId: organization._id,
+	});
 
-	const sortedStreams = allStreams.sort(
-		(a, b) =>
-			new Date(a.streamDate as string).getTime() -
-			new Date(b.streamDate as string).getTime(),
-	);
+	const sortedStreams = allStreams.filter((livestream) => {
+		const streamDate = new Date(livestream.streamDate as string);
+		const today = new Date();
+
+		const streamDateOnly = new Date(
+			streamDate.getFullYear(),
+			streamDate.getMonth(),
+			streamDate.getDate(),
+		);
+		const todayOnly = new Date(
+			today.getFullYear(),
+			today.getMonth(),
+			today.getDate(),
+		);
+
+		return streamDateOnly >= todayOnly;
+	});
 
 	const stage = sortedStreams.length > 0 ? sortedStreams[0] : null;
 

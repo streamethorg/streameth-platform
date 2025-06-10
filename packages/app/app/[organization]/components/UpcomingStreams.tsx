@@ -15,13 +15,10 @@ const LiveStreams = async ({
 		organizationId,
 	});
 
-	console.log(livestreams);
 	livestreams = livestreams.filter((livestream) => {
-		// filter by streams in the future or happening today
 		const streamDate = new Date(livestream.streamDate as string);
 		const today = new Date();
 
-		// Compare only the date parts (year, month, day)
 		const streamDateOnly = new Date(
 			streamDate.getFullYear(),
 			streamDate.getMonth(),
@@ -35,6 +32,8 @@ const LiveStreams = async ({
 
 		return livestream._id !== currentStreamId && streamDateOnly >= todayOnly;
 	});
+
+	console.log(livestreams);
 
 	return (
 		<>
