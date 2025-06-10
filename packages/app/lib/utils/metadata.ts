@@ -46,13 +46,13 @@ export const organizationMetadata = ({
 	const imageUrl = organization.banner ? organization.banner : BASE_IMAGE;
 
 	return {
-		title: `${organization.name} | StreamETH`,
+		title: `${organization.name} || StreamETH`,
 		description: `${organization.description}`,
 		metadataBase: new URL("https://streameth.org"),
 		openGraph: {
-			title: `${organization.name} | StreamETH`,
+			title: `${organization.name} || StreamETH`,
 			siteName: "StreamETH",
-			description: `Archive of ${organization.description}`,
+			description: `${organization.description}`,
 			images: {
 				url: imageUrl,
 				alt: "StreamETH Logo",

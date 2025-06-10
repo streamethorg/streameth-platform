@@ -6,7 +6,11 @@ import { ChannelPageParams } from "@/lib/types";
 import { Suspense } from "react";
 import LiveStreams, { LiveStreamsLoading } from "./components/UpcomingStreams";
 import { fetchOrganizationStages } from "@/lib/services/stageService";
-import { livestreamMetadata, generalMetadata } from "@/lib/utils/metadata";
+import {
+	livestreamMetadata,
+	generalMetadata,
+	organizationMetadata,
+} from "@/lib/utils/metadata";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ArchiveVideos from "./videos/components/ArchiveVideos";
 import ArchiveVideoSkeleton from "./livestream/components/ArchiveVideosSkeleton";
@@ -93,36 +97,7 @@ export async function generateMetadata({
 		return generalMetadata;
 	}
 
-	const allStreams = await fetchOrganizationStages({
-		organizationId: organization._id,
-	});
-
-	const sortedStreams = allStreams.filter((livestream) => {
-		const streamDate = new Date(livestream.streamDate as string);
-		const today = new Date();
-
-		const streamDateOnly = new Date(
-			streamDate.getFullYear(),
-			streamDate.getMonth(),
-			streamDate.getDate(),
-		);
-		const todayOnly = new Date(
-			today.getFullYear(),
-			today.getMonth(),
-			today.getDate(),
-		);
-
-		return streamDateOnly >= todayOnly;
-	});
-
-	const stage = sortedStreams.length > 0 ? sortedStreams[0] : null;
-
-	if (!stage) {
-		return generalMetadata;
-	}
-
-	return livestreamMetadata({
-		livestream: stage,
+	return organizationMetadata({
 		organization,
 	});
 }
