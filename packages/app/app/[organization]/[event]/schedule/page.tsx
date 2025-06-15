@@ -1,53 +1,55 @@
-import SchedulePageComponent from './components/ScheduleComponent';
-import type { Metadata, ResolvingMetadata } from 'next';
-import EmbedLayout from '@/components/Layout/EmbedLayout';
-import { fetchEvent } from '@/lib/services/eventService';
-import { EventPageProps } from '@/lib/types';
-import { archiveMetadata, generalMetadata } from '@/lib/utils/metadata';
+import SchedulePageComponent from "./components/ScheduleComponent";
+import type { Metadata } from "next";
+import EmbedLayout from "@/components/Layout/EmbedLayout";
+import { fetchEvent } from "@/lib/services/eventService";
+import { EventPageProps } from "@/lib/types";
+import { archiveMetadata, generalMetadata } from "@/lib/utils/metadata";
 
-import { fetchEventStages } from '@/lib/services/stageService';
+import { fetchEventStages } from "@/lib/services/stageService";
 
 export default async function SchedulePage({
-  params,
-  searchParams,
+	params: paramsPromise,
+	searchParams: searchParamsPromise,
 }: EventPageProps) {
-  const event = await fetchEvent({
-    eventSlug: params.event,
-  });
+	const params = await paramsPromise;
+	const searchParams = await searchParamsPromise;
 
-  if (!event) {
-    return null;
-  }
-  const stages = await fetchEventStages({
-    eventId: params.event,
-  });
+	const event = await fetchEvent({
+		eventSlug: params.event,
+	});
 
-  return (
-    <EmbedLayout>
-      <SchedulePageComponent
-        stages={stages}
-        event={event}
-        stage={searchParams.stage}
-        date={searchParams.date}
-      />
-    </EmbedLayout>
-  );
+	if (!event) {
+		return null;
+	}
+	const stages = await fetchEventStages({
+		eventId: params.event,
+	});
+
+	return (
+		<EmbedLayout>
+			<SchedulePageComponent
+				stages={stages}
+				event={event}
+				stage={searchParams.stage}
+				date={searchParams.date}
+			/>
+		</EmbedLayout>
+	);
 }
 
-export async function generateMetadata(
-  { params }: EventPageProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { event } = params;
-  const eventInfo = await fetchEvent({
-    eventSlug: event,
-  });
+export async function generateMetadata({
+	params,
+}: EventPageProps): Promise<Metadata> {
+	const { event } = await params;
+	const eventInfo = await fetchEvent({
+		eventSlug: event,
+	});
 
-  if (!eventInfo) {
-    return generalMetadata;
-  }
+	if (!eventInfo) {
+		return generalMetadata;
+	}
 
-  return archiveMetadata({
-    event: eventInfo,
-  });
+	return archiveMetadata({
+		event: eventInfo,
+	});
 }

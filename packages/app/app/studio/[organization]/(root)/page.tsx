@@ -8,9 +8,12 @@ import ClipContentButton from "./library/components/ClipContentButton";
 import UploadVideoDialog from "./library/components/UploadVideoDialog";
 
 export default async function OrganizationPage({
-	params,
-	searchParams,
+	params: paramsPromise,
+	searchParams: searchParamsPromise,
 }: LivestreamPageParams) {
+	const params = await paramsPromise;
+	const searchParams = await searchParamsPromise;
+
 	const startOfDay = new Date();
 	startOfDay.setHours(0, 0, 0, 0);
 
