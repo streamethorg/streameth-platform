@@ -15,11 +15,11 @@ export default class PineconeService {
   private model: string;
   private indexName: string;
   private namespace: string;
-  constructor(indexName: string) {
+  constructor() {
     this.pc = pc;
     this.model = 'multilingual-e5-large';
     this.indexName = 'transcripts';
-    this.namespace = indexName;
+    this.namespace = 'all-transcripts';
   }
 
   async createIndex() {
@@ -41,21 +41,18 @@ export default class PineconeService {
   }
 
   async embed(
+    transcriptId: string,
     phraseArray: { text: string; start: number; end: number }[],
   ): Promise<void> {
     if (phraseArray.length === 0) {
       throw new Error('phraseArray is empty');
     }
 
-    const BATCH_SIZE = 96; // Maximum batch size for multilingual-e5-large
+    const BATCH_SIZE = 96;
     const allRecords = [];
 
-    // Process embeddings in batches
     for (let i = 0; i < phraseArray.length; i += BATCH_SIZE) {
       const batch = phraseArray.slice(i, i + BATCH_SIZE);
-      console.log(
-        `Processing embedding batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(phraseArray.length / BATCH_SIZE)} (${batch.length} phrases)`,
-      );
 
       const embeddings = await this.pc.inference.embed(
         this.model,
@@ -63,27 +60,15 @@ export default class PineconeService {
         { inputType: 'passage', truncate: 'END' },
       );
 
-      // Validate embeddings
-      if (
-        !embeddings.length ||
-        !embeddings[0].values ||
-        embeddings[0].values.length !== 1024
-      ) {
-        console.error('Invalid embeddings:', {
-          embeddingsLength: embeddings.length,
-          firstEmbeddingDimension: embeddings[0]?.values?.length,
-        });
-        throw new Error('Invalid embeddings generated');
-      }
-
       const records = embeddings.map((embedding, index) => {
         if (!embedding.values || embedding.values.length !== 1024) {
           throw new Error(`Invalid embedding at index ${index}`);
         }
         return {
-          id: `${batch[index].start}-${batch[index].end}`,
+          id: `${transcriptId}-${batch[index].start}-${batch[index].end}`,
           values: Array.from(embedding.values),
           metadata: {
+            transcriptId: transcriptId,
             start: batch[index].start,
             end: batch[index].end,
             text: batch[index].text,
@@ -94,48 +79,29 @@ export default class PineconeService {
       allRecords.push(...records);
     }
 
-    console.log(`Generated ${allRecords.length} embeddings successfully`);
-    console.log('First embedding dimension:', allRecords[0].values.length);
-    console.log(
-      'Sample of first embedding values:',
-      allRecords[0].values.slice(0, 5),
-    );
-
     // Upsert records in batches
     const UPSERT_BATCH_SIZE = 100;
     for (let i = 0; i < allRecords.length; i += UPSERT_BATCH_SIZE) {
       const batch = allRecords.slice(i, i + UPSERT_BATCH_SIZE);
-      console.log(
-        `Upserting batch ${Math.floor(i / UPSERT_BATCH_SIZE) + 1}/${Math.ceil(allRecords.length / UPSERT_BATCH_SIZE)}`,
-      );
       await this.pc
         .index(this.indexName)
         .namespace(this.namespace)
         .upsert(batch);
     }
-
-    console.log('All records upserted successfully');
   }
 
   async query(
+    transcriptId: string,
     queries: string[],
   ): Promise<ScoredPineconeRecord<RecordMetadata>[]> {
     console.log('Querying with:', queries);
-    
-    // Get embeddings for all queries
+
     const queryEmbeddings = await this.pc.inference.embed(this.model, queries, {
       inputType: 'query',
     });
 
-    // Validate embeddings
-    if (!queryEmbeddings.length) {
-      throw new Error('No query embeddings generated');
-    }
-
-    // Store all matches
     const allMatches: ScoredPineconeRecord<RecordMetadata>[] = [];
-    
-    // Query for each embedding
+
     for (const embedding of queryEmbeddings) {
       if (!embedding.values || embedding.values.length !== 1024) {
         console.error('Invalid embedding dimension:', embedding.values?.length);
@@ -150,26 +116,35 @@ export default class PineconeService {
           vector: embedding.values,
           includeValues: false,
           includeMetadata: true,
+          filter: {
+            transcriptId: transcriptId,
+          },
         });
 
       allMatches.push(...queryResponse.matches);
     }
 
     // Deduplicate matches based on metadata.start time and combine scores
-    const uniqueMatches = new Map<number, ScoredPineconeRecord<RecordMetadata>>();
-    
-    allMatches.forEach(match => {
+    const uniqueMatches = new Map<
+      number,
+      ScoredPineconeRecord<RecordMetadata>
+    >();
+
+    allMatches.forEach((match) => {
       const start = Number(match.metadata?.start);
       if (isNaN(start)) return;
-      
-      if (!uniqueMatches.has(start) || match.score > uniqueMatches.get(start)!.score) {
+
+      if (
+        !uniqueMatches.has(start) ||
+        match.score > uniqueMatches.get(start)!.score
+      ) {
         uniqueMatches.set(start, match);
       }
     });
 
-    // Convert back to array and sort by time
-    return Array.from(uniqueMatches.values())
-      .sort((a, b) => Number(a.metadata.start) - Number(b.metadata.start));
+    return Array.from(uniqueMatches.values()).sort(
+      (a, b) => Number(a.metadata.start) - Number(b.metadata.start),
+    );
   }
 
   async namespaceHasData(): Promise<boolean> {
@@ -225,5 +200,17 @@ export default class PineconeService {
       }
     }
     return phraseArray;
+  }
+
+  async transcriptHasData(): Promise<boolean> {
+    try {
+      const index = this.pc.index(this.indexName);
+      const indexStats = await index.describeIndexStats();
+
+      return indexStats.namespaces[this.namespace].recordCount > 0;
+    } catch (error) {
+      console.error(`Error checking transcript data: ${error}`);
+      throw new Error(`Failed to check transcript data: ${error.message}`);
+    }
   }
 }

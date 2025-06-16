@@ -27,7 +27,7 @@ export class ChatAPI {
     try {
       const completion = await this.openai.chat.completions.create({
         temperature: 1,
-        model: 'gemini-1.5-pro-latest',
+        model: 'gemini-2.0-flash',
         messages,
         max_tokens: 2000,
         response_format: { type: 'json_object' },
@@ -40,9 +40,9 @@ export class ChatAPI {
   }
 
   async initializeSession(sessionId: string, chunks: any[]) {
-    const pineconeService = new PineconeService(sessionId);
+    const pineconeService = new PineconeService();
     const phrases = await pineconeService.wordsToPhrases(chunks);
-    await pineconeService.embed(phrases);
+    await pineconeService.embed(sessionId, phrases);
   }
 
   async summarizeSession(sessionId: string, text: string) {
@@ -80,13 +80,13 @@ export class ChatAPI {
     query: string[],
     optimalScore: number = 0.89,
   ) {
-    const pineconeService = new PineconeService(sessionId);
+    const pineconeService = new PineconeService();
     if (!(await pineconeService.namespaceHasData())) {
       const phrases = await pineconeService.wordsToPhrases(chunks);
-      await pineconeService.embed(phrases);
+      await pineconeService.embed(sessionId, phrases);
     }
 
-    const scores = await pineconeService.query(query);
+    const scores = await pineconeService.query(sessionId, query);
 
     // Take all scores within 0.05 of the highest score
     const highestScore = Math.max(...scores.map((s) => s.score));
