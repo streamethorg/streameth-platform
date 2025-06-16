@@ -51,7 +51,6 @@ const NFT = async ({
 						Create NFT collection from your livestream on Base Chain.
 					</CardDescription>
 				</CardHeader>
-
 				<CardFooter>
 					<CreateNFTCollectionModal type={type} />
 				</CardFooter>

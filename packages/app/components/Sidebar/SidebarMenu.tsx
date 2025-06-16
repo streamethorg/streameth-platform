@@ -10,6 +10,7 @@ import {
   LuBookOpen,
   LuDollarSign,
   LuLock,
+  LuImage,
 } from 'react-icons/lu';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -53,6 +54,11 @@ const SidebarMenu = ({}) => {
       text: 'Docs',
       url: 'https://streameth.notion.site/StreamETH-Docs-f31d759cea824b0ea8f959a4608b0b42',
       icon: <LuBookOpen size={25} />,
+    },
+    {
+      text: 'Collectibles',
+      url: `/studio/${organizationId}/nfts`,
+      icon: <LuImage size={25} />,
     },
   ];
 

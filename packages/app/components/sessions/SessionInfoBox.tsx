@@ -20,6 +20,7 @@ import {
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
 import { EllipsisVertical } from 'lucide-react';
+import CollectVideButton from './CollectVideButton';
 
 const DesktopButtons = ({
   name,
@@ -27,17 +28,21 @@ const DesktopButtons = ({
   date,
   video,
   vod,
+  nftCollection,
 }: {
   name: string;
   description: string;
   date: string;
   video?: IExtendedSession;
   vod: boolean;
+  nftCollection?: IExtendedNftCollections;
 }) => {
+  console.log(video)
   return (
     <>
       <div className="flex flex-row space-x-2">
         <ShareButton shareFor="video" />
+        <CollectVideButton video={video} nftCollection={nftCollection} />
         {video?.assetId && (
           <VideoDownloadClient
             variant="outline"
@@ -117,6 +122,7 @@ const SessionInfoBox = async ({
   inverted,
   vod = false,
   video,
+  nftCollection,
 }: {
   name: string;
   description: string;
@@ -130,6 +136,7 @@ const SessionInfoBox = async ({
   video?:
     | (IExtendedSession & { isMultipleDate?: boolean; streamEndDate?: string })
     | IExtendedStage;
+  nftCollection?: IExtendedNftCollection;
 }) => {
   return (
     <div
@@ -148,6 +155,7 @@ const SessionInfoBox = async ({
                 date={date}
                 video={video as IExtendedSession | undefined}
                 vod={vod}
+                nftCollection={nftCollection}
               />
             </div>
             <div className="hidden justify-end items-center ml-auto space-x-2 md:flex">
@@ -157,6 +165,7 @@ const SessionInfoBox = async ({
                 date={date}
                 video={video as IExtendedSession | undefined}
                 vod={vod}
+                nftCollection={nftCollection}
               />
             </div>
           </div>

@@ -12,6 +12,7 @@ import { generateThumbnailAction } from "@/lib/actions/sessions";
 import Link from "next/link";
 import ArchiveVideos from "../videos/components/ArchiveVideos";
 import ArchiveVideoSkeleton from "../livestream/components/ArchiveVideosSkeleton";
+import { fetchNFTCollection } from "@/lib/services/nftCollectionService";
 
 const Loading = () => {
 	return (
@@ -49,6 +50,10 @@ export default async function Watch({
 		session: searchParams.session,
 	});
 
+  const nftCollection = await fetchNFTCollection({
+    collectionId: session?.nftCollections?.[0],
+  });
+
 	if (!session?.playbackId) return notFound();
 
 	const videoUrl = await getVideoUrlAction(session);
@@ -82,6 +87,7 @@ export default async function Watch({
 							organizationSlug={params.organization}
 							vod={true}
 							video={session as IExtendedSession}
+              nftCollection={nftCollection}
 						/>
 					</div>
 				</div>
