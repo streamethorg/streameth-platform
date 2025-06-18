@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 # Define common configurations that can be reused
 x-common-environment: &common-environment
@@ -238,7 +238,7 @@ services:
     depends_on:
       - mongodb
       - redis
-    environment: 
+    environment:
       <<: *common-environment
     deploy:
       <<: *common-deploy
@@ -251,6 +251,8 @@ services:
         max-size: "10m"
         max-file: "3"
         mode: "non-blocking"
+    tmpfs:
+      - /tmp:size=10G
 
 networks:
   default:

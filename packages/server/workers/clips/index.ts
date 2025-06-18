@@ -34,9 +34,9 @@ const consumer = async () => {
       start: data.start,
       end: data.end,
       hasEditorOptions: !!data.editorOptions,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-    
+
     try {
       return await processClip(data);
     } catch (error) {
@@ -44,7 +44,7 @@ const consumer = async () => {
         sessionId: data.sessionId,
         error: error.message,
         stack: error.stack,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
       await Session.findByIdAndUpdate(data.sessionId, {
         $set: {
@@ -62,27 +62,27 @@ const processClip = async (data: IClip) => {
     start: data.start,
     end: data.end,
     hasEditorOptions: !!data.editorOptions,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 
   try {
     console.log('📥 Fetching master playlist:', {
       url: data.clipUrl,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-    
+
     const masterResponse = await fetch(data.clipUrl);
     if (!masterResponse.ok) {
       console.error('❌ Failed to fetch master playlist:', {
         status: masterResponse.status,
         statusText: masterResponse.statusText,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
       throw new Error(
         `Failed to fetch master playlist: ${masterResponse.statusText}`,
       );
     }
-    
+
     const masterContent = await masterResponse.text();
     console.log('✅ Successfully fetched master playlist');
 
@@ -108,7 +108,7 @@ const processClip = async (data: IClip) => {
     console.log('🎯 Selected variant details:', {
       bandwidth: maxBandwidth,
       url: variantUrl,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     variantUrl = data.clipUrl.replace('index.m3u8', variantUrl);
@@ -124,7 +124,7 @@ const processClip = async (data: IClip) => {
       start: data.start,
       end: data.end,
       duration,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     const tempDir = tmpdir();
@@ -133,7 +133,7 @@ const processClip = async (data: IClip) => {
     console.log('📁 Temporary file paths:', {
       concatPath,
       outputPath,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // 1. Fetch and parse manifest
@@ -182,8 +182,13 @@ const processClip = async (data: IClip) => {
     }
 
     if (segments.length === 0) {
-      console.error('❌ No segments found for specified time range:', { start: data.start, end: data.end });
-      throw new Error(`No segments found for time range ${data.start}-${data.end}`);
+      console.error('❌ No segments found for specified time range:', {
+        start: data.start,
+        end: data.end,
+      });
+      throw new Error(
+        `No segments found for time range ${data.start}-${data.end}`,
+      );
     }
 
     console.log('📊 Segment analysis:', {
@@ -194,7 +199,7 @@ const processClip = async (data: IClip) => {
     });
 
     // 3. Download segments in parallel with progress tracking
-    const CONCURRENT_DOWNLOADS = 5;
+    const CONCURRENT_DOWNLOADS = 3;
     const segmentPaths: string[] = new Array(segments.length);
 
     // Progress tracking
@@ -208,13 +213,13 @@ const processClip = async (data: IClip) => {
       const downloadedMB = downloadedBytes / (1024 * 1024);
       const totalMB = totalBytes / (1024 * 1024);
 
-      console.log('📥 Download progress:', {
-        completedSegments: completedDownloads,
-        totalSegments: segments.length,
-        percentComplete: `${percentComplete.toFixed(1)}%`,
-        downloadedSize: `${downloadedMB.toFixed(1)}MB`,
-        totalSize: `${totalMB.toFixed(1)}MB`,
-      });
+      // console.log('📥 Download progress:', {
+      //   completedSegments: completedDownloads,
+      //   totalSegments: segments.length,
+      //   percentComplete: `${percentComplete.toFixed(1)}%`,
+      //   downloadedSize: `${downloadedMB.toFixed(1)}MB`,
+      //   totalSize: `${totalMB.toFixed(1)}MB`,
+      // });
     };
 
     const downloadSegment = async (segment: Segment, index: number) => {
@@ -223,7 +228,7 @@ const processClip = async (data: IClip) => {
         startTime: segment.startTime,
         duration: segment.duration,
       });
-      
+
       const response = await fetch(segment.url);
       if (!response.ok) {
         console.error(`❌ Failed to download segment ${index}:`, {
@@ -244,12 +249,18 @@ const processClip = async (data: IClip) => {
         totalBytes += contentLength;
       }
 
-      const buffer = await response.buffer();
-      await fs.promises.writeFile(segmentPath, buffer);
-
-      // Update progress
-      downloadedBytes += buffer.length;
-      updateProgress();
+      // Stream the response directly to file instead of buffering
+      const fileStream = fs.createWriteStream(segmentPath);
+      await new Promise((resolve, reject) => {
+        response.body.pipe(fileStream);
+        response.body.on('error', reject);
+        fileStream.on('finish', () => {
+          downloadedBytes += contentLength || 0;
+          updateProgress();
+          resolve(true);
+        });
+        fileStream.on('error', reject);
+      });
 
       return segmentPath;
     };
@@ -326,17 +337,36 @@ const processClip = async (data: IClip) => {
       totalDuration: duration,
     });
 
+    const logMemoryUsage = () => {
+      const used = process.memoryUsage();
+      console.log('Memory usage:', {
+        rss: `${Math.round(used.rss / 1024 / 1024)}MB`,
+        heapTotal: `${Math.round(used.heapTotal / 1024 / 1024)}MB`,
+        heapUsed: `${Math.round(used.heapUsed / 1024 / 1024)}MB`,
+        external: `${Math.round(used.external / 1024 / 1024)}MB`,
+      });
+    };
+
+    // Log every 5 seconds
+    const memoryInterval = setInterval(logMemoryUsage, 5000);
+
     return new Promise((resolve, reject) => {
       console.log('🎬 Starting FFmpeg concatenation');
       ffmpeg()
         .input(concatFilePath)
         .inputOptions(['-f', 'concat', '-safe', '0'])
-        .outputOptions(['-c', 'copy'])
+        .outputOptions([
+          '-c',
+          'copy',
+          '-loglevel error',
+          '-threads 2', // Limit FFmpeg threads
+          '-max_muxing_queue_size 1024', // Limit muxing queue
+        ])
         .output(concatPath)
         .on('start', (command) => {
           console.log('🎥 FFmpeg concat command:', {
             command,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         })
         .on('end', () => {
@@ -348,14 +378,14 @@ const processClip = async (data: IClip) => {
           console.log('🎬 Starting FFmpeg trim operation');
           ffmpeg()
             .input(concatPath)
-            .inputOptions([`-ss ${offsetInFirstSegment}`])
+            .inputOptions([`-ss ${offsetInFirstSegment}`, '-loglevel error'])
             .outputOptions(['-c copy', '-f mp4', '-movflags +faststart'])
             .duration(duration)
             .output(outputPath)
             .on('start', (command) => {
               console.log('🎥 FFmpeg trim command:', {
                 command,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
               });
             })
             .on('end', async () => {
@@ -365,13 +395,14 @@ const processClip = async (data: IClip) => {
 
                 console.log('✅ Clip creation finished');
                 const storageService = new StorageService();
-                
+
                 const stats = await stat(outputPath);
                 console.log('📊 Output file size:', {
                   bytes: stats.size,
                   megabytes: (stats.size / (1024 * 1024)).toFixed(2) + ' MB',
-                  gigabytes: (stats.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB',
-                  timestamp: new Date().toISOString()
+                  gigabytes:
+                    (stats.size / (1024 * 1024 * 1024)).toFixed(2) + ' GB',
+                  timestamp: new Date().toISOString(),
                 });
 
                 const fileStream = createReadStream(outputPath);
@@ -379,12 +410,15 @@ const processClip = async (data: IClip) => {
                 const url = await storageService.uploadFile(
                   'clips/' + data.sessionId,
                   fileStream,
-                  'video/mp4'
+                  'video/mp4',
                 );
                 console.log('✅ Clip uploaded to S3:', url);
 
                 if (data.editorOptions) {
-                  console.log('🎨 Processing editor options:', data.editorOptions);
+                  console.log(
+                    '🎨 Processing editor options:',
+                    data.editorOptions,
+                  );
                   const updateData = {
                     source: {
                       streamUrl: url,
@@ -419,10 +453,11 @@ const processClip = async (data: IClip) => {
                   console.log('🎬 Launching Remotion render');
                   await clipEditorService.launchRemotionRender(clipEditor);
                   console.log('✅ Remotion render launched');
-                  
-                  await Session.findByIdAndUpdate(data.sessionId, 
+
+                  await Session.findByIdAndUpdate(
+                    data.sessionId,
                     { $set: { processingStatus: ProcessingStatus.rendering } },
-                    { new: true }
+                    { new: true },
                   );
                   console.log('💾 Updated session status to rendering');
                 } else {
@@ -447,22 +482,24 @@ const processClip = async (data: IClip) => {
                 console.error('❌ Error in final processing steps:', {
                   error: error.message,
                   stack: error.stack,
-                  timestamp: new Date().toISOString()
+                  timestamp: new Date().toISOString(),
                 });
                 reject(error);
+              } finally {
+                clearInterval(memoryInterval);
               }
             })
             .on('progress', (progress) => {
               console.log('📈 FFmpeg trim progress:', {
                 ...progress,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
               });
             })
             .on('error', async (err) => {
               console.error('❌ Error during FFmpeg trim:', {
                 error: err.message,
                 stack: err.stack,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
               });
               fs.unlinkSync(concatPath);
               await Session.findByIdAndUpdate(data.sessionId, {
@@ -477,14 +514,14 @@ const processClip = async (data: IClip) => {
         .on('progress', (progress) => {
           console.log('📈 FFmpeg concat progress:', {
             ...progress,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
         })
         .on('error', async (err) => {
           console.error('❌ Error during FFmpeg concat:', {
             error: err.message,
             stack: err.stack,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
           });
           await Session.findByIdAndUpdate(data.sessionId, {
             $set: {
@@ -499,7 +536,7 @@ const processClip = async (data: IClip) => {
     console.error('❌ Fatal error in clip processing:', {
       error: error.message,
       stack: error.stack,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
     await Session.findByIdAndUpdate(data.sessionId, {
       $set: {
@@ -513,7 +550,7 @@ const processClip = async (data: IClip) => {
 const init = async () => {
   try {
     console.log('🚀 Initializing clips worker');
-    
+
     console.log('🔌 Connecting to database...');
     await connect(dbConnection.url, {
       serverSelectionTimeoutMS: 5000,
@@ -527,7 +564,7 @@ const init = async () => {
       name: err.name,
       message: err.message,
       stack: err.stack,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
     process.exit(1);
   }
@@ -536,7 +573,7 @@ const init = async () => {
 process.on('unhandledRejection', (error) => {
   console.error('❌ Unhandled rejection in clips worker:', {
     error,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
   process.exit(1);
 });
@@ -544,7 +581,7 @@ process.on('unhandledRejection', (error) => {
 process.on('uncaughtException', (error) => {
   console.error('❌ Uncaught exception in clips worker:', {
     error,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
   process.exit(1);
 });
@@ -554,7 +591,7 @@ init().catch((error) => {
     name: error.name,
     message: error.message,
     stack: error.stack,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
   process.exit(1);
 });
