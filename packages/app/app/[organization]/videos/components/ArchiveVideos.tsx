@@ -10,6 +10,7 @@ interface ArchiveVideosProps {
 	searchQuery?: string;
 	page?: number;
 	gridLength: number;
+	sortBy?: "default" | "random";
 }
 
 const ArchiveVideos = async ({
@@ -17,8 +18,9 @@ const ArchiveVideos = async ({
 	searchQuery,
 	page,
 	gridLength = 10,
+	sortBy = "default",
 }: ArchiveVideosProps) => {
-	const { sessions, pagination } = await fetchAllSessions({
+	let { sessions, pagination } = await fetchAllSessions({
 		organizationId,
 		limit: gridLength,
 		onlyVideos: true,
@@ -27,7 +29,9 @@ const ArchiveVideos = async ({
 		page,
 	});
 
-	let shuffledSessions = shuffleArray(sessions);
+	if (sortBy === "random") {
+		sessions = shuffleArray(sessions);
+	}
 
 	if (!searchQuery && sessions.length === 0) {
 		return (
@@ -51,7 +55,7 @@ const ArchiveVideos = async ({
 
 	return (
 		<>
-			<VideoGrid videos={shuffledSessions} />
+			<VideoGrid videos={sessions} />
 			{page && pagination.totalPages > 1 && <Pagination {...pagination} />}
 		</>
 	);
