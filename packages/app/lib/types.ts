@@ -16,6 +16,10 @@ import { INftCollection } from "streameth-new-server/src/interfaces/nft.collecti
 import { IScheduleImporter } from "streameth-new-server/src/interfaces/schedule-importer.interface";
 import Hls from "hls.js";
 
+export type ActionResult<T> =
+	| { success: true; data: T }
+	| { success: false; error: string };
+
 export interface HomePageProps {
 	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
