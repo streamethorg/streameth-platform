@@ -1,6 +1,7 @@
 "use client";
+
 import { useState, createContext } from "react";
-import Image from "next/image";
+
 export const LoadingContext = createContext<{
 	isLoading: boolean;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
