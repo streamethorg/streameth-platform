@@ -5,12 +5,8 @@ import { fetchOrganization } from "@/lib/services/organizationService";
 import { ChannelPageParams } from "@/lib/types";
 import { Suspense } from "react";
 import LiveStreams, { LiveStreamsLoading } from "./components/UpcomingStreams";
-import { fetchOrganizationStages } from "@/lib/services/stageService";
-import {
-	livestreamMetadata,
-	generalMetadata,
-	organizationMetadata,
-} from "@/lib/utils/metadata";
+import { fetchStages } from "@/lib/services/stageService";
+import { generalMetadata, organizationMetadata } from "@/lib/utils/metadata";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ArchiveVideos from "./videos/components/ArchiveVideos";
 import ArchiveVideoSkeleton from "./livestream/components/ArchiveVideosSkeleton";
@@ -27,11 +23,29 @@ const OrganizationHome = async ({
 	const { organization } = await params;
 	const { streamId, search, page } = await searchParams;
 
-	const streams = await fetchOrganizationStages({
+	let streams = await fetchStages({
 		organizationId: organization,
 	});
-	const defaultTabValue = streams.length > 0 ? "livestreams" : "videos";
 
+	streams = streams.filter((livestream) => {
+		const streamDate = new Date(livestream.streamDate as string);
+		const today = new Date();
+
+		const streamDateOnly = new Date(
+			streamDate.getFullYear(),
+			streamDate.getMonth(),
+			streamDate.getDate(),
+		);
+		const todayOnly = new Date(
+			today.getFullYear(),
+			today.getMonth(),
+			today.getDate(),
+		);
+
+		return streamDateOnly >= todayOnly;
+	});
+
+	const defaultTabValue = streams.length > 0 ? "livestreams" : "videos";
 	const liveStream = streams.find(
 		(stream) => stream.streamSettings?.isActive === true,
 	);
