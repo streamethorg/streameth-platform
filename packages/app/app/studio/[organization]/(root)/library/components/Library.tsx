@@ -78,6 +78,7 @@ const Library = async ({
 										<TableHead className="cursor-pointer">
 											<TableSort title="Created at" sortBy="date" />
 										</TableHead>
+										<TableHead>Views</TableHead>
 										<TableHead>Status</TableHead>
 										<TableHead>Actions</TableHead>
 									</TableRow>
@@ -128,6 +129,9 @@ const TableCellsSkeleton = () => {
 			</TableCell>
 			<TableCell>
 				<div className="w-16 h-4 bg-gray-200 animate-pulse" />
+			</TableCell>
+			<TableCell>
+				<div className="w-32 h-4 bg-gray-200 animate-pulse" />
 			</TableCell>
 			<TableCell>
 				<div className="w-32 h-4 bg-gray-200 animate-pulse" />
