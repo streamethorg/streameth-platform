@@ -42,11 +42,6 @@ export enum eSort {
 	desc_date = "desc_date",
 }
 
-export enum eLayout {
-	grid = "grid",
-	list = "list",
-}
-
 export interface Page {
 	name: string;
 	href: string;
@@ -256,7 +251,6 @@ export interface LivestreamPageParams {
 		streamId: string;
 	}>;
 	searchParams: Promise<{
-		layout: eLayout;
 		sort: eSort;
 		show: boolean;
 		previewId: string;

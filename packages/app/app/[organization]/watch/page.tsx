@@ -79,7 +79,6 @@ export default async function Watch({
 							speakers={session.speakers}
 							date={session.createdAt as string}
 							playbackId={session.playbackId}
-							organizationSlug={params.organization}
 							vod={true}
 							video={session as IExtendedSession}
 						/>
