@@ -71,6 +71,7 @@ export default async function Livestream({
 				<div className="md:hidden">
 					<Suspense fallback={<ArchiveVideoSkeleton />}>
 						<ArchiveVideos
+							sortBy="random"
 							organizationId={organization}
 							organizationSlug={organization}
 							gridLength={4}
@@ -80,6 +81,7 @@ export default async function Livestream({
 				<div className="hidden md:block">
 					<Suspense fallback={<ArchiveVideoSkeleton />}>
 						<ArchiveVideos
+							sortBy="random"
 							organizationId={organization}
 							organizationSlug={organization}
 							gridLength={8}

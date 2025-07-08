@@ -16,6 +16,10 @@ import { INftCollection } from "streameth-new-server/src/interfaces/nft.collecti
 import { IScheduleImporter } from "streameth-new-server/src/interfaces/schedule-importer.interface";
 import Hls from "hls.js";
 
+export type ActionResult<T> =
+	| { success: true; data: T }
+	| { success: false; error: string };
+
 export interface HomePageProps {
 	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
@@ -36,11 +40,6 @@ export enum eSort {
 	desc_alpha = "desc_alpha",
 	asc_date = "asc_date",
 	desc_date = "desc_date",
-}
-
-export enum eLayout {
-	grid = "grid",
-	list = "list",
 }
 
 export interface Page {
@@ -252,7 +251,6 @@ export interface LivestreamPageParams {
 		streamId: string;
 	}>;
 	searchParams: Promise<{
-		layout: eLayout;
 		sort: eSort;
 		show: boolean;
 		previewId: string;

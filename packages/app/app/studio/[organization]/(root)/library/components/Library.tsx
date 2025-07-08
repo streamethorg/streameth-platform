@@ -3,7 +3,7 @@
 import { fetchAllSessions } from "@/lib/services/sessionService";
 import { Suspense } from "react";
 import EmptyLibrary from "./EmptyLibrary";
-import { IExtendedSession, eLayout, eSort } from "@/lib/types";
+import { IExtendedSession, eSort } from "@/lib/types";
 
 import { sortArray } from "@/lib/utils/utils";
 import Pagination from "./Pagination";
@@ -24,7 +24,6 @@ const Library = async ({
 }: {
 	params: { organization: string };
 	searchParams: {
-		layout: eLayout;
 		sort: eSort;
 		show?: boolean;
 		limit?: number;
@@ -78,6 +77,7 @@ const Library = async ({
 										<TableHead className="cursor-pointer">
 											<TableSort title="Created at" sortBy="date" />
 										</TableHead>
+										<TableHead>Views</TableHead>
 										<TableHead>Status</TableHead>
 										<TableHead>Actions</TableHead>
 									</TableRow>
@@ -128,6 +128,9 @@ const TableCellsSkeleton = () => {
 			</TableCell>
 			<TableCell>
 				<div className="w-16 h-4 bg-gray-200 animate-pulse" />
+			</TableCell>
+			<TableCell>
+				<div className="w-32 h-4 bg-gray-200 animate-pulse" />
 			</TableCell>
 			<TableCell>
 				<div className="w-32 h-4 bg-gray-200 animate-pulse" />

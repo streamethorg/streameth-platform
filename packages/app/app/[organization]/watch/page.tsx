@@ -79,7 +79,6 @@ export default async function Watch({
 							speakers={session.speakers}
 							date={session.createdAt as string}
 							playbackId={session.playbackId}
-							organizationSlug={params.organization}
 							vod={true}
 							video={session as IExtendedSession}
 						/>
@@ -95,6 +94,7 @@ export default async function Watch({
 					<div className="md:hidden">
 						<Suspense fallback={<ArchiveVideoSkeleton />}>
 							<ArchiveVideos
+								sortBy="random"
 								organizationId={params.organization}
 								organizationSlug={params.organization}
 								gridLength={4}
@@ -104,6 +104,7 @@ export default async function Watch({
 					<div className="hidden md:block">
 						<Suspense fallback={<ArchiveVideoSkeleton />}>
 							<ArchiveVideos
+								sortBy="random"
 								organizationId={params.organization}
 								organizationSlug={params.organization}
 								gridLength={8}
