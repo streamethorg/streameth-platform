@@ -3,7 +3,7 @@
 import { fetchAllSessions } from "@/lib/services/sessionService";
 import { Suspense } from "react";
 import EmptyLibrary from "./EmptyLibrary";
-import { IExtendedSession, eLayout, eSort } from "@/lib/types";
+import { IExtendedSession, eSort } from "@/lib/types";
 
 import { sortArray } from "@/lib/utils/utils";
 import Pagination from "./Pagination";
@@ -24,7 +24,6 @@ const Library = async ({
 }: {
 	params: { organization: string };
 	searchParams: {
-		layout: eLayout;
 		sort: eSort;
 		show?: boolean;
 		limit?: number;

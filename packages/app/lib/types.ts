@@ -251,7 +251,6 @@ export interface LivestreamPageParams {
 		streamId: string;
 	}>;
 	searchParams: Promise<{
-		layout: eLayout;
 		sort: eSort;
 		show: boolean;
 		previewId: string;

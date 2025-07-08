@@ -1,8 +1,7 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { eLayout, eSort } from "@/lib/types";
+import { eSort } from "@/lib/types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import VideosTab from "./components/tabs/VideosTab";
 import PlaylistsTab from "./components/tabs/PlaylistsTab";
