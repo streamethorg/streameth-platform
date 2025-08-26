@@ -77,19 +77,21 @@ export default class SessionService {
 
       // Check if the organization has reached its video library limit
       if (
-        organization.subscriptionStatus === 'active' && 
-        organization.maxVideoLibrarySize !== undefined && 
+        organization.subscriptionStatus === 'active' &&
+        organization.maxVideoLibrarySize !== undefined &&
         organization.currentVideoCount !== undefined &&
         organization.currentVideoCount >= organization.maxVideoLibrarySize
       ) {
-        throw new HttpException(403, 'Video library limit reached for this subscription tier. Please upgrade your subscription.');
+        throw new HttpException(
+          403,
+          'Video library limit reached for this subscription tier. Please upgrade your subscription.',
+        );
       }
 
       // Increment the video count for the organization
-      await Organization.findByIdAndUpdate(
-        data.organizationId,
-        { $inc: { currentVideoCount: 1 } }
-      );
+      await Organization.findByIdAndUpdate(data.organizationId, {
+        $inc: { currentVideoCount: 1 },
+      });
     }
 
     return this.controller.store.create(
@@ -120,20 +122,21 @@ export default class SessionService {
     return findSession;
   }
 
-  async getAll(d: {
-    event: string;
-    organizationId: string;
-    speaker: string;
-    stageId: string;
-    assetId: string;
-    onlyVideos: boolean;
-    size: number;
-    page: number;
-    published: string;
-    type: string;
-    itemStatus: string;
-    itemDate: string; // unix timestamp
-    clipable: boolean;
+  async getAll(params: {
+    event?: string;
+    organizationId?: string;
+    speaker?: string;
+    stageId?: string;
+    assetId?: string;
+    onlyVideos?: boolean;
+    size?: number;
+    page?: number;
+    published?: string;
+    type?: string;
+    itemStatus?: string;
+    itemDate?: string; // unix timestamp
+    clipable?: boolean;
+    searchQuery?: string;
   }): Promise<{
     sessions: Array<ISession>;
     pagination: {
@@ -143,88 +146,22 @@ export default class SessionService {
       limit: number;
     };
   }> {
-    let filter: {} = {};
-
-    // Only exclude animations and editor clips if no specific type is requested and no stageId is provided
-    if (d.type === undefined && d.stageId === undefined) {
-      console.log(
-        'No type or stageId specified, excluding animations and editor clips',
-      );
-      filter = {
-        type: { $nin: [SessionType.animation, SessionType.editorClip] },
-      };
-    } else if (d.type !== undefined) {
-      console.log('Type specified:', d.type);
-      filter = { type: d.type };
-    }
-
-    if (d.published != undefined) {
-      filter = { ...filter, published: d.published };
-    }
-    if (d.itemStatus != undefined) {
-      filter = { ...filter, processingStatus: d.itemStatus };
-    }
-    if (d.itemDate != undefined) {
-      const itemDateNumber = Number(d.itemDate);
-      const startOfDay = new Date(itemDateNumber);
-      startOfDay.setHours(0, 0, 0, 0);
-      const endOfDay = new Date(itemDateNumber);
-      endOfDay.setHours(23, 59, 59, 999);
-
-      filter = { ...filter, createdAt: { $gte: startOfDay, $lte: endOfDay } };
-    }
-    if (d.clipable == true) {
-      filter = {
-        ...filter,
-        processingStatus: ProcessingStatus.completed,
-        type: { $in: [SessionType.livestream, SessionType.video] },
-      };
-    }
-    if (d.event != undefined) {
-      let query = this.queryByIdOrSlug(d.event);
-      let event = await Event.findOne(query);
-      filter = { ...filter, eventId: event?._id };
-    }
-    if (d.organizationId != undefined) {
-      const organization = await Organization.findById(d.organizationId);
-      filter = { ...filter, organizationId: d.organizationId };
-    }
-    if (d.onlyVideos) {
-      filter = {
-        ...filter,
-        $or: [
-          { playbackId: { $ne: '' } },
-          { assetId: { $ne: '' } },
-          { type: SessionType.animation },
-        ],
-      };
-    }
-    if (d.assetId != undefined) {
-      filter = { ...filter, assetId: d.assetId };
-    }
-    if (d.stageId != undefined) {
-      // let query = this.queryByIdOrSlug(d.stageId);
-      // let stage = await Stage.findOne(query);
-      filter = { ...filter, stageId: d.stageId };
-    }
-
-    const pageSize = Number(d.size) || 0;
-    const pageNumber = Number(d.page) || 0;
-    const skip = pageSize * pageNumber - pageSize;
-
-    const sessions = await this.controller.store.findAll(
-      filter,
-      {},
-      this.path,
-      skip,
-      pageSize,
+    console.log('getAll', params, params.searchQuery);
+    const filter = await this.buildSessionFilter(params);
+    const { pageSize, pageNumber, skip } = this.calculatePagination(
+      params.size,
+      params.page,
     );
 
-    const totalItems = await this.controller.store.countDocuments(filter);
+    const [sessions, totalItems] = await Promise.all([
+      this.controller.store.findAll(filter, {}, this.path, skip, pageSize),
+      this.controller.store.countDocuments(filter),
+    ]);
+
     return {
-      sessions: sessions,
+      sessions,
       pagination: {
-        totalItems: totalItems,
+        totalItems,
         currentPage: pageNumber,
         totalPages: Math.ceil(totalItems / pageSize),
         limit: pageSize,
@@ -232,19 +169,186 @@ export default class SessionService {
     };
   }
 
+  private async buildSessionFilter(params: {
+    event?: string;
+    organizationId?: string;
+    speaker?: string;
+    stageId?: string;
+    assetId?: string;
+    onlyVideos?: boolean;
+    published?: string;
+    type?: string;
+    itemStatus?: string;
+    itemDate?: string;
+    clipable?: boolean;
+    searchQuery?: string;
+  }): Promise<{}> {
+    let filter: any = {};
+
+    console.log('params', params);
+    // Handle session type filtering
+    filter = this.applyTypeFilter(filter, params.type, params.stageId);
+
+    // Apply basic filters
+    filter = this.applyBasicFilters(filter, params);
+
+    // Apply date filtering
+    if (params.itemDate) {
+      filter = this.applyDateFilter(filter, params.itemDate);
+    }
+
+    // Apply clipable filter
+    if (params.clipable) {
+      filter = this.applyClipableFilter(filter);
+    }
+
+    // Apply video-only filter
+    if (params.onlyVideos) {
+      filter = this.applyVideoOnlyFilter(filter);
+    }
+
+    // Apply search query filter
+    if (params.searchQuery) {
+      filter = this.applySearchFilter(filter, params.searchQuery);
+    }
+
+    // Apply entity-based filters (async operations)
+    filter = await this.applyEntityFilters(filter, params);
+
+    return filter;
+  }
+
+  private applyTypeFilter(filter: any, type?: string, stageId?: string): any {
+    if (type !== undefined) {
+      return { ...filter, type };
+    }
+
+    if (stageId === undefined) {
+      return {
+        ...filter,
+        type: { $nin: [SessionType.animation, SessionType.editorClip] },
+      };
+    }
+
+    return filter;
+  }
+
+  private applyBasicFilters(filter: any, params: any): any {
+    const basicFilters = ['published', 'assetId', 'stageId'];
+
+    basicFilters.forEach((key) => {
+      if (params[key] !== undefined) {
+        if (key === 'published') {
+          filter.published = params[key];
+        } else if (key === 'itemStatus') {
+          filter.processingStatus = params[key];
+        } else {
+          filter[key] = params[key];
+        }
+      }
+    });
+
+    return filter;
+  }
+
+  private applyDateFilter(filter: any, itemDate: string): any {
+    const itemDateNumber = Number(itemDate);
+    const startOfDay = new Date(itemDateNumber);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(itemDateNumber);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    return {
+      ...filter,
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
+    };
+  }
+
+  private applyClipableFilter(filter: any): any {
+    return {
+      ...filter,
+      processingStatus: ProcessingStatus.completed,
+      type: { $in: [SessionType.livestream, SessionType.video] },
+    };
+  }
+
+  private applyVideoOnlyFilter(filter: any): any {
+    return {
+      ...filter,
+      $or: [
+        { playbackId: { $ne: '' } },
+        { assetId: { $ne: '' } },
+        { type: SessionType.animation },
+      ],
+    };
+  }
+
+  private applySearchFilter(filter: any, searchQuery: string): any {
+    const searchRegex = new RegExp(searchQuery, 'i');
+
+    return {
+      ...filter,
+      $or: [
+        { name: searchRegex },
+        { description: searchRegex },
+        { aiDescription: searchRegex },
+        { autoLabels: { $in: [searchRegex] } },
+        { speakers: { $in: [searchRegex] } },
+        { track: searchRegex },
+      ],
+    };
+  }
+
+  private async applyEntityFilters(filter: any, params: any): Promise<any> {
+    // Handle event filtering
+    if (params.event) {
+      const query = this.queryByIdOrSlug(params.event);
+      const event = await Event.findOne(query);
+      if (event) {
+        filter.eventId = event._id;
+      }
+    }
+
+    // Handle organization filtering
+    if (params.organizationId) {
+      const organization = await Organization.findById(params.organizationId);
+      if (organization) {
+        filter.organizationId = params.organizationId;
+      }
+    }
+
+    return filter;
+  }
+
+  private calculatePagination(
+    size?: number,
+    page?: number,
+  ): {
+    pageSize: number;
+    pageNumber: number;
+    skip: number;
+  } {
+    const pageSize = Number(size) || 10; // Default to 10 instead of 0
+    const pageNumber = Number(page) || 1; // Default to 1 instead of 0
+    const skip = pageSize * (pageNumber - 1);
+
+    return { pageSize, pageNumber, skip };
+  }
+
   async deleteOne(sessionId: string): Promise<void> {
     const session = await this.get(sessionId);
-    
+
     // Decrement the video count for the organization if this is a video session
     if (session.type === SessionType.video && session.organizationId) {
       await Organization.findByIdAndUpdate(
         session.organizationId,
         { $inc: { currentVideoCount: -1 } },
         // Ensure count doesn't go below 0
-        { new: true, runValidators: true }
+        { new: true, runValidators: true },
       );
     }
-    
+
     return await this.controller.store.delete(sessionId);
   }
 
@@ -325,9 +429,12 @@ export default class SessionService {
     if (!stage) {
       console.error('❌ Stage not found for stream ID:', {
         streamId: payload.parentId,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
-      throw new HttpException(404, `Stage not found for stream ID: ${payload.parentId}`);
+      throw new HttpException(
+        404,
+        `Stage not found for stream ID: ${payload.parentId}`,
+      );
     }
 
     const asset = await getAsset(payload.assetId);
@@ -443,13 +550,16 @@ export default class SessionService {
     const recordings = await getStreamRecordings(streamId);
     for (const recording of recordings) {
       let stage = await Stage.findOne({ 'streamSettings.streamId': streamId });
-      
+
       if (!stage) {
         console.error('❌ Stage not found for stream ID:', {
           streamId,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
-        throw new HttpException(404, `Stage not found for stream ID: ${streamId}`);
+        throw new HttpException(
+          404,
+          `Stage not found for stream ID: ${streamId}`,
+        );
       }
 
       await this.create({
@@ -508,12 +618,15 @@ export default class SessionService {
 
         // Check if the organization has reached its video library limit
         if (
-          organization.subscriptionStatus === 'active' && 
-          organization.maxVideoLibrarySize !== undefined && 
+          organization.subscriptionStatus === 'active' &&
+          organization.maxVideoLibrarySize !== undefined &&
           organization.currentVideoCount !== undefined &&
           organization.currentVideoCount >= organization.maxVideoLibrarySize
         ) {
-          throw new HttpException(403, 'Video library limit reached for this subscription tier. Please upgrade your subscription.');
+          throw new HttpException(
+            403,
+            'Video library limit reached for this subscription tier. Please upgrade your subscription.',
+          );
         }
       }
 
@@ -564,10 +677,9 @@ export default class SessionService {
         });
 
         // Once we queue the job, increment the organization's video count
-        await Organization.findByIdAndUpdate(
-          d.organizationId,
-          { $inc: { currentVideoCount: 1 } }
-        );
+        await Organization.findByIdAndUpdate(d.organizationId, {
+          $inc: { currentVideoCount: 1 },
+        });
 
         return session;
       } else {
@@ -591,7 +703,7 @@ export default class SessionService {
       const similarPhrases = await chat.getSimilarPhrases(
         session._id.toString(),
         chunks,
-        query
+        query,
       );
       console.log('similarPhrases', similarPhrases);
       const contextualizedPhrases = chat.contextualizePhrasesWithTimestamps(

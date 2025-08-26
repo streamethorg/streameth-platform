@@ -175,6 +175,7 @@ export class SessionController extends Controller {
     @Query() itemStatus?: string,
     @Query() itemDate?: string,
     @Query() clipable?: boolean,
+    @Query() searchQuery?: string,
   ): Promise<
     IStandardResponse<{
       sessions: Array<ISession>;
@@ -201,6 +202,7 @@ export class SessionController extends Controller {
       itemStatus: itemStatus,
       itemDate: itemDate,
       clipable: clipable,
+      searchQuery: searchQuery,
     };
     const sessions = await this.sessionService.getAll(queryParams);
     return SendApiResponse('sessions fetched', sessions);

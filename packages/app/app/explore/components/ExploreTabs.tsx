@@ -58,7 +58,7 @@ const ExploreTabs = () => {
   };
 
   return (
-    <div className="relative bg-white rounded-xl p-4 border border-gray-100">
+    <div className="relative">
       {showLeftArrow && (
         <button
           onClick={() => scroll('left')}
@@ -91,7 +91,7 @@ const ExploreTabs = () => {
             <TabsTrigger
               key={tab.name}
               value={tab.searchQuery}
-              className="whitespace-nowrap px-6 py-3 text-sm font-medium rounded-lg data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200 hover:bg-gray-100"
+              className="whitespace-nowrap px-6 py-3 text-sm font-medium rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-600 data-[state=active]:shadow-sm transition-all duration-200 hover:bg-gray-100"
             >
               {tab.name}
             </TabsTrigger>

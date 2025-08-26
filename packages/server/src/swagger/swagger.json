@@ -6235,6 +6235,14 @@
 						"schema": {
 							"type": "boolean"
 						}
+					},
+					{
+						"in": "query",
+						"name": "searchQuery",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
 					}
 				]
 			}

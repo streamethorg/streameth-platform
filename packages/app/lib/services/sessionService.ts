@@ -23,6 +23,7 @@ interface ApiParams {
   type?: string;
   itemStatus?: string;
   clipable?: boolean;
+  searchQuery?: string;
 }
 
 function constructApiUrl(baseUrl: string, params: ApiParams): string {
@@ -96,7 +97,7 @@ export async function fetchAllSessions({
     organizationId,
     stageId,
     page,
-    size: searchQuery ? 0 : limit,
+    size: limit,
     onlyVideos,
     published,
     speakerIds,
@@ -104,7 +105,9 @@ export async function fetchAllSessions({
     itemStatus,
     itemDate,
     clipable,
+    searchQuery,
   };
+  console.log('fetchAllSessions', params);
   const response = await fetch(
     constructApiUrl(`${apiUrl()}/sessions`, params),
     {
