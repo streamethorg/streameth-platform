@@ -15,12 +15,13 @@ export default function SearchBar({
   searchVisible = true,
   isMobile = false,
   isStudio = false,
+  organizationId,
 }: {
   searchVisible?: boolean;
   isMobile?: boolean;
   isStudio?: boolean;
+  organizationId?: string;
 }): JSX.Element {
-  const { organizationId } = useOrganizationContext();
   const { searchParams, handleTermChange: handleStudioTermChange } =
     useSearchParams();
   const [isOpened, setIsOpened] = useState(false);
