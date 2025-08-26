@@ -14,7 +14,7 @@ export const tierLimits = {
     maxSeats: 1,
     isLivestreamingEnabled: false,
     isMultistreamEnabled: false,
-    isCustomChannelEnabled: false,
+    isCustomChannelEnabled: true,
     hasPrioritySupport: false,
   },
   creator: {
@@ -22,7 +22,7 @@ export const tierLimits = {
     maxSeats: 1,
     isLivestreamingEnabled: true,
     isMultistreamEnabled: false,
-    isCustomChannelEnabled: false,
+    isCustomChannelEnabled: true,
     hasPrioritySupport: false,
   },
   pro: {
