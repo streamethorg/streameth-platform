@@ -9,6 +9,15 @@
     -ms-user-select: none;
     user-select: none;
   }
+  
+  /* Hide scrollbar for webkit browsers */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
   :root {
     color: #334155;
     --background: 210, 40%, 98%;

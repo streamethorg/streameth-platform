@@ -3,7 +3,7 @@ import { apiUrl } from '@/lib/utils/utils';
 import { IExtendedSession } from '@/lib/types';
 import useDebounce from '@/lib/hooks/useDebounce';
 
-export function useSearch(organizationId: string, isStudio: boolean) {
+export function useSearch(organizationId?: string, isStudio?: boolean) {
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<IExtendedSession[]>([]);

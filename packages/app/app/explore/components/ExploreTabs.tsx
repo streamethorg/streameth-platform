@@ -58,40 +58,40 @@ const ExploreTabs = () => {
   };
 
   return (
-    <div className="sticky z-[5] bg-white pt-2 border-b">
+    <div className="relative bg-white rounded-xl p-4 border border-gray-100">
       {showLeftArrow && (
         <button
           onClick={() => scroll('left')}
-          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-xl bg-white p-1 shadow-md"
+          className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200"
           aria-label="Scroll left"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-5 w-5 text-gray-600" />
         </button>
       )}
       {showRightArrow && (
         <button
           onClick={() => scroll('right')}
-          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-xl bg-white p-1 shadow-md"
+          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-200"
           aria-label="Scroll right"
         >
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-5 w-5 text-gray-600" />
         </button>
       )}
       <Tabs
         defaultValue={currentTerm}
-        className="w-full mt-4"
+        className="w-full"
         onValueChange={handleTabChange}
       >
         <TabsList
           ref={tabsListRef}
-          className="flex overflow-x-hidden overflow-y-hidden"
+          className="flex overflow-x-auto overflow-y-hidden bg-gray-50 rounded-xl p-1 gap-1 scrollbar-hide"
           onScroll={checkForArrows}
         >
           {tabData.map((tab) => (
             <TabsTrigger
               key={tab.name}
               value={tab.searchQuery}
-              className="whitespace-nowrap px-4 text-md font-medium "
+              className="whitespace-nowrap px-6 py-3 text-sm font-medium rounded-lg data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200 hover:bg-gray-100"
             >
               {tab.name}
             </TabsTrigger>
