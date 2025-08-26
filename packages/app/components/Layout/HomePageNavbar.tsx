@@ -193,7 +193,7 @@ const PCNavBar = ({
 		<NavigationMenu className="hidden sticky top-0 flex-row justify-between items-center p-2 px-4 w-full bg-white border-b md:hidden lg:flex h-18 z-[30]">
 			<div className="flex flex-1 justify-start items-center">
 				{showLogo && (
-					<Link href={`/${currentOrganization}`}>
+					<Link href={`/`}>
 						<Image
 							src={"/logo_dark.png"}
 							alt="Logo"
@@ -205,7 +205,7 @@ const PCNavBar = ({
 				)}
 			</div>
 			<div className="flex justify-center items-center mx-auto w-full max-w-md">
-				<SearchBar searchVisible={showSearchBar} />
+				{showSearchBar && <SearchBar searchVisible={showSearchBar} />}
 			</div>
 			<div className="flex flex-1 justify-end items-center">
 				{organizations ? (

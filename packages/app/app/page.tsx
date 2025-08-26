@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { fetchAllSessions } from '@/lib/services/sessionService';
 
 const HomePage = async ({
   searchParams: searchParamsPromise,
@@ -72,6 +73,16 @@ const HomePage = async ({
     { label: 'Countries', value: '30+', icon: Globe },
   ];
 
+  // Fetch featured session (most popular)
+  const { sessions: allSessions } = await fetchAllSessions({
+    onlyVideos: true,
+    published: 'public',
+    limit: 1,
+    page: 1,
+  });
+
+  const featuredSession = allSessions[0];
+
   return (
     <div className="min-h-screen bg-white">
       <HomePageNavbar
@@ -108,21 +119,25 @@ const HomePage = async ({
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button
-                size="lg"
-                className="bg-white text-slate-900 hover:bg-slate-100 px-10 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
-              >
-                <Play className="w-5 h-5 mr-3" />
-                Start Streaming
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 px-10 py-6 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300"
-              >
-                Explore Events
-                <ArrowRight className="w-5 h-5 ml-3" />
-              </Button>
+              <Link href="/studio">
+                <Button
+                  size="lg"
+                  className="bg-white text-slate-900 hover:bg-slate-100 px-10 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
+                >
+                  <Play className="w-5 h-5 mr-3" />
+                  Start Streaming
+                </Button>
+              </Link>
+              <Link href="/explore">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white/30 text-slate-900 hover:bg-white/10 px-10 py-6 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300"
+                >
+                  Explore Events
+                  <ArrowRight className="w-5 h-5 ml-3" />
+                </Button>
+              </Link>
             </div>
 
             {/* Stats */}
@@ -198,70 +213,105 @@ const HomePage = async ({
               </p>
             </div>
             <div className="hidden md:flex items-center gap-3">
-              <Button variant="outline" size="sm" className="rounded-lg">
-                <Eye className="w-4 h-4 mr-2" />
-                Most Viewed
-              </Button>
-              <Button variant="outline" size="sm" className="rounded-lg">
-                <Calendar className="w-4 h-4 mr-2" />
-                Recent
-              </Button>
+              <Link href="/explore?sort=views">
+                <Button variant="outline" size="sm" className="rounded-lg">
+                  <Eye className="w-4 h-4 mr-2" />
+                  Most Viewed
+                </Button>
+              </Link>
+              <Link href="/explore?sort=recent">
+                <Button variant="outline" size="sm" className="rounded-lg">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Recent
+                </Button>
+              </Link>
             </div>
           </div>
 
           {/* Featured Session Highlight */}
-          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 md:p-12 mb-12 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:20px_20px]"></div>
-            <div className="relative">
-              <div className="flex flex-col lg:flex-row gap-8 items-center">
-                <div className="relative w-full lg:w-96 h-64 rounded-2xl overflow-hidden bg-slate-700">
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
-                    <Play className="w-16 h-16 text-white/50" />
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      Featured
+          {featuredSession && (
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 md:p-12 mb-12 text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:20px_20px]"></div>
+              <div className="relative">
+                <div className="flex flex-col lg:flex-row gap-8 items-center">
+                  <div className="relative w-full lg:w-96 h-64 rounded-2xl overflow-hidden bg-slate-700">
+                    {featuredSession.coverImage ? (
+                      <Image
+                        src={featuredSession.coverImage}
+                        alt={featuredSession.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
+                        <Play className="w-16 h-16 text-white/50" />
+                      </div>
+                    )}
+                    <div className="absolute top-4 left-4">
+                      <div className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        Featured
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex-1 text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-4">
-                    <TrendingUp className="w-4 h-4" />
-                    Most Popular This Week
+                  <div className="flex-1 text-center lg:text-left">
+                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-4">
+                      <TrendingUp className="w-4 h-4" />
+                      Most Popular This Week
+                    </div>
+                    <h3 className="text-3xl font-bold mb-4">
+                      {featuredSession.name}
+                    </h3>
+                    <p className="text-slate-300 mb-6 text-lg leading-relaxed">
+                      {featuredSession.description ||
+                        featuredSession.aiDescription ||
+                        'Join industry experts as they discuss the latest trends, challenges, and opportunities in technology and innovation.'}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-6 mb-8 justify-center lg:justify-start">
+                      {featuredSession.speakers &&
+                        featuredSession.speakers.length > 0 && (
+                          <div className="flex items-center gap-2 text-slate-300">
+                            <Users className="w-4 h-4" />
+                            <span>{featuredSession.speakers.join(', ')}</span>
+                          </div>
+                        )}
+                      {featuredSession.start && featuredSession.end && (
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <Clock className="w-4 h-4" />
+                          <span>
+                            {Math.round(
+                              (new Date(featuredSession.end).getTime() -
+                                new Date(featuredSession.start).getTime()) /
+                                60000
+                            )}{' '}
+                            min
+                          </span>
+                        </div>
+                      )}
+                      {featuredSession.createdAt && (
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <Calendar className="w-4 h-4" />
+                          <span>
+                            {new Date(
+                              featuredSession.createdAt
+                            ).toLocaleDateString()}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <Link href={`/watch?session=${featuredSession._id}`}>
+                      <Button
+                        size="lg"
+                        className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 font-semibold rounded-xl"
+                      >
+                        <Play className="w-5 h-5 mr-2" />
+                        Watch Now
+                      </Button>
+                    </Link>
                   </div>
-                  <h3 className="text-3xl font-bold mb-4">
-                    The Future of Web3 Development
-                  </h3>
-                  <p className="text-slate-300 mb-6 text-lg leading-relaxed">
-                    Join industry experts as they discuss the latest trends,
-                    challenges, and opportunities in Web3 development. Learn
-                    about emerging technologies and best practices.
-                  </p>
-                  <div className="flex flex-wrap items-center gap-6 mb-8 justify-center lg:justify-start">
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <Users className="w-4 h-4" />
-                      <span>2.5K viewers</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <Clock className="w-4 h-4" />
-                      <span>45 min</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <Calendar className="w-4 h-4" />
-                      <span>2 days ago</span>
-                    </div>
-                  </div>
-                  <Button
-                    size="lg"
-                    className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 font-semibold rounded-xl"
-                  >
-                    <Play className="w-5 h-5 mr-2" />
-                    Watch Now
-                  </Button>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Content Grid */}
           <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
@@ -294,14 +344,16 @@ const HomePage = async ({
                     List
                   </Button>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-lg text-xs"
-                >
-                  <Eye className="w-3 h-3 mr-1" />
-                  Most Viewed
-                </Button>
+                <Link href="/explore?sort=views">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-lg text-xs"
+                  >
+                    <Eye className="w-3 h-3 mr-1" />
+                    Most Viewed
+                  </Button>
+                </Link>
               </div>
             </div>
 
@@ -335,14 +387,16 @@ const HomePage = async ({
               </Suspense>
 
               <div className="text-center mt-12 pt-8 border-t border-gray-100">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="rounded-xl px-8 py-4 font-semibold border-slate-200 hover:bg-slate-50"
-                >
-                  Load More Content
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                <Link href="/explore">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-xl px-8 py-4 font-semibold border-slate-200 hover:bg-slate-50"
+                  >
+                    Browse All Content
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -370,19 +424,23 @@ const HomePage = async ({
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  className="bg-white text-slate-700 hover:bg-slate-50 px-10 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
-                >
-                  Get Started Free
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 px-10 py-6 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300"
-                >
-                  Learn More
-                </Button>
+                <Link href="/studio">
+                  <Button
+                    size="lg"
+                    className="bg-white text-slate-700 hover:bg-slate-50 px-10 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
+                  >
+                    Get Started Free
+                  </Button>
+                </Link>
+                <Link href="/explore">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/30 text-slate-900 hover:bg-white/10 px-10 py-6 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300"
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
