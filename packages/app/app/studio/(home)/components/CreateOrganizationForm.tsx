@@ -40,10 +40,10 @@ export default function CreateOrganizationForm({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
-  
+
   // Get the email safely
   const userEmail = user?.email || '';
-  
+
   const form = useForm<z.infer<typeof organizationSchema>>({
     resolver: zodResolver(organizationSchema),
     defaultValues: {
@@ -55,7 +55,7 @@ export default function CreateOrganizationForm({
       address: userEmail,
     },
   });
-  
+
   // Update form values when user becomes available
   useEffect(() => {
     if (user?.email) {
@@ -67,7 +67,7 @@ export default function CreateOrganizationForm({
     if (!user) {
       return; // No submission if no user
     }
-    
+
     setIsLoading(true);
     setNameError(null);
 
@@ -110,132 +110,132 @@ export default function CreateOrganizationForm({
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="relative">
-          <FormField
-            control={form.control}
-            name="banner"
-            render={({ field }) => (
-              <FormItem className="">
-                <FormControl>
-                  <ImageUpload
-                    className="w-full h-40 rounded-xl bg-neutrals-300"
-                    options={{
-                      resize: true,
-                      resizeDimensions: { width: 1500, height: 500 },
-                      placeholder:
-                        'Click to upload image here. Image will be resized to cover 1500x500 pixels. Maximum file size is 2MB.',
-                      aspectRatio: 3 / 1,
-                      coverImage: true,
-                    }}
-                    path="organizations"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="logo"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <ImageUpload
-                    options={{
-                      placeholder: 'Upload logo',
-                      resize: false,
-                      isProfileImage: true,
-                      aspectRatio: 1,
-                    }}
-                    path={`organizations`}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+    <div className="flex flex-col h-full">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col h-full space-y-4"
+        >
+          <div className="flex-1 space-y-4">
+            <div className="relative">
+              <FormField
+                control={form.control}
+                name="banner"
+                render={({ field }) => (
+                  <FormItem className="">
+                    <FormControl>
+                      <ImageUpload
+                        className="w-full h-40 rounded-xl bg-neutrals-300"
+                        options={{
+                          resize: true,
+                          resizeDimensions: { width: 1500, height: 500 },
+                          placeholder:
+                            'Click to upload image here. Image will be resized to cover 1500x500 pixels. Maximum file size is 2MB.',
+                          aspectRatio: 3 / 1,
+                          coverImage: true,
+                        }}
+                        path="organizations"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="logo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <ImageUpload
+                        options={{
+                          placeholder: 'Upload logo',
+                          resize: false,
+                          isProfileImage: true,
+                          aspectRatio: 1,
+                        }}
+                        path={`organizations`}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel required className="">
-                Organization name
-              </FormLabel>
-              <FormControl>
-                <Input disabled={disableName} placeholder="Name" {...field} />
-              </FormControl>
-              <FormMessage />
-              {nameError && (
-                <p className="text-sm font-medium text-destructive mt-2">
-                  {nameError}
-                </p>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required className="">
+                    Organization name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={disableName}
+                      placeholder="Name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  {nameError && (
+                    <p className="text-sm font-medium text-destructive mt-2">
+                      {nameError}
+                    </p>
+                  )}
+                </FormItem>
               )}
-            </FormItem>
-          )}
-        />
+            />
 
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="">Description</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Description" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="">Description</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Description" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel required className="">
-                Email
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="Email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required className="">
+                    Email
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        <div className="flex flex-row justify-between">
-          {!organization && (
-            <Button
-              type="button"
-              onClick={() => {
-                router.push('/studio');
-              }}
-              variant={'outline'}
-            >
-              Go back
+          <div className="flex flex-row justify-end">
+            <Button type="submit" variant={'primary'}>
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
+                </>
+              ) : organization ? (
+                'Update '
+              ) : (
+                'Create'
+              )}
             </Button>
-          )}
-          <Button type="submit" className="ml-auto" variant={'primary'}>
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 w-4 h-4 animate-spin" /> Please wait
-              </>
-            ) : organization ? (
-              'Update '
-            ) : (
-              'Create'
-            )}
-          </Button>
-        </div>
-      </form>
-    </Form>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

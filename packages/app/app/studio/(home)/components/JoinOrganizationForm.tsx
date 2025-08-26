@@ -27,7 +27,7 @@ export default function JoinOrganizationForm() {
   const router = useRouter();
   const { user } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const form = useForm<z.infer<typeof JoinOrganizationSchema>>({
     resolver: zodResolver(JoinOrganizationSchema),
     defaultValues: {
@@ -39,7 +39,7 @@ export default function JoinOrganizationForm() {
     if (!user || !user.email) {
       return; // No submission if no user
     }
-    
+
     setIsLoading(true);
     try {
       const organization = await joinOrganizationAction({
@@ -59,37 +59,38 @@ export default function JoinOrganizationForm() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="invitationCode"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel required>Invitation Code</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your invitation code" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <div className="flex flex-col h-full">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col h-full space-y-4"
+        >
+          <div className="flex-1">
+            <FormField
+              control={form.control}
+              name="invitationCode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel required>Invitation Code</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your invitation code"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        <div className="flex flex-row justify-between">
-          <Button
-            type="button"
-            onClick={() => {
-              router.push('/studio');
-            }}
-            variant={'outline'}
-          >
-            Go back
-          </Button>
-          <Button type="submit" variant="primary">
-            {isLoading ? 'Joining...' : 'Join'}
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <div className="flex flex-row justify-end">
+            <Button type="submit" variant="primary">
+              {isLoading ? 'Joining...' : 'Join'}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }
