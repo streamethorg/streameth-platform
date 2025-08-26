@@ -18,7 +18,7 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import DatePicker from "@/components/misc/form/datePicker";
-import { Funnel } from "lucide-react";
+  import { Filter } from "lucide-react";
 
 const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
 	const { searchParams, handleTermChange } = useSearchParams();
@@ -98,7 +98,7 @@ const LibraryFilter = ({ stages }: { stages: IExtendedStage[] }) => {
 		<Popover>
 			<PopoverTrigger asChild>
 				<Button variant="outline" size="sm">
-					<Funnel size={18} />
+					<Filter size={18} />
 					{activeFilterCount > 0 && `( ${activeFilterCount} )`}
 				</Button>
 			</PopoverTrigger>

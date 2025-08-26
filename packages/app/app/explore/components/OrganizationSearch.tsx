@@ -136,7 +136,7 @@ const OrganizationSearch = ({
               </span>
               {searchTerm && (
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-800 text-sm rounded-full font-medium">
-                  Search: "{searchTerm}"
+                  Search: &quot;{searchTerm}&quot;
                   <button
                     onClick={() => handleSearch('')}
                     className="ml-1 hover:bg-blue-200 rounded-full p-1 transition-colors"
