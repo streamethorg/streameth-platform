@@ -209,7 +209,7 @@ export default class OrganizationService {
     return orgsWithVideos
       .filter(({ videoCount }) => videoCount >= 2)
       .map(({ org, videoCount }) => ({
-        ...org.toObject(),
+        ...(org as any).toObject(),
         currentVideoCount: videoCount,
       }));
   }
