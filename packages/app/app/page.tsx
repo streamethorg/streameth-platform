@@ -88,7 +88,10 @@ const HomePage = async ({
       <HomePageNavbar
         logo=""
         currentOrganization=""
-        pages={[]}
+        pages={[
+          { name: 'Blog', href: '/blog' },
+          { name: 'Explore', href: '/explore' },
+        ]}
         showSearchBar={false}
       />
 
