@@ -1,9 +1,16 @@
 import { config } from '@config';
 import BaseController from '@databases/storage';
 import { HttpException } from '@exceptions/HttpException';
-import { IOrganization, IOrganizationUpdate, ISocials, SubscriptionTier, SubscriptionStatus } from '@interfaces/organization.interface';
+import {
+  IOrganization,
+  IOrganizationUpdate,
+  ISocials,
+  SubscriptionTier,
+  SubscriptionStatus,
+} from '@interfaces/organization.interface';
 import { IUser } from '@interfaces/user.interface';
 import Organization from '@models/organization.model';
+import Session from '@models/session.model';
 import User from '@models/user.model';
 import { generateId } from '@utils/util';
 
@@ -34,7 +41,7 @@ export default class OrganizationService {
       // paidStages: 0,
       // currentStages: 0,
       invitationCode: this.generateInvitationCode(),
-      
+
       // Free tier defaults
       subscriptionTier: 'free' as SubscriptionTier,
       subscriptionStatus: 'active' as SubscriptionStatus,
@@ -62,11 +69,11 @@ export default class OrganizationService {
 
   async activateFreeTier(organizationId: string): Promise<IOrganization> {
     const org = await this.get(organizationId);
-    
+
     if (!org) {
       throw new HttpException(404, 'Organization not found');
     }
-    
+
     // Set free tier values without affecting one-off subscription data
     const updateData = {
       subscriptionTier: 'free' as SubscriptionTier,
@@ -76,14 +83,14 @@ export default class OrganizationService {
       isLivestreamingEnabled: false, // Free tier has no livestreaming
       isMultistreamEnabled: false,
       isCustomChannelEnabled: false,
-      hasPrioritySupport: false
+      hasPrioritySupport: false,
     };
-    
+
     // Update using the Organization model directly
     const updatedOrg = await Organization.findByIdAndUpdate(
       organizationId,
       { $set: updateData },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedOrg) {
@@ -93,8 +100,13 @@ export default class OrganizationService {
     return updatedOrg;
   }
 
-  async joinOrganization(invitationCode: string, userEmail: string): Promise<IOrganization> {
-    const organization = await this.controller.store.findOne({ invitationCode });
+  async joinOrganization(
+    invitationCode: string,
+    userEmail: string,
+  ): Promise<IOrganization> {
+    const organization = await this.controller.store.findOne({
+      invitationCode,
+    });
     if (!organization) {
       throw new HttpException(404, 'Invalid invitation code');
     }
@@ -104,13 +116,20 @@ export default class OrganizationService {
       throw new HttpException(404, 'User not found');
     }
 
-    if (user.organizations?.some(orgId => orgId.toString() === organization._id.toString())) {
-      throw new HttpException(409, 'User is already a member of this organization');
+    if (
+      user.organizations?.some(
+        (orgId) => orgId.toString() === organization._id.toString(),
+      )
+    ) {
+      throw new HttpException(
+        409,
+        'User is already a member of this organization',
+      );
     }
 
     await User.findOneAndUpdate(
       { email: userEmail },
-      { $addToSet: { organizations: organization._id } }
+      { $addToSet: { organizations: organization._id } },
     );
 
     return organization;
@@ -132,7 +151,7 @@ export default class OrganizationService {
     const updatedOrg = await Organization.findByIdAndUpdate(
       organizationId,
       { $set: organizationUpdate },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedOrg) {
@@ -165,7 +184,8 @@ export default class OrganizationService {
   }
 
   async getAll(): Promise<Array<IOrganization>> {
-    return await this.controller.store.findAll(
+    // Get all organizations
+    const allOrgs = await this.controller.store.findAll(
       {},
       {
         'socials.accessToken': 0,
@@ -173,6 +193,25 @@ export default class OrganizationService {
         'socials.expireTime': 0,
       },
     );
+
+    // Filter organizations that have at least 2 videos and include video count
+    const orgsWithVideos = await Promise.all(
+      allOrgs.map(async (org) => {
+        const videoCount = await Session.countDocuments({
+          organizationId: org._id,
+          published: 'public',
+        });
+        return { org, videoCount };
+      }),
+    );
+
+    // Return only organizations with at least 2 videos, including video count
+    return orgsWithVideos
+      .filter(({ videoCount }) => videoCount >= 2)
+      .map(({ org, videoCount }) => ({
+        ...org.toObject(),
+        currentVideoCount: videoCount,
+      }));
   }
 
   async deleteOne(organizationId: string): Promise<void> {

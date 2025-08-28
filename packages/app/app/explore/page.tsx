@@ -282,14 +282,12 @@ const EventCard = ({
               </div>
             )}
 
-            {organization.currentVideoCount !== undefined && (
-              <div className="flex items-center text-sm text-gray-600">
-                <Play className="w-4 h-4 mr-3 text-gray-400" />
-                <span className="font-medium">
-                  {organization.currentVideoCount} videos
-                </span>
-              </div>
-            )}
+            <div className="flex items-center text-sm text-gray-600">
+              <Play className="w-4 h-4 mr-3 text-gray-400" />
+              <span className="font-medium">
+                {organization.currentVideoCount ?? 0} videos
+              </span>
+            </div>
           </div>
 
           <Button className="w-full bg-slate-600 hover:bg-slate-700 text-white font-medium rounded-lg py-2 px-4 text-sm transition-all duration-300 group-hover:shadow-md">
