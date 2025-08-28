@@ -160,6 +160,26 @@ const MobileNavBar = ({
                   </Button>
                 </Link>
               ))}
+              <Link href="/blog">
+                <Button
+                  variant="ghost"
+                  className="justify-start w-full text-left"
+                >
+                  Blog
+                </Button>
+              </Link>
+              <Link
+                href="https://calendly.com/pablo-streameth/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="ghost"
+                  className="justify-start w-full text-left"
+                >
+                  Book a Call
+                </Button>
+              </Link>
             </nav>
           </div>
         )}
@@ -207,7 +227,19 @@ const PCNavBar = ({
       <div className="flex justify-center items-center mx-auto w-full max-w-md">
         {showSearchBar && <SearchBar searchVisible={showSearchBar} />}
       </div>
-      <div className="flex flex-1 justify-end items-center">
+      <div className="flex flex-1 justify-end items-center gap-3">
+        <Button variant="outline">
+          <Link href="/blog">Blog</Link>
+        </Button>
+        <Button variant="outline">
+          <Link
+            href="https://calendly.com/pablo-streameth/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book a Call
+          </Link>
+        </Button>
         {organizations ? (
           <Button variant="primary">
             <Link href={`/studio`}>Go to studio</Link>
