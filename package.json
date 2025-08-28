@@ -2,6 +2,10 @@
   "name": "streameth-platform",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
   "workspaces": {
     "packages": [
       "packages/app",

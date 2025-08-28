@@ -2,6 +2,10 @@
   "name": "@streameth/streameth-app",
   "private": true,
   "version": "3.0.0",
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack -H 0.0.0.0 -p 3000",
     "build": "next build",
