@@ -1,0 +1,26 @@
+{
+  "functions": {
+    "packages/app/app/**/*.tsx": {
+      "runtime": "nodejs22.x"
+    },
+    "packages/app/app/**/*.ts": {
+      "runtime": "nodejs22.x"
+    },
+    "packages/app/components/**/*.tsx": {
+      "runtime": "nodejs22.x"
+    },
+    "packages/app/components/**/*.ts": {
+      "runtime": "nodejs22.x"
+    },
+    "packages/app/lib/**/*.ts": {
+      "runtime": "nodejs22.x"
+    },
+    "packages/app/lib/**/*.tsx": {
+      "runtime": "nodejs22.x"
+    }
+  },
+  "buildCommand": "cd packages/app && npm run build",
+  "outputDirectory": "packages/app/.next",
+  "installCommand": "npm install",
+  "framework": "nextjs"
+}

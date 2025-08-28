@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Input } from '@/components/ui/input';
 import useSearchParams from '@/lib/hooks/useSearchParams';
 import { archivePath } from '@/lib/utils/utils';
@@ -21,7 +21,7 @@ export default function SearchBar({
   isMobile?: boolean;
   isStudio?: boolean;
   organizationId?: string;
-}): JSX.Element {
+}): ReactElement {
   const { searchParams, handleTermChange: handleStudioTermChange } =
     useSearchParams();
   const [isOpened, setIsOpened] = useState(false);

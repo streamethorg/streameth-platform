@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react';
+'use client';
+import React, { useState, ReactElement } from 'react';
 import { SiX, SiYoutube } from 'react-icons/si';
 import { Radio } from 'lucide-react';
 import CreateCustomStream from './forms/CustomRtmpForm';
@@ -10,8 +10,8 @@ import { TargetOutput } from 'streameth-new-server/src/interfaces/stage.interfac
 
 interface StreamTargetItem {
   title: string;
-  icon: JSX.Element;
-  onClick?: () => JSX.Element;
+  icon: ReactElement;
+  onClick?: () => ReactElement;
 }
 const Block = ({
   index,
@@ -46,7 +46,7 @@ const StreamPlatformGrid = ({
   streamTargets: TargetOutput[];
 }) => {
   const [SelectedComponent, setSelectedComponent] =
-    useState<JSX.Element | null>(null);
+    useState<ReactElement | null>(null);
 
   const StreamTarget: StreamTargetItem[] = [
     {
@@ -64,10 +64,7 @@ const StreamPlatformGrid = ({
       title: 'Custom RTMP',
       icon: <Radio size={50} />,
       onClick: () => (
-        <CreateCustomStream
-          streamId={streamId}
-          setIsOpen={setIsOpen}
-        />
+        <CreateCustomStream streamId={streamId} setIsOpen={setIsOpen} />
       ),
     },
   ];

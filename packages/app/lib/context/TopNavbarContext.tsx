@@ -1,10 +1,10 @@
 'use client';
-import { createContext, useState } from 'react';
+import { createContext, useState, ReactElement } from 'react';
 
 export interface Page {
   name: string;
   href: string;
-  icon: JSX.Element;
+  icon: ReactElement;
 }
 
 export const TopNavbarContext = createContext<{
