@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import HomePageNavbar from '@/components/Layout/HomePageNavbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +22,45 @@ import {
   BlogPost,
 } from '@/lib/utils/blog';
 
+// Static navbar component for blog page to avoid dynamic server usage
+const StaticBlogNavbar = () => {
+  return (
+    <nav className="sticky top-0 z-50 bg-white border-b">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo_dark.png"
+              alt="StreamEth Logo"
+              width={140}
+              height={30}
+              className="h-8 w-auto"
+            />
+          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/explore">
+              <Button variant="ghost">Explore</Button>
+            </Link>
+            <Link href="/blog">
+              <Button variant="ghost">Blog</Button>
+            </Link>
+            <Link
+              href="https://calendly.com/pablo-streameth/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline">Book a Call</Button>
+            </Link>
+            <Link href="/studio/login">
+              <Button variant="default">Login</Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
 const BlogPage = async () => {
   const featuredPosts = await getFeaturedPosts();
   const allPosts = await getSortedPostsData();
@@ -31,17 +69,7 @@ const BlogPage = async () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Suspense fallback={<div className="h-16 bg-white" />}>
-        <HomePageNavbar
-          logo=""
-          currentOrganization=""
-          pages={[
-            { name: 'Blog', href: '/blog' },
-            { name: 'Explore', href: '/explore' },
-          ]}
-          showSearchBar={false}
-        />
-      </Suspense>
+      <StaticBlogNavbar />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
@@ -276,5 +304,8 @@ const BlogPostCard = ({ post }: { post: BlogPost }) => {
     </Card>
   );
 };
+
+// Force static generation for the blog page
+export const dynamic = 'force-static';
 
 export default BlogPage;
