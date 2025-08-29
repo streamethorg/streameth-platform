@@ -1,6 +1,6 @@
 ---
 title: 'Run of Show: Essential Guide for Successful Events'
-excerpt: 'Learn what a run of show is and why it\'s crucial for organizing successful events, from corporate meetings to music festivals and television broadcasts.'
+excerpt: 'Learn what a run of show is and why it is crucial for organizing successful events, from corporate meetings to music festivals and television broadcasts.'
 author: 'StreamEth Team'
 authorAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
 authorBio: 'The StreamEth team is dedicated to helping event organizers create memorable live streaming experiences. Follow us for the latest insights on event production and live streaming technology.'
@@ -10,7 +10,14 @@ category: 'Event Planning'
 image: 'https://images.unsplash.com/photo-1559223607-b4d0555ae227?w=1200&h=600&fit=crop'
 featured: false
 views: 0
-tags: ['Event Planning', 'Production', 'Organization', 'Broadcasting', 'Live Events']
+tags:
+  [
+    'Event Planning',
+    'Production',
+    'Organization',
+    'Broadcasting',
+    'Live Events',
+  ]
 ---
 
 Whether you're planning a corporate event, a music festival, or a television broadcast, one essential tool you'll need is a run of show. But what exactly is a run of show and why do you need one?

@@ -5,10 +5,13 @@ import { redirect } from 'next/navigation';
 const StudioLayout = async (props: { children: React.ReactNode }) => {
   console.log('🚀 [StudioLayout] Fetching user data...');
   const startTime = Date.now();
-  
+
   const user = await fetchUserAction();
-  
-  console.log(`⏱️ [StudioLayout] User data fetch complete in ${Date.now() - startTime}ms:`, user ? '✅ User found' : '❌ User not found');
+
+  console.log(
+    `⏱️ [StudioLayout] User data fetch complete in ${Date.now() - startTime}ms:`,
+    user ? '✅ User found' : '❌ User not found'
+  );
 
   if (!user) {
     console.log('🔄 [StudioLayout] Redirecting to login page');
@@ -26,3 +29,4 @@ const StudioLayout = async (props: { children: React.ReactNode }) => {
 };
 
 export default StudioLayout;
+export const dynamic = 'force-dynamic';

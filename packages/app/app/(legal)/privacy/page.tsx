@@ -41,3 +41,4 @@ const Privacy = async () => {
 };
 
 export default Privacy;
+export const dynamic = 'force-dynamic';
