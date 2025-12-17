@@ -59,7 +59,7 @@
     "nanoid": "3.3.7",
     "ncp": "^2.0.0",
     "node-fetch": "^2",
-    "nodemailer": "^6.9.15",
+    "nodemailer": "^7.0.11",
     "openai": "^4.73.1",
     "reflect-metadata": "^0.2.1",
     "siwe": "^2.1.4",
