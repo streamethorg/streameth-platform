@@ -76,9 +76,16 @@ export default class SessionService {
       }
 
       // Check if the organization has reached its video library limit
-      if (
-        organization.subscriptionStatus === 'active' &&
+      // Skip check if maxVideoLibrarySize is null, undefined, negative, or Infinity (unlimited)
+      const hasLimit = 
         organization.maxVideoLibrarySize !== undefined &&
+        organization.maxVideoLibrarySize !== null &&
+        organization.maxVideoLibrarySize > 0 &&
+        isFinite(organization.maxVideoLibrarySize);
+      
+      if (
+        hasLimit &&
+        organization.subscriptionStatus === 'active' &&
         organization.currentVideoCount !== undefined &&
         organization.currentVideoCount >= organization.maxVideoLibrarySize
       ) {
@@ -617,9 +624,16 @@ export default class SessionService {
         }
 
         // Check if the organization has reached its video library limit
-        if (
-          organization.subscriptionStatus === 'active' &&
+        // Skip check if maxVideoLibrarySize is null, undefined, negative, or Infinity (unlimited)
+        const hasLimit = 
           organization.maxVideoLibrarySize !== undefined &&
+          organization.maxVideoLibrarySize !== null &&
+          organization.maxVideoLibrarySize > 0 &&
+          isFinite(organization.maxVideoLibrarySize);
+        
+        if (
+          hasLimit &&
+          organization.subscriptionStatus === 'active' &&
           organization.currentVideoCount !== undefined &&
           organization.currentVideoCount >= organization.maxVideoLibrarySize
         ) {
