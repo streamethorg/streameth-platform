@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { config } from '@config';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
-import PineconeService from './pinecone';
+import { TranscriptSearchService } from './transcript-search';
 import { HttpException } from '@exceptions/HttpException';
 import { encode } from 'gpt-tokenizer';
 
@@ -11,9 +11,16 @@ interface AIHighlight {
   title: string;
 }
 
+interface TranscriptChunk {
+  start: number;
+  end: number;
+  word: string;
+}
+
 export class ChatAPI {
   private openai: OpenAI;
   private maxTokens: number;
+  private searchService: TranscriptSearchService;
 
   constructor(maxTokens: number = 12800) {
     this.openai = new OpenAI({
@@ -21,6 +28,7 @@ export class ChatAPI {
       baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
     });
     this.maxTokens = maxTokens;
+    this.searchService = new TranscriptSearchService();
   }
 
   async chat(messages: ChatCompletionMessageParam[]) {
@@ -39,10 +47,10 @@ export class ChatAPI {
     }
   }
 
-  async initializeSession(sessionId: string, chunks: any[]) {
-    const pineconeService = new PineconeService();
-    const phrases = await pineconeService.wordsToPhrases(chunks);
-    await pineconeService.embed(sessionId, phrases);
+  async initializeSession(sessionId: string, chunks: TranscriptChunk[]) {
+    // No longer need to store embeddings in Pinecone
+    // Transcript chunks are stored in MongoDB and searched on-demand
+    console.log(`Session ${sessionId} initialized with ${chunks.length} chunks (no Pinecone storage needed)`);
   }
 
   async summarizeSession(sessionId: string, text: string) {
@@ -76,37 +84,40 @@ export class ChatAPI {
 
   async getSimilarPhrases(
     sessionId: string,
-    chunks: any[],
+    chunks: TranscriptChunk[],
     query: string[],
     optimalScore: number = 0.89,
   ) {
-    const pineconeService = new PineconeService();
-    if (!(await pineconeService.namespaceHasData())) {
-      const phrases = await pineconeService.wordsToPhrases(chunks);
-      await pineconeService.embed(sessionId, phrases);
+    // Use the new local search service instead of Pinecone
+    const results = await this.searchService.search(chunks, query, {
+      minResults: 10,
+      useSemanticFallback: true,
+      keywordThreshold: 0.4,
+    });
+
+    if (results.length === 0) {
+      return [];
     }
 
-    const scores = await pineconeService.query(sessionId, query);
-
-    // Take all scores within 0.05 of the highest score
-    const highestScore = Math.max(...scores.map((s) => s.score));
+    // Take all scores within 0.02 of the highest score
+    const highestScore = Math.max(...results.map((s) => s.score));
     const threshold = highestScore - 0.02;
 
-    return scores.filter((score) => score.score > threshold);
+    return results.filter((result) => result.score > threshold);
   }
 
-  contextualizePhrasesWithTimestamps(similarityScores: any[], chunks: any[]) {
+  contextualizePhrasesWithTimestamps(similarityScores: any[], chunks: TranscriptChunk[]) {
     return similarityScores.map((score) => {
       const start = Number(score.metadata.start);
       const end = Number(score.metadata.end) + 120;
       const relevantChunks = chunks.filter(
-        (chunk) => chunk.start >= start && chunk.end <= end,
+        (chunk: TranscriptChunk) => chunk.start >= start && chunk.end <= end,
       );
 
       return {
         ...score,
         chunks: relevantChunks,
-        text: relevantChunks.map((chunk) => chunk.word).join(' '),
+        text: relevantChunks.map((chunk: TranscriptChunk) => chunk.word).join(' '),
       };
     });
   }

@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.509.0",
-    "@pinecone-database/pinecone": "^4.1.0",
     "@privy-io/server-auth": "^1.7.3",
     "@pulsecron/pulse": "^1.6.3",
     "@thirdweb-dev/storage": "^2.0.10",
