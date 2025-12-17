@@ -38,7 +38,7 @@
     "@remotion/transitions": "^4.0.251",
     "@types/lodash": "^4.17.7",
     "@xzdarcy/react-timeline-editor": "^0.1.9",
-    "axios": "^1.7.5",
+    "axios": "^1.12.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "compromise": "^14.14.0",
