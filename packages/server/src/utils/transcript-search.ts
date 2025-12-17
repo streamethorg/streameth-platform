@@ -14,7 +14,7 @@ interface Phrase {
   end: number;
 }
 
-interface SearchResult {
+export interface SearchResult {
   score: number;
   metadata: {
     start: number;
