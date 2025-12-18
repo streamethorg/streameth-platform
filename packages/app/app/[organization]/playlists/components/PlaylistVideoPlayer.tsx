@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { PlayerWithControls } from '@/components/ui/Player';
 import { Src } from '@livepeer/react';
+import ShareButton from '@/components/misc/interact/ShareButton';
+import VideoDownloadClient from '@/components/misc/VideoDownloadClient';
 
 interface PlaylistVideoPlayerProps {
   playlist: IPlaylist;
@@ -63,7 +65,19 @@ export default function PlaylistVideoPlayer({
           </div>
 
           <div className="p-4 bg-white rounded-b-lg flex-1">
-            <CardTitle>{currentVideo?.name || 'Video'}</CardTitle>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2 gap-2">
+              <CardTitle className="flex-1">{currentVideo?.name || 'Video'}</CardTitle>
+              <div className="flex flex-row space-x-2 md:ml-4">
+                <ShareButton shareFor="video" />
+                {currentVideo?.assetId && (
+                  <VideoDownloadClient
+                    variant="outline"
+                    videoName={`${currentVideo.name}.mp4`}
+                    assetId={currentVideo.assetId}
+                  />
+                )}
+              </div>
+            </div>
             <div className="mt-2 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
               <div className="flex items-center gap-3">
                 <Link href={`/${organizationId}`} className="block">
