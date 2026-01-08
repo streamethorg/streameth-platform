@@ -29,7 +29,7 @@
     "@remotion/bundler": "4.0.251",
     "@remotion/cli": "4.0.251",
     "@remotion/google-fonts": "4.0.251",
-    "@remotion/lambda": "4.0.251",
+    "@remotion/lambda": "4.0.403",
     "@remotion/paths": "4.0.251",
     "@remotion/player": "4.0.251",
     "@remotion/renderer": "4.0.251",
