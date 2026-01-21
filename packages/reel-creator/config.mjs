@@ -6,26 +6,29 @@ import * as fs from 'fs';
  * @type {import('@remotion/lambda').AwsRegion}
  */
 
-
-const readSecretFile = (path) => {
-  // Add debug logging
-  // console.log('Attempting to read secret file, path:', path);
-  
-  if (!path) {
-    console.warn('No path provided for secret file');
-    return undefined;
-  }
-
+// Get secret value - supports both direct env vars (Coolify) and file-based secrets (Docker Swarm)
+const getSecret = (directValue, filePath) => {
+  // In development, return direct value or file path as-is
   if (process.env.NODE_ENV === 'development') {
-    return path;
+    return directValue || filePath || undefined;
   }
 
-  try {
-    return fs.readFileSync(path, 'utf8').trim();
-  } catch (error) {
-    console.error(`Error reading secret file ${path}:`, error);
-    return undefined;
+  // Prefer direct environment variable (Coolify style)
+  if (directValue) {
+    return directValue;
   }
+
+  // Fall back to file-based secret (Docker Swarm style)
+  if (filePath) {
+    try {
+      return fs.readFileSync(filePath, 'utf8').trim();
+    } catch (error) {
+      console.error(`Error reading secret file ${filePath}:`, error);
+      return undefined;
+    }
+  }
+
+  return undefined;
 };
 
 export const REGION = "us-east-2";
@@ -36,6 +39,6 @@ export const DISK = 10240;
 export const TIMEOUT = 900;
 
 export const WEBHOOK_URL = process.env.SERVER_WEBHOOK_URL;
-export const WEBHOOK_SECRET = readSecretFile(process.env.SERVER_WEBHOOK_SECRET_FILE);
-export const AWS_ACCESS_KEY_ID = readSecretFile(process.env.AWS_ACCESS_KEY_ID_FILE);
-export const AWS_SECRET_ACCESS_KEY = readSecretFile(process.env.AWS_SECRET_ACCESS_KEY_FILE);
+export const WEBHOOK_SECRET = getSecret(process.env.SERVER_WEBHOOK_SECRET, process.env.SERVER_WEBHOOK_SECRET_FILE);
+export const AWS_ACCESS_KEY_ID = getSecret(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_ACCESS_KEY_ID_FILE);
+export const AWS_SECRET_ACCESS_KEY = getSecret(process.env.AWS_SECRET_ACCESS_KEY, process.env.AWS_SECRET_ACCESS_KEY_FILE);

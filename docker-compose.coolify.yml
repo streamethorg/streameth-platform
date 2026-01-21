@@ -1,0 +1,223 @@
+version: "3.8"
+
+# Coolify-compatible Docker Compose configuration
+# Environment variables are injected by Coolify - configure them in the Coolify UI
+# For different environments (prod/staging), create separate Coolify applications
+# with different environment variable values
+
+x-common-environment: &common-environment
+  NODE_ENV: ${NODE_ENV:-production}
+  APP_PORT: 8080
+  BASE_URL: ${BASE_URL}
+  FRONTEND_URL: ${FRONTEND_URL}
+  PLAYER_URL: ${PLAYER_URL}
+  # Database
+  DB_HOST: mongodb
+  DB_USER: ${DB_USER:-root}
+  DB_PASSWORD: ${DB_PASSWORD}
+  DB_NAME: ${DB_NAME}
+  # Auth
+  JWT_SECRET: ${JWT_SECRET}
+  JWT_EXPIRY: ${JWT_EXPIRY:-30d}
+  OAUTH_SECRET: ${OAUTH_SECRET}
+  MAGIC_LINK_SECRET: ${MAGIC_LINK_SECRET}
+  MAGIC_LINK_EXPIRY: ${MAGIC_LINK_EXPIRY:-30 days}
+  # CORS
+  CORS_ORIGIN: ${CORS_ORIGIN:-*}
+  CORS_CREDENTIALS: ${CORS_CREDENTIALS:-true}
+  # Livepeer
+  LIVEPEER_API_KEY: ${LIVEPEER_API_KEY}
+  LIVEPEER_WEBHOOK_SECRET: ${LIVEPEER_WEBHOOK_SECRET}
+  LIVEPEER_BASE_URL: ${LIVEPEER_BASE_URL:-https://livepeer.studio}
+  # Storage (DigitalOcean Spaces)
+  SPACES_KEY: ${SPACES_KEY}
+  SPACES_SECRET: ${SPACES_SECRET}
+  BUCKET_NAME: ${BUCKET_NAME}
+  BUCKET_URL: ${BUCKET_URL}
+  # AWS (for Remotion)
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  # OAuth Providers
+  TWITTER_OAUTH_SECRET: ${TWITTER_OAUTH_SECRET}
+  TWITTER_CLIENT_ID: ${TWITTER_CLIENT_ID}
+  GOOGLE_OAUTH_SECRET: ${GOOGLE_OAUTH_SECRET}
+  GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+  SERVICE_ACCOUNT_PRIVATE_KEY: ${SERVICE_ACCOUNT_PRIVATE_KEY}
+  SERVICE_ACCOUNT_EMAIL: ${SERVICE_ACCOUNT_EMAIL}
+  # Email
+  MAIL_HOST: ${MAIL_HOST:-smtp.resend.com}
+  MAIL_PORT: ${MAIL_PORT:-587}
+  MAIL_USER: ${MAIL_USER}
+  MAIL_PASS: ${MAIL_PASS}
+  # Redis
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  REDIS_PASSWORD: ${REDIS_PASSWORD}
+  # AI Services
+  OPENAI_API_KEY: ${OPENAI_API_KEY}
+  GEMINI_API_KEY: ${GEMINI_API_KEY}
+  # Stripe
+  STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+  STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY}
+  # Remotion
+  REMOTION_BASE_URL: http://reel-creator:3000
+  REMOTION_WEBHOOK_SECRET: ${REMOTION_WEBHOOK_SECRET}
+  REMOTION_ID: ${REMOTION_ID:-pebs}
+  REMOTION_SITE_NAME: ${REMOTION_SITE_NAME}
+  REMOTION_WEBHOOK_URL: ${REMOTION_WEBHOOK_URL}
+  # Third Party
+  THIRDWEB_SECRET_KEY: ${THIRDWEB_SECRET_KEY}
+  TELEGRAM_API_KEY: ${TELEGRAM_API_KEY}
+  TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+  PIPEDREAM_AUTH_TOKEN: ${PIPEDREAM_AUTH_TOKEN}
+  DEVCON_UPLOAD_ENDPOINT: ${DEVCON_UPLOAD_ENDPOINT}
+  # Logging
+  LOG_DIR: logs
+  LOG_FORMAT: ${LOG_FORMAT:-dev}
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: packages/server/src/Dockerfile
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      <<: *common-environment
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  stage-transcriptions:
+    build:
+      context: .
+      dockerfile: packages/server/workers/stage-transcriptions/Dockerfile
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      server:
+        condition: service_started
+    environment:
+      <<: *common-environment
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  session-transcriptions:
+    build:
+      context: .
+      dockerfile: packages/server/workers/session-transcriptions/Dockerfile
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      <<: *common-environment
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  clips:
+    build:
+      context: .
+      dockerfile: packages/server/workers/clips/Dockerfile
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      <<: *common-environment
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    tmpfs:
+      - /tmp:size=10G
+
+  video-importer:
+    build:
+      context: .
+      dockerfile: packages/server/workers/video-importer/Dockerfile
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      <<: *common-environment
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  reel-creator:
+    build:
+      context: .
+      dockerfile: packages/reel-creator/Dockerfile
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      SERVER_WEBHOOK_URL: ${REMOTION_WEBHOOK_URL}
+      SERVER_WEBHOOK_SECRET: ${REMOTION_WEBHOOK_SECRET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      BUCKET_NAME: ${BUCKET_NAME}
+      BUCKET_URL: ${BUCKET_URL}
+      SPACES_KEY: ${SPACES_KEY}
+      SPACES_SECRET: ${SPACES_SECRET}
+      SITE_NAME: ${REMOTION_SITE_NAME:-rendering-engine}
+      PORT: 3000
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    command: --auth
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongodb_data:
+  redis_data:
