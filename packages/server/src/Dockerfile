@@ -16,7 +16,12 @@ RUN apk add --no-cache python3 make g++ curl
 
 # Copy package files first to leverage cache
 COPY package.json yarn.lock ./
+# Copy all workspace package.json files (required for yarn workspaces)
 COPY packages/server/package.json ./packages/server/
+COPY packages/app/package.json ./packages/app/
+COPY packages/contracts/package.json ./packages/contracts/
+COPY packages/video-uploader/package.json ./packages/video-uploader/
+COPY packages/reel-creator/package.json ./packages/reel-creator/
 
 # Install all dependencies (including devDependencies)
 # Set NODE_ENV inline to override any build args injected by Coolify
@@ -47,12 +52,17 @@ RUN apk add --no-cache python3 curl
 
 # Copy only necessary files from builder
 COPY --from=builder /app/package.json /app/yarn.lock ./
+# Copy all workspace package.json files (required for yarn workspaces)
 COPY --from=builder /app/packages/server/package.json ./packages/server/
+COPY --from=builder /app/packages/app/package.json ./packages/app/
+COPY --from=builder /app/packages/contracts/package.json ./packages/contracts/
+COPY --from=builder /app/packages/video-uploader/package.json ./packages/video-uploader/
+COPY --from=builder /app/packages/reel-creator/package.json ./packages/reel-creator/
 COPY --from=builder /app/packages/server/dist ./packages/server/dist
 COPY --from=builder /app/packages/server/templates ./packages/server/templates
 
 # Install only production dependencies
-RUN yarn install --frozen-lockfile --production
+RUN NODE_ENV=production yarn install --frozen-lockfile --production
 
 EXPOSE 8080
 

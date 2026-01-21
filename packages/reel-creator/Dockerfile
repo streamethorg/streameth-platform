@@ -6,12 +6,12 @@ RUN apk add --no-cache ffmpeg
 
 # Copy workspace files
 COPY package.json yarn.lock ./
-
-# Ensure the directory structure exists
-RUN mkdir -p packages/reel-creator
-
-# Copy the reel-creator package files
+# Copy all workspace package.json files (required for yarn workspaces)
 COPY packages/reel-creator/package.json ./packages/reel-creator/
+COPY packages/server/package.json ./packages/server/
+COPY packages/app/package.json ./packages/app/
+COPY packages/contracts/package.json ./packages/contracts/
+COPY packages/video-uploader/package.json ./packages/video-uploader/
 
 # Install all dependencies at the workspace root
 # Set NODE_ENV inline to override any build args injected by Coolify
@@ -27,7 +27,10 @@ ENV NODE_ENV=production
 RUN npx next build
 
 # Clean install only production dependencies
-RUN yarn install --frozen-lockfile --production
+WORKDIR /app
+RUN NODE_ENV=production yarn install --frozen-lockfile --production
+
+WORKDIR /app/packages/reel-creator
 
 # Start the application
 CMD ["node", ".next/standalone/server.js"]
