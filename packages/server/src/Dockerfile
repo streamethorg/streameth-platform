@@ -25,7 +25,7 @@ COPY packages/reel-creator/package.json ./packages/reel-creator/
 
 # Install all dependencies (including devDependencies)
 # Set NODE_ENV inline to override any build args injected by Coolify
-RUN NODE_ENV=development yarn install --frozen-lockfile
+RUN NODE_ENV=development yarn install
 
 # Copy source files and templates
 COPY packages/server ./packages/server

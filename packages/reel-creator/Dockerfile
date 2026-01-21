@@ -15,7 +15,7 @@ COPY packages/video-uploader/package.json ./packages/video-uploader/
 
 # Install all dependencies at the workspace root
 # Set NODE_ENV inline to override any build args injected by Coolify
-RUN NODE_ENV=development yarn install --frozen-lockfile
+RUN NODE_ENV=development yarn install
 
 # Copy the source code
 COPY packages/reel-creator ./packages/reel-creator
