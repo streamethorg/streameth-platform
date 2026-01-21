@@ -10,6 +10,9 @@ RUN apk add --no-cache python3 make g++
 COPY package.json yarn.lock ./
 COPY packages/server/package.json ./packages/server/
 
+# Ensure devDependencies are installed (Coolify may inject NODE_ENV=production)
+ENV NODE_ENV=development
+
 # Install all dependencies (including devDependencies for build)
 RUN yarn install --frozen-lockfile
 
@@ -23,6 +26,8 @@ RUN yarn build:server
 FROM node:22-alpine
 
 WORKDIR /app
+
+ENV NODE_ENV=production
 
 # Install runtime dependencies
 RUN apk add --no-cache python3 ffmpeg
