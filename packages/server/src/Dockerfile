@@ -18,11 +18,9 @@ RUN apk add --no-cache python3 make g++ curl
 COPY package.json yarn.lock ./
 COPY packages/server/package.json ./packages/server/
 
-# Ensure devDependencies are installed (Coolify may inject NODE_ENV=production)
-ENV NODE_ENV=development
-
 # Install all dependencies (including devDependencies)
-RUN yarn install --frozen-lockfile
+# Set NODE_ENV inline to override any build args injected by Coolify
+RUN NODE_ENV=development yarn install --frozen-lockfile
 
 # Copy source files and templates
 COPY packages/server ./packages/server

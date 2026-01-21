@@ -13,11 +13,9 @@ RUN mkdir -p packages/reel-creator
 # Copy the reel-creator package files
 COPY packages/reel-creator/package.json ./packages/reel-creator/
 
-# Ensure devDependencies are installed (Coolify may inject NODE_ENV=production)
-ENV NODE_ENV=development
-
 # Install all dependencies at the workspace root
-RUN yarn install --frozen-lockfile
+# Set NODE_ENV inline to override any build args injected by Coolify
+RUN NODE_ENV=development yarn install --frozen-lockfile
 
 # Copy the source code
 COPY packages/reel-creator ./packages/reel-creator
