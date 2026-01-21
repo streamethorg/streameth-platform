@@ -2,7 +2,8 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache ffmpeg
+# Install build dependencies for native modules
+RUN apk add --no-cache python3 make g++ ffmpeg
 
 # Copy workspace files
 COPY package.json yarn.lock ./
@@ -15,7 +16,7 @@ COPY packages/video-uploader/package.json ./packages/video-uploader/
 
 # Install all dependencies at the workspace root
 # Set NODE_ENV inline to override any build args injected by Coolify
-RUN NODE_ENV=development yarn install
+RUN NODE_ENV=development yarn install --frozen-lockfile
 
 # Copy the source code
 COPY packages/reel-creator ./packages/reel-creator
