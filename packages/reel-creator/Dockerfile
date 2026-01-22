@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -23,15 +23,25 @@ COPY packages/reel-creator ./packages/reel-creator
 
 WORKDIR /app/packages/reel-creator
 
-# Build using npx to ensure next is found
-ENV NODE_ENV=production
-RUN npx next build
+# Build the Next.js app
+RUN NODE_ENV=production npx next build
 
-# Clean install only production dependencies
+# Production stage
+FROM node:22-alpine
+
 WORKDIR /app
-RUN NODE_ENV=production yarn install --frozen-lockfile --production
+
+# Install runtime dependencies
+RUN apk add --no-cache ffmpeg
+
+# Copy the standalone build from builder
+COPY --from=builder /app/packages/reel-creator/.next/standalone ./
+COPY --from=builder /app/packages/reel-creator/.next/static ./packages/reel-creator/.next/static
+COPY --from=builder /app/packages/reel-creator/public ./packages/reel-creator/public
 
 WORKDIR /app/packages/reel-creator
 
+ENV NODE_ENV=production
+
 # Start the application
-CMD ["node", ".next/standalone/server.js"]
+CMD ["node", "server.js"]
