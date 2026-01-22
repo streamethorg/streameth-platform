@@ -15,7 +15,7 @@ x-common-environment: &common-environment
   DB_HOST: mongodb
   DB_USER: ${DB_USER:-root}
   DB_PASSWORD: ${DB_PASSWORD}
-  DB_NAME: ${DB_NAME}
+  DB_NAME: ${DB_NAME:-streameth-prod}
   # Auth
   JWT_SECRET: ${JWT_SECRET}
   JWT_EXPIRY: ${JWT_EXPIRY:-30d}
