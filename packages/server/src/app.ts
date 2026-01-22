@@ -70,6 +70,11 @@ class App {
   }
 
   private initializeMiddlewares() {
+    // Health check endpoint for container orchestration (before other middleware)
+    this.app.get('/health', (req, res) => {
+      res.status(200).json({ status: 'ok' });
+    });
+
     this.app.use(morgan('dev'));
     this.app.use(
       cors({
