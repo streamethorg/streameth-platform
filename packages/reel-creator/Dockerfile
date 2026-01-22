@@ -37,7 +37,6 @@ RUN apk add --no-cache ffmpeg
 # Copy the standalone build from builder
 COPY --from=builder /app/packages/reel-creator/.next/standalone ./
 COPY --from=builder /app/packages/reel-creator/.next/static ./packages/reel-creator/.next/static
-COPY --from=builder /app/packages/reel-creator/public ./packages/reel-creator/public
 
 WORKDIR /app/packages/reel-creator
 
