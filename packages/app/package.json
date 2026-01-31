@@ -110,7 +110,7 @@
     "@types/react-dom": "^19",
     "@types/react-scroll": "^1.8.7",
     "dotenv": "^16.4.5",
-    "eslint": "8.50.0",
+    "eslint": "9.26.0",
     "eslint-config-next": "^15.3.2",
     "next-bundle-analyzer": "^0.6.8",
     "tailwind-merge": "^2.2.0",
