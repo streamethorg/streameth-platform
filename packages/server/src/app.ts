@@ -76,9 +76,10 @@ class App {
     });
 
     this.app.use(morgan('dev'));
+    const corsOrigin = config.cors.origin.trim();
     this.app.use(
       cors({
-        origin: config.cors.origin.trim().split(','),
+        origin: corsOrigin === '*' ? '*' : corsOrigin.split(','),
         credentials: config.cors.credentials,
       }),
     );
