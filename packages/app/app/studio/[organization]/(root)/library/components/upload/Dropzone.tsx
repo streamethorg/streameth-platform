@@ -173,15 +173,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                     label: 'Cancel',
                     onClick: () => cancelUpload(uploadId, toastId),
                   },
-                  // TODO: Add edit button back in once we now how to fix it
-                  // action: {
-                  //   label: 'Edit',
-                  //   onClick: (event) => {
-                  //     event.preventDefault(); // Prevent the toast from closing
-                  //     console.log('Edit button clicked for:', uploadId);
-                  //     handleEditClick(uploadId);
-                  //   },
-                  // },
                   id: toastId,
                 }
               );
@@ -204,7 +195,6 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
                 };
               });
 
-              // Call finishUpload only once, after setUploads
               finishUpload({
                 name: file.name,
                 description: 'No description',
@@ -213,6 +203,9 @@ const Dropzone = forwardRef<HTMLDivElement, DropzoneProps>((props, ref) => {
               });
 
               resolve(assetId);
+            },
+            (error) => {
+              reject(error);
             }
           );
         });
