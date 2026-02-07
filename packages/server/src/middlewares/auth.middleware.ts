@@ -1,4 +1,5 @@
 import { config } from '@config';
+import { HttpException } from '@exceptions/HttpException';
 import User from '@models/user.model';
 import { Request } from 'express';
 import jwt from 'jsonwebtoken';
@@ -19,13 +20,13 @@ export const expressAuthentication = async (
   if (securityName === 'jwt') {
     const token = getTokenHeader(req);
     if (!token) {
-      throw new Error('Authentication failed: No token provided');
+      throw new HttpException(401, 'Authentication failed: No token provided');
     }
     try {
       const decoded: any = jwt.verify(token, config.jwt.secret);
       const user = await User.findOne({ did: decoded.id });
       if (!user) {
-        throw new Error('Authentication Failed/Invalid Token');
+        throw new HttpException(401, 'Authentication Failed/Invalid Token');
       }
       if (
         scopes.length > 0 &&
@@ -33,12 +34,15 @@ export const expressAuthentication = async (
           req.body.organizationId ?? req.params.organizationId,
         )
       ) {
-        throw new Error('Insufficient permissions to execute action');
+        throw new HttpException(403, 'Insufficient permissions to execute action');
       }
       return user;
     } catch (e) {
+      if (e instanceof HttpException) {
+        throw e;
+      }
       if (e instanceof jwt.JsonWebTokenError) {
-        throw new Error('Authentication Failed/Invalid Token');
+        throw new HttpException(401, 'Authentication Failed/Invalid Token');
       }
       throw e;
     }
